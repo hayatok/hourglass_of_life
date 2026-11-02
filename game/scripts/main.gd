@@ -2,6 +2,7 @@ extends Node3D
 
 const AVATAR = preload("res://game/scenes/resident_avatar.tscn")
 const BENCH = preload("res://game/scenes/bench.tscn")
+const LEGACY = preload("res://game/scenes/legacy_record.tscn")
 var avatars: Dictionary = {}
 var selected_id: String = "aoi"
 var following: bool = false
@@ -14,6 +15,7 @@ var ui_timer: float = 0
 var detail_tab: int = 0
 var toast_left: float = 0
 var running_before_menu: bool = false
+var running_before_journal: bool = false
 
 @onready var camera: Camera3D = $Camera
 @onready var roster: VBoxContainer = %Roster
@@ -33,6 +35,11 @@ func _ready() -> void:
 	%Speed1.pressed.connect(func(): _set_speed(1))
 	%Speed3.pressed.connect(func(): _set_speed(3))
 	%Speed6.pressed.connect(func(): _set_speed(6))
+	%Speed30.pressed.connect(func(): _set_speed(30))
+	%SpeedHalf.pressed.connect(func(): _set_speed(.5))
+	%JournalButton.pressed.connect(func(): _open_journal(false))
+	%JournalContinueButton.pressed.connect(_close_journal)
+	%JournalSaveButton.pressed.connect(_save)
 	%MenuButton.pressed.connect(_open_menu)
 	%ResumeButton.pressed.connect(_close_menu)
 	%SaveButton.pressed.connect(_save)
@@ -52,12 +59,14 @@ func _ready() -> void:
 	%MemoriesTab.pressed.connect(func(): detail_tab=2; _refresh_detail())
 	%LifeTab.pressed.connect(func(): detail_tab=3; _refresh_detail())
 	Sim.town_changed.connect(_rebuild)
+	Sim.chapter_reached.connect(func(): _open_journal(true))
 	Sim.event_added.connect(func(_e): _refresh_events())
 	_rebuild()
 	_build_roster()
 	_refresh_ui()
 	title.visible = true
 	pause_menu.visible = false
+	%JournalScreen.visible = false
 	%HUD.visible = false
 	Sim.running = false
 
@@ -69,10 +78,11 @@ func _start_play() -> void:
 	title.visible = false
 	pause_menu.visible = false
 	%HUD.visible = true
-	Sim.running = true
+	Sim.running = Sim.people.any(func(p): return Sim.life.is_alive(p))
 	_rebuild()
 	_select(selected_id)
-	_toast("気になる住人を選び、暮らしを見てみましょう。Spaceで一時停止できます。")
+	_toast("気になる住人を選び、暮らしを見てみましょう。Spaceで一時停止できます。" if Sim.running else "町の記録から、ここまでの時間を読み返せます。")
+	if Sim.life.chapter_ready: _open_journal(true)
 
 func _continue_game() -> void:
 	if Sim.load_game():
@@ -83,6 +93,7 @@ func _continue_game() -> void:
 
 func _rebuild() -> void:
 	for a in $Residents.get_children():
+		$Residents.remove_child(a)
 		a.queue_free()
 	avatars.clear()
 	for p in Sim.people:
@@ -91,48 +102,66 @@ func _rebuild() -> void:
 		actor.configure(p)
 		avatars[p.id] = actor
 	for b in $PlacedBenches.get_children():
+		$PlacedBenches.remove_child(b)
 		b.queue_free()
 	for position in Sim.benches:
 		var bench = BENCH.instantiate()
 		$PlacedBenches.add_child(bench)
 		bench.position = position
+	for child in $LegacyRecords.get_children():
+		$LegacyRecords.remove_child(child)
+		child.queue_free()
+	for item in Sim.life.legacy:
+		var record = LEGACY.instantiate()
+		$LegacyRecords.add_child(record)
+		record.position = item.position
+		record.get_node("Sign").text = item.label
+	if is_node_ready():
+		var preferred: String = partner.get_selected_metadata() if partner.item_count>0 else ""
+		_build_roster()
+		_update_partners(preferred)
+		if not Sim.life.is_alive(Sim.person(selected_id)): following = false
 	_refresh_events()
 
 func _build_roster() -> void:
 	for child in roster.get_children():
+		roster.remove_child(child)
 		child.queue_free()
 	for p in Sim.people:
 		var button = Button.new()
 		button.text = "%s\n%s" % [p.name,p.occupation]
 		button.custom_minimum_size = Vector2(188,55)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		button.clip_text = true
 		button.add_theme_font_size_override("font_size",15)
 		button.pressed.connect(_select.bind(p.id))
 		roster.add_child(button)
 
-func _select(id: String) -> void:
-	selected_id = id
+func _update_partners(preferred: String = "") -> void:
 	partner.clear()
 	for p in Sim.people:
-		if p.id != id:
+		if p.id != selected_id and Sim.life.is_alive(p):
 			partner.add_item(p.name)
 			partner.set_item_metadata(partner.item_count-1,p.id)
-	if id == "aoi":
-		for i in partner.item_count:
-			if partner.get_item_metadata(i) == "osamu":
-				partner.select(i)
+	for i in partner.item_count:
+		if partner.get_item_metadata(i)==preferred: partner.select(i)
+
+func _select(id: String) -> void:
+	selected_id = id
+	_update_partners("osamu" if id=="aoi" else "")
 	var ids = ["nagisa","ryo","rin","osamu","fumi","maho","ritsu","aoi"]
 	var x = [30,240,440,615,840,1060,1280,1505][ids.find(id)]
 	var atlas = AtlasTexture.new()
 	atlas.atlas = load("res://game/assets/ui/residents.png")
 	atlas.region = Rect2(x,10,200,235)
 	portrait.texture = atlas
+	portrait.modulate = Color.WHITE if Sim.life.is_alive(Sim.person(id)) else Color(.65,.65,.65)
 	_refresh_detail()
 
 func _process(delta: float) -> void:
 	if following and not title.visible:
 		camera_target = camera_target.lerp(Sim.person(selected_id).position,minf(1,delta*2))
-	if not title.visible and not pause_menu.visible:
+	if not title.visible and not pause_menu.visible and not %JournalScreen.visible:
 		var motion = Vector3.ZERO
 		if Input.is_physical_key_pressed(KEY_W): motion.z -= 1
 		if Input.is_physical_key_pressed(KEY_S): motion.z += 1
@@ -160,13 +189,15 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ESCAPE:
-			if placement:
+			if %JournalScreen.visible:
+				_close_journal()
+			elif placement:
 				placement = false
 			elif not title.visible:
 				_close_menu() if pause_menu.visible else _open_menu()
-		elif event.keycode == KEY_SPACE and not title.visible and not pause_menu.visible:
+		elif event.keycode == KEY_SPACE and not title.visible and not pause_menu.visible and not %JournalScreen.visible:
 			_toggle_pause()
-	if title.visible or pause_menu.visible:
+	if title.visible or pause_menu.visible or %JournalScreen.visible:
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -199,11 +230,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		yaw -= event.relative.x*.006
 
 func _set_speed(value: float) -> void:
+	if not Sim.people.any(func(p): return Sim.life.is_alive(p)): return
 	Sim.speed = value
 	Sim.running = true
 	_refresh_ui()
 
 func _toggle_pause() -> void:
+	if not Sim.people.any(func(p): return Sim.life.is_alive(p)): return
 	Sim.running = not Sim.running
 	_refresh_ui()
 
@@ -227,6 +260,21 @@ func _to_title() -> void:
 	%HUD.visible = false
 	%ContinueButton.disabled = not Sim.has_save()
 
+func _open_journal(chapter: bool) -> void:
+	running_before_journal = true if chapter else Sim.running
+	Sim.running = false
+	%JournalScreen.visible = true
+	%JournalHeading.text = {"last":"町に残った時間","resumed":"この町の年月を振り返る","three_years":"最初の三年を振り返る"}.get(Sim.life.chapter_mode,"町に積もった時間") if chapter else "町に積もった時間"
+	%JournalBody.text = Sim.life.journal_text()
+
+func _close_journal() -> void:
+	%JournalScreen.visible = false
+	if Sim.life.chapter_ready:
+		Sim.life.chapter_acknowledged = true
+		Sim.life.chapter_ready = false
+		if Sim.life.chapter_mode=="last": Sim.life.final_reviewed = true
+	Sim.running = running_before_journal and Sim.people.any(func(p): return Sim.life.is_alive(p))
+
 func _meet() -> void:
 	if partner.item_count == 0:
 		return
@@ -248,7 +296,12 @@ func _refresh_ui() -> void:
 	%PauseButton.text = "再開" if not Sim.running else "一時停止"
 	%Budget.text = "共有予算  %d" % Sim.shared_budget
 	%FollowButton.text = "追従中" if following else "この人を追う"
-	%Version.text = "v0.3 開発版 · 仕事と家庭"
+	%Version.text = "v0.4 開発版 · 年月と人生"
+	var alive = Sim.life.is_alive(Sim.person(selected_id))
+	var living_town = Sim.people.any(func(p): return Sim.life.is_alive(p))
+	for action in [%PauseButton,%SpeedHalf,%Speed1,%Speed3,%Speed6,%Speed30]: action.disabled = not living_town
+	for action in [%RestButton,%GoalButton,%FollowButton]: action.disabled = not alive
+	for action in [%SupportButton,%ProjectButton,%MeetButton]: action.disabled = not alive or partner.item_count==0
 	var offer = Sim.social.offer
 	%OfferPanel.visible = not offer.is_empty() and offer.a==selected_id
 	if %OfferPanel.visible:
@@ -269,13 +322,14 @@ func _refresh_detail() -> void:
 	%Fatigue.value = p.fatigue*100
 	%Hunger.value = p.hunger*100
 	%Connection.value = p.connection*100
-	%Goal.text = Sim.definitions[p.id].goals[0]
+	for meter in [%Fatigue,%Hunger,%Connection]: meter.get_parent().visible = Sim.life.is_alive(p)
+	%Goal.text = p.current_goal
 	%GoalProgress.value = p.goal_progress*100
 	var text: String = ""
 	if detail_tab == 0:
 		text = Sim.social.person_text(p)
 		if not text.is_empty(): text += "\n"
-		text += "いま大切にしていること\n\n"+Sim.definitions[p.id].public_private_difference+"\n\n"+Sim.definitions[p.id].goals[1]
+		text += ("暮らしの背景\n\n" if p.alive else "大切にしていたこと\n\n")+Sim.definitions[p.id].public_private_difference+"\n\n暮らしの始まりに気にかけていたこと\n"+Sim.definitions[p.id].goals[1]
 	elif detail_tab == 1:
 		text = "親しみ / 信頼\n\n"
 		for other_id in p.relationships:

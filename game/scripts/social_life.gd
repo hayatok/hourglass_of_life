@@ -26,13 +26,14 @@ func relation(p: Dictionary, other: String) -> Dictionary:
 	return p.relationships.get(other,{"familiarity":.05,"trust":.2,"ease":.25,"unresolved_expectation":0.0})
 
 func partner_score(p: Dictionary, other: Dictionary) -> float:
+	if not other.get("alive",true): return -1
 	var r = relation(p,other.id)
 	return .35*r.familiarity+.4*r.ease+.25*r.trust-.4*r.unresolved_expectation
 
 func venue_interest(p: Dictionary, venue: String) -> float:
 	var interest = .1
 	for other in sim.people:
-		if other.id!=p.id and not other.moving and other.place==venue and sim._routine_at(other).is_empty():
+		if other.get("alive",true) and other.id!=p.id and not other.moving and other.place==venue and sim._routine_at(other).is_empty():
 			interest = maxf(interest,partner_score(p,other))
 	return interest
 
@@ -74,7 +75,7 @@ func activity_tick(p: Dictionary) -> void:
 func propose(first: String, second: String, location: String) -> Dictionary:
 	var a = sim.person(first)
 	var b = sim.person(second)
-	if a.is_empty() or b.is_empty() or first==second:
+	if not sim.life.is_alive(a) or not sim.life.is_alive(b) or first==second:
 		return {"status":"decline","text":"一緒に過ごす相手を選んでください"}
 	if location not in ["bench","cafe","workshop"]:
 		return {"status":"decline","text":"待ち合わせる場所を選んでください"}
@@ -117,6 +118,7 @@ func when_text(minute: int) -> String:
 	return "%s %02d:%02d"%[label,int((absolute%1440)/60.0),absolute%60]
 
 func find_slot(a: Dictionary, b: Dictionary, duration: int = 25) -> int:
+	if not sim.life.is_alive(a) or not sim.life.is_alive(b): return -1
 	var first = int(ceil((sim.start_minute+sim.elapsed+120)/30.0))*30-sim.start_minute
 	for minute in range(first,sim.elapsed+2881,30):
 		if _slot_free(a,b,minute,duration): return minute
@@ -139,6 +141,9 @@ func confirm_offer(selected: String) -> Dictionary:
 		return {"status":"defer","text":"まず二人に話す機会を提案してください"}
 	var a = sim.person(offer.a)
 	var b = sim.person(offer.b)
+	if not sim.life.is_alive(a) or not sim.life.is_alive(b):
+		offer.clear()
+		return {"status":"decline","text":"その約束を、新たに作ることはできない。残された時間を思い返したい。"}
 	if sim.elapsed>offer.made_at+180 or offer.start-sim.elapsed<120 or not _slot_free(a,b,offer.start,offer.duration):
 		offer.clear()
 		return sim._reply(a,"defer","その後、予定が変わった。もう一度時間を相談したい。")
@@ -161,6 +166,7 @@ func next_commitment(p: Dictionary) -> Dictionary:
 	return result
 
 func tick() -> void:
+	if not offer.is_empty() and sim.elapsed>offer.made_at+180: offer.clear()
 	for planned in appointments:
 		if planned.state!="planned" or sim.elapsed<planned.start-120: continue
 		if sim.elapsed>planned.start+45:
@@ -249,4 +255,5 @@ func restore(data: Dictionary) -> void:
 	appointments = data.get("appointments",[])
 	offer = data.get("offer",{})
 	serial = int(data.get("serial",0))
+	if not offer.is_empty() and sim.elapsed>offer.made_at+180: offer.clear()
 	for p in sim.people: upgrade_person(p)

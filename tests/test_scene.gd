@@ -13,8 +13,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.3"))
-	var path = "res://docs/verification/v0.3/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.4"))
+	var path = "res://docs/verification/v0.4/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:
@@ -105,5 +105,37 @@ func run() -> void:
 	main._refresh_ui()
 	expect(sim.person("aoi").goal_progress>=.18,"Finishing shared work is reflected in the visible character goal")
 	await capture("07-household")
+	sim.reset()
+	sim.running = false
+	for day in range(36):
+		sim.advance_minutes(1440,true)
+		await process_frame
+	main._refresh_ui()
+	expect(main.get_node("%JournalScreen").visible and sim.life.chapter_ready,"Three years opens the actual review UI")
+	expect("最初の三年" in main.get_node("%JournalHeading").text,"The review identifies the time that was played")
+	await capture("08-three-years")
+	main.get_node("%JournalContinueButton").pressed.emit()
+	expect(sim.life.chapter_acknowledged and not main.get_node("%JournalScreen").visible,"The player can return to the continuing town")
+	sim.running = false
+	main._select("aoi")
+	main.get_node("%LifeTab").pressed.emit()
+	main._refresh_ui()
+	expect("葵の新しい暮らし" in main.get_node("%DetailText").text,"A move is reflected in the actual household panel")
+	expect(main.get_node("LegacyRecords").get_child_count()==sim.life.legacy.size() and not sim.life.legacy.is_empty(),"Records from actual achievements exist as 3D scene objects")
+	await capture("09-changed-town")
+	for year in range(4,89):
+		sim.advance_minutes(maxi(0,year*12*1440-sim.start_minute-sim.elapsed),true)
+		await process_frame
+		if sim.life.chapter_ready and sim.life.chapter_mode=="last": break
+	await process_frame
+	main._refresh_ui()
+	expect(main.get_node("%JournalScreen").visible and "町に残った時間" in main.get_node("%JournalHeading").text,"The complete lives reach the actual final review screen")
+	expect(main.get_node("%Partner").item_count==0,"Absent residents are no longer offered as live partners")
+	expect(main.get_node("Residents").get_children().all(func(actor): return not actor.visible),"Remembered people do not remain as living actors in the town")
+	await capture("10-final-review")
+	main.get_node("%JournalContinueButton").pressed.emit()
+	expect(not sim.running and sim.life.final_reviewed,"Returning to the record-only town keeps its clock at rest")
+	main._start_play()
+	expect(not sim.running,"Opening a completed town does not restart an empty life simulation")
 	print("Scene/UI smoke: %s"%("PASS" if errors.is_empty() else "FAIL"))
 	quit(0 if errors.is_empty() else 1)

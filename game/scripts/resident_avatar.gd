@@ -37,8 +37,9 @@ func configure(p: Dictionary) -> void:
 	_recolor($Visual/Hips/Apron, palette[3])
 	$Visual/Hips/Apron.visible = p.id in ["nagisa","osamu","maho","rin"]
 	if p.id == "rin":
-		visual.scale = Vector3.ONE*.72
-		name_label.position.y = 1.55
+		var growth = clampf(.72+(p.age-7)*.045,.72,1)
+		visual.scale = Vector3.ONE*growth
+		name_label.position.y = 2.1*growth
 	selection.visible = false
 
 func _recolor(mesh: MeshInstance3D, color: Color) -> void:
@@ -47,7 +48,7 @@ func _recolor(mesh: MeshInstance3D, color: Color) -> void:
 	mesh.material_override = mat
 
 func update_state(p: Dictionary, delta: float, selected: bool) -> void:
-	visible = p.moving or not p.place.begins_with("off_map_")
+	visible = p.get("alive",true) and (p.moving or not p.place.begins_with("off_map_"))
 	global_position = global_position.lerp(p.position, minf(1,delta*12))
 	var direction: Vector3 = p.position-last_position
 	if direction.length_squared()>.00001:
