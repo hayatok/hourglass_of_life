@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "note": "12代表日を1年とする架空の物語の予定。寿命や卒業・退職の年齢は現実の個人や統計から推定した値ではない。本人が知る予定と、物語内部の生涯の終わりを分ける。",
+  "announce_day": 18,
+  "transition_day": 24,
+  "chapter_review_day": 36,
+  "care_independence_age": 12,
+  "career_changes": {"nagisa": 66, "ryo": 67, "maho": 65, "ritsu": 64, "rin": 67, "aoi": 67},
+  "retirement_support": 9,
+  "retirement_support_away": 6,
+  "end_ages": {"nagisa": 91, "ryo": 90, "rin": 94, "osamu": 88, "fumi": 92, "maho": 93, "ritsu": 92, "aoi": 94}
+}

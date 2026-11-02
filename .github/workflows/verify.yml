@@ -22,5 +22,7 @@ jobs:
         run: godot --headless --path . --script tests/test_social_life.gd
       - name: Simulate work, household expenses, care handover and joint projects
         run: godot --headless --path . --script tests/test_work_family.gd
+      - name: Simulate years, changing roles, inheritance and farewell
+        run: godot --headless --path . --script tests/test_life_course.gd
       - name: Boot the complete scene
         run: godot --headless --path . --quit-after 10

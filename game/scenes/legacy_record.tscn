@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Wood"]
+albedo_color = Color(0.36, 0.29, 0.22, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Cover"]
+albedo_color = Color(0.24, 0.38, 0.4, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Stand"]
+size = Vector3(0.55, 0.7, 0.4)
+
+[sub_resource type="BoxMesh" id="Book"]
+size = Vector3(0.52, 0.08, 0.38)
+
+[sub_resource type="SystemFont" id="Font"]
+font_names = PackedStringArray("Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP")
+
+[sub_resource type="BoxMesh" id="Pages"]
+size = Vector3(0.46, 0.045, 0.34)
+
+[node name="LegacyRecord" type="Node3D"]
+
+[node name="Stand" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.35, 0)
+mesh = SubResource("Stand")
+material_override = SubResource("Wood")
+
+[node name="Book" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.76, 0)
+rotation = Vector3(-0.18, 0, 0)
+mesh = SubResource("Book")
+material_override = SubResource("Cover")
+
+[node name="Pages" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.78, 0.015)
+rotation = Vector3(-0.18, 0, 0)
+mesh = SubResource("Pages")
+
+[node name="Sign" type="Label3D" parent="."]
+position = Vector3(0, 1.35, 0)
+billboard = 1
+font = SubResource("Font")
+font_size = 22
+pixel_size = 0.012
+text = "町に残る記録"
+outline_size = 5

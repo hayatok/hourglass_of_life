@@ -28,7 +28,7 @@ func upgrade_person(p: Dictionary) -> void:
 		if not p.has(key): p[key] = defaults[key]
 
 func household_id(p: Dictionary) -> String:
-	return sim.definitions[p.id].household_id
+	return p.household_override if not p.get("household_override","").is_empty() else sim.definitions[p.id].household_id
 
 func household(p: Dictionary) -> Dictionary:
 	return households[household_id(p)]
@@ -39,8 +39,8 @@ func worry(p: Dictionary) -> float:
 
 func add_options(p: Dictionary, options: Array) -> void:
 	var d = sim.definitions[p.id]
-	var home = sim.HOME[d.household_id]
-	if household(p).home_load>.15:
+	var home = sim.home_for(p)
+	if household(p).home_load>.15 and home==sim.HOME[household_id(p)]:
 		options.append({"kind":"chores","place":home,"need":household(p).home_load,"goal":d.values.care*.7,"relation":.5,"role":.9,"habit":d.traits.conscientiousness,"fun":.2,"cost":p.fatigue*.5,"reason":"家の用事を、できるところから片付けよう"})
 	# Extra work is an option for these authored flexible jobs, not every role.
 	if p.id in ["ryo","osamu"] and worry(p)>.3 and sim.minute_of_day()>=480 and sim.minute_of_day()<1080:
@@ -51,13 +51,19 @@ func tick() -> void:
 		var h = households[id]
 		var members = 0
 		for p in sim.people:
-			if household_id(p)==id: members += 1
+			if p.get("alive",true) and household_id(p)==id: members += 1
 		h.home_load = minf(1,h.home_load+.00006*members)
 	if sim.minute_of_day()==0: _settle_day()
 	for help in supports:
 		if help.state not in ["travel","active","handoff"]: continue
 		var giver = sim.person(help.giver)
 		var receiver = sim.person(help.receiver)
+		if not sim.life.is_alive(giver) or not sim.life.is_alive(receiver):
+			help.state = "interrupted"
+			giver.support_id = ""
+			giver.routine_id = ""
+			receiver.routine_id = ""
+			continue
 		var obligation = sim._authored_routine_at(giver)
 		if help.state=="handoff":
 			if sim._authored_routine_at(receiver).get("id","")!="after_school_care" or (not receiver.moving and receiver.place==help.place):
@@ -98,14 +104,14 @@ func activity_tick(p: Dictionary) -> void:
 	var h = household(p)
 	var d = sim.definitions[p.id]
 	if p.action=="work":
-		var earned = config.earnings_per_work_minute.get(p.id,0)
+		var earned = .04 if p.id=="aoi" and p.stage=="moved" else (.035 if p.id=="rin" and p.age>=22 else config.earnings_per_work_minute.get(p.id,0))
 		h.cash += earned
 		h.earned_today += earned
 		p.earned_today += earned
-		var meaning = .5*d.values.achievement+.3*d.values.care
-		p.work_satisfaction = clampf(p.work_satisfaction+.0006*(meaning-.4)-.0003*p.fatigue,0,1)
+		var meaning = clampf(.2+.45*d.values.achievement+.25*d.values.care-.35*p.fatigue,.1,.9)
+		p.work_satisfaction = lerpf(p.work_satisfaction,meaning,.002)
 		p.fatigue = minf(1,p.fatigue+.0003)
-		if p.id in ["ryo","maho"]: p.goal_progress = minf(1,p.goal_progress+.0004)
+		if p.goal_kind=="career" or (p.id=="rin" and p.age>=22): p.goal_progress = minf(1,p.goal_progress+.0004)
 	elif p.action=="chores":
 		for help in supports:
 			if help.giver==p.id and help.state=="active": h = household(sim.person(help.receiver))
@@ -118,9 +124,14 @@ func activity_tick(p: Dictionary) -> void:
 		h.cash -= 1
 		h.spent_today += 1
 		p.session_meal_paid = true
+	elif p.action=="own_life":
+		# The off-map home aggregates ordinary household time; town visits do not
+		# magically clean a different household.
+		h.home_load = maxf(0,h.home_load-.00025)
 
 func hobby_progress(p: Dictionary) -> float:
-	if (p.id=="ryo" and p.private_project>=1) or (p.id!="ryo" and p.goal_progress>=1): return 0
+	var primary = p.goal_kind in ["creative","model"]
+	if (primary and p.goal_progress>=1) or (not primary and p.private_project>=1): return 0
 	var h = household(p)
 	var cost = config.project_materials.get(p.id,0)
 	var key = "%s:%d"%[p.id,sim.day_index()]
@@ -131,15 +142,16 @@ func hobby_progress(p: Dictionary) -> float:
 		h.cash -= cost
 		h.spent_today += cost
 		h.material_days[key] = true
-	if p.id=="ryo":
+	if not primary:
 		p.private_project = minf(1,p.private_project+.0015)
 		return 0
+	if p.id=="ryo": p.private_project = minf(1,p.private_project+.0015)
 	return .0015
 
 func propose_support(receiver_id: String, giver_id: String) -> Dictionary:
 	var receiver = sim.person(receiver_id)
 	var giver = sim.person(giver_id)
-	if receiver.is_empty() or giver.is_empty() or receiver_id==giver_id:
+	if not sim.life.is_alive(receiver) or not sim.life.is_alive(giver) or receiver_id==giver_id:
 		return {"status":"decline","text":"手助けを相談する相手を選んでください"}
 	if giver.age<18:
 		return sim._reply(giver,"decline","大人の代わりに世話を引き受けるのは難しい。自分の道具なら片付けるよ。")
@@ -211,7 +223,7 @@ func meeting_compatible(p: Dictionary, meeting: Dictionary) -> bool:
 func propose_project(first: String, second: String) -> Dictionary:
 	var a = sim.person(first)
 	var b = sim.person(second)
-	if a.is_empty() or b.is_empty() or first==second:
+	if not sim.life.is_alive(a) or not sim.life.is_alive(b) or first==second:
 		return {"status":"decline","text":"一緒に取り組む相手を選んでください"}
 	var project = project_definition(a,b)
 	var hypothetical = {"mode":"project","project":project}
@@ -260,7 +272,7 @@ func finish_project(meeting: Dictionary) -> void:
 	projects[key] = minf(1,projects[key]+.18)
 	for id in [meeting.a,meeting.b]:
 		var p = sim.person(id)
-		if (key=="radio" and id in ["aoi","osamu"]) or (key=="model" and id=="rin") or (key=="bread" and id in ["nagisa","maho"]) or (key=="photo" and id=="fumi") or (key=="music" and id=="ritsu"):
+		if (key=="radio" and id in ["aoi","osamu"] and p.goal_kind!="career") or (key=="model" and (id=="rin" or (id=="ryo" and p.goal_kind=="model"))) or (key=="bread" and id in ["nagisa","maho"]) or (key=="photo" and id=="fumi") or (key=="music" and id=="ritsu"):
 			p.goal_progress = minf(1,p.goal_progress+.18)
 		else:
 			p.private_project = minf(1,p.private_project+.18)
@@ -271,9 +283,14 @@ func _settle_day() -> void:
 	for id in households:
 		var h = households[id]
 		var d = config.households[id]
+		if not sim.people.any(func(p): return p.get("alive",true) and household_id(p)==id): continue
 		var expenses = d.daily_basics+(d.season_housing if sim.day_index()%3==0 else 0)
-		h.cash += d.daily_support-expenses
-		h.ledger.append({"day":sim.day_index(),"earned":h.earned_today,"support":d.daily_support,"expenses":h.spent_today+expenses,"balance":h.cash})
+		var support = 0 if id=="shared_house" and sim.person("aoi").stage=="moved" else d.daily_support
+		for p in sim.people:
+			if p.get("alive",true) and household_id(p)==id and p.career_retired:
+				support += sim.life.config.retirement_support_away if id=="aoi_apartment" else sim.life.config.retirement_support
+		h.cash += support-expenses
+		h.ledger.append({"day":sim.day_index(),"earned":h.earned_today,"support":support,"expenses":h.spent_today+expenses,"balance":h.cash})
 		if h.ledger.size()>60: h.ledger.pop_front()
 		h.earned_today = 0
 		h.spent_today = 0
@@ -310,6 +327,8 @@ func restore(data: Dictionary) -> void:
 		reset()
 		return
 	households = data.households
+	if not households.has("aoi_apartment"):
+		households.aoi_apartment = {"cash":0.0,"home_load":.3,"earned_today":0.0,"spent_today":0.0,"material_days":{},"ledger":[]}
 	supports = data.supports
 	serial = int(data.serial)
 	projects = data.get("projects",{"radio":0.0,"model":0.0,"bread":0.0,"photo":0.0,"music":0.0,"craft":0.0})

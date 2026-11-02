@@ -52,6 +52,21 @@ func run() -> void:
 	sim.advance_minutes(10)
 	expect(h.cash>cash_at_arrival and ryo.earned_today>0,"Actual time spent working earns household income")
 	expect(ryo.goal_progress>0,"Work can advance a resident's own professional goal")
+	sim.reset()
+	ryo = sim.person("ryo")
+	ryo.action = "work"
+	ryo.fatigue = .1
+	ryo.work_satisfaction = .3
+	for minute in range(50): sim.work_family.activity_tick(ryo)
+	var rested_meaning = ryo.work_satisfaction
+	expect(rested_meaning>.3,"Meaningful work can improve a rested resident's sense of fulfilment")
+	sim.reset()
+	ryo = sim.person("ryo")
+	ryo.action = "work"
+	ryo.fatigue = .95
+	ryo.work_satisfaction = .3
+	for minute in range(50): sim.work_family.activity_tick(ryo)
+	expect(ryo.work_satisfaction<rested_meaning,"The same job feels different when the person is already exhausted")
 	# Household tasks can be chosen by any resident with the same conditions.
 	sim.reset()
 	ryo = sim.person("ryo")

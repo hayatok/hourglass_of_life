@@ -224,6 +224,8 @@ fov = 48.0
 
 [node name="Residents" type="Node3D" parent="." unique_id=1715402004]
 
+[node name="LegacyRecords" type="Node3D" parent="."]
+
 [node name="PlacedBenches" type="Node3D" parent="." unique_id=1457908643]
 
 [node name="Interface" type="CanvasLayer" parent="." unique_id=245876416]
@@ -315,6 +317,21 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "メニュー"
+
+[node name="SpeedHalf" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "×0.5"
+
+[node name="Speed30" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "×30"
+
+[node name="JournalButton" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "町の記録"
 
 [node name="ResidentsPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1809890037]
 layout_mode = 0
@@ -611,7 +628,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "v0.3 開発版 · 仕事と家庭"
+text = "v0.4 開発版 · 年月と人生"
 autowrap_mode = 3
 
 [node name="Toast" type="Label" parent="Interface/InterfaceRoot/HUD" unique_id=582779342]
@@ -705,7 +722,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8392157, 0.8666667, 0.81960785, 1)
 theme_override_font_sizes/font_size = 12
-text = "v0.3 開発版 · 仕事と家庭"
+text = "v0.4 開発版 · 年月と人生"
 autowrap_mode = 3
 
 [node name="PauseMenu" type="Control" parent="Interface/InterfaceRoot" unique_id=1313611870]
@@ -798,3 +815,60 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 text = "この日時で約束する"
+
+[node name="JournalScreen" type="Control" parent="Interface/InterfaceRoot"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scrim" type="ColorRect" parent="Interface/InterfaceRoot/JournalScreen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.1, 0.12, 0.82)
+
+[node name="JournalPanel" type="PanelContainer" parent="Interface/InterfaceRoot/JournalScreen"]
+layout_mode = 0
+anchor_left = 0.2
+anchor_top = 0.08
+anchor_right = 0.8
+anchor_bottom = 0.92
+theme_override_styles/panel = SubResource("StyleBoxFlat_cxktm")
+
+[node name="JournalColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/JournalScreen/JournalPanel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="JournalHeading" type="Label" parent="Interface/InterfaceRoot/JournalScreen/JournalPanel/JournalColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "町に積もった時間"
+
+[node name="JournalBody" type="RichTextLabel" parent="Interface/InterfaceRoot/JournalScreen/JournalPanel/JournalColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.17, 0.23, 0.24, 1)
+theme_override_font_sizes/normal_font_size = 18
+text = "ここまでの暮らしを振り返る。"
+
+[node name="JournalActions" type="HBoxContainer" parent="Interface/InterfaceRoot/JournalScreen/JournalPanel/JournalColumn"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="JournalContinueButton" type="Button" parent="Interface/InterfaceRoot/JournalScreen/JournalPanel/JournalColumn/JournalActions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "町の時間へ戻る"
+
+[node name="JournalSaveButton" type="Button" parent="Interface/InterfaceRoot/JournalScreen/JournalPanel/JournalColumn/JournalActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "この町を保存する"
