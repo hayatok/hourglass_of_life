@@ -1,0 +1,188 @@
+{
+  "schema_version": "0.1.0",
+  "status": "design_not_implemented",
+  "reviewed_on": "2026-11-03",
+  "setting": "fictional_contemporary_japan",
+  "evidence_document": "../docs/research-notes.md",
+  "source_urls": {
+    "R01": "https://www.stat.go.jp/data/shakai/2021/pdf/gaiyoua.pdf",
+    "R02": "https://www.e-stat.go.jp/stat-search/files?layout=datalist&lid=000001298496&page=1",
+    "R03": "https://jsite.mhlw.go.jp/osaka-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/hourei_seido/jikan2/info.html",
+    "R04": "https://www.mext.go.jp/a_menu/shotou/cs/1320944.htm",
+    "R05": "https://selfdeterminationtheory.org/SDT/documents/2000_RyanDeci_SDT.pdf",
+    "R06": "https://www.ocf.berkeley.edu/~johnlab/bfi.html",
+    "R07": "https://pubmed.ncbi.nlm.nih.gov/11414368/",
+    "R08": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ejsp.674",
+    "R09": "https://journals.sagepub.com/doi/pdf/10.1177/0265407518761225",
+    "R10": "https://pubmed.ncbi.nlm.nih.gov/9599440/",
+    "R11": "https://pubmed.ncbi.nlm.nih.gov/34718558/",
+    "R12": "https://sociology.stanford.edu/publications/strength-weak-ties",
+    "R13": "https://ide.mit.edu/wp-content/uploads/2022/09/abl4476.pdf"
+  },
+  "empirical_references": [
+    {
+      "id": "japan_2021_sleep_all_10_plus",
+      "source_id": "R01",
+      "kind": "observed_aggregate",
+      "value": 474,
+      "unit": "minutes_per_day",
+      "population": "Japan, age 10 and over",
+      "time_basis": "2021, average across the full week",
+      "source_location": "冊子2ページ、表1-1",
+      "allowed_use": "conditional_aggregate_comparison",
+      "not_a_personal_target": true
+    },
+    {
+      "id": "japan_2021_work_all_10_plus",
+      "source_id": "R01",
+      "kind": "observed_aggregate",
+      "value": 208,
+      "unit": "minutes_per_day",
+      "population": "Japan, age 10 and over, including people not in employment",
+      "time_basis": "2021, average across the full week",
+      "source_location": "冊子2ページ、表1-1",
+      "allowed_use": "conditional_aggregate_comparison",
+      "not_a_workday_shift_duration": true
+    },
+    {
+      "id": "japan_2021_household_work_husband_child_under_6",
+      "source_id": "R01",
+      "kind": "observed_aggregate",
+      "value": 114,
+      "unit": "minutes_per_day",
+      "population": "Husbands in couple-and-child households with a child under 6",
+      "time_basis": "2021, average across the full week",
+      "source_location": "冊子4〜5ページ、表2-2と説明",
+      "category": "Housework, caring or nursing, childcare, shopping",
+      "allowed_use": "conditional_aggregate_comparison",
+      "not_a_gender_preference": true
+    },
+    {
+      "id": "japan_2021_household_work_wife_child_under_6",
+      "source_id": "R01",
+      "kind": "observed_aggregate",
+      "value": 448,
+      "unit": "minutes_per_day",
+      "population": "Wives in couple-and-child households with a child under 6",
+      "time_basis": "2021, average across the full week",
+      "source_location": "冊子4〜5ページ、表2-2と説明",
+      "category": "Housework, caring or nursing, childcare, shopping",
+      "allowed_use": "conditional_aggregate_comparison",
+      "not_a_gender_preference": true
+    }
+  ],
+  "design_principles": {
+    "traits_do_not_hard_gate_actions": true,
+    "demographics_do_not_assign_personality_or_care_preference": true,
+    "child_schedules_are_authored_separately_from_10_plus_statistics": true,
+    "agents_use_only_known_events": true,
+    "relationships_are_directed": true,
+    "co_presence_is_distinct_from_engagement": true,
+    "dialogue_reports_simulation_events": true,
+    "all_numeric_game_parameters_are_authored": true
+  },
+  "state_dimensions": {
+    "traits": [
+      "extraversion",
+      "agreeableness",
+      "conscientiousness",
+      "negative_emotionality",
+      "open_mindedness"
+    ],
+    "values": [
+      "achievement",
+      "security",
+      "care",
+      "creativity",
+      "belonging",
+      "autonomy"
+    ],
+    "needs": [
+      "hunger",
+      "fatigue",
+      "connection_deficit",
+      "autonomy_deficit",
+      "competence_deficit",
+      "quiet_need"
+    ],
+    "relationship": [
+      "familiarity",
+      "trust",
+      "ease",
+      "unresolved_expectation"
+    ],
+    "range": {
+      "min": 0,
+      "max": 1,
+      "needs_high_means": "greater_unmet_need"
+    }
+  },
+  "mechanism_references": {
+    "time_accounting": ["R01", "R02", "R03", "R04"],
+    "motivation": ["R05"],
+    "traits_and_context": ["R06", "R07"],
+    "habits": ["R08"],
+    "relationships": ["R09", "R10"],
+    "perceived_endings": ["R11"],
+    "information_networks": ["R12", "R13"]
+  },
+  "game_parameters": {
+    "provenance": "authored_prototype_values_not_empirical_estimates",
+    "utility_weights": {
+      "need_relief": 0.26,
+      "goal_and_value_fit": 0.20,
+      "relationship_fit": 0.16,
+      "role_fit": 0.10,
+      "contextual_habit": 0.08,
+      "expected_enjoyment": 0.08,
+      "burden": -0.12
+    },
+    "selection": {
+      "candidate_band_basis": "base_score",
+      "max_gap_from_best_base_score": 0.12,
+      "shortlist_rank_basis": "score_after_suggestion",
+      "max_shortlist_size": 3,
+      "softmax_temperature": 0.08,
+      "persist_rng_state": true,
+      "reconsider_interval_sim_minutes": 10,
+      "respect_action_specific_boundaries": true
+    },
+    "suggestions": {
+      "max_score_bonus": 0.06,
+      "active_limit_per_resident": 1,
+      "responses": ["accept", "defer", "decline", "counteroffer"],
+      "repeat_bonus_if_same_declined_conditions": 0,
+      "cannot_bypass": ["reachability", "capacity", "affordability", "mutual_participation", "confirmed_care_handoff"]
+    },
+    "habits": {
+      "reinforcement_alpha": 0.04,
+      "reinforcement_formula": "H_next = H + alpha * (1 - H)",
+      "single_missed_opportunity_resets_habit": false,
+      "long_absence_decay": "calibrate_in_prototype",
+      "context_keys": ["place", "preceding_action", "time_window"]
+    },
+    "time": {
+      "minutes_per_life_day": 1440,
+      "life_week_days": 7,
+      "representative_days_per_season": 3,
+      "seasons_per_age_year": 4,
+      "tentative_real_seconds_per_day": 180,
+      "calendar_is_play_abstraction": true,
+      "reset_week_or_habits_at_age_year_boundary": false,
+      "offline_progression": false,
+      "event_processing_independent_of_render_rate": true
+    },
+    "presentation": {
+      "dimension": "3D",
+      "art_direction": "anime_3d_jrpg",
+      "shading_style": "toon_planes_with_soft_gradients",
+      "artwork_reference": "../assets/artwork/v02-jrpg/README.md",
+      "adult_head_height_ratio_range": [5.5, 6.5],
+      "child_head_height_ratio_range": [4.0, 4.5],
+      "camera": "rotatable_dollhouse",
+      "behavior_phases": ["respond", "reserve", "travel", "rendezvous", "execute", "finish_or_interrupt"],
+      "animation_channels": ["locomotion", "upper_body", "face_and_gaze"],
+      "joint_memory_requires_actual_engagement": true
+    }
+  }
+}

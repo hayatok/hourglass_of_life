@@ -1,0 +1,148 @@
+{
+  "version": "0.2.0",
+  "created_on": "2026-11-03",
+  "generator": "built-in image_gen",
+  "art_direction": "Japanese anime 3D JRPG",
+  "stage": "concept_and_modeling_reference",
+  "prompt_file": "prompts.json",
+  "assets": [
+    {
+      "id": "town",
+      "file": "01-town-overview.png",
+      "title": "町全体と日常",
+      "prompt_key": "town",
+      "source_filename": "exec-bdc52e27-c770-4722-bb58-2cd011b20a9c.png",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 3439720,
+      "sha256": "927509ebc53a85f1cfb7270191535265bfc5a0713de90353b47dd9e3a2acbfae"
+    },
+    {
+      "id": "cast",
+      "file": "02-residents-lineup.png",
+      "title": "住人8人の集合図",
+      "prompt_key": "cast",
+      "source_filename": "exec-385ec2d2-af19-4c00-ae11-482e019670da.png",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 2205216,
+      "sha256": "8330b23937a6060cd23c0368f765d5e2df82a91211847e0390b33daae2e7b8a3"
+    },
+    {
+      "id": "nagisa",
+      "file": "03-nagisa-turnaround.png",
+      "title": "小川渚の三面図",
+      "prompt_key": "nagisa_turnaround",
+      "source_filename": "exec-0da6fd58-8015-44b7-8b72-b903419028f0.png",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 1459899,
+      "sha256": "dff273057ae4ef4a996b7e2ba043bd5879c0d4803d750a606c1b73a4c1c6e3c0"
+    },
+    {
+      "id": "osamu",
+      "file": "04-osamu-turnaround.png",
+      "title": "佐伯修の三面図",
+      "prompt_key": "osamu_turnaround",
+      "source_filename": "exec-dbed2f28-46ca-4ace-8844-9af01f5d4ef2.png",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 1613795,
+      "sha256": "b445b42710108f8788e18931f7fb92e3c9e17bd38aee106faee7d512a422af34"
+    },
+    {
+      "id": "architecture",
+      "file": "05-buildings-and-cutaways.png",
+      "title": "3種類の建物の外観と断面",
+      "prompt_key": "architecture",
+      "source_filename": "exec-6cc5ab52-5574-40ac-af7d-e003fb3bea6f.png",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 2429206,
+      "sha256": "e9c39227dd36c0a47b4bec9101a90afe99f9d2d5e97d6e1decf079ad772c60b4"
+    },
+    {
+      "id": "props",
+      "file": "06-props-atlas.png",
+      "title": "家具と小物12点",
+      "prompt_key": "props",
+      "source_filename": "exec-db818a70-e779-410c-9fba-97eeb257b4c1.png",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "color_type": "RGBA",
+      "bytes": 2355080,
+      "sha256": "16403e2e4ac7bf8df25bf123548257834e8e5041b12cd0ec4bf3b30b9a6f2eee",
+      "alpha": {
+        "min": 0,
+        "max": 254,
+        "fully_transparent_pixels": 764987,
+        "fully_transparent_fraction": 0.4864,
+        "near_opaque_pixels": 653732,
+        "sample_alpha": {
+          "(768, 0)": 0,
+          "(0, 0)": 0,
+          "(1535, 0)": 0,
+          "(384, 0)": 0,
+          "(1152, 0)": 0,
+          "(768, 341)": 0,
+          "(384, 341)": 0,
+          "(1152, 341)": 0,
+          "(1535, 1023)": 0,
+          "(0, 1023)": 1
+        }
+      }
+    }
+  ],
+  "official_style_references": [
+    {
+      "page": "https://www.falcom.co.jp/sora/character/estelle.html",
+      "image": "https://www.falcom.co.jp/sora/assets/character/single/ss/thumb/estelle_02.webp",
+      "role": "anime face construction, hair shading and real-time 3D rendering",
+      "included_in_pack": false
+    },
+    {
+      "page": "https://www.falcom.co.jp/sora2/character/estelle.html",
+      "image": "https://www.falcom.co.jp/sora2/assets/character/single/ss/thumb/estelle_02.webp",
+      "role": "anime face construction, hair shading and real-time 3D rendering",
+      "included_in_pack": false
+    }
+  ],
+  "cast_order": [
+    "nagisa",
+    "ryo",
+    "rin",
+    "osamu",
+    "fumi",
+    "maho",
+    "ritsu",
+    "aoi"
+  ],
+  "visual_review": {
+    "cast_count": 8,
+    "turnaround_views": [
+      "front",
+      "side",
+      "back"
+    ],
+    "building_types": 3,
+    "prop_count": 12,
+    "images_are_modeling_references_not_game_captures": true
+  },
+  "input_design_references": [
+    "assets/artwork/v01/01-town-overview.png",
+    "assets/artwork/v01/02-residents-lineup.png",
+    "assets/artwork/v01/05-buildings-and-cutaways.png",
+    "assets/artwork/v01/06-props-atlas.png"
+  ]
+}

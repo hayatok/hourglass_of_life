@@ -1,0 +1,155 @@
+{
+  "version": "0.1.0",
+  "created_on": "2026-11-03",
+  "generator": "built-in image_gen",
+  "stage": "concept_and_modeling_reference",
+  "prompt_file": "prompts.json",
+  "assets": [
+    {
+      "id": "town",
+      "file": "01-town-overview.png",
+      "title": "町の外観と日常の場面",
+      "prompt_key": "town",
+      "input_reference_files": [],
+      "source_filename": "exec-40df1c79-039b-44fe-aaa7-2a4152d93e78.png",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 3110072,
+      "sha256": "e73d0988aa2077692d6187fb9d177ae7d49ec7b1ffcba46ad70190bd046bd828"
+    },
+    {
+      "id": "cast",
+      "file": "02-residents-lineup.png",
+      "title": "初期住人8人の集合図",
+      "prompt_key": "cast_refinement",
+      "input_reference_files": [
+        "studies/02-residents-lineup-before-proportion-adjustment.png"
+      ],
+      "source_filename": "exec-361487f2-d7a5-4053-b579-07d280ad18b0.png",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 2169125,
+      "sha256": "d21a96ce59d594a78a2cc813e4b6a41be6ade8971e8fe5fc9ebf1b6fa9694282"
+    },
+    {
+      "id": "nagisa",
+      "file": "03-nagisa-turnaround.png",
+      "title": "小川渚の正面 側面 背面",
+      "prompt_key": "nagisa_turnaround",
+      "input_reference_files": [
+        "02-residents-lineup.png"
+      ],
+      "source_filename": "exec-c7285535-7b2c-455f-a3d0-84c716def27c.png",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 1559335,
+      "sha256": "1315797c64e911af696a7db5e05423a6aac658cb54df0fe2f5c8876b1585896b"
+    },
+    {
+      "id": "osamu",
+      "file": "04-osamu-turnaround.png",
+      "title": "佐伯修の正面 側面 背面",
+      "prompt_key": "osamu_turnaround",
+      "input_reference_files": [
+        "02-residents-lineup.png"
+      ],
+      "source_filename": "exec-593d7475-fc7d-4e35-8720-3b4c05c5dbe0.png",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 1971367,
+      "sha256": "8332b47e767ea6563f7d7ca379ab1da0e2269d072d0b50f5da506ce1f5968d20"
+    },
+    {
+      "id": "architecture",
+      "file": "05-buildings-and-cutaways.png",
+      "title": "3種類の建物の外観と断面",
+      "prompt_key": "architecture",
+      "input_reference_files": [
+        "01-town-overview.png"
+      ],
+      "source_filename": "exec-65659bc6-f94c-40eb-a024-77c435c7b2b3.png",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "color_type": "RGB",
+      "bytes": 2413576,
+      "sha256": "fa0226fd8c17f6eb31b404970617a8efc2c1f3adfe0b4825f26813c73f07d030"
+    },
+    {
+      "id": "props",
+      "file": "06-props-atlas.png",
+      "title": "家具と小物12点の透過シート",
+      "prompt_key": "props",
+      "input_reference_files": [
+        "01-town-overview.png",
+        "05-buildings-and-cutaways.png"
+      ],
+      "source_filename": "exec-15938c5a-8100-4dde-b545-6c71da2e36a2.png",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "color_type": "RGBA",
+      "bytes": 2137097,
+      "sha256": "e7a1640d64e5a10eb80ca32914e3aff86070e645e29d4d130b8fd399ccfb311f",
+      "alpha": {
+        "min": 0,
+        "max": 254,
+        "fully_transparent_pixels": 840750,
+        "fully_transparent_fraction": 0.5345,
+        "near_opaque_pixels": 531682,
+        "sample_alpha": {
+          "(768, 0)": 0,
+          "(0, 0)": 0,
+          "(1535, 0)": 0,
+          "(384, 0)": 0,
+          "(1152, 0)": 0,
+          "(768, 341)": 0,
+          "(384, 341)": 0,
+          "(1152, 341)": 0,
+          "(1535, 1023)": 0,
+          "(0, 1023)": 1
+        }
+      }
+    }
+  ],
+  "cast_order": [
+    "nagisa",
+    "ryo",
+    "rin",
+    "osamu",
+    "fumi",
+    "maho",
+    "ritsu",
+    "aoi"
+  ],
+  "visual_review": {
+    "cast_count": 8,
+    "turnaround_views": [
+      "front",
+      "side",
+      "back"
+    ],
+    "building_types": 3,
+    "prop_count": 12,
+    "images_are_modeling_references_not_game_captures": true
+  },
+  "studies": [
+    {
+      "file": "studies/02-residents-lineup-before-proportion-adjustment.png",
+      "purpose": "Initial cast proportions, superseded by 02-residents-lineup.png",
+      "prompt_key": "cast",
+      "input_reference_files": [
+        "01-town-overview.png"
+      ],
+      "source_filename": "exec-34afc074-7853-425f-b756-587fc795e243.png"
+    }
+  ]
+}

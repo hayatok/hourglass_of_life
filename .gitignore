@@ -1,0 +1,12 @@
+.DS_Store
+.godot/
+.artifacts/
+builds/
+*.blend1
+*.blend2
+*.tmp
+assets/artwork/*.zip
+.env
+.env.*
+!.env.example
+

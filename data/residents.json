@@ -1,0 +1,198 @@
+{
+  "schema_version": "0.1.0",
+  "status": "authored_fictional_prototype_cast",
+  "model_file": "behavior-model.json",
+  "note": "人物、数値、生活歴、勤務時間は架空の設定。統計の標本や、研究から推定した個人像ではない。予定は拘束時間の例で、一日全体を埋めるものではない。",
+  "week_day_index": {
+    "0": "Monday",
+    "1": "Tuesday",
+    "2": "Wednesday",
+    "3": "Thursday",
+    "4": "Friday",
+    "5": "Saturday",
+    "6": "Sunday"
+  },
+  "routine_semantics": "start_minuteは生活日の午前0時からの分。duration_minutesは翌日まで継続できる。on_daysは開始日の曜日を示す。生活週は加齢年の境目でも連続する。",
+  "households": [
+    {"id": "ogawa", "label": "小川家", "members": ["nagisa", "ryo", "rin"]},
+    {"id": "saeki", "label": "佐伯家", "members": ["osamu", "fumi"]},
+    {"id": "shared_house", "label": "共同住宅の三人", "members": ["maho", "ritsu", "aoi"]}
+  ],
+  "residents": [
+    {
+      "id": "nagisa",
+      "name": "小川 渚",
+      "age_years": 36,
+      "household_id": "ogawa",
+      "occupation": "パン屋兼喫茶店の製造担当",
+      "traits": {"extraversion": 0.38, "agreeableness": 0.62, "conscientiousness": 0.80, "negative_emotionality": 0.42, "open_mindedness": 0.75},
+      "values": {"achievement": 0.85, "security": 0.60, "care": 0.65, "creativity": 0.88, "belonging": 0.55, "autonomy": 0.80},
+      "goals": ["自分の名前で出せる季節のパンを完成させたい", "休日には家族と出かけたい"],
+      "responsibilities": ["朝の製造を担当する", "亮と相談して夕食の用意を分担する"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1260, "duration_minutes": 420, "place": "home"},
+        {"id": "bakery_shift", "on_days": [0, 1, 3, 4, 5], "start_minute": 300, "duration_minutes": 480, "place": "bakery_cafe"}
+      ],
+      "public_private_difference": "店では製造の段取りを優先する。家では親しい人と少人数でゆっくり話す。",
+      "possible_counteroffer": "閉店後は疲れている。休みの水曜に二人で会いたい。",
+      "initial_habit": {"cue": "休日の朝食後", "action": "新作の試作ノートを開く"},
+      "visible_behavior": "焼いたパンを眺め、手元のノートへ書き込む。人に見せるときは少しためらう。"
+    },
+    {
+      "id": "ryo",
+      "name": "小川 亮",
+      "age_years": 37,
+      "household_id": "ogawa",
+      "occupation": "在宅のデザイナー",
+      "traits": {"extraversion": 0.55, "agreeableness": 0.75, "conscientiousness": 0.65, "negative_emotionality": 0.55, "open_mindedness": 0.80},
+      "values": {"achievement": 0.65, "security": 0.83, "care": 0.88, "creativity": 0.80, "belonging": 0.72, "autonomy": 0.70},
+      "goals": ["継続して頼んでもらえる仕事を作りたい", "凛と作りかけの模型を完成させたい"],
+      "responsibilities": ["平日の下校後に凛を見守る", "渚と相談して家事を分担する"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1380, "duration_minutes": 480, "place": "home"},
+        {"id": "remote_work", "on_days": [0, 1, 2, 3, 4], "start_minute": 540, "duration_minutes": 300, "place": "home"},
+        {"id": "after_school_care", "on_days": [0, 1, 2, 3, 4], "start_minute": 900, "duration_minutes": 180, "place": "home"}
+      ],
+      "public_private_difference": "依頼者には落ち着いて説明する。家では先の収入が気になり、仕事の画面を見直すことがある。",
+      "possible_counteroffer": "その時間は凛といる。迎えを交代できれば行ける。",
+      "initial_habit": {"cue": "凛が宿題を始めたあと", "action": "同じ机で仕事の下書きをする"},
+      "visible_behavior": "子どもの作業を横から眺め、ときどき自分の道具を渡す。"
+    },
+    {
+      "id": "rin",
+      "name": "小川 凛",
+      "age_years": 7,
+      "household_id": "ogawa",
+      "occupation": "小学生",
+      "traits": {"extraversion": 0.68, "agreeableness": 0.55, "conscientiousness": 0.35, "negative_emotionality": 0.45, "open_mindedness": 0.90},
+      "values": {"achievement": 0.55, "security": 0.75, "care": 0.50, "creativity": 0.90, "belonging": 0.85, "autonomy": 0.65},
+      "goals": ["自分で考えた町の模型を作りたい", "作ったものを誰かに見せたい"],
+      "responsibilities": ["学校へ通う", "使った道具を片付ける"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1260, "duration_minutes": 600, "place": "home"},
+        {"id": "school", "on_days": [0, 1, 2, 3, 4], "start_minute": 510, "duration_minutes": 390, "place": "off_map_school"}
+      ],
+      "public_private_difference": "初めての大人の前では様子を見る。慣れた相手には作ったものを次々見せる。",
+      "possible_counteroffer": "いま模型を作っている。一緒に続きをしてほしい。",
+      "initial_habit": {"cue": "学校から帰って手を洗ったあと", "action": "模型の机をのぞく"},
+      "visible_behavior": "作品を両手で持ち、見てくれる相手の反応を待つ。",
+      "evidence_note": "10歳未満の予定は試作用に作成したもの。R01の10歳以上の睡眠平均を適用していない。"
+    },
+    {
+      "id": "osamu",
+      "name": "佐伯 修",
+      "age_years": 68,
+      "household_id": "saeki",
+      "occupation": "工房を続ける修理職人",
+      "traits": {"extraversion": 0.25, "agreeableness": 0.48, "conscientiousness": 0.90, "negative_emotionality": 0.35, "open_mindedness": 0.65},
+      "values": {"achievement": 0.85, "security": 0.55, "care": 0.50, "creativity": 0.87, "belonging": 0.48, "autonomy": 0.92},
+      "goals": ["自分が納得するラジオを一台完成させたい", "工房を今後どう続けるか考えたい"],
+      "responsibilities": ["引き受けた修理を納期までに仕上げる", "文と生活費や予定を相談する"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1320, "duration_minutes": 480, "place": "home"},
+        {"id": "workshop", "on_days": [0, 1, 3, 4], "start_minute": 540, "duration_minutes": 420, "place": "workshop"}
+      ],
+      "public_private_difference": "客への説明は短い。興味を持った相手には、部品の違いを詳しく話す。",
+      "possible_counteroffer": "教室は今すぐには開かない。この一台が仕上がったら見に来てほしい。",
+      "initial_habit": {"cue": "工房を開けたあと", "action": "同じ椅子に座ってラジオをつける"},
+      "visible_behavior": "作業の手は止めず、相手の質問を聞いてから顔を上げる。"
+    },
+    {
+      "id": "fumi",
+      "name": "佐伯 文",
+      "age_years": 65,
+      "household_id": "saeki",
+      "occupation": "退職した販売員",
+      "traits": {"extraversion": 0.76, "agreeableness": 0.68, "conscientiousness": 0.60, "negative_emotionality": 0.32, "open_mindedness": 0.88},
+      "values": {"achievement": 0.55, "security": 0.65, "care": 0.65, "creativity": 0.85, "belonging": 0.85, "autonomy": 0.90},
+      "goals": ["写真を習い始めたい", "以前の職場以外にも友人を作りたい"],
+      "responsibilities": ["修と生活費や家事の分担を相談する"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1380, "duration_minutes": 480, "place": "home"}
+      ],
+      "public_private_difference": "集まりでは進んで話す。家では修と別々の趣味をしながら過ごすことも好き。",
+      "possible_counteroffer": "その日は写真を撮りに行きたい。散歩しながらなら一緒にどう？",
+      "initial_habit": {"cue": "午後に外へ出る前", "action": "カメラを持っていく"},
+      "visible_behavior": "町の小さな変化を見つけると足を止め、しゃがんで写真を撮る。"
+    },
+    {
+      "id": "maho",
+      "name": "水野 真帆",
+      "age_years": 26,
+      "household_id": "shared_house",
+      "occupation": "パン屋兼喫茶店の接客担当",
+      "traits": {"extraversion": 0.82, "agreeableness": 0.80, "conscientiousness": 0.65, "negative_emotionality": 0.48, "open_mindedness": 0.68},
+      "values": {"achievement": 0.70, "security": 0.62, "care": 0.78, "creativity": 0.68, "belonging": 0.90, "autonomy": 0.70},
+      "goals": ["常連も初めての人も入りやすい店にしたい", "休みの日には自分のために出かけたい"],
+      "responsibilities": ["接客と閉店作業を担当する", "同居人と共用部の片付けを分担する"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1410, "duration_minutes": 480, "place": "home"},
+        {"id": "cafe_shift", "on_days": [1, 2, 3, 4, 5], "start_minute": 600, "duration_minutes": 480, "place": "bakery_cafe"}
+      ],
+      "public_private_difference": "店では人の話をよく聞く。帰宅後は、自分の予定を優先したい日もある。",
+      "possible_counteroffer": "みんなの会は楽しそう。でも今日は休みたい。来週なら手伝える。",
+      "initial_habit": {"cue": "閉店の片付けが終わったあと", "action": "窓際で飲み物を一杯飲む"},
+      "visible_behavior": "相手を見て相づちを打つ。疲れた日は帰宅してすぐ静かな席を選ぶ。"
+    },
+    {
+      "id": "ritsu",
+      "name": "三浦 律",
+      "age_years": 31,
+      "household_id": "shared_house",
+      "occupation": "町外で夜勤をする看護職",
+      "traits": {"extraversion": 0.30, "agreeableness": 0.78, "conscientiousness": 0.85, "negative_emotionality": 0.52, "open_mindedness": 0.65},
+      "values": {"achievement": 0.72, "security": 0.85, "care": 0.88, "creativity": 0.60, "belonging": 0.62, "autonomy": 0.78},
+      "goals": ["仕事を続けながら音楽を作る時間を持ちたい", "休息を確保しながら同居人とも過ごしたい"],
+      "responsibilities": ["町外の勤務先へ通う", "睡眠時間に合わせて共用部の分担を相談する"],
+      "routines": [
+        {"id": "night_shift", "on_days": [0, 3, 5], "start_minute": 1200, "duration_minutes": 720, "place": "off_map_workplace"},
+        {"id": "post_shift_sleep", "on_days": [1, 4, 6], "start_minute": 540, "duration_minutes": 420, "place": "home"},
+        {"id": "off_shift_sleep", "on_days": [0, 2, 3, 5], "start_minute": 0, "duration_minutes": 480, "place": "home"}
+      ],
+      "public_private_difference": "職場では相手を安心させるために声をかける。家では話さずに近くにいられる時間も好き。",
+      "possible_counteroffer": "午前は眠っている。夕方、出勤前に少しなら会える。",
+      "initial_habit": {"cue": "夜勤のない日の夕食後", "action": "ヘッドホンで曲の続きを作る"},
+      "visible_behavior": "帰宅後に同居人へ短く手を振り、静かに自室へ向かう。",
+      "evidence_note": "勤務と睡眠の時刻は架空の例。看護職の実際の勤務分布や医療上の推奨値を示さない。"
+    },
+    {
+      "id": "aoi",
+      "name": "高瀬 葵",
+      "age_years": 20,
+      "household_id": "shared_house",
+      "occupation": "町外へ通う学生",
+      "traits": {"extraversion": 0.42, "agreeableness": 0.60, "conscientiousness": 0.48, "negative_emotionality": 0.68, "open_mindedness": 0.94},
+      "values": {"achievement": 0.68, "security": 0.50, "care": 0.55, "creativity": 0.95, "belonging": 0.75, "autonomy": 0.86},
+      "goals": ["譲ってもらったラジオを直したい", "次の学期にどう過ごすか考えたい"],
+      "responsibilities": ["授業や制作の締切を守る", "同居人と共用部の片付けを分担する"],
+      "routines": [
+        {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 0, "duration_minutes": 480, "place": "home"},
+        {"id": "classes", "on_days": [0, 1, 3, 4], "start_minute": 600, "duration_minutes": 360, "place": "off_map_school"}
+      ],
+      "public_private_difference": "初めての相手には話しかけるきっかけを探す。好きな道具の話では長く話す。",
+      "possible_counteroffer": "大きな集まりはまだ緊張する。工房を見せてもらうだけなら行きたい。",
+      "initial_habit": {"cue": "帰宅して荷物を置いたあと", "action": "ラジオの部品を眺める"},
+      "visible_behavior": "店先で足を止め、手元のラジオと工房の中を交互に見る。"
+    }
+  ],
+  "relationship_seeds": [
+    {"from": "nagisa", "to": "ryo", "roles": ["partner", "co_parent"], "familiarity": 0.95, "trust": 0.85, "ease": 0.85, "unresolved_expectation": 0.15},
+    {"from": "ryo", "to": "nagisa", "roles": ["partner", "co_parent"], "familiarity": 0.95, "trust": 0.88, "ease": 0.85, "unresolved_expectation": 0.10},
+    {"from": "nagisa", "to": "rin", "roles": ["parent"], "familiarity": 0.98, "trust": 0.85, "ease": 0.90, "unresolved_expectation": 0.05},
+    {"from": "rin", "to": "nagisa", "roles": ["child"], "familiarity": 0.98, "trust": 0.95, "ease": 0.95, "unresolved_expectation": 0.10},
+    {"from": "ryo", "to": "rin", "roles": ["parent"], "familiarity": 0.98, "trust": 0.85, "ease": 0.92, "unresolved_expectation": 0.05},
+    {"from": "rin", "to": "ryo", "roles": ["child"], "familiarity": 0.98, "trust": 0.95, "ease": 0.95, "unresolved_expectation": 0.05},
+    {"from": "osamu", "to": "fumi", "roles": ["partner"], "familiarity": 0.98, "trust": 0.92, "ease": 0.82, "unresolved_expectation": 0.10},
+    {"from": "fumi", "to": "osamu", "roles": ["partner"], "familiarity": 0.98, "trust": 0.88, "ease": 0.78, "unresolved_expectation": 0.20},
+    {"from": "nagisa", "to": "maho", "roles": ["colleague"], "familiarity": 0.72, "trust": 0.78, "ease": 0.65, "unresolved_expectation": 0.05},
+    {"from": "maho", "to": "nagisa", "roles": ["colleague"], "familiarity": 0.72, "trust": 0.82, "ease": 0.62, "unresolved_expectation": 0.05},
+    {"from": "maho", "to": "ritsu", "roles": ["housemate"], "familiarity": 0.68, "trust": 0.72, "ease": 0.68, "unresolved_expectation": 0.10},
+    {"from": "ritsu", "to": "maho", "roles": ["housemate"], "familiarity": 0.68, "trust": 0.75, "ease": 0.70, "unresolved_expectation": 0.05},
+    {"from": "maho", "to": "aoi", "roles": ["housemate"], "familiarity": 0.62, "trust": 0.65, "ease": 0.72, "unresolved_expectation": 0.05},
+    {"from": "aoi", "to": "maho", "roles": ["housemate"], "familiarity": 0.62, "trust": 0.75, "ease": 0.80, "unresolved_expectation": 0.05},
+    {"from": "ritsu", "to": "aoi", "roles": ["housemate"], "familiarity": 0.55, "trust": 0.65, "ease": 0.75, "unresolved_expectation": 0.05},
+    {"from": "aoi", "to": "ritsu", "roles": ["housemate"], "familiarity": 0.55, "trust": 0.68, "ease": 0.72, "unresolved_expectation": 0.05},
+    {"from": "aoi", "to": "osamu", "roles": ["acquaintance"], "familiarity": 0.08, "trust": 0.25, "ease": 0.15, "unresolved_expectation": 0.00},
+    {"from": "osamu", "to": "aoi", "roles": ["acquaintance"], "familiarity": 0.05, "trust": 0.20, "ease": 0.30, "unresolved_expectation": 0.00}
+  ]
+}
