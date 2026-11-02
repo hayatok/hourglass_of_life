@@ -1,0 +1,329 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_delivery.blend",
+  "summary": {
+    "tris_by_lod": {
+      "0": 30528,
+      "1": 12820,
+      "2": 3661
+    },
+    "fail": [],
+    "warn": [
+      "CH_Nagisa_Body_LOD0: 26 doubled vertices within 0.0001",
+      "CH_Nagisa_Face_LOD0: 22 doubled vertices within 0.0001",
+      "CH_Nagisa_Body_LOD1: 2 doubled vertices within 0.0001",
+      "CH_Nagisa_Body_LOD2: 7 doubled vertices within 0.0001"
+    ]
+  },
+  "objects": [
+    {
+      "name": "CH_Nagisa_Body_LOD0",
+      "type": "MESH",
+      "warn": [
+        "26 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 24928,
+        "verts_evaluated": 12684,
+        "verts": 12684,
+        "faces": 24928,
+        "boundary_edges": 108,
+        "nonmanifold_edges": 0,
+        "islands": 84,
+        "flipped_vs_recalc": 36,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Nagisa_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Nagisa_Face_LOD0",
+      "type": "MESH",
+      "warn": [
+        "22 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 5600,
+        "verts_evaluated": 3086,
+        "verts": 3086,
+        "faces": 5600,
+        "boundary_edges": 504,
+        "nonmanifold_edges": 0,
+        "islands": 24,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Nagisa_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Nagisa_Body_LOD1",
+      "type": "MESH",
+      "warn": [
+        "2 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 10468,
+        "verts_evaluated": 5436,
+        "verts": 5436,
+        "faces": 10468,
+        "boundary_edges": 72,
+        "nonmanifold_edges": 0,
+        "islands": 84,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Nagisa_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Nagisa_Body_LOD2",
+      "type": "MESH",
+      "warn": [
+        "7 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2989,
+        "verts_evaluated": 1682,
+        "verts": 1682,
+        "faces": 2989,
+        "boundary_edges": 47,
+        "nonmanifold_edges": 0,
+        "islands": 84,
+        "flipped_vs_recalc": 17,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Nagisa_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Nagisa_Face_LOD1",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2352,
+        "verts_evaluated": 1461,
+        "verts": 1461,
+        "faces": 2352,
+        "boundary_edges": 502,
+        "nonmanifold_edges": 0,
+        "islands": 24,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Nagisa_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Nagisa_Face_LOD2",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 672,
+        "verts_evaluated": 527,
+        "verts": 527,
+        "faces": 672,
+        "boundary_edges": 314,
+        "nonmanifold_edges": 0,
+        "islands": 24,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Nagisa_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "COL_body",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 92,
+        "verts_evaluated": 48,
+        "verts": 48,
+        "faces": 92,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Nagisa_Body"
+        ],
+        "modifiers": []
+      }
+    },
+    {
+      "name": "SOCKET_hand.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Nagisa_Rig",
+        "parent_bone": "DEF-hand.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_hand.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Nagisa_Rig",
+        "parent_bone": "DEF-hand.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_head",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Nagisa_Rig",
+        "parent_bone": "DEF-head",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_chest",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Nagisa_Rig",
+        "parent_bone": "DEF-chest",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Nagisa_Rig",
+        "parent_bone": "DEF-foot.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Nagisa_Rig",
+        "parent_bone": "DEF-foot.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "CH_Nagisa_Rig",
+      "type": "ARMATURE",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "bones": 35,
+        "deform_bones": 35,
+        "roots": [
+          "DEF-root"
+        ]
+      }
+    }
+  ]
+}

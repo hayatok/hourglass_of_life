@@ -1,0 +1,35 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_delivery.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -0.1954319030046463,
+    -1.650712251663208,
+    0.3242799937725067
+  ],
+  "bbox_max": [
+    0.195795476436615,
+    -0.0059999823570251465,
+    0.6152734160423279
+  ],
+  "size_xyz": [
+    0.3912273645401001,
+    1.644712209701538,
+    0.29099342226982117
+  ],
+  "objects": [
+    "CH_Nagisa_Body_LOD0",
+    "CH_Nagisa_Face_LOD0"
+  ],
+  "renders": {
+    "threequarter": {
+      "file": "assets/models/CH_Nagisa/review/08_animation/sleep/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 2.5985998205743854
+    }
+  }
+}

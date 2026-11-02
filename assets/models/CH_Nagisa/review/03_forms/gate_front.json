@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/ref/front.png",
+  "m_per_px": 0.001987951807229,
+  "iou": 0.9174,
+  "ref_only_pct": 4.46,
+  "render_only_pct": 4.14,
+  "band_width_diff": [
+    0.006,
+    0.024,
+    0.018,
+    0.0156,
+    -0.0048,
+    0.0012,
+    -0.0084,
+    -0.0036,
+    0.0036,
+    0.0036
+  ]
+}

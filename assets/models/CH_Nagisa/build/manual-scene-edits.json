@@ -1,0 +1,9 @@
+{
+  "performed_in": "Blender 5.2.1 native Edit Mode, 2026-11-03",
+  "object": "CH_Nagisa_Fringe01_LOD0",
+  "operation": "all vertices, median pivot, global X scale 1.08; global Y translation -0.006 m",
+  "scale_x_about_median": 1.08,
+  "translate_y_m": -0.006,
+  "reason": "Widen the swept foreground lock and separate its overlap with the adjacent lock.",
+  "saved_master_verified": true
+}

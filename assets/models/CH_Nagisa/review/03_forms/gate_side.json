@@ -1,0 +1,21 @@
+{
+  "view": "side",
+  "az": 90.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/ref/side.png",
+  "m_per_px": 0.001987951807229,
+  "iou": 0.9101,
+  "ref_only_pct": 5.45,
+  "render_only_pct": 3.88,
+  "band_width_diff": [
+    0.0121,
+    0.0241,
+    -0.0084,
+    0.0181,
+    -0.0084,
+    -0.0012,
+    -0.0145,
+    0.0036,
+    0.0036,
+    -0.0097
+  ]
+}

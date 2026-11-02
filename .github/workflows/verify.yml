@@ -26,3 +26,5 @@ jobs:
         run: godot --headless --path . --script tests/test_life_course.gd
       - name: Boot the complete scene
         run: godot --headless --path . --quit-after 10
+      - name: Import character skin, face morphs and actual animation poses
+        run: godot --headless --path . --script tests/test_character_model.gd

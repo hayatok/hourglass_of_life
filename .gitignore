@@ -1,10 +1,13 @@
 .DS_Store
 .godot/
 .artifacts/
-builds/
+builds/*
+!builds/.gdignore
 *.blend1
 *.blend2
 *.tmp
+__pycache__/
+*.pyc
 assets/artwork/*.zip
 .env
 .env.*

@@ -3,6 +3,7 @@ extends Node3D
 var resident_id: String = ""
 var last_position = Vector3.ZERO
 var animation_name: String = ""
+var jrpg: JrpgResidentModel
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var visual: Node3D = $Visual
 @onready var name_label: Label3D = $Name
@@ -36,6 +37,13 @@ func configure(p: Dictionary) -> void:
 	_recolor($Visual/Hips/Head/Hair, palette[2])
 	_recolor($Visual/Hips/Apron, palette[3])
 	$Visual/Hips/Apron.visible = p.id in ["nagisa","osamu","maho","rin"]
+	if p.id == "nagisa":
+		$Visual/Hips.hide()
+		$AnimationPlayer.stop()
+		jrpg = preload("res://game/scenes/characters/nagisa.tscn").instantiate()
+		visual.add_child(jrpg)
+		animator = jrpg.animator
+		name_label.position.y = 1.9
 	if p.id == "rin":
 		var growth = clampf(.72+(p.age-7)*.045,.72,1)
 		visual.scale = Vector3.ONE*growth
@@ -76,4 +84,6 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 		animator.play(wanted,.2)
 		animation_name = wanted
 	animator.speed_scale = clampf(Sim.speed,.5,3) if Sim.running else 0
+	if is_instance_valid(jrpg):
+		jrpg.set_expression(p.fatigue,.4 if wanted in ["talk","sit_talk"] else 0)
 

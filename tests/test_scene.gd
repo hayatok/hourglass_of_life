@@ -13,8 +13,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.4"))
-	var path = "res://docs/verification/v0.4/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.5/integration"))
+	var path = "res://docs/verification/v0.5/integration/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:

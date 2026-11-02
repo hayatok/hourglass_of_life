@@ -1,0 +1,44 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_delivery.blend",
+  "mode": "wire",
+  "engine": "workbench",
+  "bbox_min": [
+    -0.37099871039390564,
+    -0.15571999549865723,
+    0.006000000052154064
+  ],
+  "bbox_max": [
+    0.37099871039390564,
+    0.1409447193145752,
+    1.6514091491699219
+  ],
+  "size_xyz": [
+    0.7419974207878113,
+    0.2966647148132324,
+    1.645409107208252
+  ],
+  "objects": [
+    "CH_Nagisa_Body_LOD0",
+    "CH_Nagisa_Face_LOD0"
+  ],
+  "renders": {
+    "front": {
+      "file": "assets/models/CH_Nagisa/review/04_topology/wire_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 4.148332357406616
+    },
+    "threequarter": {
+      "file": "assets/models/CH_Nagisa/review/04_topology/wire_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 2.924910245877173
+    }
+  }
+}

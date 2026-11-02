@@ -1,0 +1,196 @@
+{
+  "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/exports/CH_Nagisa_LOD2.glb",
+  "errors": [],
+  "meshes": [
+    {
+      "name": "CH_Nagisa_Body_LOD2",
+      "tris": 2989,
+      "verts": 6838,
+      "uv": true,
+      "materials": [
+        "CH_Nagisa_Body"
+      ],
+      "skinned": true,
+      "shape_keys": 0
+    },
+    {
+      "name": "CH_Nagisa_Face_LOD2",
+      "tris": 672,
+      "verts": 1586,
+      "uv": true,
+      "materials": [
+        "CH_Nagisa_Face"
+      ],
+      "skinned": true,
+      "shape_keys": 7
+    }
+  ],
+  "armatures": [
+    {
+      "name": "CH_Nagisa_Rig",
+      "bones": [
+        "DEF-root",
+        "DEF-pelvis",
+        "DEF-apron_back",
+        "DEF-apron_front",
+        "DEF-spine_01",
+        "DEF-spine_02",
+        "DEF-chest",
+        "DEF-clavicle.L",
+        "DEF-upper_arm.L",
+        "DEF-forearm.L",
+        "DEF-hand.L",
+        "DEF-finger0.L",
+        "DEF-finger1.L",
+        "DEF-finger2.L",
+        "DEF-finger3.L",
+        "DEF-finger4.L",
+        "DEF-clavicle.R",
+        "DEF-upper_arm.R",
+        "DEF-forearm.R",
+        "DEF-hand.R",
+        "DEF-finger0.R",
+        "DEF-finger1.R",
+        "DEF-finger2.R",
+        "DEF-finger3.R",
+        "DEF-finger4.R",
+        "DEF-neck",
+        "DEF-head",
+        "DEF-thigh.L",
+        "DEF-shin.L",
+        "DEF-foot.L",
+        "DEF-toe.L",
+        "DEF-thigh.R",
+        "DEF-shin.R",
+        "DEF-foot.R",
+        "DEF-toe.R"
+      ],
+      "roots": [
+        "DEF-root"
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "name": "eat",
+      "frames": [
+        0,
+        57
+      ],
+      "length_s": 2.4
+    },
+    {
+      "name": "idle",
+      "frames": [
+        0,
+        57
+      ],
+      "length_s": 2.4
+    },
+    {
+      "name": "rest",
+      "frames": [
+        0,
+        72
+      ],
+      "length_s": 3.0
+    },
+    {
+      "name": "sit_talk",
+      "frames": [
+        0,
+        57
+      ],
+      "length_s": 2.4
+    },
+    {
+      "name": "sleep",
+      "frames": [
+        0,
+        72
+      ],
+      "length_s": 3.0
+    },
+    {
+      "name": "talk",
+      "frames": [
+        0,
+        57
+      ],
+      "length_s": 2.4
+    },
+    {
+      "name": "walk",
+      "frames": [
+        0,
+        19
+      ],
+      "length_s": 0.8
+    },
+    {
+      "name": "wave",
+      "frames": [
+        0,
+        48
+      ],
+      "length_s": 2.0
+    },
+    {
+      "name": "work",
+      "frames": [
+        0,
+        48
+      ],
+      "length_s": 2.0
+    }
+  ],
+  "materials": [
+    "CH_Nagisa_Body",
+    "CH_Nagisa_Face"
+  ],
+  "images": [
+    {
+      "name": "CH_Nagisa_BaseColor",
+      "size": [
+        1024,
+        1024
+      ],
+      "ok": true
+    },
+    {
+      "name": "CH_Nagisa_Normal",
+      "size": [
+        1024,
+        1024
+      ],
+      "ok": true
+    },
+    {
+      "name": "CH_Nagisa_ORM",
+      "size": [
+        1024,
+        1024
+      ],
+      "ok": true
+    }
+  ],
+  "bounds_m": {
+    "min": [
+      -0.1947,
+      -0.6299,
+      0.005
+    ],
+    "max": [
+      0.194,
+      0.1294,
+      1.2925
+    ],
+    "size": [
+      0.3887,
+      0.7593,
+      1.2875
+    ]
+  },
+  "height_m": 1.2875,
+  "render": "assets/models/CH_Nagisa/review/09_roundtrip/LOD2/roundtrip_clay_threequarter.png"
+}
