@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "created_on": "2026-11-03",
   "generator": "built-in image_gen",
   "art_direction": "Japanese anime 3D JRPG",
@@ -102,6 +102,84 @@
           "(0, 1023)": 1
         }
       }
+    },
+    {
+      "id": "ryo",
+      "file": "07-ryo-turnaround.png",
+      "source_filename": "exec-2d51871d-03b0-4b10-925b-07c42ce25ee4.png",
+      "title": "ryo three-view modeling reference",
+      "prompt_file": "additional-prompts.json",
+      "prompt_key": "ryo_turnaround",
+      "width": 1774,
+      "height": 887,
+      "color_type": "RGB",
+      "bytes": 1436419,
+      "sha256": "0e43590342109137c5a26f15c3faa48a2b538bf84e485ed8a307507f56f9ba27"
+    },
+    {
+      "id": "rin",
+      "file": "08-rin-turnaround.png",
+      "source_filename": "exec-83408312-d276-4a04-bc81-a51e26f713b5.png",
+      "title": "rin three-view modeling reference",
+      "prompt_file": "additional-prompts.json",
+      "prompt_key": "rin_turnaround",
+      "width": 1774,
+      "height": 887,
+      "color_type": "RGB",
+      "bytes": 1502615,
+      "sha256": "3b5822e87282588d943bd57fc5253cd8ebfcfd337bca2326e9bdf014ee88b02e"
+    },
+    {
+      "id": "fumi",
+      "file": "09-fumi-turnaround.png",
+      "source_filename": "exec-bf8e3073-aed1-4023-adde-6ddbad58af4e.png",
+      "title": "fumi three-view modeling reference",
+      "prompt_file": "additional-prompts.json",
+      "prompt_key": "fumi_turnaround",
+      "width": 1774,
+      "height": 887,
+      "color_type": "RGB",
+      "bytes": 1474905,
+      "sha256": "797e0391c7651e3656f6a6f20c4f8f950f3858bfcec4aa0fd2983872f6fa4f11"
+    },
+    {
+      "id": "maho",
+      "file": "10-maho-turnaround.png",
+      "source_filename": "exec-c9b7c870-5698-422e-9697-e531c1c0bd50.png",
+      "title": "maho three-view modeling reference",
+      "prompt_file": "additional-prompts.json",
+      "prompt_key": "maho_turnaround",
+      "width": 1774,
+      "height": 887,
+      "color_type": "RGB",
+      "bytes": 1469956,
+      "sha256": "2ca5d17f8fc365f59221cb741dc1127e33c0d0440b78eb83355f5ea212c3e4d8"
+    },
+    {
+      "id": "ritsu",
+      "file": "11-ritsu-turnaround.png",
+      "source_filename": "exec-349e0000-ebff-4fce-ac52-e83208270d67.png",
+      "title": "ritsu three-view modeling reference",
+      "prompt_file": "additional-prompts.json",
+      "prompt_key": "ritsu_turnaround",
+      "width": 1774,
+      "height": 887,
+      "color_type": "RGB",
+      "bytes": 1410732,
+      "sha256": "8c909e8ff42666976bbfb524a0adca468fee211f5d9ba6714b99a88402b16a08"
+    },
+    {
+      "id": "aoi",
+      "file": "12-aoi-turnaround.png",
+      "source_filename": "exec-8c05fe2a-03eb-4b8b-b365-79c7afd669bc.png",
+      "title": "aoi three-view modeling reference",
+      "prompt_file": "additional-prompts.json",
+      "prompt_key": "aoi_turnaround",
+      "width": 1774,
+      "height": 887,
+      "color_type": "RGB",
+      "bytes": 1488264,
+      "sha256": "efa7a7b84d585e945904724689c13885646ae90ec578836c97a1ac082038f1e6"
     }
   ],
   "official_style_references": [
@@ -137,7 +215,8 @@
     ],
     "building_types": 3,
     "prop_count": 12,
-    "images_are_modeling_references_not_game_captures": true
+    "images_are_modeling_references_not_game_captures": true,
+    "turnaround_character_count": 8
   },
   "input_design_references": [
     "assets/artwork/v01/01-town-overview.png",
