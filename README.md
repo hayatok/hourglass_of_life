@@ -4,7 +4,31 @@
 
 プレイヤーは町の暮らしを観察し、場所を整え、予定を提案し、迷っている人を少し後押しする。住人は仕事、家庭、趣味、人付き合いに自分の時間を使い、その経験から次の行動を選ぶ。
 
-2026年11月3日時点では企画、仕様、アートワークの段階。ゲーム本体、3Dモデル、アニメーションは未実装。
+v0.1「日常ときっかけ」をGodot 4.7.2で実装中。8人の日課、3Dでの移動、観察HUD、提案への返答、実際の交流から生まれる記憶、ベンチ配置、保存と再開が動く。人物と町は仮モデルであり、JRPG調の完成用モデル、仕事と家庭の条件、加齢と継承は後続版で実装する。
+
+## 起動と操作
+
+Godot 4.7.2で `project.godot` を開き、プロジェクトを実行する。macOS向けの配布物はGitHubのリリースへ版ごとに保存する。
+
+- 人物一覧または町の人をクリックすると、事情や予定、関係、記憶を見られる。
+- 下部から休息、本人の目標、相手との交流を提案できる。本人が予定や疲れから返答する。
+- ベンチを置くと、広場で過ごせる場所が増える。使用するかは住人が選ぶ。
+- WASDでカメラ移動、右ドラッグで回転、ホイールでズーム。人物への追従も選べる。
+- Spaceで一時停止、Escapeでメニュー。メニューから保存と再開ができる。
+
+保存先はGodotの `user://life-save-v01.json`。macOSでは `~/Library/Application Support/Godot/app_userdata/命の砂時計/` に置かれる。
+
+## 開発と検証
+
+[GitHub](https://github.com/hayatok/hourglass_of_life)のIssueとMilestoneで、[版ごとの中心となる遊び](docs/development-roadmap.md)を管理する。[メニュー・HUD・動きの設計](docs/interface-and-animation.md)も参照。
+
+```sh
+godot --headless --editor --import --path .
+godot --headless --path . --script tests/test_simulation.gd
+godot --path . --script tests/test_scene.gd
+```
+
+`godot` はGodot実行ファイルのパスに読み替える。最後の確認はGPUを使用し、タイトル、会話、記憶の画面を `docs/verification/v0.1/` へ保存する。Godotのシーンエディタで編集した `.tscn` と、保存されたAnimationPlayerのクリップを実行時に使用する。初期シーンの作成補助は `tools/build_scenes.gd` に残しているが、再実行すると手作業の編集を上書きする。
 
 ## 制作方針
 

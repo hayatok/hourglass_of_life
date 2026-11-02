@@ -1,0 +1,756 @@
+[gd_scene format=3 uid="uid://bx4gao0rkd4m2"]
+
+[ext_resource type="Script" uid="uid://b4psilvqt2yvs" path="res://game/scripts/main.gd" id="1_gp8w2"]
+[ext_resource type="PackedScene" path="res://game/scenes/town.tscn" id="2_8buom"]
+[ext_resource type="Texture2D" uid="uid://bsdn0cb4rgfhr" path="res://game/assets/ui/title.png" id="3_ejk4j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3qal"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.4, 0.45490196, 0.44705883, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uk16q"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.34509805, 0.45882353, 0.47843137, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8862745, 0.78039217, 0.5137255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j1va"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.21568628, 0.34117648, 0.3764706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmvmd"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.14901961, 0.24705882, 0.28235295, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9529412, 0.84313726, 0.6156863, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shkmv"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.81960785, 0.78431374, 0.6901961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j51q3"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.4, 0.53333336, 0.5019608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="SystemFont" id="SystemFont_ats11"]
+font_names = PackedStringArray("Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP")
+
+[sub_resource type="Theme" id="Theme_6mtf4"]
+default_font = SubResource("SystemFont_ats11")
+default_font_size = 16
+Button/colors/font_color = Color(1, 0.94509804, 0.84313726, 1)
+Button/colors/font_disabled_color = Color(0.6117647, 0.62352943, 0.6, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_l3qal")
+Button/styles/hover = SubResource("StyleBoxFlat_uk16q")
+Button/styles/normal = SubResource("StyleBoxFlat_7j1va")
+Button/styles/pressed = SubResource("StyleBoxFlat_rmvmd")
+Label/colors/font_color = Color(0.17254902, 0.22745098, 0.24313726, 1)
+ProgressBar/styles/background = SubResource("StyleBoxFlat_shkmv")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_j51q3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12hk3"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.93333334, 0.91764706, 0.8627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v7cf"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.93333334, 0.91764706, 0.8627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r75lq"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.93333334, 0.91764706, 0.8627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxktm"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.93333334, 0.91764706, 0.8627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aju45"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.95686275, 0.9019608, 0.78039217, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1x0e"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.93333334, 0.91764706, 0.8627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.654902, 0.5568628, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="LifeTown" type="Node3D" unique_id=184307291]
+script = ExtResource("1_gp8w2")
+
+[node name="Town" parent="." unique_id=1650187101 instance=ExtResource("2_8buom")]
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1277737853]
+current = true
+fov = 48.0
+
+[node name="Residents" type="Node3D" parent="." unique_id=1715402004]
+
+[node name="PlacedBenches" type="Node3D" parent="." unique_id=1457908643]
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=245876416]
+
+[node name="InterfaceRoot" type="Control" parent="Interface" unique_id=186793716]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_6mtf4")
+
+[node name="HUD" type="Control" parent="Interface/InterfaceRoot" unique_id=2113730277]
+unique_name_in_owner = true
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="TimePanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=697945934]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 68.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_12hk3")
+
+[node name="TimeControls" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/TimePanel" unique_id=1240828661]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Calendar" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=995844013]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "1年目　春1日　土曜"
+autowrap_mode = 3
+
+[node name="Clock" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=476524496]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "13:00"
+autowrap_mode = 3
+
+[node name="PauseButton" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=224436999]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "一時停止"
+
+[node name="Speed1" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=1120836573]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "×1"
+
+[node name="Speed3" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=26274695]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "×3"
+
+[node name="Speed6" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=1550399956]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "×6"
+
+[node name="Spacer" type="Control" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=461999875]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Budget" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=46867515]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "共有予算 100"
+autowrap_mode = 3
+
+[node name="MenuButton" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=1990441923]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "メニュー"
+
+[node name="ResidentsPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1809890037]
+layout_mode = 0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = 222.0
+offset_bottom = -181.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3v7cf")
+
+[node name="ResidentsColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/ResidentsPanel" unique_id=1085604637]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="RosterTitle" type="Label" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=2024984227]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "町の人たち"
+autowrap_mode = 3
+
+[node name="Roster" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=267000262]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="CameraGuide" type="Label" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=560154937]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "WASDで移動
+右ドラッグで回転
+ホイールでズーム"
+autowrap_mode = 3
+
+[node name="DetailPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1012788735]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -346.0
+offset_top = 80.0
+offset_right = -12.0
+offset_bottom = -181.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r75lq")
+
+[node name="DetailColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel" unique_id=1889402142]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Identity" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=227940391]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Portrait" type="TextureRect" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Identity" unique_id=754748171]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(85, 98)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="IdentityText" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Identity" unique_id=486403951]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="ResidentName" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Identity/IdentityText" unique_id=895211366]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "高瀬 葵　20歳"
+autowrap_mode = 3
+
+[node name="Occupation" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Identity/IdentityText" unique_id=2004835277]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "学生"
+autowrap_mode = 3
+
+[node name="FollowButton" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Identity/IdentityText" unique_id=1772694589]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "この人を追う"
+
+[node name="Activity" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=457912344]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "好きなことに取り組む"
+autowrap_mode = 3
+
+[node name="Reason" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=1964996904]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "「ラジオを直したい」"
+autowrap_mode = 3
+
+[node name="NextPlan" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=881525462]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "このあとは自由な時間"
+autowrap_mode = 3
+
+[node name="FatigueRow" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=496550411]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="FatigueCaption" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/FatigueRow" unique_id=1962014910]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "疲れ"
+autowrap_mode = 3
+
+[node name="Fatigue" type="ProgressBar" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/FatigueRow" unique_id=1943222550]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+show_percentage = false
+
+[node name="HungerRow" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=1301496495]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="HungerCaption" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/HungerRow" unique_id=1470572971]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "空腹"
+autowrap_mode = 3
+
+[node name="Hunger" type="ProgressBar" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/HungerRow" unique_id=931447797]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+show_percentage = false
+
+[node name="ConnectionRow" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=616472229]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="ConnectionCaption" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/ConnectionRow" unique_id=935023359]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "人恋しさ"
+autowrap_mode = 3
+
+[node name="Connection" type="ProgressBar" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/ConnectionRow" unique_id=1897875397]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+show_percentage = false
+
+[node name="Goal" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=149664913]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "本人が気になっていること"
+autowrap_mode = 3
+
+[node name="GoalProgress" type="ProgressBar" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=302112587]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 9)
+layout_mode = 2
+show_percentage = false
+
+[node name="Tabs" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=516523654]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="NowTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs" unique_id=1123697107]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "いま"
+
+[node name="RelationsTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs" unique_id=2006368591]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "関係"
+
+[node name="MemoriesTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs" unique_id=949678044]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "記憶"
+
+[node name="DetailScroll" type="ScrollContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=2057750930]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="DetailText" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/DetailScroll" unique_id=154141791]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "町の暮らしを見守りましょう。"
+autowrap_mode = 3
+
+[node name="ActionsPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1083504612]
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -169.0
+offset_right = -12.0
+offset_bottom = -12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cxktm")
+
+[node name="ActionColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/ActionsPanel" unique_id=2105257259]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Actions" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn" unique_id=1864866975]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="RestButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=1549529787]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "休むことを提案"
+
+[node name="GoalButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=1132710888]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "やりたいことを応援"
+
+[node name="Partner" type="OptionButton" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=342374533]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(154, 0)
+layout_mode = 2
+
+[node name="MeetButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=594181689]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "話す機会を作る"
+
+[node name="Flex" type="Control" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=264781472]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BenchButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=502741078]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "ベンチを置く  20"
+
+[node name="EventText" type="Label" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn" unique_id=1378913187]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 14
+text = "町の出来事がここに残ります。"
+autowrap_mode = 3
+
+[node name="Version" type="Label" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn" unique_id=798463988]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "v0.1 開発版 · 日常ときっかけ"
+autowrap_mode = 3
+
+[node name="Toast" type="Label" parent="Interface/InterfaceRoot/HUD" unique_id=582779342]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+anchor_left = 0.17
+anchor_right = 0.75
+offset_top = 80.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_aju45")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TitleScreen" type="Control" parent="Interface/InterfaceRoot" unique_id=1282696613]
+unique_name_in_owner = true
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TitleArtwork" type="TextureRect" parent="Interface/InterfaceRoot/TitleScreen" unique_id=2027475589]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("3_ejk4j")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="Interface/InterfaceRoot/TitleScreen" unique_id=1314706736]
+layout_mode = 0
+anchor_right = 0.38
+anchor_bottom = 1.0
+color = Color(0.07, 0.16, 0.19, 0.91)
+
+[node name="TitleColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/TitleScreen" unique_id=865858705]
+layout_mode = 0
+anchor_left = 0.04
+anchor_top = 0.18
+anchor_right = 0.33
+anchor_bottom = 0.85
+theme_override_constants/separation = 7
+
+[node name="GameTitle" type="Label" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=1685665706]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95686275, 0.9098039, 0.78431374, 1)
+theme_override_font_sizes/font_size = 42
+text = "命の砂時計"
+autowrap_mode = 3
+
+[node name="Subtitle" type="Label" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=906655991]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8392157, 0.8666667, 0.81960785, 1)
+theme_override_font_sizes/font_size = 20
+text = "それぞれの時間が、
+同じ町で重なっていく。"
+autowrap_mode = 3
+
+[node name="TitleSpacer" type="Control" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=1129381472]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartButton" type="Button" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=478992972]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "新しい町を始める"
+
+[node name="ContinueButton" type="Button" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=1668081815]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "つづきから"
+
+[node name="GuideButton" type="Button" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=1145925251]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "町を見守るには"
+
+[node name="TitleQuit" type="Button" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=1838470061]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "終了する"
+
+[node name="TitleVersion" type="Label" parent="Interface/InterfaceRoot/TitleScreen/TitleColumn" unique_id=1391070095]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8392157, 0.8666667, 0.81960785, 1)
+theme_override_font_sizes/font_size = 12
+text = "v0.1 開発版 · 日常ときっかけ"
+autowrap_mode = 3
+
+[node name="PauseMenu" type="Control" parent="Interface/InterfaceRoot" unique_id=1313611870]
+unique_name_in_owner = true
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Scrim" type="ColorRect" parent="Interface/InterfaceRoot/PauseMenu" unique_id=1706138466]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0.08, 0.1, 0.65)
+
+[node name="MenuPanel" type="PanelContainer" parent="Interface/InterfaceRoot/PauseMenu" unique_id=331346020]
+layout_mode = 0
+anchor_left = 0.35
+anchor_top = 0.2
+anchor_right = 0.65
+anchor_bottom = 0.8
+theme_override_styles/panel = SubResource("StyleBoxFlat_q1x0e")
+
+[node name="PauseColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel" unique_id=1668442694]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="PauseTitle" type="Label" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel/PauseColumn" unique_id=1404068019]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "町の時間をひと休み"
+autowrap_mode = 3
+
+[node name="ResumeButton" type="Button" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel/PauseColumn" unique_id=613055657]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "町に戻る"
+
+[node name="SaveButton" type="Button" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel/PauseColumn" unique_id=1389309697]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "保存する"
+
+[node name="LoadButton" type="Button" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel/PauseColumn" unique_id=1443696173]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "保存したところから再開"
+
+[node name="HelpButton" type="Button" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel/PauseColumn" unique_id=432771184]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "操作の案内"
+
+[node name="ReturnTitle" type="Button" parent="Interface/InterfaceRoot/PauseMenu/MenuPanel/PauseColumn" unique_id=226730534]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "タイトルへ戻る"
+
+[node name="InfoDialog" type="AcceptDialog" parent="Interface/InterfaceRoot" unique_id=93101539]
+unique_name_in_owner = true
+theme = SubResource("Theme_6mtf4")
