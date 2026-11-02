@@ -1,6 +1,7 @@
 extends SceneTree
 
-# One-time authoring tool. Outputs ordinary editable scenes, never runs in game.
+# v0.1 one-time authoring tool. Never runs in game. Later scene edits are in .tscn;
+# running this archival tool overwrites them and is not an upgrade procedure.
 var cream = Color("e9e2ce")
 var wood = Color("886346")
 var teal = Color("375f65")

@@ -4,7 +4,9 @@ extends Node
 signal event_added(event: Dictionary)
 signal town_changed
 
-const SAVE_PATH = "user://life-save-v01.json"
+const SAVE_PATH = "user://life-save.json"
+const LEGACY_SAVE_PATH = "user://life-save-v01.json"
+const WALK_METERS_PER_MINUTE = .36
 const HOME = {"ogawa": "home_ogawa", "saeki": "home_saeki", "shared_house": "home_shared"}
 const SITES = {
 	"home_ogawa": Vector3(-9, 0, 6), "home_saeki": Vector3(-9, 0, -4),
@@ -35,7 +37,7 @@ const ROUTINE_NAMES = {
 	"post_shift_sleep": "夜勤を終えて休む時間", "bakery_shift": "パン屋の仕事",
 	"cafe_shift": "喫茶店の仕事", "remote_work": "引き受けた仕事",
 	"after_school_care": "凛と過ごす約束", "school": "学校の時間",
-	"classes": "授業の時間", "workshop": "工房での仕事", "night_shift": "町外での夜勤"
+	"classes": "授業の時間", "workshop": "工房での仕事", "night_shift": "町外での夜勤", "appointment":"誰かと会う約束の準備"
 }
 
 var people: Array = []
@@ -55,6 +57,7 @@ var graph = AStar3D.new()
 var minute_remainder: float = 0
 var meeting_serial: int = 0
 var rejection_context: Dictionary = {}
+var social: SocialLife
 
 func _ready() -> void:
 	_build_graph()
@@ -115,6 +118,8 @@ func reset(seed_value: int = 71103) -> void:
 	for rel in data.relationship_seeds:
 		var r = person(rel.from)
 		r.relationships[rel.to] = rel.duplicate(true)
+	if social==null: social = SocialLife.new(self)
+	social.reset()
 	for p in people:
 		_choose_action(p)
 	_log("", "町の新しい一日", "住人の暮らしを眺め、気になった人を選んでみましょう。")
@@ -153,6 +158,7 @@ func advance_minutes(amount: float) -> void:
 	while minute_remainder >= 1.0:
 		minute_remainder -= 1.0
 		elapsed += 1
+		social.tick()
 		for p in people:
 			_tick_person(p)
 		_tick_meetings()
@@ -185,7 +191,7 @@ func commitment_text(p: Dictionary) -> String:
 	return "今日はこのあと、決まった予定はありません"
 
 func _next_commitment(p: Dictionary) -> Dictionary:
-	var result = {"minutes": 2880, "id": ""}
+	var result = social.next_commitment(p) if social!=null else {"minutes":2880,"id":""}
 	for offset in range(0, 3):
 		var day = (weekday() + offset) % 7
 		for routine in definitions[p.id].routines:
@@ -227,6 +233,7 @@ func _tick_person(p: Dictionary) -> void:
 	if not p.meeting_id.is_empty():
 		return
 	p.activity_minutes += 1
+	social.activity_tick(p)
 	p.remaining -= 1
 	match p.action:
 		"sleep":
@@ -275,7 +282,9 @@ func _choose_action(p: Dictionary) -> void:
 		_assign(p, "eat", home, 25, "お腹がすいた。食事を先にしよう")
 		return
 	for o in options:
+		if o.kind=="social": o.relation = social.venue_interest(p,o.place)
 		o.score = .26*o.need+.20*o.goal+.16*o.relation+.10*o.role+.08*o.habit+.08*o.fun-.12*o.cost
+		o.score += social.habit_bonus(p,o)
 		if p.supported and o.kind == "hobby":
 			o.score += 0.06
 	options.sort_custom(func(a,b): return a.score > b.score)
@@ -308,6 +317,8 @@ func _assign(p: Dictionary, kind: String, place: String, duration: float, reason
 	p.action = kind
 	p.reason = reason
 	p.remaining = duration
+	p.action_elapsed = 0
+	p.habit_recorded = false
 	p.destination = place
 	var index = people.find(p)
 	p.target = exact_target if exact_target != null else SITES.get(place, Vector3.ZERO) + _offset(index)
@@ -361,7 +372,7 @@ func _available_bench(origin: Vector3) -> Variant:
 	return best
 
 func _move(p: Dictionary) -> void:
-	var distance: float = .24
+	var distance: float = WALK_METERS_PER_MINUTE
 	p.travel_minutes += 1
 	while distance > 0 and not p.path.is_empty():
 		var point: Vector3 = p.path[0]
@@ -399,41 +410,21 @@ func support_goal(id: String) -> Dictionary:
 	return _reply(p, "accept", "やってみたいと思っていた。自分のペースで取り組んでみる。")
 
 func propose_meeting(first: String, second: String, location: String = "bench") -> Dictionary:
-	var a = person(first)
-	var b = person(second)
-	if a.is_empty() or b.is_empty() or first == second:
-		return {"status":"decline", "text":"一緒に過ごす相手を選んでください"}
-	if location == "bench" and benches.is_empty():
-		return _reply(a, "defer", "座って過ごせる場所を用意したい。")
-	for p in [a,b]:
-		if not p.meeting_id.is_empty():
-			return _reply(p, "defer", "いま誘われている予定がある。その返事を待ってほしい。")
-		var r = _routine_at(p)
-		if not r.is_empty():
-			return _reply(p, "counteroffer", "今は%s。別の時間なら考えられるよ。" % ROUTINE_NAMES.get(r.id,"予定の時間"))
-		if p.fatigue > .82:
-			return _reply(p, "decline", "今日は疲れている。まずは一人で休みたい。")
-		if _next_commitment(p).minutes < 90:
-			return _reply(p, "counteroffer", "次の予定が近い。もう少し余裕のある時間に会いたい。")
-		if p.quiet > .8 and _relation(p, (b if p == a else a).id).familiarity < .4:
-			return _reply(p, "counteroffer", "今は静かに過ごしたい。慣れた場所で少しずつ話したい。")
-	var seat = _available_bench((a.position+b.position)*.5)
-	if location == "bench" and seat == null:
-		return _reply(a,"defer","今はベンチが使われている。空いてから会いたい。")
-	var center: Vector3 = seat if location == "bench" else SITES.workshop
-	_begin_meeting(a,b,center,"bench" if location == "bench" else "workshop",false)
-	return _reply(a, "accept", "%sさんと話してみよう。まずは待ち合わせの場所へ。" % b.name)
+	return social.propose(first,second,location)
 
-func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: String, spontaneous: bool) -> void:
+func confirm_offer(selected: String) -> Dictionary:
+	return social.confirm_offer(selected)
+
+func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: String, spontaneous: bool, duration: int = 25, not_before: int = 0, appointment_id: String = "") -> void:
 	meeting_serial += 1
 	var id = "meeting_%d" % meeting_serial
-	var m = {"id":id,"a":a.id,"b":b.id,"location":location,"center":center,"state":"travel","remaining":25,"waited":0,"spontaneous":spontaneous}
+	var m = {"id":id,"a":a.id,"b":b.id,"location":location,"center":center,"state":"travel","remaining":duration,"not_before":not_before,"appointment_id":appointment_id,"waited":0,"spontaneous":spontaneous}
 	meetings.append(m)
 	for i in 2:
 		var p = a if i == 0 else b
 		p.meeting_id = id
-		var venue = "square" if location == "bench" else (a.place if spontaneous else "workshop")
-		_assign(p, "meet", venue, 25, "相手と合流してから、ゆっくり話したい", center+Vector3(-.6 if i==0 else .6,0,.08 if location=="bench" else 0))
+		var venue = "square" if location == "bench" else (a.place if spontaneous else ("bakery_cafe" if location=="cafe" else "workshop"))
+		_assign(p, "meet", venue, duration, "相手と合流してから、ゆっくり話したい", center+Vector3(-.6 if i==0 else .6,0,.08 if location=="bench" else 0))
 
 func _tick_meetings() -> void:
 	var ended: Array = []
@@ -444,9 +435,14 @@ func _tick_meetings() -> void:
 			_finish_meeting(m, false)
 			ended.append(m)
 			continue
-		if m.state == "travel":
+		if m.state in ["travel","waiting"]:
 			m.waited += 1
 			if not a.moving and not b.moving:
+				if elapsed<m.get("not_before",0):
+					m.state = "waiting"
+					a.reason = "約束の時刻まで、ここでひと息つく"
+					b.reason = "少し早く着いた。約束の時刻を待っている"
+					continue
 				m.state = "engaged"
 				a.reason = "%sさんと、近況を話している" % b.name
 				b.reason = "%sさんと、同じ時間を過ごしている" % a.name
@@ -467,16 +463,8 @@ func _tick_meetings() -> void:
 func _finish_meeting(m: Dictionary, completed: bool) -> void:
 	var a = person(m.a)
 	var b = person(m.b)
-	if completed:
-		for pair in [[a,b],[b,a]]:
-			var p = pair[0]
-			var other = pair[1]
-			var rel = _relation(p,other.id)
-			rel.familiarity = minf(1, rel.familiarity+.035)
-			rel.ease = minf(1, rel.ease+.025*(1-p.quiet))
-			rel.trust = minf(1, rel.trust+.015)
-			_remember(p,other.id,"一緒に過ごした午後","%sさんと、近況や好きなことを話した。" % other.name,"shared_time")
-	else:
+	social.finish(m,completed)
+	if not completed:
 		_log(a.id,"予定を見直しました","次の予定や移動の都合で、今回は話す時間を取れなかった。")
 	for p in [a,b]:
 		p.meeting_id = ""
@@ -487,7 +475,9 @@ func _try_spontaneous() -> void:
 	for a in people:
 		if a.moving or not a.meeting_id.is_empty() or a.action != "social":
 			continue
-		for b in people:
+		var candidates = people.duplicate()
+		candidates.sort_custom(func(b,c): return social.partner_score(a,b)>social.partner_score(a,c))
+		for b in candidates:
 			if a.id == b.id or b.moving or not b.meeting_id.is_empty():
 				continue
 			if b.action not in ["social","photo","rest"] or b.quiet > .6:
@@ -536,10 +526,10 @@ func _log(id: String, title: String, text: String) -> void:
 	event_added.emit(e)
 
 func has_save() -> bool:
-	return FileAccess.file_exists(SAVE_PATH)
+	return FileAccess.file_exists(SAVE_PATH) or FileAccess.file_exists(LEGACY_SAVE_PATH)
 
 func save_game(path: String = SAVE_PATH) -> bool:
-	var data = {"schema":1,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder}
+	var data = {"schema":2,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize()}
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
 		return false
@@ -549,10 +539,12 @@ func save_game(path: String = SAVE_PATH) -> bool:
 	return error == OK
 
 func load_game(path: String = SAVE_PATH) -> bool:
+	if path==SAVE_PATH and not FileAccess.file_exists(path) and FileAccess.file_exists(LEGACY_SAVE_PATH):
+		path = LEGACY_SAVE_PATH
 	if not FileAccess.file_exists(path):
 		return false
 	var raw = JSON.parse_string(FileAccess.get_file_as_string(path))
-	if not raw is Dictionary or raw.get("schema",0) != 1:
+	if not SaveValidation.valid(raw,definitions,SITES):
 		return false
 	var data = _decode(raw)
 	if data.people.size() != definitions.size():
@@ -571,6 +563,7 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	shared_budget = int(data.budget)
 	meeting_serial = int(data.meeting_serial)
 	minute_remainder = float(data.remainder)
+	social.restore(data.get("social",{}))
 	rejection_context.clear()
 	town_changed.emit()
 	return true

@@ -593,7 +593,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "v0.1 開発版 · 日常ときっかけ"
+text = "v0.2 開発版 · 関係と記憶"
 autowrap_mode = 3
 
 [node name="Toast" type="Label" parent="Interface/InterfaceRoot/HUD" unique_id=582779342]
@@ -687,7 +687,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8392157, 0.8666667, 0.81960785, 1)
 theme_override_font_sizes/font_size = 12
-text = "v0.1 開発版 · 日常ときっかけ"
+text = "v0.2 開発版 · 関係と記憶"
 autowrap_mode = 3
 
 [node name="PauseMenu" type="Control" parent="Interface/InterfaceRoot" unique_id=1313611870]
@@ -754,3 +754,29 @@ text = "タイトルへ戻る"
 [node name="InfoDialog" type="AcceptDialog" parent="Interface/InterfaceRoot" unique_id=93101539]
 unique_name_in_owner = true
 theme = SubResource("Theme_6mtf4")
+
+[node name="OfferPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD"]
+unique_name_in_owner = true
+visible = false
+anchor_left = 0.17
+anchor_right = 0.75
+offset_top = 132.0
+offset_bottom = 196.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cxktm")
+
+[node name="OfferRow" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/OfferPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="OfferText" type="Label" parent="Interface/InterfaceRoot/HUD/OfferPanel/OfferRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "二人からの別案"
+autowrap_mode = 3
+
+[node name="AcceptOfferButton" type="Button" parent="Interface/InterfaceRoot/HUD/OfferPanel/OfferRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "この日時で約束する"

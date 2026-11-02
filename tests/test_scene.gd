@@ -13,7 +13,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	var path = "res://docs/verification/v0.1/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.2"))
+	var path = "res://docs/verification/v0.2/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:
@@ -65,5 +66,23 @@ func run() -> void:
 	main._refresh_detail()
 	expect("佐伯 文" in main.get_node("%DetailText").text,"The memory tab shows the completed shared experience")
 	await capture("03-memory")
+	sim.reset()
+	sim.running = false
+	await process_frame
+	await process_frame
+	main._select("maho")
+	main.detail_tab = 0
+	var partner = main.get_node("%Partner")
+	for i in partner.item_count:
+		if partner.get_item_metadata(i)=="fumi": partner.select(i)
+	main.get_node("%MeetButton").pressed.emit()
+	main._refresh_ui()
+	expect(main.get_node("%OfferPanel").visible,"A concrete counteroffer is actionable in the observation UI")
+	await capture("04-counteroffer")
+	main.get_node("%AcceptOfferButton").pressed.emit()
+	main._refresh_ui()
+	expect(sim.social.appointments.size()==1 and not main.get_node("%OfferPanel").visible,"Confirming the displayed alternative records the appointment")
+	expect("約束" in main.get_node("%DetailText").text,"A resident's upcoming promise is visible in their own panel")
+	await capture("05-appointment")
 	print("Scene/UI smoke: %s"%("PASS" if errors.is_empty() else "FAIL"))
 	quit(0 if errors.is_empty() else 1)

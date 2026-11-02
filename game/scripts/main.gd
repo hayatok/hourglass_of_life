@@ -43,6 +43,7 @@ func _ready() -> void:
 	%RestButton.pressed.connect(func(): _answer(Sim.propose_rest(selected_id)))
 	%GoalButton.pressed.connect(func(): _answer(Sim.support_goal(selected_id)))
 	%MeetButton.pressed.connect(_meet)
+	%AcceptOfferButton.pressed.connect(func(): _answer(Sim.confirm_offer(selected_id)))
 	%BenchButton.pressed.connect(func(): placement = not placement; _toast("広場の地面をクリックして、ベンチを置きます（共有予算20）" if placement else "配置を取り消しました"))
 	%NowTab.pressed.connect(func(): detail_tab=0; _refresh_detail())
 	%RelationsTab.pressed.connect(func(): detail_tab=1; _refresh_detail())
@@ -244,7 +245,12 @@ func _refresh_ui() -> void:
 	%PauseButton.text = "再開" if not Sim.running else "一時停止"
 	%Budget.text = "共有予算  %d" % Sim.shared_budget
 	%FollowButton.text = "追従中" if following else "この人を追う"
-	%Version.text = "v0.1 開発版 · 日常ときっかけ"
+	%Version.text = "v0.2 開発版 · 関係と記憶"
+	var offer = Sim.social.offer
+	%OfferPanel.visible = not offer.is_empty() and offer.a==selected_id
+	if %OfferPanel.visible:
+		var place = {"bench":"広場のベンチ","cafe":"喫茶店","workshop":"工房"}.get(offer.location,"待ち合わせ場所")
+		%OfferText.text = "%s · %sさんと\n%sで %d分ほど過ごす"%[Sim.social.when_text(offer.start),Sim.person(offer.b).name,place,offer.duration]
 	if not title.visible:
 		_refresh_detail()
 
@@ -264,7 +270,9 @@ func _refresh_detail() -> void:
 	%GoalProgress.value = p.goal_progress*100
 	var text: String = ""
 	if detail_tab == 0:
-		text = "いま大切にしていること\n\n"+Sim.definitions[p.id].public_private_difference+"\n\n"+Sim.definitions[p.id].goals[1]
+		text = Sim.social.person_text(p)
+		if not text.is_empty(): text += "\n"
+		text += "いま大切にしていること\n\n"+Sim.definitions[p.id].public_private_difference+"\n\n"+Sim.definitions[p.id].goals[1]
 	elif detail_tab == 1:
 		text = "親しみ / 信頼\n\n"
 		for other_id in p.relationships:
