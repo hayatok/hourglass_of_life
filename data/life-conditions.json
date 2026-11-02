@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "note": "架空のゲーム用の生活条件。金額は現実の円や給与・年金・奨学金の水準を表さず、生活時間の選択を生む調整値。家事や支援は性別で割り当てない。",
+  "money_unit": "生活費",
+  "households": {
+    "ogawa": {"label": "小川家", "cash": 45, "daily_basics": 6, "season_housing": 18, "daily_support": 0},
+    "saeki": {"label": "佐伯家", "cash": 40, "daily_basics": 4, "season_housing": 12, "daily_support": 8},
+    "shared_house": {"label": "共同住宅", "cash": 28, "daily_basics": 6, "season_housing": 21, "daily_support": 4}
+  },
+  "earnings_per_work_minute": {"nagisa": 0.035, "ryo": 0.04, "rin": 0, "osamu": 0.03, "fumi": 0, "maho": 0.025, "ritsu": 0.032, "aoi": 0},
+  "project_materials": {"nagisa": 2, "ryo": 0, "rin": 3, "osamu": 4, "fumi": 1, "maho": 0, "ritsu": 2, "aoi": 4}
+}

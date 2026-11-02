@@ -20,5 +20,7 @@ jobs:
         run: godot --headless --path . --script tests/test_simulation.gd
       - name: Simulate promises, social history, habits and save migration
         run: godot --headless --path . --script tests/test_social_life.gd
+      - name: Simulate work, household expenses, care handover and joint projects
+        run: godot --headless --path . --script tests/test_work_family.gd
       - name: Boot the complete scene
         run: godot --headless --path . --quit-after 10

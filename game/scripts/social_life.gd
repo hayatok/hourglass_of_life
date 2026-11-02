@@ -125,6 +125,7 @@ func find_slot(a: Dictionary, b: Dictionary, duration: int = 25) -> int:
 func _slot_free(a: Dictionary, b: Dictionary, start: int, duration: int) -> bool:
 	for p in [a,b]:
 		for offset in range(-120,duration+16,15):
+			if sim.work_family!=null and sim.work_family.reserved(p,start+offset): return false
 			var absolute = sim.start_minute+start+offset
 			if not sim._routine_at(p,absolute%1440,(sim.epoch_weekday+int(absolute/1440.0))%7).is_empty():
 				return false
@@ -206,6 +207,7 @@ func finish(m: Dictionary, completed: bool) -> void:
 			r.unresolved_expectation = maxf(0,r.unresolved_expectation-.04*scale)
 		p.quiet = minf(1,p.quiet+.08*(1-sim.definitions[p.id].traits.extraversion))
 		var text = "%sさんと、%sを話した。"%[other.name,topic]
+		if m.get("mode","")=="project": text = "%sさんと、%sに一緒に取り組んだ。"%[other.name,m.project.title]
 		if uneasy: text += "まだ言葉にできないことも残った。"
 		elif r.familiarity>.6: text += "よく知る相手だから、近況を落ち着いて伝えられた。"
 		else: text += "相手の好きなことを、少し知ることができた。"

@@ -35,7 +35,7 @@ static func record(value: Variant, text_keys: Array, numeric_keys: Array) -> boo
 static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> bool:
 	if not raw is Dictionary or not encoded(raw): return false
 	if not record(raw,["rng_state"],["schema","elapsed","start_minute","epoch_weekday","budget","meeting_serial","remainder"]): return false
-	if int(raw.schema) not in [1,2] or not raw.rng_state.is_valid_int(): return false
+	if int(raw.schema) not in [1,2,3] or not raw.rng_state.is_valid_int(): return false
 	if raw.elapsed<0 or raw.start_minute<0 or raw.start_minute>=1440 or raw.epoch_weekday<0 or raw.epoch_weekday>6: return false
 	if raw.budget<0 or raw.remainder<0 or raw.remainder>=1: return false
 	for key in ["people","events","meetings","benches"]:
@@ -51,6 +51,10 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 			if not vector(p.get(key)): return false
 		for key in ["moving","supported","goal_notified"]:
 			if not p.get(key) is bool: return false
+		for key in ["work_satisfaction","earned_today","care_minutes","private_project","action_elapsed"]:
+			if p.has(key) and not number(p[key]): return false
+		for key in ["session_meal_paid","habit_recorded"]:
+			if p.has(key) and not p[key] is bool: return false
 		for key in ["path","memories"]:
 			if not p.get(key) is Array: return false
 		for point in p.path:
@@ -74,6 +78,10 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		if not record(meeting,["id","a","b","location","state"],["remaining","waited"]): return false
 		if not definitions.has(meeting.a) or not definitions.has(meeting.b): return false
 		if not meeting.get("spontaneous") is bool: return false
+		if meeting.get("mode","")=="project":
+			if not record(meeting.get("project"),["key","title","place"],["cost"]): return false
+			if not vector(meeting.project.get("center")) or not sites.has(meeting.project.place): return false
+			if meeting.project.key not in ["radio","model","bread","photo","music","craft"] or not meeting.get("materials_ready") is bool: return false
 	if raw.has("social"):
 		var social = raw.social
 		if not social is Dictionary or not social.get("appointments") is Array or not social.get("offer") is Dictionary or not number(social.get("serial")): return false
@@ -83,4 +91,19 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		if not social.offer.is_empty():
 			if not record(social.offer,["a","b","location"],["start","duration","made_at"]): return false
 			if not definitions.has(social.offer.a) or not definitions.has(social.offer.b): return false
+	if raw.has("work_family"):
+		var life = raw.work_family
+		if not life is Dictionary or not life.get("households") is Dictionary or not life.get("supports") is Array or not number(life.get("serial")): return false
+		for id in ["ogawa","saeki","shared_house"]:
+			var h = life.households.get(id)
+			if not record(h,[],["cash","home_load","earned_today","spent_today"]) or not h.get("material_days") is Dictionary or not h.get("ledger") is Array: return false
+			for entry in h.ledger:
+				if not record(entry,[],["day","earned","support","expenses","balance"]): return false
+		for help in life.supports:
+			if not record(help,["id","giver","receiver","kind","place","state"],["requested","began"]): return false
+			if not definitions.has(help.giver) or not definitions.has(help.receiver): return false
+		if life.has("projects"):
+			if not life.projects is Dictionary: return false
+			for key in ["radio","model","bread","photo","music","craft"]:
+				if not number(life.projects.get(key)): return false
 	return true
