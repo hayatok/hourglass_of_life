@@ -61,13 +61,15 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 			wanted = "work"
 		elif p.action == "sleep":
 			wanted = "sleep"
-		elif p.action == "meet":
+		elif p.action in ["meet","joint_work"]:
 			for meeting in Sim.meetings:
 				if meeting.id == p.meeting_id and meeting.state == "engaged":
 					wanted = "sit_talk" if meeting.location == "bench" else "talk"
+					if meeting.get("mode","")=="project": wanted = "work"
 					var other = Sim.person(meeting.b if meeting.a==p.id else meeting.a)
 					var toward: Vector3 = other.position-p.position
 					var face_angle = 0.0 if meeting.location=="bench" else atan2(toward.x,toward.z)
+					if meeting.get("mode","")=="project": face_angle = PI
 					visual.rotation.y = lerp_angle(visual.rotation.y,face_angle,minf(1,delta*5))
 	if wanted != animation_name:
 		animator.play(wanted,.2)

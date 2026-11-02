@@ -13,8 +13,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.2"))
-	var path = "res://docs/verification/v0.2/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.3"))
+	var path = "res://docs/verification/v0.3/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:
@@ -84,5 +84,26 @@ func run() -> void:
 	expect(sim.social.appointments.size()==1 and not main.get_node("%OfferPanel").visible,"Confirming the displayed alternative records the appointment")
 	expect("約束" in main.get_node("%DetailText").text,"A resident's upcoming promise is visible in their own panel")
 	await capture("05-appointment")
+	sim.reset()
+	sim.running = false
+	await process_frame
+	await process_frame
+	main._select("aoi")
+	main.get_node("%ProjectButton").pressed.emit()
+	expect(not sim.meetings.is_empty() and sim.meetings[0].get("mode","")=="project","The action bar can start actual joint work")
+	limit = 0
+	while sim.meetings.size()>0 and sim.meetings[0].state=="travel" and limit<180:
+		sim.advance_minutes(1)
+		limit += 1
+	for p in sim.people: main.avatars[p.id].update_state(p,1,p.id==main.selected_id)
+	expect(main.avatars.aoi.animation_name=="work","Joint work plays the work animation after arrival")
+	main.get_node("%LifeTab").pressed.emit()
+	main._refresh_ui()
+	expect("生活費" in main.get_node("%DetailText").text,"The household panel explains the resident's living conditions")
+	await capture("06-shared-work")
+	sim.advance_minutes(45)
+	main._refresh_ui()
+	expect(sim.person("aoi").goal_progress>=.18,"Finishing shared work is reflected in the visible character goal")
+	await capture("07-household")
 	print("Scene/UI smoke: %s"%("PASS" if errors.is_empty() else "FAIL"))
 	quit(0 if errors.is_empty() else 1)

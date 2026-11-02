@@ -44,10 +44,13 @@ func _ready() -> void:
 	%GoalButton.pressed.connect(func(): _answer(Sim.support_goal(selected_id)))
 	%MeetButton.pressed.connect(_meet)
 	%AcceptOfferButton.pressed.connect(func(): _answer(Sim.confirm_offer(selected_id)))
+	%SupportButton.pressed.connect(func(): _answer(Sim.propose_support(selected_id,partner.get_selected_metadata())))
+	%ProjectButton.pressed.connect(func(): _answer(Sim.propose_project(selected_id,partner.get_selected_metadata())))
 	%BenchButton.pressed.connect(func(): placement = not placement; _toast("広場の地面をクリックして、ベンチを置きます（共有予算20）" if placement else "配置を取り消しました"))
 	%NowTab.pressed.connect(func(): detail_tab=0; _refresh_detail())
 	%RelationsTab.pressed.connect(func(): detail_tab=1; _refresh_detail())
 	%MemoriesTab.pressed.connect(func(): detail_tab=2; _refresh_detail())
+	%LifeTab.pressed.connect(func(): detail_tab=3; _refresh_detail())
 	Sim.town_changed.connect(_rebuild)
 	Sim.event_added.connect(func(_e): _refresh_events())
 	_rebuild()
@@ -245,7 +248,7 @@ func _refresh_ui() -> void:
 	%PauseButton.text = "再開" if not Sim.running else "一時停止"
 	%Budget.text = "共有予算  %d" % Sim.shared_budget
 	%FollowButton.text = "追従中" if following else "この人を追う"
-	%Version.text = "v0.2 開発版 · 関係と記憶"
+	%Version.text = "v0.3 開発版 · 仕事と家庭"
 	var offer = Sim.social.offer
 	%OfferPanel.visible = not offer.is_empty() and offer.a==selected_id
 	if %OfferPanel.visible:
@@ -280,12 +283,14 @@ func _refresh_detail() -> void:
 			text += "%s  %d / %d\n" % [Sim.person(other_id).name,int(rel.familiarity*100),int(rel.trust*100)]
 		if p.relationships.is_empty():
 			text += "これから知っていく人たちがいる。"
-	else:
+	elif detail_tab==2:
 		text = "この人に残った出来事\n\n"
 		for memory in p.memories.slice(maxi(0,p.memories.size()-5)):
 			text += "・%s\n%s\n\n" % [memory.title,memory.text]
 		if p.memories.is_empty():
 			text += "町で過ごす時間が、これから積もっていく。"
+	else:
+		text = Sim.work_family.person_text(p)
 	%DetailText.text = text
 
 func _refresh_events() -> void:

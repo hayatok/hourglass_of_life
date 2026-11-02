@@ -70,7 +70,8 @@
       "responsibilities": ["学校へ通う", "使った道具を片付ける"],
       "routines": [
         {"id": "sleep", "on_days": [0, 1, 2, 3, 4, 5, 6], "start_minute": 1260, "duration_minutes": 600, "place": "home"},
-        {"id": "school", "on_days": [0, 1, 2, 3, 4], "start_minute": 510, "duration_minutes": 390, "place": "off_map_school"}
+        {"id": "school", "on_days": [0, 1, 2, 3, 4], "start_minute": 510, "duration_minutes": 390, "place": "off_map_school"},
+        {"id": "after_school_home", "on_days": [0, 1, 2, 3, 4], "start_minute": 900, "duration_minutes": 180, "place": "home"}
       ],
       "public_private_difference": "初めての大人の前では様子を見る。慣れた相手には作ったものを次々見せる。",
       "possible_counteroffer": "いま模型を作っている。一緒に続きをしてほしい。",

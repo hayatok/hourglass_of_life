@@ -516,6 +516,12 @@ custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "記憶"
 
+[node name="LifeTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "暮らし"
+
 [node name="DetailScroll" type="ScrollContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=2057750930]
 layout_mode = 2
 size_flags_vertical = 3
@@ -571,6 +577,18 @@ custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "話す機会を作る"
 
+[node name="SupportButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "手助けを相談"
+
+[node name="ProjectButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "一緒に作る相談"
+
 [node name="Flex" type="Control" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=264781472]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -593,7 +611,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "v0.2 開発版 · 関係と記憶"
+text = "v0.3 開発版 · 仕事と家庭"
 autowrap_mode = 3
 
 [node name="Toast" type="Label" parent="Interface/InterfaceRoot/HUD" unique_id=582779342]
@@ -687,7 +705,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8392157, 0.8666667, 0.81960785, 1)
 theme_override_font_sizes/font_size = 12
-text = "v0.2 開発版 · 関係と記憶"
+text = "v0.3 開発版 · 仕事と家庭"
 autowrap_mode = 3
 
 [node name="PauseMenu" type="Control" parent="Interface/InterfaceRoot" unique_id=1313611870]
