@@ -4,18 +4,18 @@
   "engine": "cycles",
   "bbox_min": [
     -0.37099871039390564,
-    -0.15399999916553497,
+    -0.15571999549865723,
     0.006000000052154064
   ],
   "bbox_max": [
     0.37099871039390564,
-    0.1379999965429306,
-    1.649999976158142
+    0.1409447193145752,
+    1.6514091491699219
   ],
   "size_xyz": [
     0.7419974207878113,
-    0.2919999957084656,
-    1.6439999341964722
+    0.2966647148132324,
+    1.645409107208252
   ],
   "objects": [
     "CH_Nagisa_Blouse_LOD0",
@@ -25,7 +25,6 @@
     "CH_Nagisa_Ear.L_LOD0",
     "CH_Nagisa_Sleeve.L_LOD0",
     "CH_Nagisa_Cuff.L_LOD0",
-    "CH_Nagisa_Forearm.L_LOD0",
     "CH_Nagisa_Palm.L_LOD0",
     "CH_Nagisa_Finger0.L_LOD0",
     "CH_Nagisa_Finger1.L_LOD0",
@@ -39,7 +38,6 @@
     "CH_Nagisa_Ear.R_LOD0",
     "CH_Nagisa_Sleeve.R_LOD0",
     "CH_Nagisa_Cuff.R_LOD0",
-    "CH_Nagisa_Forearm.R_LOD0",
     "CH_Nagisa_Palm.R_LOD0",
     "CH_Nagisa_Finger0.R_LOD0",
     "CH_Nagisa_Finger1.R_LOD0",
@@ -53,7 +51,9 @@
     "CH_Nagisa_ApronSkirt_LOD0",
     "CH_Nagisa_ApronBib_LOD0",
     "CH_Nagisa_WaistTie_LOD0",
-    "CH_Nagisa_NoseForms_LOD0",
+    "CH_Nagisa_ArmSkin.L_LOD0",
+    "CH_Nagisa_ArmSkin.R_LOD0",
+    "CH_Nagisa_CollarStand_LOD0",
     "CH_Nagisa_Sclera.L_LOD0",
     "CH_Nagisa_IrisRim.L_LOD0",
     "CH_Nagisa_Iris.L_LOD0",
@@ -135,7 +135,7 @@
         0,
         0
       ],
-      "distance": 4.145999997854233
+      "distance": 4.148332357406616
     },
     "threequarter": {
       "file": "assets/models/CH_Nagisa/review/03_forms/material/material_threequarter.png",
@@ -144,7 +144,7 @@
         15,
         50
       ],
-      "distance": 2.9194935008159106
+      "distance": 2.924910245877173
     },
     "ref": {
       "file": "assets/models/CH_Nagisa/review/03_forms/material/material_ref.png",
@@ -153,7 +153,7 @@
         0.0,
         0.0
       ],
-      "distance": 4.145999997854233
+      "distance": 4.148332357406616
     }
   }
 }
