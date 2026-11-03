@@ -1,0 +1,12 @@
+{
+  "scope": "Actual packaged app saved through native menu and reopened through title Continue; player files preserved separately and restored after quitting. Not an assertion of zero elapsed time while the loaded town runs.",
+  "schema": 7,
+  "people": 12,
+  "elapsed_minutes_at_save": 107,
+  "start_minute": 780,
+  "world_objects": 1,
+  "tabletop_pieces": 16,
+  "observed_save_clock": "14:47",
+  "observed_after_continue_and_pause": "15:01",
+  "old_save_message": "Readable on title; new-town instruction visible"
+}

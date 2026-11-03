@@ -77,6 +77,7 @@ godot --path . --script tests/test_activity_furniture.gd
 - [キャラクター行動仕様](docs/character-spec.md)
 - [欲求・内面と行動を一緒に広げる設計](docs/needs-and-behavior-design.md)
 - [行動が街と噛み合うモーションの設計](docs/motion-and-world-interaction.md)
+- [季節・服装・経済と行動の拡張](docs/world-context-and-actions.md)
 - [調査資料と仕様への反映](docs/research-notes.md)
 - [行動モデルの設定案](data/behavior-model.json)
 - [住民12人の設定](data/residents.json)

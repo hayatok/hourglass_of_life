@@ -212,13 +212,13 @@ func run() -> void:
 	var copied_back: Array = knowledge(sim.person("fumi"),"profile","osamu")
 	expect(copied_back.size()==1 and copied_back[0].mode=="observed","A two-way dialogue does not immediately bounce a newly received profile back as fresh evidence")
 
-	# Missing old-save snapshots stay missing even after a relationship changes.
+	# An explicitly empty current profile map stays empty after a relationship changes.
 	prepare(false)
 	sim.person("fumi").known_profiles = {}
 	sim.person("fumi").relationships.osamu.familiarity = .99
-	expect(sim.save_game("user://test-knowledge-exchange-empty.json") and sim.load_game("user://test-knowledge-exchange-empty.json"),"An explicitly empty old profile map survives actual save/load")
+	expect(sim.save_game("user://test-knowledge-exchange-empty.json") and sim.load_game("user://test-knowledge-exchange-empty.json"),"An explicitly empty current profile map survives actual save/load")
 	talk("fumi","aoi")
-	expect(sim.person("fumi").known_profiles.is_empty() and not sim.cognition.knows_person(sim.person("aoi"),"osamu"),"Increased friendship does not reconstruct unobserved old-save profiles")
+	expect(sim.person("fumi").known_profiles.is_empty() and not sim.cognition.knows_person(sim.person("aoi"),"osamu"),"Increased friendship does not reconstruct unobserved profiles after load")
 
 	# A failed or unfinished meeting has no exchange, regardless of API hints.
 	prepare()

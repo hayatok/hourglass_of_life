@@ -120,7 +120,8 @@ func run() -> void:
 		var day_mean := image_mean(daytime);var night_mean := image_mean(nighttime)
 		metrics.rendered_brightness = {"day":day_mean,"night":night_mean}
 		expect(night_mean<day_mean*.82 and night_mean>.015,"Rendered night differs from day while the town remains visible")
-	# A saved route from the old street must not continue through the new shared house.
+	# Retained route recovery for an absent optional layout version is tested
+	# within the current save schema, not as an older-format compatibility promise.
 	var resident := sim.person("aoi")
 	sim._assign(resident,"school","off_map_school",180,"町外へ向かう")
 	resident.position = Vector3(5,0,7);resident.place = "home_shared"
@@ -129,15 +130,15 @@ func run() -> void:
 	sim.save_game(save_path)
 	var raw = JSON.parse_string(FileAccess.get_file_as_string(save_path));raw.erase("route_layout")
 	var file := FileAccess.open(save_path,FileAccess.WRITE);file.store_string(JSON.stringify(raw));file.close()
-	expect(sim.load_game(save_path) and sim.person("aoi").position==Vector3(5,0,7),"Loading an old route keeps the actual resident position")
+	expect(sim.load_game(save_path) and sim.person("aoi").position==Vector3(5,0,7),"A current-format payload without a route layout keeps the saved resident position")
 	resident = sim.person("aoi")
-	expect(resident.path.any(func(point): return point.z>=10),"An old cross-house route is replanned around the shared house")
+	expect(resident.path.any(func(point): return point.z>=10),"An unversioned cross-house route is replanned around the shared house")
 	var prior: Vector3 = resident.position
-	var migrated_clear := true
+	var replanned_clear := true
 	for point in resident.path:
-		if not space.intersect_ray(PhysicsRayQueryParameters3D.create(prior+Vector3.UP*1.15,point+Vector3.UP*1.15)).is_empty(): migrated_clear = false
+		if not space.intersect_ray(PhysicsRayQueryParameters3D.create(prior+Vector3.UP*1.15,point+Vector3.UP*1.15)).is_empty(): replanned_clear = false
 		prior = point
-	expect(migrated_clear,"The migrated route clears the actual wall meshes")
+	expect(replanned_clear,"The recovered current-format route clears the actual wall meshes")
 	raw.route_layout = "invalid"
 	file = FileAccess.open(save_path,FileAccess.WRITE);file.store_string(JSON.stringify(raw));file.close()
 	expect(not sim.load_game(save_path),"A malformed route layout field is rejected before changing the town")

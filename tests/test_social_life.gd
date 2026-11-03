@@ -19,6 +19,13 @@ func shared_count(p: Dictionary, other: String) -> int:
 		if memory.kind=="shared_time" and memory.other==other: count += 1
 	return count
 
+func live_state() -> Dictionary:
+	return sim._encode({"people":sim.people,"definitions":sim.definitions,"events":sim.events,"meetings":sim.meetings,
+		"elapsed":sim.elapsed,"start_minute":sim.start_minute,"epoch_weekday":sim.epoch_weekday,"remainder":sim.minute_remainder,
+		"rng":str(sim.rng.state),"world_seed":sim.world_seed,"event_serial":sim.event_serial,"meeting_serial":sim.meeting_serial,
+		"benches":sim.benches,"budget":sim.shared_budget,"social":sim.social.serialize(),"work":sim.work_family.serialize(),
+		"life":sim.life.serialize(),"agenda":sim.agenda.serialize(),"interactions":sim.interactions.serialize(),"tabletop":sim.tabletop.serialize()})
+
 func run() -> void:
 	sim = LifeSimulation.new()
 	root.add_child(sim)
@@ -100,7 +107,7 @@ func run() -> void:
 	expect(sim.social.habit_bonus(a,option)>0,"A learned habit changes a future action's appeal")
 	expect(sim.social.habit_bonus(a,{"kind":"hobby","place":"workshop"})==0,"A learned habit remains tied to its context")
 	expect("習慣" in sim.social.person_text(a),"The reason behind repeated behavior is visible to the player")
-	# Social commitments and learned habits are part of the save, including v0.1 migration.
+	# Current-format commitments and learned habits survive an actual round trip.
 	sim.social.offer = {"a":"aoi","b":"fumi","start":sim.elapsed+180,"location":"cafe","duration":25,"made_at":sim.elapsed}
 	sim.confirm_offer("aoi")
 	var appointment_count = sim.social.appointments.size()
@@ -108,8 +115,11 @@ func run() -> void:
 	sim.reset()
 	expect(sim.load_game("user://test-social.json"),"Social state can be loaded")
 	expect(sim.person("aoi").habits[0].days.size()==3 and sim.social.appointments.size()==appointment_count,"Habits and appointments survive a round trip")
-	# Construct a genuine schema-1 payload by removing the new social fields.
-	var legacy = JSON.parse_string(FileAccess.get_file_as_string("user://test-social.json"))
+	# Earlier development formats are intentionally incompatible. Their rejection
+	# must not replace today's habits, plans, objects, random stream or saved file.
+	var current_text := FileAccess.get_file_as_string("user://test-social.json")
+	var current_payload: Dictionary = JSON.parse_string(current_text)
+	var legacy: Dictionary = current_payload.duplicate(true)
 	legacy.schema = 1
 	legacy.erase("social")
 	for p in legacy.people:
@@ -119,10 +129,13 @@ func run() -> void:
 	var file = FileAccess.open("user://test-legacy.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(legacy))
 	file.close()
-	expect(sim.load_game("user://test-legacy.json"),"A v0.1 save remains playable")
-	expect(sim.person("aoi").habits.is_empty() and sim.social.appointments.is_empty(),"Migration initializes new social fields without inventing past events")
-	var time_before = sim.elapsed
-	var bad_payloads = [{"schema":2},legacy.duplicate(true),legacy.duplicate(true),legacy.duplicate(true)]
+	var legacy_text := FileAccess.get_file_as_string("user://test-legacy.json")
+	var before := live_state()
+	expect(not sim.load_game("user://test-legacy.json") and not sim.load_error.is_empty(),"A schema-1 social save is rejected with a readable incompatible-format reason")
+	expect(live_state()==before,"Rejecting an older format preserves the complete live social town and RNG")
+	expect(FileAccess.get_file_as_string("user://test-social.json")==current_text and FileAccess.get_file_as_string("user://test-legacy.json")==legacy_text,"Rejecting an older format preserves both current and older saved files")
+	# Corrupt the current format so schema rejection cannot mask a broken field.
+	var bad_payloads = [{"schema":SaveValidation.CURRENT_SCHEMA},current_payload.duplicate(true),current_payload.duplicate(true),current_payload.duplicate(true)]
 	bad_payloads[1].people[1].id = bad_payloads[1].people[0].id
 	bad_payloads[2].people[0].position = {"__vector3":[1]}
 	bad_payloads[3].people[0].erase("path")
@@ -130,7 +143,7 @@ func run() -> void:
 		var invalid = FileAccess.open("user://test-invalid.json",FileAccess.WRITE)
 		invalid.store_string(JSON.stringify(bad))
 		invalid.close()
-		expect(not sim.load_game("user://test-invalid.json") and sim.elapsed==time_before,"A malformed save is rejected without changing the current town")
+		expect(not sim.load_game("user://test-invalid.json") and live_state()==before,"A malformed current-format save is rejected without changing the live town or RNG")
 	for path in ["user://test-social.json","user://test-legacy.json","user://test-invalid.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	print("Social life checks: %d passed, %d failed"%[checks-failures.size(),failures.size()])

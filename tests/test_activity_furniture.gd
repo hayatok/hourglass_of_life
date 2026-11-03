@@ -197,11 +197,13 @@ func run() -> void:
 	expect(sim.save_game(save_path) and sim.load_game(save_path),"Occupied furniture survives an actual save and load")
 	expect(sim.people.map(func(p): return p.activity_spot)==saved_ids,"Reloading keeps the same resident-to-furniture assignments")
 	var raw = JSON.parse_string(FileAccess.get_file_as_string(save_path))
+	# This stays in the current schema. The optional assignment fallback is
+	# distinct from accepting an incompatible development save format.
 	for p in raw.people: p.erase("activity_spot")
 	var file := FileAccess.open(save_path,FileAccess.WRITE);file.store_string(JSON.stringify(raw));file.close()
 	var positions: Array = sim.people.map(func(p): return p.position)
-	expect(sim.load_game(save_path),"An older save without furniture assignments remains loadable")
-	expect(sim.people.map(func(p): return p.position)==positions,"Adopting furniture does not teleport people from an old save")
+	expect(sim.load_game(save_path),"A current-format payload may omit optional furniture assignments")
+	expect(sim.people.map(func(p): return p.position)==positions,"Restoring omitted furniture assignments does not teleport the saved residents")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
 	if DisplayServer.get_name()!="headless":
 		var metrics_file := FileAccess.open(OUT+"/contact-metrics.json",FileAccess.WRITE)

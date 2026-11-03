@@ -86,9 +86,9 @@ func run() -> void:
 	town.events.append(old_profile)
 	cognition.observe(a,old_profile)
 	expect(is_equal_approx(cognition.known_skill(a,"osamu","repair"),.99) and "music" in cognition.known_interests(a,"osamu"),"Receiving an old account later does not overwrite a newer profile observation")
-	var older_save_person = {"id":"fumi","relationships":f.relationships.duplicate(true)}
-	cognition.upgrade_person(older_save_person)
-	expect(older_save_person.known_profiles.is_empty(),"Old-save upgrades do not reconstruct initial knowledge from current relationships")
+	var incomplete_person = {"id":"fumi","relationships":f.relationships.duplicate(true)}
+	cognition.upgrade_person(incomplete_person)
+	expect(incomplete_person.known_profiles.is_empty(),"Initializing missing personal fields does not invent observations from current relationships")
 	# Retained personal information remains shareable after the recent town log rolls over.
 	town.events.clear()
 	f.knowledge.clear()
