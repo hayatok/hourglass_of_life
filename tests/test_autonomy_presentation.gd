@@ -26,16 +26,25 @@ func capture(name: String) -> void:
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(OUTPUT+"/"+name+".png")
 
-func snapshot(meeting: Dictionary) -> Dictionary:
+func before_step() -> Dictionary:
+	var people := {}
+	for p in sim.people:
+		people[p.id] = {"id":p.id,"name":p.name,"skills":p.skills.duplicate(),"knowledge":p.knowledge.duplicate(),
+			"expectations":p.expectations.duplicate(),"position":p.position,"cognition_plan":p.cognition_plan.duplicate(true),"action":p.action,"moving":p.moving}
+	return {"minute":sim.elapsed,"clock":sim.clock_text(),"people":people}
+
+func snapshot(meeting: Dictionary, prior: Dictionary = {}) -> Dictionary:
 	var actors := []
 	var skill: String = meeting.project.skill
 	for id in [meeting.a,meeting.b]:
-		var person: Dictionary = sim.person(id)
+		var person: Dictionary = prior.get("people",{}).get(id,sim.person(id))
 		actors.append({"id":id,"name":person.name,"skill":skill,
+			"action":person.action,"moving":person.moving,
 			"level":float(person.skills.get(skill,0)),"knowledge":person.knowledge.size(),
 			"expectations":person.expectations.size(),"position":[person.position.x,person.position.y,person.position.z],
 			"plan":person.cognition_plan.duplicate(true)})
-	return {"minute":sim.elapsed,"clock":sim.clock_text(),"state":meeting.state,"actors":actors}
+	return {"minute":prior.get("minute",sim.elapsed),"clock":prior.get("clock",sim.clock_text()),
+		"state":"before_shared_time" if not prior.is_empty() else meeting.state,"actors":actors}
 
 func active_meeting(id: String) -> Dictionary:
 	for meeting in sim.meetings:
@@ -70,11 +79,12 @@ func run() -> void:
 	var completed := {}
 	var capture_started := false
 	for minute in SEARCH_MINUTES:
+		var previous := before_step()
 		sim.advance_minutes(1)
 		for meeting in sim.meetings:
 			if meeting.get("mode","")!="project" or not meeting.get("autonomous",false): continue
 			if not pending.has(meeting.id):
-				pending[meeting.id] = {"meeting":meeting.duplicate(true),"before":snapshot(meeting)}
+				pending[meeting.id] = {"meeting":meeting.duplicate(true),"before":snapshot(meeting,previous) if meeting.state=="engaged" else snapshot(meeting)}
 		if observed.is_empty():
 			for meeting in sim.meetings:
 				if not pending.has(meeting.id) or meeting.state!="engaged": continue
@@ -112,14 +122,14 @@ func run() -> void:
 		record.before = before
 		record.engaged = engaged
 		record.completed = completed
-		record.started = before.actors[0].plan.started
+		record.started = engaged.actors[0].plan.started
 		record.finished = completed.minute
 		record.screenshots = [{"file":"01-resident-initiated-work.png","minute":engaged.minute,"stage":"engaged"}]
 		expect(capture_started and before.minute<=engaged.minute and engaged.minute<completed.minute,"The images follow one continuous play and one actual meeting")
-		expect(before.state=="travel" and engaged.state=="engaged","The encounter is observed before and after the real rendezvous")
+		expect(before.state in ["travel","waiting","before_shared_time"] and before.minute<engaged.minute and engaged.state=="engaged","The encounter is observed before the agreed shared time and after actual participation begins")
 		var learned := false
 		for index in 2:
-			learned = learned or float(completed.actors[index].level)>float(before.actors[index].level)
+			learned = learned or float(completed.actors[index].level)>float(engaged.actors[index].level)
 		expect(learned,"At least one participant's practiced skill changes after completed work")
 		sim.advance_minutes(1)
 		main.get_node("%NowTab").pressed.emit()

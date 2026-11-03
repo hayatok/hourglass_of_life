@@ -61,6 +61,12 @@ static func profile(value: Variant, definitions: Dictionary) -> bool:
 	if value.has("interests") and not strings(value.interests): return false
 	return true
 
+static func introduction(value: Variant, definitions: Dictionary, observed_at: float) -> bool:
+	if not record(value,["person","via","skill","profile_event"],["profile_minute"]): return false
+	if not definitions.has(value.person) or not definitions.has(value.via) or value.person==value.via: return false
+	if value.skill.is_empty() or value.profile_event.is_empty(): return false
+	return whole(value.profile_minute) and value.profile_minute<=observed_at
+
 static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary, elapsed: float) -> bool:
 	if p.has("skills") and not skills(p.skills): return false
 	if p.has("interests") and not strings(p.interests): return false
@@ -81,6 +87,7 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if known.has("received_from") and (not known.received_from is String or (not known.received_from.is_empty() and not definitions.has(known.received_from))): return false
 			if known.has("origin_observed_at") and (not whole(known.origin_observed_at) or known.origin_observed_at>known.observed_at): return false
 			if known.fact=="profile" and not profile(known.value,definitions): return false
+			if known.fact=="introduction" and not introduction(known.value,definitions,known.observed_at): return false
 	if p.has("expectations"):
 		if not p.expectations is Dictionary or p.expectations.size()>96: return false
 		for key in p.expectations:
@@ -111,6 +118,7 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if plan.has("finished") and (not whole(plan.finished) or plan.finished<plan.started or plan.finished>elapsed): return false
 			if plan.has("reason") and not plan.reason is String: return false
 			if plan.has("kind") and plan.kind not in ["project","social","support"]: return false
+			if plan.has("introduction_event") and (not plan.introduction_event is String or plan.introduction_event.is_empty()): return false
 	if p.has("plan_history"):
 		if not p.plan_history is Array or p.plan_history.size()>24: return false
 		for entry in p.plan_history:
@@ -119,6 +127,7 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if not whole(entry.day) or not whole(entry.minute) or entry.minute>elapsed: return false
 	if p.has("next_plan_minute") and not whole(p.next_plan_minute): return false
 	if p.has("support_next_attempt") and not whole(p.support_next_attempt): return false
+	if p.has("preparing_agenda_id") and not p.preparing_agenda_id is String: return false
 	return true
 
 static func agenda(data: Variant, definitions: Dictionary, sites: Dictionary, elapsed: float) -> bool:
@@ -154,6 +163,18 @@ static func agenda(data: Variant, definitions: Dictionary, sites: Dictionary, el
 		for id in planned.shared_before:
 			if id not in [planned.a,planned.b] or not whole(planned.shared_before[id]): return false
 		if planned.state=="travel" and (planned.meeting_id.is_empty() or planned.shared_before.size()!=2): return false
+		for key in ["last_blocker","change_reason","outcome"]:
+			if planned.has(key) and not planned[key] is String: return false
+		if planned.has("revisions"):
+			if not planned.revisions is Array or planned.revisions.size()>2: return false
+			var previous := -1
+			for revision in planned.revisions:
+				if not record(revision,["reason"],["from","to","at"]): return false
+				if not whole(revision.from) or not whole(revision.to) or not whole(revision.at): return false
+				if revision.from<planned.made_at or revision.to<=revision.from or revision.at<planned.made_at or revision.at>elapsed: return false
+				if previous>=0 and revision.from!=previous: return false
+				previous = int(revision.to)
+			if previous>=0 and previous!=planned.start: return false
 	return true
 
 static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> bool:
@@ -235,6 +256,8 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 					if not definitions.has(witness): return false
 		if e.has("fact") and not e.fact is String: return false
 		if e.get("fact","")=="profile" and not profile(e.get("value"),definitions): return false
+		if e.get("fact","")=="introduction" and not introduction(e.get("value"),definitions,e.minute): return false
+		if e.has("origin_observed_at") and (not whole(e.origin_observed_at) or e.origin_observed_at>e.minute): return false
 		if e.has("source") and not e.source is String: return false
 		if e.has("public") and not e.public is bool: return false
 	for bench in raw.benches:
@@ -263,6 +286,13 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 			if not record(social.offer,["a","b","location"],["start","duration","made_at"]): return false
 			if not definitions.has(social.offer.a) or not definitions.has(social.offer.b): return false
 	if raw.has("agenda") and not agenda(raw.agenda,definitions,sites,raw.elapsed): return false
+	for p in raw.people:
+		if p.get("preparing_agenda_id","").is_empty(): continue
+		if p.action!="prepare" or not raw.has("agenda"): return false
+		var found := false
+		for planned in raw.agenda.records:
+			if planned.id==p.preparing_agenda_id and planned.state=="planned" and p.id in [planned.a,planned.b]: found = true
+		if not found: return false
 	if raw.has("work_family"):
 		var life = raw.work_family
 		if not life is Dictionary or not life.get("households") is Dictionary or not life.get("supports") is Array or not number(life.get("serial")): return false

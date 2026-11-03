@@ -60,6 +60,37 @@ func known_interests(observer: Dictionary, other_id: String) -> Array:
 	if observer.get("id","")==other_id: return observer.interests.duplicate()
 	return _known_profile(observer,other_id).interests.duplicate()
 
+func known_profile(observer: Dictionary, other_id: String) -> Dictionary:
+	upgrade_person(observer)
+	if observer.id==other_id:
+		return {"skills":observer.skills.duplicate(true),"interests":observer.interests.duplicate(true)}
+	return _known_profile(observer,other_id)
+
+func knows_person(observer: Dictionary, other_id: String) -> bool:
+	upgrade_person(observer)
+	if observer.id==other_id or observer.known_profiles.has(other_id): return true
+	for known in observer.knowledge:
+		if known.get("fact","")!="profile" or not known.get("value") is Dictionary: continue
+		if known.value.get("person","")==other_id and float(known.confidence)>=.5 and int(known.observed_at)<=sim.elapsed: return true
+	return false
+
+func skill_evidence(observer: Dictionary, other_id: String, skill: String) -> Dictionary:
+	upgrade_person(observer)
+	var result: Dictionary = {}
+	var initial: Dictionary = observer.known_profiles.get(other_id,{})
+	if initial.get("skills",{}).has(skill):
+		result = {"level":initial.skills[skill],"origin_observed_at":int(initial.get("observed_at",0)),"confidence":.95}
+	for known in observer.knowledge:
+		if known.get("fact","")!="profile" or not known.get("value") is Dictionary: continue
+		if known.value.get("person","")!=other_id or not known.value.get("skills",{}).has(skill): continue
+		if int(known.observed_at)>sim.elapsed: continue
+		var origin: int = int(known.get("origin_observed_at",known.observed_at))
+		if not result.is_empty():
+			if origin<int(result.origin_observed_at): continue
+			if origin==int(result.origin_observed_at) and float(known.confidence)<=float(result.confidence): continue
+		result = {"level":known.value.skills[skill],"origin_observed_at":origin,"confidence":float(known.confidence)}
+	return result
+
 func observe(p: Dictionary, event: Dictionary) -> bool:
 	upgrade_person(p)
 	var actual := _existing_event(event)
@@ -75,12 +106,14 @@ func observe(p: Dictionary, event: Dictionary) -> bool:
 		# Old events have no serial; attach an ID once to their canonical record.
 		event_id = "past_%d_%d_%d"%[int(actual.get("minute",0)),sim.events.find(actual),str(actual).hash()]
 		actual.event_id = event_id
+	var original_minute: int = int(actual.get("origin_observed_at",actual.get("minute",sim.elapsed)))
+	if original_minute<0 or original_minute>int(actual.get("minute",sim.elapsed)): return false
 	var knowledge = {
 		"event_id":event_id,"fact":str(actual.get("fact",actual.get("kind",actual.get("title","出来事")))),
 		"value":_copy(actual.get("value",actual.get("text",""))),
 		"source":actual.get("source",owner if not owner.is_empty() else observer),
 		"observed_at":int(sim.elapsed),"mode":"observed","confidence":.95,
-		"received_from":"","origin_observed_at":int(actual.get("minute",sim.elapsed))
+		"received_from":"","origin_observed_at":original_minute
 	}
 	return _retain(p,knowledge)
 
@@ -187,6 +220,9 @@ func _known_profile(observer: Dictionary, other_id: String) -> Dictionary:
 	var result = {"skills":initial.get("skills",{}).duplicate(true),"interests":initial.get("interests",[]).duplicate(true)}
 	var skill_times: Dictionary = {}
 	var skill_confidence: Dictionary = {}
+	for skill in initial.get("skills",{}):
+		skill_times[skill] = int(initial.get("observed_at",0))
+		skill_confidence[skill] = .95
 	for known in observer.knowledge:
 		if known.fact!="profile" or not known.value is Dictionary: continue
 		if known.value.get("person","")!=other_id or int(known.observed_at)>int(sim.elapsed): continue

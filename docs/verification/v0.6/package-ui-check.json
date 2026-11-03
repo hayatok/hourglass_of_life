@@ -1,0 +1,39 @@
+{
+  "artifact": "hourglass-of-life-v0.6.0-dev-macOS.zip",
+  "input": "native app UI through cua_repl",
+  "scope": "agent-operated packaged UI verification; not a human playtest or a fun evaluation",
+  "checks": [
+    {
+      "action": "new town",
+      "observed": "title opened the actual 3D town with eight residents"
+    },
+    {
+      "action": "Space pause",
+      "observed": "14:28 remained unchanged during roster and follow actions"
+    },
+    {
+      "action": "follow and roster toggle",
+      "observed": "closer camera and all eight selectable residents"
+    },
+    {
+      "action": "select Osamu",
+      "observed": "Osamu, age 68, details and camera updated"
+    },
+    {
+      "action": "save from menu",
+      "observed": "success message; schema 4, elapsed 88, seed 1793658720731, one agreed future plan"
+    },
+    {
+      "action": "resume then load",
+      "observed": "18:47 town returned to the saved afternoon; 14:38 shown after automatic resume and load success message"
+    },
+    {
+      "action": "quit",
+      "observed": "own packaged app process terminated"
+    }
+  ],
+  "test_save_sha256": "d0fea6fd2d132676426372bfc76018681e395b2a04044fd92594e515304e4650",
+  "original_save_files_preserved": 2,
+  "original_saves_restored_and_hash_verified": true,
+  "images": "native UI captures are present in this Codex task tool transcript; no repository screenshots are claimed for this check"
+}

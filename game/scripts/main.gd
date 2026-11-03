@@ -154,7 +154,7 @@ func _update_partners(preferred: String = "") -> void:
 
 func _select(id: String) -> void:
 	selected_id = id
-	_update_partners("osamu" if id=="aoi" else "")
+	_update_partners(_initial_partner(id))
 	var ids = ["nagisa","ryo","rin","osamu","fumi","maho","ritsu","aoi"]
 	var x = [30,240,440,615,840,1060,1280,1505][ids.find(id)]
 	var atlas = AtlasTexture.new()
@@ -164,6 +164,19 @@ func _select(id: String) -> void:
 	portrait.modulate = Color.WHITE if Sim.life.is_alive(Sim.person(id)) else Color(.65,.65,.65)
 	if %HUD.has_method("reveal_person"): %HUD.reveal_person()
 	_refresh_detail()
+
+func _initial_partner(id: String) -> String:
+	var p: Dictionary = Sim.person(id)
+	for meeting in Sim.meetings:
+		if meeting.id!=p.get("meeting_id","") or meeting.state not in ["travel","waiting","engaged"]: continue
+		if id not in [meeting.a,meeting.b]: continue
+		var other: String = meeting.b if meeting.a==id else meeting.a
+		if other!=id and Sim.life.is_alive(Sim.person(other)): return other
+	var plan: Dictionary = p.get("cognition_plan",{})
+	var planned_other: String = plan.get("partner","")
+	if plan.get("stage","") in ["travel","waiting","execute"] and planned_other!=id and Sim.life.is_alive(Sim.person(planned_other)):
+		return planned_other
+	return "osamu" if id=="aoi" else ""
 
 func _process(delta: float) -> void:
 	if following and not title.visible:
@@ -347,8 +360,11 @@ func _refresh_detail() -> void:
 	%ResidentName.text = "%s  ·  %d歳" % [p.name,p.age]
 	%Occupation.text = p.occupation
 	%Activity.text = ("移動中 → " if p.moving else "")+Sim.ACTION_NAMES.get(p.action,p.action)
-	%Reason.text = "「%s」" % p.reason
-	%NextPlan.text = Sim.commitment_text(p)
+	var plan: Dictionary = p.get("cognition_plan",{})
+	var plan_reason: String = plan.get("reason","")
+	var active_plan: bool = plan.get("stage","") in ["travel","execute"]
+	%Reason.text = "「%s」" % (plan_reason if active_plan and not plan_reason.is_empty() else p.reason)
+	%NextPlan.text = _next_agreement_text(p)
 	%Fatigue.value = p.fatigue*100
 	%Hunger.value = p.hunger*100
 	%Connection.value = p.connection*100
@@ -357,15 +373,12 @@ func _refresh_detail() -> void:
 	%GoalProgress.value = p.goal_progress*100
 	var text: String = ""
 	if detail_tab == 0:
-		text = Sim.social.person_text(p)
-		var plan_text: String = Sim.planner.person_text(p)
-		if not plan_text.is_empty(): text += ("\n\n" if not text.is_empty() else "")+plan_text
-		var future: String = Sim.agenda.person_text(p)
-		if not future.is_empty(): text += ("\n\n" if not text.is_empty() else "")+future
+		text = Sim.planner.person_text(p)
+		if not active_plan and not plan_reason.is_empty():
+			text += ("\n" if not text.is_empty() else "")+plan_reason
 		var learning: String = Sim.cognition.explain(p)
-		if not learning.is_empty(): text += ("\n\n" if not text.is_empty() else "")+learning
-		if not text.is_empty(): text += "\n"
-		text += ("暮らしの背景\n\n" if p.alive else "大切にしていたこと\n\n")+Sim.definitions[p.id].public_private_difference+"\n\n暮らしの始まりに気にかけていたこと\n"+Sim.definitions[p.id].goals[1]
+		if not learning.is_empty() and learning!=plan_reason:
+			text += ("\n\n" if not text.is_empty() else "")+learning
 	elif detail_tab == 1:
 		text = "親しみ / 信頼\n\n"
 		for other_id in p.relationships:
@@ -381,7 +394,26 @@ func _refresh_detail() -> void:
 			text += "町で過ごす時間が、これから積もっていく。"
 	else:
 		text = Sim.work_family.person_text(p)
+		var personal: String = Sim.social.person_text(p)
+		if not personal.is_empty(): text += "\n\n"+personal
+		text += "\n\n"+("暮らしの背景\n\n" if p.alive else "大切にしていたこと\n\n")+Sim.definitions[p.id].public_private_difference+"\n\n暮らしの始まりに気にかけていたこと\n"+Sim.definitions[p.id].goals[1]
 	%DetailText.text = text
+
+func _next_agreement_text(p: Dictionary) -> String:
+	if not Sim.life.is_alive(p): return Sim.commitment_text(p)
+	var next: Dictionary = {}
+	var commitment: Dictionary = Sim.agenda.next_commitment(p)
+	for record in Sim.agenda.records:
+		if record.id==commitment.get("agenda_id",""):
+			next = record
+			break
+	for appointment in Sim.social.appointments:
+		if appointment.state!="planned" or p.id not in [appointment.a,appointment.b]: continue
+		if next.is_empty() or int(appointment.start)<int(next.start): next = appointment
+	if next.is_empty(): return Sim.commitment_text(p)
+	var other: Dictionary = Sim.person(next.b if next.a==p.id else next.a)
+	if not Sim.life.is_alive(other): return Sim.commitment_text(p)
+	return "%s · %sさんと%s"%[Sim.social.when_text(int(next.start)),other.name,next.get("title","ゆっくり話す")]
 
 func _refresh_events() -> void:
 	if not is_node_ready():

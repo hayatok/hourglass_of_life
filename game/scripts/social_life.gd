@@ -6,9 +6,11 @@ var sim
 var appointments: Array = []
 var offer: Dictionary = {}
 var serial: int = 0
+var knowledge_exchange
 
 func _init(simulation) -> void:
 	sim = simulation
+	knowledge_exchange = preload("res://game/scripts/resident_knowledge_exchange.gd").new(sim)
 
 func reset() -> void:
 	appointments.clear()
@@ -226,12 +228,7 @@ func finish(m: Dictionary, completed: bool) -> void:
 		if m.get("mode","")!="project":
 			sim.cognition.experience(p,other.id,"social",{"place":p.place},
 				{"enjoyment":.3 if uneasy else .7,"burden":p.quiet*.6})
-	# Only people who actually spent time together can exchange what they know.
-	for pair in [[a,b],[b,a]]:
-		var known: Array = previous_knowledge[pair[0].id]
-		known.reverse()
-		for fact in known:
-			if sim.cognition.share(pair[0],pair[1],fact.event_id): break
+	knowledge_exchange.exchange(a,b,previous_knowledge[a.id],previous_knowledge[b.id],m)
 
 func _postpone(planned: Dictionary, reason: String) -> void:
 	planned.state = "postponed"

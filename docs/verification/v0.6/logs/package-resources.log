@@ -1,5 +1,4 @@
 {
-  "inspection": "PCK v4 directory, record offsets bounded by directory start",
   "packed_files": [
     ".godot/exported/133200997/export-025b0ef822c4c0b6d521e2baeefecc2a-aoi.scn",
     ".godot/exported/133200997/export-0b1652a766932d161367f884fc8a8946-ritsu.scn",
@@ -392,6 +391,8 @@
     "game/scripts/resident_cognition.gdc",
     "game/scripts/resident_contacts.gd.remap",
     "game/scripts/resident_contacts.gdc",
+    "game/scripts/resident_knowledge_exchange.gd.remap",
+    "game/scripts/resident_knowledge_exchange.gdc",
     "game/scripts/resident_planner.gd.remap",
     "game/scripts/resident_planner.gdc",
     "game/scripts/resident_support_plans.gd.remap",

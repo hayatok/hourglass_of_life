@@ -9,6 +9,7 @@ const SAVE_PATH = "user://life-save.json"
 const LEGACY_SAVE_PATH = "user://life-save-v01.json"
 const WALK_METERS_PER_MINUTE = .36
 const HUNGER_PER_MINUTE = .0013
+const FATIGUE_PER_MINUTE = .0007
 const HOME = {"ogawa": "home_ogawa", "saeki": "home_saeki", "shared_house": "home_shared", "aoi_apartment":"off_map_home"}
 const SITES = {
 	"home_ogawa": Vector3(-9, 0, 6), "home_saeki": Vector3(-9, 0, -4),
@@ -38,7 +39,7 @@ const ACTION_NAMES = {
 	"sleep": "眠っている", "work": "仕事に取り組む", "school": "学校で過ごす",
 	"care": "家族と過ごす", "rest": "ひと息つく", "eat": "食事をする",
 	"hobby": "好きなことに取り組む", "social": "誰かと過ごしたい", "photo": "町を撮る",
-	"meet": "一緒に話す", "travel": "移動する", "chores":"家の用事を片付ける", "joint_work":"一緒に制作する", "own_life":"町外で暮らしている", "legacy":"残された記録を見ている", "remembered":"町に残る記憶"
+	"meet": "一緒に話す", "prepare":"待ち合わせの準備", "travel": "移動する", "chores":"家の用事を片付ける", "joint_work":"一緒に制作する", "own_life":"町外で暮らしている", "legacy":"残された記録を見ている", "remembered":"町に残る記憶"
 }
 const ROUTINE_NAMES = {
 	"sleep": "いつもの睡眠の時間", "off_shift_sleep": "夜勤のない日の睡眠",
@@ -281,7 +282,7 @@ func home_for(p: Dictionary) -> String:
 func _tick_person(p: Dictionary) -> void:
 	if not life.is_alive(p): return
 	p.hunger = clampf(p.hunger + HUNGER_PER_MINUTE, 0, 1)
-	p.fatigue = clampf(p.fatigue + 0.0007, 0, 1)
+	p.fatigue = clampf(p.fatigue + FATIGUE_PER_MINUTE, 0, 1)
 	p.connection = clampf(p.connection + 0.0006, 0, 1)
 	p.quiet = clampf(p.quiet + (0.0005 if p.action == "meet" else -0.00015), 0, 1)
 	if p.meeting_id.is_empty():
@@ -339,6 +340,7 @@ func _choose_action(p: Dictionary) -> void:
 		_assign(p, _routine_action(r), _place_for(p, r.place), 30, ROUTINE_NAMES.get(r.id, "予定の時間"))
 		p.routine_id = r.id
 		return
+	if agenda!=null and agenda.prepare(p): return
 	var options: Array = [
 		{"kind":"rest", "place":home, "need":p.fatigue, "goal":0.15, "relation":0.15, "role":0.3, "habit":0.4, "fun":0.5, "cost":0.1, "reason":"自分のペースで休みたい"},
 		{"kind":"eat", "place":home, "need":p.hunger, "goal":0.2, "relation":0.2, "role":0.4, "habit":0.6, "fun":0.55, "cost":0.1, "reason":"そろそろ食事にしよう"},
@@ -403,6 +405,7 @@ func _hobby_place(p: Dictionary) -> String:
 
 func _assign(p: Dictionary, kind: String, place: String, duration: float, reason: String, exact_target: Variant = null, spot_id: String = "") -> void:
 	_finish_activity_experience(p)
+	p.preparing_agenda_id = ""
 	var activity: Dictionary = activities.spots.get(spot_id,{})
 	if activity.is_empty() and exact_target==null: activity = activities.reserve(p,kind,place)
 	p.activity_spot = activity.get("id","")
@@ -429,6 +432,7 @@ func _finish_activity_experience(p: Dictionary) -> void:
 	var session: Dictionary = p.get("cognition_session",{})
 	if session.is_empty(): return
 	var kind: String = session.kind
+	if kind=="prepare": return
 	var relief := maxf(0,float(session.fatigue)-float(p.fatigue))
 	var enjoyment := clampf(.5+relief+(.12 if kind in ["hobby","photo"] else 0),0,1)
 	cognition.experience(p,"",kind,{"place":session.place},
@@ -437,6 +441,13 @@ func _finish_activity_experience(p: Dictionary) -> void:
 func route(origin: Vector3, origin_place: String, target: Vector3, destination: String) -> Array:
 	if origin.distance_to(target) < .1:
 		return []
+	# During a journey, place still names the departure site. Estimate a new
+	# route from the room the person physically occupies, including its aisles.
+	if not activities.inside(origin_place,origin):
+		for site in activities.rooms:
+			if activities.inside(site,origin):
+				origin_place = site
+				break
 	if origin_place == destination and activities.inside(destination,origin) and activities.inside(destination,target):
 		return activities.indoor_route(destination,origin,target)
 	if origin_place == destination and origin.distance_to(target) < 3: return [target]

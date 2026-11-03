@@ -105,6 +105,8 @@ func run() -> void:
 	var owner: Dictionary = sim.person("osamu")
 	a = sim.person("aoi")
 	b = sim.person("ritsu")
+	b.interests.append("repair")
+	b.current_goal = "修理について教わりたい"
 	sim._learn_profile(a,owner,"repair")
 	var profile: Dictionary = a.knowledge[-1]
 	expect(not b.knowledge.any(func(k): return k.event_id==profile.event_id),"A third person does not instantly learn another household's exchange")

@@ -11,13 +11,17 @@ CHECKS={
  'work':('test_work_family.gd',r'Work/family checks: \d+ passed, 0 failed'),
  'life':('test_life_course.gd',r'Life course checks: \d+ passed, 0 failed'),
  'cognition':('test_cognition.gd',r'Cognition checks: \d+ passed, 0 failed'),
+ 'knowledge_exchange':('test_knowledge_exchange.gd',r'Knowledge exchange checks: \d+ passed, 0 failed'),
  'resident_activities':('test_resident_activities.gd',r'Resident activity checks: \d+ passed, 0 failed'),
  'autonomy':('test_autonomy.gd',r'Autonomy checks: \d+ passed, 0 failed'),
  'resident_agenda':('test_resident_agenda.gd',r'Resident agenda checks: \d+ passed, 0 failed'),
+ 'agenda_preparation':('test_agenda_preparation.gd',r'Agenda preparation checks: \d+ passed, 0 failed'),
  'resident_support':('test_resident_support_plans.gd',r'Resident support plan checks: \d+ passed, 0 failed'),
+ 'support_index':('test_support_index.gd',r'Support index checks: \d+ passed, 0 failed'),
  'resident_lod':('test_resident_lod.gd',r'Resident LOD checks: \d+ passed, 0 failed'),
  'observation_hud':('test_observation_hud.gd',r'Observation HUD checks: \d+ passed, 0 failed'),
  'autonomy_presentation':('test_autonomy_presentation.gd',r'Autonomy presentation checks: \d+ passed, 0 failed'),
+ 'social_chain_presentation':('test_social_chain_presentation.gd',r'Social chain presentation checks: \d+ passed, 0 failed'),
  'character':('test_character_model.gd',r'Character import and motion checks: PASS'),
  'cast':('test_resident_models.gd',r'Resident cast and growth checks: PASS'),
  'activities':('test_activity_furniture.gd',r'Furniture and activity checks: \d+ passed, 0 failed'),
@@ -56,9 +60,9 @@ def run(name,args,marker=None,timeout=180):
 run('import',['--headless','--editor','--import'])
 for name in a.checks:
     file,marker=CHECKS[name]
-    run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy'] else 180)
+    run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else 180)
 if a.gpu:
-    for name in ['character','cast','resident_lod','activities','neighborhood','observation_hud','autonomy_presentation']:
-        file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker)
+    for name in ['character','cast','resident_lod','activities','neighborhood','observation_hud','autonomy_presentation','social_chain_presentation']:
+        file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker,timeout=600 if name=='social_chain_presentation' else 180)
     run('scene-gpu',['--script','tests/test_scene.gd'],r'Scene/UI smoke: PASS',timeout=600)
 print('All requested engine checks completed.',flush=True)

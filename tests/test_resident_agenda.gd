@@ -108,10 +108,17 @@ func run() -> void:
 	sim.elapsed = mini(int(record.departures[a.id]),int(record.departures[b.id]))-1
 	agenda.tick()
 	expect(sim.meetings.is_empty(),"The residents keep their own day until departure preparation begins")
-	advance(1)
-	expect(record.state=="travel" and sim.meetings.size()==1 and sim.meetings[0].get("agenda_id","")==record.id,"The agreed plan starts a real meeting at departure time")
+	advance(5)
+	expect(a.action=="prepare" or b.action=="prepare" or record.state=="travel","The agreed preparation window starts real individual journeys")
+	var joining := 0
+	while record.state=="planned" and joining<180:
+		advance(1); joining += 1
+	var actual: Dictionary = {}
+	for meeting in sim.meetings:
+		if meeting.get("agenda_id","")==record.id: actual = meeting
+	expect(not actual.is_empty() and record.state=="travel","The shared meeting is created only after the participants actually reach the place")
 	expect(agenda.person_text(a).is_empty() and agenda.next_commitment(a).id=="","A plan already under way is shown as the current activity rather than duplicated as a future promise")
-	expect(sim.meetings[0].not_before==record.start and not sim.meetings[0].materials_ready,"Early arrival waits for the agreed start and spends no project materials")
+	expect(not actual.is_empty() and actual.get("not_before",-1)==record.start and not actual.get("materials_ready",true),"Early arrival waits for the agreed start and spends no project materials")
 	finish_record(record)
 	expect(record.state=="kept" and a.skills.repair>skill_before and sim.elapsed>=int(record.start)+int(record.duration),"A kept agreement requires actual arrival and the full shared work time")
 	expect(agenda.person_text(a).is_empty(),"Completed plans no longer appear as future appointments")
@@ -143,8 +150,7 @@ func run() -> void:
 	agenda.dispatch_id = record.id
 	expect(not agenda.reserved(a,int(record.start)) and agenda.next_commitment(a).id=="","Synchronous dispatch excludes its own reservation from admission queries")
 	agenda.dispatch_id = ""
-	# A nearby person's duty must fit the common departure, rather than their
-	# shorter individual route, because a meeting currently dispatches both.
+	# The farther resident can travel while the nearer resident finishes work.
 	prepare()
 	a = sim.person("aoi")
 	b = sim.person("osamu")
@@ -152,11 +158,17 @@ func run() -> void:
 	a.place = "off_map_school"
 	b.position = sim.SITES.workshop
 	b.place = "workshop"
-	sim.definitions.osamu.routines = [routine(780,80)]
+	var nearby_work := routine(780,80)
+	nearby_work.place = "workshop"
+	sim.definitions.osamu.routines = [nearby_work]
 	reply = agenda.propose(a.id,b.id,"radio",true)
 	expect(reply.status=="accept","People at different distances can negotiate a later meeting")
 	record = agenda.records[0]
-	expect(record.departures[a.id]==record.departures[b.id] and int(record.departures[b.id])>=80,"The nearer person's duty ends before the common preparation window starts")
+	expect(int(record.departures[a.id])<int(record.departures[b.id]) and int(record.departures[b.id])>=80,"Each person has an individual preparation window and the nearby person's duty is protected")
+	advance(60)
+	expect(a.action=="prepare" and b.action=="work" and b.routine_id=="temporary_work" and b.meeting_id.is_empty(),"The distant person travels without pulling the nearby person out of work")
+	finish_record(record)
+	expect(record.state=="kept","Both individual journeys can reach an actual shared activity after the duty ends")
 	# A calendar gap that holds outbound travel and work still cannot be used
 	# when the return journey would run into a scheduled obligation.
 	prepare()
@@ -202,9 +214,10 @@ func run() -> void:
 	record = agenda.records[0]
 	for p in [sim.person("ryo"),sim.person("nagisa")]: p.activity_spot = "bench_0_%d"%[0 if p.id=="ryo" else 1]
 	sim.social.offer = original_offer.duplicate(true)
-	finish_record(record,180)
-	expect(record.state=="postponed" and int(record.attempts)<=3 and sim.meetings.is_empty(),"Unavailable seats cause a bounded postponement instead of fictitious attendance or endless retry")
-	expect(sim.social.offer==original_offer and not a.memories.any(func(m): return m.kind=="shared_time"),"Failed resident dispatch changes neither the UI offer nor shared-experience memories")
+	finish_record(record,600)
+	expect(record.state=="postponed" and record.revisions.size()<=2 and int(record.attempts)<=3 and sim.meetings.is_empty(),"Unavailable seats cause a bounded conclusion after at most two mutually agreed new times")
+	var offer_preserved: bool = sim.social.offer==original_offer if sim.elapsed<=int(original_offer.made_at)+180 else sim.social.offer.is_empty()
+	expect(offer_preserved and record.meeting_id.is_empty(),"Failed resident dispatch preserves a pending UI offer until its normal expiry and never creates attendance for the failed appointment")
 	var tries: int = record.attempts
 	advance(30)
 	expect(record.attempts==tries and agenda.propose(a.id,b.id,"social",false).status=="defer" and agenda.records.size()==1,"A postponed agreement stops retrying and cannot immediately create another promise")
@@ -221,7 +234,8 @@ func run() -> void:
 	agenda.tick()
 	expect(b.action=="eat" and b.meeting_id.is_empty() and record.state=="planned","A changed need for food prevents social dispatch from overwriting an actual meal")
 	finish_record(record)
-	expect(record.state=="postponed" and not b.memories.any(func(m): return m.kind=="shared_time"),"An agreement deferred for a meal is never recorded as kept without participation")
+	var shared_after_meal: bool = b.memories.any(func(m): return m.kind=="shared_time" and m.other==a.id)
+	expect((record.state=="kept" and shared_after_meal and b.hunger<.75) or (record.state=="postponed" and not shared_after_meal),"A deferred meal can lead to a kept promise only after actual participation with the hunger addressed")
 	prepare()
 	a = sim.person("aoi")
 	b = sim.person("fumi")

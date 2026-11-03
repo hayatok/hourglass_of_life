@@ -55,12 +55,17 @@ func add_options(p: Dictionary, options: Array) -> void:
 
 func _known_contacts(p: Dictionary) -> Array:
 	var result: Array = []
+	var recent := {}
+	for memory in p.memories:
+		if memory.kind=="shared_time" and int(memory.minute)>sim.elapsed-1440:
+			recent[memory.other] = int(recent.get(memory.other,0))+1
 	for other in sim.people:
 		if other.id==p.id or not sim.life.is_alive(other) or not sim.resident_activities._known_partner(p,other): continue
 		var relation: Dictionary = sim.social.relation(p,other.id)
 		var score: float = .4*float(relation.trust)+.35*float(relation.ease)+.25*float(relation.familiarity)
-		for memory in p.memories:
-			if memory.other==other.id and memory.kind=="shared_time" and int(memory.minute)>sim.elapsed-1440: score -= .07
+		# Keep the same ordered subtractions while scanning the growing personal
+		# history only once, rather than once per possible partner.
+		for encounter in int(recent.get(other.id,0)): score -= .07
 		result.append({"person":other,"score":score})
 	result.sort_custom(func(a,b): return a.score>b.score if not is_equal_approx(a.score,b.score) else str(a.person.id)<str(b.person.id))
 	return result
@@ -93,6 +98,11 @@ func track(meeting: Dictionary) -> void:
 			"steps":["相談する","合流する","一緒に過ごす","経験を振り返る"],
 			"kind":"project" if not project.is_empty() else "social"
 		}
+		var introduction: Dictionary = sim.social.knowledge_exchange.introduction(p,other)
+		if not introduction.is_empty() and (project.is_empty() or introduction.skill==project.get("skill","")):
+			if float(sim.social.relation(p,other).familiarity)<.4:
+				p.cognition_plan.reason = sim.social.knowledge_exchange.introduction_reason(p,other)
+				p.cognition_plan.introduction_event = introduction.event_id
 
 func engaged(meeting: Dictionary) -> void:
 	for id in [meeting.a,meeting.b]:

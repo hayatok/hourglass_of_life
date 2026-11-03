@@ -57,6 +57,9 @@ func candidates(p: Dictionary) -> Array:
 			var reason := "%sさんと、%sを進めてみたい"%[other.name,project.title]
 			if project.learner==p.id: reason = "%sさんに、%sを教わってみたい"%[other.name,project.title]
 			elif project.teacher==p.id: reason = "%sさんと、知っていることを分け合いながら%sを進めたい"%[other.name,project.title]
+			var introduction: Dictionary = sim.social.knowledge_exchange.introduction(p,other.id)
+			if not introduction.is_empty() and introduction.skill==project.skill and relation.familiarity<.4:
+				reason = sim.social.knowledge_exchange.introduction_reason(p,other.id)+"。"+reason
 			best = {"kind":"joint_work","place":project.place,"partner":other.id,"project":project,
 				"need":maxf(.3,float(p.get("connection",0))),"goal":clampf(.35+.35*interest+.2*_goal_match(p,project),0,1),
 				"relation":clampf(float(relation.ease)*.5+float(relation.trust)*.5,0,1),"role":.5,
@@ -119,9 +122,10 @@ func _perceived_partner(p: Dictionary, other: Dictionary) -> Dictionary:
 	var perceived := {"id":other.id,"name":other.name,"skills":{},"interests":[],"current_goal":""}
 	var cognition = sim.get("cognition")
 	if cognition==null: return perceived
-	perceived.interests = cognition.known_interests(p,other.id)
+	var known: Dictionary = cognition.known_profile(p,other.id)
+	perceived.interests = known.interests
 	for authored in definitions:
-		perceived.skills[authored.skill] = cognition.known_skill(p,other.id,authored.skill)
+		perceived.skills[authored.skill] = float(known.skills.get(authored.skill,0))
 	return perceived
 
 func _feasible(a: Dictionary, b: Dictionary, project: Dictionary) -> Dictionary:

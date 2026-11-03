@@ -5,15 +5,23 @@
     {
       "check": "activities",
       "passed": true,
-      "seconds": 2.45,
+      "seconds": 2.46,
       "failure": null,
       "log": "logs/activities.log",
       "completion": "Furniture and activity checks: 156 passed, 0 failed"
     },
     {
+      "check": "agenda_preparation",
+      "passed": true,
+      "seconds": 0.45,
+      "failure": null,
+      "log": "logs/agenda_preparation.log",
+      "completion": "Agenda preparation checks: 34 passed, 0 failed"
+    },
+    {
       "check": "autonomy",
       "passed": true,
-      "seconds": 29.41,
+      "seconds": 35.43,
       "failure": null,
       "log": "logs/autonomy.log",
       "completion": "Autonomy checks: 23 passed, 0 failed"
@@ -21,7 +29,7 @@
     {
       "check": "autonomy_presentation",
       "passed": true,
-      "seconds": 1.73,
+      "seconds": 1.47,
       "failure": null,
       "log": "logs/autonomy_presentation.log",
       "completion": "Autonomy presentation checks: 7 passed, 0 failed"
@@ -29,7 +37,7 @@
     {
       "check": "cast",
       "passed": true,
-      "seconds": 2.66,
+      "seconds": 2.75,
       "failure": null,
       "log": "logs/cast.log",
       "completion": "Resident cast and growth checks: PASS, errors=[]"
@@ -37,7 +45,7 @@
     {
       "check": "character",
       "passed": true,
-      "seconds": 1.47,
+      "seconds": 1.46,
       "failure": null,
       "log": "logs/character.log",
       "completion": "Character import and motion checks: PASS, errors=[]"
@@ -45,23 +53,31 @@
     {
       "check": "cognition",
       "passed": true,
-      "seconds": 0.24,
+      "seconds": 0.34,
       "failure": null,
       "log": "logs/cognition.log",
-      "completion": "Cognition checks: 89 passed, 0 failed"
+      "completion": "Cognition checks: 105 passed, 0 failed"
     },
     {
       "check": "import",
       "passed": true,
-      "seconds": 3.37,
+      "seconds": 2.53,
       "failure": null,
       "log": "logs/import.log",
       "completion": null
     },
     {
+      "check": "knowledge_exchange",
+      "passed": true,
+      "seconds": 0.35,
+      "failure": null,
+      "log": "logs/knowledge_exchange.log",
+      "completion": "Knowledge exchange checks: 67 passed, 0 failed"
+    },
+    {
       "check": "life",
       "passed": true,
-      "seconds": 320.02,
+      "seconds": 174.54,
       "failure": null,
       "log": "logs/life.log",
       "completion": "Life course checks: 50 passed, 0 failed"
@@ -69,7 +85,7 @@
     {
       "check": "neighborhood",
       "passed": true,
-      "seconds": 1.25,
+      "seconds": 1.36,
       "failure": null,
       "log": "logs/neighborhood.log",
       "completion": "Neighborhood checks: 96 passed, 0 failed"
@@ -77,15 +93,15 @@
     {
       "check": "observation_hud",
       "passed": true,
-      "seconds": 1.56,
+      "seconds": 1.35,
       "failure": null,
       "log": "logs/observation_hud.log",
-      "completion": "Observation HUD checks: 16 passed, 0 failed"
+      "completion": "Observation HUD checks: 33 passed, 0 failed"
     },
     {
       "check": "resident_activities",
       "passed": true,
-      "seconds": 0.24,
+      "seconds": 0.25,
       "failure": null,
       "log": "logs/resident_activities.log",
       "completion": "Resident activity checks: 24 passed, 0 failed"
@@ -93,15 +109,15 @@
     {
       "check": "resident_agenda",
       "passed": true,
-      "seconds": 0.35,
+      "seconds": 0.34,
       "failure": null,
       "log": "logs/resident_agenda.log",
-      "completion": "Resident agenda checks: 51 passed, 0 failed"
+      "completion": "Resident agenda checks: 54 passed, 0 failed"
     },
     {
       "check": "resident_lod",
       "passed": true,
-      "seconds": 0.74,
+      "seconds": 0.75,
       "failure": null,
       "log": "logs/resident_lod.log",
       "completion": "Resident LOD checks: 901 passed, 0 failed"
@@ -109,7 +125,7 @@
     {
       "check": "resident_support",
       "passed": true,
-      "seconds": 0.63,
+      "seconds": 0.65,
       "failure": null,
       "log": "logs/resident_support.log",
       "completion": "Resident support plan checks: 41 passed, 0 failed"
@@ -117,7 +133,7 @@
     {
       "check": "simulation",
       "passed": true,
-      "seconds": 1.15,
+      "seconds": 1.35,
       "failure": null,
       "log": "logs/simulation.log",
       "completion": "Simulation checks: 49 passed, 0 failed"
@@ -131,9 +147,25 @@
       "completion": "Social life checks: 33 passed, 0 failed"
     },
     {
+      "check": "social_chain_presentation",
+      "passed": true,
+      "seconds": 21.99,
+      "failure": null,
+      "log": "logs/social_chain_presentation.log",
+      "completion": "Social chain presentation checks: 14 passed, 0 failed; completed natural chain"
+    },
+    {
+      "check": "support_index",
+      "passed": true,
+      "seconds": 0.94,
+      "failure": null,
+      "log": "logs/support_index.log",
+      "completion": "Support index checks: 36 passed, 0 failed"
+    },
+    {
       "check": "work",
       "passed": true,
-      "seconds": 0.45,
+      "seconds": 0.55,
       "failure": null,
       "log": "logs/work.log",
       "completion": "Work/family checks: 41 passed, 0 failed"
@@ -143,7 +175,7 @@
     {
       "check": "activities-gpu",
       "passed": true,
-      "seconds": 4.4,
+      "seconds": 4.24,
       "failure": null,
       "log": "logs/activities-gpu.log",
       "completion": "Furniture and activity checks: 156 passed, 0 failed"
@@ -151,16 +183,15 @@
     {
       "check": "autonomy_presentation-gpu",
       "passed": true,
-      "seconds": null,
+      "seconds": 3.03,
       "failure": null,
       "log": "logs/autonomy_presentation-gpu.log",
-      "completion": "Autonomy presentation checks: 7 passed, 0 failed",
-      "note": "Repeated on the final UI change; completion marker and strict error log checked."
+      "completion": "Autonomy presentation checks: 7 passed, 0 failed"
     },
     {
       "check": "cast-gpu",
       "passed": true,
-      "seconds": 6.54,
+      "seconds": 6.24,
       "failure": null,
       "log": "logs/cast-gpu.log",
       "completion": "Resident cast and growth checks: PASS, errors=[]"
@@ -168,7 +199,7 @@
     {
       "check": "character-gpu",
       "passed": true,
-      "seconds": 3.24,
+      "seconds": 3.3,
       "failure": null,
       "log": "logs/character-gpu.log",
       "completion": "Character import and motion checks: PASS, errors=[]"
@@ -176,7 +207,7 @@
     {
       "check": "neighborhood-gpu",
       "passed": true,
-      "seconds": 3.58,
+      "seconds": 3.39,
       "failure": null,
       "log": "logs/neighborhood-gpu.log",
       "completion": "Neighborhood checks: 97 passed, 0 failed"
@@ -184,15 +215,15 @@
     {
       "check": "observation_hud-gpu",
       "passed": true,
-      "seconds": 3.02,
+      "seconds": 3.81,
       "failure": null,
       "log": "logs/observation_hud-gpu.log",
-      "completion": "Observation HUD checks: 16 passed, 0 failed"
+      "completion": "Observation HUD checks: 33 passed, 0 failed"
     },
     {
       "check": "resident_lod-gpu",
       "passed": true,
-      "seconds": 2.22,
+      "seconds": 2.07,
       "failure": null,
       "log": "logs/resident_lod-gpu.log",
       "completion": "Resident LOD checks: 901 passed, 0 failed"
@@ -200,10 +231,18 @@
     {
       "check": "scene-gpu",
       "passed": true,
-      "seconds": 313.51,
+      "seconds": 185.34,
       "failure": null,
       "log": "logs/scene-gpu.log",
       "completion": "Scene/UI smoke: PASS"
+    },
+    {
+      "check": "social_chain_presentation-gpu",
+      "passed": true,
+      "seconds": 56.379,
+      "failure": null,
+      "log": "logs/social_chain_presentation-gpu.log",
+      "completion": "Social chain presentation checks: 14 passed, 0 failed; completed natural chain"
     }
   ],
   "gpu_logs": [
@@ -214,7 +253,8 @@
     "logs/neighborhood-gpu.log",
     "logs/observation_hud-gpu.log",
     "logs/resident_lod-gpu.log",
-    "logs/scene-gpu.log"
+    "logs/scene-gpu.log",
+    "logs/social_chain_presentation-gpu.log"
   ],
   "source_sha256": {
     "data/behavior-model.json": "677904ea8a1bef8ab891911fe4077f16c8a6f663797dc4f441db0f1dda2dbb59",
@@ -229,46 +269,52 @@
     "game/scripts/contact_rotation.gd": "f322e3537075b918641fa18d2cdc8f44c867ddebc8e62b2dac3597d5794d79c1",
     "game/scripts/jrpg_resident_model.gd": "703d81f9b8bcf7eae12cb9b07f39f5082be9d99058a450915a0b719b4f192ca1",
     "game/scripts/life_course.gd": "71c6ea7c5d8bee650f507c7016c103e6be2e258516556621866945553401ce50",
-    "game/scripts/main.gd": "76898ab56205b78f6b2a14e45d65c1f65f5f925a6421878ab1ea747c71a78927",
+    "game/scripts/main.gd": "d94b9f55a28a45b91fa0dd5e2821372915dda4c4fb7b33caac5cf94cb9e3ee2f",
     "game/scripts/observation_hud.gd": "f20cddfe127fd12329f80e538883888fe07da15290c1cfd7b4d6d7f14d8e7572",
-    "game/scripts/resident_activities.gd": "d79f53149497df0a8aaa05d6ea57b30b8437d65b34080fb51ae0ec9411d62d62",
-    "game/scripts/resident_agenda.gd": "af6613379c4aa6b0f36f52c19aa03498825f456dfc95a8700823702615a0deb1",
+    "game/scripts/resident_activities.gd": "12781e8248b0dd316b84a107dd049549a050e4b61143e1adb0bbf3c3c6c603a1",
+    "game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
     "game/scripts/resident_avatar.gd": "a12addd9d9b9c6248082c41fec66350f0e3591fe390abacae929d09b87b78a24",
-    "game/scripts/resident_cognition.gd": "1312fe6bcaecd122aa4f28c92792af05a2cc79caac75ae31f01815eff13064b6",
+    "game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
     "game/scripts/resident_contacts.gd": "3ee077b656613823df55ddbb2e48eec51b6955fdf0da8039da97f677e0fef962",
-    "game/scripts/resident_planner.gd": "c2d204a69855dc52a088338dea769dccc54b055c69a0d2d5d31aac92380e47cf",
+    "game/scripts/resident_knowledge_exchange.gd": "20ee577541776d9c7d72a5411faa3927620c74c2b1052329e1539f44a17422da",
+    "game/scripts/resident_planner.gd": "d4476ccd385e2fcd82906a9123275d419cc82bdfccbd7194f78760ddae83a37a",
     "game/scripts/resident_support_plans.gd": "b5423c7d474b635da38e9287b9fac89a7af59369b9ea5c44731d4f0f6bfc26cc",
-    "game/scripts/save_validation.gd": "8f3c8a816eb951ac43b242dce8536f9167e380b4ab38d8096c88ad82c164688c",
-    "game/scripts/simulation.gd": "2401197695c2d1b4537ebf7fc9f1254cd2ee8057d20637b6f4bb803f1a12444b",
-    "game/scripts/social_life.gd": "7cc2ff0a7e9f10aba1bccbe9bc58d1801b671d3208500a50663ad6d83f629e20",
+    "game/scripts/save_validation.gd": "c8ddb9a538a97a03ad7f8907fce397a64afb1164ac333915f9f2efe8ddd8fa72",
+    "game/scripts/simulation.gd": "c970f33e717bdfb0cc7822388b6d679c3de757b57ac4becde0db5bc6fb39c936",
+    "game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
     "game/scripts/town_building.gd": "6c091275caf0fb036d18994a9755a3f10d52fa08a1431d4f32abbf1f065f93de",
     "game/scripts/town_environment.gd": "b99124ef8f53d6c15d103d1e9cef363db323f19b9504fd9a5b2e60ace5746ca4",
-    "game/scripts/work_family.gd": "1c27b6468fc60d355e27d1f9397d8ff61c459fa46c8f7a65a8249818b3fb46e8",
+    "game/scripts/work_family.gd": "127384d6ee3763e836aa56d6d47889d1350233da2b9d50bd51ec3de0b4a1c199",
     "project.godot": "87597ffc3e75841de24361b168f6b1c8f4037650593a6ec141a34e9cd7ba66b8",
     "tests/test_activity_furniture.gd": "76a915331c6e371abebe0f824b1b9364fbffdc953c58c1957a713bfc3221eea3",
-    "tests/test_autonomy.gd": "eee5a023619d2e54cba32f467b7a2ea52dcb81ccb80c2ae3b99deef2485a0250",
-    "tests/test_autonomy_presentation.gd": "f0d79d3cbfc62c558d2e4163458922c50102c80891d1078c5f1b4607e1c1e419",
+    "tests/test_agenda_preparation.gd": "ee95fe88d1c6cedc3a9bc06ed06b96dfdb79fe537d3545d9ddc2223785475984",
+    "tests/test_autonomy.gd": "d95d2f19bd56e671457168139168e438c3d221f528808072bb1ecc76d81a96e6",
+    "tests/test_autonomy_presentation.gd": "bd939658c35760a99dedd1cac7c0a0416118e42d7863f1a43949c7b6af08e608",
     "tests/test_character_model.gd": "ebdf64edb79aa2c107780adb534b83ec7b32cb471800cb4c592489c3532afe4a",
-    "tests/test_cognition.gd": "f37991df90c161ea145c48d2242cb29cec6ccffa0fba39188874bb156dbe70e3",
+    "tests/test_cognition.gd": "dccddb25bff5317f47ce315a228ff7b4bdf524806df3dc00d9f7ecf989f51226",
+    "tests/test_knowledge_exchange.gd": "cda459d1ae42c5f887b8c56c928696a283392e3eb1477761ffb43e196fa2344f",
     "tests/test_life_course.gd": "099c84f5d1b4be9fe204bb5ca987741c7169d999ef8bfa83aaffec6f22522fe5",
     "tests/test_neighborhood.gd": "63234a30d8f41e9c95ae3dcf032719f31ffe981d2a72c396e8ed52a789f70ae0",
-    "tests/test_observation_hud.gd": "bbb7eb4ec21c9905dd37566a21a54838ff3bac48187326eaed1925fd300c9423",
+    "tests/test_observation_hud.gd": "02626b0c1655cb058ac530e168bf242f2f6017fdc7a50db8232a1a50a7142ad9",
     "tests/test_resident_activities.gd": "abfe572762d14cf4cfd3d571014c33a40cb0cb9ae862129e6d0c441909531b1e",
-    "tests/test_resident_agenda.gd": "c25f76b62c1725fb040b4564e19cc2676b97fe8255e8bd0b60ee7d9680a183e1",
+    "tests/test_resident_agenda.gd": "d96280e3470d00b8297577df8f42b3e398a432391ea9c315928e4f83f2aec420",
     "tests/test_resident_lod.gd": "8e19eade0a78a421ea4ec31b4c269ec19496ee9ecfb13fdb9cef96e6d90c4446",
     "tests/test_resident_models.gd": "d61689b63a8285c1c052fefd44a0896cb12902c1a94c78d7102ac2a50b4b7055",
     "tests/test_resident_support_plans.gd": "936ebf86f7a26b69bf6337a93e1719524cfb0b939270715096a4ebadc6d06743",
-    "tests/test_scene.gd": "57f11f26c8d457e903a25e55430c9115bad2202bdf36b1fe84c7932e21bb76d2",
+    "tests/test_scene.gd": "b246c15d91c8ab6ec457fe5749f061e4a401839af12618cec6ae735f248fc02d",
     "tests/test_simulation.gd": "81759761ff72ade52c626591b0fc46a7b1722d9f4c7306f6019eb693851bc15c",
+    "tests/test_social_chain_presentation.gd": "81d6d6ac0674ca1d397f12490b5bcce6f7851354470acdc9039114cd500f7adf",
     "tests/test_social_life.gd": "9c3ae8858b6d8a4fb86011474ea03d514c4c80c2822fc0e24ef5890e86a3ab75",
+    "tests/test_support_index.gd": "2d9707b8bdf828c7361a465e5ac09a03ba5c489e47cd08f9f88e369eb602e98e",
     "tests/test_work_family.gd": "4247503c6b732d2a2a424c7b9b3869be4989027385179efce9d7575a5176d58e",
-    "tools/verify_game.py": "5534419235b038baa13eca1e66099c5668e4164f82732726bef8be3ba5a2772d"
+    "tools/inspect_agenda.gd": "5c688db4cccdc61b1516e026482cc37dc071bd5522762a4303282ca2dcb2ffa7",
+    "tools/verify_game.py": "29a21a68f1222ab8980108f66efd41739d7316e7346f7208aa164cd871413786"
   },
   "limits": [
     "No human playtest or fun/behavioral-validity conclusion",
     "v0.5 art/audio acceptance and complete v0.6 remain open",
     "Population is still the authored eight residents",
-    "Future agreements have a high postponement rate; planning and preparation need tuning",
-    "LOD triangle reduction was checked; frame-rate improvement was not measured"
+    "Introduction-linked natural play is an observed sequence, not an isolated causal experiment",
+    "LOD frame-rate improvement was not measured"
   ]
 }

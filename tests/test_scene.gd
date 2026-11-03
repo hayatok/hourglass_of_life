@@ -86,7 +86,8 @@ func run() -> void:
 	main.get_node("%AcceptOfferButton").pressed.emit()
 	main._refresh_ui()
 	expect(sim.social.appointments.size()==1 and not main.get_node("%OfferPanel").visible,"Confirming the displayed alternative records the appointment")
-	expect("約束" in main.get_node("%DetailText").text,"A resident's upcoming promise is visible in their own panel")
+	var next_plan: String = main.get_node("%NextPlan").text
+	expect(sim.social.when_text(int(sim.social.appointments[0].start)) in next_plan and sim.person("fumi").name in next_plan,"The next-plan field shows the actual agreed time and partner")
 	await capture("05-appointment")
 	sim.reset()
 	sim.running = false

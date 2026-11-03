@@ -150,8 +150,9 @@ func _save_checks() -> void:
 		legacy.schema = schema
 		legacy.erase("world_seed")
 		legacy.erase("event_serial")
+		legacy.erase("agenda")
 		for person in legacy.people:
-			for field in ["knowledge","known_profiles","skills","interests","expectations","cognition_plan","cognition_session","plan_history","next_plan_minute"]:
+			for field in ["knowledge","known_profiles","skills","interests","expectations","cognition_plan","cognition_session","plan_history","next_plan_minute","preparing_agenda_id","support_next_attempt"]:
 				person.erase(field)
 		_write(path,legacy)
 		expect(sim.load_game(path),"An older schema-%d save without cognition fields remains compatible"%schema)
@@ -176,6 +177,19 @@ func _save_checks() -> void:
 	payload = original.duplicate(true);payload.people[0].knowledge = [{"event_id":"future","fact":"something","source":"osamu","mode":"told","observed_at":100,"confidence":.5,"value":true}];bad.append(payload)
 	payload = original.duplicate(true);payload.people[0].cognition_session.__vector3 = [0,0,0];bad.append(payload)
 	payload = original.duplicate(true);payload.__vector3 = [0,0,0];bad.append(payload)
+	var intro := {"event_id":"test_introduction","fact":"introduction","source":"fumi","mode":"observed","observed_at":0,"confidence":.95,"value":{"person":"osamu","via":"fumi","skill":"repair","profile_event":"event_1","profile_minute":0}}
+	for problem in ["missing","person","via","skill","reference","future","fraction"]:
+		var invalid: Dictionary = intro.duplicate(true)
+		match problem:
+			"missing": invalid.value.erase("profile_minute")
+			"person": invalid.value.person = "absent"
+			"via": invalid.value.via = "absent"
+			"skill": invalid.value.skill = null
+			"reference": invalid.value.profile_event = ""
+			"future": invalid.value.profile_minute = 10
+			"fraction": invalid.value.profile_minute = .5
+		payload = original.duplicate(true); payload.people[0].knowledge = [invalid]; bad.append(payload)
+	payload = original.duplicate(true);payload.events[0].origin_observed_at = -1;bad.append(payload)
 	var before := _town_snapshot(sim)
 	for index in bad.size():
 		_write(path,bad[index])
