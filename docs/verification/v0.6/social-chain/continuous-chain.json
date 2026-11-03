@@ -1,873 +1,879 @@
 {
-	"activity": "radio",
-	"before": {
-		"actors": [
-			{
-				"action": "joint_work",
-				"id": "osamu",
-				"initial_profile_of_partner": {},
-				"level": 0.911890430664062,
-				"memories_about_partner": [],
-				"moving": true,
-				"name": "佐伯 修",
-				"place": "home_saeki",
-				"plan": {
-					"activity": "radio",
-					"introduction_event": "event_387",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "aoi",
-					"reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
-					"stage": "travel",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					-7.20000028610229,
-					0.0,
-					-2.03999996185303
-				],
-				"reason": "高瀬 葵さんと、ラジオの調整を一緒に進めたい",
-				"relationship_to_partner": {
-					"ease": 0.3,
-					"familiarity": 0.05,
-					"from": "osamu",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "aoi",
-					"trust": 0.2,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			},
-			{
-				"action": "joint_work",
-				"id": "aoi",
-				"initial_profile_of_partner": {},
-				"level": 0.22,
-				"memories_about_partner": [],
-				"moving": true,
-				"name": "高瀬 葵",
-				"place": "home_shared",
-				"plan": {
-					"activity": "radio",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "osamu",
-					"stage": "travel",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					9.85378074645996,
-					0.0,
-					8.22263336181641
-				],
-				"reason": "佐伯 修さんと、ラジオの調整に取り組むことにした",
-				"relationship_to_partner": {
-					"ease": 0.15,
-					"familiarity": 0.08,
-					"from": "aoi",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "osamu",
-					"trust": 0.25,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			}
-		],
-		"calendar": "1年目  冬 3日  水曜",
-		"clock": "13:07",
-		"day": 11,
-		"minute": 15847,
-		"state": "travel"
-	},
-	"checks": 14,
-	"collaboration_observed": {
-		"actors": [
-			{
-				"action": "joint_work",
-				"id": "osamu",
-				"initial_profile_of_partner": {},
-				"level": 0.911890430664062,
-				"memories_about_partner": [],
-				"moving": false,
-				"name": "佐伯 修",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"introduction_event": "event_387",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "aoi",
-					"reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
-					"stage": "execute",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					-0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "高瀬 葵さんと、ラジオの調整を一緒に進めている",
-				"relationship_to_partner": {
-					"ease": 0.3,
-					"familiarity": 0.05,
-					"from": "osamu",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "aoi",
-					"trust": 0.2,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			},
-			{
-				"action": "joint_work",
-				"id": "aoi",
-				"initial_profile_of_partner": {},
-				"level": 0.22,
-				"memories_about_partner": [],
-				"moving": false,
-				"name": "高瀬 葵",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "osamu",
-					"stage": "execute",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "佐伯 修さんと、ラジオの調整に取り組んでいる",
-				"relationship_to_partner": {
-					"ease": 0.15,
-					"familiarity": 0.08,
-					"from": "aoi",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "osamu",
-					"trust": 0.25,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			}
-		],
-		"calendar": "1年目  冬 3日  水曜",
-		"clock": "14:28",
-		"day": 11,
-		"minute": 15928,
-		"state": "engaged"
-	},
-	"completed": {
-		"actors": [
-			{
-				"action": "joint_work",
-				"id": "osamu",
-				"initial_profile_of_partner": {},
-				"level": 0.914093169897461,
-				"memories_about_partner": [
-					{
-						"kind": "shared_time",
-						"minute": 15973,
-						"other": "aoi",
-						"text": "高瀬 葵さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
-						"title": "一緒に過ごした時間"
-					}
-				],
-				"moving": false,
-				"name": "佐伯 修",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"finished": 15973,
-					"introduction_event": "event_387",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "aoi",
-					"reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
-					"stage": "completed",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					-0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "高瀬 葵さんと、ラジオの調整を一緒に進めている",
-				"relationship_to_partner": {
-					"ease": 0.325,
-					"familiarity": 0.088,
-					"from": "osamu",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "aoi",
-					"trust": 0.212,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			},
-			{
-				"action": "joint_work",
-				"id": "aoi",
-				"initial_profile_of_partner": {},
-				"level": 0.2434,
-				"memories_about_partner": [
-					{
-						"kind": "shared_time",
-						"minute": 15973,
-						"other": "osamu",
-						"text": "佐伯 修さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
-						"title": "一緒に過ごした時間"
-					}
-				],
-				"moving": false,
-				"name": "高瀬 葵",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"finished": 15973,
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "osamu",
-					"stage": "completed",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "佐伯 修さんと、ラジオの調整に取り組んでいる",
-				"relationship_to_partner": {
-					"ease": 0.175,
-					"familiarity": 0.1168,
-					"from": "aoi",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "osamu",
-					"trust": 0.262,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			}
-		],
-		"calendar": "1年目  冬 3日  水曜",
-		"clock": "15:13",
-		"day": 11,
-		"minute": 15973,
-		"state": "completed"
-	},
-	"engaged": {
-		"actors": [
-			{
-				"action": "joint_work",
-				"id": "osamu",
-				"initial_profile_of_partner": {},
-				"level": 0.911890430664062,
-				"memories_about_partner": [],
-				"moving": false,
-				"name": "佐伯 修",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"introduction_event": "event_387",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "aoi",
-					"reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
-					"stage": "execute",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					-0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "高瀬 葵さんと、ラジオの調整を一緒に進めている",
-				"relationship_to_partner": {
-					"ease": 0.3,
-					"familiarity": 0.05,
-					"from": "osamu",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "aoi",
-					"trust": 0.2,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			},
-			{
-				"action": "joint_work",
-				"id": "aoi",
-				"initial_profile_of_partner": {},
-				"level": 0.22,
-				"memories_about_partner": [],
-				"moving": false,
-				"name": "高瀬 葵",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "osamu",
-					"stage": "execute",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "佐伯 修さんと、ラジオの調整に取り組んでいる",
-				"relationship_to_partner": {
-					"ease": 0.15,
-					"familiarity": 0.08,
-					"from": "aoi",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "osamu",
-					"trust": 0.25,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			}
-		],
-		"calendar": "1年目  冬 3日  水曜",
-		"clock": "14:28",
-		"day": 11,
-		"minute": 15928,
-		"state": "engaged"
-	},
-	"failures": [],
-	"first_meeting_already_engaged": false,
-	"found": true,
-	"interrupted_chains": [],
-	"introduction": {
-		"clock": "10:15",
-		"day": 7,
-		"event": {
-			"clock": "10:15",
-			"day": 7,
-			"event_id": "event_387",
-			"fact": "introduction",
-			"minute": 9915,
-			"participants": [
-				"fumi",
-				"osamu"
-			],
-			"resident_id": "fumi",
-			"source": "fumi",
-			"text": "佐伯 修さんに、以前知った高瀬 葵さんの修理のことを話した。",
-			"title": "相談できる人の話",
-			"value": {
-				"person": "aoi",
-				"profile_event": "event_370",
-				"profile_minute": 9206,
-				"skill": "repair",
-				"via": "fumi"
-			}
-		},
-		"initial_profile_of_subject": {},
-		"knowledge": {
-			"confidence": 0.95,
-			"event_id": "event_387",
-			"fact": "introduction",
-			"mode": "observed",
-			"observed_at": 9915,
-			"origin_observed_at": 9915,
-			"received_from": "",
-			"source": "fumi",
-			"value": {
-				"person": "aoi",
-				"profile_event": "event_370",
-				"profile_minute": 9206,
-				"skill": "repair",
-				"via": "fumi"
-			}
-		},
-		"listener": {
-			"action": "joint_work",
-			"id": "osamu",
-			"initial_profile_of_partner": {
-				"interests": [
-					"photography",
-					"walking"
-				],
-				"observed_at": 0,
-				"skills": {
-					"communication": 0.75,
-					"photography": 0.25
-				},
-				"source": "initial_profile"
-			},
-			"level": 0.9073140625,
-			"memories_about_partner": [
-				{
-					"kind": "shared_time",
-					"minute": 1470,
-					"other": "fumi",
-					"text": "佐伯 文さんと、この前の「約束して過ごした時間」を話した。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "一緒に過ごした時間"
-				},
-				{
-					"kind": "shared_time",
-					"minute": 1835,
-					"other": "fumi",
-					"text": "佐伯 文さんと、この前の「約束して過ごした時間」を話した。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "約束して過ごした時間"
-				},
-				{
-					"kind": "shared_time",
-					"minute": 4712,
-					"other": "fumi",
-					"text": "佐伯 文さんと、この前の「約束して過ごした時間」を話した。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "約束して過ごした時間"
-				},
-				{
-					"kind": "shared_time",
-					"minute": 5540,
-					"other": "fumi",
-					"text": "佐伯 文さんと、町の写真を選ぶ時間に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "一緒に過ごした時間"
-				},
-				{
-					"kind": "shared_time",
-					"minute": 5781,
-					"other": "fumi",
-					"text": "佐伯 文さんと、ラジオの調整に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "一緒に過ごした時間"
-				},
-				{
-					"kind": "inheritance",
-					"minute": 6279,
-					"other": "fumi",
-					"text": "佐伯 文さんの町の写真帖を見た。作り方や、その人が気にかけていたことを、自分の取り組みの参考にしたい。",
-					"title": "誰かが残したものから"
-				},
-				{
-					"kind": "shared_time",
-					"minute": 7611,
-					"other": "fumi",
-					"text": "佐伯 文さんと、ラジオの調整に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "約束して過ごした時間"
-				},
-				{
-					"kind": "shared_time",
-					"minute": 9915,
-					"other": "fumi",
-					"text": "佐伯 文さんと、ラジオの調整に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
-					"title": "約束して過ごした時間"
-				}
-			],
-			"moving": false,
-			"name": "佐伯 修",
-			"place": "workshop",
-			"plan": {
-				"activity": "radio",
-				"finished": 9915,
-				"kind": "project",
-				"meeting": "meeting_33",
-				"origin": "resident",
-				"partner": "fumi",
-				"stage": "completed",
-				"started": 9866,
-				"steps": [
-					"相談する",
-					"合流する",
-					"一緒に過ごす",
-					"経験を振り返る"
-				],
-				"title": "ラジオの調整"
-			},
-			"position": [
-				-0.349999994039536,
-				0.0,
-				-7.03999996185303
-			],
-			"reason": "佐伯 文さんと、ラジオの調整を一緒に進めている",
-			"relationship_to_partner": {
-				"ease": 0.981929107142857,
-				"familiarity": 0.984744059624628,
-				"from": "osamu",
-				"roles": [
-					"partner"
-				],
-				"to": "fumi",
-				"trust": 1.0,
-				"unresolved_expectation": 0.0
-			},
-			"skill": "repair"
-		},
-		"memories_about_subject": [],
-		"original_profile_minute": 9206,
-		"original_profile_time": {
-			"clock": "22:26",
-			"day": 6,
-			"minute": 9206
-		},
-		"profile": {
-			"confidence": 0.855,
-			"event_id": "event_370",
-			"fact": "profile",
-			"mode": "told",
-			"observed_at": 9915,
-			"origin_observed_at": 9206,
-			"received_from": "fumi",
-			"source": "aoi",
-			"value": {
-				"interests": [
-					"repair"
-				],
-				"person": "aoi",
-				"skills": {
-					"repair": 0.22
-				}
-			}
-		},
-		"received_at": 9915,
-		"recipient": "osamu",
-		"relation_to_subject": {
-			"ease": 0.3,
-			"familiarity": 0.05,
-			"from": "osamu",
-			"roles": [
-				"acquaintance"
-			],
-			"to": "aoi",
-			"trust": 0.2,
-			"unresolved_expectation": 0.0
-		},
-		"skill": "repair",
-		"speaker": "fumi",
-		"subject": "aoi"
-	},
-	"meeting": "meeting_53",
-	"minutes_per_seed": 17280,
-	"observation_controls": [
-		"select the referred initiator",
-		"follow",
-		"open the current person tab"
-	],
-	"ordinary_residents": 8,
-	"outcome": "completed natural chain",
-	"player_interventions": [],
-	"rendered": true,
-	"renderer": "macOS",
-	"result_observed": {
-		"actors": [
-			{
-				"action": "eat",
-				"id": "osamu",
-				"initial_profile_of_partner": {},
-				"level": 0.914093169897461,
-				"memories_about_partner": [
-					{
-						"kind": "shared_time",
-						"minute": 15973,
-						"other": "aoi",
-						"text": "高瀬 葵さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
-						"title": "一緒に過ごした時間"
-					}
-				],
-				"moving": true,
-				"name": "佐伯 修",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"finished": 15973,
-					"introduction_event": "event_387",
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "aoi",
-					"reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
-					"stage": "completed",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					-0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "お腹がすいた。食事を先にしよう",
-				"relationship_to_partner": {
-					"ease": 0.325,
-					"familiarity": 0.088,
-					"from": "osamu",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "aoi",
-					"trust": 0.212,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			},
-			{
-				"action": "hobby",
-				"id": "aoi",
-				"initial_profile_of_partner": {},
-				"level": 0.2434,
-				"memories_about_partner": [
-					{
-						"kind": "shared_time",
-						"minute": 15973,
-						"other": "osamu",
-						"text": "佐伯 修さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
-						"title": "一緒に過ごした時間"
-					}
-				],
-				"moving": true,
-				"name": "高瀬 葵",
-				"place": "workshop",
-				"plan": {
-					"activity": "radio",
-					"finished": 15973,
-					"kind": "project",
-					"meeting": "meeting_53",
-					"origin": "resident",
-					"partner": "osamu",
-					"stage": "completed",
-					"started": 15847,
-					"steps": [
-						"相談する",
-						"合流する",
-						"一緒に過ごす",
-						"経験を振り返る"
-					],
-					"title": "ラジオの調整"
-				},
-				"position": [
-					0.349999994039536,
-					0.0,
-					-7.03999996185303
-				],
-				"reason": "譲ってもらったラジオを直したい。水野 真帆さんの記録を参考にしてみたい",
-				"relationship_to_partner": {
-					"ease": 0.175,
-					"familiarity": 0.1168,
-					"from": "aoi",
-					"roles": [
-						"acquaintance"
-					],
-					"to": "osamu",
-					"trust": 0.262,
-					"unresolved_expectation": 0.0
-				},
-				"skill": "repair"
-			}
-		],
-		"calendar": "1年目  冬 3日  水曜",
-		"clock": "15:14",
-		"day": 11,
-		"minute": 15974,
-		"state": "completed"
-	},
-	"scope": "Natural runs only. Introduction receipt and the later plan share an actual event ID. No counterfactual claim that the introduction alone caused the choice.",
-	"screenshots": [
-		{
-			"file": "01-referred-plan.png",
-			"minute": 15847,
-			"rendered": true,
-			"state": "travel"
-		},
-		{
-			"file": "02-actual-collaboration.png",
-			"minute": 15928,
-			"rendered": true,
-			"state": "engaged"
-		},
-		{
-			"file": "03-completed-result.png",
-			"minute": 15974,
-			"rendered": true,
-			"state": "completed"
-		}
-	],
-	"searches": [
-		{
-			"introductions": 8,
-			"matching_projects_observed": 0,
-			"minutes": 17280,
-			"seed": 710
-		},
-		{
-			"introductions": 8,
-			"matching_projects_observed": 0,
-			"minutes": 17280,
-			"seed": 711
-		},
-		{
-			"introductions": 5,
-			"matching_projects_observed": 0,
-			"minutes": 17280,
-			"seed": 712
-		},
-		{
-			"introductions": 4,
-			"matching_projects_observed": 0,
-			"minutes": 17280,
-			"seed": 713
-		},
-		{
-			"introductions": 13,
-			"matching_projects_observed": 1,
-			"minutes": 15973,
-			"seed": 714
-		}
-	],
-	"seed": 714,
-	"seeds": [
-		710,
-		711,
-		712,
-		713,
-		714,
-		715,
-		716,
-		717,
-		718,
-		719
-	],
-	"skill": "repair",
-	"source_sha256": {
-		"data/behavior-model.json": "677904ea8a1bef8ab891911fe4077f16c8a6f663797dc4f441db0f1dda2dbb59",
-		"data/life-conditions.json": "d3c3b8b42684e6b347837567f5539af169db0e01bd4e18a8635a7ddc9f45d548",
-		"data/life-course.json": "5d470a03f8caf87bc90d0e5e208599d56d066aee890a8139abd965ba195a6c5a",
-		"data/resident-activities.json": "597ba9f8ed105dfdeb0ec8bdfb18963f2c45659501ce01e8b81cfef6ba8b0087",
-		"data/residents.json": "d373bacfb5e1f51a0ff5126a5572e03aa5326aebfd7e2cb5d2e019c833d73676",
-		"game/scenes/main.tscn": "42cf12000719b317b430fa0060db0d99f24df2578763f600893d3f9398f83fd9",
-		"game/scripts/activity_places.gd": "2abbeb60b463af560b71df131d6b92af435fcc3ada406d2fd4edb0d217933c3a",
-		"game/scripts/activity_spot.gd": "caccfed1ae901538e467b7f64167f075d01c128cff7efb0b82b0c64d6f491b77",
-		"game/scripts/character_stage.gd": "913f1bb1d3868fc220bc738eb94a9d17945c145772b0dbb9ac3abc764f49a892",
-		"game/scripts/contact_rotation.gd": "f322e3537075b918641fa18d2cdc8f44c867ddebc8e62b2dac3597d5794d79c1",
-		"game/scripts/jrpg_resident_model.gd": "703d81f9b8bcf7eae12cb9b07f39f5082be9d99058a450915a0b719b4f192ca1",
-		"game/scripts/life_course.gd": "71c6ea7c5d8bee650f507c7016c103e6be2e258516556621866945553401ce50",
-		"game/scripts/main.gd": "d94b9f55a28a45b91fa0dd5e2821372915dda4c4fb7b33caac5cf94cb9e3ee2f",
-		"game/scripts/observation_hud.gd": "f20cddfe127fd12329f80e538883888fe07da15290c1cfd7b4d6d7f14d8e7572",
-		"game/scripts/resident_activities.gd": "12781e8248b0dd316b84a107dd049549a050e4b61143e1adb0bbf3c3c6c603a1",
-		"game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
-		"game/scripts/resident_avatar.gd": "a12addd9d9b9c6248082c41fec66350f0e3591fe390abacae929d09b87b78a24",
-		"game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
-		"game/scripts/resident_contacts.gd": "3ee077b656613823df55ddbb2e48eec51b6955fdf0da8039da97f677e0fef962",
-		"game/scripts/resident_knowledge_exchange.gd": "20ee577541776d9c7d72a5411faa3927620c74c2b1052329e1539f44a17422da",
-		"game/scripts/resident_planner.gd": "d4476ccd385e2fcd82906a9123275d419cc82bdfccbd7194f78760ddae83a37a",
-		"game/scripts/resident_support_plans.gd": "b5423c7d474b635da38e9287b9fac89a7af59369b9ea5c44731d4f0f6bfc26cc",
-		"game/scripts/save_validation.gd": "c8ddb9a538a97a03ad7f8907fce397a64afb1164ac333915f9f2efe8ddd8fa72",
-		"game/scripts/simulation.gd": "c970f33e717bdfb0cc7822388b6d679c3de757b57ac4becde0db5bc6fb39c936",
-		"game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
-		"game/scripts/town_building.gd": "6c091275caf0fb036d18994a9755a3f10d52fa08a1431d4f32abbf1f065f93de",
-		"game/scripts/town_environment.gd": "b99124ef8f53d6c15d103d1e9cef363db323f19b9504fd9a5b2e60ace5746ca4",
-		"game/scripts/work_family.gd": "127384d6ee3763e836aa56d6d47889d1350233da2b9d50bd51ec3de0b4a1c199",
-		"project.godot": "87597ffc3e75841de24361b168f6b1c8f4037650593a6ec141a34e9cd7ba66b8",
-		"tests/test_social_chain_presentation.gd": "81d6d6ac0674ca1d397f12490b5bcce6f7851354470acdc9039114cd500f7adf"
-	},
-	"ui": {
-		"completed": {
-			"activity": "移動中 → 食事をする",
-			"detail": "一緒に進めたこと\n高瀬 葵さんと、ラジオの調整\n佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
-			"next": "6時間46分後：いつもの睡眠の時間",
-			"proposal_partner": "aoi",
-			"reason": "「お腹がすいた。食事を先にしよう」"
-		},
-		"engaged": {
-			"activity": "一緒に制作する",
-			"detail": "一緒に取り組んでいること\n高瀬 葵さんと、ラジオの調整",
-			"next": "7時間32分後：いつもの睡眠の時間",
-			"proposal_partner": "aoi",
-			"reason": "「佐伯 文さんから、高瀬 葵さんの修理について聞いた。」"
-		},
-		"planned": {
-			"activity": "移動中 → 一緒に制作する",
-			"detail": "合流して取り組む予定\n高瀬 葵さんと、ラジオの調整",
-			"next": "8時間53分後：いつもの睡眠の時間",
-			"proposal_partner": "aoi",
-			"reason": "「佐伯 文さんから、高瀬 葵さんの修理について聞いた。」"
-		}
-	},
-	"wall_seconds": 56.379
+  "activity": "radio",
+  "before": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "id": "osamu",
+        "initial_profile_of_partner": {},
+        "level": 0.911890430664062,
+        "memories_about_partner": [],
+        "moving": true,
+        "name": "佐伯 修",
+        "place": "home_saeki",
+        "plan": {
+          "activity": "radio",
+          "introduction_event": "event_387",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "aoi",
+          "reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
+          "stage": "travel",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -7.20000028610229,
+          0.0,
+          -2.03999996185303
+        ],
+        "reason": "高瀬 葵さんと、ラジオの調整を一緒に進めたい",
+        "relationship_to_partner": {
+          "ease": 0.3,
+          "familiarity": 0.05,
+          "from": "osamu",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "aoi",
+          "trust": 0.2,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "id": "aoi",
+        "initial_profile_of_partner": {},
+        "level": 0.22,
+        "memories_about_partner": [],
+        "moving": true,
+        "name": "高瀬 葵",
+        "place": "home_shared",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "travel",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          9.85378074645996,
+          0.0,
+          8.22263336181641
+        ],
+        "reason": "佐伯 修さんと、ラジオの調整に取り組むことにした",
+        "relationship_to_partner": {
+          "ease": 0.15,
+          "familiarity": 0.08,
+          "from": "aoi",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "osamu",
+          "trust": 0.25,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      }
+    ],
+    "calendar": "1年目  冬 3日  水曜",
+    "clock": "13:07",
+    "day": 11,
+    "minute": 15847,
+    "state": "travel"
+  },
+  "checks": 13,
+  "collaboration_observed": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "id": "osamu",
+        "initial_profile_of_partner": {},
+        "level": 0.911890430664062,
+        "memories_about_partner": [],
+        "moving": false,
+        "name": "佐伯 修",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "introduction_event": "event_387",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "aoi",
+          "reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
+          "stage": "execute",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "高瀬 葵さんと、ラジオの調整を一緒に進めている",
+        "relationship_to_partner": {
+          "ease": 0.3,
+          "familiarity": 0.05,
+          "from": "osamu",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "aoi",
+          "trust": 0.2,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "id": "aoi",
+        "initial_profile_of_partner": {},
+        "level": 0.22,
+        "memories_about_partner": [],
+        "moving": false,
+        "name": "高瀬 葵",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "execute",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "佐伯 修さんと、ラジオの調整に取り組んでいる",
+        "relationship_to_partner": {
+          "ease": 0.15,
+          "familiarity": 0.08,
+          "from": "aoi",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "osamu",
+          "trust": 0.25,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      }
+    ],
+    "calendar": "1年目  冬 3日  水曜",
+    "clock": "14:28",
+    "day": 11,
+    "minute": 15928,
+    "state": "engaged"
+  },
+  "completed": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "id": "osamu",
+        "initial_profile_of_partner": {},
+        "level": 0.914093169897461,
+        "memories_about_partner": [
+          {
+            "kind": "shared_time",
+            "minute": 15973,
+            "other": "aoi",
+            "text": "高瀬 葵さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
+            "title": "一緒に過ごした時間"
+          }
+        ],
+        "moving": false,
+        "name": "佐伯 修",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "finished": 15973,
+          "introduction_event": "event_387",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "aoi",
+          "reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
+          "stage": "completed",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "高瀬 葵さんと、ラジオの調整を一緒に進めている",
+        "relationship_to_partner": {
+          "ease": 0.325,
+          "familiarity": 0.088,
+          "from": "osamu",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "aoi",
+          "trust": 0.212,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "id": "aoi",
+        "initial_profile_of_partner": {},
+        "level": 0.2434,
+        "memories_about_partner": [
+          {
+            "kind": "shared_time",
+            "minute": 15973,
+            "other": "osamu",
+            "text": "佐伯 修さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
+            "title": "一緒に過ごした時間"
+          }
+        ],
+        "moving": false,
+        "name": "高瀬 葵",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "finished": 15973,
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "completed",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "佐伯 修さんと、ラジオの調整に取り組んでいる",
+        "relationship_to_partner": {
+          "ease": 0.175,
+          "familiarity": 0.1168,
+          "from": "aoi",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "osamu",
+          "trust": 0.262,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      }
+    ],
+    "calendar": "1年目  冬 3日  水曜",
+    "clock": "15:13",
+    "day": 11,
+    "minute": 15973,
+    "state": "completed"
+  },
+  "engaged": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "id": "osamu",
+        "initial_profile_of_partner": {},
+        "level": 0.911890430664062,
+        "memories_about_partner": [],
+        "moving": false,
+        "name": "佐伯 修",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "introduction_event": "event_387",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "aoi",
+          "reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
+          "stage": "execute",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "高瀬 葵さんと、ラジオの調整を一緒に進めている",
+        "relationship_to_partner": {
+          "ease": 0.3,
+          "familiarity": 0.05,
+          "from": "osamu",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "aoi",
+          "trust": 0.2,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "id": "aoi",
+        "initial_profile_of_partner": {},
+        "level": 0.22,
+        "memories_about_partner": [],
+        "moving": false,
+        "name": "高瀬 葵",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "execute",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "佐伯 修さんと、ラジオの調整に取り組んでいる",
+        "relationship_to_partner": {
+          "ease": 0.15,
+          "familiarity": 0.08,
+          "from": "aoi",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "osamu",
+          "trust": 0.25,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      }
+    ],
+    "calendar": "1年目  冬 3日  水曜",
+    "clock": "14:28",
+    "day": 11,
+    "minute": 15928,
+    "state": "engaged"
+  },
+  "failures": [],
+  "first_meeting_already_engaged": false,
+  "found": true,
+  "interrupted_chains": [],
+  "introduction": {
+    "clock": "10:15",
+    "day": 7,
+    "event": {
+      "clock": "10:15",
+      "day": 7,
+      "event_id": "event_387",
+      "fact": "introduction",
+      "minute": 9915,
+      "participants": [
+        "fumi",
+        "osamu"
+      ],
+      "resident_id": "fumi",
+      "source": "fumi",
+      "text": "佐伯 修さんに、以前知った高瀬 葵さんの修理のことを話した。",
+      "title": "相談できる人の話",
+      "value": {
+        "person": "aoi",
+        "profile_event": "event_370",
+        "profile_minute": 9206,
+        "skill": "repair",
+        "via": "fumi"
+      }
+    },
+    "initial_profile_of_subject": {},
+    "knowledge": {
+      "confidence": 0.95,
+      "event_id": "event_387",
+      "fact": "introduction",
+      "mode": "observed",
+      "observed_at": 9915,
+      "origin_observed_at": 9915,
+      "received_from": "",
+      "source": "fumi",
+      "value": {
+        "person": "aoi",
+        "profile_event": "event_370",
+        "profile_minute": 9206,
+        "skill": "repair",
+        "via": "fumi"
+      }
+    },
+    "listener": {
+      "action": "joint_work",
+      "id": "osamu",
+      "initial_profile_of_partner": {
+        "interests": [
+          "photography",
+          "walking"
+        ],
+        "observed_at": 0,
+        "skills": {
+          "communication": 0.75,
+          "photography": 0.25
+        },
+        "source": "initial_profile"
+      },
+      "level": 0.9073140625,
+      "memories_about_partner": [
+        {
+          "kind": "shared_time",
+          "minute": 1470,
+          "other": "fumi",
+          "text": "佐伯 文さんと、この前の「約束して過ごした時間」を話した。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "一緒に過ごした時間"
+        },
+        {
+          "kind": "shared_time",
+          "minute": 1835,
+          "other": "fumi",
+          "text": "佐伯 文さんと、この前の「約束して過ごした時間」を話した。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "約束して過ごした時間"
+        },
+        {
+          "kind": "shared_time",
+          "minute": 4712,
+          "other": "fumi",
+          "text": "佐伯 文さんと、この前の「約束して過ごした時間」を話した。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "約束して過ごした時間"
+        },
+        {
+          "kind": "shared_time",
+          "minute": 5540,
+          "other": "fumi",
+          "text": "佐伯 文さんと、町の写真を選ぶ時間に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "一緒に過ごした時間"
+        },
+        {
+          "kind": "shared_time",
+          "minute": 5781,
+          "other": "fumi",
+          "text": "佐伯 文さんと、ラジオの調整に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "一緒に過ごした時間"
+        },
+        {
+          "kind": "inheritance",
+          "minute": 6279,
+          "other": "fumi",
+          "text": "佐伯 文さんの町の写真帖を見た。作り方や、その人が気にかけていたことを、自分の取り組みの参考にしたい。",
+          "title": "誰かが残したものから"
+        },
+        {
+          "kind": "shared_time",
+          "minute": 7611,
+          "other": "fumi",
+          "text": "佐伯 文さんと、ラジオの調整に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "約束して過ごした時間"
+        },
+        {
+          "kind": "shared_time",
+          "minute": 9915,
+          "other": "fumi",
+          "text": "佐伯 文さんと、ラジオの調整に一緒に取り組んだ。よく知る相手だから、近況を落ち着いて伝えられた。",
+          "title": "約束して過ごした時間"
+        }
+      ],
+      "moving": false,
+      "name": "佐伯 修",
+      "place": "workshop",
+      "plan": {
+        "activity": "radio",
+        "finished": 9915,
+        "kind": "project",
+        "meeting": "meeting_33",
+        "origin": "resident",
+        "partner": "fumi",
+        "stage": "completed",
+        "started": 9866,
+        "steps": [
+          "相談する",
+          "合流する",
+          "一緒に過ごす",
+          "経験を振り返る"
+        ],
+        "title": "ラジオの調整"
+      },
+      "position": [
+        -0.349999994039536,
+        0.0,
+        -7.03999996185303
+      ],
+      "reason": "佐伯 文さんと、ラジオの調整を一緒に進めている",
+      "relationship_to_partner": {
+        "ease": 0.981929107142857,
+        "familiarity": 0.984744059624628,
+        "from": "osamu",
+        "roles": [
+          "partner"
+        ],
+        "to": "fumi",
+        "trust": 1.0,
+        "unresolved_expectation": 0.0
+      },
+      "skill": "repair"
+    },
+    "memories_about_subject": [],
+    "original_profile_minute": 9206,
+    "original_profile_time": {
+      "clock": "22:26",
+      "day": 6,
+      "minute": 9206
+    },
+    "profile": {
+      "confidence": 0.855,
+      "event_id": "event_370",
+      "fact": "profile",
+      "mode": "told",
+      "observed_at": 9915,
+      "origin_observed_at": 9206,
+      "received_from": "fumi",
+      "source": "aoi",
+      "value": {
+        "interests": [
+          "repair"
+        ],
+        "person": "aoi",
+        "skills": {
+          "repair": 0.22
+        }
+      }
+    },
+    "received_at": 9915,
+    "recipient": "osamu",
+    "relation_to_subject": {
+      "ease": 0.3,
+      "familiarity": 0.05,
+      "from": "osamu",
+      "roles": [
+        "acquaintance"
+      ],
+      "to": "aoi",
+      "trust": 0.2,
+      "unresolved_expectation": 0.0
+    },
+    "skill": "repair",
+    "speaker": "fumi",
+    "subject": "aoi"
+  },
+  "meeting": "meeting_53",
+  "minutes_per_seed": 17280,
+  "observation_controls": [
+    "select the referred initiator",
+    "follow",
+    "open the current person tab"
+  ],
+  "ordinary_residents": 8,
+  "outcome": "completed natural chain",
+  "player_interventions": [],
+  "rendered": true,
+  "renderer": "macOS",
+  "result_observed": {
+    "actors": [
+      {
+        "action": "eat",
+        "id": "osamu",
+        "initial_profile_of_partner": {},
+        "level": 0.914093169897461,
+        "memories_about_partner": [
+          {
+            "kind": "shared_time",
+            "minute": 15973,
+            "other": "aoi",
+            "text": "高瀬 葵さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
+            "title": "一緒に過ごした時間"
+          }
+        ],
+        "moving": true,
+        "name": "佐伯 修",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "finished": 15973,
+          "introduction_event": "event_387",
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "aoi",
+          "reason": "佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
+          "stage": "completed",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "お腹がすいた。食事を先にしよう",
+        "relationship_to_partner": {
+          "ease": 0.325,
+          "familiarity": 0.088,
+          "from": "osamu",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "aoi",
+          "trust": 0.212,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      },
+      {
+        "action": "hobby",
+        "id": "aoi",
+        "initial_profile_of_partner": {},
+        "level": 0.2434,
+        "memories_about_partner": [
+          {
+            "kind": "shared_time",
+            "minute": 15973,
+            "other": "osamu",
+            "text": "佐伯 修さんと、ラジオの調整に一緒に取り組んだ。相手の好きなことを、少し知ることができた。",
+            "title": "一緒に過ごした時間"
+          }
+        ],
+        "moving": true,
+        "name": "高瀬 葵",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "finished": 15973,
+          "kind": "project",
+          "meeting": "meeting_53",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "completed",
+          "started": 15847,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "reason": "譲ってもらったラジオを直したい。水野 真帆さんの記録を参考にしてみたい",
+        "relationship_to_partner": {
+          "ease": 0.175,
+          "familiarity": 0.1168,
+          "from": "aoi",
+          "roles": [
+            "acquaintance"
+          ],
+          "to": "osamu",
+          "trust": 0.262,
+          "unresolved_expectation": 0.0
+        },
+        "skill": "repair"
+      }
+    ],
+    "calendar": "1年目  冬 3日  水曜",
+    "clock": "15:14",
+    "day": 11,
+    "minute": 15974,
+    "state": "completed"
+  },
+  "scope": "Natural runs only. Introduction receipt and the later plan share an actual event ID. No counterfactual claim that the introduction alone caused the choice.",
+  "screenshots": [
+    {
+      "file": "01-referred-plan.png",
+      "minute": 15847,
+      "rendered": true,
+      "state": "travel"
+    },
+    {
+      "file": "02-actual-collaboration.png",
+      "minute": 15928,
+      "rendered": true,
+      "state": "engaged"
+    },
+    {
+      "file": "03-completed-result.png",
+      "minute": 15974,
+      "rendered": true,
+      "state": "completed"
+    }
+  ],
+  "searches": [
+    {
+      "introductions": 8,
+      "matching_projects_observed": 0,
+      "minutes": 17280,
+      "seed": 710
+    },
+    {
+      "introductions": 8,
+      "matching_projects_observed": 0,
+      "minutes": 17280,
+      "seed": 711
+    },
+    {
+      "introductions": 5,
+      "matching_projects_observed": 0,
+      "minutes": 17280,
+      "seed": 712
+    },
+    {
+      "introductions": 4,
+      "matching_projects_observed": 0,
+      "minutes": 17280,
+      "seed": 713
+    },
+    {
+      "introductions": 13,
+      "matching_projects_observed": 1,
+      "minutes": 15973,
+      "seed": 714
+    }
+  ],
+  "seed": 714,
+  "seeds": [
+    710,
+    711,
+    712,
+    713,
+    714,
+    715,
+    716,
+    717,
+    718,
+    719
+  ],
+  "skill": "repair",
+  "ui": {
+    "completed": {
+      "activity": "移動中 → 食事をする",
+      "detail": "一緒に進めたこと\n高瀬 葵さんと、ラジオの調整\n佐伯 文さんから、高瀬 葵さんの修理について聞いた。",
+      "next": "6時間46分後：いつもの睡眠の時間",
+      "proposal_partner": "aoi",
+      "reason": "「お腹がすいた。食事を先にしよう」"
+    },
+    "engaged": {
+      "activity": "一緒に制作する",
+      "detail": "一緒に取り組んでいること\n高瀬 葵さんと、ラジオの調整",
+      "next": "7時間32分後：いつもの睡眠の時間",
+      "proposal_partner": "aoi",
+      "reason": "「佐伯 文さんから、高瀬 葵さんの修理について聞いた。」"
+    },
+    "planned": {
+      "activity": "移動中 → 一緒に制作する",
+      "detail": "合流して取り組む予定\n高瀬 葵さんと、ラジオの調整",
+      "next": "8時間53分後：いつもの睡眠の時間",
+      "proposal_partner": "aoi",
+      "reason": "「佐伯 文さんから、高瀬 葵さんの修理について聞いた。」"
+    }
+  },
+  "wall_seconds": 56.379,
+  "provenance": {
+    "source_sha256": {
+      "data/behavior-model.json": "677904ea8a1bef8ab891911fe4077f16c8a6f663797dc4f441db0f1dda2dbb59",
+      "data/life-conditions.json": "d3c3b8b42684e6b347837567f5539af169db0e01bd4e18a8635a7ddc9f45d548",
+      "data/life-course.json": "5d470a03f8caf87bc90d0e5e208599d56d066aee890a8139abd965ba195a6c5a",
+      "data/resident-activities.json": "597ba9f8ed105dfdeb0ec8bdfb18963f2c45659501ce01e8b81cfef6ba8b0087",
+      "data/residents.json": "d373bacfb5e1f51a0ff5126a5572e03aa5326aebfd7e2cb5d2e019c833d73676",
+      "game/scenes/main.tscn": "42cf12000719b317b430fa0060db0d99f24df2578763f600893d3f9398f83fd9",
+      "game/scripts/activity_places.gd": "2abbeb60b463af560b71df131d6b92af435fcc3ada406d2fd4edb0d217933c3a",
+      "game/scripts/activity_spot.gd": "caccfed1ae901538e467b7f64167f075d01c128cff7efb0b82b0c64d6f491b77",
+      "game/scripts/character_stage.gd": "913f1bb1d3868fc220bc738eb94a9d17945c145772b0dbb9ac3abc764f49a892",
+      "game/scripts/contact_rotation.gd": "f322e3537075b918641fa18d2cdc8f44c867ddebc8e62b2dac3597d5794d79c1",
+      "game/scripts/jrpg_resident_model.gd": "703d81f9b8bcf7eae12cb9b07f39f5082be9d99058a450915a0b719b4f192ca1",
+      "game/scripts/life_course.gd": "71c6ea7c5d8bee650f507c7016c103e6be2e258516556621866945553401ce50",
+      "game/scripts/main.gd": "d94b9f55a28a45b91fa0dd5e2821372915dda4c4fb7b33caac5cf94cb9e3ee2f",
+      "game/scripts/observation_hud.gd": "f20cddfe127fd12329f80e538883888fe07da15290c1cfd7b4d6d7f14d8e7572",
+      "game/scripts/resident_activities.gd": "12781e8248b0dd316b84a107dd049549a050e4b61143e1adb0bbf3c3c6c603a1",
+      "game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
+      "game/scripts/resident_avatar.gd": "a12addd9d9b9c6248082c41fec66350f0e3591fe390abacae929d09b87b78a24",
+      "game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
+      "game/scripts/resident_contacts.gd": "3ee077b656613823df55ddbb2e48eec51b6955fdf0da8039da97f677e0fef962",
+      "game/scripts/resident_knowledge_exchange.gd": "20ee577541776d9c7d72a5411faa3927620c74c2b1052329e1539f44a17422da",
+      "game/scripts/resident_planner.gd": "d4476ccd385e2fcd82906a9123275d419cc82bdfccbd7194f78760ddae83a37a",
+      "game/scripts/resident_support_plans.gd": "b5423c7d474b635da38e9287b9fac89a7af59369b9ea5c44731d4f0f6bfc26cc",
+      "game/scripts/save_validation.gd": "c8ddb9a538a97a03ad7f8907fce397a64afb1164ac333915f9f2efe8ddd8fa72",
+      "game/scripts/simulation.gd": "c970f33e717bdfb0cc7822388b6d679c3de757b57ac4becde0db5bc6fb39c936",
+      "game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
+      "game/scripts/town_building.gd": "6c091275caf0fb036d18994a9755a3f10d52fa08a1431d4f32abbf1f065f93de",
+      "game/scripts/town_environment.gd": "b99124ef8f53d6c15d103d1e9cef363db323f19b9504fd9a5b2e60ace5746ca4",
+      "game/scripts/work_family.gd": "127384d6ee3763e836aa56d6d47889d1350233da2b9d50bd51ec3de0b4a1c199",
+      "project.godot": "87597ffc3e75841de24361b168f6b1c8f4037650593a6ec141a34e9cd7ba66b8",
+      "tests/test_social_chain_presentation.gd": "81d6d6ac0674ca1d397f12490b5bcce6f7851354470acdc9039114cd500f7adf"
+    },
+    "historical_reported_checks": 14,
+    "excluded_source_identity_assertions": 1,
+    "scope": "Source identifiers do not contribute to functional outcomes. Existing execution reclassified without rerendering or adding assertions."
+  },
+  "count_policy": "Functional assertions only; one source-SHA assertion excluded. Original engine logs retain their historical counter."
 }

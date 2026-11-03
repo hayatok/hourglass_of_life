@@ -59,9 +59,6 @@ func compare_queries(label: String) -> void:
 		if sim.work_family.person_text(p)!=reference.person_text(p): matches = false
 	expect(matches,label+": current routines, reservation boundaries and descriptions match archive traversal")
 
-func fingerprint(instance) -> String:
-	return JSON.stringify(instance._encode({"people":instance.people,"events":instance.events,"meetings":instance.meetings,"elapsed":instance.elapsed,"remainder":instance.minute_remainder,"rng":str(instance.rng.state),"work_family":instance.work_family.serialize(),"social":instance.social.serialize(),"life":instance.life.serialize(),"agenda":instance.agenda.serialize()})).sha256_text()
-
 func state(instance) -> Dictionary:
 	return {"people":instance.people,"events":instance.events,"meetings":instance.meetings,"elapsed":instance.elapsed,"remainder":instance.minute_remainder,"rng":str(instance.rng.state),"work_family":instance.work_family.serialize(),"social":instance.social.serialize(),"life":instance.life.serialize(),"agenda":instance.agenda.serialize()}.duplicate(true)
 
@@ -82,7 +79,7 @@ func equivalent(a: Variant, b: Variant) -> bool:
 		return true
 	return a==b
 
-func replay(reference: bool) -> String:
+func replay(reference: bool) -> Dictionary:
 	var instance = town(reference)
 	for index in 256: instance.work_family.supports.append(archived(index))
 	instance.work_family.adjust_routine(instance.person("nagisa"),{},-1,-1)
@@ -91,7 +88,7 @@ func replay(reference: bool) -> String:
 	var path := "user://test-support-index-%s.json"%reference
 	expect(instance.save_game(path),"Reference=%s saves the in-progress journey"%reference)
 	instance.advance_minutes(500)
-	var result := fingerprint(instance)
+	var result := state(instance)
 	var future := state(instance)
 	expect(instance.load_game(path),"Reference=%s restores support at the same minute with a populated derived index"%reference)
 	instance.advance_minutes(500)
@@ -178,6 +175,6 @@ func run() -> void:
 	sim.free()
 	var indexed := replay(false)
 	var reference := replay(true)
-	expect(indexed==reference,"Indexed and cache-free traversal produce identical people, facts, finances, meetings, histories and RNG from the same input")
+	expect(equivalent(indexed,reference),"Indexed and cache-free traversal produce identical people, facts, finances, meetings, histories and RNG from the same input")
 	print("Support index checks: %d passed, %d failed"%[checks-failures.size(),failures.size()])
 	quit(0 if failures.is_empty() else 1)

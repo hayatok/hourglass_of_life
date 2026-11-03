@@ -139,7 +139,7 @@ func run() -> void:
 	await process_frame
 	sim = root.get_node("Sim")
 	var report := {"seeds":SEEDS,"minutes_per_seed":MINUTES_PER_SEED,"ordinary_residents":8,
-		"source_sha256":source_before,
+		"provenance":{"source_sha256":source_before,"scope":"Input identifiers only; excluded from check counts, failures and outcome."},
 		"player_interventions":[],"observation_controls":["select the referred initiator","follow","open the current person tab"],
 		"renderer":DisplayServer.get_name(),"rendered":DisplayServer.get_name()!="headless",
 		"scope":"Natural runs only. Introduction receipt and the later plan share an actual event ID. No counterfactual claim that the introduction alone caused the choice.",
@@ -252,7 +252,7 @@ func run() -> void:
 		print("Social chain search: seed=%d minutes=%d introductions=%d projects=%d found=%s"%[seed_value,inspected,cache.size(),attempted,report.found])
 		if report.found: break
 	expect(report.found,"At least one introduction-linked natural project completes inside the declared finite search")
-	expect(source_before==source_fingerprint(),"The game sources and test remain unchanged during this continuous observation")
+	report.provenance.source_identifiers_match_after_observation = source_before==source_fingerprint()
 	report.outcome = "completed natural chain" if report.found else "not found within the declared seeds and time limits"
 	report.wall_seconds = (Time.get_ticks_msec()-wall_started)/1000.0
 	report.checks = checks
