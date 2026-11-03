@@ -61,9 +61,15 @@ func run() -> void:
 		limit += 1
 	expect(not sim.meetings.is_empty() and sim.meetings[0].state=="engaged","The new pair actually reaches the repair table")
 	expect(a.cognition_plan.stage=="execute" and b.cognition_plan.stage=="execute","Both residents' plans follow actual execution")
+	var introduced_meeting: Dictionary = sim.meetings[0]
 	sim.advance_minutes(45)
 	expect(b.skills.get("repair",0)>before,"Completed work changes the new participant's actual repair skill")
-	expect(b.cognition_plan.stage=="completed" and not b.expectations.is_empty(),"The completed plan leaves a situated expectation")
+	for minute in int(sim.interactions.config.timeout_minutes):
+		if not sim.meetings.has(introduced_meeting): break
+		sim.advance_minutes(1)
+	var workflow: Dictionary = sim.interactions.sessions.get(introduced_meeting.get("interaction_id",""),{})
+	var radio: Dictionary = sim.interactions.objects.get(workflow.get("object_id",""),{})
+	expect(b.cognition_plan.stage=="completed" and not b.expectations.is_empty() and workflow.get("phase","")=="completed" and radio.get("state","")=="stored" and radio.get("container","")==sim.interactions.config.source_container and radio.get("holder","missing").is_empty() and radio.get("reserved_by","missing").is_empty(),"The completed plan leaves a situated expectation after returning the actual radio")
 	expect(sim.cognition.known_skill(a,b.id,"repair")>before,"Actual participation reveals the practiced skill")
 	# Enjoying a craft does not magically complete an unrelated repair wish.
 	sim.reset()

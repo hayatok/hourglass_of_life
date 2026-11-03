@@ -3,6 +3,12 @@ extends Node3D
 
 @export var rest_height := 1.65
 @export var walk_speed := 1.6
+@export var walk_foot_plant := false
+# Normalized support windows measured from this family's in-place walk clips.
+# Older character rigs keep their authored gait until separately calibrated.
+@export var walk_plant_start := Vector2(.25,.75)
+@export var walk_plant_duration := .38
+@export var walk_plant_fade := .06
 @export var hair_cells := Vector3i(-1,-1,-1)
 enum MaterialMode { PALETTE_TOON, TEXTURE_TOON, SOURCE_PBR }
 enum ExpressionMode { BLEND_SHAPES, STATIC_ATLAS, TEXTURE_EYES }

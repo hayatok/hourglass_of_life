@@ -1,0 +1,66 @@
+[
+  {
+    "check": "import",
+    "passed": true,
+    "seconds": 2.51,
+    "failure": null,
+    "log": "import.log",
+    "completion": null
+  },
+  {
+    "check": "cognition",
+    "passed": true,
+    "seconds": 0.34,
+    "failure": null,
+    "log": "cognition.log",
+    "completion": "Cognition checks: 109 passed, 0 failed"
+  },
+  {
+    "check": "tabletop",
+    "passed": true,
+    "seconds": 0.86,
+    "failure": null,
+    "log": "tabletop.log",
+    "completion": "Tabletop checks: 84 passed, 0 failed"
+  },
+  {
+    "check": "world_interactions",
+    "passed": true,
+    "seconds": 0.96,
+    "failure": null,
+    "log": "world_interactions.log",
+    "completion": "World interaction checks: 97 passed, 0 failed"
+  },
+  {
+    "check": "activities",
+    "passed": true,
+    "seconds": 3.37,
+    "failure": null,
+    "log": "activities.log",
+    "completion": "Furniture and activity checks: 217 passed, 0 failed"
+  },
+  {
+    "check": "resident_proposals",
+    "passed": true,
+    "seconds": 0.93,
+    "failure": null,
+    "log": "resident_proposals.log",
+    "completion": "Resident proposal UI checks: 66 passed, 0 failed"
+  },
+  {
+    "check": "population_environment",
+    "passed": true,
+    "seconds": 2.59,
+    "failure": null,
+    "log": "population_environment.log",
+    "completion": "Population environment checks: 77 passed, 0 failed"
+  },
+  {
+    "check": "autonomy",
+    "passed": true,
+    "seconds": 36.76,
+    "failure": null,
+    "log": "autonomy.log",
+    "completion": "Autonomy checks: 23 passed, 0 failed"
+  }
+]

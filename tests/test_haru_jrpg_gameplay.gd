@@ -10,7 +10,7 @@ const MODEL = "res://game/assets/models/haru/CH_Haru.glb"
 const LODS = [MODEL,"res://game/assets/models/haru/CH_Haru_LOD1.glb","res://game/assets/models/haru/CH_Haru_LOD2.glb"]
 const MANIFEST = "res://game/assets/models/haru/asset-manifest.json"
 const PORTRAIT = "res://game/assets/ui/portraits/haru.png"
-const OUT = "res://docs/verification/v0.5/haru-jrpg-gameplay"
+var OUT = "res://builds/haru-jrpg-gameplay"
 const SAVE = "user://test-haru-jrpg-gameplay.json"
 const CLIPS = ["eat","idle","rest","sit_talk","sleep","talk","walk","wave","work"]
 
@@ -36,6 +36,8 @@ func source_fingerprint() -> Dictionary:
 	return result
 
 func _initialize() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): OUT = argument.trim_prefix("--output=")
 	call_deferred("run")
 
 func save_path() -> String:
@@ -254,7 +256,7 @@ func actor_snapshot() -> Dictionary:
 func world_snapshot() -> Dictionary:
 	return sim._encode({"people":sim.people,"events":sim.events,"meetings":sim.meetings,"elapsed":sim.elapsed,
 		"rng":str(sim.rng.state),"serial":sim.event_serial,"meeting_serial":sim.meeting_serial,
-		"social":sim.social.serialize(),"agenda":sim.agenda.serialize(),"work":sim.work_family.serialize(),"life":sim.life.serialize()}).duplicate(true)
+		"social":sim.social.serialize(),"agenda":sim.agenda.serialize(),"work":sim.work_family.serialize(),"life":sim.life.serialize(),"interactions":sim.interactions.serialize(),"tabletop":sim.tabletop.serialize()}).duplicate(true)
 
 func equivalent(a: Variant, b: Variant) -> bool:
 	if (a is int or a is float) and (b is int or b is float): return absf(float(a)-float(b))<1e-10
@@ -317,7 +319,8 @@ func check_conversation(meeting: Dictionary) -> void:
 	var other: String = meeting.b if meeting.a=="haru" else meeting.a
 	var target: Vector3 = main.avatars[other].head_position()
 	var direction: Vector3 = (target-observed.head).normalized()
-	expect(actor.animation_name in ["talk","sit_talk"] and actor.contacts.look.active,"An actual engaged conversation selects the conversation pose and head attention")
+	var conversation_clips := ["talk","sit_talk"] if actor.conversation_role=="speaker" else ["idle","rest"]
+	expect(actor.conversation_role in ["speaker","listener"] and actor.animation_name in conversation_clips and actor.contacts.look.active,"An actual engaged conversation selects the speaking or listening pose for its current turn and head attention")
 	expect(observed.head_forward.dot(direction)>.35,"The rendered head turns toward the actual conversation partner")
 	var hand_start: Vector3 = observed.handL
 	await render(.15)
@@ -414,11 +417,11 @@ func run() -> void:
 			await check_walk()
 		for meeting in sim.meetings:
 			if "haru" not in [meeting.a,meeting.b]: continue
-			if meeting.get("mode","")!="project" and meeting.state=="engaged" and not evidence.natural.has("conversation"):
+			if meeting.get("mode","") not in ["project","play"] and meeting.state=="engaged" and not evidence.natural.has("conversation"):
 				await check_conversation(meeting)
 			if meeting.get("mode","")=="project" and meeting.get("autonomous",false) and "osamu" in [meeting.a,meeting.b]:
 				if project_started.is_empty(): project_started = actor_snapshot();target_meeting = meeting.duplicate(true)
-				if meeting.state=="engaged" and not evidence.natural.has("project_engaged"):
+				if meeting.state=="engaged" and (not sim.interactions.supports(meeting) or sim.interactions.pose_for(p.id).get("phase","")=="working") and not evidence.natural.has("project_engaged"):
 					main._select("haru");await render(.60)
 					var actor = current_actor()
 					expect(actor.animation_name=="work" and sim.activities.for_person(p).get("pose","")=="work","The natural joint project selects its real work surface and work animation after arrival")

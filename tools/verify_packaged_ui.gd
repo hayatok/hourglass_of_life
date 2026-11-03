@@ -41,10 +41,18 @@ func run() -> void:
 	var portraits := true
 	for button in main.roster.get_children(): portraits = portraits and button.icon!=null
 	expect(portraits,"All twelve portrait choices work, including the original atlas and the four new portraits")
+	expect(is_instance_valid(main.interaction_view.object_node("workshop_radio")) and main.tabletop_view.piece_nodes.size()==16 and is_instance_valid(main.tabletop_view.board_node),"The package reconstructs one real radio and the board with all sixteen physical tokens")
+	var before_zoom: float = main.distance
+	main.get_node("%ZoomIn").pressed.emit()
+	expect(main.distance<before_zoom and not sim.running,"The exported zoom-in control changes the actual camera distance while paused")
+	main.get_node("%ZoomOut").pressed.emit()
+	expect(is_equal_approx(main.distance,before_zoom),"The exported zoom-out control reverses zoom without advancing the clock")
 	main._select("saki")
 	main.get_node("%ProposeButton").pressed.emit()
 	var proposals = main.proposals
 	expect(proposals.visible and not sim.running,"The packaged resident card opens the new proposal flow and holds time")
+	proposals.choose_kind("play")
+	expect(proposals.get_node("%Play").text=="一緒に遊ぶ" and proposals.get_node("%Execute").text.contains("四目並べ") and proposals.get_node("%Execute").text.contains("咲"),"The packaged play proposal names the real resident and tabletop game before execution")
 	proposals.choose_kind("support")
 	var target: String = proposals.partner.get_selected_metadata()
 	expect(proposals.get_node("%Execute").text.contains(sim.person(target).name) and proposals.get_node("%Execute").text.contains("咲"),"The packaged confirmation names the helper and the selected resident")

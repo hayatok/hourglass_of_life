@@ -23,4 +23,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: engine-verification
-          path: builds/verification/
+          path: |
+            builds/verification/
+            builds/tabletop-presentation/*.json
+            builds/interaction-presentation/*.json
+            builds/foot-plant/*.json
+            builds/social-motion/*.json
+            builds/haru-jrpg-gameplay/*.json
+            builds/jrpg-renewal-gameplay/*.json

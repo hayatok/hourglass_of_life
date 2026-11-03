@@ -1,6 +1,10 @@
 class_name SaveValidation
 extends RefCounted
 
+# Furniture roles and the physical interaction pool are a current-format contract.
+# Development saves from older layouts are intentionally not migrated.
+const CURRENT_SCHEMA := 7
+
 static func number(value: Variant) -> bool:
 	return (value is int or value is float) and is_finite(float(value))
 
@@ -117,7 +121,7 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if not whole(plan.started) or plan.started>elapsed or not strings(plan.get("steps"),16): return false
 			if plan.has("finished") and (not whole(plan.finished) or plan.finished<plan.started or plan.finished>elapsed): return false
 			if plan.has("reason") and not plan.reason is String: return false
-			if plan.has("kind") and plan.kind not in ["project","social","support"]: return false
+			if plan.has("kind") and plan.kind not in ["project","social","support","play"]: return false
 			if plan.has("introduction_event") and (not plan.introduction_event is String or plan.introduction_event.is_empty()): return false
 	if p.has("plan_history"):
 		if not p.plan_history is Array or p.plan_history.size()>24: return false
@@ -127,6 +131,7 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if not whole(entry.day) or not whole(entry.minute) or entry.minute>elapsed: return false
 	if p.has("next_plan_minute") and not whole(p.next_plan_minute): return false
 	if p.has("support_next_attempt") and not whole(p.support_next_attempt): return false
+	if p.has("play_next_attempt") and not whole(p.play_next_attempt): return false
 	if p.has("preparing_agenda_id") and not p.preparing_agenda_id is String: return false
 	return true
 
@@ -177,6 +182,187 @@ static func agenda(data: Variant, definitions: Dictionary, sites: Dictionary, el
 			if previous>=0 and previous!=planned.start: return false
 	return true
 
+static func world_interactions(data: Variant, raw: Dictionary, definitions: Dictionary) -> bool:
+	if not data is Dictionary or data.get("version")!=1: return false
+	if not data.get("objects") is Dictionary or data.objects.keys()!=["workshop_radio"]: return false
+	if not data.get("sessions") is Dictionary or data.sessions.size()>64: return false
+	var object = data.objects.workshop_radio
+	if not record(object,["id","kind","owner","holder","container","reserved_by","state"],["yaw"]): return false
+	if object.id!="workshop_radio" or object.kind!="radio" or object.owner!="town" or not vector(object.get("position")) or not unit(object.get("work_progress")): return false
+	if object.state not in ["stored","held","on_table"] or object.container not in ["","radio_shelf","radio_table"]: return false
+	if not object.holder.is_empty() and not definitions.has(object.holder): return false
+	var meetings := {}
+	for meeting in raw.meetings:
+		meetings[meeting.id] = meeting
+	var people := {}
+	for p in raw.people: people[p.id] = p
+	var active := 0
+	var settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world-interactions.json")).radio
+	var source := Vector3(settings.source_position[0],settings.source_position[1],settings.source_position[2])
+	var world_target := Vector3(settings.target_position[0],settings.target_position[1],settings.target_position[2])
+	var coordinates: Array = object.position.__vector3
+	var object_position := Vector3(coordinates[0],coordinates[1],coordinates[2])
+	for id in data.sessions:
+		var s = data.sessions[id]
+		if not id is String or not record(s,["id","meeting","key","object_id","a","b","carrier","operator","phase","reason"],["started","phase_started","finished","worked_minutes","required_work","travel_distance","phase_object_yaw","carry_yaw","phase_carry_yaw"]): return false
+		if s.id!=id or id!="interaction_"+s.meeting or s.key!="radio" or s.object_id!=object.id: return false
+		if not definitions.has(s.a) or not definitions.has(s.b) or s.a==s.b or s.carrier not in [s.a,s.b] or s.operator not in [s.a,s.b]: return false
+		if int(people[s.carrier].age)<int(settings.minimum_carrier_age): return false
+		if s.phase not in WorldInteractions.PHASES or not vector(s.get("phase_object_position")): return false
+		if not whole(s.started) or not whole(s.phase_started) or s.started>s.phase_started or s.phase_started>raw.elapsed: return false
+		if not whole(s.required_work,1) or s.required_work>240 or not whole(s.worked_minutes) or s.worked_minutes>s.required_work or s.travel_distance<0: return false
+		if not strings(s.get("effects"),1) or (s.effects.size()==1 and s.effects[0]!="result"): return false
+		if ("result" in s.effects)!=(s.worked_minutes==s.required_work): return false
+		if not s.get("targets") is Dictionary or s.targets.size()!=2: return false
+		var target_spots := []
+		for person_id in [s.a,s.b]:
+			var target = s.targets.get(person_id)
+			if not record(target,["spot"],[]) or not vector(target.get("position")) or target.spot not in ["radio_work_0","radio_work_1"] or target.spot in target_spots: return false
+			target_spots.append(target.spot)
+		if s.phase in WorldInteractions.ACTIVE_PHASES:
+			active += 1
+			if active>1 or s.finished!=-1 or object.reserved_by!=id or not meetings.has(s.meeting): return false
+			var meeting: Dictionary = meetings[s.meeting]
+			if meeting.get("interaction_id","")!=id or meeting.a!=s.a or meeting.b!=s.b or meeting.get("project",{}).get("key","")!="radio": return false
+			if not whole(meeting.remaining) or int(meeting.remaining)!=int(s.required_work)-int(s.worked_minutes): return false
+			for person_id in [s.a,s.b]:
+				if not people[person_id].get("alive",true) or people[person_id].meeting_id!=s.meeting: return false
+			var duration: float = settings.phase_minutes.get(s.phase,1)
+			var progress := clampf((float(raw.elapsed)-float(s.phase_started))/duration,0,1)
+			var held: bool = s.phase in ["carry_to_target","carry_to_source"] or (s.phase in ["take","take_return"] and progress>=.3) or (s.phase in ["place","return"] and progress<.75)
+			var on_table: bool = s.phase=="working" or (s.phase=="take_return" and progress<.3) or (s.phase=="place" and progress>=.75)
+			if object.holder!=(s.carrier if held else "") or object.state!=("held" if held else ("on_table" if on_table else "stored")): return false
+			if object.container!=("" if held else ("radio_table" if on_table else "radio_shelf")): return false
+			if s.phase=="to_source" and object_position.distance_to(source)>.0001: return false
+			if s.phase=="working" and object_position.distance_to(world_target)>.0001: return false
+			if s.phase in ["take_return","carry_to_source","return"] and not meeting.get("work_completed",false): return false
+		else:
+			if not whole(s.finished) or s.finished<s.started or s.finished>raw.elapsed: return false
+			if s.phase=="completed" and s.worked_minutes!=s.required_work: return false
+	if active==0 and (not object.reserved_by.is_empty() or not object.holder.is_empty() or object.container!="radio_shelf" or object.state!="stored"): return false
+	if active==0 and object_position.distance_to(source)>.0001: return false
+	for meeting in raw.meetings:
+		if meeting.get("project",{}).get("key","")!="radio": continue
+		var session = data.sessions.get(meeting.get("interaction_id",""),{})
+		if session.is_empty() or session.phase not in WorldInteractions.ACTIVE_PHASES: return false
+		if meeting.get("work_completed",false)!=("result" in session.effects) or meeting.get("project_result_recorded",false)!=("result" in session.effects): return false
+	return true
+
+static func tabletop_board(value: Variant) -> bool:
+	if not value is Array or value.size()!=16: return false
+	for color in value:
+		if not whole(color) or color>2: return false
+	return true
+
+static func tabletop_boards_equal(first: Array, second: Array) -> bool:
+	# JSON arrays contain float Variants. Compare the already-validated whole
+	# colors, rather than Godot's type-sensitive Array equality.
+	if first.size()!=second.size(): return false
+	for cell in first.size():
+		if int(first[cell])!=int(second[cell]): return false
+	return true
+
+static func tabletop(data: Variant, raw: Dictionary, definitions: Dictionary) -> bool:
+	if not data is Dictionary or data.get("version")!=1 or not whole(data.get("serial")): return false
+	if not data.get("sessions") is Dictionary or data.sessions.size()>32 or not data.get("pieces") is Dictionary or data.pieces.size()!=16: return false
+	for value in data.pieces.values():
+		if not value is Dictionary: return false
+	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/tabletop-game.json"))
+	var origin := Vector3(config.board_origin[0],config.board_origin[1],config.board_origin[2])
+	var people := {};var meetings := {}
+	for p in raw.people: people[p.id] = p
+	for meeting in raw.meetings: meetings[meeting.id] = meeting
+	var active: Dictionary = {}
+	for id in data.sessions:
+		var s = data.sessions[id]
+		if not id is String or not record(s,["id","meeting","a","b","board_id","phase","selected_piece","align_stage","align_next","reason"],["started","phase_started","finished","turn","selected_cell","winner"]): return false
+		if id!=s.id or not id.begins_with("tabletop_"): return false
+		var suffix: String = id.trim_prefix("tabletop_")
+		if not suffix.is_valid_int() or int(suffix)<1 or int(suffix)>data.serial: return false
+		if not definitions.has(s.a) or not definitions.has(s.b) or s.a==s.b or s.board_id!=config.board_id or s.phase not in TabletopGame.PHASES: return false
+		if not whole(s.started) or not whole(s.phase_started) or s.started>s.phase_started or s.phase_started>raw.elapsed: return false
+		if not whole(s.turn,1) or s.turn>2 or not whole(s.winner) or s.winner>2 or not s.get("draw") is bool or not s.get("result_recorded") is bool or not s.get("interruption_recorded") is bool: return false
+		if not tabletop_board(s.get("board")) or not s.get("final_board") is Array or (not s.final_board.is_empty() and not tabletop_board(s.final_board)): return false
+		if not s.get("moves") is Array or s.moves.size()>16 or not strings(s.get("cleanup_queue"),16): return false
+		if not s.get("targets") is Dictionary or s.targets.size()!=2: return false
+		var spots := []
+		for person_id in [s.a,s.b]:
+			var target = s.targets.get(person_id)
+			if not record(target,["spot"],[]) or target.spot not in ["craft_work_0","craft_work_1"] or target.spot in spots: return false
+			if not vector(target.get("approach")) or not vector(target.get("standby")): return false
+			var point: Array = target.approach.__vector3;var expected_point: Array = config.slots[target.spot]
+			if Vector3(point[0],point[1],point[2]).distance_to(Vector3(expected_point[0],expected_point[1],expected_point[2]))>.001: return false
+			point = target.standby.__vector3
+			if Vector3(point[0],point[1],point[2]).distance_to(Vector3(expected_point[0],0,float(config.standby_z)))>.001: return false
+			spots.append(target.spot)
+		var replay: Array = [];replay.resize(16);replay.fill(0)
+		var used := {};var last_at: int = int(s.started)
+		for index in s.moves.size():
+			var move = s.moves[index]
+			if not record(move,["piece"],["cell","color","at"]) or not whole(move.cell) or move.cell>15 or move.color!=1+index%2 or not whole(move.at) or move.at<last_at or move.at>raw.elapsed: return false
+			if TabletopGame.winner(replay)!=0 or replay[int(move.cell)]!=0 or used.has(move.piece) or not data.pieces.has(move.piece): return false
+			if int(data.pieces[move.piece].get("color",0))!=int(move.color): return false
+			replay[int(move.cell)] = int(move.color);used[move.piece] = true;last_at = int(move.at)
+		var actual_winner: int = TabletopGame.winner(replay)
+		var draw: bool = actual_winner==0 and TabletopGame.legal_cells(replay).is_empty()
+		if s.winner!=actual_winner or s.draw!=draw or s.result_recorded!=(actual_winner!=0 or draw): return false
+		if not s.final_board.is_empty() and not tabletop_boards_equal(s.final_board,replay): return false
+		if s.result_recorded and not tabletop_boards_equal(s.final_board,replay): return false
+		if s.phase in TabletopGame.ACTIVE:
+			if not active.is_empty() or s.finished!=-1 or not meetings.has(s.meeting): return false
+			active = s
+			var meeting: Dictionary = meetings[s.meeting]
+			if meeting.get("mode","")!="play" or meeting.get("game_id","")!=id or meeting.a!=s.a or meeting.b!=s.b: return false
+			for person_id in [s.a,s.b]:
+				if not people[person_id].get("alive",true) or people[person_id].meeting_id!=s.meeting or people[person_id].get("activity_spot","")!=s.targets[person_id].spot: return false
+			if s.phase in ["travel","think"]:
+				if s.selected_cell!=-1 or not s.selected_piece.is_empty(): return false
+			else:
+				if not whole(s.selected_cell) or s.selected_cell>15 or not data.pieces.has(s.selected_piece) or data.pieces[s.selected_piece].get("color")!=s.turn: return false
+			if s.phase=="align" and (s.align_stage not in ["clear","approach"] or s.align_next not in ["reach","cleanup"]): return false
+			if (s.phase=="cleanup" or (s.phase=="align" and s.align_next=="cleanup")) and not s.result_recorded: return false
+			var progress := clampf((float(raw.elapsed)-float(s.phase_started))/float(config.phase_minutes.get(s.phase,1)),0,1)
+			var next_turn: bool = s.phase in ["travel","think","reach"] or (s.phase=="align" and s.align_next=="reach") or (s.phase=="place" and progress<.75)
+			if next_turn and s.turn!=1+s.moves.size()%2: return false
+			if s.phase in ["react","switch_turn"] or (s.phase=="place" and progress>=.75):
+				if s.moves.is_empty() or s.turn!=s.moves[-1].color: return false
+			if not s.result_recorded and not tabletop_boards_equal(s.board,replay): return false
+		else:
+			if not whole(s.finished) or s.finished<s.started or s.finished>raw.elapsed or s.board.any(func(color): return color!=0): return false
+			if s.phase=="completed" and not s.result_recorded: return false
+		for piece_id in s.cleanup_queue:
+			if not used.has(piece_id): return false
+	var occupied := {}
+	for color in [1,2]:
+		for ordinal in range(1,9):
+			var id := "craft_token_%d_%02d"%[color,ordinal]
+			var piece = data.pieces.get(id)
+			if not record(piece,["id","owner","holder","reserved_by","container","location"],["color","ordinal","cell","yaw"]) or piece.id!=id or piece.color!=color or piece.ordinal!=ordinal or piece.owner!="town" or not vector(piece.get("position")): return false
+			if piece.location not in ["supply","hand","board"]: return false
+			if piece.reserved_by!=(active.get("id","") if not active.is_empty() else ""): return false
+			var xyz: Array = piece.position.__vector3;var position := Vector3(xyz[0],xyz[1],xyz[2])
+			if piece.location=="supply":
+				var bank: Array = config.bank_offsets[color-1]
+				var expected := origin+Vector3(bank[0],bank[1]+(ordinal-1)*float(config.piece_stack_height),bank[2])
+				if piece.cell!=-1 or not piece.holder.is_empty() or piece.container!="bank_%d"%color or position.distance_to(expected)>.0001: return false
+			else:
+				if active.is_empty(): return false
+				if piece.location=="board":
+					if not whole(piece.cell) or piece.cell>15 or occupied.has(int(piece.cell)) or active.board[int(piece.cell)]!=color or piece.container!=config.board_id or not piece.holder.is_empty(): return false
+					var expected := origin+Vector3((int(piece.cell)%4-1.5)*float(config.cell_pitch),float(config.piece_bottom_offset),(int(int(piece.cell)/4)-1.5)*float(config.cell_pitch))
+					if position.distance_to(expected)>.0001: return false
+					occupied[int(piece.cell)] = color
+				else:
+					if piece.id!=active.selected_piece or piece.holder!=(active.a if active.turn==1 else active.b) or not piece.container.is_empty(): return false
+					if active.phase not in ["reach","place","cleanup"] or position.distance_to(origin)>2: return false
+	if not active.is_empty():
+		for cell in 16:
+			if active.board[cell]!=occupied.get(cell,0): return false
+	for meeting in raw.meetings:
+		if meeting.get("mode","")!="play": continue
+		if active.is_empty() or active.meeting!=meeting.id or active.id!=meeting.get("game_id",""): return false
+	return true
+
 static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, household_ids: Array = []) -> bool:
 	var required_households: Array = []
 	for definition in definitions.values():
@@ -185,7 +371,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, hous
 		household_ids = JSON.parse_string(FileAccess.get_file_as_string("res://data/life-conditions.json")).households.keys()
 	if not raw is Dictionary or not encoded(raw): return false
 	if not record(raw,["rng_state"],["schema","elapsed","start_minute","epoch_weekday","budget","meeting_serial","remainder"]): return false
-	if not whole(raw.schema,1) or int(raw.schema) not in [1,2,3,4] or not raw.rng_state.is_valid_int(): return false
+	if not whole(raw.schema,1) or int(raw.schema)!=CURRENT_SCHEMA or not raw.rng_state.is_valid_int(): return false
 	if raw.has("route_layout") and (not number(raw.route_layout) or raw.route_layout<0 or raw.route_layout!=int(raw.route_layout)): return false
 	if raw.has("world_seed") and not whole(raw.world_seed): return false
 	if raw.has("event_serial") and not whole(raw.event_serial): return false
@@ -198,6 +384,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, hous
 	for p in raw.people:
 		if not record(p,["id","name","occupation","place","destination","action","reason","meeting_id","routine_id"],["age","remaining","fatigue","hunger","connection","quiet","goal_progress","travel_minutes","activity_minutes"]): return false
 		if not cognition(p,definitions,sites,raw.elapsed): return false
+		if int(raw.schema)>=6 and not whole(p.get("play_next_attempt")): return false
 		if not definitions.has(p.id) or seen.has(p.id): return false
 		seen[p.id] = true
 		if not sites.has(p.place) or not sites.has(p.destination): return false
@@ -272,6 +459,9 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, hous
 		if not definitions.has(meeting.a) or not definitions.has(meeting.b): return false
 		if not meeting.get("spontaneous") is bool: return false
 		if meeting.has("autonomous") and not meeting.autonomous is bool: return false
+		for key in ["project_result_recorded","work_completed"]:
+			if meeting.has(key) and not meeting[key] is bool: return false
+		if meeting.has("duration") and not whole(meeting.duration,1): return false
 		if meeting.has("agenda_id") and (not meeting.agenda_id is String or meeting.agenda_id.is_empty()): return false
 		if meeting.get("mode","")=="project":
 			if not record(meeting.get("project"),["key","title","place"],["cost"]): return false
@@ -281,6 +471,10 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, hous
 				if meeting.project.has(key) and not meeting.project[key] is String: return false
 			for key in ["teacher","learner"]:
 				if meeting.project.has(key) and not meeting.project[key].is_empty() and not definitions.has(meeting.project[key]): return false
+	if int(raw.schema)>=5 and not raw.has("interactions"): return false
+	if raw.has("interactions") and not world_interactions(raw.interactions,raw,definitions): return false
+	if int(raw.schema)>=6 and not raw.has("tabletop"): return false
+	if raw.has("tabletop") and not tabletop(raw.tabletop,raw,definitions): return false
 	if raw.has("social"):
 		var social = raw.social
 		if not social is Dictionary or not social.get("appointments") is Array or not social.get("offer") is Dictionary or not number(social.get("serial")): return false

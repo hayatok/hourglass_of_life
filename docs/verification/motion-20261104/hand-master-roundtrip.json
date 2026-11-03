@@ -1,0 +1,85 @@
+{
+  "scope": "Hand-weight authoring copy plus clean GLB reimport. Actual skinned motion is reviewed separately in Godot.",
+  "master": "builds/haru-cute-pilot/CH_Haru_Delivery.blend",
+  "output": "builds/haru-hand-repair/r2/CH_Haru_HandWeights_Master.blend",
+  "applied": [
+    {
+      "lod": 0,
+      "method": "Clean current-delivery import; compatible LOD meshes share the first imported rig",
+      "vertices": 17990
+    },
+    {
+      "lod": 1,
+      "method": "Clean current-delivery import; compatible LOD meshes share the first imported rig",
+      "vertices": 8743
+    },
+    {
+      "lod": 2,
+      "method": "Clean current-delivery import; compatible LOD meshes share the first imported rig",
+      "vertices": 3298
+    }
+  ],
+  "roundtrip": [
+    {
+      "lod": 0,
+      "armatures": 1,
+      "bones": 35,
+      "meshes": 1,
+      "actions": [
+        "eat",
+        "idle",
+        "rest",
+        "sit_talk",
+        "sleep",
+        "talk",
+        "walk",
+        "wave",
+        "work"
+      ],
+      "unweighted_vertices": 0,
+      "maximum_influences": 4,
+      "preserve_volume": false
+    },
+    {
+      "lod": 1,
+      "armatures": 1,
+      "bones": 35,
+      "meshes": 1,
+      "actions": [
+        "eat",
+        "idle",
+        "rest",
+        "sit_talk",
+        "sleep",
+        "talk",
+        "walk",
+        "wave",
+        "work"
+      ],
+      "unweighted_vertices": 0,
+      "maximum_influences": 4,
+      "preserve_volume": false
+    },
+    {
+      "lod": 2,
+      "armatures": 1,
+      "bones": 35,
+      "meshes": 1,
+      "actions": [
+        "eat",
+        "idle",
+        "rest",
+        "sit_talk",
+        "sleep",
+        "talk",
+        "walk",
+        "wave",
+        "work"
+      ],
+      "unweighted_vertices": 0,
+      "maximum_influences": 4,
+      "preserve_volume": false
+    }
+  ],
+  "master_method": "Explicit clean current-delivery reconstruction; older master retained unchanged"
+}

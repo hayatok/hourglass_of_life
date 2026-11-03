@@ -147,7 +147,14 @@ func run() -> void:
 		expect(meeting.state=="engaged" and listener.skills.repair==skill_before,"The new partners physically reach the worktable before receiving experience")
 		sim.advance_minutes(45)
 		expect(listener.skills.repair>skill_before and listener.expectations.size()>expectations_before,"Only completed joint work increases repair skill and a situated expectation")
-		expect(listener.cognition_plan.stage=="completed","The introduced activity completes the real participant's plan")
+		# The practical result is earned at the worktable, but the shared plan
+		# includes carrying the same radio back and releasing its reservation.
+		for minute in int(sim.interactions.config.timeout_minutes):
+			if not sim.meetings.has(meeting): break
+			sim.advance_minutes(1)
+		var workflow: Dictionary = sim.interactions.sessions.get(meeting.get("interaction_id",""),{})
+		var radio: Dictionary = sim.interactions.objects.get(workflow.get("object_id",""),{})
+		expect(listener.cognition_plan.stage=="completed" and workflow.get("phase","")=="completed" and radio.get("state","")=="stored" and radio.get("container","")==sim.interactions.config.source_container and radio.get("holder","missing").is_empty() and radio.get("reserved_by","missing").is_empty(),"The introduced activity completes the real participant's plan after returning the actual radio")
 
 	# Matched town: same people, interests, skills, needs and conversation; no bridge.
 	prepare(false)

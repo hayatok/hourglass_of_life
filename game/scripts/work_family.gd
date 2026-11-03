@@ -274,6 +274,8 @@ func propose_project(first: String, second: String, preferred: String = "", auto
 			return sim._reply(p,"defer","今は自分の取り組みを進めたい。また余裕があるときに相談しよう。")
 	if household(a).cash<project.cost:
 		return sim._reply(a,"defer","一緒に取り組みたいけれど、材料の用意を先に考えたい。")
+	if project.key=="radio" and not sim.interactions.available():
+		return sim._reply(a,"defer","ラジオはほかの人が使っている。道具が戻ってから相談したい。")
 	if not sim._begin_meeting(a,b,project.center,"project",false,45,0,"",project.place,project.key):
 		return sim._reply(a,"defer","作業台が使われている。空いてから一緒に取り組みたい。")
 	var meeting = sim.meetings[-1]
@@ -281,6 +283,10 @@ func propose_project(first: String, second: String, preferred: String = "", auto
 	meeting.project = project
 	meeting.materials_ready = false
 	meeting.autonomous = autonomous
+	if not sim.interactions.begin(meeting):
+		sim._finish_meeting(meeting,false)
+		sim.meetings.erase(meeting)
+		return sim._reply(a,"defer","ラジオや作業場所の準備が整ってから、改めて相談したい。")
 	sim.planner.track(meeting)
 	a.action = "joint_work"
 	b.action = "joint_work"
@@ -316,7 +322,8 @@ func project_tick(meeting: Dictionary) -> bool:
 	return true
 
 func finish_project(meeting: Dictionary) -> void:
-	if meeting.get("mode","")!="project": return
+	if meeting.get("mode","")!="project" or meeting.get("project_result_recorded",false): return
+	meeting.project_result_recorded = true
 	var key = meeting.project.key
 	var before = projects[key]
 	projects[key] = minf(1,projects[key]+.18)

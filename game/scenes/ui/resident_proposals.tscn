@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://game/scripts/resident_proposals.gd" id="1"]
 [ext_resource type="Texture2D" path="res://game/assets/ui/icons/rest.svg" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" path="res://game/assets/ui/icons/close.svg" id="7"]
 [ext_resource type="Texture2D" path="res://game/assets/ui/icons/arrow_back.svg" id="8"]
 [ext_resource type="Theme" path="res://game/assets/ui/game_theme.tres" id="9"]
+[ext_resource type="Texture2D" path="res://game/assets/ui/icons/board.svg" id="10"]
 
 [node name="ResidentProposals" type="Control"]
 visible = false
@@ -117,6 +118,13 @@ custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "一緒に制作する"
 icon = ExtResource("6")
+
+[node name="Play" type="Button" parent="Dialog/Margins/Layout/Scroll/Pages/Choices"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "一緒に遊ぶ"
+icon = ExtResource("10")
 
 [node name="Target" type="VBoxContainer" parent="Dialog/Margins/Layout/Scroll/Pages"]
 unique_name_in_owner = true

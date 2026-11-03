@@ -32,6 +32,7 @@ func add_options(p: Dictionary, options: Array) -> void:
 		if record.state in ["planned","travel"] and p.id in [record.a,record.b]: return
 	var contacts := _known_contacts(p)
 	if contacts.is_empty(): return
+	sim.tabletop.add_options(p,options,contacts)
 	var other: Dictionary = contacts[0].person
 	var common := {"place":"square","partner":other.id,"need":p.connection,
 		"goal":sim.definitions[p.id].values.belonging,"relation":clampf(contacts[0].score,0,1),
@@ -71,6 +72,10 @@ func _known_contacts(p: Dictionary) -> Array:
 	return result
 
 func begin(p: Dictionary, candidate: Dictionary) -> bool:
+	if candidate.kind=="play":
+		var play: Dictionary = sim.tabletop.propose(p.id,candidate.partner,true)
+		p.next_plan_minute = sim.elapsed+120
+		return play.status=="accept"
 	if candidate.kind in ["social_plan","planned_project"]:
 		var activity: String = candidate.project.key if candidate.kind=="planned_project" else "social"
 		var agreed: Dictionary = sim.agenda.propose(p.id,candidate.partner,activity,true)
@@ -131,5 +136,7 @@ func person_text(p: Dictionary) -> String:
 		"completed":"一緒に進めたこと","interrupted":"また相談したいこと"}.get(plan.get("stage",""),"")
 	if plan.get("kind","")=="social":
 		label = {"travel":"会いに向かっている","execute":"一緒に話している","completed":"話して過ごした時間","interrupted":"また時間を相談したいこと"}.get(plan.get("stage",""),"")
+	if plan.get("kind","")=="play":
+		label = {"travel":"遊ぶ机へ向かっている","execute":"交互に考えながら遊んでいる","completed":"一緒に遊んだ時間","interrupted":"切り上げた遊び"}.get(plan.get("stage",""),"")
 	if not sim.life.is_alive(other) and plan.get("stage","")=="interrupted": label = "途中で終わった予定"
 	return "%s\n%sさんと、%s"%[label,other.name,plan.title]

@@ -41,12 +41,13 @@ func chair(parent: Node3D, id: String, site: String, at: Vector3, yaw: float, si
 	prop(node,"Chair","Chair",Vector3.ZERO,0,Vector2(.51,.51))
 	spot(node,id,site,Vector3.ZERO,0,"seat",["eat","rest","care","social","meet"],Vector3(side*.50,0,-.08),Vector3(0,.46,0),group,pair)
 
-func workstation(parent: Node3D, id: String, site: String, at: Vector3, group: String) -> Node3D:
+func workstation(parent: Node3D, id: String, site: String, at: Vector3, group: String,
+		actions: Array = ["work","hobby","chores","joint_work","meet"]) -> Node3D:
 	var node := assembly(parent,id+"Assembly",at)
 	prop(node,"Worktable","Worktable",Vector3.ZERO,0,Vector2(1.55,.84))
 	for i in 2:
 		spot(node,id+"_%d"%i,site,Vector3(-.35 if i==0 else .35,0,.66),PI,"work",
-			["work","hobby","chores","joint_work","meet"],Vector3.ZERO,Vector3.ZERO,group,id,"",.99)
+			actions,Vector3.ZERO,Vector3.ZERO,group,id,"",.99)
 	return node
 
 func room(name: String, site: String, at: Vector3) -> Node3D:
@@ -92,10 +93,16 @@ func run() -> void:
 	var radio := workstation(workshop,"radio_work","workshop",Vector3(0,0,-.7),"radio")
 	prop(radio,"Radio","Radio",Vector3(0,.95,.24))
 	# Small public shared tables give the remaining projects a physical surface.
-	for entry in [["photo","garden",Vector3(-1.2,0,3.8)],["music","square",Vector3(2.8,0,4.5)],["craft","square",Vector3(-2.8,0,6)]]:
+	for entry in [["photo","garden",Vector3(-1.2,0,3.8)],["music","square",Vector3(2.8,0,4.5)]]:
 		var node := Node3D.new();node.name = entry[0].capitalize();node.position = entry[2];add(layout,node)
 		workstation(node,entry[0]+"_work",entry[1],Vector3.ZERO,entry[0])
 		if entry[0]=="photo": prop(node,"PhotoMug","Mug",Vector3(0,.95,.2))
+	# Keep the original board table and spot IDs dedicated to the physical game.
+	var boards := assembly(layout,"Craft",Vector3(-2.8,0,6))
+	workstation(boards,"craft_work","square",Vector3.ZERO,"tabletop",["play"])
+	# The production table sits south of the z=7 street, clear of the homes.
+	var art := assembly(layout,"CraftArt",Vector3(-2.8,0,8.3))
+	workstation(art,"craft_art","square",Vector3.ZERO,"craft")
 	var packed := PackedScene.new()
 	assert(packed.pack(layout)==OK)
 	assert(ResourceSaver.save(packed,"res://game/scenes/activity_layout.tscn")==OK)

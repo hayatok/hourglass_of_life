@@ -53,8 +53,18 @@ func resident_snapshot(p: Dictionary, skill: String) -> Dictionary:
 
 func meeting_snapshot(meeting: Dictionary) -> Dictionary:
 	var skill: String = meeting.project.skill
-	return {"minute":sim.elapsed,"clock":sim.clock_text(),"day":sim.day_index(),"calendar":sim.calendar_text(),
+	return {"meeting":meeting.id,"interaction_phase":interaction_phase(meeting),"minute":sim.elapsed,"clock":sim.clock_text(),"day":sim.day_index(),"calendar":sim.calendar_text(),
 		"state":meeting.state,"actors":[resident_snapshot(sim.person(meeting.a),skill),resident_snapshot(sim.person(meeting.b),skill)]}
+
+func interaction_phase(meeting: Dictionary) -> String:
+	var workflow: Dictionary = sim.interactions.sessions.get(meeting.get("interaction_id",""),{})
+	if workflow.is_empty():
+		for session in sim.interactions.sessions.values():
+			if session.meeting==meeting.id: workflow = session;break
+	return workflow.get("phase","")
+
+func is_collaborating(meeting: Dictionary) -> bool:
+	return meeting.state=="engaged" and (not sim.interactions.supports(meeting) or interaction_phase(meeting)=="working")
 
 func held(p: Dictionary, event_id: String) -> Dictionary:
 	for known in p.knowledge:
@@ -115,14 +125,15 @@ func select_actor(id: String) -> void:
 	main.toast_left = 0
 	main.get_node("%Toast").visible = false
 
-func both_visible(meeting: Dictionary) -> bool:
+func person_visible(id: String) -> bool:
 	var right: Control = main.get_node("%HUD").detail_panel
-	for id in [meeting.a,meeting.b]:
-		var focus: Vector3 = main.avatars[id].focus_position()
-		if main.camera.is_position_behind(focus): return false
-		var pixel: Vector2 = main.camera.unproject_position(focus)
-		if pixel.x<18 or pixel.x>right.position.x-18 or pixel.y<80 or pixel.y>root.size.y-85: return false
-	return true
+	var focus: Vector3 = main.avatars[id].focus_position()
+	if main.camera.is_position_behind(focus): return false
+	var pixel: Vector2 = main.camera.unproject_position(focus)
+	return pixel.x>=18 and pixel.x<=right.position.x-18 and pixel.y>=80 and pixel.y<=root.size.y-85
+
+func both_visible(meeting: Dictionary) -> bool:
+	return person_visible(meeting.a) and person_visible(meeting.b)
 
 func run() -> void:
 	var wall_started: int = Time.get_ticks_msec()
@@ -177,11 +188,14 @@ func run() -> void:
 					var known: Dictionary = cache[event_id]
 					if known.recipient!=actor.id or known.subject!=meeting.b or known.skill!=meeting.project.skill: continue
 					if meeting.state not in ["travel","waiting","engaged"]: continue
+					# A returning carrier remains 'engaged' until the object is
+					# stored. Do not mistake cleanup for an observed collaboration.
+					if sim.interactions.supports(meeting) and interaction_phase(meeting) in ["take_return","carry_to_source","return","completed","interrupted"]: continue
 					if int(known.received_at)>int(plan.started): continue
 					tracked = meeting.duplicate(true)
 					introduction = known.duplicate(true)
 					before = meeting_snapshot(meeting)
-					engaged = before.duplicate(true) if meeting.state=="engaged" else {}
+					engaged = before.duplicate(true) if is_collaborating(meeting) else {}
 					collaboration_observed = {}
 					engaged_ui = {}
 					attempted += 1
@@ -191,7 +205,7 @@ func run() -> void:
 					break
 			else:
 				var current: Dictionary = active_meeting(tracked.id)
-				if not current.is_empty() and current.state=="engaged" and engaged_ui.is_empty():
+				if not current.is_empty() and is_collaborating(current) and engaged_ui.is_empty():
 					collaboration_observed = meeting_snapshot(current)
 					if engaged.is_empty(): engaged = collaboration_observed.duplicate(true)
 					engaged_image = await capture()
@@ -233,7 +247,11 @@ func run() -> void:
 					expect(sim.person(introduction.speaker).name in first_ui.reason and sim.person(tracked.b).name in first_ui.detail,"The normal HUD distinguishes who introduced the information from the activity partner")
 					expect("一緒に進めたこと" in result_ui.detail and actor.cognition_plan.reason in result_ui.detail,"The normal HUD retains the completed result and its introduction trigger")
 					expect(first_ui.proposal_partner==tracked.b and result_ui.proposal_partner==tracked.b,"Selecting the initiator starts the proposal control with the real activity partner and refreshes preserve it")
-					expect(both_visible(tracked),"The two actual participants remain inside the free observation area")
+					# Ordinary choices may separate the partners after cleanup.
+					# Both were visible during real work (checked at that capture);
+					# the result view must follow its actual selected participant.
+					var returned: bool = not sim.interactions.supports(tracked) or interaction_phase(tracked)=="completed"
+					expect(returned and person_visible(tracked.a),"The result view follows the real participant after the same project's cleanup completes")
 					var learned := false
 					for i in 2: learned = learned or float(ended.actors[i].level)>float(before.actors[i].level)
 					expect(learned,"Actual completed work changes at least one participant's practiced skill")

@@ -20,6 +20,10 @@ var mug: Node3D
 var greeting := 0.0
 var time := 0.0
 var observed: Dictionary = {}
+var foot_plant: ResidentFootPlant
+var social_motion: ResidentSocialMotion
+var interaction_motion
+var interaction_result: Dictionary = {}
 
 func _node(name: String) -> Node3D:
 	var node := Node3D.new();node.name = name;add_child(node)
@@ -35,6 +39,7 @@ func _sample(clip: String) -> Dictionary:
 
 func bind_model(owner_avatar: Node3D, resident_model: JrpgResidentModel) -> void:
 	avatar = owner_avatar;model = resident_model;skeleton = model.skeleton
+	interaction_motion = ResidentInteractionMotion.new()
 	pose_samples.seat = _sample("sit_talk");pose_samples.bed = _sample("sleep")
 	model.animator.play("idle",0);model.animator.seek(0,true);model.animator.advance(0)
 	var to_model := model.global_transform.affine_inverse()*skeleton.global_transform
@@ -42,12 +47,15 @@ func bind_model(owner_avatar: Node3D, resident_model: JrpgResidentModel) -> void
 		var rest := to_model*skeleton.get_bone_global_rest(skeleton.find_bone("DEF-foot."+side))
 		rest_feet[side] = rest
 	rest_shoulder = (to_model*skeleton.get_bone_global_rest(skeleton.find_bone("DEF-upper_arm.L"))).origin.y
+	social_motion = ResidentSocialMotion.new();social_motion.name = "ConversationPosture";skeleton.add_child(social_motion)
 	look_target = _node("AttentionTarget")
 	look = LookAtModifier3D.new();look.name = "Attention"
 	skeleton.add_child(look);look.bone_name = "DEF-head";look.target_node = look.get_path_to(look_target)
 	look.forward_axis = SkeletonModifier3D.BONE_AXIS_PLUS_Z
 	look.use_angle_limitation = true;look.symmetry_limitation = true
 	look.primary_limit_angle = .80;look.secondary_limit_angle = .55;look.duration = .25;look.active = false
+	foot_plant = ResidentFootPlant.new();foot_plant.name = "WalkingSupport"
+	foot_plant.contacts = self;skeleton.add_child(foot_plant)
 	for side in ["L","R"]:
 		hand_targets[side] = _node("HandTarget"+side)
 		foot_targets[side] = _node("FootTarget"+side)
@@ -74,8 +82,14 @@ func detach() -> void:
 		for node in nodes.values(): node.free()
 	if is_instance_valid(look): look.free()
 	if is_instance_valid(wrists): wrists.free()
+	if is_instance_valid(foot_plant): foot_plant.free()
+	if is_instance_valid(social_motion): social_motion.free()
 
 func greet() -> void: greeting = 1.8
+
+func prepare_motion(p: Dictionary, activity: Dictionary, pose: Dictionary, delta: float) -> Dictionary:
+	interaction_result = interaction_motion.update(self,p,activity,pose,delta)
+	return interaction_result
 
 func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention: Vector3, attend: bool, delta: float) -> void:
 	time += delta*model.animator.speed_scale
@@ -84,6 +98,7 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 	var seat: bool = active and activity.pose=="seat"
 	var bed: bool = active and activity.pose=="bed"
 	var work: bool = active and activity.pose=="work" and clip=="work"
+	var tabletop_standing: bool = not p.moving and interaction_result.get("profile","")=="four_in_row" and interaction_result.get("phase","") not in ["travel","align","completed","interrupted"]
 	var child: bool = avatar.displayed_model=="rin"
 	var body_scale: Vector3 = avatar.visual.scale
 	var scale_y: float = body_scale.y
@@ -98,15 +113,16 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 	elif bed:
 		root_target = activity.contact-facing*(pose_samples.bed.head*body_scale)
 		root_target.y = activity.contact.y+.11*scale_y-pose_samples.bed.pelvis.y*scale_y
-	elif work and child:
-		rise = clampf(activity.hand_left.y+.14-rest_shoulder*scale_y-avatar.global_position.y,0,.23)
+	elif (work or tabletop_standing) and child:
+		var surface_y: float = interaction_result.get("surface_y",activity.get("hand_left",Vector3.ZERO).y)
+		rise = clampf(surface_y+.14-rest_shoulder*scale_y-avatar.global_position.y,0,.23)
 		root_target += Vector3.UP*rise+facing*Vector3(0,0,.08)
 	if active: avatar.visual.rotation.y = lerp_angle(avatar.visual.rotation.y,yaw,minf(1,delta*10))
 	avatar.visual.position = avatar.visual.position.lerp(root_target-avatar.global_position,minf(1,delta*12))
-	step.visible = child and (seat or work)
+	step.visible = child and (seat or work or tabletop_standing)
 	if step.visible:
 		step.global_basis = facing
-		if work:
+		if work or tabletop_standing:
 			step.scale.y = maxf(.1,rise/.23);step.global_position = root_target-Vector3.UP*rise
 		else:
 			var feet := (point("foot.L")+point("foot.R"))*.5
@@ -114,7 +130,13 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 			step.scale.y = 1
 	look.active = not bed and (attend or work)
 	if look.active: look_target.global_position = attention if attend else (activity.hand_left+activity.hand_right)*.5
+	social_motion.update(avatar,attention,attend and not bed and not work,avatar.conversation_role=="listener",time,delta)
 	wrists.targets.clear();wrists.eating = clip=="eat" and seat
+	wrists.finger_curls = {"L":.12,"R":.12} if clip=="walk" else {}
+	wrists.finger_rotations = interaction_result.get("finger_rotations",{})
+	social_motion.action_lean = social_motion.action_lean.lerp(interaction_result.get("lean",Vector3.ZERO),minf(1,delta*10))
+	foot_plant.walking = clip=="walk" and p.moving
+	if not foot_plant.walking: foot_plant.reset()
 	mug.visible = wrists.eating
 	for side in ["L","R"]:
 		var sign_x := 1.0 if side=="L" else -1.0
@@ -147,6 +169,17 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 			foot.global_position = pos;foot.global_basis = facing*rest_feet[side].basis.orthonormalized()
 			poles["foot"+side].global_position = avatar.visual.global_transform*Vector3(sign_x*.12,.45,.9)
 			wrists.targets["DEF-foot."+side] = foot
+		var word := "left" if side=="L" else "right"
+		if interaction_result.has(word):
+			hand.global_transform = interaction_result[word]
+			hand_ik[side].active = true
+			wrists.targets["DEF-hand."+side] = hand
+			poles["hand"+side].global_position = avatar.visual.global_transform*Vector3(sign_x*.32,rest_shoulder-.24,.12)
+			if interaction_result.has("elbow_"+word): poles["hand"+side].global_position = interaction_result["elbow_"+word]
+		if interaction_result.has("fingers_"+word):
+			wrists.finger_curls[side] = interaction_result["fingers_"+word]
+		elif interaction_result.has("grip_"+word):
+			wrists.finger_curls[side] = interaction_result["grip_"+word]
 
 func _observe() -> void:
 	# A queued skeleton update can outlive removal during a town rebuild or body swap.
@@ -154,6 +187,22 @@ func _observe() -> void:
 	observed.clear()
 	for side in ["L","R"]:
 		observed["hand"+side] = point("hand."+side)
+		observed["hand_pose"+side] = skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("DEF-hand."+side))
+		var word := "left" if side=="L" else "right"
+		if interaction_result.has("palm_local_"+word): observed["palm"+side] = point("hand."+side,interaction_result["palm_local_"+word])
+		if interaction_result.has("pinch_local_"+word): observed["pinch"+side] = point("hand."+side,interaction_result["pinch_local_"+word])
+		if interaction_result.has("finger_pad_local_"+word):
+			var pads: Dictionary = interaction_result["finger_pad_local_"+word]
+			var actual_pads := {"thumb":point("finger0."+side,pads.thumb),"index":point("finger1."+side,pads.index)}
+			observed["finger_pad"+side] = actual_pads
+			observed["pinch"+side] = (actual_pads.thumb+actual_pads.index)*.5
+			var finger_poses := {};var finger_rotations := {}
+			for entry in [["thumb",0],["index",1]]:
+				var bone := skeleton.find_bone("DEF-finger%d.%s"%[entry[1],side])
+				finger_poses[entry[0]] = skeleton.global_transform*skeleton.get_bone_global_pose(bone)
+				finger_rotations[entry[0]] = skeleton.get_bone_pose_rotation(bone)
+			observed["finger_pose"+side] = finger_poses
+			observed["finger_rotation"+side] = finger_rotations
 		observed["foot"+side] = point("foot."+side)
 		if hand_ik.has(side) and hand_ik[side].active:
 			observed["hand_error"+side] = observed["hand"+side].distance_to(hand_targets[side].global_position)

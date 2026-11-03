@@ -144,19 +144,16 @@ func _save_checks() -> void:
 	expect(sim.save_game(path),"An integrated town with cognition can be saved")
 	var original: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
 	expect(sim.load_game(path),"Valid cognition, session, seed and event serial data load successfully")
-	# Each old schema can omit all the newly added state without fabricating a past.
-	for schema in [1,2,3,4]:
+	# Older development layouts are intentionally incompatible. Rejection must
+	# preserve the live current-format town, rather than move an old craft task
+	# onto the new dedicated game board or invent its missing object state.
+	for schema in [1,2,3,4,5,6]:
 		var legacy: Dictionary = original.duplicate(true)
 		legacy.schema = schema
-		legacy.erase("world_seed")
-		legacy.erase("event_serial")
-		legacy.erase("agenda")
-		for person in legacy.people:
-			for field in ["knowledge","known_profiles","skills","interests","expectations","cognition_plan","cognition_session","plan_history","next_plan_minute","preparing_agenda_id","support_next_attempt"]:
-				person.erase(field)
 		_write(path,legacy)
-		expect(sim.load_game(path),"An older schema-%d save without cognition fields remains compatible"%schema)
-		expect(sim.person("fumi").known_profiles.is_empty() and sim.person("fumi").knowledge.is_empty(),"Schema-%d migration adds empty knowledge without inventing observations"%schema)
+		var live_before: Array = sim._encode(sim.people).duplicate(true)
+		expect(not sim.load_game(path) and not sim.load_error.is_empty(),"Older development schema-%d is rejected with a readable reason"%schema)
+		expect(sim._encode(sim.people)==live_before,"Rejecting schema-%d preserves the live current-format town"%schema)
 	var bad: Array = []
 	var payload: Dictionary = original.duplicate(true)
 	payload.people[0].skills = {"repair":"expert"};bad.append(payload)

@@ -1,0 +1,749 @@
+{
+  "schema_version": 1,
+  "method": "Centroid of the distal 4 mm band of mesh vertices with thumb/index skin weight >= 0.85, in that finger's bind-local coordinates.",
+  "scope": "Measured distal skin contact points. Single-bone fingers rotate at their bases; this does not add finger joints or prove anatomical accuracy.",
+  "generator": "tools/measure_finger_pads.py",
+  "models": {
+    "res://game/assets/models/aoi/CH_Aoi.glb": {
+      "scene": "res://game/scenes/characters/aoi.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              -0.0001416569,
+              0.0533517842,
+              -0.000318382
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 49,
+            "maximum_local_y_m": 0.0553054851
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0004283525,
+              0.0793291628,
+              -0.0004844332
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 55,
+            "maximum_local_y_m": 0.0816375909
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              0.0001457174,
+              0.0533675266,
+              -0.0002997673
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 49,
+            "maximum_local_y_m": 0.0553054851
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0004246514,
+              0.0793424873,
+              -0.0004672983
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 55,
+            "maximum_local_y_m": 0.0816375909
+          }
+        }
+      }
+    },
+    "res://game/assets/models/fumi/CH_Fumi.glb": {
+      "scene": "res://game/scenes/characters/fumi.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0003952745,
+              0.0471881326,
+              -0.0005168033
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 56,
+            "maximum_local_y_m": 0.049206972
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0003555032,
+              0.0705468738,
+              -0.0004815479
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 55,
+            "maximum_local_y_m": 0.0725803432
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.0004659488,
+              0.0472215745,
+              -0.0005603412
+            ],
+            "strong_vertex_count": 91,
+            "distal_cap_vertex_count": 59,
+            "maximum_local_y_m": 0.049206972
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0003979608,
+              0.0705639025,
+              -0.0005294467
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 57,
+            "maximum_local_y_m": 0.0725803432
+          }
+        }
+      }
+    },
+    "res://game/assets/models/haru/CH_Haru.glb": {
+      "scene": "res://game/scenes/characters/haru.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0060886001,
+              0.0735079627,
+              -0.0464621727
+            ],
+            "strong_vertex_count": 20,
+            "distal_cap_vertex_count": 9,
+            "maximum_local_y_m": 0.0749946311
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0108048346,
+              0.0641323664,
+              -0.0250684661
+            ],
+            "strong_vertex_count": 17,
+            "distal_cap_vertex_count": 7,
+            "maximum_local_y_m": 0.0654890988
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.0067533221,
+              0.0740017937,
+              -0.0479143993
+            ],
+            "strong_vertex_count": 12,
+            "distal_cap_vertex_count": 4,
+            "maximum_local_y_m": 0.0757842211
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0033976344,
+              0.0659067009,
+              -0.0167219669
+            ],
+            "strong_vertex_count": 21,
+            "distal_cap_vertex_count": 5,
+            "maximum_local_y_m": 0.0667709039
+          }
+        }
+      }
+    },
+    "res://game/assets/models/maho/CH_Maho.glb": {
+      "scene": "res://game/scenes/characters/maho.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              -0.0001430387,
+              0.0494307346,
+              -0.0003492179
+            ],
+            "strong_vertex_count": 90,
+            "distal_cap_vertex_count": 50,
+            "maximum_local_y_m": 0.0511917027
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0003668647,
+              0.0734035683,
+              -0.0004988625
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 56,
+            "maximum_local_y_m": 0.0755193556
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              0.0001451183,
+              0.0494015426,
+              -0.000270896
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 48,
+            "maximum_local_y_m": 0.0511917027
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0003844633,
+              0.0733617146,
+              -0.0004378988
+            ],
+            "strong_vertex_count": 86,
+            "distal_cap_vertex_count": 54,
+            "maximum_local_y_m": 0.0755193556
+          }
+        }
+      }
+    },
+    "res://game/assets/models/nagisa/CH_Nagisa.glb": {
+      "scene": "res://game/scenes/characters/nagisa.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0002209094,
+              0.0463817801,
+              -0.0002645212
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 52,
+            "maximum_local_y_m": 0.0482355367
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0004193067,
+              0.069113248,
+              -0.0004160534
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 55,
+            "maximum_local_y_m": 0.0711153733
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.0002418377,
+              0.0464114591,
+              -0.0002589025
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 53,
+            "maximum_local_y_m": 0.0482355367
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0004182238,
+              0.0690885701,
+              -0.0004016152
+            ],
+            "strong_vertex_count": 86,
+            "distal_cap_vertex_count": 54,
+            "maximum_local_y_m": 0.0711153733
+          }
+        }
+      }
+    },
+    "res://game/assets/models/osamu/CH_Osamu.glb": {
+      "scene": "res://game/scenes/characters/osamu.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              -0.0001280351,
+              0.0509731931,
+              -0.0002609674
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 49,
+            "maximum_local_y_m": 0.0527270139
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              -0.0002046428,
+              0.0758898238,
+              -0.0001981732
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 48,
+            "maximum_local_y_m": 0.0777131961
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              0.0001678605,
+              0.0509610842,
+              -0.0002474359
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 48,
+            "maximum_local_y_m": 0.0527270139
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              0.0002466028,
+              0.0758752676,
+              -0.0001847982
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 47,
+            "maximum_local_y_m": 0.0777131961
+          }
+        }
+      }
+    },
+    "res://game/assets/models/rin/CH_Rin.glb": {
+      "scene": "res://game/scenes/characters/rin.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0003909051,
+              0.0324218287,
+              -0.0004643599
+            ],
+            "strong_vertex_count": 90,
+            "distal_cap_vertex_count": 58,
+            "maximum_local_y_m": 0.0337882051
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0003320695,
+              0.0483313967,
+              -0.0004364982
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 56,
+            "maximum_local_y_m": 0.04972076
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.000386708,
+              0.0324175907,
+              -0.000509235
+            ],
+            "strong_vertex_count": 91,
+            "distal_cap_vertex_count": 59,
+            "maximum_local_y_m": 0.0337882051
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.000328612,
+              0.0483301914,
+              -0.0004829777
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 57,
+            "maximum_local_y_m": 0.04972076
+          }
+        }
+      }
+    },
+    "res://game/assets/models/rin_adult/CH_RinAdult.glb": {
+      "scene": "res://game/scenes/characters/rin_adult.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              -9.93504e-05,
+              0.0534709935,
+              -0.00024483
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 49,
+            "maximum_local_y_m": 0.0554038121
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0004753876,
+              0.0795083369,
+              -0.0004127472
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 55,
+            "maximum_local_y_m": 0.0817991549
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              0.0001550651,
+              0.0534665635,
+              -0.000225116
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 48,
+            "maximum_local_y_m": 0.0554038121
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0004716231,
+              0.0795216023,
+              -0.00039607
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 55,
+            "maximum_local_y_m": 0.0817991549
+          }
+        }
+      }
+    },
+    "res://game/assets/models/ritsu/CH_Ritsu.glb": {
+      "scene": "res://game/scenes/characters/ritsu.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              -0.0001103567,
+              0.0561841963,
+              0.0001824865
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 45,
+            "maximum_local_y_m": 0.0580283814
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0002194448,
+              0.0834074469,
+              -0.0001760662
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 51,
+            "maximum_local_y_m": 0.0856774812
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              0.0001725661,
+              0.0561833672,
+              0.0002147036
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 44,
+            "maximum_local_y_m": 0.0580283814
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0002153033,
+              0.0834224205,
+              -0.0001574041
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 51,
+            "maximum_local_y_m": 0.0856774812
+          }
+        }
+      }
+    },
+    "res://game/assets/models/ryo/CH_Ryo.glb": {
+      "scene": "res://game/scenes/characters/ryo.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              -0.0001134146,
+              0.0561972936,
+              0.0001842617
+            ],
+            "strong_vertex_count": 89,
+            "distal_cap_vertex_count": 45,
+            "maximum_local_y_m": 0.0580421105
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0002253416,
+              0.0834236638,
+              -0.0001778246
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 51,
+            "maximum_local_y_m": 0.0856943187
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              0.000177299,
+              0.0561963219,
+              0.0002168091
+            ],
+            "strong_vertex_count": 88,
+            "distal_cap_vertex_count": 44,
+            "maximum_local_y_m": 0.0580421105
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0002210887,
+              0.0834386503,
+              -0.0001589829
+            ],
+            "strong_vertex_count": 87,
+            "distal_cap_vertex_count": 51,
+            "maximum_local_y_m": 0.0856943187
+          }
+        }
+      }
+    },
+    "res://game/assets/models/saki/CH_Saki.glb": {
+      "scene": "res://game/scenes/characters/saki.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0212663494,
+              0.066497037,
+              -0.0534855501
+            ],
+            "strong_vertex_count": 36,
+            "distal_cap_vertex_count": 3,
+            "maximum_local_y_m": 0.0668342645
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              -0.0040425427,
+              0.068147548,
+              -0.0190968237
+            ],
+            "strong_vertex_count": 43,
+            "distal_cap_vertex_count": 6,
+            "maximum_local_y_m": 0.0690358996
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.0228976987,
+              0.0664141285,
+              -0.0535699484
+            ],
+            "strong_vertex_count": 52,
+            "distal_cap_vertex_count": 2,
+            "maximum_local_y_m": 0.0670091005
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              0.003021773,
+              0.0678069735,
+              -0.0175246556
+            ],
+            "strong_vertex_count": 60,
+            "distal_cap_vertex_count": 6,
+            "maximum_local_y_m": 0.0700009192
+          }
+        }
+      }
+    },
+    "res://game/assets/models/tomo/CH_Tomo.glb": {
+      "scene": "res://game/scenes/characters/tomo.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0210253216,
+              0.0638725904,
+              -0.0407407438
+            ],
+            "strong_vertex_count": 40,
+            "distal_cap_vertex_count": 3,
+            "maximum_local_y_m": 0.0662573559
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              0.0015664719,
+              0.0667988745,
+              -0.0145072055
+            ],
+            "strong_vertex_count": 52,
+            "distal_cap_vertex_count": 5,
+            "maximum_local_y_m": 0.067717502
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.0092863313,
+              0.0698836961,
+              -0.0353973724
+            ],
+            "strong_vertex_count": 49,
+            "distal_cap_vertex_count": 2,
+            "maximum_local_y_m": 0.0717954053
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              -0.0012705178,
+              0.0663692672,
+              -0.0144687483
+            ],
+            "strong_vertex_count": 56,
+            "distal_cap_vertex_count": 3,
+            "maximum_local_y_m": 0.0683299248
+          }
+        }
+      }
+    },
+    "res://game/assets/models/yui/CH_Yui.glb": {
+      "scene": "res://game/scenes/characters/yui.tscn",
+      "hands": {
+        "L": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.L",
+            "point": [
+              0.0011542072,
+              0.0612840682,
+              -0.0163702294
+            ],
+            "strong_vertex_count": 24,
+            "distal_cap_vertex_count": 3,
+            "maximum_local_y_m": 0.0626028368
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.L",
+            "point": [
+              -0.0064787252,
+              0.0373510028,
+              0.0017109087
+            ],
+            "strong_vertex_count": 25,
+            "distal_cap_vertex_count": 3,
+            "maximum_local_y_m": 0.0380582493
+          }
+        },
+        "R": {
+          "thumb": {
+            "supported": true,
+            "bone": "DEF-finger0.R",
+            "point": [
+              -0.0041128283,
+              0.0564476446,
+              -0.0158913713
+            ],
+            "strong_vertex_count": 23,
+            "distal_cap_vertex_count": 2,
+            "maximum_local_y_m": 0.0564476446
+          },
+          "index": {
+            "supported": true,
+            "bone": "DEF-finger1.R",
+            "point": [
+              0.0066679521,
+              0.0375746489,
+              0.0009526195
+            ],
+            "strong_vertex_count": 19,
+            "distal_cap_vertex_count": 2,
+            "maximum_local_y_m": 0.0375746489
+          }
+        }
+      }
+    }
+  }
+}

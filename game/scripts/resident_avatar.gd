@@ -10,6 +10,7 @@ var walk_rate := 1.0
 var contacts: ResidentContacts
 var others: Dictionary = {}
 var greeted_meeting := ""
+var conversation_role := ""
 var appearance: Dictionary = {}
 static var appearance_definitions: Dictionary = {}
 static var variant_palettes: Dictionary = {}
@@ -139,6 +140,7 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 	var wanted := "walk" if p.moving else "idle"
 	var attention := Vector3.ZERO
 	var attend := false
+	conversation_role = ""
 	if not p.moving:
 		if not activity.is_empty():
 			if activity.pose=="bed" and p.action=="sleep": wanted = "sleep"
@@ -155,11 +157,26 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 			if meeting.get("mode","")=="project":
 				wanted = "work"
 				attend = false
-			elif greeted_meeting!=meeting.id and is_instance_valid(contacts):
-				greeted_meeting = meeting.id;contacts.greet()
+			else:
+				# Turn-taking derives from this actual meeting's elapsed time, so
+				# pause, replay and load retain the same speaker without new RNG.
+				var turn := int(maxf(0,float(meeting.get("duration",25))-float(meeting.remaining))/8.0)
+				var speaker: String = meeting.a if turn%2==0 else meeting.b
+				conversation_role = "speaker" if p.id==speaker else "listener"
+				if conversation_role=="listener": wanted = "rest" if activity.get("pose","")=="seat" else "idle"
+				if greeted_meeting!=meeting.id and is_instance_valid(contacts):
+					greeted_meeting = meeting.id;contacts.greet()
 			if activity.is_empty():
 				var toward: Vector3 = attention-global_position
 				visual.rotation.y = lerp_angle(visual.rotation.y,atan2(toward.x,toward.z),minf(1,delta*5))
+	if is_instance_valid(contacts) and Sim.interactions!=null:
+		var pose: Dictionary = Sim.interactions.pose_for(p.id)
+		if pose.is_empty() and Sim.tabletop!=null: pose = Sim.tabletop.pose_for(p.id)
+		var motion: Dictionary = contacts.prepare_motion(p,activity if wanted=="work" or not pose.is_empty() else {},pose,delta)
+		if motion.has("clip"): wanted = motion.clip
+		if motion.has("body_yaw"): visual.rotation.y = lerp_angle(visual.rotation.y,float(motion.body_yaw),minf(1,delta*10))
+		if motion.has("gaze"):
+			attention = motion.gaze;attend = true
 	if wanted != animation_name:
 		animator.play(wanted,.2)
 		animation_name = wanted

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Worktable.glb" id="7_i6tvr"]
 [ext_resource type="PackedScene" path="res://game/assets/furniture/PR_TownModel.glb" id="8_0pl5r"]
 [ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Radio.glb" id="9_bewk6"]
+[ext_resource type="PackedScene" path="res://game/scenes/props/radio_shelf.tscn" id="10_radio_shelf"]
 
 [node name="ActivityLayout" type="Node3D" unique_id=963921295]
 
@@ -791,14 +792,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 metadata/site = "workshop"
 metadata/room_size = Vector2(5.6, 5.6)
 
+[node name="RadioShelf" parent="Workshop" instance=ExtResource("10_radio_shelf")]
+position = Vector3(-1.7, 0, -0.6)
+
 [node name="radio_workAssembly" type="Node3D" parent="Workshop" unique_id=131283078]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
 
 [node name="Worktable" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=71260665 instance=ExtResource("7_i6tvr")]
 metadata/footprint = Vector2(1.55, 0.84)
+metadata/interaction_container = "radio_table"
+metadata/interaction_surface_height = 0.95
 
 [node name="radio_work_0" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=1108392413]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.24, 0, 0.66)
 script = ExtResource("2_wnwp1")
 spot_id = "radio_work_0"
 site = "workshop"
@@ -818,7 +824,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
 
 [node name="radio_work_1" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=375260678]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.24, 0, 0.66)
 script = ExtResource("2_wnwp1")
 spot_id = "radio_work_1"
 site = "workshop"
@@ -839,6 +845,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
 
 [node name="Radio" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=1046370632 instance=ExtResource("9_bewk6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.24)
+metadata/legacy_interaction_object_id = "workshop_radio"
 
 [node name="Photo" type="Node3D" parent="." unique_id=1986883852]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, 3.8)
@@ -952,9 +959,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.3
 script = ExtResource("2_wnwp1")
 spot_id = "craft_work_0"
 site = "square"
-actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+actions = PackedStringArray("play")
 pose_kind = "work"
-group = "craft"
+group = "tabletop"
 pair = "craft_work"
 
 [node name="Approach" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_0" unique_id=476783427]
@@ -972,9 +979,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35
 script = ExtResource("2_wnwp1")
 spot_id = "craft_work_1"
 site = "square"
-actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+actions = PackedStringArray("play")
 pose_kind = "work"
-group = "craft"
+group = "tabletop"
 pair = "craft_work"
 
 [node name="Approach" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=1033259035]
@@ -986,6 +993,54 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
 
 [node name="HandRight" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=1580300429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="CraftArt" type="Node3D" parent="."]
+position = Vector3(-2.8, 0, 8.3)
+
+[node name="craft_artAssembly" type="Node3D" parent="CraftArt"]
+
+[node name="Worktable" type="Node3D" parent="CraftArt/craft_artAssembly" instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="craft_art_0" type="Node3D" parent="CraftArt/craft_artAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "craft_art_0"
+site = "square"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "craft"
+pair = "craft_art"
+
+[node name="Approach" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+
+[node name="Contact" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+
+[node name="HandLeft" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+position = Vector3(0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+position = Vector3(-0.13, 0.99, 0.34)
+
+[node name="craft_art_1" type="Node3D" parent="CraftArt/craft_artAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "craft_art_1"
+site = "square"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "craft"
+pair = "craft_art"
+
+[node name="Approach" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+
+[node name="Contact" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+
+[node name="HandLeft" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+position = Vector3(0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+position = Vector3(-0.13, 0.99, 0.34)
 
 [node name="NorthShared" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)

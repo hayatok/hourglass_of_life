@@ -7,6 +7,7 @@
 script = ExtResource("1")
 rest_height = 1.65
 walk_speed = 0.9107191183
+walk_foot_plant = true
 material_mode = 1
 expression_mode = 2
 face_layout_path = "res://game/assets/models/saki/face-layout.json"

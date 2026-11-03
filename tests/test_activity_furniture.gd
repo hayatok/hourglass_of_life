@@ -19,11 +19,19 @@ func frame(count: int = 1) -> void:
 		for p in sim.people: main.avatars[p.id].update_state(p,1.0/60.0,false)
 		await process_frame
 
-func arrive(people: Array) -> void:
+func arrive(people: Array, meeting: Dictionary = {}) -> void:
 	var limit := 0
-	while people.any(func(p): return p.moving) and limit<180:
+	var maximum := 180 if meeting.is_empty() else int(sim.interactions.config.timeout_minutes)
+	var workflow: Dictionary = {}
+	while limit<maximum:
+		if not meeting.is_empty(): workflow = sim.interactions.sessions.get(meeting.get("interaction_id",""),{})
+		if not people.any(func(p): return p.moving) and (meeting.is_empty() or (workflow.get("phase","")=="working" and meeting.state=="engaged")): break
+		if not meeting.is_empty() and (not sim.meetings.has(meeting) or workflow.get("phase","") in ["completed","interrupted"]): break
 		sim.advance_minutes(1);limit += 1
-	expect(not people.any(func(p): return p.moving),"People reach real furniture before performing its action")
+	var performing: bool = meeting.is_empty() or (workflow.get("phase","")=="working" and meeting.state=="engaged")
+	expect(not people.any(func(p): return p.moving) and performing,"People reach real furniture before performing its action" if meeting.is_empty() else "Both participants reach the radio table and its real working phase")
+	if not meeting.is_empty():
+		metrics.radio_workflow = {"meeting":meeting.id,"phase":workflow.get("phase",""),"minute":sim.elapsed,"arrival_minutes":limit}
 	for p in sim.people: main.avatars[p.id].update_state(p,1,false)
 	await frame(30)
 
@@ -57,7 +65,7 @@ func run() -> void:
 	main.set_process(false);sim = root.get_node("Sim");sim.set_process(false)
 	main.get_node("%TitleScreen").hide();main.get_node("%HUD").hide()
 	await clean_reset()
-	expect(sim.activities.spots.size()==50,"The expanded town supplies 48 fixed places and two editable bench seats")
+	expect(sim.activities.spots.size()==52,"The expanded town supplies 50 fixed places and two editable bench seats")
 	for id in ["saki","haru","tomo","yui"]:
 		var bed: Dictionary = sim.activities.spots.get("sleep_"+id,{})
 		expect(bed.get("resident","")==id and "sleep" in bed.get("actions",[]),id+": the expanded town includes an actual assigned bed")
@@ -106,7 +114,7 @@ func run() -> void:
 	sim._assign(sim.person("ryo"),"rest","home_ogawa",90,"作業台を離れる")
 	var reply = sim.propose_project("aoi","osamu")
 	if expect(reply.status=="accept","The available radio worktable supports joint work"):
-		await arrive([sim.person("aoi"),sim.person("osamu")])
+		await arrive([sim.person("aoi"),sim.person("osamu")],sim.meetings[-1])
 		for id in ["aoi","osamu"]:
 			var actor = main.avatars[id]
 			metrics[id+"_work"] = actor.contacts.observed.duplicate()

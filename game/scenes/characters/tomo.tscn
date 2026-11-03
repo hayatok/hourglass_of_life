@@ -5,6 +5,9 @@
 
 [node name="Tomo" type="Node3D"]
 script = ExtResource("1")
+walk_foot_plant = true
+walk_plant_start = Vector2(0.2692308, 0.7692308)
+walk_plant_duration = 0.2692308
 rest_height = 1.7
 walk_speed = 2.13660552
 material_mode = 1

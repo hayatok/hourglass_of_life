@@ -1,8 +1,8 @@
 {
   "asset": "CH_Haru",
-  "generated": "2026-11-03T16:52:12",
+  "generated": "2026-11-04T02:00:34.788770+09:00",
   "blender": "5.2.1 LTS",
-  "source": "builds/haru-cute-pilot/CH_Haru_Delivery.blend",
+  "source": "builds/haru-hand-repair/r2/CH_Haru_HandWeights_Master.blend",
   "target_engine": "Godot 4.7 Compatibility",
   "units": {
     "system": "METRIC",
@@ -242,11 +242,11 @@
     "limitation": "The inherited FK gait has varying stance velocity. This is a best-fit playback speed, not proof of zero sliding or final walk quality."
   },
   "raw_source_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-  "exported_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+  "exported_glb_sha256": "678f022d3f5471a9412564e512602d465d00515882c7c4f8ddd655f55df009a5",
   "lod_sha256": {
-    "CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
-    "CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
-    "CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59"
+    "CH_Haru_LOD2.glb": "de1793d682bda05a705681fdcd68437bb33fc264b25cade19899f36641292962",
+    "CH_Haru.glb": "678f022d3f5471a9412564e512602d465d00515882c7c4f8ddd655f55df009a5",
+    "CH_Haru_LOD1.glb": "5754b3003cc63816af342f3a14e876011a5108c26b9b347d4f01441b5b554c7a"
   },
   "source_images": [
     {
@@ -357,5 +357,34 @@
     "remaining_all_body_unmatched_boundary_length_m": 0.030892340568394332,
     "watertight_claim": false,
     "evidence": "assets/models/haru-cute-pilot/review/lod-seams/"
+  },
+  "previous_authoring_master": "builds/haru-cute-pilot/CH_Haru_Delivery.blend",
+  "hand_weight_repair": {
+    "script": "assets/models/haru-cute-pilot/build/15_repair_hand_weights.py",
+    "master_script": "assets/models/haru-cute-pilot/build/16_apply_hand_weights_master.py",
+    "scope": "Local continuous palm/web skin weights only. Bind, mesh positions, UVs, materials, images and clips retained. Geometry identity is an actual array property, not SHA acceptance.",
+    "policy": {
+      "rings": 3,
+      "iterations": 24,
+      "smoothness": 0.9
+    },
+    "cpu_peak_edge_ratio_before": [
+      5.1815040437797935,
+      2.773908613513967,
+      1.7813079227176085
+    ],
+    "cpu_peak_edge_ratio_after": [
+      2.1889867872503945,
+      2.6328342283965007,
+      1.4252703313087411
+    ],
+    "maximum_influences": 4,
+    "master_method": "Clean current-delivery reconstruction; older Delivery.blend retained because its delivered LOD positions differ.",
+    "engine_visual_status": "Actual GPU match inspected at the same grasp; finger-web spikes reduced. The single-joint fingers remain a stylized intermediate, not anatomical articulation.",
+    "changed_vertices": [
+      721,
+      479,
+      187
+    ]
   }
 }

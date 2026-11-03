@@ -7,7 +7,7 @@ const IDS = ["saki","tomo","yui"]
 const SEED = 711
 const HORIZON = 3*1440
 const CLIPS = ["eat","idle","rest","sit_talk","sleep","talk","walk","wave","work"]
-const OUT = "res://docs/verification/v0.5/jrpg-renewal-gameplay"
+var OUT = "res://builds/jrpg-renewal-gameplay"
 const RAW_SHAS = {
 	"saki":"f8b647466b582c4eb38bc318a287e47ced5231208f41ae3e157e3ad18bb7a8bd",
 	"tomo":"dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65",
@@ -15,6 +15,7 @@ const RAW_SHAS = {
 
 var sim
 var main
+var greeting_tracks := {}
 var recorder
 var selected := "saki"
 var checks := 0
@@ -32,6 +33,8 @@ var report := {"seed":SEED,"population":12,"search_limit_minutes":HORIZON,
 	"scope":"Natural twelve-person town. No action, needs, knowledge, relationship, routine or participant rewrites. Save replay is a separate branch."}
 
 func _initialize() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): OUT = argument.trim_prefix("--output=")
 	call_deferred("run")
 
 func expect(value: bool, message: String) -> bool:
@@ -195,7 +198,7 @@ func world_snapshot() -> Dictionary:
 	return sim._encode({"people":sim.people,"events":sim.events,"meetings":sim.meetings,"elapsed":sim.elapsed,
 		"remainder":sim.minute_remainder,"rng":str(sim.rng.state),"serial":sim.event_serial,"meeting_serial":sim.meeting_serial,
 		"budget":sim.shared_budget,"benches":sim.benches,"social":sim.social.serialize(),"agenda":sim.agenda.serialize(),
-		"work":sim.work_family.serialize(),"life":sim.life.serialize()}).duplicate(true)
+		"work":sim.work_family.serialize(),"life":sim.life.serialize(),"interactions":sim.interactions.serialize(),"tabletop":sim.tabletop.serialize()}).duplicate(true)
 
 func observe_candidates() -> void:
 	for id in IDS:
@@ -343,6 +346,23 @@ func render(seconds: float = .20) -> void:
 		main._process(1.0/60.0)
 		for actor in main.avatars.values(): actor.animator.advance(1.0/60.0)
 		await process_frame
+		observe_greetings()
+
+func observe_greetings() -> void:
+	# Several residents can greet during the same real encounter. Sampling all
+	# actual skeletons here retains an earlier greeting while another resident
+	# is selected; focusing Yui later must not restart her greeting for a test.
+	for id in IDS:
+		var actor = main.avatars[id]
+		var actual: Dictionary = actor.contacts.observed
+		var meeting_id: String = sim.person(id).meeting_id
+		if actor.contacts.greeting<=0 or meeting_id.is_empty() or not actual.has("handL") or not actual.has("head"): continue
+		var key: String = meeting_id+":"+id
+		if not greeting_tracks.has(key): greeting_tracks[key]={"meeting":meeting_id,"resident":id,"first":actual.handL,"movement":0.0,"raised":false,"samples":0}
+		var row: Dictionary = greeting_tracks[key]
+		row.samples += 1
+		row.movement=maxf(row.movement,row.first.distance_to(actual.handL))
+		row.raised=row.raised or actual.handL.y>actual.head.y-.25
 
 func wait_for_attention(duration: float) -> void:
 	# LookAtModifier3D retains its normal engine-time transition. A manual clip
@@ -487,11 +507,13 @@ func check_conversation(meeting: Dictionary) -> void:
 		"look_duration":actor.contacts.look.duration,"engine_process_delta":actor.get_process_delta_time(),
 		"wall_seconds_since_focus":(Time.get_ticks_usec()-focus_started_us)/1000000.0,
 		"neck_rest":bone_record(actor.jrpg.skeleton,"DEF-neck"),"head_rest":bone_record(actor.jrpg.skeleton,"DEF-head")}
-	expect(actor.animation_name in ["talk","sit_talk"] and actor.contacts.look.active,selected+": an actual engaged conversation selects the conversation pose and head attention")
+	var conversation_clips := ["talk","sit_talk"] if actor.conversation_role=="speaker" else ["idle","rest"]
+	expect(actor.conversation_role in ["speaker","listener"] and actor.animation_name in conversation_clips and actor.contacts.look.active,selected+": an actual engaged conversation selects its current speaking/listening role and head attention")
 	var hand_start: Vector3 = observed.handL
 	await render(.15)
 	var raised: bool = actor.contacts.observed.handL.y>actor.contacts.observed.head.y-.25
-	expect(raised and hand_start.distance_to(actor.contacts.observed.handL)>.003,selected+": the real encounter's greeting moves the visible hand near the face")
+	var greeting_track: Dictionary = greeting_tracks.get(meeting.id+":"+selected,{})
+	expect((raised and hand_start.distance_to(actor.contacts.observed.handL)>.003) or (greeting_track.get("raised",false) and float(greeting_track.get("movement",0))>.003),selected+": the same real encounter's greeting moves the actual visible hand near the face, including a greeting sampled before this resident was focused")
 	expect(selected_labels()==[selected] and actor.name_label.global_position.y-actor.head_position().y>.35,"Only the selected resident's name is shown above the head while nearby faces and hands remain unlabeled")
 	var greeting_observed := actor_snapshot()
 	var greeting_after: float = actor.contacts.greeting
@@ -510,6 +532,7 @@ func check_conversation(meeting: Dictionary) -> void:
 	expect(settled_dot>.35,selected+": the rendered head turns toward the actual conversation partner after the normal transition")
 	report.residents[selected].natural.conversation = {"meeting":meeting.duplicate(true),"observed":actor_snapshot(),"head_dot":head_dot,
 		"greeting_before":greeting_start,"greeting_after":greeting_after,"hand_before":sim._encode(hand_start),
+		"same_encounter_greeting_track":sim._encode(greeting_track),
 		"hand_movement":hand_movement,"raised_near_head":raised,"attention_sample":attention_sample,
 		"greeting_observed":greeting_observed,"settled_head_dot":settled_dot,"settled_attention_sample":settled_sample}
 	await capture(selected+"-03-conversation")
@@ -631,9 +654,9 @@ func observe_actual_town() -> void:
 			if meeting.get("mode","")=="project" and meeting.get("autonomous",false):
 				if not project_starts[id].has(meeting.id):
 					project_starts[id][meeting.id] = {"state":state(id),"meeting":meeting.duplicate(true)}
-				if meeting.state=="engaged" and not natural.has("project_engaged"):
+				if meeting.state=="engaged" and (not sim.interactions.supports(meeting) or sim.interactions.pose_for(id).get("phase","")=="working") and not natural.has("project_engaged"):
 					await focus(id);await record_project(meeting)
-			elif meeting.state=="engaged" and not natural.has("conversation"):
+			elif meeting.get("mode","")!="play" and meeting.state=="engaged" and not natural.has("conversation"):
 				await focus(id);await check_conversation(meeting)
 		if natural.has("project_engaged") and not natural.has("project_finished"):
 			var project: Dictionary = natural.project_engaged.meeting

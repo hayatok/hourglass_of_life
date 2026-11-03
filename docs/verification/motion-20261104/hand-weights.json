@@ -1,0 +1,1749 @@
+{
+  "scope": "Isolated weight-only candidates. CPU diagnostics do not satisfy the skill's extreme-pose, round-trip, or actual-engine delivery gates.",
+  "immutable_hand_baseline": "assets/models/haru-cute-pilot/build/fixtures/haru-hand-weight-baseline.json",
+  "policy": {
+    "rings": 3,
+    "iterations": 24,
+    "smoothness": 0.9,
+    "pose": "Same recorded contact, not a better-scoring replacement pose."
+  },
+  "lods": [
+    {
+      "level": 0,
+      "source": "game/assets/models/haru/CH_Haru.glb",
+      "candidate": "builds/haru-hand-repair/reproduced/CH_Haru.glb",
+      "input_vertices_reset_to_original_hand_baseline": 721,
+      "changed_vertices": 721,
+      "changed_weight_bytes": 12830,
+      "changed_bounds_gltf_m": [
+        [
+          -0.4310813546180725,
+          0.43111029267311096
+        ],
+        [
+          0.7265987992286682,
+          0.851639449596405
+        ],
+        [
+          -0.04462152346968651,
+          0.0575275793671608
+        ]
+      ],
+      "welded_hand_region_nodes": 566,
+      "mutable_nodes": 541,
+      "before": {
+        "hand_edges": 1038,
+        "peak_ratio": 5.1815040437797935,
+        "edges_over_3x": 7,
+        "peak_extra_length_m": 0.02657476261545788,
+        "worst": [
+          {
+            "vertices": [
+              17524,
+              17529
+            ],
+            "rest_length_m": 0.006333167872212199,
+            "posed_length_m": 0.03281533493980378,
+            "ratio": 5.1815040437797935,
+            "extra_length_m": 0.02648216706759158
+          },
+          {
+            "vertices": [
+              17512,
+              17519
+            ],
+            "rest_length_m": 0.005064223212750936,
+            "posed_length_m": 0.026075731503882156,
+            "ratio": 5.149009119153253,
+            "extra_length_m": 0.02101150829113122
+          },
+          {
+            "vertices": [
+              17572,
+              17573
+            ],
+            "rest_length_m": 0.006279807089743279,
+            "posed_length_m": 0.028140279734890108,
+            "ratio": 4.481073914014211,
+            "extra_length_m": 0.02186047264514683
+          },
+          {
+            "vertices": [
+              17568,
+              17569
+            ],
+            "rest_length_m": 0.008896265973354208,
+            "posed_length_m": 0.03236652239537445,
+            "ratio": 3.638214335353456,
+            "extra_length_m": 0.02347025642202024
+          },
+          {
+            "vertices": [
+              17519,
+              17524
+            ],
+            "rest_length_m": 0.010674871304795103,
+            "posed_length_m": 0.03585940485556756,
+            "ratio": 3.3592353323697384,
+            "extra_length_m": 0.025184533550772457
+          },
+          {
+            "vertices": [
+              17529,
+              17530
+            ],
+            "rest_length_m": 0.01185167625949884,
+            "posed_length_m": 0.03842643887495672,
+            "ratio": 3.2422788163960212,
+            "extra_length_m": 0.02657476261545788
+          },
+          {
+            "vertices": [
+              17507,
+              17508
+            ],
+            "rest_length_m": 0.010847823494527425,
+            "posed_length_m": 0.034867797023778076,
+            "ratio": 3.2142666260534556,
+            "extra_length_m": 0.02401997352925065
+          },
+          {
+            "vertices": [
+              17512,
+              17514
+            ],
+            "rest_length_m": 0.013095097374655995,
+            "posed_length_m": 0.038306099066844665,
+            "ratio": 2.9252244539228527,
+            "extra_length_m": 0.02521100169218867
+          },
+          {
+            "vertices": [
+              17507,
+              17512
+            ],
+            "rest_length_m": 0.013865180277424336,
+            "posed_length_m": 0.03992214886837584,
+            "ratio": 2.87930975793933,
+            "extra_length_m": 0.026056968590951503
+          },
+          {
+            "vertices": [
+              17530,
+              17532
+            ],
+            "rest_length_m": 0.00788541909323376,
+            "posed_length_m": 0.022402188614204604,
+            "ratio": 2.8409635999470524,
+            "extra_length_m": 0.014516769520970843
+          },
+          {
+            "vertices": [
+              17573,
+              17579
+            ],
+            "rest_length_m": 0.008849126494027314,
+            "posed_length_m": 0.023479249109894757,
+            "ratio": 2.6532843807512516,
+            "extra_length_m": 0.014630122615867443
+          },
+          {
+            "vertices": [
+              17569,
+              17573
+            ],
+            "rest_length_m": 0.014603910710396706,
+            "posed_length_m": 0.0364814885173604,
+            "ratio": 2.498062966886587,
+            "extra_length_m": 0.021877577806963693
+          }
+        ],
+        "surface_diagnostic": {
+          "hand_triangles": 647,
+          "minimum_area_ratio": 0.2278966063766749,
+          "triangles_under_tenth_rest_area": 0,
+          "normals_reversed_vs_rest": 2,
+          "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+        }
+      },
+      "after": {
+        "hand_edges": 1038,
+        "peak_ratio": 2.1889867872503945,
+        "edges_over_3x": 0,
+        "peak_extra_length_m": 0.009021388791823905,
+        "worst": [
+          {
+            "vertices": [
+              17578,
+              17586
+            ],
+            "rest_length_m": 0.00227885077908418,
+            "posed_length_m": 0.004988374245530538,
+            "ratio": 2.1889867872503945,
+            "extra_length_m": 0.002709523466446358
+          },
+          {
+            "vertices": [
+              17501,
+              17503
+            ],
+            "rest_length_m": 0.0064151890896854075,
+            "posed_length_m": 0.01282735866168488,
+            "ratio": 1.9995293174302857,
+            "extra_length_m": 0.006412169571999472
+          },
+          {
+            "vertices": [
+              17562,
+              17565
+            ],
+            "rest_length_m": 0.0064151890896854075,
+            "posed_length_m": 0.01282735866168488,
+            "ratio": 1.9995293174302857,
+            "extra_length_m": 0.006412169571999472
+          },
+          {
+            "vertices": [
+              17499,
+              17515
+            ],
+            "rest_length_m": 0.005742913772299163,
+            "posed_length_m": 0.01127376958840442,
+            "ratio": 1.9630748493531693,
+            "extra_length_m": 0.0055308558161052575
+          },
+          {
+            "vertices": [
+              17502,
+              17509
+            ],
+            "rest_length_m": 0.00405097872553495,
+            "posed_length_m": 0.007886026994863892,
+            "ratio": 1.9466967192780076,
+            "extra_length_m": 0.0038350482693289417
+          },
+          {
+            "vertices": [
+              17492,
+              17527
+            ],
+            "rest_length_m": 0.0050303863531689745,
+            "posed_length_m": 0.009294686895033374,
+            "ratio": 1.8477083552793183,
+            "extra_length_m": 0.004264300541864399
+          },
+          {
+            "vertices": [
+              17510,
+              17531
+            ],
+            "rest_length_m": 0.0037448423386736147,
+            "posed_length_m": 0.006640188272036942,
+            "ratio": 1.7731556288665624,
+            "extra_length_m": 0.002895345933363327
+          },
+          {
+            "vertices": [
+              17525,
+              17541
+            ],
+            "rest_length_m": 0.006677782275456555,
+            "posed_length_m": 0.01183755250691862,
+            "ratio": 1.7726772180677746,
+            "extra_length_m": 0.005159770231462064
+          },
+          {
+            "vertices": [
+              17524,
+              17529
+            ],
+            "rest_length_m": 0.006333167872212199,
+            "posed_length_m": 0.01078704170963883,
+            "ratio": 1.7032616105075509,
+            "extra_length_m": 0.00445387383742663
+          },
+          {
+            "vertices": [
+              17572,
+              17573
+            ],
+            "rest_length_m": 0.006279807089743279,
+            "posed_length_m": 0.010634204688087364,
+            "ratio": 1.6933967136436503,
+            "extra_length_m": 0.0043543975983440855
+          },
+          {
+            "vertices": [
+              17507,
+              17512
+            ],
+            "rest_length_m": 0.013865180277424336,
+            "posed_length_m": 0.02288656906924824,
+            "ratio": 1.6506506667289984,
+            "extra_length_m": 0.009021388791823905
+          },
+          {
+            "vertices": [
+              17507,
+              17508
+            ],
+            "rest_length_m": 0.010847823494527425,
+            "posed_length_m": 0.0177664371413512,
+            "ratio": 1.6377881839904678,
+            "extra_length_m": 0.006918613646823776
+          }
+        ],
+        "surface_diagnostic": {
+          "hand_triangles": 647,
+          "minimum_area_ratio": 0.2278966063766749,
+          "triangles_under_tenth_rest_area": 0,
+          "normals_reversed_vs_rest": 2,
+          "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+        }
+      },
+      "constraints": {
+        "non_weight_bytes_unchanged": true,
+        "position_values_unchanged": true,
+        "skin_bind_matrices_unchanged": true,
+        "nodes_and_animations_unchanged": true,
+        "maximum_influences": 4,
+        "peak_normalisation_error": 1.0058283805847168e-07,
+        "seam_scope": "All coincident positions with any hand/digit influence, including unchanged hand regions.",
+        "hand_seam_weight_mismatches": [],
+        "distal_pad_weight_losses": [],
+        "locked_distal_vertex_pose_displacement_m": 0.0
+      },
+      "mirrored_right_stress": {
+        "scope": "Inferred symmetric stress pose, not an actual observed right-hand game action.",
+        "before": {
+          "hand_edges": 813,
+          "peak_ratio": 5.67755200605415,
+          "edges_over_3x": 2,
+          "peak_extra_length_m": 0.02778476809362233,
+          "worst": [
+            {
+              "vertices": [
+                788,
+                792
+              ],
+              "rest_length_m": 0.004631567669830663,
+              "posed_length_m": 0.026295966315022623,
+              "ratio": 5.67755200605415,
+              "extra_length_m": 0.02166439864519196
+            },
+            {
+              "vertices": [
+                842,
+                854
+              ],
+              "rest_length_m": 0.005729387385650074,
+              "posed_length_m": 0.0240036060463962,
+              "ratio": 4.1895589232656985,
+              "extra_length_m": 0.018274218660746126
+            },
+            {
+              "vertices": [
+                859,
+                860
+              ],
+              "rest_length_m": 0.008637212688953995,
+              "posed_length_m": 0.02476586341176683,
+              "ratio": 2.8673443972775536,
+              "extra_length_m": 0.01612865072281284
+            },
+            {
+              "vertices": [
+                787,
+                790
+              ],
+              "rest_length_m": 0.014272045684943231,
+              "posed_length_m": 0.03935497631207309,
+              "ratio": 2.7574867107938092,
+              "extra_length_m": 0.02508293062712986
+            },
+            {
+              "vertices": [
+                842,
+                850
+              ],
+              "rest_length_m": 0.01669979767160591,
+              "posed_length_m": 0.040023392587231074,
+              "ratio": 2.396639370983606,
+              "extra_length_m": 0.023323594915625166
+            },
+            {
+              "vertices": [
+                854,
+                860
+              ],
+              "rest_length_m": 0.018411821032117193,
+              "posed_length_m": 0.04240914492731067,
+              "ratio": 2.303365042128807,
+              "extra_length_m": 0.023997323895193476
+            },
+            {
+              "vertices": [
+                842,
+                843
+              ],
+              "rest_length_m": 0.02199800120053518,
+              "posed_length_m": 0.04752054565907706,
+              "ratio": 2.160221068536034,
+              "extra_length_m": 0.025522544458541883
+            },
+            {
+              "vertices": [
+                858,
+                865
+              ],
+              "rest_length_m": 0.011764934340384024,
+              "posed_length_m": 0.025386099356284567,
+              "ratio": 2.157776543566832,
+              "extra_length_m": 0.013621165015900542
+            },
+            {
+              "vertices": [
+                854,
+                861
+              ],
+              "rest_length_m": 0.020632506438572302,
+              "posed_length_m": 0.044356028894464425,
+              "ratio": 2.149812919071296,
+              "extra_length_m": 0.023723522455892123
+            },
+            {
+              "vertices": [
+                859,
+                863
+              ],
+              "rest_length_m": 0.012566884086536783,
+              "posed_length_m": 0.026853686083852378,
+              "ratio": 2.1368611263488457,
+              "extra_length_m": 0.014286801997315595
+            },
+            {
+              "vertices": [
+                855,
+                860
+              ],
+              "rest_length_m": 0.022959485884989275,
+              "posed_length_m": 0.048313527165506236,
+              "ratio": 2.1042948177290515,
+              "extra_length_m": 0.02535404128051696
+            },
+            {
+              "vertices": [
+                840,
+                843
+              ],
+              "rest_length_m": 0.022537533155580766,
+              "posed_length_m": 0.04583348949112138,
+              "ratio": 2.033651561363185,
+              "extra_length_m": 0.023295956335540612
+            }
+          ],
+          "surface_diagnostic": {
+            "hand_triangles": 503,
+            "minimum_area_ratio": 0.14172812828697143,
+            "triangles_under_tenth_rest_area": 0,
+            "normals_reversed_vs_rest": 6,
+            "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+          }
+        },
+        "after": {
+          "hand_edges": 813,
+          "peak_ratio": 2.2310005578351424,
+          "edges_over_3x": 0,
+          "peak_extra_length_m": 0.01192223807528248,
+          "worst": [
+            {
+              "vertices": [
+                843,
+                844
+              ],
+              "rest_length_m": 0.004884944314934418,
+              "posed_length_m": 0.010898313491612296,
+              "ratio": 2.2310005578351424,
+              "extra_length_m": 0.006013369176677877
+            },
+            {
+              "vertices": [
+                138,
+                139
+              ],
+              "rest_length_m": 0.010127587956389348,
+              "posed_length_m": 0.02023947595000819,
+              "ratio": 1.9984497826295746,
+              "extra_length_m": 0.010111887993618842
+            },
+            {
+              "vertices": [
+                788,
+                792
+              ],
+              "rest_length_m": 0.004631567669830663,
+              "posed_length_m": 0.008475676030325723,
+              "ratio": 1.8299799624077622,
+              "extra_length_m": 0.0038441083604950597
+            },
+            {
+              "vertices": [
+                844,
+                850
+              ],
+              "rest_length_m": 0.010991712425861342,
+              "posed_length_m": 0.01822404039207828,
+              "ratio": 1.6579800931837236,
+              "extra_length_m": 0.007232327966216938
+            },
+            {
+              "vertices": [
+                137,
+                139
+              ],
+              "rest_length_m": 0.011677221027764908,
+              "posed_length_m": 0.019079545996682917,
+              "ratio": 1.6339115232397772,
+              "extra_length_m": 0.007402324968918008
+            },
+            {
+              "vertices": [
+                139,
+                140
+              ],
+              "rest_length_m": 0.010031821880638428,
+              "posed_length_m": 0.01638391683889575,
+              "ratio": 1.6331945516812816,
+              "extra_length_m": 0.0063520949582573216
+            },
+            {
+              "vertices": [
+                184,
+                185
+              ],
+              "rest_length_m": 0.010031821880638428,
+              "posed_length_m": 0.01638391683889575,
+              "ratio": 1.6331945516812816,
+              "extra_length_m": 0.0063520949582573216
+            },
+            {
+              "vertices": [
+                858,
+                865
+              ],
+              "rest_length_m": 0.011764934340384024,
+              "posed_length_m": 0.01917954389516378,
+              "ratio": 1.6302295737706372,
+              "extra_length_m": 0.007414609554779756
+            },
+            {
+              "vertices": [
+                849,
+                850
+              ],
+              "rest_length_m": 0.010400314827542959,
+              "posed_length_m": 0.01675087257758967,
+              "ratio": 1.6106120685143732,
+              "extra_length_m": 0.006350557750046712
+            },
+            {
+              "vertices": [
+                866,
+                867
+              ],
+              "rest_length_m": 0.008817370739403385,
+              "posed_length_m": 0.013690772062082997,
+              "ratio": 1.5527045949084548,
+              "extra_length_m": 0.004873401322679612
+            },
+            {
+              "vertices": [
+                806,
+                807
+              ],
+              "rest_length_m": 0.008817370739403385,
+              "posed_length_m": 0.013690772062082997,
+              "ratio": 1.5527045949084548,
+              "extra_length_m": 0.004873401322679612
+            },
+            {
+              "vertices": [
+                859,
+                863
+              ],
+              "rest_length_m": 0.012566884086536783,
+              "posed_length_m": 0.018983103975804588,
+              "ratio": 1.5105656935390739,
+              "extra_length_m": 0.006416219889267804
+            }
+          ],
+          "surface_diagnostic": {
+            "hand_triangles": 503,
+            "minimum_area_ratio": 0.11962000432967772,
+            "triangles_under_tenth_rest_area": 0,
+            "normals_reversed_vs_rest": 3,
+            "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+          }
+        }
+      }
+    },
+    {
+      "level": 1,
+      "source": "game/assets/models/haru/CH_Haru_LOD1.glb",
+      "candidate": "builds/haru-hand-repair/reproduced/CH_Haru_LOD1.glb",
+      "input_vertices_reset_to_original_hand_baseline": 479,
+      "changed_vertices": 479,
+      "changed_weight_bytes": 8492,
+      "changed_bounds_gltf_m": [
+        [
+          -0.4294130802154541,
+          0.4296453297138214
+        ],
+        [
+          0.7265987992286682,
+          0.8565142750740051
+        ],
+        [
+          -0.044387005269527435,
+          0.05740021541714668
+        ]
+      ],
+      "welded_hand_region_nodes": 321,
+      "mutable_nodes": 306,
+      "before": {
+        "hand_edges": 567,
+        "peak_ratio": 2.773908613513967,
+        "edges_over_3x": 0,
+        "peak_extra_length_m": 0.023346526872554025,
+        "worst": [
+          {
+            "vertices": [
+              8503,
+              8516
+            ],
+            "rest_length_m": 0.007041177028977599,
+            "posed_length_m": 0.019531581609957643,
+            "ratio": 2.773908613513967,
+            "extra_length_m": 0.012490404580980044
+          },
+          {
+            "vertices": [
+              8506,
+              8512
+            ],
+            "rest_length_m": 0.0067460904126956335,
+            "posed_length_m": 0.015746119053871573,
+            "ratio": 2.3341102906416085,
+            "extra_length_m": 0.009000028641175939
+          },
+          {
+            "vertices": [
+              8503,
+              8504
+            ],
+            "rest_length_m": 0.01502060531255612,
+            "posed_length_m": 0.034018369523979575,
+            "ratio": 2.2647802013373406,
+            "extra_length_m": 0.018997764211423455
+          },
+          {
+            "vertices": [
+              8505,
+              8542
+            ],
+            "rest_length_m": 0.014305670179695766,
+            "posed_length_m": 0.030705001597186095,
+            "ratio": 2.1463518459111497,
+            "extra_length_m": 0.01639933141749033
+          },
+          {
+            "vertices": [
+              8504,
+              8541
+            ],
+            "rest_length_m": 0.014305670179695766,
+            "posed_length_m": 0.030705001597186095,
+            "ratio": 2.1463518459111497,
+            "extra_length_m": 0.01639933141749033
+          },
+          {
+            "vertices": [
+              8512,
+              8513
+            ],
+            "rest_length_m": 0.016519647453515807,
+            "posed_length_m": 0.03492557321248108,
+            "ratio": 2.114183932239306,
+            "extra_length_m": 0.018405925758965276
+          },
+          {
+            "vertices": [
+              8498,
+              8530
+            ],
+            "rest_length_m": 0.0201282027073863,
+            "posed_length_m": 0.04147551683559416,
+            "ratio": 2.0605673262806614,
+            "extra_length_m": 0.02134731412820786
+          },
+          {
+            "vertices": [
+              8499,
+              8531
+            ],
+            "rest_length_m": 0.0201282027073863,
+            "posed_length_m": 0.04147551683559416,
+            "ratio": 2.0605673262806614,
+            "extra_length_m": 0.02134731412820786
+          },
+          {
+            "vertices": [
+              8501,
+              8516
+            ],
+            "rest_length_m": 0.016684676886280968,
+            "posed_length_m": 0.033606889084651426,
+            "ratio": 2.014236734322665,
+            "extra_length_m": 0.016922212198370458
+          },
+          {
+            "vertices": [
+              8500,
+              8506
+            ],
+            "rest_length_m": 0.0237035422021814,
+            "posed_length_m": 0.047050069074735426,
+            "ratio": 1.9849383131608693,
+            "extra_length_m": 0.023346526872554025
+          },
+          {
+            "vertices": [
+              8500,
+              8530
+            ],
+            "rest_length_m": 0.01976079029866232,
+            "posed_length_m": 0.038623011563922095,
+            "ratio": 1.9545276772931812,
+            "extra_length_m": 0.018862221265259774
+          },
+          {
+            "vertices": [
+              8441,
+              8542
+            ],
+            "rest_length_m": 0.02186452889591597,
+            "posed_length_m": 0.042243707887385136,
+            "ratio": 1.932065771390837,
+            "extra_length_m": 0.020379178991469165
+          }
+        ],
+        "surface_diagnostic": {
+          "hand_triangles": 346,
+          "minimum_area_ratio": 0.13005404647992286,
+          "triangles_under_tenth_rest_area": 0,
+          "normals_reversed_vs_rest": 0,
+          "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+        }
+      },
+      "after": {
+        "hand_edges": 567,
+        "peak_ratio": 2.6328342283965007,
+        "edges_over_3x": 0,
+        "peak_extra_length_m": 0.011345703477920431,
+        "worst": [
+          {
+            "vertices": [
+              8497,
+              8509
+            ],
+            "rest_length_m": 0.006948472343737123,
+            "posed_length_m": 0.018294175821657554,
+            "ratio": 2.6328342283965007,
+            "extra_length_m": 0.011345703477920431
+          },
+          {
+            "vertices": [
+              8497,
+              8500
+            ],
+            "rest_length_m": 0.007686534440962699,
+            "posed_length_m": 0.01640452873165469,
+            "ratio": 2.1341904934729086,
+            "extra_length_m": 0.008717994290691991
+          },
+          {
+            "vertices": [
+              8491,
+              8495
+            ],
+            "rest_length_m": 0.008036252115608095,
+            "posed_length_m": 0.015228283995204381,
+            "ratio": 1.8949485128307317,
+            "extra_length_m": 0.007192031879596286
+          },
+          {
+            "vertices": [
+              8493,
+              8495
+            ],
+            "rest_length_m": 0.005515371323185566,
+            "posed_length_m": 0.009730246267334755,
+            "ratio": 1.7642051091701951,
+            "extra_length_m": 0.004214874944149189
+          },
+          {
+            "vertices": [
+              8494,
+              8496
+            ],
+            "rest_length_m": 0.005515371323185566,
+            "posed_length_m": 0.009730246267334755,
+            "ratio": 1.7642051091701951,
+            "extra_length_m": 0.004214874944149189
+          },
+          {
+            "vertices": [
+              8430,
+              8440
+            ],
+            "rest_length_m": 0.007475822570253051,
+            "posed_length_m": 0.011571360998912036,
+            "ratio": 1.5478378319137065,
+            "extra_length_m": 0.004095538428658984
+          },
+          {
+            "vertices": [
+              8491,
+              8497
+            ],
+            "rest_length_m": 0.009343646665032863,
+            "posed_length_m": 0.014080758593212443,
+            "ratio": 1.5069874855079315,
+            "extra_length_m": 0.0047371119281795805
+          },
+          {
+            "vertices": [
+              8516,
+              8517
+            ],
+            "rest_length_m": 0.019988716138725063,
+            "posed_length_m": 0.029558577421453437,
+            "ratio": 1.4787631790011886,
+            "extra_length_m": 0.009569861282728374
+          },
+          {
+            "vertices": [
+              8495,
+              8498
+            ],
+            "rest_length_m": 0.01133581122261332,
+            "posed_length_m": 0.016411241271908197,
+            "ratio": 1.4477341717873813,
+            "extra_length_m": 0.005075430049294878
+          },
+          {
+            "vertices": [
+              8496,
+              8499
+            ],
+            "rest_length_m": 0.01133581122261332,
+            "posed_length_m": 0.016411241271908197,
+            "ratio": 1.4477341717873813,
+            "extra_length_m": 0.005075430049294878
+          },
+          {
+            "vertices": [
+              8436,
+              8505
+            ],
+            "rest_length_m": 0.01817998876234554,
+            "posed_length_m": 0.02575602193440258,
+            "ratio": 1.4167237544034432,
+            "extra_length_m": 0.007576033172057042
+          },
+          {
+            "vertices": [
+              8434,
+              8504
+            ],
+            "rest_length_m": 0.01817998876234554,
+            "posed_length_m": 0.02575602193440258,
+            "ratio": 1.4167237544034432,
+            "extra_length_m": 0.007576033172057042
+          }
+        ],
+        "surface_diagnostic": {
+          "hand_triangles": 346,
+          "minimum_area_ratio": 0.13005404647992286,
+          "triangles_under_tenth_rest_area": 0,
+          "normals_reversed_vs_rest": 0,
+          "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+        }
+      },
+      "constraints": {
+        "non_weight_bytes_unchanged": true,
+        "position_values_unchanged": true,
+        "skin_bind_matrices_unchanged": true,
+        "nodes_and_animations_unchanged": true,
+        "maximum_influences": 4,
+        "peak_normalisation_error": 9.685754776000977e-08,
+        "seam_scope": "All coincident positions with any hand/digit influence, including unchanged hand regions.",
+        "hand_seam_weight_mismatches": [],
+        "distal_pad_weight_losses": [],
+        "locked_distal_vertex_pose_displacement_m": 0.0
+      },
+      "mirrored_right_stress": {
+        "scope": "Inferred symmetric stress pose, not an actual observed right-hand game action.",
+        "before": {
+          "hand_edges": 505,
+          "peak_ratio": 3.1987820904266004,
+          "edges_over_3x": 1,
+          "peak_extra_length_m": 0.028252804879691902,
+          "worst": [
+            {
+              "vertices": [
+                541,
+                581
+              ],
+              "rest_length_m": 0.008385232103563836,
+              "posed_length_m": 0.026822530276950165,
+              "ratio": 3.1987820904266004,
+              "extra_length_m": 0.01843729817338633
+            },
+            {
+              "vertices": [
+                585,
+                586
+              ],
+              "rest_length_m": 0.01006065594017946,
+              "posed_length_m": 0.02686960176220031,
+              "ratio": 2.670760427746127,
+              "extra_length_m": 0.01680894582202085
+            },
+            {
+              "vertices": [
+                542,
+                543
+              ],
+              "rest_length_m": 0.015767536631097746,
+              "posed_length_m": 0.041159903728035116,
+              "ratio": 2.6104206821284257,
+              "extra_length_m": 0.02539236709693737
+            },
+            {
+              "vertices": [
+                585,
+                587
+              ],
+              "rest_length_m": 0.012566884086536783,
+              "posed_length_m": 0.026853686083852378,
+              "ratio": 2.1368611263488457,
+              "extra_length_m": 0.014286801997315595
+            },
+            {
+              "vertices": [
+                583,
+                588
+              ],
+              "rest_length_m": 0.014211399076464397,
+              "posed_length_m": 0.028636335448812302,
+              "ratio": 2.0150257757687733,
+              "extra_length_m": 0.014424936372347905
+            },
+            {
+              "vertices": [
+                581,
+                586
+              ],
+              "rest_length_m": 0.024251270343252834,
+              "posed_length_m": 0.04832214551304526,
+              "ratio": 1.9925614134473333,
+              "extra_length_m": 0.02407087516979243
+            },
+            {
+              "vertices": [
+                510,
+                546
+              ],
+              "rest_length_m": 0.023329809316460892,
+              "posed_length_m": 0.04610497641428208,
+              "ratio": 1.976226028635032,
+              "extra_length_m": 0.022775167097821188
+            },
+            {
+              "vertices": [
+                542,
+                545
+              ],
+              "rest_length_m": 0.024338263210562372,
+              "posed_length_m": 0.04798825216162898,
+              "ratio": 1.9717204858234476,
+              "extra_length_m": 0.02364998895106661
+            },
+            {
+              "vertices": [
+                541,
+                544
+              ],
+              "rest_length_m": 0.024338263210562372,
+              "posed_length_m": 0.04798825216162898,
+              "ratio": 1.9717204858234476,
+              "extra_length_m": 0.02364998895106661
+            },
+            {
+              "vertices": [
+                585,
+                589
+              ],
+              "rest_length_m": 0.032367241157684294,
+              "posed_length_m": 0.060620046037376196,
+              "ratio": 1.8728827008162978,
+              "extra_length_m": 0.028252804879691902
+            },
+            {
+              "vertices": [
+                503,
+                508
+              ],
+              "rest_length_m": 0.007340298940432425,
+              "posed_length_m": 0.013656226879468145,
+              "ratio": 1.860445601778671,
+              "extra_length_m": 0.00631592793903572
+            },
+            {
+              "vertices": [
+                502,
+                506
+              ],
+              "rest_length_m": 0.007340298940432425,
+              "posed_length_m": 0.013656226879468145,
+              "ratio": 1.860445601778671,
+              "extra_length_m": 0.00631592793903572
+            }
+          ],
+          "surface_diagnostic": {
+            "hand_triangles": 313,
+            "minimum_area_ratio": 0.24677897068294227,
+            "triangles_under_tenth_rest_area": 0,
+            "normals_reversed_vs_rest": 1,
+            "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+          }
+        },
+        "after": {
+          "hand_edges": 505,
+          "peak_ratio": 2.492375228414377,
+          "edges_over_3x": 0,
+          "peak_extra_length_m": 0.01251946575524801,
+          "worst": [
+            {
+              "vertices": [
+                507,
+                510
+              ],
+              "rest_length_m": 0.002235224523486463,
+              "posed_length_m": 0.005571018232281991,
+              "ratio": 2.492375228414377,
+              "extra_length_m": 0.003335793708795528
+            },
+            {
+              "vertices": [
+                506,
+                509
+              ],
+              "rest_length_m": 0.002235224523486463,
+              "posed_length_m": 0.005571018232281991,
+              "ratio": 2.492375228414377,
+              "extra_length_m": 0.003335793708795528
+            },
+            {
+              "vertices": [
+                579,
+                580
+              ],
+              "rest_length_m": 0.009537611620574869,
+              "posed_length_m": 0.021156082531953575,
+              "ratio": 2.218174043312367,
+              "extra_length_m": 0.011618470911378706
+            },
+            {
+              "vertices": [
+                579,
+                582
+              ],
+              "rest_length_m": 0.009803674920886806,
+              "posed_length_m": 0.016610006566772754,
+              "ratio": 1.6942632942046054,
+              "extra_length_m": 0.006806331645885948
+            },
+            {
+              "vertices": [
+                544,
+                580
+              ],
+              "rest_length_m": 0.011498032205178242,
+              "posed_length_m": 0.019236505800863807,
+              "ratio": 1.67302591065978,
+              "extra_length_m": 0.007738473595685564
+            },
+            {
+              "vertices": [
+                544,
+                581
+              ],
+              "rest_length_m": 0.02236650529473692,
+              "posed_length_m": 0.034793086703162356,
+              "ratio": 1.555588870262604,
+              "extra_length_m": 0.012426581408425435
+            },
+            {
+              "vertices": [
+                520,
+                558
+              ],
+              "rest_length_m": 0.007965868996453199,
+              "posed_length_m": 0.012333093305503641,
+              "ratio": 1.54824204502923,
+              "extra_length_m": 0.004367224309050443
+            },
+            {
+              "vertices": [
+                521,
+                559
+              ],
+              "rest_length_m": 0.007965868996453199,
+              "posed_length_m": 0.012333093305503641,
+              "ratio": 1.54824204502923,
+              "extra_length_m": 0.004367224309050443
+            },
+            {
+              "vertices": [
+                583,
+                588
+              ],
+              "rest_length_m": 0.014211399076464397,
+              "posed_length_m": 0.02197533137340188,
+              "ratio": 1.546317238377704,
+              "extra_length_m": 0.007763932296937483
+            },
+            {
+              "vertices": [
+                542,
+                545
+              ],
+              "rest_length_m": 0.024338263210562372,
+              "posed_length_m": 0.03685772896581038,
+              "ratio": 1.5143943775665465,
+              "extra_length_m": 0.01251946575524801
+            },
+            {
+              "vertices": [
+                541,
+                544
+              ],
+              "rest_length_m": 0.024338263210562372,
+              "posed_length_m": 0.03685772896581038,
+              "ratio": 1.5143943775665465,
+              "extra_length_m": 0.01251946575524801
+            },
+            {
+              "vertices": [
+                105,
+                109
+              ],
+              "rest_length_m": 0.009258888078637742,
+              "posed_length_m": 0.013049528917629177,
+              "ratio": 1.40940562266189,
+              "extra_length_m": 0.003790640838991435
+            }
+          ],
+          "surface_diagnostic": {
+            "hand_triangles": 313,
+            "minimum_area_ratio": 0.24677897068294227,
+            "triangles_under_tenth_rest_area": 0,
+            "normals_reversed_vs_rest": 0,
+            "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+          }
+        }
+      }
+    },
+    {
+      "level": 2,
+      "source": "game/assets/models/haru/CH_Haru_LOD2.glb",
+      "candidate": "builds/haru-hand-repair/reproduced/CH_Haru_LOD2.glb",
+      "input_vertices_reset_to_original_hand_baseline": 187,
+      "changed_vertices": 187,
+      "changed_weight_bytes": 3325,
+      "changed_bounds_gltf_m": [
+        [
+          -0.4289373457431793,
+          0.4311828315258026
+        ],
+        [
+          0.736875057220459,
+          0.8510369658470154
+        ],
+        [
+          -0.04557950422167778,
+          0.06414390355348587
+        ]
+      ],
+      "welded_hand_region_nodes": 88,
+      "mutable_nodes": 82,
+      "before": {
+        "hand_edges": 121,
+        "peak_ratio": 1.7813079227176085,
+        "edges_over_3x": 0,
+        "peak_extra_length_m": 0.0247418117032175,
+        "worst": [
+          {
+            "vertices": [
+              3204,
+              3208
+            ],
+            "rest_length_m": 0.025511366102525464,
+            "posed_length_m": 0.04544359855777805,
+            "ratio": 1.7813079227176085,
+            "extra_length_m": 0.019932232455252583
+          },
+          {
+            "vertices": [
+              3148,
+              3205
+            ],
+            "rest_length_m": 0.034117749319123855,
+            "posed_length_m": 0.058859561022341356,
+            "ratio": 1.7251888590830666,
+            "extra_length_m": 0.0247418117032175
+          },
+          {
+            "vertices": [
+              3145,
+              3204
+            ],
+            "rest_length_m": 0.034117749319123855,
+            "posed_length_m": 0.058859561022341356,
+            "ratio": 1.7251888590830666,
+            "extra_length_m": 0.0247418117032175
+          },
+          {
+            "vertices": [
+              3206,
+              3208
+            ],
+            "rest_length_m": 0.025492708162036266,
+            "posed_length_m": 0.04237675486191528,
+            "ratio": 1.6623088685815943,
+            "extra_length_m": 0.016884046699879012
+          },
+          {
+            "vertices": [
+              3215,
+              3222
+            ],
+            "rest_length_m": 0.02666903653560842,
+            "posed_length_m": 0.042312201973674246,
+            "ratio": 1.5865665757058423,
+            "extra_length_m": 0.015643165438065827
+          },
+          {
+            "vertices": [
+              3202,
+              3216
+            ],
+            "rest_length_m": 0.03295739020784479,
+            "posed_length_m": 0.05210445580767462,
+            "ratio": 1.5809642535127761,
+            "extra_length_m": 0.01914706559982983
+          },
+          {
+            "vertices": [
+              3203,
+              3217
+            ],
+            "rest_length_m": 0.03295739020784479,
+            "posed_length_m": 0.05210445580767462,
+            "ratio": 1.5809642535127761,
+            "extra_length_m": 0.01914706559982983
+          },
+          {
+            "vertices": [
+              3183,
+              3205
+            ],
+            "rest_length_m": 0.030753267035593387,
+            "posed_length_m": 0.047951013195449275,
+            "ratio": 1.559216883850144,
+            "extra_length_m": 0.01719774615985589
+          },
+          {
+            "vertices": [
+              3204,
+              3206
+            ],
+            "rest_length_m": 0.018559465784801134,
+            "posed_length_m": 0.02890826382630875,
+            "ratio": 1.5576021509187261,
+            "extra_length_m": 0.010348798041507616
+          },
+          {
+            "vertices": [
+              3183,
+              3215
+            ],
+            "rest_length_m": 0.032590054934432185,
+            "posed_length_m": 0.04856167148343327,
+            "ratio": 1.490076392357556,
+            "extra_length_m": 0.01597161654900109
+          },
+          {
+            "vertices": [
+              3207,
+              3222
+            ],
+            "rest_length_m": 0.028033835079682882,
+            "posed_length_m": 0.040195397999113563,
+            "ratio": 1.433817309863701,
+            "extra_length_m": 0.012161562919430682
+          },
+          {
+            "vertices": [
+              3206,
+              3218
+            ],
+            "rest_length_m": 0.028033835079682882,
+            "posed_length_m": 0.040195397999113563,
+            "ratio": 1.433817309863701,
+            "extra_length_m": 0.012161562919430682
+          }
+        ],
+        "surface_diagnostic": {
+          "hand_triangles": 101,
+          "minimum_area_ratio": 0.5321794722741903,
+          "triangles_under_tenth_rest_area": 0,
+          "normals_reversed_vs_rest": 0,
+          "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+        }
+      },
+      "after": {
+        "hand_edges": 121,
+        "peak_ratio": 1.4252703313087411,
+        "edges_over_3x": 0,
+        "peak_extra_length_m": 0.012754225191274712,
+        "worst": [
+          {
+            "vertices": [
+              3206,
+              3208
+            ],
+            "rest_length_m": 0.025492708162036266,
+            "posed_length_m": 0.03633400060806248,
+            "ratio": 1.4252703313087411,
+            "extra_length_m": 0.010841292446026215
+          },
+          {
+            "vertices": [
+              3202,
+              3216
+            ],
+            "rest_length_m": 0.03295739020784479,
+            "posed_length_m": 0.045711615399119505,
+            "ratio": 1.3869913579576711,
+            "extra_length_m": 0.012754225191274712
+          },
+          {
+            "vertices": [
+              3203,
+              3217
+            ],
+            "rest_length_m": 0.03295739020784479,
+            "posed_length_m": 0.045711615399119505,
+            "ratio": 1.3869913579576711,
+            "extra_length_m": 0.012754225191274712
+          },
+          {
+            "vertices": [
+              3148,
+              3205
+            ],
+            "rest_length_m": 0.034117749319123855,
+            "posed_length_m": 0.04533453707839634,
+            "ratio": 1.328766931674042,
+            "extra_length_m": 0.011216787759272484
+          },
+          {
+            "vertices": [
+              3145,
+              3204
+            ],
+            "rest_length_m": 0.034117749319123855,
+            "posed_length_m": 0.04533453707839634,
+            "ratio": 1.328766931674042,
+            "extra_length_m": 0.011216787759272484
+          },
+          {
+            "vertices": [
+              3245,
+              3294
+            ],
+            "rest_length_m": 0.016919930936351323,
+            "posed_length_m": 0.02224423498884134,
+            "ratio": 1.3146764648460303,
+            "extra_length_m": 0.005324304052490018
+          },
+          {
+            "vertices": [
+              3204,
+              3208
+            ],
+            "rest_length_m": 0.025511366102525464,
+            "posed_length_m": 0.03334961506356174,
+            "ratio": 1.307245363871766,
+            "extra_length_m": 0.007838248961036274
+          },
+          {
+            "vertices": [
+              3204,
+              3213
+            ],
+            "rest_length_m": 0.031824191984974305,
+            "posed_length_m": 0.04051687567403105,
+            "ratio": 1.2731470352227943,
+            "extra_length_m": 0.008692683689056742
+          },
+          {
+            "vertices": [
+              3205,
+              3214
+            ],
+            "rest_length_m": 0.031824191984974305,
+            "posed_length_m": 0.04051687567403105,
+            "ratio": 1.2731470352227943,
+            "extra_length_m": 0.008692683689056742
+          },
+          {
+            "vertices": [
+              3215,
+              3222
+            ],
+            "rest_length_m": 0.02666903653560842,
+            "posed_length_m": 0.03385910069217584,
+            "ratio": 1.269603446190014,
+            "extra_length_m": 0.007190064156567422
+          },
+          {
+            "vertices": [
+              3183,
+              3215
+            ],
+            "rest_length_m": 0.032590054934432185,
+            "posed_length_m": 0.040247296986729894,
+            "ratio": 1.2349564021203183,
+            "extra_length_m": 0.0076572420522977094
+          },
+          {
+            "vertices": [
+              3294,
+              3296
+            ],
+            "rest_length_m": 0.011970945440464766,
+            "posed_length_m": 0.014588876457554958,
+            "ratio": 1.2186904142291832,
+            "extra_length_m": 0.0026179310170901925
+          }
+        ],
+        "surface_diagnostic": {
+          "hand_triangles": 101,
+          "minimum_area_ratio": 0.5321794722741903,
+          "triangles_under_tenth_rest_area": 0,
+          "normals_reversed_vs_rest": 0,
+          "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+        }
+      },
+      "constraints": {
+        "non_weight_bytes_unchanged": true,
+        "position_values_unchanged": true,
+        "skin_bind_matrices_unchanged": true,
+        "nodes_and_animations_unchanged": true,
+        "maximum_influences": 4,
+        "peak_normalisation_error": 8.940696716308594e-08,
+        "seam_scope": "All coincident positions with any hand/digit influence, including unchanged hand regions.",
+        "hand_seam_weight_mismatches": [],
+        "distal_pad_weight_losses": [],
+        "locked_distal_vertex_pose_displacement_m": 0.0
+      },
+      "mirrored_right_stress": {
+        "scope": "Inferred symmetric stress pose, not an actual observed right-hand game action.",
+        "before": {
+          "hand_edges": 100,
+          "peak_ratio": 2.2512178605429427,
+          "edges_over_3x": 0,
+          "peak_extra_length_m": 0.025305562183897436,
+          "worst": [
+            {
+              "vertices": [
+                204,
+                216
+              ],
+              "rest_length_m": 0.015437788741921065,
+              "posed_length_m": 0.03475382574310147,
+              "ratio": 2.2512178605429427,
+              "extra_length_m": 0.019316037001180404
+            },
+            {
+              "vertices": [
+                205,
+                220
+              ],
+              "rest_length_m": 0.03403374005499528,
+              "posed_length_m": 0.059339302238892715,
+              "ratio": 1.7435433820381203,
+              "extra_length_m": 0.025305562183897436
+            },
+            {
+              "vertices": [
+                204,
+                218
+              ],
+              "rest_length_m": 0.03403374005499528,
+              "posed_length_m": 0.059339302238892715,
+              "ratio": 1.7435433820381203,
+              "extra_length_m": 0.025305562183897436
+            },
+            {
+              "vertices": [
+                197,
+                203
+              ],
+              "rest_length_m": 0.025719606082979272,
+              "posed_length_m": 0.04296257759185216,
+              "ratio": 1.6704212907943385,
+              "extra_length_m": 0.017242971508872888
+            },
+            {
+              "vertices": [
+                216,
+                218
+              ],
+              "rest_length_m": 0.034294571051187536,
+              "posed_length_m": 0.05453448782780904,
+              "ratio": 1.5901784497147298,
+              "extra_length_m": 0.020239916776621507
+            },
+            {
+              "vertices": [
+                181,
+                203
+              ],
+              "rest_length_m": 0.025155654933443433,
+              "posed_length_m": 0.03880235670300412,
+              "ratio": 1.5424904183837387,
+              "extra_length_m": 0.01364670176956069
+            },
+            {
+              "vertices": [
+                46,
+                216
+              ],
+              "rest_length_m": 0.027202844178556996,
+              "posed_length_m": 0.03743759696225735,
+              "ratio": 1.3762383343638762,
+              "extra_length_m": 0.010234752783700351
+            },
+            {
+              "vertices": [
+                47,
+                197
+              ],
+              "rest_length_m": 0.007491597212108097,
+              "posed_length_m": 0.009843271400077382,
+              "ratio": 1.3139082523241443,
+              "extra_length_m": 0.002351674187969285
+            },
+            {
+              "vertices": [
+                49,
+                198
+              ],
+              "rest_length_m": 0.007491597212108097,
+              "posed_length_m": 0.009843271400077382,
+              "ratio": 1.3139082523241443,
+              "extra_length_m": 0.002351674187969285
+            },
+            {
+              "vertices": [
+                40,
+                189
+              ],
+              "rest_length_m": 0.019317011647847736,
+              "posed_length_m": 0.0236959985740905,
+              "ratio": 1.226690701754102,
+              "extra_length_m": 0.004378986926242764
+            },
+            {
+              "vertices": [
+                38,
+                188
+              ],
+              "rest_length_m": 0.019317011647847736,
+              "posed_length_m": 0.0236959985740905,
+              "ratio": 1.226690701754102,
+              "extra_length_m": 0.004378986926242764
+            },
+            {
+              "vertices": [
+                46,
+                50
+              ],
+              "rest_length_m": 0.026532723115978055,
+              "posed_length_m": 0.03210867471564168,
+              "ratio": 1.2101537627815435,
+              "extra_length_m": 0.005575951599663627
+            }
+          ],
+          "surface_diagnostic": {
+            "hand_triangles": 92,
+            "minimum_area_ratio": 0.5346784519963514,
+            "triangles_under_tenth_rest_area": 0,
+            "normals_reversed_vs_rest": 0,
+            "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+          }
+        },
+        "after": {
+          "hand_edges": 100,
+          "peak_ratio": 1.6925639347222947,
+          "edges_over_3x": 0,
+          "peak_extra_length_m": 0.009242884529127233,
+          "worst": [
+            {
+              "vertices": [
+                199,
+                215
+              ],
+              "rest_length_m": 0.013345893520767088,
+              "posed_length_m": 0.02258877804989432,
+              "ratio": 1.6925639347222947,
+              "extra_length_m": 0.009242884529127233
+            },
+            {
+              "vertices": [
+                205,
+                220
+              ],
+              "rest_length_m": 0.03403374005499528,
+              "posed_length_m": 0.042821473113781455,
+              "ratio": 1.2582065046211799,
+              "extra_length_m": 0.008787733058786176
+            },
+            {
+              "vertices": [
+                204,
+                218
+              ],
+              "rest_length_m": 0.03403374005499528,
+              "posed_length_m": 0.042821473113781455,
+              "ratio": 1.2582065046211799,
+              "extra_length_m": 0.008787733058786176
+            },
+            {
+              "vertices": [
+                44,
+                47
+              ],
+              "rest_length_m": 0.02641898098790305,
+              "posed_length_m": 0.032833473791449894,
+              "ratio": 1.2427986456587394,
+              "extra_length_m": 0.0064144928035468445
+            },
+            {
+              "vertices": [
+                45,
+                48
+              ],
+              "rest_length_m": 0.02641898098790305,
+              "posed_length_m": 0.032833473791449894,
+              "ratio": 1.2427986456587394,
+              "extra_length_m": 0.0064144928035468445
+            },
+            {
+              "vertices": [
+                216,
+                218
+              ],
+              "rest_length_m": 0.034294571051187536,
+              "posed_length_m": 0.041957988568269766,
+              "ratio": 1.2234586198977073,
+              "extra_length_m": 0.00766341751708223
+            },
+            {
+              "vertices": [
+                190,
+                191
+              ],
+              "rest_length_m": 0.02140802578797078,
+              "posed_length_m": 0.025343142148646827,
+              "ratio": 1.183815004692642,
+              "extra_length_m": 0.003935116360676047
+            },
+            {
+              "vertices": [
+                46,
+                50
+              ],
+              "rest_length_m": 0.026532723115978055,
+              "posed_length_m": 0.03106844169840264,
+              "ratio": 1.1709480991678975,
+              "extra_length_m": 0.004535718582424585
+            },
+            {
+              "vertices": [
+                47,
+                52
+              ],
+              "rest_length_m": 0.026532723115978055,
+              "posed_length_m": 0.03106844169840264,
+              "ratio": 1.1709480991678975,
+              "extra_length_m": 0.004535718582424585
+            },
+            {
+              "vertices": [
+                200,
+                202
+              ],
+              "rest_length_m": 0.017530167206139122,
+              "posed_length_m": 0.019999169239526056,
+              "ratio": 1.1408430395645217,
+              "extra_length_m": 0.0024690020333869335
+            },
+            {
+              "vertices": [
+                199,
+                201
+              ],
+              "rest_length_m": 0.017530167206139122,
+              "posed_length_m": 0.019999169239526056,
+              "ratio": 1.1408430395645217,
+              "extra_length_m": 0.0024690020333869335
+            },
+            {
+              "vertices": [
+                34,
+                56
+              ],
+              "rest_length_m": 0.017429306600587592,
+              "posed_length_m": 0.01986690666027488,
+              "ratio": 1.139856399083892,
+              "extra_length_m": 0.002437600059687288
+            }
+          ],
+          "surface_diagnostic": {
+            "hand_triangles": 92,
+            "minimum_area_ratio": 0.3934102914366405,
+            "triangles_under_tenth_rest_area": 0,
+            "normals_reversed_vs_rest": 0,
+            "scope": "Diagnostic only: a pose rotates surfaces, so a rest-normal reversal alone is not an inversion test."
+          }
+        }
+      }
+    }
+  ]
+}

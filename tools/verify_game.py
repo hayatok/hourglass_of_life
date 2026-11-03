@@ -19,6 +19,14 @@ CHECKS={
  'resident_support':('test_resident_support_plans.gd',r'Resident support plan checks: \d+ passed, 0 failed'),
  'support_index':('test_support_index.gd',r'Support index checks: \d+ passed, 0 failed'),
  'resident_lod':('test_resident_lod.gd',r'Resident LOD checks: \d+ passed, 0 failed'),
+ 'resident_foot_plant':('test_resident_foot_plant.gd',r'Resident foot plant checks: \d+ passed, 0 failed'),
+ 'camera_controls':('test_camera_controls.gd',r'Camera control checks: \d+ passed, 0 failed'),
+ 'social_motion':('test_resident_social_motion.gd',r'Resident social motion checks: \d+ passed, 0 failed'),
+ 'world_interactions':('test_world_interactions.gd',r'World interaction checks: \d+ passed, 0 failed'),
+ 'tabletop':('test_tabletop_game.gd',r'Tabletop checks: \d+ passed, 0 failed'),
+ 'public_routes':('test_public_routes.gd',r'Public route checks: \d+ passed, 0 failed'),
+ 'tabletop_presentation':('test_tabletop_presentation.gd',r'Tabletop presentation: \d+ passed, 0 functional failures; 0 artifact failures'),
+ 'interaction_presentation':('test_world_interaction_presentation.gd',r'World interaction presentation: \d+ passed, 0 functional failures; 0 artifact failures'),
  'resident_proposals':('test_resident_proposals.gd',r'Resident proposal UI checks: \d+ passed, 0 failed'),
  'observation_hud':('test_observation_hud.gd',r'Observation HUD checks: \d+ passed, 0 failed'),
  'population_ui':('test_population_ui.gd',r'Population UI checks: \d+ passed, 0 failed'),
@@ -68,9 +76,11 @@ def run(name,args,marker=None,timeout=180):
 run('import',['--headless','--editor','--import'])
 for name in a.checks:
     file,marker=CHECKS[name]
-    run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else 180)
+    run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else (300 if name=='tabletop_presentation' else 180))
 if a.gpu:
-    for name in ['character','cast','resident_lod','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation']:
-        file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker,timeout=600 if name=='social_chain_presentation' else 180)
-    run('scene-gpu',['--script','tests/test_scene.gd'],r'Scene/UI smoke: PASS',timeout=600)
+    gpu_checks={'character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls'}
+    for name in a.checks:
+        if name not in gpu_checks: continue
+        file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker,timeout=600 if name=='social_chain_presentation' else (300 if name=='tabletop_presentation' else 180))
+    run('scene-gpu',['--script','tests/test_scene.gd','--','--ui-only'],r'Scene/UI smoke: PASS',timeout=180)
 print('All requested engine checks completed.',flush=True)

@@ -1,8 +1,11 @@
 extends SceneTree
 
 var errors: Array[String] = []
+var output := "res://builds/scene-ui"
 
 func _initialize() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): output=argument.trim_prefix("--output=")
 	call_deferred("run")
 
 func expect(condition: bool, message: String) -> void:
@@ -13,8 +16,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/ui-redesign/integration"))
-	var path = "res://docs/verification/ui-redesign/integration/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
+	var path = output+"/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:
@@ -121,6 +124,11 @@ func run() -> void:
 	sim.advance_minutes(45)
 	main._refresh_ui()
 	expect(sim.person("aoi").goal_progress>=.18,"Finishing shared work is reflected in the visible character goal")
+	limit = 0
+	while not sim.meetings.is_empty() and limit<120:
+		sim.advance_minutes(1);limit += 1
+	expect(sim.meetings.is_empty(),"The actual shared project returns its object before the completed UI state is captured")
+	main._refresh_ui()
 	main.get_node("%DetailToggle").button_pressed = false
 	await capture("07-household")
 	expect(main.get_node("%LatestEvent").is_visible_in_tree() and project_title in main.get_node("%LatestEvent").text,"Finishing actual work visibly names the completed collaboration outside the notebook")

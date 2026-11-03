@@ -5,6 +5,8 @@
 
 [node name="Yui" type="Node3D"]
 script = ExtResource("1")
+walk_foot_plant = true
+walk_plant_start = Vector2(0.2608696, 0.7391304)
 rest_height = 1.7
 walk_speed = 1.1493800332
 material_mode = 1

@@ -1,0 +1,2008 @@
+{
+  "artifacts": [
+    "res://builds/interaction-verification/craft-probe/craft-overview.png",
+    "res://builds/interaction-verification/craft-probe/craft-hand-stack-closeup.png"
+  ],
+  "closeup_frame": 120,
+  "engaged": {
+    "elapsed": 5,
+    "meeting": {
+      "a": "tomo",
+      "appointment_id": "",
+      "autonomous": true,
+      "b": "yui",
+      "center": [
+        -2.79999995231628,
+        0.0,
+        7.0
+      ],
+      "duration": 45,
+      "id": "meeting_1",
+      "location": "project",
+      "materials_ready": false,
+      "mode": "project",
+      "not_before": 0,
+      "project": {
+        "center": [
+          -2.79999995231628,
+          0.0,
+          7.0
+        ],
+        "center_offset": [
+          -2.8,
+          0.0,
+          6.0
+        ],
+        "cost": 1.0,
+        "duration": 45.0,
+        "fit": 0.653,
+        "goal_words": [
+          "好きなもの",
+          "小さな制作",
+          "自分のためのもの"
+        ],
+        "interest": "craft",
+        "key": "craft",
+        "learner": "yui",
+        "place": "square",
+        "roles": {
+          "tomo": "teacher",
+          "yui": "learner"
+        },
+        "selection_bonus": 0.0,
+        "skill": "craft",
+        "teacher": "tomo",
+        "title": "好きなものの小さな制作",
+        "topic": "最近の暮らしと、それぞれがやってみたいこと"
+      },
+      "remaining": 45,
+      "spontaneous": false,
+      "state": "engaged",
+      "waited": 5
+    },
+    "props": {
+      "board": {
+        "maximum": [
+          -2.64999985694885,
+          0.975000023841858,
+          6.40000009536743
+        ],
+        "minimum": [
+          -2.95000004768372,
+          0.949999988079071,
+          6.09999990463257
+        ]
+      },
+      "pieces": {
+        "craft_token_1_01": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              0.990999937057495,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              0.974999964237213,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_01",
+            "location": "supply",
+            "ordinal": 1,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              0.974999964237213,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_02": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.00699996948242,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              0.99099999666214,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_02",
+            "location": "supply",
+            "ordinal": 2,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              0.99099999666214,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_03": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.02300000190735,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              1.00699996948242,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_03",
+            "location": "supply",
+            "ordinal": 3,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              1.00699996948242,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_04": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.03900003433228,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              1.02300000190735,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_04",
+            "location": "supply",
+            "ordinal": 4,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              1.02300000190735,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_05": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.0550000667572,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              1.03900003433228,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_05",
+            "location": "supply",
+            "ordinal": 5,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              1.03900003433228,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_06": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.07099997997284,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              1.05499994754791,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_06",
+            "location": "supply",
+            "ordinal": 6,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              1.05499994754791,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_07": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.08700001239777,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              1.07099997997284,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_07",
+            "location": "supply",
+            "ordinal": 7,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              1.07099997997284,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_1_08": {
+          "bounds": {
+            "maximum": [
+              -3.00200009346008,
+              1.10300004482269,
+              6.31800031661987
+            ],
+            "minimum": [
+              -3.03799986839294,
+              1.08700001239777,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 1,
+            "container": "bank_1",
+            "holder": "",
+            "id": "craft_token_1_08",
+            "location": "supply",
+            "ordinal": 8,
+            "owner": "town",
+            "position": [
+              -3.01999998092651,
+              1.08700001239777,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_01": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              0.990999937057495,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              0.974999964237213,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_01",
+            "location": "supply",
+            "ordinal": 1,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              0.974999964237213,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_02": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.00699996948242,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              0.99099999666214,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_02",
+            "location": "supply",
+            "ordinal": 2,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              0.99099999666214,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_03": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.02300000190735,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              1.00699996948242,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_03",
+            "location": "supply",
+            "ordinal": 3,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              1.00699996948242,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_04": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.03900003433228,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              1.02300000190735,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_04",
+            "location": "supply",
+            "ordinal": 4,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              1.02300000190735,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_05": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.0550000667572,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              1.03900003433228,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_05",
+            "location": "supply",
+            "ordinal": 5,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              1.03900003433228,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_06": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.07099997997284,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              1.05499994754791,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_06",
+            "location": "supply",
+            "ordinal": 6,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              1.05499994754791,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_07": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.08700001239777,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              1.07099997997284,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_07",
+            "location": "supply",
+            "ordinal": 7,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              1.07099997997284,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        },
+        "craft_token_2_08": {
+          "bounds": {
+            "maximum": [
+              -2.56200003623962,
+              1.10300004482269,
+              6.31800031661987
+            ],
+            "minimum": [
+              -2.59799981117249,
+              1.08700001239777,
+              6.28200006484985
+            ]
+          },
+          "state": {
+            "cell": -1,
+            "color": 2,
+            "container": "bank_2",
+            "holder": "",
+            "id": "craft_token_2_08",
+            "location": "supply",
+            "ordinal": 8,
+            "owner": "town",
+            "position": [
+              -2.57999992370605,
+              1.08700001239777,
+              6.30000019073486
+            ],
+            "reserved_by": "",
+            "yaw": 0.0
+          }
+        }
+      },
+      "tray1": {
+        "maximum": [
+          -2.97499990463257,
+          0.982999980449677,
+          6.34000015258789
+        ],
+        "minimum": [
+          -3.06500005722046,
+          0.949999988079071,
+          6.26000022888184
+        ]
+      },
+      "tray2": {
+        "maximum": [
+          -2.53499984741211,
+          0.982999980449677,
+          6.34000015258789
+        ],
+        "minimum": [
+          -2.625,
+          0.949999988079071,
+          6.26000022888184
+        ]
+      }
+    }
+  },
+  "final_props": {
+    "board": {
+      "maximum": [
+        -2.64999985694885,
+        0.975000023841858,
+        6.40000009536743
+      ],
+      "minimum": [
+        -2.95000004768372,
+        0.949999988079071,
+        6.09999990463257
+      ]
+    },
+    "pieces": {
+      "craft_token_1_01": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            0.990999937057495,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            0.974999964237213,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_01",
+          "location": "supply",
+          "ordinal": 1,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            0.974999964237213,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_02": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.00699996948242,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            0.99099999666214,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_02",
+          "location": "supply",
+          "ordinal": 2,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            0.99099999666214,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_03": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.02300000190735,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            1.00699996948242,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_03",
+          "location": "supply",
+          "ordinal": 3,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            1.00699996948242,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_04": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.03900003433228,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            1.02300000190735,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_04",
+          "location": "supply",
+          "ordinal": 4,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            1.02300000190735,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_05": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.0550000667572,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            1.03900003433228,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_05",
+          "location": "supply",
+          "ordinal": 5,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            1.03900003433228,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_06": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.07099997997284,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            1.05499994754791,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_06",
+          "location": "supply",
+          "ordinal": 6,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            1.05499994754791,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_07": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.08700001239777,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            1.07099997997284,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_07",
+          "location": "supply",
+          "ordinal": 7,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            1.07099997997284,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_1_08": {
+        "bounds": {
+          "maximum": [
+            -3.00200009346008,
+            1.10300004482269,
+            6.31800031661987
+          ],
+          "minimum": [
+            -3.03799986839294,
+            1.08700001239777,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 1,
+          "container": "bank_1",
+          "holder": "",
+          "id": "craft_token_1_08",
+          "location": "supply",
+          "ordinal": 8,
+          "owner": "town",
+          "position": [
+            -3.01999998092651,
+            1.08700001239777,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_01": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            0.990999937057495,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            0.974999964237213,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_01",
+          "location": "supply",
+          "ordinal": 1,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            0.974999964237213,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_02": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.00699996948242,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            0.99099999666214,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_02",
+          "location": "supply",
+          "ordinal": 2,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            0.99099999666214,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_03": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.02300000190735,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            1.00699996948242,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_03",
+          "location": "supply",
+          "ordinal": 3,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            1.00699996948242,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_04": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.03900003433228,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            1.02300000190735,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_04",
+          "location": "supply",
+          "ordinal": 4,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            1.02300000190735,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_05": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.0550000667572,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            1.03900003433228,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_05",
+          "location": "supply",
+          "ordinal": 5,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            1.03900003433228,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_06": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.07099997997284,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            1.05499994754791,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_06",
+          "location": "supply",
+          "ordinal": 6,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            1.05499994754791,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_07": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.08700001239777,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            1.07099997997284,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_07",
+          "location": "supply",
+          "ordinal": 7,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            1.07099997997284,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      },
+      "craft_token_2_08": {
+        "bounds": {
+          "maximum": [
+            -2.56200003623962,
+            1.10300004482269,
+            6.31800031661987
+          ],
+          "minimum": [
+            -2.59799981117249,
+            1.08700001239777,
+            6.28200006484985
+          ]
+        },
+        "state": {
+          "cell": -1,
+          "color": 2,
+          "container": "bank_2",
+          "holder": "",
+          "id": "craft_token_2_08",
+          "location": "supply",
+          "ordinal": 8,
+          "owner": "town",
+          "position": [
+            -2.57999992370605,
+            1.08700001239777,
+            6.30000019073486
+          ],
+          "reserved_by": "",
+          "yaw": 0.0
+        }
+      }
+    },
+    "tray1": {
+      "maximum": [
+        -2.97499990463257,
+        0.982999980449677,
+        6.34000015258789
+      ],
+      "minimum": [
+        -3.06500005722046,
+        0.949999988079071,
+        6.26000022888184
+      ]
+    },
+    "tray2": {
+      "maximum": [
+        -2.53499984741211,
+        0.982999980449677,
+        6.34000015258789
+      ],
+      "minimum": [
+        -2.625,
+        0.949999988079071,
+        6.26000022888184
+      ]
+    }
+  },
+  "mesh_samples": [
+    {
+      "elapsed": 5,
+      "example_points": [
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.03214836120605,
+            1.04911112785339,
+            6.3094482421875
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.03214836120605,
+            1.04911112785339,
+            6.3094482421875
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.03214836120605,
+            1.04911112785339,
+            6.3094482421875
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01421117782593,
+            1.06625914573669,
+            6.31460094451904
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01421117782593,
+            1.06625914573669,
+            6.31460094451904
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01421117782593,
+            1.06625914573669,
+            6.31460094451904
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01263976097107,
+            1.06227898597717,
+            6.28882217407227
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.02628827095032,
+            1.06240010261536,
+            6.28397226333618
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01088213920593,
+            1.05934810638428,
+            6.30591726303101
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01088213920593,
+            1.05934810638428,
+            6.30591726303101
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.02448797225952,
+            1.04950678348541,
+            6.29094457626343
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.01530742645264,
+            1.04824101924896,
+            6.29782485961914
+          ]
+        }
+      ],
+      "hands": {
+        "tomo": {
+          "actual_baked_hand_vertices": 1000,
+          "bounds": {
+            "maximum": [
+              -2.97517681121826,
+              1.08506917953491,
+              6.40221071243286
+            ],
+            "minimum": [
+              -3.32311964035034,
+              0.943233966827393,
+              6.19536542892456
+            ]
+          },
+          "mesh_sampling_supported": true
+        },
+        "yui": {
+          "actual_baked_hand_vertices": 268,
+          "bounds": {
+            "maximum": [
+              -2.29784536361694,
+              1.06712174415588,
+              6.3814697265625
+            ],
+            "minimum": [
+              -2.60327076911926,
+              0.956191122531891,
+              6.22625780105591
+            ]
+          },
+          "mesh_sampling_supported": true
+        }
+      },
+      "inside_token_vertices": 50,
+      "overlaps": {
+        "craft_token_1_04": 2,
+        "craft_token_1_05": 15,
+        "craft_token_1_06": 17,
+        "craft_token_2_04": 4,
+        "craft_token_2_05": 7,
+        "craft_token_2_06": 5
+      },
+      "sample_frame": 0
+    },
+    {
+      "elapsed": 11,
+      "example_points": [
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.0218608379364,
+            1.06625890731812,
+            6.3145956993103
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.0218608379364,
+            1.06625890731812,
+            6.3145956993103
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.0218608379364,
+            1.06625890731812,
+            6.3145956993103
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.02029180526733,
+            1.06227886676788,
+            6.28882217407227
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01853179931641,
+            1.0593478679657,
+            6.30591201782227
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01086831092834,
+            1.05718302726746,
+            6.29068326950073
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01853179931641,
+            1.0593478679657,
+            6.30591201782227
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.03214025497437,
+            1.04950666427612,
+            6.29094457626343
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.0229594707489,
+            1.04824090003967,
+            6.29782438278198
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01933526992798,
+            1.06077075004578,
+            6.30297470092773
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01836442947388,
+            1.05637001991272,
+            6.29757308959961
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.0229594707489,
+            1.04824090003967,
+            6.29782438278198
+          ]
+        }
+      ],
+      "hands": {
+        "tomo": {
+          "actual_baked_hand_vertices": 1000,
+          "bounds": {
+            "maximum": [
+              -2.98282885551453,
+              1.08506906032562,
+              6.39946126937866
+            ],
+            "minimum": [
+              -3.31546807289124,
+              0.943233847618103,
+              6.19536542892456
+            ]
+          },
+          "mesh_sampling_supported": true
+        },
+        "yui": {
+          "actual_baked_hand_vertices": 268,
+          "bounds": {
+            "maximum": [
+              -2.29760813713074,
+              1.06723654270172,
+              6.38225412368774
+            ],
+            "minimum": [
+              -2.60350775718689,
+              0.956190824508667,
+              6.22625732421875
+            ]
+          },
+          "mesh_sampling_supported": true
+        }
+      },
+      "inside_token_vertices": 45,
+      "overlaps": {
+        "craft_token_1_05": 11,
+        "craft_token_1_06": 17,
+        "craft_token_1_07": 1,
+        "craft_token_2_04": 4,
+        "craft_token_2_05": 7,
+        "craft_token_2_06": 5
+      },
+      "sample_frame": 60
+    },
+    {
+      "elapsed": 17,
+      "example_points": [
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.0251989364624,
+            1.04911112785339,
+            6.30944347381592
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.0251989364624,
+            1.04911112785339,
+            6.30944347381592
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.0251989364624,
+            1.04911112785339,
+            6.30944347381592
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.01934099197388,
+            1.06239998340607,
+            6.28397226333618
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.0039324760437,
+            1.0593478679657,
+            6.30591201782227
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_06",
+          "world": [
+            -3.0039324760437,
+            1.0593478679657,
+            6.30591201782227
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.02399086952209,
+            1.04870319366455,
+            6.28503465652466
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.02399086952209,
+            1.04870319366455,
+            6.28503465652466
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.02442669868469,
+            1.0482325553894,
+            6.3147497177124
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.01754069328308,
+            1.04950678348541,
+            6.29094457626343
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.02442669868469,
+            1.0482325553894,
+            6.3147497177124
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.00835990905762,
+            1.04824101924896,
+            6.29782438278198
+          ]
+        }
+      ],
+      "hands": {
+        "tomo": {
+          "actual_baked_hand_vertices": 1000,
+          "bounds": {
+            "maximum": [
+              -2.96822953224182,
+              1.08506917953491,
+              6.39987754821777
+            ],
+            "minimum": [
+              -3.33006739616394,
+              0.943233966827393,
+              6.19536542892456
+            ]
+          },
+          "mesh_sampling_supported": true
+        },
+        "yui": {
+          "actual_baked_hand_vertices": 268,
+          "bounds": {
+            "maximum": [
+              -2.27762269973755,
+              1.06721591949463,
+              6.3825216293335
+            ],
+            "minimum": [
+              -2.62349343299866,
+              0.956191062927246,
+              6.22625732421875
+            ]
+          },
+          "mesh_sampling_supported": true
+        }
+      },
+      "inside_token_vertices": 57,
+      "overlaps": {
+        "craft_token_1_04": 3,
+        "craft_token_1_05": 17,
+        "craft_token_1_06": 14,
+        "craft_token_2_03": 6,
+        "craft_token_2_04": 9,
+        "craft_token_2_05": 5,
+        "craft_token_2_06": 3
+      },
+      "sample_frame": 120
+    },
+    {
+      "elapsed": 23,
+      "example_points": [
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.02225303649902,
+            1.03090047836304,
+            6.30139064788818
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.02225303649902,
+            1.03090047836304,
+            6.30139064788818
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.02225303649902,
+            1.03090047836304,
+            6.30139064788818
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.02225303649902,
+            1.03090047836304,
+            6.30139064788818
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.02010297775269,
+            1.03301048278809,
+            6.28365421295166
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.02010297775269,
+            1.03301048278809,
+            6.28365421295166
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.01982593536377,
+            1.02872383594513,
+            6.30432081222534
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.01982593536377,
+            1.02872383594513,
+            6.30432081222534
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.03107166290283,
+            1.03305780887604,
+            6.31142330169678
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_03",
+          "world": [
+            -3.02030801773071,
+            1.02154421806335,
+            6.29015684127808
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_04",
+          "world": [
+            -3.03107166290283,
+            1.03305780887604,
+            6.31142330169678
+          ]
+        },
+        {
+          "person": "tomo",
+          "token": "craft_token_1_05",
+          "world": [
+            -3.0232298374176,
+            1.04718351364136,
+            6.29865884780884
+          ]
+        }
+      ],
+      "hands": {
+        "tomo": {
+          "actual_baked_hand_vertices": 1000,
+          "bounds": {
+            "maximum": [
+              -2.94490385055542,
+              1.0850692987442,
+              6.40062808990479
+            ],
+            "minimum": [
+              -3.35339307785034,
+              0.943234086036682,
+              6.19536542892456
+            ]
+          },
+          "mesh_sampling_supported": true
+        },
+        "yui": {
+          "actual_baked_hand_vertices": 268,
+          "bounds": {
+            "maximum": [
+              -2.2561821937561,
+              1.0671923160553,
+              6.38285446166992
+            ],
+            "minimum": [
+              -2.64493370056152,
+              0.956191182136536,
+              6.22625732421875
+            ]
+          },
+          "mesh_sampling_supported": true
+        }
+      },
+      "inside_token_vertices": 40,
+      "overlaps": {
+        "craft_token_1_03": 3,
+        "craft_token_1_04": 15,
+        "craft_token_1_05": 4,
+        "craft_token_1_06": 1,
+        "craft_token_2_02": 5,
+        "craft_token_2_03": 9,
+        "craft_token_2_04": 3
+      },
+      "sample_frame": 179
+    }
+  ],
+  "peak_inside_token_vertices": 57,
+  "proposal": {
+    "resident_id": "tomo",
+    "status": "accept",
+    "text": "森 結衣さんと、好きなものの小さな制作を進めよう。まずは道具を広げる場所へ。"
+  },
+  "sampling": {
+    "actual_bones": "skeleton_updated after modifiers",
+    "cycle_note": "Requested 3-second window; the craft lateral sine period is about 6.35 seconds.",
+    "fps": 60,
+    "intersection": "Conservative interior of actual token CylinderMesh primitives; 0.5mm surface margin. Counts are diagnostics, not a formal pass/fail.",
+    "mesh": "GPU baked current visible skin, hand/finger-weighted vertices only",
+    "seconds": 3.0,
+    "simulation_minutes_per_frame": 0.1
+  },
+  "scope": "Controlled real-Main regular craft project with the permanent board and stored pieces. No claim of a human playtest or natural encounter.",
+  "setup": {
+    "mid_run_state_changes": [],
+    "needs": ".02 hunger/fatigue; .1 quiet",
+    "new_plans": "deferred",
+    "participants": [
+      "tomo",
+      "yui"
+    ],
+    "population": 12,
+    "routines": "all empty",
+    "seed": 711,
+    "starting_floor_positions": [
+      [
+        -4.5,
+        0,
+        7.2
+      ],
+      [
+        -1.5,
+        0,
+        7.2
+      ]
+    ]
+  },
+  "status": "captured",
+  "travel": [
+    {
+      "actors": {
+        "tomo": {
+          "moving": true,
+          "position": [
+            -4.5,
+            0.0,
+            7.19999980926514
+          ],
+          "remaining_path": [
+            [
+              -3.14999985694885,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        },
+        "yui": {
+          "moving": true,
+          "position": [
+            -1.5,
+            0.0,
+            7.19999980926514
+          ],
+          "remaining_path": [
+            [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        }
+      },
+      "elapsed": 0
+    },
+    {
+      "actors": {
+        "tomo": {
+          "moving": true,
+          "position": [
+            -4.16574859619141,
+            0.0,
+            7.0662989616394
+          ],
+          "remaining_path": [
+            [
+              -3.14999985694885,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        },
+        "yui": {
+          "moving": true,
+          "position": [
+            -1.81297218799591,
+            0.0,
+            7.02209997177124
+          ],
+          "remaining_path": [
+            [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        }
+      },
+      "elapsed": 1
+    },
+    {
+      "actors": {
+        "tomo": {
+          "moving": true,
+          "position": [
+            -3.83149695396423,
+            0.0,
+            6.93259859085083
+          ],
+          "remaining_path": [
+            [
+              -3.14999985694885,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        },
+        "yui": {
+          "moving": true,
+          "position": [
+            -2.12594437599182,
+            0.0,
+            6.84420013427734
+          ],
+          "remaining_path": [
+            [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        }
+      },
+      "elapsed": 2
+    },
+    {
+      "actors": {
+        "tomo": {
+          "moving": true,
+          "position": [
+            -3.49724531173706,
+            0.0,
+            6.7988977432251
+          ],
+          "remaining_path": [
+            [
+              -3.14999985694885,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        },
+        "yui": {
+          "moving": true,
+          "position": [
+            -2.43891644477844,
+            0.0,
+            6.66629981994629
+          ],
+          "remaining_path": [
+            [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        }
+      },
+      "elapsed": 3
+    },
+    {
+      "actors": {
+        "tomo": {
+          "moving": true,
+          "position": [
+            -3.16299366950989,
+            0.0,
+            6.66519737243652
+          ],
+          "remaining_path": [
+            [
+              -3.14999985694885,
+              0.0,
+              6.65999984741211
+            ]
+          ]
+        },
+        "yui": {
+          "moving": false,
+          "position": [
+            -2.45000004768372,
+            0.0,
+            6.65999984741211
+          ],
+          "remaining_path": []
+        }
+      },
+      "elapsed": 4
+    },
+    {
+      "actors": {
+        "tomo": {
+          "moving": false,
+          "position": [
+            -3.14999985694885,
+            0.0,
+            6.65999984741211
+          ],
+          "remaining_path": []
+        },
+        "yui": {
+          "moving": false,
+          "position": [
+            -2.45000004768372,
+            0.0,
+            6.65999984741211
+          ],
+          "remaining_path": []
+        }
+      },
+      "elapsed": 5
+    }
+  ],
+  "frame_summary": {
+    "samples": 180,
+    "source": "local builds/interaction-verification/craft-probe/craft-probe.json",
+    "note": "Full per-frame poses retained locally. This report retains the actual mesh samples, setup, engaged state, props and peak intrusion."
+  }
+}

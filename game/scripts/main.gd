@@ -18,6 +18,8 @@ var running_before_menu: bool = false
 var running_before_journal: bool = false
 var bench_preview: Node3D
 var event_focus := ""
+var interaction_view: WorldInteractionView
+var tabletop_view: TabletopGameView
 
 @onready var camera: Camera3D = $Camera
 @onready var roster: VBoxContainer = %Roster
@@ -53,6 +55,9 @@ func _ready() -> void:
 	%ReturnTitle.pressed.connect(_to_title)
 	%FollowButton.pressed.connect(_toggle_follow)
 	%BuildingsButton.pressed.connect(_toggle_buildings)
+	%ZoomIn.pressed.connect(func(): _zoom_by(1.2))
+	%ZoomOut.pressed.connect(func(): _zoom_by(1.0/1.2))
+	%TownOverview.pressed.connect(_show_town_overview)
 	%ProposeButton.pressed.connect(func(): dragging = false; proposals.open_for(selected_id))
 	%LatestEvent.pressed.connect(func(): event_focus = selected_id; _refresh_events(); %HUD._show_history(true))
 	%HistoryToggle.toggled.connect(func(open):
@@ -69,6 +74,10 @@ func _ready() -> void:
 	Sim.chapter_reached.connect(func(): _open_journal(true))
 	Sim.event_added.connect(func(_e): _refresh_events())
 	_rebuild()
+	interaction_view = WorldInteractionView.new();interaction_view.name = "WorldObjects";add_child(interaction_view)
+	interaction_view.setup($Town,avatars,Sim)
+	tabletop_view = TabletopGameView.new();tabletop_view.name = "TabletopObjects";add_child(tabletop_view)
+	tabletop_view.setup($Town,avatars,Sim)
 	_build_roster()
 	_refresh_ui()
 	title.visible = true
@@ -106,7 +115,7 @@ func _continue_game() -> void:
 		_start_play()
 		_toast("保存した町の続きを開きました")
 	else:
-		_toast("保存データを読み込めませんでした")
+		_toast(Sim.load_error if not Sim.load_error.is_empty() else "保存データを読み込めませんでした")
 
 func _rebuild() -> void:
 	var selection_changed: bool = Sim.person(selected_id).is_empty()
@@ -136,6 +145,8 @@ func _rebuild() -> void:
 		$LegacyRecords.add_child(record)
 		record.position = item.position
 		record.get_node("Sign").text = item.label
+	if is_instance_valid(interaction_view): interaction_view.setup($Town,avatars,Sim)
+	if is_instance_valid(tabletop_view): tabletop_view.setup($Town,avatars,Sim)
 	if is_node_ready():
 		var preferred: String = partner.get_selected_metadata() if partner.item_count>0 else ""
 		_build_roster()
@@ -248,6 +259,8 @@ func _process(delta: float) -> void:
 			var actor = avatars[p.id]
 			actor.update_state(p,delta,selected_id==p.id)
 			_update_resident_name_label(actor,p.id)
+	if is_instance_valid(interaction_view): interaction_view.sync(delta)
+	if is_instance_valid(tabletop_view): tabletop_view.sync(delta)
 	ui_timer -= delta
 	if ui_timer<=0:
 		ui_timer = .2
@@ -289,15 +302,29 @@ func _unhandled_input(event: InputEvent) -> void:
 			_toggle_pause()
 		elif event.keycode == KEY_V and not title.visible and not pause_menu.visible and not %JournalScreen.visible:
 			_toggle_buildings()
+		elif not title.visible and not pause_menu.visible and not %JournalScreen.visible:
+			if event.keycode in [KEY_PLUS,KEY_EQUAL,KEY_KP_ADD]: _zoom_by(1.2)
+			elif event.keycode in [KEY_MINUS,KEY_KP_SUBTRACT]: _zoom_by(1.0/1.2)
 	if title.visible or pause_menu.visible or %JournalScreen.visible:
+		return
+	if event is InputEventMagnifyGesture:
+		if not _camera_pointer_over_ui(event.position): _zoom_by(event.factor)
+		get_viewport().set_input_as_handled()
+		return
+	if event is InputEventPanGesture:
+		if not _camera_pointer_over_ui(event.position):
+			following = false
+			camera_target += Vector3(event.delta.x,0,event.delta.y).rotated(Vector3.UP,yaw)*distance*.025
+			camera_target.x = clampf(camera_target.x,-15,15);camera_target.z = clampf(camera_target.z,-20,13)
+		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			dragging = event.pressed
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			distance = maxf(7,distance-2)
+			_zoom_by(pow(1.12,maxf(.1,event.factor)))
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			distance = minf(48,distance+2)
+			_zoom_by(pow(1.12,-maxf(.1,event.factor)))
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			if placement:
 				var plane = Plane(Vector3.UP,0)
@@ -323,6 +350,19 @@ func _unhandled_input(event: InputEvent) -> void:
 					_select(closest)
 	if event is InputEventMouseMotion and dragging:
 		yaw -= event.relative.x*.006
+
+func _zoom_by(factor: float) -> void:
+	if is_finite(factor) and factor>0: distance = clampf(distance/factor,3.5,48)
+
+func _show_town_overview() -> void:
+	following = false;camera_target = Vector3.ZERO;distance = 31
+
+func _camera_pointer_over_ui(position: Vector2) -> bool:
+	for control in %HUD.find_children("*","Control",true,false):
+		if not control.is_visible_in_tree(): continue
+		if control is PanelContainer or control is BaseButton or control is ScrollContainer or control is LineEdit:
+			if control.get_global_rect().has_point(position): return true
+	return false
 
 func _toggle_buildings() -> void:
 	$Town.cutaway = not $Town.cutaway
@@ -538,7 +578,7 @@ func _refresh_events() -> void:
 
 func _show_guide() -> void:
 	info_dialog.title = "町を見守る操作"
-	info_dialog.dialog_text = "住民をクリック、または『住民を選ぶ』から気になる人を選びます。\n『この人を追いかける』で近くから見守れます。\n\n選んだ人のカードから『提案する』を開くと、休息や交流を相談できます。相手と内容を選び、住民の返答を読んでください。予定や気持ちによって、断ったり別の日を提案したりします。\n\n『人物手帳』は願い・予定・人間関係・思い出・仕事。\n『出来事を見る』は最近の動き、『年月を振り返る』は町の歩みです。\n\nSpace：時間の停止／再開　WASD：カメラ移動\n右ドラッグ：回転　ホイール：拡大縮小　Esc：閉じる\n『町を整える』から、広場にベンチを置けます。"
+	info_dialog.dialog_text = "住民をクリック、または『住民を選ぶ』から気になる人を選びます。\n『この人を追いかける』で近くから見守れます。\n\n選んだ人のカードから『提案する』を開くと、休息や交流を相談できます。相手と内容を選び、住民の返答を読んでください。予定や気持ちによって、断ったり別の日を提案したりします。\n\n『人物手帳』は願い・予定・人間関係・思い出・仕事。\n『出来事を見る』は最近の動き、『年月を振り返る』は町の歩みです。\n\nSpace：時間の停止／再開　WASD：カメラ移動\nピンチ・＋／−：拡大縮小　二本指：カメラ移動\n右ドラッグ：回転　ホイール：拡大縮小　Esc：閉じる\n『町を整える』から、広場にベンチを置けます。"
 	info_dialog.popup_centered(Vector2i(700,430))
 
 func _set_placement(active: bool) -> void:

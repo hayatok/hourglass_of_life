@@ -611,8 +611,35 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -236.0
 offset_right = -20.0
-offset_top = -110.0
+offset_top = -160.0
 offset_bottom = -20.0
+
+[node name="CameraControls" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/TownTools"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ZoomOut" type="Button" parent="Interface/InterfaceRoot/HUD/TownTools/CameraControls"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(48,40)
+text = "−"
+tooltip_text = "縮小（−キー）"
+theme_type_variation = &"QuietButton"
+
+[node name="TownOverview" type="Button" parent="Interface/InterfaceRoot/HUD/TownTools/CameraControls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "町の全景"
+theme_type_variation = &"QuietButton"
+
+[node name="ZoomIn" type="Button" parent="Interface/InterfaceRoot/HUD/TownTools/CameraControls"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(48,40)
+text = "＋"
+tooltip_text = "拡大（＋キー）"
+theme_type_variation = &"QuietButton"
 
 [node name="BuildingsButton" type="Button" parent="Interface/InterfaceRoot/HUD/TownTools"]
 unique_name_in_owner = true
@@ -636,8 +663,8 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -340.0
 offset_right = -20.0
-offset_top = -300.0
-offset_bottom = -128.0
+offset_top = -350.0
+offset_bottom = -178.0
 
 [node name="Column" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/BuildPanel"]
 layout_mode = 2

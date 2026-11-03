@@ -1,6 +1,6 @@
 extends SceneTree
 
-const OUT = "res://docs/verification/ui-rebuild"
+const OUT = "res://builds/proposal-ui"
 var sim
 var direct
 var panel
@@ -21,7 +21,7 @@ func expect(value: bool, message: String) -> void:
 func snapshot(world) -> Dictionary:
 	return world._encode({"people":world.people,"elapsed":world.elapsed,"rng":str(world.rng.state),
 		"events":world.events,"meetings":world.meetings,"event_serial":world.event_serial,"meeting_serial":world.meeting_serial,
-		"social":world.social.serialize(),"agenda":world.agenda.serialize(),"work":world.work_family.serialize(),"life":world.life.serialize()}).duplicate(true)
+		"social":world.social.serialize(),"agenda":world.agenda.serialize(),"work":world.work_family.serialize(),"life":world.life.serialize(),"interactions":world.interactions.serialize(),"tabletop":world.tabletop.serialize()}).duplicate(true)
 
 func fresh(id: String, other: String, running: bool = true) -> void:
 	panel.close_panel()
@@ -109,7 +109,7 @@ func verify_direct(kind: String, receiver: String, other: String) -> void:
 	await fresh(receiver,other)
 	var before := snapshot(sim)
 	panel.choose_kind(kind)
-	if kind in ["meet","support","project"]:
+	if kind in ["meet","support","project","play"]:
 		expect(panel.get_node("%Target").visible and not panel.get_node("%Result").visible,kind+": choosing the action opens target confirmation")
 		expect(snapshot(sim)==before and replies.is_empty(),kind+": selecting an action does not execute the simulation request")
 		select_partner(other)
@@ -125,6 +125,7 @@ func verify_direct(kind: String, receiver: String, other: String) -> void:
 		"meet": expected = direct.propose_meeting(receiver,other,"bench")
 		"support": expected = direct.propose_support(receiver,other)
 		"project": expected = direct.propose_project(receiver,other)
+		"play": expected = direct.propose_play(receiver,other)
 	expect(replies.size()==1 and replies[-1]==expected,kind+": the modal returns the same actual answer as the real API with the intended IDs")
 	expect(snapshot(sim)==snapshot(direct),kind+": the actual world effect matches the real API call, including participant direction")
 	expect(panel.get_node("%Result").visible and panel.get_node("%ReplyText").text==expected.text,kind+": the actual reply is shown inside the modal")
@@ -154,8 +155,8 @@ func run() -> void:
 	expect(panel.get_node("%Done").theme_type_variation==&"QuietButton","Returning to town stays quiet beside the explicit proposal-submit button")
 	expect(snapshot(sim)==unchanged and replies.is_empty(),"Partner selection and target preview alone have no world side effect")
 	panel.get_node("%Back").pressed.emit()
-	expect(panel.get_node("%Choices").visible and snapshot(sim)==unchanged,"Back returns to five choices without sending a proposal")
-	await capture("proposal-five-choices")
+	expect(panel.get_node("%Choices").visible and panel.get_node("%Choices").get_child_count()==6 and snapshot(sim)==unchanged,"Back returns to six choices without sending a proposal")
+	await capture("proposal-six-choices")
 	panel.close_panel()
 	expect(snapshot(sim)==unchanged and sim.running,"Cancel restores time while leaving the actual world unchanged")
 	await fresh("saki","haru",false)
@@ -165,7 +166,7 @@ func run() -> void:
 	var escape := InputEventKey.new();escape.keycode = KEY_ESCAPE;escape.pressed = true
 	panel._input(escape)
 	expect(not panel.visible and sim.running,"Escape closes the modal and restores its saved running state")
-	for row in [["rest","tomo","yui"],["goal","saki","haru"],["meet","tomo","yui"],["support","tomo","osamu"],["project","tomo","yui"]]:
+	for row in [["rest","tomo","yui"],["goal","saki","haru"],["meet","tomo","yui"],["support","tomo","osamu"],["project","tomo","yui"],["play","haru","osamu"]]:
 		await verify_direct(row[0],row[1],row[2])
 	expect(panel.get_node("%Done").theme_type_variation==&"PrimaryButton","Returning to town becomes the primary action after a reply")
 	await verify_partner_popup()

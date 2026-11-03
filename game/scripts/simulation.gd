@@ -42,7 +42,7 @@ const ACTION_NAMES = {
 	"sleep": "眠っている", "work": "仕事に取り組む", "school": "学校で過ごす",
 	"care": "家族と過ごす", "rest": "ひと息つく", "eat": "食事をする",
 	"hobby": "好きなことに取り組む", "social": "誰かと過ごしたい", "photo": "町を撮る",
-	"meet": "一緒に話す", "prepare":"待ち合わせの準備", "travel": "移動する", "chores":"家の用事を片付ける", "joint_work":"一緒に制作する", "own_life":"町外で暮らしている", "legacy":"残された記録を見ている", "remembered":"町に残る記憶"
+	"meet": "一緒に話す", "play":"四目並べで遊ぶ", "prepare":"待ち合わせの準備", "travel": "移動する", "chores":"家の用事を片付ける", "joint_work":"一緒に制作する", "own_life":"町外で暮らしている", "legacy":"残された記録を見ている", "remembered":"町に残る記憶"
 }
 const ROUTINE_NAMES = {
 	"sleep": "いつもの睡眠の時間", "off_shift_sleep": "夜勤のない日の睡眠",
@@ -84,6 +84,9 @@ var resident_activities: ResidentActivities
 var planner: ResidentPlanner
 var agenda: ResidentAgenda
 var support_plans: ResidentSupportPlans
+var interactions: WorldInteractions
+var tabletop: TabletopGame
+var load_error := ""
 
 func _ready() -> void:
 	_build_graph()
@@ -177,6 +180,10 @@ func reset(seed_value: int = 71103, population: int = BASE_POPULATION) -> void:
 	agenda.reset()
 	if support_plans==null: support_plans = ResidentSupportPlans.new(self)
 	support_plans.reset()
+	if interactions==null: interactions = WorldInteractions.new(self)
+	interactions.reset()
+	if tabletop==null: tabletop = TabletopGame.new(self)
+	tabletop.reset()
 	for p in people:
 		# The clock starts in an existing day, so active shifts are already underway.
 		var routine = _routine_at(p)
@@ -221,6 +228,8 @@ func advance_minutes(amount: float, stop_at_review: bool = false) -> void:
 		minute_remainder -= 1.0
 		elapsed += 1
 		life.tick()
+		interactions.tick()
+		tabletop.tick()
 		work_family.tick()
 		support_plans.tick()
 		agenda.tick()
@@ -404,7 +413,7 @@ func _choose_action(p: Dictionary) -> void:
 			chosen = o
 			break
 	var reason: String = chosen.reason
-	if chosen.kind in ["joint_work","social_plan","planned_project"]:
+	if chosen.kind in ["joint_work","social_plan","planned_project","play"]:
 		if planner.begin(p,chosen): return
 		_assign(p,"rest",home,30,"相手の予定も大切にして、次の機会を待とう")
 		return
@@ -470,7 +479,11 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 				break
 	if origin_place == destination and activities.inside(destination,origin) and activities.inside(destination,target):
 		return activities.indoor_route(destination,origin,target)
-	if origin_place == destination and origin.distance_to(target) < 3: return [target]
+	var public_shortcut := origin_place==destination and origin.distance_to(target)<3
+	var public_obstacles: Array = []
+	if public_shortcut:
+		public_obstacles = _public_route_obstacles()
+		if _public_segment_clear(origin,target,public_obstacles): return [target]
 	var path: Array = []
 	var departure: Vector3 = ENTRIES.get(origin_place, origin)
 	if ENTRIES.has(origin_place) and (activities.inside(origin_place,origin) or origin.distance_to(departure)<.6):
@@ -496,7 +509,54 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 		path.append(entry)
 	if entry.distance_to(target) > .1:
 		path.append_array(activities.indoor_route(destination,entry,target))
-	return path
+	# Keep the street graph for the detour. Its final connectors also need to
+	# clear furniture: the closest street point can lie across the same table.
+	return _public_clear_path(origin,path,public_obstacles) if public_shortcut else path
+
+func _public_route_obstacles() -> Array:
+	# ActivityPlaces already expands authored public tables by the .18m body
+	# radius. The editable PR_Bench bounds are x +/- .875, z -.334 .. .310;
+	# round outward before applying the same clearance, leaving its .65m
+	# front approach accessible. A reservation does not make furniture vanish.
+	var result: Array = activities.public_obstacles.duplicate()
+	for bench in benches:
+		result.append(Rect2(Vector2(bench.x-.88,bench.z-.34),Vector2(1.76,.66)).grow(.18))
+	return result
+
+func _public_segment_clear(first: Vector3, second: Vector3, occupied: Array) -> bool:
+	var a := Vector2(first.x,first.z);var b := Vector2(second.x,second.z)
+	for rect: Rect2 in occupied:
+		if rect.has_point(a) or rect.has_point(b): return false
+		var corners := [rect.position,Vector2(rect.end.x,rect.position.y),rect.end,Vector2(rect.position.x,rect.end.y)]
+		for side in 4:
+			if Geometry2D.segment_intersects_segment(a,b,corners[side],corners[(side+1)%4])!=null: return false
+	return true
+
+func _public_clear_path(origin: Vector3, path: Array, occupied: Array) -> Array:
+	var result: Array = []
+	var previous := origin
+	for point: Vector3 in path:
+		if _public_segment_clear(previous,point,occupied):
+			result.append(point)
+		else:
+			var detour := AStar3D.new()
+			var corners: Array = [previous,point]
+			for rect: Rect2 in occupied:
+				# A small extra margin keeps segments off an inclusive rectangle
+				# edge, without changing the requested endpoint or body size.
+				var outer := rect.grow(.02)
+				for corner: Vector2 in [outer.position,Vector2(outer.end.x,outer.position.y),outer.end,Vector2(outer.position.x,outer.end.y)]:
+					corners.append(Vector3(corner.x,0,corner.y))
+			for index in corners.size(): detour.add_point(index,corners[index])
+			for first in corners.size():
+				for second in range(first+1,corners.size()):
+					if _public_segment_clear(corners[first],corners[second],occupied): detour.connect_points(first,second)
+			var steps := detour.get_point_path(0,1)
+			# Never fall back to the known blocked straight line.
+			if steps.is_empty(): return []
+			for index in range(1,steps.size()): result.append(steps[index])
+		previous = point
+	return result
 
 func _street_corner(entry: Vector3) -> Vector3:
 	return Vector3(-5 if entry.x < -5 else (4.4 if entry.x > 4.4 else 0),0,entry.z)
@@ -565,15 +625,18 @@ func propose_support(receiver: String, giver: String) -> Dictionary:
 func propose_project(first: String, second: String) -> Dictionary:
 	return work_family.propose_project(first,second)
 
+func propose_play(first: String, second: String) -> Dictionary:
+	return tabletop.propose(first,second)
+
 func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: String, spontaneous: bool, duration: int = 25, not_before: int = 0, appointment_id: String = "", venue_override: String = "", activity_group: String = "") -> bool:
 	var venue = "square" if location == "bench" else (a.place if spontaneous else ("bakery_cafe" if location=="cafe" else "workshop"))
 	if not venue_override.is_empty(): venue = venue_override
 	var group := activity_group if not activity_group.is_empty() else location
 	var pair := activities.pair_for(group,center,[a.id,b.id])
-	if group in ["bench","cafe","radio","model","bread","photo","music","craft"] and pair.size()<2: return false
+	if group in ["bench","cafe","radio","model","bread","photo","music","craft","tabletop"] and pair.size()<2: return false
 	meeting_serial += 1
 	var id = "meeting_%d" % meeting_serial
-	var m = {"id":id,"a":a.id,"b":b.id,"location":location,"center":center,"state":"travel","remaining":duration,"not_before":not_before,"appointment_id":appointment_id,"waited":0,"spontaneous":spontaneous}
+	var m = {"id":id,"a":a.id,"b":b.id,"location":location,"center":center,"state":"travel","duration":duration,"remaining":duration,"not_before":not_before,"appointment_id":appointment_id,"waited":0,"spontaneous":spontaneous}
 	meetings.append(m)
 	for i in 2:
 		var p = a if i == 0 else b
@@ -590,6 +653,30 @@ func _tick_meetings() -> void:
 		if not work_family.meeting_compatible(a,m) or not work_family.meeting_compatible(b,m):
 			_finish_meeting(m, false)
 			ended.append(m)
+			continue
+		if tabletop.handles(m):
+			var play_stage: String = tabletop.advance(m)
+			if play_stage in ["completed","interrupted"]:
+				_finish_meeting(m,play_stage=="completed");ended.append(m)
+			continue
+		if interactions.supports(m):
+			if not m.has("interaction_id") and not interactions.begin(m):
+				_finish_meeting(m,false);ended.append(m);continue
+			var stage: String = interactions.advance(m)
+			if stage=="interrupted":
+				_finish_meeting(m,false);ended.append(m);continue
+			if stage=="completed":
+				_finish_meeting(m,true);ended.append(m);continue
+			if stage!="working": continue
+			if m.state!="engaged":
+				m.state = "engaged"
+				planner.engaged(m)
+				_log(a.id,"ラジオを作業台へ運びました","%sさんと、実物を支えながらラジオを調整する。"%b.name)
+			if not work_family.project_tick(m):
+				_finish_meeting(m,false);ended.append(m);continue
+			m.remaining -= 1
+			for p in [a,b]: p.connection = maxf(0,p.connection-.012)
+			interactions.worked(m)
 			continue
 		if m.state in ["travel","waiting"]:
 			m.waited += 1
@@ -627,19 +714,27 @@ func _tick_meetings() -> void:
 func _finish_meeting(m: Dictionary, completed: bool) -> void:
 	var a = person(m.a)
 	var b = person(m.b)
-	social.finish(m,completed)
-	if completed: work_family.finish_project(m)
-	if agenda!=null: agenda.finish(m,completed)
-	if completed:
+	if tabletop.handles(m):
+		tabletop.end(m,completed)
+		planner.finish(m,completed)
+		for p in [a,b]: p.meeting_id = "";p.remaining = 0;p.routine_id = ""
+		return
+	interactions.end(m,completed)
+	# Finished work remains real even if a later cleanup is forcibly interrupted.
+	var achieved: bool = completed or m.get("work_completed",false)
+	social.finish(m,achieved)
+	if achieved: work_family.finish_project(m)
+	if agenda!=null: agenda.finish(m,achieved)
+	if achieved:
 		var used_skill: String = m.get("project",{}).get("skill","")
 		_learn_profile(a,b,used_skill)
 		_learn_profile(b,a,used_skill)
-	planner.finish(m,completed)
-	if not completed and m.get("mode","")=="project" and m.state=="engaged":
+	planner.finish(m,achieved)
+	if not achieved and m.get("mode","")=="project" and m.state=="engaged":
 		for pair in [[a,b],[b,a]]:
 			cognition.experience(pair[0],pair[1].id,"joint_work",{"place":pair[0].place},
 				{"completed":false,"enjoyment":.3,"burden":.65})
-	if not completed:
+	if not completed and not achieved:
 		_log(a.id,"予定を見直しました","次の予定や移動の都合で、今回は話す時間を取れなかった。")
 	for p in [a,b]:
 		p.meeting_id = ""
@@ -728,10 +823,12 @@ func has_save() -> bool:
 	return FileAccess.file_exists(SAVE_PATH) or FileAccess.file_exists(LEGACY_SAVE_PATH)
 
 func save_game(path: String = SAVE_PATH) -> bool:
-	var data = {"schema":4,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize(),"work_family":work_family.serialize(),"life":life.serialize()}
+	var data = {"schema":SaveValidation.CURRENT_SCHEMA,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize(),"work_family":work_family.serialize(),"life":life.serialize()}
 	data.world_seed = world_seed
 	data.event_serial = event_serial
 	data.agenda = agenda.serialize()
+	data.interactions = interactions.serialize()
+	data.tabletop = tabletop.serialize()
 	data.route_layout = 1
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
@@ -742,12 +839,16 @@ func save_game(path: String = SAVE_PATH) -> bool:
 	return error == OK
 
 func load_game(path: String = SAVE_PATH) -> bool:
+	load_error = ""
 	if path==SAVE_PATH and not FileAccess.file_exists(path) and FileAccess.file_exists(LEGACY_SAVE_PATH):
 		path = LEGACY_SAVE_PATH
 	if not FileAccess.file_exists(path):
 		return false
 	var raw = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not raw is Dictionary or not raw.get("people") is Array: return false
+	if raw.get("schema",0)!=SaveValidation.CURRENT_SCHEMA:
+		load_error = "この開発版では保存形式が変わりました。新しい町を始めてください。"
+		return false
 	# Replays and population comparisons keep their saved authored roster.
 	if raw.people.size() not in [BASE_POPULATION,EXPANDED_POPULATION]: return false
 	var cast: Dictionary = definitions if definitions.size()==raw.people.size() else _cast_definitions(raw.people.size())
@@ -775,10 +876,13 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	work_family.restore(data.get("work_family",{}))
 	life.restore(data.get("life",{}))
 	agenda.restore(data.get("agenda",{}))
+	interactions.restore(data.get("interactions",{}))
+	tabletop.restore(data.get("tabletop",{}))
 	for p in people:
 		cognition.upgrade_person(p)
 		planner.upgrade_person(p)
 		support_plans.upgrade_person(p)
+		tabletop.upgrade_person(p)
 	activities.configure_benches(benches)
 	for p in people:
 		if not activities.spots.has(p.get("activity_spot","")): p.activity_spot = ""

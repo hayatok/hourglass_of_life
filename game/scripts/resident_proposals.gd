@@ -25,6 +25,7 @@ func _ready() -> void:
 	%Meet.pressed.connect(_choose_partner.bind("meet"))
 	%Support.pressed.connect(_choose_partner.bind("support"))
 	%Project.pressed.connect(_choose_partner.bind("project"))
+	%Play.pressed.connect(_choose_partner.bind("play"))
 	%Execute.pressed.connect(_execute_selected)
 	%ConfirmOffer.pressed.connect(_confirm_offer)
 	partner.item_selected.connect(func(_index): sync_partner_preview())
@@ -102,7 +103,7 @@ func _show_choices() -> void:
 	%Done.theme_type_variation = &"QuietButton"
 	%Rest.disabled = not _alive(resident_id)
 	%Goal.disabled = not _alive(resident_id)
-	for button in [%Meet,%Support,%Project]: button.disabled = not _alive(resident_id) or partner.item_count==0
+	for button in [%Meet,%Support,%Project,%Play]: button.disabled = not _alive(resident_id) or partner.item_count==0
 	%Rest.grab_focus()
 
 func _choose_partner(kind: String) -> void:
@@ -115,7 +116,7 @@ func _choose_partner(kind: String) -> void:
 
 func choose_kind(kind: String) -> void:
 	if kind in ["rest","goal"]: _execute(kind)
-	elif kind in ["meet","support","project"]: _choose_partner(kind)
+	elif kind in ["meet","support","project","play"]: _choose_partner(kind)
 
 func submit() -> void:
 	_execute_selected()
@@ -154,11 +155,13 @@ func sync_partner_preview() -> void:
 	%SecondName.text = who if helping else with_who
 	%TargetHeading.text = {"meet":"%sさんを、誰との会話に誘いますか？"%who,
 		"support":"誰に、%sさんの手助けを頼みますか？"%who,
-		"project":"%sさんと、誰が一緒に制作しますか？"%who}.get(proposal_kind,"")
-	%PairDirection.text = "手伝う →" if helping else ("会話" if proposal_kind=="meet" else "一緒に制作")
+		"project":"%sさんと、誰が一緒に制作しますか？"%who,
+		"play":"%sさんと、誰が一緒に遊びますか？"%who}.get(proposal_kind,"")
+	%PairDirection.text = {"support":"手伝う →","meet":"会話","project":"一緒に制作","play":"四目並べ"}.get(proposal_kind,"")
 	%Execute.text = {"meet":"%sさんと%sさんを会話に誘う"%[who,with_who],
 		"support":"%sさんに、%sさんの手助けを頼む"%[with_who,who],
-		"project":"%sさんと%sさんに制作を提案する"%[who,with_who]}.get(proposal_kind,"提案する")
+		"project":"%sさんと%sさんに制作を提案する"%[who,with_who],
+		"play":"%sさんと%sさんを四目並べに誘う"%[who,with_who]}.get(proposal_kind,"提案する")
 	%Execute.disabled = not _alive(resident_id) or not _alive(other) or resident_id==other
 	%NoPartner.visible = partner.item_count==0
 	partner.add_theme_constant_override("icon_max_width",30)
@@ -182,6 +185,7 @@ func _execute(kind: String) -> void:
 		"meet": reply = sim.propose_meeting(resident_id,other,"bench")
 		"support": reply = sim.propose_support(resident_id,other)
 		"project": reply = sim.propose_project(resident_id,other)
+		"play": reply = sim.propose_play(resident_id,other)
 		_: return
 	_present_reply(reply)
 	answered.emit(reply)

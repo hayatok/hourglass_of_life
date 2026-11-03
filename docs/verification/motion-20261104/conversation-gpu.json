@@ -1,0 +1,91 @@
+{
+	"checks": 42,
+	"failures": [],
+	"observations": [
+		{
+			"label": "haru-speaking",
+			"minute": 74,
+			"people": {
+				"haru": {
+					"clip": "sit_talk",
+					"head_dot": 0.823752582073212,
+					"pelvis": "(-0.48, 0.558455, 2.5)",
+					"role": "speaker",
+					"torso_turn": 0.95
+				},
+				"saki": {
+					"clip": "rest",
+					"head_dot": 0.824618101119995,
+					"pelvis": "(0.48, 0.555, 2.5)",
+					"role": "listener",
+					"torso_turn": -0.95
+				}
+			},
+			"remaining": 25
+		},
+		{
+			"label": "saki-speaking",
+			"minute": 82,
+			"people": {
+				"haru": {
+					"clip": "rest",
+					"head_dot": 0.825747311115265,
+					"pelvis": "(-0.48, 0.558455, 2.5)",
+					"role": "listener",
+					"torso_turn": 0.95
+				},
+				"saki": {
+					"clip": "sit_talk",
+					"head_dot": 0.822286605834961,
+					"pelvis": "(0.48, 0.555, 2.5)",
+					"role": "speaker",
+					"torso_turn": -0.95
+				}
+			},
+			"remaining": 17
+		},
+		{
+			"label": "tomo-speaking",
+			"minute": 76,
+			"people": {
+				"tomo": {
+					"clip": "sit_talk",
+					"head_dot": 0.827879905700684,
+					"pelvis": "(-0.48, 0.557879, 2.5)",
+					"role": "speaker",
+					"torso_turn": 0.95
+				},
+				"yui": {
+					"clip": "rest",
+					"head_dot": 0.820687592029572,
+					"pelvis": "(0.48, 0.557879, 2.5)",
+					"role": "listener",
+					"torso_turn": -0.95
+				}
+			},
+			"remaining": 25
+		},
+		{
+			"label": "yui-speaking",
+			"minute": 84,
+			"people": {
+				"tomo": {
+					"clip": "rest",
+					"head_dot": 0.829883337020874,
+					"pelvis": "(-0.48, 0.557879, 2.5)",
+					"role": "listener",
+					"torso_turn": 0.95
+				},
+				"yui": {
+					"clip": "sit_talk",
+					"head_dot": 0.818691611289978,
+					"pelvis": "(0.48, 0.557879, 2.5)",
+					"role": "speaker",
+					"torso_turn": -0.95
+				}
+			},
+			"remaining": 17
+		}
+	],
+	"scope": "Controlled twelve-person town bench fixtures; no human playtest claim."
+}
