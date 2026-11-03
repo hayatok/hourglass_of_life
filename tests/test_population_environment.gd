@@ -5,10 +5,11 @@ const NEW_IDS := ["saki","haru","tomo","yui"]
 const BASES := {"saki":"fumi","haru":"aoi","tomo":"ryo","yui":"maho"}
 const NAMES := {"saki":"白井 咲","haru":"瀬戸 晴","tomo":"森 智","yui":"森 結衣"}
 const AGES := {"saki":42,"haru":25,"tomo":52,"yui":27}
+const RIG_BONE_COUNTS := {"saki":36,"haru":35,"tomo":35,"yui":36}
 var sim: LifeSimulation
 var checks := 0
 var failures: Array[String] = []
-var report := {"scope":"12-resident housing and provisional shared-rig variants; agent verification, not a human playtest","rendered":false,"variants":{},"rooms":{},"images":[]}
+var report := {"scope":"12-resident housing and dedicated resident bodies; agent verification, not a human playtest","rendered":false,"variants":{},"rooms":{},"images":[]}
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -39,6 +40,29 @@ func actor(id: String, parent: Node) -> Node3D:
 	avatar.animator.advance(0)
 	avatar.animator.speed_scale = 0
 	return avatar
+
+func matches_deformation_contract(id: String, model: JrpgResidentModel) -> bool:
+	# Exact counts retain DEF35; only the two skirt bodies add their real helper.
+	var expected_count: int = RIG_BONE_COUNTS[id]
+	if model.skeleton.get_bone_count()!=expected_count: return false
+	var required_names: Array = []
+	for bone in JrpgResidentModel.REQUIRED_BONES: required_names.append("DEF-"+bone)
+	if id in ["saki","yui"]: required_names.append("DEF-skirt_middle")
+	for name in required_names:
+		if model.skeleton.find_bone(name)<0: return false
+	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://game/assets/models/"+id+"/asset-manifest.json"))
+	var contract: Dictionary = manifest.get("runtime_contract",{})
+	if id!="haru" and (int(contract.get("bone_count",0))!=expected_count or int(contract.get("skin_bind_count",0))!=expected_count): return false
+	var declared_names: Array = contract.get("skin_bind_names",[])
+	if not contract.is_empty() and declared_names.size()!=expected_count: return false
+	if model.lod_parts.is_empty(): return false
+	for part in model.lod_parts.values():
+		if part.skin==null or part.skin.get_bind_count()!=expected_count or part.get_node_or_null(part.skeleton)!=model.skeleton: return false
+		for index in part.skin.get_bind_count():
+			var bind_name: String = part.skin.get_bind_name(index)
+			if bind_name not in required_names: return false
+			if not declared_names.is_empty() and bind_name!=str(declared_names[index]): return false
+	return true
 
 func clear_route(site: String, target: Vector3) -> bool:
 	var entry: Vector3 = sim.SITES[site]+Vector3(0,0,2.8)
@@ -222,7 +246,7 @@ func run() -> void:
 	for id in NEW_IDS:
 		var avatar := actor(id,stage)
 		expect(avatar.jrpg!=null and not avatar.get_node("Visual/Hips").visible,id+": the resident uses a JRPG rig rather than a placeholder")
-		expect(avatar.jrpg.skeleton.get_bone_count()==35,id+": the existing deformation rig is retained")
+		expect(matches_deformation_contract(id,avatar.jrpg),id+": the exact declared deformation rig, required bones and connected skin binds are retained")
 		expect(avatar.displayed_model==id,id+": presentation identity remains distinct from its source asset")
 		var original_skeleton: int = avatar.jrpg.skeleton.get_instance_id()
 		var palette: Texture2D = avatar.jrpg.body_materials[0].get_shader_parameter("base_palette")
@@ -242,7 +266,7 @@ func run() -> void:
 		expect(avatar.jrpg.body_materials[0].get_shader_parameter("base_palette")==palette,id+": changing LOD preserves the resident's appearance")
 		var scalar: Array = avatar.appearance.body_scale
 		expect(avatar.visual.scale.is_equal_approx(Vector3(scalar[0],scalar[1],scalar[2])),id+": its own authored body proportions are applied")
-		report.variants[id] = {"source":capabilities.source_model,"material_mode":capabilities.material_mode,"scale":scalar,"height":avatar.jrpg.rest_height*avatar.visual.scale.y,"lod_resources":avatar.jrpg.lod_resources_loaded,"provisional":true}
+		report.variants[id] = {"source":capabilities.source_model,"material_mode":capabilities.material_mode,"scale":scalar,"height":avatar.jrpg.rest_height*avatar.visual.scale.y,"bone_count":avatar.jrpg.skeleton.get_bone_count(),"lod_resources":avatar.jrpg.lod_resources_loaded,"provisional":avatar.jrpg.uses_palette_swatches()}
 		avatar.free()
 	stage.free()
 	if DisplayServer.get_name()!="headless":

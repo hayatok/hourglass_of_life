@@ -13,8 +13,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.6/integration"))
-	var path = "res://docs/verification/v0.6/integration/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/ui-redesign/integration"))
+	var path = "res://docs/verification/ui-redesign/integration/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:
@@ -66,9 +66,10 @@ func run() -> void:
 	await capture("02-conversation")
 	expect(main.avatars.aoi.animation_name=="sit_talk","An actual seated meeting selects the seated animation")
 	sim.advance_minutes(25)
-	main.detail_tab = 2
+	main.get_node("%DetailToggle").button_pressed = true
+	main.get_node("%MemoriesTab").pressed.emit()
 	main._refresh_detail()
-	expect("佐伯 文" in main.get_node("%DetailText").text,"The memory tab shows the completed shared experience")
+	expect(main.get_node("%DetailText").is_visible_in_tree() and "佐伯 文" in main.get_node("%DetailText").text,"The memory tab shows the completed shared experience")
 	await capture("03-memory")
 	sim.reset()
 	sim.running = false
@@ -76,32 +77,43 @@ func run() -> void:
 	await process_frame
 	main._select("maho")
 	main.detail_tab = 0
-	var partner = main.get_node("%Partner")
+	main.proposals.open_for("maho")
+	var partner = main.partner
 	for i in partner.item_count:
 		if partner.get_item_metadata(i)=="fumi": partner.select(i)
-	main.get_node("%MeetButton").pressed.emit()
+	main.proposals.choose_kind("meet")
+	main.proposals.submit()
 	main._refresh_ui()
-	expect(main.get_node("%OfferPanel").visible,"A concrete counteroffer is actionable in the observation UI")
+	expect(main.proposals.get_node("%OfferDetails").visible,"A concrete counteroffer is actionable in the observation UI")
 	await capture("04-counteroffer")
-	main.get_node("%AcceptOfferButton").pressed.emit()
+	main.proposals.accept_offer()
 	main._refresh_ui()
-	expect(sim.social.appointments.size()==1 and not main.get_node("%OfferPanel").visible,"Confirming the displayed alternative records the appointment")
+	expect(sim.social.appointments.size()==1 and not main.proposals.get_node("%OfferDetails").visible,"Confirming the displayed alternative records the appointment")
 	var next_plan: String = main.get_node("%NextPlan").text
 	expect(sim.social.when_text(int(sim.social.appointments[0].start)) in next_plan and sim.person("fumi").name in next_plan,"The next-plan field shows the actual agreed time and partner")
+	main.proposals.close_panel()
+	main.get_node("%DetailToggle").button_pressed = true
+	main.get_node("%NowTab").pressed.emit()
+	expect(main.get_node("%NextPlan").is_visible_in_tree(),"The agreed appointment can actually be read in the opened notebook")
 	await capture("05-appointment")
 	sim.reset()
 	sim.running = false
 	await process_frame
 	await process_frame
 	main._select("aoi")
-	main.get_node("%ProjectButton").pressed.emit()
-	expect(not sim.meetings.is_empty() and sim.meetings[0].get("mode","")=="project","The action bar can start actual joint work")
+	main.proposals.open_for("aoi")
+	main.proposals.choose_kind("project")
+	main.proposals.submit()
+	main.proposals.close_panel()
+	expect(not sim.meetings.is_empty() and sim.meetings[0].get("mode","")=="project","The explicit resident-and-partner proposal starts actual joint work")
+	var project_title: String = sim.meetings[0].project.title
 	limit = 0
 	while sim.meetings.size()>0 and sim.meetings[0].state=="travel" and limit<180:
 		sim.advance_minutes(1)
 		limit += 1
 	for p in sim.people: main.avatars[p.id].update_state(p,1,p.id==main.selected_id)
 	expect(main.avatars.aoi.animation_name=="work","Joint work plays the work animation after arrival")
+	main.get_node("%DetailToggle").button_pressed = true
 	main.get_node("%LifeTab").pressed.emit()
 	main._refresh_ui()
 	expect("生活費" in main.get_node("%DetailText").text,"The household panel explains the resident's living conditions")
@@ -109,7 +121,12 @@ func run() -> void:
 	sim.advance_minutes(45)
 	main._refresh_ui()
 	expect(sim.person("aoi").goal_progress>=.18,"Finishing shared work is reflected in the visible character goal")
+	main.get_node("%DetailToggle").button_pressed = false
 	await capture("07-household")
+	expect(main.get_node("%LatestEvent").is_visible_in_tree() and project_title in main.get_node("%LatestEvent").text,"Finishing actual work visibly names the completed collaboration outside the notebook")
+	if "--ui-only" in OS.get_cmdline_user_args():
+		print("Scene/UI smoke: %s (focused UI flow through completed collaboration)"%("PASS" if errors.is_empty() else "FAIL"))
+		main.free();quit(0 if errors.is_empty() else 1);return
 	sim.reset()
 	sim.running = false
 	for day in range(36):
@@ -123,6 +140,7 @@ func run() -> void:
 	expect(sim.life.chapter_acknowledged and not main.get_node("%JournalScreen").visible,"The player can return to the continuing town")
 	sim.running = false
 	main._select("aoi")
+	main.get_node("%DetailToggle").button_pressed = true
 	main.get_node("%LifeTab").pressed.emit()
 	main._refresh_ui()
 	expect("葵の新しい暮らし" in main.get_node("%DetailText").text,"A move is reflected in the actual household panel")
@@ -135,7 +153,7 @@ func run() -> void:
 	await process_frame
 	main._refresh_ui()
 	expect(main.get_node("%JournalScreen").visible and "町に残った時間" in main.get_node("%JournalHeading").text,"The complete lives reach the actual final review screen")
-	expect(main.get_node("%Partner").item_count==0,"Absent residents are no longer offered as live partners")
+	expect(main.partner.item_count==0,"Absent residents are no longer offered as live partners")
 	expect(main.get_node("Residents").get_children().all(func(actor): return not actor.visible),"Remembered people do not remain as living actors in the town")
 	await capture("10-final-review")
 	main.get_node("%JournalContinueButton").pressed.emit()

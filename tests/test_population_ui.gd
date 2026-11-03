@@ -47,7 +47,7 @@ func run() -> void:
 	expect(scroll.scroll_vertical>0,"The last resident can be brought into the visible roster")
 	roster.get_child(11).pressed.emit()
 	expect(main.selected_id=="yui","Selecting the last roster entry opens the actual new resident")
-	expect(main.portrait.texture!=null and main.portrait.texture.resource_path.ends_with("/yui.png"),"The new resident has their own portrait instead of an existing resident's atlas region")
+	expect(main.portrait.texture!=null and main.portrait.texture is AtlasTexture and main.portrait.texture.atlas.resource_path.ends_with("/yui.png"),"The new resident has their own portrait instead of an existing resident's atlas region")
 	var partner_ids := []
 	for index in main.partner.item_count: partner_ids.append(main.partner.get_item_metadata(index))
 	expect(partner_ids.size()==11 and "saki" in partner_ids and "yui" not in partner_ids,"The interaction chooser includes every other living resident")

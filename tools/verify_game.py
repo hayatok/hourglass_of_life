@@ -19,6 +19,7 @@ CHECKS={
  'resident_support':('test_resident_support_plans.gd',r'Resident support plan checks: \d+ passed, 0 failed'),
  'support_index':('test_support_index.gd',r'Support index checks: \d+ passed, 0 failed'),
  'resident_lod':('test_resident_lod.gd',r'Resident LOD checks: \d+ passed, 0 failed'),
+ 'resident_proposals':('test_resident_proposals.gd',r'Resident proposal UI checks: \d+ passed, 0 failed'),
  'observation_hud':('test_observation_hud.gd',r'Observation HUD checks: \d+ passed, 0 failed'),
  'population_ui':('test_population_ui.gd',r'Population UI checks: \d+ passed, 0 failed'),
  'population':('test_population.gd',r'Population checks: \d+ passed, 0 failed'),
@@ -69,7 +70,7 @@ for name in a.checks:
     file,marker=CHECKS[name]
     run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else 180)
 if a.gpu:
-    for name in ['character','cast','resident_lod','activities','neighborhood','observation_hud','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation']:
+    for name in ['character','cast','resident_lod','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation']:
         file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker,timeout=600 if name=='social_chain_presentation' else 180)
     run('scene-gpu',['--script','tests/test_scene.gd'],r'Scene/UI smoke: PASS',timeout=600)
 print('All requested engine checks completed.',flush=True)

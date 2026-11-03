@@ -1,0 +1,71 @@
+{
+	"artifacts": [],
+	"checks": 58,
+	"failures": [],
+	"partner_popup": {
+		"content_height": 511.0,
+		"items": 11,
+		"last_item": "yui",
+		"mean_row_height": 46.4545454545455,
+		"native_window": false,
+		"opened_by": "Space on focused OptionButton",
+		"position": "(355.0, 377.0)",
+		"scroll_available": true,
+		"selected_before": "haru",
+		"size": "(182.0, 420.0)"
+	},
+	"renderer": "headless",
+	"scenarios": [
+		{
+			"kind": "rest",
+			"partner": "yui",
+			"reply": {
+				"resident_id": "tomo",
+				"status": "accept",
+				"text": "少し休もうと思う。自分の時間も必要だね。"
+			},
+			"resident": "tomo"
+		},
+		{
+			"kind": "goal",
+			"partner": "haru",
+			"reply": {
+				"resident_id": "saki",
+				"status": "accept",
+				"text": "やってみたいと思っていた。自分のペースで取り組んでみる。"
+			},
+			"resident": "saki"
+		},
+		{
+			"kind": "meet",
+			"partner": "yui",
+			"reply": {
+				"resident_id": "yui",
+				"status": "counteroffer",
+				"text": "今は1時間0分後：引き受けた仕事の時間。今日 21:00ならどうかな。"
+			},
+			"resident": "tomo"
+		},
+		{
+			"kind": "support",
+			"partner": "osamu",
+			"reply": {
+				"resident_id": "osamu",
+				"status": "counteroffer",
+				"text": "まだ慣れない家のことは分からない。まず一緒に過ごして、できることを知りたい。"
+			},
+			"resident": "tomo"
+		},
+		{
+			"kind": "project",
+			"partner": "yui",
+			"reply": {
+				"resident_id": "tomo",
+				"status": "accept",
+				"text": "森 結衣さんと、音楽の小さな録音を進めよう。まずは道具を広げる場所へ。"
+			},
+			"resident": "tomo"
+		}
+	],
+	"scope": "Proposal modal over real seed-711 twelve-person simulation. Direct API calls on an independent identical world establish expected arguments/results; no needs, actions, relationships or replies are fabricated."
+}

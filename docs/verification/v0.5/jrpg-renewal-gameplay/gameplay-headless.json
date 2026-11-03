@@ -22,11 +22,11 @@
 	"provenance": {
 		"scope": "SHA/hash and pixel-hash identity records do not affect functional check counts, failures or outcome.",
 		"source_after_sha256": {
-			"res://assets/models/jrpg-resident-renewal/saki/generation.json": "42929842e8e62f14ec25d7a968f1da77e186c496f8786065817d5c5fd40ebca4",
+			"res://assets/models/jrpg-resident-renewal/saki/generation.json": "d5928cb5dd8552c5a066e164b703f676a9dabbb93aca578910aec3abc7684fe4",
 			"res://assets/models/jrpg-resident-renewal/saki/raw/CH_Saki_JRPG_Raw.glb": "f8b647466b582c4eb38bc318a287e47ced5231208f41ae3e157e3ad18bb7a8bd",
-			"res://assets/models/jrpg-resident-renewal/tomo/generation.json": "8479c1cecf8bcf17d530ed71207a9d05dfe24128a8041864c4a7e8e37cb82d40",
+			"res://assets/models/jrpg-resident-renewal/tomo/generation.json": "dd7f57baa6a4ed9379a78bb51be373ef24dfcafad64e310ff2d6089c4573820e",
 			"res://assets/models/jrpg-resident-renewal/tomo/raw/CH_Tomo_JRPG_Raw.glb": "dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65",
-			"res://assets/models/jrpg-resident-renewal/yui/generation.json": "ad716d6fa9aa4ab46e1365e32d0a57c3c18d066ec38f319ee24c7946c6d4af6e",
+			"res://assets/models/jrpg-resident-renewal/yui/generation.json": "ba2568bdb656ccb9d807599ff10a0b43f151e821e71fa14d46b27f31d4418ee0",
 			"res://assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
 			"res://data/resident-appearance.json": "d847ca271afa44ea86e775316bd76b538b8b4753394deb617fe619a6e2eb1af3",
 			"res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
@@ -35,19 +35,19 @@
 			"res://game/assets/models/saki/CH_Saki_LOD1.glb": "138e4c7ddda7c4cb12a471f7954cee09f76f13faa9be2f52502bd89246e293ef",
 			"res://game/assets/models/saki/CH_Saki_LOD2.glb": "e7f6d83241df28f3ca0ff19a21ddfca743ad6401a01a825f761e95349faf6392",
 			"res://game/assets/models/saki/animation-contract.json": "97c73e8a94003048046c02a4354065ba4fe3969f2bc0cb5d09f4249f2fcfef77",
-			"res://game/assets/models/saki/asset-manifest.json": "47bf7cf96a9e1c25f39e7ee84a4bc28bc09687ca6669e456f25217acd315532a",
+			"res://game/assets/models/saki/asset-manifest.json": "7d5a20792e559c5fa2a39e358c9916ab97d02760be8b011370f903211b3da1cc",
 			"res://game/assets/models/saki/face-layout.json": "1ecbd56c14ec036454c046197867064fdac0eda5417affbc9ae48ea9759d3e27",
 			"res://game/assets/models/tomo/CH_Tomo.glb": "5507c175485324910a3d8c7e00e594c89a34ca1e5315ff8a5057fe6b2094ba13",
 			"res://game/assets/models/tomo/CH_Tomo_LOD1.glb": "0c4251c66ad17151d0274d52793bd73033177dd1a49f069b635152ddf282e547",
 			"res://game/assets/models/tomo/CH_Tomo_LOD2.glb": "85afb644f0296d584b51b7d45ed5f3a5d1b2b9be47acda645705f1405361d523",
 			"res://game/assets/models/tomo/animation-contract.json": "35ffce48028004450c2dee6950c4650e5754069f84602bd01abce341bb67d8b4",
-			"res://game/assets/models/tomo/asset-manifest.json": "95daf9cccbfff439220412fa1f0cd6806010c324d45d5c4179ab1b8e19379b5e",
+			"res://game/assets/models/tomo/asset-manifest.json": "5358e2f8b0fdac870a963a4cc5b269de2a2058f6d84c2f2159f01d19b5fd5381",
 			"res://game/assets/models/tomo/face-layout.json": "a0c38ab2e51596ac57878b78ac121cc650e6e243e98e9ab07b3945e0a87e6846",
 			"res://game/assets/models/yui/CH_Yui.glb": "a9cb13b6cbf444bf5e0e41afba90ba2795053cf117cde8f2d39d16a8f4ea4352",
 			"res://game/assets/models/yui/CH_Yui_LOD1.glb": "6d4ba8cfff24359d76b1b8fe11e52569ec299ddfc8214122e8182c959a854c46",
 			"res://game/assets/models/yui/CH_Yui_LOD2.glb": "23c0b7b5fca41ab5a4fb8b9389d257267e137403dc3b6c77a25e947ce94e3d9c",
 			"res://game/assets/models/yui/animation-contract.json": "386b7b1dd14031d017e3c5ef90268c5256be8a119a761aef461d5ca147f7772e",
-			"res://game/assets/models/yui/asset-manifest.json": "2215d9a8a5359c4edbc610f7181fa325ace8e652aa4d704433133740f0ab838a",
+			"res://game/assets/models/yui/asset-manifest.json": "b4a4d24073badb9cf64380c07ff293bb4d09eef142be81d235cb8ff43bb78d38",
 			"res://game/assets/models/yui/face-layout.json": "3f3990c4124957f6405a0e29a80491358b990ea2a6a0e76b57dda86b77229183",
 			"res://game/assets/ui/portraits/saki.png": "a59058bc07955d79323a82aadeb8cc999b7f4a8c9c46cb7a7bf202568872fcdd",
 			"res://game/assets/ui/portraits/tomo.png": "ea1ab2febc28c1e5b5feb2363ccd8efc0d2522260c0ebb5ef055efd36909a74a",
@@ -55,10 +55,10 @@
 			"res://game/scenes/characters/saki.tscn": "7f7aab19fad2ad0f3082147bc42a66fb252b99e1c023887b12fd3e110b2a915f",
 			"res://game/scenes/characters/tomo.tscn": "a4ec919727b35a3fa308de3f3862a2dfb64b07725a841b73bf4370ba64cdfbbb",
 			"res://game/scenes/characters/yui.tscn": "4229b3f0815bb0f15e9a5d12d5cc5d1faa938beade412c968d4e22607fb361d5",
-			"res://game/scenes/main.tscn": "1bbf2da01df31044aaace1002de5383592ef2f69bffd13f017511f274c7f61b5",
+			"res://game/scenes/main.tscn": "e7e7973343618a8fc054a813c70a72451c9432f3eaf3b05999736ff7ba314975",
 			"res://game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
 			"res://game/scripts/life_course.gd": "de903d5945a65f11bd0f45666237d4a41d9f966c536423388aa7646f6a10bea7",
-			"res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
+			"res://game/scripts/main.gd": "88daa88c0c35765618fcbc5b4d48c5ac10ed101d6059aa46aac91ce0366ed623",
 			"res://game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
 			"res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
 			"res://game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
@@ -68,15 +68,15 @@
 			"res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
 			"res://game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
 			"res://game/scripts/work_family.gd": "9749bb676f8ed5a4e569ac44625741679f0931b0d46ef69326d250de9151bc5e",
-			"res://tests/test_jrpg_renewal_gameplay.gd": "fa37bc46395a25b411730aa68cde2b7734c8134c1fda4060f5f37675a60cdef4",
+			"res://tests/test_jrpg_renewal_gameplay.gd": "9136ec2450036c396bd9694b0bb8ffa1165b4f33820c48904c4669abdf0f5f87",
 			"res://tools/inspect_population.gd": "2bb82a82a1b9d28f5ef9a4c7e98e8c9b179a4d261683c4e363a988136f240f0d"
 		},
 		"source_sha256": {
-			"res://assets/models/jrpg-resident-renewal/saki/generation.json": "42929842e8e62f14ec25d7a968f1da77e186c496f8786065817d5c5fd40ebca4",
+			"res://assets/models/jrpg-resident-renewal/saki/generation.json": "d5928cb5dd8552c5a066e164b703f676a9dabbb93aca578910aec3abc7684fe4",
 			"res://assets/models/jrpg-resident-renewal/saki/raw/CH_Saki_JRPG_Raw.glb": "f8b647466b582c4eb38bc318a287e47ced5231208f41ae3e157e3ad18bb7a8bd",
-			"res://assets/models/jrpg-resident-renewal/tomo/generation.json": "8479c1cecf8bcf17d530ed71207a9d05dfe24128a8041864c4a7e8e37cb82d40",
+			"res://assets/models/jrpg-resident-renewal/tomo/generation.json": "dd7f57baa6a4ed9379a78bb51be373ef24dfcafad64e310ff2d6089c4573820e",
 			"res://assets/models/jrpg-resident-renewal/tomo/raw/CH_Tomo_JRPG_Raw.glb": "dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65",
-			"res://assets/models/jrpg-resident-renewal/yui/generation.json": "ad716d6fa9aa4ab46e1365e32d0a57c3c18d066ec38f319ee24c7946c6d4af6e",
+			"res://assets/models/jrpg-resident-renewal/yui/generation.json": "ba2568bdb656ccb9d807599ff10a0b43f151e821e71fa14d46b27f31d4418ee0",
 			"res://assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
 			"res://data/resident-appearance.json": "d847ca271afa44ea86e775316bd76b538b8b4753394deb617fe619a6e2eb1af3",
 			"res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
@@ -85,19 +85,19 @@
 			"res://game/assets/models/saki/CH_Saki_LOD1.glb": "138e4c7ddda7c4cb12a471f7954cee09f76f13faa9be2f52502bd89246e293ef",
 			"res://game/assets/models/saki/CH_Saki_LOD2.glb": "e7f6d83241df28f3ca0ff19a21ddfca743ad6401a01a825f761e95349faf6392",
 			"res://game/assets/models/saki/animation-contract.json": "97c73e8a94003048046c02a4354065ba4fe3969f2bc0cb5d09f4249f2fcfef77",
-			"res://game/assets/models/saki/asset-manifest.json": "47bf7cf96a9e1c25f39e7ee84a4bc28bc09687ca6669e456f25217acd315532a",
+			"res://game/assets/models/saki/asset-manifest.json": "7d5a20792e559c5fa2a39e358c9916ab97d02760be8b011370f903211b3da1cc",
 			"res://game/assets/models/saki/face-layout.json": "1ecbd56c14ec036454c046197867064fdac0eda5417affbc9ae48ea9759d3e27",
 			"res://game/assets/models/tomo/CH_Tomo.glb": "5507c175485324910a3d8c7e00e594c89a34ca1e5315ff8a5057fe6b2094ba13",
 			"res://game/assets/models/tomo/CH_Tomo_LOD1.glb": "0c4251c66ad17151d0274d52793bd73033177dd1a49f069b635152ddf282e547",
 			"res://game/assets/models/tomo/CH_Tomo_LOD2.glb": "85afb644f0296d584b51b7d45ed5f3a5d1b2b9be47acda645705f1405361d523",
 			"res://game/assets/models/tomo/animation-contract.json": "35ffce48028004450c2dee6950c4650e5754069f84602bd01abce341bb67d8b4",
-			"res://game/assets/models/tomo/asset-manifest.json": "95daf9cccbfff439220412fa1f0cd6806010c324d45d5c4179ab1b8e19379b5e",
+			"res://game/assets/models/tomo/asset-manifest.json": "5358e2f8b0fdac870a963a4cc5b269de2a2058f6d84c2f2159f01d19b5fd5381",
 			"res://game/assets/models/tomo/face-layout.json": "a0c38ab2e51596ac57878b78ac121cc650e6e243e98e9ab07b3945e0a87e6846",
 			"res://game/assets/models/yui/CH_Yui.glb": "a9cb13b6cbf444bf5e0e41afba90ba2795053cf117cde8f2d39d16a8f4ea4352",
 			"res://game/assets/models/yui/CH_Yui_LOD1.glb": "6d4ba8cfff24359d76b1b8fe11e52569ec299ddfc8214122e8182c959a854c46",
 			"res://game/assets/models/yui/CH_Yui_LOD2.glb": "23c0b7b5fca41ab5a4fb8b9389d257267e137403dc3b6c77a25e947ce94e3d9c",
 			"res://game/assets/models/yui/animation-contract.json": "386b7b1dd14031d017e3c5ef90268c5256be8a119a761aef461d5ca147f7772e",
-			"res://game/assets/models/yui/asset-manifest.json": "2215d9a8a5359c4edbc610f7181fa325ace8e652aa4d704433133740f0ab838a",
+			"res://game/assets/models/yui/asset-manifest.json": "b4a4d24073badb9cf64380c07ff293bb4d09eef142be81d235cb8ff43bb78d38",
 			"res://game/assets/models/yui/face-layout.json": "3f3990c4124957f6405a0e29a80491358b990ea2a6a0e76b57dda86b77229183",
 			"res://game/assets/ui/portraits/saki.png": "a59058bc07955d79323a82aadeb8cc999b7f4a8c9c46cb7a7bf202568872fcdd",
 			"res://game/assets/ui/portraits/tomo.png": "ea1ab2febc28c1e5b5feb2363ccd8efc0d2522260c0ebb5ef055efd36909a74a",
@@ -105,10 +105,10 @@
 			"res://game/scenes/characters/saki.tscn": "7f7aab19fad2ad0f3082147bc42a66fb252b99e1c023887b12fd3e110b2a915f",
 			"res://game/scenes/characters/tomo.tscn": "a4ec919727b35a3fa308de3f3862a2dfb64b07725a841b73bf4370ba64cdfbbb",
 			"res://game/scenes/characters/yui.tscn": "4229b3f0815bb0f15e9a5d12d5cc5d1faa938beade412c968d4e22607fb361d5",
-			"res://game/scenes/main.tscn": "1bbf2da01df31044aaace1002de5383592ef2f69bffd13f017511f274c7f61b5",
+			"res://game/scenes/main.tscn": "e7e7973343618a8fc054a813c70a72451c9432f3eaf3b05999736ff7ba314975",
 			"res://game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
 			"res://game/scripts/life_course.gd": "de903d5945a65f11bd0f45666237d4a41d9f966c536423388aa7646f6a10bea7",
-			"res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
+			"res://game/scripts/main.gd": "88daa88c0c35765618fcbc5b4d48c5ac10ed101d6059aa46aac91ce0366ed623",
 			"res://game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
 			"res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
 			"res://game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
@@ -118,7 +118,7 @@
 			"res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
 			"res://game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
 			"res://game/scripts/work_family.gd": "9749bb676f8ed5a4e569ac44625741679f0931b0d46ef69326d250de9151bc5e",
-			"res://tests/test_jrpg_renewal_gameplay.gd": "fa37bc46395a25b411730aa68cde2b7734c8134c1fda4060f5f37675a60cdef4",
+			"res://tests/test_jrpg_renewal_gameplay.gd": "9136ec2450036c396bd9694b0bb8ffa1165b4f33820c48904c4669abdf0f5f87",
 			"res://tools/inspect_population.gd": "2bb82a82a1b9d28f5ef9a4c7e98e8c9b179a4d261683c4e363a988136f240f0d"
 		},
 		"sources_unchanged": true
@@ -134,26 +134,26 @@
 						"activity_yaw": 0.0,
 						"actor_head": {
 							"__vector3": [
-								-0.487997502088547,
-								1.17466497421265,
-								2.51113796234131
+								-0.487380862236023,
+								1.17452394962311,
+								2.51473999023438
 							]
 						},
 						"clip": "sit_talk",
 						"clip_position": 0.266666666666667,
 						"direction_to_partner": {
 							"__vector3": [
-								0.999642074108124,
-								0.0232377592474222,
-								0.0132554387673736
+								0.999680876731873,
+								0.0234001539647579,
+								0.00952021032571793
 							]
 						},
-						"engine_process_delta": 0.006883,
+						"engine_process_delta": 0.00694444444444444,
 						"head_forward": {
 							"__vector3": [
-								0.242939174175262,
-								-0.0197332035750151,
-								0.969840824604034
+								0.207267895340919,
+								-0.0519391074776649,
+								0.976904511451721
 							]
 						},
 						"head_rest": {
@@ -281,7 +281,7 @@
 						},
 						"simulation_facing": null,
 						"visual_yaw": 12.5663709640503,
-						"wall_seconds_since_focus": 0.102654
+						"wall_seconds_since_focus": 0.103685
 					},
 					"greeting_after": 0.333333333333333,
 					"greeting_before": 0.483333333333333,
@@ -365,23 +365,23 @@
 							"hand_errorL": 0.000000273142802598159,
 							"head": {
 								"__vector3": [
-									-0.491511851549149,
-									1.17449200153351,
-									2.50292730331421
+									-0.490793853998184,
+									1.17461395263672,
+									2.50631737709045
 								]
 							},
 							"head_forward": {
 								"__vector3": [
-									0.335455656051636,
-									0.056218858808279,
-									0.940377056598663
+									0.300666958093643,
+									0.0257219951599836,
+									0.953382313251495
 								]
 							},
 							"mouth": {
 								"__vector3": [
-									-0.450916469097137,
-									1.09362256526947,
-									2.60493803024292
+									-0.454371869564056,
+									1.09045398235321,
+									2.60723567008972
 								]
 							},
 							"pelvis": {
@@ -442,7 +442,7 @@
 						]
 					},
 					"hand_movement": 0.0665355995297432,
-					"head_dot": 0.255249351263046,
+					"head_dot": 0.215286701917648,
 					"meeting": {
 						"a": "saki",
 						"agenda_id": "agenda_4",
@@ -523,38 +523,38 @@
 							"foot_errorR": 0.000000149011611938477,
 							"handL": {
 								"__vector3": [
-									-0.314820647239685,
-									1.07690119743347,
-									2.76273465156555
+									-0.314558029174805,
+									1.07792019844055,
+									2.76195287704468
 								]
 							},
 							"handR": {
 								"__vector3": [
-									-0.596259653568268,
-									0.879820644855499,
+									-0.596259713172913,
+									0.879819989204407,
 									2.93370795249939
 								]
 							},
-							"hand_errorL": 0.000000268220901489258,
+							"hand_errorL": 0.000000245756240246919,
 							"head": {
 								"__vector3": [
-									-0.492890268564224,
+									-0.492891550064087,
 									1.17414808273315,
-									2.49836182594299
+									2.49836254119873
 								]
 							},
 							"head_forward": {
 								"__vector3": [
-									0.384204089641571,
-									0.0975381508469582,
-									0.91808146238327
+									0.384204119443893,
+									0.0975340604782104,
+									0.918081939220428
 								]
 							},
 							"mouth": {
 								"__vector3": [
-									-0.44630840420723,
-									1.09786367416382,
-									2.60134148597717
+									-0.446309447288513,
+									1.09786319732666,
+									2.60134172439575
 								]
 							},
 							"pelvis": {
@@ -611,19 +611,19 @@
 					"settled_attention_sample": {
 						"actor_head": {
 							"__vector3": [
-								-0.492890268564224,
+								-0.492891550064087,
 								1.17414808273315,
-								2.49836182594299
+								2.49836254119873
 							]
 						},
-						"clip_position": 0.632811,
+						"clip_position": 0.632188,
 						"engine_process_delta": 0.00666666666666667,
-						"greeting": 0.117188999999999,
+						"greeting": 0.117811999999999,
 						"head_forward": {
 							"__vector3": [
-								0.384204089641571,
-								0.0975381508469582,
-								0.91808146238327
+								0.384204119443893,
+								0.0975340604782104,
+								0.918081939220428
 							]
 						},
 						"head_rest": {
@@ -662,32 +662,32 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.999331772327423,
-										0.036546491086483,
-										0.000540408538654447
+										0.999331593513489,
+										0.0365516729652882,
+										0.000540408422239125
 									]
 								},
 								{
 									"__vector3": [
-										-0.0364398173987865,
-										0.995047330856323,
-										0.0924815535545349
+										-0.036444578319788,
+										0.995034158229828,
+										0.0926211178302765
 									]
 								},
 								{
 									"__vector3": [
-										0.00284214434213936,
-										-0.0924394428730011,
-										0.99571430683136
+										0.00284773181192577,
+										-0.0925789028406143,
+										0.995701313018799
 									]
 								}
 							]
 						},
 						"look_target": {
 							"__vector3": [
-								0.471697360277176,
-								1.19766139984131,
-								2.51808166503906
+								0.471695750951767,
+								1.19765961170197,
+								2.51810026168823
 							]
 						},
 						"neck_rest": {
@@ -726,22 +726,22 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.99973452091217,
-										0.0230404492467642,
-										-0.000000349460805182389
+										0.999734401702881,
+										0.0230456311255693,
+										-0.00000034946074833897
 									]
 								},
 								{
 									"__vector3": [
-										-0.0230220053344965,
-										0.998934805393219,
+										-0.0230271834880114,
+										0.998934686183929,
 										0.0399893559515476
 									]
 								},
 								{
 									"__vector3": [
-										0.000921721919439733,
-										-0.0399787314236164,
+										0.000921929138712585,
+										-0.0399787239730358,
 										0.999200105667114
 									]
 								}
@@ -749,15 +749,15 @@
 						},
 						"partner_head": {
 							"__vector3": [
-								0.479041665792465,
+								0.479040324687958,
 								1.19791865348816,
-								2.49806332588196
+								2.4980628490448
 							]
 						},
 						"required_wall_seconds": 0.3,
-						"wall_seconds_since_focus": 0.309701
+						"wall_seconds_since_focus": 0.310661
 					},
-					"settled_head_dot": 0.386192142963409
+					"settled_head_dot": 0.386190950870514
 				},
 				"eat": {
 					"action": "eat",
@@ -1007,18 +1007,18 @@
 							"handL": {
 								"__vector3": [
 									3.01999974250793,
-									1.0133228302002,
+									1.01326930522919,
 									4.81999969482422
 								]
 							},
 							"handR": {
 								"__vector3": [
 									3.27999997138977,
-									1.00489377975464,
+									1.004922747612,
 									4.81999969482422
 								]
 							},
-							"hand_errorL": 0.000000238418579101562,
+							"hand_errorL": 0.000000119209289550781,
 							"hand_errorR": 0.000000266560078898692,
 							"head": {
 								"__vector3": [
@@ -2262,11 +2262,57 @@
 					"materials": [
 						"tripo_material_0e71fc2c-fe0c-479b-9cad-30a152ba12c5"
 					],
-					"production_status": "Body geometry/skin candidate frozen after numerical UV/pixel/rig/clip checks, pose review and clean reimport. Actual Godot material, eyes, LOD transitions and furniture/feet contacts remain separate acceptance steps.",
+					"production_status": "Dedicated body, nine clips, compatible LODs and the two UV-eye controls are integrated. Partial real-town character acceptance is recorded; full facial/hair-aging behavior, motion/contact polish and human UI/game-fun acceptance are still incomplete.",
 					"raw_source": "assets/models/jrpg-resident-renewal/saki/raw/CH_Saki_JRPG_Raw.glb",
 					"raw_source_sha256": "f8b647466b582c4eb38bc318a287e47ced5231208f41ae3e157e3ad18bb7a8bd",
+					"remaining_work": [
+						"Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+						"Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+						"Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+						"Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+						"Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+						"Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+						"Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
+					],
 					"resident": "saki",
 					"revision": "body-r1",
+					"runtime_acceptance": {
+						"aggregate_functional_results": {
+							"gpu": {
+								"checks": 115.0,
+								"failures": 0.0
+							},
+							"headless": {
+								"checks": 112.0,
+								"failures": 0.0
+							},
+							"scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident."
+						},
+						"artifacts": {
+							"counted_as_functional_checks": false,
+							"images_attempted": 29.0,
+							"images_saved": 29.0
+						},
+						"date": "2026-11-03",
+						"evidence": {
+							"gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
+							"headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
+							"readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
+							"review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
+						},
+						"identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts.",
+						"observed_behaviors": [
+							"Actual skin deformation and walking",
+							"Conversation gesture and head attention after the ordinary transition",
+							"Natural joint work and a real skill change",
+							"Meal seating and hand/cup contact",
+							"Own-bed head/pelvis contact, sleep closure and waking reopening",
+							"All LOD rig/bind/clip compatibility",
+							"Project-in-progress save/resume and subsequent state/RNG continuation"
+						],
+						"scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
+						"status": "partial_character_runtime_acceptance"
+					},
 					"runtime_contract": {
 						"bone_count": 36.0,
 						"mesh_part_keys": [
@@ -2402,7 +2448,11 @@
 						}
 					],
 					"sockets": [],
-					"source": "builds/jrpg-resident-renewal/saki/CH_Saki_Delivery.blend",
+					"source": "assets/models/jrpg-resident-renewal/source/saki/CH_Saki_AnimationMaster.blend",
+					"source_history": {
+						"body_delivery_staging": "builds/jrpg-resident-renewal/saki/CH_Saki_Delivery.blend",
+						"note": "Retained as the historical export working file. Canonical editable master is source; runtime delivery of record is this game/assets/models folder."
+					},
 					"source_images": [
 						{
 							"mime_type": "image/jpeg",
@@ -2719,26 +2769,26 @@
 						"activity_yaw": 0.0,
 						"actor_head": {
 							"__vector3": [
-								0.475783735513687,
-								1.17769384384155,
-								2.50581741333008
+								0.475909829139709,
+								1.17768466472626,
+								2.50516986846924
 							]
 						},
 						"clip": "sit_talk",
-						"clip_position": 0.3775,
+						"clip_position": 0.391546111111111,
 						"direction_to_partner": {
 							"__vector3": [
-								-0.998605787754059,
-								-0.0496345832943916,
-								0.0179657284170389
+								-0.998597383499146,
+								-0.0495988354086876,
+								0.0185266342014074
 							]
 						},
-						"engine_process_delta": 0.00625,
+						"engine_process_delta": 0.00666666666666667,
 						"head_forward": {
 							"__vector3": [
-								-0.214729860424995,
-								0.00855887308716774,
-								0.976635992527008
+								-0.237222477793694,
+								0.0140816196799278,
+								0.97135329246521
 							]
 						},
 						"head_rest": {
@@ -2777,23 +2827,23 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.99947601556778,
-										0.0323654785752296,
-										0.000465984834590927
+										0.999447405338287,
+										0.0332353413105011,
+										0.000477830966701731
 									]
 								},
 								{
 									"__vector3": [
-										-0.0321124903857708,
-										0.989649713039398,
-										0.139864832162857
+										-0.0329789854586124,
+										0.98973935842514,
+										0.139026150107384
 									]
 								},
 								{
 									"__vector3": [
-										0.00406563095748425,
-										-0.139806509017944,
-										0.990170478820801
+										0.00414765439927578,
+										-0.138965085148811,
+										0.990288555622101
 									]
 								}
 							]
@@ -2835,22 +2885,22 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.999784588813782,
-										0.0207552257925272,
-										0.000000000145519152283669
+										0.999772846698761,
+										0.0213131494820118,
+										0.0000000000582076609134674
 									]
 								},
 								{
 									"__vector3": [
-										-0.0207386240363121,
-										0.998984813690186,
-										0.0399893410503864
+										-0.0212961044162512,
+										0.998973071575165,
+										0.0399893373250961
 									]
 								},
 								{
 									"__vector3": [
-										0.000829987809993327,
-										-0.0399807244539261,
+										0.000852298806421459,
+										-0.0399802513420582,
 										0.999200105667114
 									]
 								}
@@ -2859,14 +2909,14 @@
 						"partner": "maho",
 						"partner_head": {
 							"__vector3": [
-								-0.487150639295578,
-								1.12983226776123,
-								2.52314138412476
+								-0.48734325170517,
+								1.12984132766724,
+								2.52304077148438
 							]
 						},
 						"simulation_facing": null,
 						"visual_yaw": 0.0,
-						"wall_seconds_since_focus": 0.103558
+						"wall_seconds_since_focus": 0.104176
 					},
 					"greeting_after": 0.333333333333333,
 					"greeting_before": 0.483333333333333,
@@ -2935,38 +2985,38 @@
 							"foot_errorR": 0.00000098663247172226,
 							"handL": {
 								"__vector3": [
-									0.701434135437012,
-									1.29690527915955,
-									2.575927734375
+									0.70146918296814,
+									1.2969491481781,
+									2.57552814483643
 								]
 							},
 							"handR": {
 								"__vector3": [
-									0.289452373981476,
-									0.848056972026825,
+									0.289448082447052,
+									0.848080635070801,
 									2.91226625442505
 								]
 							},
-							"hand_errorL": 0.0,
+							"hand_errorL": 0.000000133280039449346,
 							"head": {
 								"__vector3": [
-									0.476320266723633,
-									1.17762696743011,
-									2.5031054019928
+									0.476718068122864,
+									1.17760372161865,
+									2.50248241424561
 								]
 							},
 							"head_forward": {
 								"__vector3": [
-									-0.306084513664246,
-									0.0319435000419617,
-									0.951468288898468
+									-0.329179674386978,
+									0.0377056933939457,
+									0.943514227867126
 								]
 							},
 							"mouth": {
 								"__vector3": [
-									0.4438796043396,
-									1.09402740001678,
-									2.60583162307739
+									0.441579669713974,
+									1.09462630748749,
+									2.604825258255
 								]
 							},
 							"pelvis": {
@@ -3021,13 +3071,13 @@
 					},
 					"hand_before": {
 						"__vector3": [
-							0.702845931053162,
-							1.29644465446472,
-							2.6439220905304
+							0.702650427818298,
+							1.29645299911499,
+							2.64382410049438
 						]
 					},
-					"hand_movement": 0.0680105686187744,
-					"head_dot": 0.231551647186279,
+					"hand_movement": 0.0683079734444618,
+					"head_dot": 0.254187226295471,
 					"meeting": {
 						"a": "maho",
 						"appointment_id": "",
@@ -3106,38 +3156,38 @@
 							"foot_errorR": 0.00000098663247172226,
 							"handL": {
 								"__vector3": [
-									0.686967730522156,
-									1.06291365623474,
-									2.77557110786438
+									0.687038421630859,
+									1.06218934059143,
+									2.7761242389679
 								]
 							},
 							"handR": {
 								"__vector3": [
-									0.28918120265007,
-									0.849574983119965,
+									0.289154917001724,
+									0.849726021289825,
 									2.91226625442505
 								]
 							},
-							"hand_errorL": 0.0000000596046447753906,
+							"hand_errorL": 0.000000168587391158326,
 							"head": {
 								"__vector3": [
-									0.4797103703022,
-									1.17757630348206,
-									2.50169014930725
+									0.479907304048538,
+									1.17758071422577,
+									2.50177621841431
 								]
 							},
 							"head_forward": {
 								"__vector3": [
-									-0.388588488101959,
-									0.0485771186649799,
-									0.9201300740242
+									-0.388566076755524,
+									0.0481060370802879,
+									0.920164227485657
 								]
 							},
 							"mouth": {
 								"__vector3": [
-									0.437157958745956,
-									1.09577965736389,
-									2.60215210914612
+									0.437314808368683,
+									1.0957328081131,
+									2.60217928886414
 								]
 							},
 							"pelvis": {
@@ -3194,19 +3244,19 @@
 					"settled_attention_sample": {
 						"actor_head": {
 							"__vector3": [
-								0.4797103703022,
-								1.17757630348206,
-								2.50169014930725
+								0.479907304048538,
+								1.17758071422577,
+								2.50177621841431
 							]
 						},
-						"clip_position": 0.942717000000001,
-						"engine_process_delta": 0.00666666666666667,
-						"greeting": 0.117282999999999,
+						"clip_position": 0.958005666666668,
+						"engine_process_delta": 0.006925,
+						"greeting": 0.116916999999999,
 						"head_forward": {
 							"__vector3": [
-								-0.388588488101959,
-								0.0485771186649799,
-								0.9201300740242
+								-0.388566076755524,
+								0.0481060370802879,
+								0.920164227485657
 							]
 						},
 						"head_rest": {
@@ -3245,32 +3295,32 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.999709129333496,
-										0.0241175554692745,
-										0.000346809305483475
+										0.999738156795502,
+										0.0228833463042974,
+										0.000329518428770825
 									]
 								},
 								{
 									"__vector3": [
-										-0.0240975487977266,
-										0.998052179813385,
-										0.0575420334935188
+										-0.0228634662926197,
+										0.998027682304382,
+										0.0584623701870441
 									]
 								},
 								{
 									"__vector3": [
-										0.00104163947980851,
-										-0.0575336404144764,
-										0.998343050479889
+										0.00100894598290324,
+										-0.0584545806050301,
+										0.998289525508881
 									]
 								}
 							]
 						},
 						"look_target": {
 							"__vector3": [
-								-0.48558297753334,
-								1.13085663318634,
-								2.51316523551941
+								-0.485319167375565,
+								1.13085579872131,
+								2.51327466964722
 							]
 						},
 						"neck_rest": {
@@ -3309,22 +3359,22 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.999880433082581,
-										0.0154653089120984,
+										0.999892354011536,
+										0.0146738020703197,
 										0.0
 									]
 								},
 								{
 									"__vector3": [
-										-0.0154529400169849,
-										0.999080538749695,
-										0.0399893224239349
+										-0.0146620646119118,
+										0.99909245967865,
+										0.0399893261492252
 									]
 								},
 								{
 									"__vector3": [
-										0.000618447258602828,
-										-0.0399845354259014,
+										0.000586795504204929,
+										-0.0399850159883499,
 										0.999200105667114
 									]
 								}
@@ -3332,15 +3382,15 @@
 						},
 						"partner_head": {
 							"__vector3": [
-								-0.491601556539536,
-								1.13008368015289,
-								2.4938371181488
+								-0.491416811943054,
+								1.1300812959671,
+								2.49375295639038
 							]
 						},
 						"required_wall_seconds": 0.3,
-						"wall_seconds_since_focus": 0.310518
+						"wall_seconds_since_focus": 0.311371
 					},
-					"settled_head_dot": 0.37830975651741
+					"settled_head_dot": 0.378148168325424
 				},
 				"eat": {
 					"action": "eat",
@@ -4837,11 +4887,57 @@
 					"materials": [
 						"tripo_material_46f53796-b627-47f8-bd88-a45d7cd24866"
 					],
-					"production_status": "Body geometry/skin candidate frozen after numerical UV/pixel/rig/clip checks and clean reimport. Actual Godot material, eyes, LOD transitions and furniture/feet contacts remain separate acceptance steps.",
+					"production_status": "Dedicated body, nine clips, compatible LODs and the two UV-eye controls are integrated. Partial real-town character acceptance is recorded; full facial/hair-aging behavior, motion/contact polish and human UI/game-fun acceptance are still incomplete.",
 					"raw_source": "assets/models/jrpg-resident-renewal/tomo/raw/CH_Tomo_JRPG_Raw.glb",
 					"raw_source_sha256": "dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65",
+					"remaining_work": [
+						"Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+						"Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+						"Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+						"Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+						"Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+						"Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+						"Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
+					],
 					"resident": "tomo",
 					"revision": "body-r1",
+					"runtime_acceptance": {
+						"aggregate_functional_results": {
+							"gpu": {
+								"checks": 115.0,
+								"failures": 0.0
+							},
+							"headless": {
+								"checks": 112.0,
+								"failures": 0.0
+							},
+							"scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident."
+						},
+						"artifacts": {
+							"counted_as_functional_checks": false,
+							"images_attempted": 29.0,
+							"images_saved": 29.0
+						},
+						"date": "2026-11-03",
+						"evidence": {
+							"gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
+							"headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
+							"readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
+							"review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
+						},
+						"identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts.",
+						"observed_behaviors": [
+							"Actual skin deformation and walking",
+							"Conversation gesture and head attention after the ordinary transition",
+							"Natural joint work and a real skill change",
+							"Meal seating and hand/cup contact",
+							"Own-bed head/pelvis contact, sleep closure and waking reopening",
+							"All LOD rig/bind/clip compatibility",
+							"Project-in-progress save/resume and subsequent state/RNG continuation"
+						],
+						"scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
+						"status": "partial_character_runtime_acceptance"
+					},
 					"runtime_contract": {
 						"bone_count": 35.0,
 						"mesh_part_keys": [
@@ -4974,7 +5070,11 @@
 						}
 					],
 					"sockets": [],
-					"source": "builds/jrpg-resident-renewal/tomo/CH_Tomo_Delivery.blend",
+					"source": "assets/models/jrpg-resident-renewal/source/tomo/CH_Tomo_AnimationMaster.blend",
+					"source_history": {
+						"body_delivery_staging": "builds/jrpg-resident-renewal/tomo/CH_Tomo_Delivery.blend",
+						"note": "Retained as the historical export working file. Canonical editable master is source; runtime delivery of record is this game/assets/models folder."
+					},
 					"source_images": [
 						{
 							"mime_type": "image/jpeg",
@@ -5288,7 +5388,7 @@
 								0.0086621968075633
 							]
 						},
-						"engine_process_delta": 0.006877,
+						"engine_process_delta": 0.00694444444444444,
 						"head_forward": {
 							"__vector3": [
 								-0.996192693710327,
@@ -5421,7 +5521,7 @@
 						},
 						"simulation_facing": null,
 						"visual_yaw": -20.4182014465332,
-						"wall_seconds_since_focus": 0.10072
+						"wall_seconds_since_focus": 0.102256
 					},
 					"greeting_after": 0.333333333333333,
 					"greeting_before": 0.483333333333333,
@@ -5447,9 +5547,9 @@
 							},
 							"handL": {
 								"__vector3": [
-									7.06524658203125,
+									7.06529998779297,
 									1.65411245822906,
-									-3.57741951942444
+									-3.57741975784302
 								]
 							},
 							"handR": {
@@ -5532,12 +5632,12 @@
 					},
 					"hand_before": {
 						"__vector3": [
-							7.13452291488647,
+							7.1347770690918,
 							1.65419030189514,
-							-3.57545804977417
+							-3.57545828819275
 						]
 					},
-					"hand_movement": 0.0693041384220123,
+					"hand_movement": 0.0695048049092293,
 					"head_dot": 0.99493134021759,
 					"meeting": {
 						"a": "nagisa",
@@ -5567,45 +5667,45 @@
 							},
 							"footR": {
 								"__vector3": [
-									7.2193489074707,
+									7.21934938430786,
 									0.13000026345253,
 									-3.91011643409729
 								]
 							},
 							"handL": {
 								"__vector3": [
-									7.00823211669922,
-									1.33609414100647,
-									-3.61920738220215
+									7.0090856552124,
+									1.33807790279388,
+									-3.61895394325256
 								]
 							},
 							"handR": {
 								"__vector3": [
-									7.11412811279297,
-									0.867655158042908,
-									-3.93402051925659
+									7.1141300201416,
+									0.867653906345367,
+									-3.93401837348938
 								]
 							},
-							"hand_errorL": 0.000000546285605196317,
+							"hand_errorL": 0.000000119209289550781,
 							"head": {
 								"__vector3": [
-									7.20758867263794,
-									1.53443837165833,
-									-3.8073136806488
+									7.20758771896362,
+									1.53443825244904,
+									-3.80731606483459
 								]
 							},
 							"head_forward": {
 								"__vector3": [
-									-0.996151208877563,
-									0.0870201140642166,
-									0.0105015002191067
+									-0.996151089668274,
+									0.0870208293199539,
+									0.0105047933757305
 								]
 							},
 							"mouth": {
 								"__vector3": [
-									7.09544610977173,
-									1.45693016052246,
-									-3.80406165122986
+									7.09544563293457,
+									1.45693004131317,
+									-3.80406284332275
 								]
 							},
 							"pelvis": {
@@ -5661,19 +5761,19 @@
 					"settled_attention_sample": {
 						"actor_head": {
 							"__vector3": [
-								7.20758867263794,
-								1.53443837165833,
-								-3.8073136806488
+								7.20758771896362,
+								1.53443825244904,
+								-3.80731606483459
 							]
 						},
-						"clip_position": 0.632732,
+						"clip_position": 0.631903,
 						"engine_process_delta": 0.00666666666666667,
-						"greeting": 0.117267999999999,
+						"greeting": 0.118096999999999,
 						"head_forward": {
 							"__vector3": [
-								-0.996151208877563,
-								0.0870201140642166,
-								0.0105015002191067
+								-0.996151089668274,
+								0.0870208293199539,
+								0.0105047933757305
 							]
 						},
 						"head_rest": {
@@ -5712,32 +5812,32 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.00570403318852186,
-										0.0371147468686104,
-										0.999294698238373
+										0.0057020653039217,
+										0.0371216647326946,
+										0.999294459819794
 									]
 								},
 								{
 									"__vector3": [
-										-0.0679051429033279,
-										0.997018575668335,
-										-0.0366426073014736
+										-0.0680956244468689,
+										0.99700540304184,
+										-0.0366480723023415
 									]
 								},
 								{
 									"__vector3": [
-										-0.997675538063049,
-										-0.0676482319831848,
-										0.00820730999112129
+										-0.997662544250488,
+										-0.0678386092185974,
+										0.00821281410753727
 									]
 								}
 							]
 						},
 						"look_target": {
 							"__vector3": [
-								6.0107946395874,
-								1.51856577396393,
-								-3.79184222221375
+								6.010826587677,
+								1.51856362819672,
+								-3.79183983802795
 							]
 						},
 						"neck_rest": {
@@ -5776,38 +5876,38 @@
 							"world_basis_at_sample": [
 								{
 									"__vector3": [
-										0.00591070950031281,
-										0.0235996656119823,
-										0.999704003334045
+										0.00590880122035742,
+										0.0236065872013569,
+										0.999703884124756
 									]
 								},
 								{
 									"__vector3": [
-										-0.0152438599616289,
-										0.999607384204865,
-										-0.023507259786129
+										-0.0152482865378261,
+										0.999607145786285,
+										-0.0235141795128584
 									]
 								},
 								{
 									"__vector3": [
-										-0.999866366386414,
-										-0.0151004027575254,
-										0.00626813946291804
+										-0.999866306781769,
+										-0.0151048293337226,
+										0.00626644026488066
 									]
 								}
 							]
 						},
 						"partner_head": {
 							"__vector3": [
-								5.98885107040405,
-								1.51812708377838,
-								-3.79323768615723
+								5.98885154724121,
+								1.5181268453598,
+								-3.79323554039001
 							]
 						},
 						"required_wall_seconds": 0.3,
-						"wall_seconds_since_focus": 0.307752
+						"wall_seconds_since_focus": 0.309305
 					},
-					"settled_head_dot": 0.994952321052551
+					"settled_head_dot": 0.994952261447906
 				},
 				"eat": {
 					"action": "eat",
@@ -6058,19 +6158,19 @@
 							"handL": {
 								"__vector3": [
 									-2.57999992370605,
-									1.01379668712616,
+									1.01381969451904,
 									6.31999921798706
 								]
 							},
 							"handR": {
 								"__vector3": [
 									-2.32000017166138,
-									1.02635741233826,
+									1.02634978294373,
 									6.31999969482422
 								]
 							},
 							"hand_errorL": 0.000000533120157797384,
-							"hand_errorR": 0.0,
+							"hand_errorR": 0.000000119209289550781,
 							"head": {
 								"__vector3": [
 									-2.45000004768372,
@@ -7280,11 +7380,57 @@
 					"materials": [
 						"tripo_material_2d424f3b-2d6b-46a9-8737-46842c95cc40"
 					],
-					"production_status": "Body geometry/skin candidate frozen after numerical UV/pixel/rig/clip checks, pose review and clean reimport. Actual Godot material, eyes, LOD transitions and furniture/feet contacts remain separate acceptance steps.",
+					"production_status": "Dedicated body, nine clips, compatible LODs and the two UV-eye controls are integrated. Partial real-town character acceptance is recorded; full facial/hair-aging behavior, motion/contact polish and human UI/game-fun acceptance are still incomplete.",
 					"raw_source": "assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb",
 					"raw_source_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+					"remaining_work": [
+						"Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+						"Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+						"Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+						"Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+						"Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+						"Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+						"Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
+					],
 					"resident": "yui",
 					"revision": "body-r1",
+					"runtime_acceptance": {
+						"aggregate_functional_results": {
+							"gpu": {
+								"checks": 115.0,
+								"failures": 0.0
+							},
+							"headless": {
+								"checks": 112.0,
+								"failures": 0.0
+							},
+							"scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident."
+						},
+						"artifacts": {
+							"counted_as_functional_checks": false,
+							"images_attempted": 29.0,
+							"images_saved": 29.0
+						},
+						"date": "2026-11-03",
+						"evidence": {
+							"gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
+							"headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
+							"readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
+							"review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
+						},
+						"identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts.",
+						"observed_behaviors": [
+							"Actual skin deformation and walking",
+							"Conversation gesture and head attention after the ordinary transition",
+							"Natural joint work and a real skill change",
+							"Meal seating and hand/cup contact",
+							"Own-bed head/pelvis contact, sleep closure and waking reopening",
+							"All LOD rig/bind/clip compatibility",
+							"Project-in-progress save/resume and subsequent state/RNG continuation"
+						],
+						"scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
+						"status": "partial_character_runtime_acceptance"
+					},
 					"runtime_contract": {
 						"bone_count": 36.0,
 						"mesh_part_keys": [
@@ -7420,7 +7566,11 @@
 						}
 					],
 					"sockets": [],
-					"source": "builds/jrpg-resident-renewal/yui/CH_Yui_Delivery.blend",
+					"source": "assets/models/jrpg-resident-renewal/source/yui/CH_Yui_AnimationMaster.blend",
+					"source_history": {
+						"body_delivery_staging": "builds/jrpg-resident-renewal/yui/CH_Yui_Delivery.blend",
+						"note": "Retained as the historical export working file. Canonical editable master is source; runtime delivery of record is this game/assets/models folder."
+					},
 					"source_images": [
 						{
 							"mime_type": "image/jpeg",
@@ -7883,11 +8033,11 @@
 		},
 		"saved_minute": 447,
 		"saved_resident": "tomo",
-		"test_save_path": "user://test-jrpg-renewal-gameplay-79874.json"
+		"test_save_path": "user://test-jrpg-renewal-gameplay-88574.json"
 	},
 	"scope": "Natural twelve-person town. No action, needs, knowledge, relationship, routine or participant rewrites. Save replay is a separate branch.",
 	"screenshots": [],
 	"search_limit_minutes": 4320,
 	"seed": 711,
-	"wall_seconds": 10.128
+	"wall_seconds": 10.125
 }
