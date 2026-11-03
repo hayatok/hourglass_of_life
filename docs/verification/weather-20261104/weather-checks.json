@@ -1,0 +1,26 @@
+[
+  {
+    "check": "import",
+    "passed": true,
+    "seconds": 2.69,
+    "failure": null,
+    "log": "import.log",
+    "completion": null
+  },
+  {
+    "check": "world_weather",
+    "passed": true,
+    "seconds": 0.34,
+    "failure": null,
+    "log": "world_weather.log",
+    "completion": "World weather checks: 62 passed, 0 failed; synthetic climate, not real weather"
+  },
+  {
+    "check": "weather_behavior",
+    "passed": true,
+    "seconds": 5.07,
+    "failure": null,
+    "log": "weather_behavior.log",
+    "completion": "Weather behavior checks: 28 passed, 0 failed"
+  }
+]

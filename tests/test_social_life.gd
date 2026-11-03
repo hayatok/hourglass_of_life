@@ -24,7 +24,7 @@ func live_state() -> Dictionary:
 		"elapsed":sim.elapsed,"start_minute":sim.start_minute,"epoch_weekday":sim.epoch_weekday,"remainder":sim.minute_remainder,
 		"rng":str(sim.rng.state),"world_seed":sim.world_seed,"event_serial":sim.event_serial,"meeting_serial":sim.meeting_serial,
 		"benches":sim.benches,"budget":sim.shared_budget,"social":sim.social.serialize(),"work":sim.work_family.serialize(),
-		"life":sim.life.serialize(),"agenda":sim.agenda.serialize(),"interactions":sim.interactions.serialize(),"tabletop":sim.tabletop.serialize()})
+		"life":sim.life.serialize(),"agenda":sim.agenda.serialize(),"interactions":sim.interactions.serialize(),"tabletop":sim.tabletop.serialize(),"weather":sim.weather.serialize()})
 
 func run() -> void:
 	sim = LifeSimulation.new()

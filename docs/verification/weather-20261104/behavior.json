@@ -1,0 +1,258 @@
+{
+	"changed_choices": 341,
+	"checks": 28,
+	"decision_pairs": 896,
+	"dry_outdoor": 116,
+	"failures": [],
+	"pairs": [
+		{
+			"decision_seed": 2,
+			"dry": {
+				"action": "chores",
+				"decision_rng_before": "4397686605447780332",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "hobby",
+				"decision_rng_before": "4397686605447780332",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "外は雨。屋内で過ごそう。譲ってもらったラジオを直したい"
+			}
+		},
+		{
+			"decision_seed": 4,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "-1320785020568185274",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "-1320785020568185274",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 6,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "-7039256646584150880",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "-7039256646584150880",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 9,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "-6393592048753323481",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "-6393592048753323481",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 10,
+			"dry": {
+				"action": "chores",
+				"decision_rng_before": "-29455824906530476",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "hobby",
+				"decision_rng_before": "-29455824906530476",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "外は雨。屋内で過ごそう。譲ってもらったラジオを直したい"
+			}
+		},
+		{
+			"decision_seed": 12,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "-5747927450922496082",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "-5747927450922496082",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 14,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "6980344996771089928",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "6980344996771089928",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 18,
+			"dry": {
+				"action": "chores",
+				"decision_rng_before": "-4456598255260841284",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "hobby",
+				"decision_rng_before": "-4456598255260841284",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "外は雨。屋内で過ごそう。譲ってもらったラジオを直したい"
+			}
+		},
+		{
+			"decision_seed": 19,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "1907537968585951721",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "1907537968585951721",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 21,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "-3810933657430013885",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "-3810933657430013885",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 23,
+			"dry": {
+				"action": "social",
+				"decision_rng_before": "8917338790263572125",
+				"destination": "bakery_cafe",
+				"indoor": true,
+				"reason": "誰かの顔を見て、近況を聞きたい"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "chores",
+				"decision_rng_before": "8917338790263572125",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			}
+		},
+		{
+			"decision_seed": 25,
+			"dry": {
+				"action": "chores",
+				"decision_rng_before": "3198867164247606519",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "家の用事を、できるところから片付けよう"
+			},
+			"id": "aoi",
+			"wet": {
+				"action": "hobby",
+				"decision_rng_before": "3198867164247606519",
+				"destination": "home_shared",
+				"indoor": true,
+				"reason": "外は雨。屋内で過ごそう。譲ってもらったラジオを直したい"
+			}
+		}
+	],
+	"rain_outdoor": 87,
+	"route": {
+		"destination": "home_shared",
+		"id": "aoi",
+		"origin": "(9.0, 0.0, 6.65)",
+		"reached": true,
+		"target": "(10.8, 0.0, 7.96)"
+	},
+	"scope": "Controlled weather-only decisions and real routes, not human playtesting",
+	"weather_saved": {
+		"context_version": 1,
+		"origin": {
+			"elapsed": 0,
+			"minute_of_day": 780,
+			"season_day": 0,
+			"season_index": 0
+		},
+		"rng_state": "-1405736732429910944",
+		"rules_version": 1,
+		"sampling_origin": 0,
+		"schema": 2,
+		"source_id": "fictional-japan-temperate-assumptions-v1",
+		"state": {
+			"condition": "clear",
+			"elapsed": 137,
+			"next_change": 241,
+			"offset_c": -1.00422406196594,
+			"rain_intensity": 0.0,
+			"segment_started": 0,
+			"serial": 1
+		},
+		"weather_seed": 71103
+	}
+}

@@ -6,6 +6,9 @@ import argparse,json,os,re,shutil,subprocess,sys,time
 
 ROOT=Path(__file__).resolve().parents[1]
 CHECKS={
+ 'world_weather':('test_world_weather.gd',r'World weather checks: \d+ passed, 0 failed'),
+ 'weather_presentation':('test_weather_presentation.gd',r'Weather presentation checks: \d+ passed, 0 failed'),
+ 'weather_behavior':('test_weather_behavior.gd',r'Weather behavior checks: \d+ passed, 0 failed'),
  'simulation':('test_simulation.gd',r'Simulation checks: \d+ passed, 0 failed'),
  'social':('test_social_life.gd',r'Social life checks: \d+ passed, 0 failed'),
  'work':('test_work_family.gd',r'Work/family checks: \d+ passed, 0 failed'),
@@ -79,7 +82,7 @@ for name in a.checks:
     file,marker=CHECKS[name]
     run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else (300 if name=='tabletop_presentation' else 180))
 if a.gpu:
-    gpu_checks={'character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls','load_feedback'}
+    gpu_checks={'weather_presentation','character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls','load_feedback'}
     for name in a.checks:
         if name not in gpu_checks: continue
         file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker,timeout=600 if name=='social_chain_presentation' else (300 if name=='tabletop_presentation' else 180))

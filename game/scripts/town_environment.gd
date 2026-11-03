@@ -6,6 +6,7 @@ var buildings: Array[TownBuilding] = []
 var lamps: Array[OmniLight3D] = []
 var lighting_timer := 0.0
 var daylight := 1.0
+var cloudiness := 0.0
 var sky_material: ProceduralSkyMaterial
 var simulation: LifeSimulation
 
@@ -36,19 +37,30 @@ func update_view(eye: Vector3) -> void:
 		if building.show_interior!=cutaway: building.show_interior = cutaway
 		building.update_view(eye)
 
-func update_lighting() -> void:
+func update_lighting(weather_snapshot: Dictionary = {}) -> void:
+	# A supplied snapshot changes presentation only. Normal updates read the same
+	# current world snapshot as the date HUD, without advancing weather or RNG.
+	if weather_snapshot.is_empty():
+		var weather = simulation.get("weather")
+		if weather != null: weather_snapshot = weather.snapshot()
+	cloudiness = WeatherStatus.cloud_cover(weather_snapshot)
 	var phase := (simulation.minute_of_day()-360)/720.0*PI
 	var height := sin(phase)
 	daylight = smoothstep(-.08,.20,height)
-	$Sun.light_energy = lerpf(.12,.78,daylight)
+	var overcast := cloudiness*daylight
+	# Retain the existing night floor: cloud shading should not hide residents
+	# or multiply into progressively darker lighting on repeated refreshes.
+	$Sun.light_energy = lerpf(.12,.78,daylight)*(1.0-.35*overcast)
 	var sun_color := Color("ffe5b5").lerp(Color("fff2da"),clampf(height,0,1))
-	$Sun.light_color = Color("91add7").lerp(sun_color,daylight)
+	$Sun.light_color = Color("91add7").lerp(sun_color,daylight).lerp(Color("c4cbd0"),overcast*.55)
 	$Sun.rotation_degrees = Vector3(-maxf(10,absf(height)*62),-35+cos(phase)*38,0)
 	var env: Environment = $WorldEnvironment.environment
 	env.ambient_light_color = Color("9fb6dc").lerp(Color("c6d7e7"),daylight)
-	env.ambient_light_energy = lerpf(.22,.42,daylight)
-	sky_material.sky_top_color = Color("172b53").lerp(Color("4d94cc"),daylight)
-	sky_material.sky_horizon_color = Color("405578").lerp(Color("c4dfeb"),daylight)
+	env.ambient_light_energy = lerpf(.22,.42,daylight)*(1.0-.12*overcast)
+	var clear_top := Color("172b53").lerp(Color("4d94cc"),daylight)
+	var clear_horizon := Color("405578").lerp(Color("c4dfeb"),daylight)
+	sky_material.sky_top_color = clear_top.lerp(Color("222b38").lerp(Color("738291"),daylight),cloudiness)
+	sky_material.sky_horizon_color = clear_horizon.lerp(Color("354252").lerp(Color("a7afb5"),daylight),cloudiness)
 	sky_material.ground_horizon_color = sky_material.sky_horizon_color
 	sky_material.ground_bottom_color = Color("172434").lerp(Color("6a8265"),daylight)
 	for lamp in lamps:

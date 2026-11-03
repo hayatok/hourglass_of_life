@@ -444,6 +444,8 @@ func _toast(text: String) -> void:
 func _refresh_ui() -> void:
 	%Calendar.text = Sim.calendar_text()
 	%Clock.text = Sim.clock_text()
+	var weather = Sim.get("weather")
+	%WeatherStatus.set_weather(weather.snapshot() if weather != null else {})
 	%PauseButton.text = "時間を進める" if not Sim.running else "一時停止"
 	%PauseButton.icon = load("res://game/assets/ui/icons/play.svg" if not Sim.running else "res://game/assets/ui/icons/pause.svg")
 	%PauseButton.expand_icon = false

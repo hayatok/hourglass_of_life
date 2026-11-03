@@ -3,7 +3,7 @@ extends RefCounted
 
 # Furniture roles and the physical interaction pool are a current-format contract.
 # Development saves from older layouts are intentionally not migrated.
-const CURRENT_SCHEMA := 7
+const CURRENT_SCHEMA := 8
 
 static func number(value: Variant) -> bool:
 	return (value is int or value is float) and is_finite(float(value))
@@ -371,12 +371,19 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, hous
 		household_ids = JSON.parse_string(FileAccess.get_file_as_string("res://data/life-conditions.json")).households.keys()
 	if not raw is Dictionary or not encoded(raw): return false
 	if not record(raw,["rng_state"],["schema","elapsed","start_minute","epoch_weekday","budget","meeting_serial","remainder"]): return false
-	if not whole(raw.schema,1) or int(raw.schema)!=CURRENT_SCHEMA or not raw.rng_state.is_valid_int(): return false
+	if not whole(raw.schema,1) or int(raw.schema)!=CURRENT_SCHEMA or not WorldWeather.valid_rng_state(raw.rng_state): return false
 	if raw.has("route_layout") and (not number(raw.route_layout) or raw.route_layout<0 or raw.route_layout!=int(raw.route_layout)): return false
 	if raw.has("world_seed") and not whole(raw.world_seed): return false
 	if raw.has("event_serial") and not whole(raw.event_serial): return false
-	if raw.elapsed<0 or raw.start_minute<0 or raw.start_minute>=1440 or raw.epoch_weekday<0 or raw.epoch_weekday>6: return false
+	if raw.elapsed<0 or raw.elapsed>WorldWeather.MAX_ELAPSED or raw.start_minute<0 or raw.start_minute>=1440 or raw.epoch_weekday<0 or raw.epoch_weekday>6: return false
+	if not whole(raw.elapsed) or not whole(raw.start_minute) or not whole(raw.epoch_weekday): return false
 	if raw.budget<0 or raw.remainder<0 or raw.remainder>=1: return false
+	var weather := WorldWeather.new()
+	if not weather.restore(raw.get("weather")): return false
+	var weather_clock := weather.snapshot()
+	var weather_day: int = int((int(raw.start_minute)+int(raw.elapsed))/1440.0)
+	if weather_clock.elapsed!=raw.elapsed or not weather.matches_clock(int(raw.elapsed),posmod(int(raw.start_minute)+int(raw.elapsed),1440),int(weather_day/3.0)%4) or weather_clock.season_day!=weather_day%3: return false
+	if int(raw.weather.weather_seed)!=posmod(int(raw.get("world_seed",71103)),2147483648): return false
 	for key in ["people","events","meetings","benches"]:
 		if not raw.get(key) is Array: return false
 	if raw.people.size()!=definitions.size(): return false

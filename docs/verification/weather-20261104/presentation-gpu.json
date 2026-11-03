@@ -1,0 +1,168 @@
+{
+	"artifact_failures": [],
+	"artifacts": [
+		{
+			"path": "res://builds/weather-presentation/gpu-35316/01-clear-1440.png",
+			"written": true
+		},
+		{
+			"path": "res://builds/weather-presentation/gpu-35316/02-rain-1440.png",
+			"written": true
+		},
+		{
+			"path": "res://builds/weather-presentation/gpu-35316/03-rain-1024.png",
+			"written": true
+		}
+	],
+	"functional_checks": {
+		"failed": 0,
+		"failures": [],
+		"passed": 17
+	},
+	"layouts": [
+		{
+			"navigation": [
+				800.0,
+				22.0,
+				620.0,
+				46.0
+			],
+			"time": [
+				20.0,
+				18.0,
+				310.0,
+				70.0
+			],
+			"viewport": [
+				1440,
+				900
+			],
+			"weather": [
+				38.0,
+				54.0,
+				178.0,
+				15.0
+			]
+		},
+		{
+			"navigation": [
+				640.0,
+				22.0,
+				620.0,
+				46.0
+			],
+			"time": [
+				20.0,
+				18.0,
+				310.0,
+				70.0
+			],
+			"viewport": [
+				1280,
+				800
+			],
+			"weather": [
+				38.0,
+				54.0,
+				178.0,
+				15.0
+			]
+		},
+		{
+			"navigation": [
+				384.0,
+				22.0,
+				620.0,
+				46.0
+			],
+			"time": [
+				20.0,
+				18.0,
+				310.0,
+				70.0
+			],
+			"viewport": [
+				1024,
+				700
+			],
+			"weather": [
+				38.0,
+				54.0,
+				178.0,
+				15.0
+			]
+		}
+	],
+	"lighting": {
+		"day": {
+			"clear": {
+				"ambient": 0.419999986886978,
+				"cloud": 0.0,
+				"daylight": 1.0,
+				"sky": [
+					0.301960796117783,
+					0.580392181873322,
+					0.800000011920929
+				],
+				"sun": 0.779999971389771,
+				"sun_rotation": [
+					-1.04523229598999,
+					-0.782520532608032,
+					0.0
+				]
+			},
+			"rain": {
+				"ambient": 0.378672003746033,
+				"cloud": 0.82,
+				"daylight": 1.0,
+				"sky": [
+					0.424156844615936,
+					0.522509813308716,
+					0.61027455329895
+				],
+				"sun": 0.556140005588531,
+				"sun_rotation": [
+					-1.04523229598999,
+					-0.782520532608032,
+					0.0
+				]
+			}
+		},
+		"night": {
+			"clear": {
+				"ambient": 0.219999998807907,
+				"cloud": 0.0,
+				"daylight": 0.0,
+				"sky": [
+					0.0901960805058479,
+					0.168627455830574,
+					0.325490206480026
+				],
+				"sun": 0.119999997317791,
+				"sun_rotation": [
+					-1.08210408687592,
+					-0.610865235328674,
+					0.0
+				]
+			},
+			"rain": {
+				"ambient": 0.219999998807907,
+				"cloud": 0.82,
+				"daylight": 0.0,
+				"sky": [
+					0.125568628311157,
+					0.168627455830574,
+					0.238666668534279
+				],
+				"sun": 0.119999997317791,
+				"sun_rotation": [
+					-1.08210408687592,
+					-0.610865235328674,
+					0.0
+				]
+			},
+			"scope": "Controlled clock fixture"
+		}
+	},
+	"scope": "Controlled UI and lighting snapshots on the real town scene; not natural-action evidence or a human playtest."
+}

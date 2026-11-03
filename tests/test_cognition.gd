@@ -147,7 +147,7 @@ func _save_checks() -> void:
 	# Older development layouts are intentionally incompatible. Rejection must
 	# preserve the live current-format town, rather than move an old craft task
 	# onto the new dedicated game board or invent its missing object state.
-	for schema in [1,2,3,4,5,6]:
+	for schema in range(1,SaveValidation.CURRENT_SCHEMA):
 		var legacy: Dictionary = original.duplicate(true)
 		legacy.schema = schema
 		_write(path,legacy)

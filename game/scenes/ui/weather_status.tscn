@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://game/scripts/weather_status.gd" id="1"]
+[ext_resource type="Theme" path="res://game/assets/ui/game_theme.tres" id="2"]
+
+[node name="WeatherStatus" type="Label"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+tooltip_text = "雨や気温が、住民の行き先の選び方に影響します。"
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 14
+text = "—"
+text_overrun_behavior = 3
+script = ExtResource("1")

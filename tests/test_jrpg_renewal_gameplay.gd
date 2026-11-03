@@ -5,7 +5,9 @@ extends SceneTree
 const Inspector = preload("res://tools/inspect_population.gd")
 const IDS = ["saki","tomo","yui"]
 const SEED = 711
-const HORIZON = 3*1440
+# The weather-aware town can choose different venues. Observe one full
+# seven-day duty cycle while keeping every motion criterion and this seed.
+const HORIZON = 7*1440
 const CLIPS = ["eat","idle","rest","sit_talk","sleep","talk","walk","wave","work"]
 var OUT = "res://builds/jrpg-renewal-gameplay"
 const RAW_SHAS = {
@@ -214,6 +216,10 @@ func observe_candidates() -> void:
 			if activity.get("pose","")=="seat" and p.action!="eat" and not row.has("seat"): row.seat = state(id)
 		for meeting in sim.meetings:
 			if id not in [meeting.a,meeting.b]: continue
+			if meeting.get("mode","") not in ["project","play"]:
+				var encounters: Dictionary = report.residents[id].conversation_encounters
+				if not encounters.has(meeting.id): encounters[meeting.id] = {"first_seen":sim.elapsed,"partner":meeting.b if meeting.a==id else meeting.a,"states":[]}
+				if meeting.state not in encounters[meeting.id].states: encounters[meeting.id].states.append(meeting.state)
 			var key := "project" if meeting.get("mode","")=="project" else "conversation"
 			if meeting.state=="engaged" and not row.has(key):
 				row[key] = {"state":state(id),"meeting":meeting.duplicate(true)}
@@ -651,6 +657,10 @@ func observe_actual_town() -> void:
 			await focus(id);await check_walk()
 		for meeting in sim.meetings:
 			if id not in [meeting.a,meeting.b]: continue
+			if meeting.get("mode","") not in ["project","play"]:
+				var encounters: Dictionary = report.residents[id].conversation_encounters
+				if not encounters.has(meeting.id): encounters[meeting.id] = {"first_seen":sim.elapsed,"partner":meeting.b if meeting.a==id else meeting.a,"states":[]}
+				if meeting.state not in encounters[meeting.id].states: encounters[meeting.id].states.append(meeting.state)
 			if meeting.get("mode","")=="project" and meeting.get("autonomous",false):
 				if not project_starts[id].has(meeting.id):
 					project_starts[id][meeting.id] = {"state":state(id),"meeting":meeting.duplicate(true)}
@@ -720,7 +730,7 @@ func run() -> void:
 	animation_manual_mode()
 	var sources_valid := true
 	for id in IDS:
-		report.residents[id] = {"natural":{}}
+		report.residents[id] = {"natural":{},"conversation_encounters":{}}
 		project_starts[id] = {}
 		await focus(id)
 		sources_valid = verify_model(id) and sources_valid
@@ -741,6 +751,7 @@ func run() -> void:
 		for key in ["walk","conversation","project_engaged","project_finished","eat","sleep","wake"]:
 			if not report.residents[id].natural.has(key): missing.append(key)
 		report.residents[id].missing_conditions = missing
+		report.residents[id].final_observation = {"resident":state(id),"weather":sim.weather.snapshot()}
 		expect(missing.is_empty(),id+": the finite natural run covers travel, actual talk, completed joint work, seated food, sleep and waking without forcing an outcome")
 	report.completion_observer = {"shared_time_signals":recorder.shared_time_signals,"completed_meetings":recorder.finished.size(),"unmatched_shared_time_signals":recorder.unmatched_shared_time_signals}
 	sim.event_added.disconnect(recorder.on_event)

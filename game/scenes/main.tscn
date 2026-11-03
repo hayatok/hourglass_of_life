@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://game/scripts/observation_hud.gd" id="4_hud"]
 [ext_resource type="Theme" path="res://game/assets/ui/game_theme.tres" id="5_theme"]
 [ext_resource type="PackedScene" path="res://game/scenes/ui/resident_proposals.tscn" id="6_proposals"]
+[ext_resource type="PackedScene" path="res://game/scenes/ui/weather_status.tscn" id="7_weather"]
 
 [node name="LifeTown" type="Node3D" unique_id=184307291]
 script = ExtResource("1_gp8w2")
@@ -54,7 +55,7 @@ theme_override_constants/separation = 10
 
 [node name="Date" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 2
 size_flags_horizontal = 3
 alignment = 1
 
@@ -64,6 +65,9 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "1年目 春1日"
 
+[node name="WeatherStatus" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls/Date" instance=ExtResource("7_weather")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Clock" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
 unique_name_in_owner = true

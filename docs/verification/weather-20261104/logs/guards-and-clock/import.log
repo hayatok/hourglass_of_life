@@ -1,0 +1,28 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started プロジェクトの初期化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | ファイル構造をスキャン中...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | グローバルクラス名を読み込み中...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | GDExtensionを検証中...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 自動読み込みスクリプトを作成中...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | プラグインを初期化中...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | ファイルスキャンを開始...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started グローバルクラスを登録中... (5 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | SaveValidation[39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | LifeSimulation[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | WorldWeather[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started エディターの読み込み (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | エディターレイアウトを読み込み中...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | ドックを読み込み中...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | シーンを再オープン中...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | 中央エディターを読み込み中...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | プラグインのウィンドウレイアウトを読み込み中...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | エディターレイアウトの準備完了。[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

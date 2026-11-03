@@ -86,6 +86,8 @@ var agenda: ResidentAgenda
 var support_plans: ResidentSupportPlans
 var interactions: WorldInteractions
 var tabletop: TabletopGame
+var weather: WorldWeather
+var resident_weather: ResidentWeather
 var load_error := ""
 
 func _ready() -> void:
@@ -145,6 +147,9 @@ func reset(seed_value: int = 71103, population: int = BASE_POPULATION) -> void:
 	world_seed = seed_value
 	rejection_context.clear()
 	rng.seed = seed_value
+	if weather==null: weather = WorldWeather.new()
+	weather.reset(posmod(world_seed,2147483648),minute_of_day(),0,0,elapsed)
+	if resident_weather==null: resident_weather = ResidentWeather.new(self)
 	for id in cast: definitions[id] = cast[id]
 	for i in definitions.size():
 		var d: Dictionary = definitions.values()[i]
@@ -223,10 +228,12 @@ func clock_text() -> String:
 	return "%02d:%02d" % [int(m / 60.0), m % 60]
 
 func advance_minutes(amount: float, stop_at_review: bool = false) -> void:
+	_reconcile_weather_clock()
 	minute_remainder += amount
 	while minute_remainder >= 1.0:
 		minute_remainder -= 1.0
 		elapsed += 1
+		weather.tick(elapsed,minute_of_day(),int(day_index()/3.0)%4)
 		life.tick()
 		interactions.tick()
 		tabletop.tick()
@@ -357,6 +364,7 @@ func _tick_person(p: Dictionary) -> void:
 		_choose_action(p)
 
 func _choose_action(p: Dictionary) -> void:
+	_reconcile_weather_clock()
 	if not life.is_alive(p): return
 	if not p.meeting_id.is_empty():
 		return
@@ -388,11 +396,14 @@ func _choose_action(p: Dictionary) -> void:
 	if p.hunger > 0.75:
 		_assign(p, "eat", home, 25, "お腹がすいた。食事を先にしよう")
 		return
+	var observed_weather := weather.snapshot()
 	for o in options:
+		o.weather_exposure = resident_weather.evaluate(p,o,observed_weather)
 		if o.kind=="social": o.relation = social.venue_interest(p,o.place)
 		o.score = .26*o.need+.20*o.goal+.16*o.relation+.10*o.role+.08*o.habit+.08*o.fun-.12*o.cost
 		o.score += social.habit_bonus(p,o)
 		o.score += life.action_bonus(p,o)
+		o.score -= o.weather_exposure.penalty
 		o.score += cognition.action_bonus(p,o.kind,o.place,o.get("partner",""))
 		if p.supported and o.kind == "hobby":
 			o.score += 0.06
@@ -412,7 +423,7 @@ func _choose_action(p: Dictionary) -> void:
 		if roll <= 0:
 			chosen = o
 			break
-	var reason: String = chosen.reason
+	var reason: String = resident_weather.reason(chosen.reason,chosen.weather_exposure,observed_weather)
 	if chosen.kind in ["joint_work","social_plan","planned_project","play"]:
 		if planner.begin(p,chosen): return
 		_assign(p,"rest",home,30,"相手の予定も大切にして、次の機会を待とう")
@@ -422,6 +433,23 @@ func _choose_action(p: Dictionary) -> void:
 	_assign(p, chosen.kind, chosen.place, rng.randi_range(35, 75), reason, chosen.get("target"))
 	p.legacy_read_id = chosen.get("legacy_id","")
 	p.supported = false
+
+func _reconcile_weather_clock() -> void:
+	# Normal play only ticks the saved timeline. Public clock fields are also
+	# used by scenario fixtures/debug time jumps; explicitly reconcile those
+	# edits here, never during load validation or presentation.
+	if weather==null: return
+	if weather.matches_clock(elapsed,minute_of_day(),int(day_index()/3.0)%4):
+		weather.tick(elapsed,minute_of_day(),int(day_index()/3.0)%4)
+		return
+	var prior: int = weather.snapshot().elapsed
+	if elapsed<prior:
+		# A backwards debug jump starts a new timeline, not a saved replay.
+		weather.reset(posmod(world_seed,2147483648),minute_of_day(),int(day_index()/3.0)%4,day_index()%3,elapsed)
+	else:
+		var old_day: int = int((start_minute+prior)/1440.0)
+		weather.rebase_calendar(prior,posmod(start_minute+prior,1440),int(old_day/3.0)%4,old_day%3)
+		weather.tick(elapsed,minute_of_day(),int(day_index()/3.0)%4)
 
 func _hobby_place(p: Dictionary) -> String:
 	var configured: String = definitions[p.id].get("hobby_place","")
@@ -823,12 +851,14 @@ func has_save() -> bool:
 	return FileAccess.file_exists(SAVE_PATH) or FileAccess.file_exists(LEGACY_SAVE_PATH)
 
 func save_game(path: String = SAVE_PATH) -> bool:
+	_reconcile_weather_clock()
 	var data = {"schema":SaveValidation.CURRENT_SCHEMA,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize(),"work_family":work_family.serialize(),"life":life.serialize()}
 	data.world_seed = world_seed
 	data.event_serial = event_serial
 	data.agenda = agenda.serialize()
 	data.interactions = interactions.serialize()
 	data.tabletop = tabletop.serialize()
+	data.weather = weather.serialize()
 	data.route_layout = 1
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
@@ -854,13 +884,16 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	var cast: Dictionary = definitions if definitions.size()==raw.people.size() else _cast_definitions(raw.people.size())
 	if cast.is_empty() or not SaveValidation.valid(raw,cast,SITES,HOME.keys()):
 		return false
+	var restored_weather := WorldWeather.new()
+	if not restored_weather.restore(raw.get("weather")): return false
 	var data = _decode(raw)
+	weather = restored_weather
 	definitions = cast
 	people = data.people
 	elapsed = int(data.elapsed)
 	start_minute = int(data.start_minute)
 	epoch_weekday = int(data.epoch_weekday)
-	rng.state = int(data.rng_state)
+	rng.state = WorldWeather.parse_rng_state(data.rng_state)
 	events = data.events
 	meetings = data.meetings
 	benches = data.benches

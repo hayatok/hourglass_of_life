@@ -27,6 +27,13 @@ func run() -> void:
 	sim.set_process(false);main.set_process(false)
 	sim.reset(711,12);main._start_play();sim.running = false
 	expect(main.avatars.size()==12 and main.roster.get_child_count()==12,"The package starts the twelve-person town and its complete selection list")
+	var weather_before: Dictionary = sim.weather.serialize()
+	var snapshot: Dictionary = sim.weather.snapshot()
+	expect(FileAccess.file_exists("res://data/weather.json") and snapshot.synthetic and snapshot.condition in ["clear","rain"],"The actual package includes the explicit fictional climate and a valid current weather state")
+	main._refresh_ui();main.get_node("Town").update_lighting()
+	expect(main.get_node("%WeatherStatus").text==WeatherStatus.format_weather(snapshot),"The packaged date card shows the authoritative current weather and temperature")
+	main._refresh_ui();main.get_node("Town").update_lighting()
+	expect(sim.weather.serialize()==weather_before and is_equal_approx(main.get_node("Town").cloudiness,WeatherStatus.cloud_cover(snapshot)),"Reading the packaged weather and sky preserves the paused weather random stream")
 	for id in ["haru","saki","tomo","yui"]:
 		var model = main.avatars[id].jrpg
 		var capability: Dictionary = model.capabilities()
