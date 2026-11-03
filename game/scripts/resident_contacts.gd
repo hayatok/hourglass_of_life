@@ -85,17 +85,18 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 	var bed: bool = active and activity.pose=="bed"
 	var work: bool = active and activity.pose=="work" and clip=="work"
 	var child: bool = avatar.displayed_model=="rin"
-	var scale_y: float = avatar.visual.scale.y
+	var body_scale: Vector3 = avatar.visual.scale
+	var scale_y: float = body_scale.y
 	var yaw: float = activity.yaw if active else avatar.visual.rotation.y
 	var facing := Basis(Vector3.UP,yaw)
 	var root_target: Vector3 = avatar.global_position
 	var rise := 0.0
 	if seat:
 		# Inferred hip padding is separate from the measured animated pelvis position.
-		root_target = activity.contact+Vector3.UP*(.095*model.rest_height/1.65*scale_y)-facing*(pose_samples.seat.pelvis*scale_y)
+		root_target = activity.contact+Vector3.UP*(.095*model.rest_height/1.65*scale_y)-facing*(pose_samples.seat.pelvis*body_scale)
 		if child: root_target += facing*Vector3(0,0,.10)
 	elif bed:
-		root_target = activity.contact-facing*(pose_samples.bed.head*scale_y)
+		root_target = activity.contact-facing*(pose_samples.bed.head*body_scale)
 		root_target.y = activity.contact.y+.11*scale_y-pose_samples.bed.pelvis.y*scale_y
 	elif work and child:
 		rise = clampf(activity.hand_left.y+.14-rest_shoulder*scale_y-avatar.global_position.y,0,.23)

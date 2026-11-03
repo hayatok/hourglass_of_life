@@ -1,0 +1,317 @@
+{
+  "activity": "radio",
+  "before": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "expectations": 0,
+        "id": "osamu",
+        "knowledge": 0,
+        "level": 0.9,
+        "moving": true,
+        "name": "佐伯 修",
+        "place": "home_saeki",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_1",
+          "origin": "resident",
+          "partner": "haru",
+          "stage": "travel",
+          "started": 53,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -7.90000009536743,
+          0.0,
+          -2.03999996185303
+        ],
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "expectations": 0,
+        "id": "haru",
+        "knowledge": 0,
+        "level": 0.52,
+        "moving": true,
+        "name": "瀬戸 晴",
+        "place": "home_north_shared",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_1",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "travel",
+          "started": 53,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -7.5108757019043,
+          0.0,
+          -11.8999996185303
+        ],
+        "skill": "repair"
+      }
+    ],
+    "clock": "13:53",
+    "day": 0,
+    "minute": 53,
+    "state": "travel"
+  },
+  "checks": 7,
+  "completed": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "expectations": 1,
+        "id": "osamu",
+        "knowledge": 5,
+        "level": 0.9025,
+        "moving": false,
+        "name": "佐伯 修",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "finished": 157,
+          "kind": "project",
+          "meeting": "meeting_1",
+          "origin": "resident",
+          "partner": "haru",
+          "stage": "completed",
+          "started": 53,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "expectations": 1,
+        "id": "haru",
+        "knowledge": 5,
+        "level": 0.5344,
+        "moving": false,
+        "name": "瀬戸 晴",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "finished": 157,
+          "kind": "project",
+          "meeting": "meeting_1",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "completed",
+          "started": 53,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "skill": "repair"
+      }
+    ],
+    "clock": "15:37",
+    "day": 0,
+    "minute": 157,
+    "state": "completed"
+  },
+  "engaged": {
+    "actors": [
+      {
+        "action": "joint_work",
+        "expectations": 0,
+        "id": "osamu",
+        "knowledge": 0,
+        "level": 0.9,
+        "moving": false,
+        "name": "佐伯 修",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_1",
+          "origin": "resident",
+          "partner": "haru",
+          "stage": "execute",
+          "started": 53,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          -0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "skill": "repair"
+      },
+      {
+        "action": "joint_work",
+        "expectations": 0,
+        "id": "haru",
+        "knowledge": 0,
+        "level": 0.52,
+        "moving": false,
+        "name": "瀬戸 晴",
+        "place": "workshop",
+        "plan": {
+          "activity": "radio",
+          "kind": "project",
+          "meeting": "meeting_1",
+          "origin": "resident",
+          "partner": "osamu",
+          "stage": "execute",
+          "started": 53,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "ラジオの調整"
+        },
+        "position": [
+          0.349999994039536,
+          0.0,
+          -7.03999996185303
+        ],
+        "skill": "repair"
+      }
+    ],
+    "clock": "14:52",
+    "day": 0,
+    "minute": 112,
+    "state": "engaged"
+  },
+  "failures": [],
+  "final_screenshots": [
+    {
+      "clock": "14:52",
+      "file": "natural-seed711-meeting_1-engaged.png",
+      "meeting": "meeting_1",
+      "minute": 112,
+      "seed": 711,
+      "stage": "engaged"
+    },
+    {
+      "clock": "15:37",
+      "file": "natural-seed711-meeting_1-completed.png",
+      "meeting": "meeting_1",
+      "minute": 157,
+      "seed": 711,
+      "stage": "completed"
+    }
+  ],
+  "interrupted_observations": [],
+  "meeting": "meeting_1",
+  "minutes_per_seed": 4320,
+  "observation_controls": [
+    "select a new resident",
+    "follow",
+    "view current activity"
+  ],
+  "player_interventions": [],
+  "rendered": true,
+  "renderer": "macOS",
+  "scope": "Normal twelve-resident starts, no proposals or changes to people, schedules, needs, skills or relationships; finite search for a new/original pair's actual autonomous project, not a human playtest or a frequency estimate",
+  "screenshots": [
+    {
+      "clock": "12:59",
+      "file": "natural-seed710-meeting_24-engaged.png",
+      "meeting": "meeting_24",
+      "minute": 4319,
+      "seed": 710,
+      "stage": "engaged"
+    },
+    {
+      "clock": "14:52",
+      "file": "natural-seed711-meeting_1-engaged.png",
+      "meeting": "meeting_1",
+      "minute": 112,
+      "seed": 711,
+      "stage": "engaged"
+    },
+    {
+      "clock": "15:37",
+      "file": "natural-seed711-meeting_1-completed.png",
+      "meeting": "meeting_1",
+      "minute": 157,
+      "seed": 711,
+      "stage": "completed"
+    }
+  ],
+  "searches": [
+    {
+      "completed": false,
+      "minutes": 4320,
+      "mixed_pair_project_proposals": 1,
+      "seed": 710
+    },
+    {
+      "completed": true,
+      "minutes": 157,
+      "mixed_pair_project_proposals": 1,
+      "seed": 711
+    }
+  ],
+  "seed": 711,
+  "seeds": [
+    710,
+    711,
+    712
+  ],
+  "source_sha256": {
+    "data/life-conditions.json": "144a67d3c595b117486f064d3e1e98aefd6ea222db9ebcb75257c156e244218d",
+    "data/life-course.json": "a4edd925aff32fd9a3a7a7e54a45b128c83f4c0a18fb1587a9661b0de483789c",
+    "data/resident-activities.json": "597ba9f8ed105dfdeb0ec8bdfb18963f2c45659501ce01e8b81cfef6ba8b0087",
+    "data/resident-appearance.json": "52b1068c140f9a6c232c35407869b298f6f945bbdb4a7ffa0f5361498743126a",
+    "data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
+    "game/scripts/life_course.gd": "de903d5945a65f11bd0f45666237d4a41d9f966c536423388aa7646f6a10bea7",
+    "game/scripts/main.gd": "7a4b7bbeaeb8bcd0bdaea144c0ad0badad128b9b9043084d4ec885ba06ac18b4",
+    "game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
+    "game/scripts/resident_avatar.gd": "45ef5b6b6f161c3e474a1b73b5ca59795a4cdd3a0d3a1105f14ef3ed3e6bae96",
+    "game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
+    "game/scripts/resident_knowledge_exchange.gd": "20ee577541776d9c7d72a5411faa3927620c74c2b1052329e1539f44a17422da",
+    "game/scripts/resident_planner.gd": "d4476ccd385e2fcd82906a9123275d419cc82bdfccbd7194f78760ddae83a37a",
+    "game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
+    "game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
+    "game/scripts/work_family.gd": "9749bb676f8ed5a4e569ac44625741679f0931b0d46ef69326d250de9151bc5e"
+  },
+  "title": "ラジオの調整"
+}

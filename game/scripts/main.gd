@@ -31,6 +31,7 @@ func _ready() -> void:
 	%ContinueButton.disabled = not Sim.has_save()
 	%GuideButton.pressed.connect(_show_guide)
 	%TitleQuit.pressed.connect(func(): get_tree().quit())
+	%ResidentSearch.text_changed.connect(_filter_roster)
 	%PauseButton.pressed.connect(_toggle_pause)
 	%Speed1.pressed.connect(func(): _set_speed(1))
 	%Speed3.pressed.connect(func(): _set_speed(3))
@@ -76,7 +77,7 @@ func _new_game() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--world-seed=") and argument.trim_prefix("--world-seed=").is_valid_int():
 			seed_value = maxi(0,int(argument.trim_prefix("--world-seed=")))
-	Sim.reset(seed_value)
+	Sim.reset(seed_value,Sim.EXPANDED_POPULATION)
 	_start_play()
 
 func _start_play() -> void:
@@ -97,6 +98,8 @@ func _continue_game() -> void:
 		_toast("保存データを読み込めませんでした")
 
 func _rebuild() -> void:
+	var selection_changed: bool = Sim.person(selected_id).is_empty()
+	if selection_changed: selected_id = "aoi"
 	for a in $Residents.get_children():
 		$Residents.remove_child(a)
 		a.queue_free()
@@ -127,6 +130,7 @@ func _rebuild() -> void:
 		_build_roster()
 		_update_partners(preferred)
 		if not Sim.life.is_alive(Sim.person(selected_id)): following = false
+		if selection_changed: _select(selected_id)
 	_refresh_events()
 
 func _build_roster() -> void:
@@ -142,6 +146,12 @@ func _build_roster() -> void:
 		button.add_theme_font_size_override("font_size",15)
 		button.pressed.connect(_select.bind(p.id))
 		roster.add_child(button)
+	_filter_roster(%ResidentSearch.text)
+
+func _filter_roster(query: String) -> void:
+	query = query.strip_edges().to_lower()
+	for button in roster.get_children():
+		button.visible = query.is_empty() or query in button.text.to_lower()
 
 func _update_partners(preferred: String = "") -> void:
 	partner.clear()
@@ -153,14 +163,21 @@ func _update_partners(preferred: String = "") -> void:
 		if partner.get_item_metadata(i)==preferred: partner.select(i)
 
 func _select(id: String) -> void:
+	if Sim.person(id).is_empty(): return
 	selected_id = id
 	_update_partners(_initial_partner(id))
-	var ids = ["nagisa","ryo","rin","osamu","fumi","maho","ritsu","aoi"]
-	var x = [30,240,440,615,840,1060,1280,1505][ids.find(id)]
-	var atlas = AtlasTexture.new()
-	atlas.atlas = load("res://game/assets/ui/residents.png")
-	atlas.region = Rect2(x,10,200,235)
-	portrait.texture = atlas
+	var portrait_path := "res://game/assets/ui/portraits/%s.png"%id
+	if ResourceLoader.exists(portrait_path):
+		portrait.texture = load(portrait_path)
+	else:
+		var ids = ["nagisa","ryo","rin","osamu","fumi","maho","ritsu","aoi"]
+		var index: int = ids.find(id)
+		if index>=0:
+			var atlas = AtlasTexture.new()
+			atlas.atlas = load("res://game/assets/ui/residents.png")
+			atlas.region = Rect2([30,240,440,615,840,1060,1280,1505][index],10,200,235)
+			portrait.texture = atlas
+		else: portrait.texture = null
 	portrait.modulate = Color.WHITE if Sim.life.is_alive(Sim.person(id)) else Color(.65,.65,.65)
 	if %HUD.has_method("reveal_person"): %HUD.reveal_person()
 	_refresh_detail()
@@ -179,11 +196,13 @@ func _initial_partner(id: String) -> String:
 	return "osamu" if id=="aoi" else ""
 
 func _process(delta: float) -> void:
+	var focused := get_viewport().gui_get_focus_owner()
+	var typing: bool = focused is LineEdit or focused is TextEdit
 	if following and not title.visible:
 		var target: Vector3 = avatars[selected_id].focus_position()
 		target.y = 0
 		camera_target = camera_target.lerp(target,minf(1,delta*2))
-	if not title.visible and not pause_menu.visible and not %JournalScreen.visible:
+	if not typing and not title.visible and not pause_menu.visible and not %JournalScreen.visible:
 		var motion = Vector3.ZERO
 		if Input.is_physical_key_pressed(KEY_W): motion.z -= 1
 		if Input.is_physical_key_pressed(KEY_S): motion.z += 1
@@ -193,7 +212,7 @@ func _process(delta: float) -> void:
 			following = false
 			camera_target += motion.rotated(Vector3.UP,yaw)*delta*9
 			camera_target.x = clampf(camera_target.x,-15,15)
-			camera_target.z = clampf(camera_target.z,-10,13)
+			camera_target.z = clampf(camera_target.z,-20,13)
 	var offset = Vector3(sin(yaw)*distance,distance*.85,cos(yaw)*distance)
 	camera.position = camera_target+offset
 	camera.look_at(camera_target+Vector3(0,.7,0))
@@ -217,6 +236,10 @@ func _process(delta: float) -> void:
 		%Toast.visible = toast_left>0
 
 func _unhandled_input(event: InputEvent) -> void:
+	var focused := get_viewport().gui_get_focus_owner()
+	if event is InputEventKey and (focused is LineEdit or focused is TextEdit):
+		if event.pressed and event.keycode==KEY_ESCAPE: focused.release_focus()
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ESCAPE:
 			if %JournalScreen.visible:

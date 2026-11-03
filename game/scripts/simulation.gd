@@ -10,31 +10,34 @@ const LEGACY_SAVE_PATH = "user://life-save-v01.json"
 const WALK_METERS_PER_MINUTE = .36
 const HUNGER_PER_MINUTE = .0013
 const FATIGUE_PER_MINUTE = .0007
-const HOME = {"ogawa": "home_ogawa", "saeki": "home_saeki", "shared_house": "home_shared", "aoi_apartment":"off_map_home"}
+const BASE_POPULATION = 8
+const EXPANDED_POPULATION = 12
+const HOME = {"ogawa": "home_ogawa", "saeki": "home_saeki", "shared_house": "home_shared", "aoi_apartment":"off_map_home", "north_house":"home_north_shared", "mori":"home_mori"}
 const SITES = {
 	"home_ogawa": Vector3(-9, 0, 6), "home_saeki": Vector3(-9, 0, -4),
 	"home_shared": Vector3(9, 0, 6), "bakery_cafe": Vector3(8, 0, -5),
 	"workshop": Vector3(0, 0, -7), "square": Vector3(0, 0, 1),
-	"garden": Vector3(-3, 0, 3), "off_map_school": Vector3(14, 0, 7),
+	"garden": Vector3(-3, 0, 3), "home_north_shared":Vector3(-9,0,-14), "home_mori":Vector3(9,0,-15), "off_map_school": Vector3(14, 0, 7),
 	"off_map_workplace": Vector3(14, 0, 5), "off_map_home":Vector3(14,0,6)
 }
 const ENTRIES = {
 	"home_ogawa": Vector3(-9, 0, 8.8), "home_saeki": Vector3(-9, 0, -1.2),
 	"home_shared": Vector3(9, 0, 8.8), "bakery_cafe": Vector3(8, 0, -2.2),
-	"workshop": Vector3(0, 0, -4.8)
+	"workshop": Vector3(0, 0, -4.8), "home_north_shared":Vector3(-9,0,-11.2), "home_mori":Vector3(9,0,-12.2)
 }
 const OUTER_ENTRIES = {
 	"home_ogawa": Vector3(-9,0,10), "home_saeki": Vector3(-9,0,0),
 	"home_shared": Vector3(9,0,10), "bakery_cafe": Vector3(8,0,-1),
-	"workshop": Vector3(0,0,-4.3)
+	"workshop": Vector3(0,0,-4.3), "home_north_shared":Vector3(-9,0,-10), "home_mori":Vector3(9,0,-11)
 }
 const WAYPOINTS = [
 	Vector3(-5, 0, -4), Vector3(0, 0, -4), Vector3(4.4, 0, -4),
 	Vector3(-5, 0, 1), Vector3(0, 0, 1), Vector3(4.4, 0, 1),
 	Vector3(-5, 0, 7), Vector3(0, 0, 7), Vector3(4.4, 0, 7), Vector3(13, 0, 7),
-	Vector3(4.4,0,10.3), Vector3(13,0,10.3)
+	Vector3(4.4,0,10.3), Vector3(13,0,10.3),
+	Vector3(-5,0,-10),Vector3(4.4,0,-11)
 ]
-const LINKS = [[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[1,4],[2,5],[3,6],[4,7],[5,8],[8,10],[10,11],[11,9]]
+const LINKS = [[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[1,4],[2,5],[3,6],[4,7],[5,8],[8,10],[10,11],[11,9],[0,12],[2,13],[12,13]]
 const ACTION_NAMES = {
 	"sleep": "眠っている", "work": "仕事に取り組む", "school": "学校で過ごす",
 	"care": "家族と過ごす", "rest": "ひと息つく", "eat": "食事をする",
@@ -49,6 +52,7 @@ const ROUTINE_NAMES = {
 	"after_school_home":"学校のあと、家で過ごす時間",
 	"new_work":"町外の工房での仕事", "away_private":"町外で自分の暮らしを過ごす時間",
 	"model_work":"模型工房で引き受けた仕事",
+	"work_shift":"引き受けた仕事の時間",
 	"classes": "授業の時間", "workshop": "工房での仕事", "night_shift": "町外での夜勤", "appointment":"誰かと会う約束の準備", "agenda":"相談して決めた約束の準備", "support_care":"相談して引き受けた世話の時間", "support_chores":"相談して引き受けた家の用事"
 }
 
@@ -96,7 +100,26 @@ func _build_graph() -> void:
 	for edge in LINKS:
 		graph.connect_points(edge[0], edge[1])
 
-func reset(seed_value: int = 71103) -> void:
+func _cast_definitions(population: int) -> Dictionary:
+	if population not in [BASE_POPULATION,EXPANDED_POPULATION]: return {}
+	var data = JSON.parse_string(FileAccess.get_file_as_string("res://data/residents.json"))
+	if not data is Dictionary or data.get("residents",[]).size()<population: return {}
+	var cast := {}
+	for i in population:
+		var d: Dictionary = data.residents[i]
+		# JSON numbers are floats; Array membership distinguishes float from int.
+		for routine in d.routines:
+			var days: Array = []
+			for day in routine.on_days: days.append(int(day))
+			routine.on_days = days
+		cast[d.id] = d
+	return cast
+
+func reset(seed_value: int = 71103, population: int = BASE_POPULATION) -> void:
+	var cast := _cast_definitions(population)
+	if cast.is_empty():
+		push_error("Unsupported resident roster: %d"%population)
+		return
 	if graph.get_point_count() == 0:
 		_build_graph()
 	var data = JSON.parse_string(FileAccess.get_file_as_string("res://data/residents.json"))
@@ -119,15 +142,9 @@ func reset(seed_value: int = 71103) -> void:
 	world_seed = seed_value
 	rejection_context.clear()
 	rng.seed = seed_value
-	for i in data.residents.size():
-		var d = data.residents[i]
-		# JSON numbers are floats; Array membership distinguishes float from int.
-		for routine in d.routines:
-			var days: Array = []
-			for day in routine.on_days:
-				days.append(int(day))
-			routine.on_days = days
-		definitions[d.id] = d
+	for id in cast: definitions[id] = cast[id]
+	for i in definitions.size():
+		var d: Dictionary = definitions.values()[i]
 		var home = HOME[d.household_id]
 		var p = {
 			"id": d.id, "name": d.name, "age": int(d.age_years), "occupation": d.occupation,
@@ -142,6 +159,7 @@ func reset(seed_value: int = 71103) -> void:
 		}
 		people.append(p)
 	for rel in data.relationship_seeds:
+		if not definitions.has(rel.from) or not definitions.has(rel.to): continue
 		var r = person(rel.from)
 		r.relationships[rel.to] = rel.duplicate(true)
 	if social==null: social = SocialLife.new(self)
@@ -316,7 +334,7 @@ func _tick_person(p: Dictionary) -> void:
 			p.goal_progress = minf(1, p.goal_progress + work_family.hobby_progress(p))
 		"photo":
 			p.quiet = maxf(0,p.quiet-.0015)
-			if p.id=="fumi": p.goal_progress = minf(1,p.goal_progress+work_family.hobby_progress(p))
+			if p.id=="fumi" or definitions[p.id].get("goal_activity","")=="photo": p.goal_progress = minf(1,p.goal_progress+work_family.hobby_progress(p))
 		"care":
 			p.connection = maxf(0, p.connection - 0.002)
 		"own_life":
@@ -397,6 +415,8 @@ func _choose_action(p: Dictionary) -> void:
 	p.supported = false
 
 func _hobby_place(p: Dictionary) -> String:
+	var configured: String = definitions[p.id].get("hobby_place","")
+	if not configured.is_empty(): return _place_for(p,configured)
 	if p.id == "osamu":
 		return "workshop"
 	if p.id == "fumi":
@@ -727,14 +747,14 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	if not FileAccess.file_exists(path):
 		return false
 	var raw = JSON.parse_string(FileAccess.get_file_as_string(path))
-	if not SaveValidation.valid(raw,definitions,SITES):
+	if not raw is Dictionary or not raw.get("people") is Array: return false
+	# Replays and population comparisons keep their saved authored roster.
+	if raw.people.size() not in [BASE_POPULATION,EXPANDED_POPULATION]: return false
+	var cast: Dictionary = definitions if definitions.size()==raw.people.size() else _cast_definitions(raw.people.size())
+	if cast.is_empty() or not SaveValidation.valid(raw,cast,SITES,HOME.keys()):
 		return false
 	var data = _decode(raw)
-	if data.people.size() != definitions.size():
-		return false
-	for p in data.people:
-		if not definitions.has(p.id):
-			return false
+	definitions = cast
 	people = data.people
 	elapsed = int(data.elapsed)
 	start_minute = int(data.start_minute)

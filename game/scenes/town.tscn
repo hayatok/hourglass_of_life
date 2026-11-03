@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" path="res://game/assets/architecture/AR_Cafe.glb" id="5_d6aoe"]
 [ext_resource type="PackedScene" path="res://game/assets/architecture/AR_Workshop.glb" id="6_3yex5"]
 
+[ext_resource type="PackedScene" path="res://game/scenes/north_shared_house.tscn" id="NorthShared"]
+[ext_resource type="PackedScene" path="res://game/scenes/mori_house.tscn" id="Mori"]
+[ext_resource type="PackedScene" path="res://game/scenes/north_streets.tscn" id="NorthStreets"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x4g6x"]
 render_priority = 0
 shader = ExtResource("2_1c10m")
@@ -761,3 +765,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 2.25, 0)
 light_color = Color(1, 0.81960785, 0.54509807, 1)
 omni_range = 6.0
 omni_attenuation = 1.4
+
+[node name="NorthSharedHouse" parent="." instance=ExtResource("NorthShared")]
+position = Vector3(-9, 0, -14)
+
+[node name="MoriHouse" parent="." instance=ExtResource("Mori")]
+position = Vector3(9, 0, -15)
+
+[node name="NorthStreets" parent="." instance=ExtResource("NorthStreets")]

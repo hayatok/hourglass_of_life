@@ -986,3 +986,329 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
 
 [node name="HandRight" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=1580300429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="NorthShared" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+metadata/site = "home_north_shared"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_sakiAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="NorthShared/Bed_sakiAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_saki" type="Node3D" parent="NorthShared/Bed_sakiAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_saki"
+site = "home_north_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "saki"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_haruAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="NorthShared/Bed_haruAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_haru" type="Node3D" parent="NorthShared/Bed_haruAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_haru"
+site = "home_north_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "haru"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="NorthShared/DiningAssembly" instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_north_shared_dine_0Assembly" type="Node3D" parent="NorthShared/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_north_shared_dine_0" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_dine_0"
+site = "home_north_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_north_shared_dine_1Assembly" type="Node3D" parent="NorthShared/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_north_shared_dine_1" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_dine_1"
+site = "home_north_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="NorthShared/DiningAssembly" instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="NorthShared/DiningAssembly" instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_north_shared_deskAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="NorthShared/home_north_shared_deskAssembly" instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_north_shared_desk_0" type="Node3D" parent="NorthShared/home_north_shared_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_desk_0"
+site = "home_north_shared"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_north_shared"
+pair = "home_north_shared_desk"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+
+[node name="Contact" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_north_shared_desk_1" type="Node3D" parent="NorthShared/home_north_shared_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_desk_1"
+site = "home_north_shared"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_north_shared"
+pair = "home_north_shared_desk"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+
+[node name="Contact" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Mori" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -15)
+metadata/site = "home_mori"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_tomoAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Mori/Bed_tomoAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_tomo" type="Node3D" parent="Mori/Bed_tomoAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_tomo"
+site = "home_mori"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "tomo"
+
+[node name="Approach" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_yuiAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Mori/Bed_yuiAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_yui" type="Node3D" parent="Mori/Bed_yuiAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_yui"
+site = "home_mori"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "yui"
+
+[node name="Approach" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="Mori/DiningAssembly" instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_mori_dine_0Assembly" type="Node3D" parent="Mori/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_mori_dine_0" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_dine_0"
+site = "home_mori"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_mori_dine_1Assembly" type="Node3D" parent="Mori/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_mori_dine_1" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_dine_1"
+site = "home_mori"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Mori/DiningAssembly" instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Mori/DiningAssembly" instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_mori_deskAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="Mori/home_mori_deskAssembly" instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_mori_desk_0" type="Node3D" parent="Mori/home_mori_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_desk_0"
+site = "home_mori"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_mori"
+pair = "home_mori_desk"
+
+[node name="Approach" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+
+[node name="Contact" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+
+[node name="HandLeft" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_mori_desk_1" type="Node3D" parent="Mori/home_mori_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_desk_1"
+site = "home_mori"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_mori"
+pair = "home_mori_desk"
+
+[node name="Approach" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+
+[node name="Contact" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+
+[node name="HandLeft" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)

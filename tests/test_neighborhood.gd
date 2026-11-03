@@ -5,7 +5,7 @@ var sim: LifeSimulation
 var checks := 0
 var errors: Array[String] = []
 var metrics: Dictionary = {}
-const OUT := "res://docs/verification/v0.5/neighborhood"
+const OUT := "res://docs/verification/v0.8/neighborhood"
 
 func _initialize() -> void: call_deferred("run")
 
@@ -36,9 +36,13 @@ func run() -> void:
 	main = load("res://game/scenes/main.tscn").instantiate();root.add_child(main)
 	await process_frame
 	main.set_process(false);sim = root.get_node("Sim");sim.set_process(false);sim.running = true
+	sim.reset(71103,LifeSimulation.EXPANDED_POPULATION)
 	main.get_node("%TitleScreen").hide();main.get_node("%HUD").hide()
 	var town: TownEnvironment = main.get_node("Town");town.set_process(false)
-	expect(town.buildings.size()==5,"Five actual neighborhood buildings replace the grey shells")
+	var building_sites: Array = town.buildings.map(func(building): return building.room_site)
+	var expected_sites := ["home_ogawa","home_saeki","home_shared","bakery_cafe","workshop","home_north_shared","home_mori"]
+	expect(town.buildings.size()==7,"Seven actual neighborhood buildings include the two added homes")
+	expect(expected_sites.all(func(site): return site in building_sites),"Both new homes and every original building are included in the wall audit")
 	for building in town.buildings:
 		expect(building.parts.size()==6,building.room_site+": actual floor, four walls and roof imported independently")
 		var target: Vector3 = LifeSimulation.SITES[building.room_site]
@@ -49,7 +53,11 @@ func run() -> void:
 			building.parts[side].add_child(body);body.add_child(collision)
 	# Test-only collision meshes make the route audit depend on actual exported walls.
 	await physics_frame;await physics_frame
-	var sites := ["home_ogawa","home_saeki","home_shared","bakery_cafe","workshop","off_map_school","off_map_workplace","square"]
+	var sites: Array = building_sites.duplicate()
+	sites.append_array(["off_map_school","off_map_workplace","square"])
+	metrics.audited_sites = sites.duplicate()
+	metrics.directed_routes = sites.size()*(sites.size()-1)
+	expect(metrics.directed_routes==90,"The seven buildings and three public destinations supply ninety directed route checks")
 	var space := main.get_world_3d().direct_space_state
 	var walls_crossed: Array = []
 	for first in sites:
@@ -87,10 +95,19 @@ func run() -> void:
 	var daytime: Image = await capture("02-cutaway-day",Vector3(23,22,29),Vector3(0,0,1))
 	await capture("03-cafe",Vector3(16,7,4),Vector3(8,1,-5))
 	await capture("04-workshop",Vector3(8,7,1),Vector3(0,1,-7))
-	for p in sim.people: sim._assign(p,"rest",sim.home_for(p),600,"家でひと息つく")
+	await capture("07-north-shared",Vector3(-1,8,-5),Vector3(-9,1,-14))
+	await capture("08-mori",Vector3(17,8,-6),Vector3(9,1,-15))
+	# This is an entrance/furniture journey fixture. Give everyone free time,
+	# and start the four added residents outdoors so both new doorways are used.
+	for definition in sim.definitions.values(): definition.routines = []
+	for p in sim.people:
+		p.routine_id = "";p.next_plan_minute = 999999;p.support_next_attempt = 999999
+		if p.id in ["saki","haru","tomo","yui"]:
+			p.position = sim.SITES.square;p.place = "square";p.path.clear();p.moving = false
+		sim._assign(p,"rest",sim.home_for(p),600,"家でひと息つく")
 	var limit := 0
 	while sim.people.any(func(p): return p.moving) and limit<240:sim.advance_minutes(1);limit += 1
-	expect(not sim.people.any(func(p): return p.moving),"All eight residents can return through the new entrances and reach furniture")
+	expect(sim.people.size()==12 and not sim.people.any(func(p): return p.moving),"All twelve residents can return through the entrances and reach furniture")
 	for i in 30:
 		for p in sim.people: main.avatars[p.id].update_state(p,1.0/60.0,false)
 		await process_frame

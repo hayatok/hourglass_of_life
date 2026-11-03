@@ -5,7 +5,7 @@ var sim: LifeSimulation
 var errors: Array[String] = []
 var checks := 0
 var metrics: Dictionary = {}
-const OUT := "res://docs/verification/v0.5/activities"
+const OUT := "res://docs/verification/v0.8/activities"
 
 func _initialize() -> void: call_deferred("run")
 
@@ -37,9 +37,18 @@ func capture(name: String, target: Vector3) -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
 	root.get_texture().get_image().save_png(OUT+"/"+name+".png")
 
-func clean_reset() -> void:
-	sim.reset();sim.running = true;sim.set_process(false)
+func clean_reset(population: int = LifeSimulation.BASE_POPULATION) -> void:
+	sim.reset(71103,population);sim.running = true;sim.set_process(false)
 	await process_frame
+
+func free_activity_fixture() -> void:
+	await clean_reset(LifeSimulation.EXPANDED_POPULATION)
+	# These checks measure actual body/furniture contact. Each participant has
+	# free time so a shift beginning during another person's journey cannot
+	# replace the particular pose being measured. Daily life has separate tests.
+	for definition in sim.definitions.values(): definition.routines = []
+	for p in sim.people:
+		p.routine_id = "";p.next_plan_minute = 999999;p.support_next_attempt = 999999
 
 func run() -> void:
 	root.size = Vector2i(1440,900)
@@ -48,7 +57,10 @@ func run() -> void:
 	main.set_process(false);sim = root.get_node("Sim");sim.set_process(false)
 	main.get_node("%TitleScreen").hide();main.get_node("%HUD").hide()
 	await clean_reset()
-	expect(sim.activities.spots.size()==38,"The real town supplies 36 fixed places and two editable bench seats")
+	expect(sim.activities.spots.size()==50,"The expanded town supplies 48 fixed places and two editable bench seats")
+	for id in ["saki","haru","tomo","yui"]:
+		var bed: Dictionary = sim.activities.spots.get("sleep_"+id,{})
+		expect(bed.get("resident","")==id and "sleep" in bed.get("actions",[]),id+": the expanded town includes an actual assigned bed")
 	for spot in sim.activities.spots.values():
 		if sim.activities.rooms.has(spot.site): expect(sim.activities.walkable(spot.site,spot.approach),spot.id+": the furniture approach is walkable")
 	# Seat claims are exclusive, including visitors and delayed arrival.
@@ -114,7 +126,8 @@ func run() -> void:
 		for side in ["L","R"]: expect(child.contacts.observed.get("hand_error"+side,99)<.04,"The child's hand reaches the shared work surface")
 		await capture("02-family-model",Vector3(-7.55,0,7.3))
 	# Every resident eats at a chair, adapts to its height, and carries a real cup.
-	await clean_reset()
+	await free_activity_fixture()
+	expect(sim.people.size()==12,"The chair and drinking contact audit includes all twelve residents")
 	for p in sim.people: sim._assign(p,"eat",sim.home_for(p),600,"家で食事をする")
 	await arrive(sim.people)
 	for p in sim.people:
@@ -153,7 +166,7 @@ func run() -> void:
 		expect(adult.contacts.observed.get("foot_error"+side,99)<.04,"The grown resident still reaches the floor")
 	metrics.rin_adult_eat = adult.contacts.observed.duplicate()
 	# Sleep is face up and anchored to each person's own mattress and pillow.
-	await clean_reset()
+	await free_activity_fixture()
 	for p in sim.people: sim._assign(p,"sleep",sim.home_for(p),600,"自分の寝床で眠る")
 	await arrive(sim.people)
 	for p in sim.people:
@@ -163,11 +176,14 @@ func run() -> void:
 		metrics[p.id+"_sleep"] = actual.duplicate()
 		expect(actor.animation_name=="sleep" and activity.resident==p.id,p.id+": sleep uses the resident's own bed")
 		var head: Vector3 = actual.get("head",Vector3.INF)
-		expect(Vector2(head.x,head.z).distance_to(Vector2(activity.contact.x,activity.contact.z))<.03,p.id+": the head aligns with the pillow")
+		var pillow_error := Vector2(head.x,head.z).distance_to(Vector2(activity.contact.x,activity.contact.z))
+		expect(pillow_error<.03,"%s: the head aligns with the pillow (error %.4fm)"%[p.id,pillow_error])
 		var head_bone: Transform3D = actor.jrpg.skeleton.get_bone_global_pose(actor.jrpg.skeleton.find_bone("DEF-head"))
 		var front: Vector3 = actor.jrpg.skeleton.global_basis*head_bone.basis.z
 		expect(front.normalized().dot(Vector3.UP)>.8,p.id+": the face is up while sleeping")
 	await capture("05-family-beds",Vector3(-9,0,4.5))
+	await capture("07-north-shared-beds",LifeSimulation.SITES.home_north_shared)
+	await capture("08-mori-beds",LifeSimulation.SITES.home_mori)
 	var save_path := "user://test-activity-furniture.json"
 	var saved_ids: Array = sim.people.map(func(p): return p.activity_spot)
 	expect(sim.save_game(save_path) and sim.load_game(save_path),"Occupied furniture survives an actual save and load")

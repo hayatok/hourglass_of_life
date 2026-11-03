@@ -391,10 +391,21 @@ theme_override_font_sizes/font_size = 20
 text = "町の人たち"
 autowrap_mode = 3
 
-[node name="Roster" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=267000262]
+[node name="ResidentSearch" type="LineEdit" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn"]
 unique_name_in_owner = true
 layout_mode = 2
+placeholder_text = "住人を探す"
+clear_button_enabled = true
+
+[node name="RosterScroll" type="ScrollContainer" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn"]
+layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Roster" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn/RosterScroll" unique_id=267000262]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 7
 
 [node name="CameraGuide" type="Label" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=560154937]

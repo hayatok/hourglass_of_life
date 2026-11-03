@@ -1,0 +1,20 @@
+{
+  "audited_sites": [
+    "home_ogawa",
+    "home_saeki",
+    "home_shared",
+    "bakery_cafe",
+    "workshop",
+    "home_north_shared",
+    "home_mori",
+    "off_map_school",
+    "off_map_workplace",
+    "square"
+  ],
+  "directed_routes": 90,
+  "rendered_brightness": {
+    "day": 0.749866481967941,
+    "night": 0.295626743485091
+  },
+  "wall_crossings": []
+}

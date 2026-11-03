@@ -10,6 +10,9 @@ var walk_rate := 1.0
 var contacts: ResidentContacts
 var others: Dictionary = {}
 var greeted_meeting := ""
+var appearance: Dictionary = {}
+static var appearance_definitions: Dictionary = {}
+static var variant_palettes: Dictionary = {}
 const LOD1_DISTANCE := 20.0
 const LOD2_DISTANCE := 34.0
 const LOD_HYSTERESIS := 3.0
@@ -42,6 +45,9 @@ const MODELS = {
 
 func configure(p: Dictionary) -> void:
 	resident_id = p.id
+	if appearance_definitions.is_empty():
+		appearance_definitions = JSON.parse_string(FileAccess.get_file_as_string("res://data/resident-appearance.json")).residents
+	appearance = appearance_definitions.get(p.id,{})
 	name_label.text = p.name
 	global_position = p.position
 	last_position = p.position
@@ -63,7 +69,9 @@ func configure(p: Dictionary) -> void:
 func _update_body(p: Dictionary) -> void:
 	displayed_age = int(p.age)
 	var model_key: String = "rin_adult" if p.id=="rin" and p.age>=12 else p.id
-	if MODELS.has(model_key):
+	var model_scene: PackedScene = MODELS.get(model_key)
+	if appearance.has("model_scene"): model_scene = load(appearance.model_scene)
+	if model_scene!=null:
 		$Visual/Hips.hide()
 		$AnimationPlayer.stop()
 		if model_key != displayed_model:
@@ -72,8 +80,9 @@ func _update_body(p: Dictionary) -> void:
 			if is_instance_valid(jrpg):
 				visual.remove_child(jrpg)
 				jrpg.queue_free()
-			jrpg = MODELS[model_key].instantiate()
+			jrpg = model_scene.instantiate()
 			visual.add_child(jrpg)
+			_apply_variant_palette()
 			animator = jrpg.animator
 			contacts = ResidentContacts.new();contacts.name = "Contacts";add_child(contacts)
 			contacts.bind_model(self,jrpg)
@@ -82,9 +91,29 @@ func _update_body(p: Dictionary) -> void:
 		var growth := 1.0
 		if model_key=="rin": growth = clampf(1+(p.age-7)*.035,1,1.14)
 		if model_key=="rin_adult": growth = clampf(.88+(p.age-12)*.024,.88,1)
-		visual.scale = Vector3.ONE*growth
+		var body: Array = appearance.get("body_scale",[1,1,1])
+		visual.scale = Vector3(body[0],body[1],body[2])*growth
 		name_label.position.y = jrpg.rest_height*growth+.25
 		jrpg.set_age(int(p.age))
+
+func _apply_variant_palette() -> void:
+	if appearance.get("palette",{}).is_empty(): return
+	for material in jrpg.body_materials:
+		var original: Texture2D = material.get_shader_parameter("base_palette")
+		if original==null: continue
+		var key := resident_id+":"+original.resource_path
+		if not variant_palettes.has(key):
+			var source := original.get_image()
+			if source.is_compressed(): source.decompress()
+			var image := source.duplicate() as Image
+			var width := image.get_width()/8
+			var height := image.get_height()/8
+			for swatch in appearance.palette:
+				var index := int(swatch)
+				image.fill_rect(Rect2i((index%8)*width,(7-index/8)*height,width,height),Color(appearance.palette[swatch]))
+			image.generate_mipmaps()
+			variant_palettes[key] = ImageTexture.create_from_image(image)
+		material.set_shader_parameter("base_palette",variant_palettes[key])
 
 func _recolor(mesh: MeshInstance3D, color: Color) -> void:
 	var mat = mesh.material_override.duplicate() as StandardMaterial3D

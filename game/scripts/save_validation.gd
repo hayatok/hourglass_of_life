@@ -177,7 +177,12 @@ static func agenda(data: Variant, definitions: Dictionary, sites: Dictionary, el
 			if previous>=0 and previous!=planned.start: return false
 	return true
 
-static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> bool:
+static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, household_ids: Array = []) -> bool:
+	var required_households: Array = []
+	for definition in definitions.values():
+		if definition.household_id not in required_households: required_households.append(definition.household_id)
+	if household_ids.is_empty():
+		household_ids = JSON.parse_string(FileAccess.get_file_as_string("res://data/life-conditions.json")).households.keys()
 	if not raw is Dictionary or not encoded(raw): return false
 	if not record(raw,["rng_state"],["schema","elapsed","start_minute","epoch_weekday","budget","meeting_serial","remainder"]): return false
 	if not whole(raw.schema,1) or int(raw.schema) not in [1,2,3,4] or not raw.rng_state.is_valid_int(): return false
@@ -211,7 +216,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		for key in ["stage","current_goal","goal_kind","legacy_read_id","household_override"]:
 			if p.has(key) and not p[key] is String: return false
 		if p.has("goal_kind") and p.goal_kind not in ["creative","career","model"]: return false
-		if p.has("household_override") and p.household_override not in ["","ogawa","saeki","shared_house","aoi_apartment"]: return false
+		if p.has("household_override") and p.household_override!="" and p.household_override not in household_ids: return false
 		if p.has("known_plans"):
 			if not p.known_plans is Array: return false
 			for plan in p.known_plans:
@@ -296,8 +301,16 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 	if raw.has("work_family"):
 		var life = raw.work_family
 		if not life is Dictionary or not life.get("households") is Dictionary or not life.get("supports") is Array or not number(life.get("serial")): return false
-		for id in ["ogawa","saeki","shared_house"]:
-			var h = life.households.get(id)
+		for p in raw.people:
+			var override_id: String = p.get("household_override","")
+			if not override_id.is_empty() and override_id not in required_households: required_households.append(override_id)
+		for id in required_households:
+			if not life.households.has(id): return false
+		for id in life.households:
+			if id not in household_ids: return false
+			# Newly authored empty houses may already be present in an eight-person
+			# save. Check every stored account, including unoccupied households.
+			var h = life.households[id]
 			if not record(h,[],["cash","home_load","earned_today","spent_today"]) or not h.get("material_days") is Dictionary or not h.get("ledger") is Array: return false
 			for entry in h.ledger:
 				if not record(entry,[],["day","earned","support","expenses","balance"]): return false

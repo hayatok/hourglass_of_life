@@ -70,8 +70,10 @@ func add_options(p: Dictionary, options: Array) -> void:
 	if household(p).home_load>.15 and home==sim.HOME[household_id(p)]:
 		options.append({"kind":"chores","place":home,"need":household(p).home_load,"goal":d.values.care*.7,"relation":.5,"role":.9,"habit":d.traits.conscientiousness,"fun":.2,"cost":p.fatigue*.5,"reason":"家の用事を、できるところから片付けよう"})
 	# Extra work is an option for these authored flexible jobs, not every role.
-	if p.id in ["ryo","osamu"] and worry(p)>.3 and sim.minute_of_day()>=480 and sim.minute_of_day()<1080:
-		options.append({"kind":"work","place":"workshop" if p.id=="osamu" else home,"need":worry(p),"goal":d.values.security,"relation":.3,"role":.7,"habit":.4,"fun":p.work_satisfaction,"cost":p.fatigue*.9,"reason":"暮らしの出費が気になる。無理のない範囲でもう少し仕事を進めたい"})
+	if d.get("flexible_work",p.id in ["ryo","osamu"]) and worry(p)>.3 and sim.minute_of_day()>=480 and sim.minute_of_day()<1080:
+		var place: String = d.get("work_place","workshop" if p.id=="osamu" else home)
+		if place=="home": place = home
+		options.append({"kind":"work","place":place,"need":worry(p),"goal":d.values.security,"relation":.3,"role":.7,"habit":.4,"fun":p.work_satisfaction,"cost":p.fatigue*.9,"reason":"暮らしの出費が気になる。無理のない範囲でもう少し仕事を進めたい"})
 
 func tick() -> void:
 	for id in households:
@@ -139,7 +141,7 @@ func activity_tick(p: Dictionary) -> void:
 	var h = household(p)
 	var d = sim.definitions[p.id]
 	if p.action=="work":
-		var earned = .04 if p.id=="aoi" and p.stage=="moved" else (.035 if p.id=="rin" and p.age>=22 else config.earnings_per_work_minute.get(p.id,0))
+		var earned: float = d.get("work_income_per_minute",.04 if p.id=="aoi" and p.stage=="moved" else (.035 if p.id=="rin" and p.age>=22 else config.earnings_per_work_minute.get(p.id,0)))
 		h.cash += earned
 		h.earned_today += earned
 		p.earned_today += earned
@@ -168,7 +170,7 @@ func hobby_progress(p: Dictionary) -> float:
 	var primary = p.goal_kind in ["creative","model"]
 	if (primary and p.goal_progress>=1) or (not primary and p.private_project>=1): return 0
 	var h = household(p)
-	var cost = config.project_materials.get(p.id,0)
+	var cost = sim.definitions[p.id].get("project_material_cost",config.project_materials.get(p.id,0))
 	var key = "%s:%d"%[p.id,sim.day_index()]
 	if not h.material_days.has(key):
 		if h.cash<cost:
@@ -333,6 +335,7 @@ func finish_project(meeting: Dictionary) -> void:
 
 func _advances_goal(p: Dictionary, project: Dictionary) -> bool:
 	if p.goal_kind=="career": return false
+	if project.get("skill","") in sim.definitions[p.id].get("goal_skills",[]): return true
 	for word in project.get("goal_words",[]):
 		if word in p.current_goal: return true
 	return false
@@ -346,7 +349,7 @@ func _settle_day() -> void:
 		var support = 0 if id=="shared_house" and sim.person("aoi").stage=="moved" else d.daily_support
 		for p in sim.people:
 			if p.get("alive",true) and household_id(p)==id and p.career_retired:
-				support += sim.life.config.retirement_support_away if id=="aoi_apartment" else sim.life.config.retirement_support
+				support += sim.definitions[p.id].get("retirement",{}).get("support_per_day",sim.life.config.retirement_support_away if id=="aoi_apartment" else sim.life.config.retirement_support)
 		h.cash += support-expenses
 		h.ledger.append({"day":sim.day_index(),"earned":h.earned_today,"support":support,"expenses":h.spent_today+expenses,"balance":h.cash})
 		if h.ledger.size()>60: h.ledger.pop_front()
