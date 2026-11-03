@@ -1,0 +1,55 @@
+{
+  "raw_sha256": "f8b647466b582c4eb38bc318a287e47ced5231208f41ae3e157e3ad18bb7a8bd",
+  "raw_bytes": 2982932,
+  "raw_local_geometry_sha256_before": "8b82ad49ad9bb1a6f15e4f3f95c52b8e1f4f90f4f2f3414e664d49a016b1c24c",
+  "raw_local_geometry_sha256_after": "8b82ad49ad9bb1a6f15e4f3f95c52b8e1f4f90f4f2f3414e664d49a016b1c24c",
+  "local_geometry_unchanged": true,
+  "original_bounds": {
+    "min": [
+      -0.261199951171875,
+      -0.11713407933712006,
+      0.0
+    ],
+    "max": [
+      0.261199951171875,
+      0.11713407933712006,
+      1.0
+    ]
+  },
+  "review_scale": 1.65,
+  "review_height_m": 1.65,
+  "vertices": 18261,
+  "triangles": 29062,
+  "meshes": 1,
+  "materials": 1,
+  "images": [
+    {
+      "name": "CH_Saki_JRPG_Raw_basecolor.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "CH_Saki_JRPG_Raw_rm.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "CH_Saki_JRPG_Raw_normal.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color"
+    }
+  ],
+  "skins": 0,
+  "clips": [],
+  "shape_keys": [],
+  "inferred": "Side/back and physical height/joints; single front concept only."
+}

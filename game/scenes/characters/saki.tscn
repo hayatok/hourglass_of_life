@@ -1,12 +1,14 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://game/scripts/jrpg_resident_model.gd" id="1"]
-[ext_resource type="PackedScene" path="res://game/assets/models/fumi/CH_Fumi.glb" id="2"]
+[ext_resource type="PackedScene" path="res://game/assets/models/saki/CH_Saki.glb" id="2"]
 
 [node name="Saki" type="Node3D"]
 script = ExtResource("1")
-rest_height = 1.61
-walk_speed = 1.35
-hair_cells = Vector3i(7, 8, 9)
+rest_height = 1.65
+walk_speed = 0.9107191183
+material_mode = 1
+expression_mode = 2
+face_layout_path = "res://game/assets/models/saki/face-layout.json"
 
 [node name="Model" parent="." instance=ExtResource("2")]

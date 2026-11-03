@@ -1,0 +1,171 @@
+{
+  "resident": "tomo",
+  "all_pass": true,
+  "errors": [],
+  "blender_version": "5.2.1 LTS",
+  "lods": [
+    {
+      "level": 0,
+      "skin_connected": true,
+      "bone_count": 35,
+      "vertices": 17648,
+      "rest_height_m": 1.7000006151402545,
+      "motion": {
+        "eat": {
+          "maximum_sampled_vertex_displacement_m": 0.15102347335128768,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "idle": {
+          "maximum_sampled_vertex_displacement_m": 0.008960818322040251,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "rest": {
+          "maximum_sampled_vertex_displacement_m": 2.384185791015625e-07,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": true
+        },
+        "sit_talk": {
+          "maximum_sampled_vertex_displacement_m": 0.01604414752277992,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "sleep": {
+          "maximum_sampled_vertex_displacement_m": 0.008783320159537896,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "talk": {
+          "maximum_sampled_vertex_displacement_m": 0.14196163643522872,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "walk": {
+          "maximum_sampled_vertex_displacement_m": 0.7055672052405298,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "wave": {
+          "maximum_sampled_vertex_displacement_m": 0.9707382913432773,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "work": {
+          "maximum_sampled_vertex_displacement_m": 0.20241580089052436,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        }
+      }
+    },
+    {
+      "level": 1,
+      "skin_connected": true,
+      "bone_count": 35,
+      "vertices": 8408,
+      "rest_height_m": 1.700115510087926,
+      "motion": {
+        "eat": {
+          "maximum_sampled_vertex_displacement_m": 0.15102347335128768,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "idle": {
+          "maximum_sampled_vertex_displacement_m": 0.008960818322040251,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "rest": {
+          "maximum_sampled_vertex_displacement_m": 3.5762786865234375e-07,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": true
+        },
+        "sit_talk": {
+          "maximum_sampled_vertex_displacement_m": 0.016056497256328017,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "sleep": {
+          "maximum_sampled_vertex_displacement_m": 0.008783320159537896,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "talk": {
+          "maximum_sampled_vertex_displacement_m": 0.14196163643522872,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "walk": {
+          "maximum_sampled_vertex_displacement_m": 0.7054041752701771,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "wave": {
+          "maximum_sampled_vertex_displacement_m": 0.9707382913432773,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "work": {
+          "maximum_sampled_vertex_displacement_m": 0.20241580089052436,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        }
+      }
+    },
+    {
+      "level": 2,
+      "skin_connected": true,
+      "bone_count": 35,
+      "vertices": 3891,
+      "rest_height_m": 1.701367657384253,
+      "motion": {
+        "eat": {
+          "maximum_sampled_vertex_displacement_m": 0.1505082954295777,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "idle": {
+          "maximum_sampled_vertex_displacement_m": 0.00895353571686805,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "rest": {
+          "maximum_sampled_vertex_displacement_m": 2.384185791015625e-07,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": true
+        },
+        "sit_talk": {
+          "maximum_sampled_vertex_displacement_m": 0.01605816248303203,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "sleep": {
+          "maximum_sampled_vertex_displacement_m": 0.008780388615857646,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "talk": {
+          "maximum_sampled_vertex_displacement_m": 0.14162355398132503,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "walk": {
+          "maximum_sampled_vertex_displacement_m": 0.705728856280726,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "wave": {
+          "maximum_sampled_vertex_displacement_m": 0.9715488403245955,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        },
+        "work": {
+          "maximum_sampled_vertex_displacement_m": 0.20292213953281846,
+          "first_last_surface_gap_m": 0.0,
+          "intentional_hold": false
+        }
+      }
+    }
+  ],
+  "limitation": "Agent-rendered asset motion/scale evidence. Actual game interaction, feet/furniture contacts and facial behavior are separate acceptance steps."
+}

@@ -1,12 +1,14 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://game/scripts/jrpg_resident_model.gd" id="1"]
-[ext_resource type="PackedScene" path="res://game/assets/models/maho/CH_Maho.glb" id="2"]
+[ext_resource type="PackedScene" path="res://game/assets/models/yui/CH_Yui.glb" id="2"]
 
 [node name="Yui" type="Node3D"]
 script = ExtResource("1")
-rest_height = 1.64
-walk_speed = 1.61
-hair_cells = Vector3i(5, 6, 7)
+rest_height = 1.7
+walk_speed = 1.1493800332
+material_mode = 1
+expression_mode = 2
+face_layout_path = "res://game/assets/models/yui/face-layout.json"
 
 [node name="Model" parent="." instance=ExtResource("2")]

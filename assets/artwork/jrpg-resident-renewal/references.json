@@ -1,5 +1,5 @@
 {
-  "scope": "JRPG character source references; these images do not constitute game-ready models or gameplay tests. Haru is tracked in cute-cast-pilot; the remaining 12 references include the grown-up Rin.",
+  "scope": "JRPG character source references. Haru is tracked in cute-cast-pilot. Saki/Tomo/Yui now have dedicated bodies and two UV-eye controls with partial real-town character acceptance; eight original residents and grown-up Rin still have reference images only for this renewal. References, generated raw meshes and automated/agent character checks do not establish complete game quality or human UI acceptance.",
   "residents": [
     {
       "id": "aoi",
@@ -128,9 +128,21 @@
       "provider": "built-in imagegen",
       "input_style_reference": "assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
       "identity_reference": "game/assets/ui/portraits/saki.png",
-      "mesh_status": "raw_exported_review_pending",
+      "mesh_status": "dedicated_body_integrated_partial_character_acceptance",
       "generation_form": "Chrome generated and GLB exported; 30 credits",
-      "generation_record": "assets/models/jrpg-resident-renewal/saki/generation.json"
+      "generation_record": "assets/models/jrpg-resident-renewal/saki/generation.json",
+      "raw_mesh_history": {
+        "status_at_export": "raw_exported_review_pending",
+        "generation_form": "Chrome generated and GLB exported; 30 credits",
+        "note": "Raw export and original generation/credit record retained; rig/LOD/eye integration is subsequent local production."
+      },
+      "canonical_authoring_source": "assets/models/jrpg-resident-renewal/source/saki/CH_Saki_AnimationMaster.blend",
+      "runtime_manifest": "game/assets/models/saki/asset-manifest.json",
+      "runtime_face_controls": [
+        "Blink",
+        "TiredEyes"
+      ],
+      "runtime_evidence": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md"
     },
     {
       "id": "tomo",
@@ -142,9 +154,21 @@
       "provider": "built-in imagegen",
       "input_style_reference": "assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
       "identity_reference": "game/assets/ui/portraits/tomo.png",
-      "mesh_status": "raw_exported_review_pending",
+      "mesh_status": "dedicated_body_integrated_partial_character_acceptance",
       "generation_form": "Chrome generated and GLB exported; 30 credits",
-      "generation_record": "assets/models/jrpg-resident-renewal/tomo/generation.json"
+      "generation_record": "assets/models/jrpg-resident-renewal/tomo/generation.json",
+      "raw_mesh_history": {
+        "status_at_export": "raw_exported_review_pending",
+        "generation_form": "Chrome generated and GLB exported; 30 credits",
+        "note": "Raw export and original generation/credit record retained; rig/LOD/eye integration is subsequent local production."
+      },
+      "canonical_authoring_source": "assets/models/jrpg-resident-renewal/source/tomo/CH_Tomo_AnimationMaster.blend",
+      "runtime_manifest": "game/assets/models/tomo/asset-manifest.json",
+      "runtime_face_controls": [
+        "Blink",
+        "TiredEyes"
+      ],
+      "runtime_evidence": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md"
     },
     {
       "id": "yui",
@@ -156,9 +180,67 @@
       "provider": "built-in imagegen",
       "input_style_reference": "assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
       "identity_reference": "game/assets/ui/portraits/yui.png",
-      "mesh_status": "raw_exported_review_pending",
+      "mesh_status": "dedicated_body_integrated_partial_character_acceptance",
       "generation_form": "Chrome generated and GLB exported; 30 credits",
-      "generation_record": "assets/models/jrpg-resident-renewal/yui/generation.json"
+      "generation_record": "assets/models/jrpg-resident-renewal/yui/generation.json",
+      "raw_mesh_history": {
+        "status_at_export": "raw_exported_review_pending",
+        "generation_form": "Chrome generated and GLB exported; 30 credits",
+        "note": "Raw export and original generation/credit record retained; rig/LOD/eye integration is subsequent local production."
+      },
+      "canonical_authoring_source": "assets/models/jrpg-resident-renewal/source/yui/CH_Yui_AnimationMaster.blend",
+      "runtime_manifest": "game/assets/models/yui/asset-manifest.json",
+      "runtime_face_controls": [
+        "Blink",
+        "TiredEyes"
+      ],
+      "runtime_evidence": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md"
     }
+  ],
+  "runtime_acceptance": {
+    "status": "partial_character_runtime_acceptance",
+    "date": "2026-11-03",
+    "scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
+    "observed_behaviors": [
+      "Actual skin deformation and walking",
+      "Conversation gesture and head attention after the ordinary transition",
+      "Natural joint work and a real skill change",
+      "Meal seating and hand/cup contact",
+      "Own-bed head/pelvis contact, sleep closure and waking reopening",
+      "All LOD rig/bind/clip compatibility",
+      "Project-in-progress save/resume and subsequent state/RNG continuation"
+    ],
+    "aggregate_functional_results": {
+      "scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident.",
+      "headless": {
+        "checks": 112,
+        "failures": 0
+      },
+      "gpu": {
+        "checks": 115,
+        "failures": 0
+      }
+    },
+    "artifacts": {
+      "images_saved": 29,
+      "images_attempted": 29,
+      "counted_as_functional_checks": false
+    },
+    "evidence": {
+      "readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
+      "headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
+      "gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
+      "review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
+    },
+    "identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts."
+  },
+  "remaining_work": [
+    "Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+    "Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+    "Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+    "Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+    "Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+    "Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+    "Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
   ]
 }

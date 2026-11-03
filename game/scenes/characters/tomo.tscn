@@ -1,12 +1,14 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://game/scripts/jrpg_resident_model.gd" id="1"]
-[ext_resource type="PackedScene" path="res://game/assets/models/ryo/CH_Ryo.glb" id="2"]
+[ext_resource type="PackedScene" path="res://game/assets/models/tomo/CH_Tomo.glb" id="2"]
 
 [node name="Tomo" type="Node3D"]
 script = ExtResource("1")
-rest_height = 1.76
-walk_speed = 1.45
-hair_cells = Vector3i(4, 5, 6)
+rest_height = 1.7
+walk_speed = 2.13660552
+material_mode = 1
+expression_mode = 2
+face_layout_path = "res://game/assets/models/tomo/face-layout.json"
 
 [node name="Model" parent="." instance=ExtResource("2")]

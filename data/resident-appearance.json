@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "note": "咲・智・結衣は既存モデルを共有する暫定外見。晴は新atlasと35骨・9動作を使い、UVシェーダーで閉眼と疲れ目に対応。口や笑顔の変形は未対応。paletteのキーは旧モデルの8×8色見本の番号。",
+  "note": "咲・晴・智・結衣は個別atlasと9動作を使い、UVシェーダーで閉眼と疲れ目に対応。晴・智は35骨、咲・結衣は裾補助骨を含む36骨。口や笑顔の変形は未対応。paletteのキーは旧モデルの8×8色見本の番号。",
   "residents": {
-    "saki": {"model_scene":"res://game/scenes/characters/saki.tscn","body_scale":[0.96,1.025,0.96],"palette":{"7":"#292836","8":"#3d3a4b","9":"#585266","17":"#405f83","18":"#3a414c"}},
+    "saki": {"model_scene":"res://game/scenes/characters/saki.tscn","body_scale":[1,1,1],"palette":{}},
     "haru": {"model_scene":"res://game/scenes/characters/haru.tscn","body_scale":[1,1,1],"palette":{}},
-    "tomo": {"model_scene":"res://game/scenes/characters/tomo.tscn","body_scale":[1.09,0.965,1.055],"palette":{"4":"#393534","5":"#56504d","6":"#756a60","14":"#995b4e","15":"#394d54"}},
-    "yui": {"model_scene":"res://game/scenes/characters/yui.tscn","body_scale":[0.94,1.035,0.94],"palette":{"0":"#d3b3c8","5":"#33273a","6":"#513a54","7":"#705475","8":"#6e477e","12":"#454055","15":"#cab3cf","17":"#69548e"}}
+    "tomo": {"model_scene":"res://game/scenes/characters/tomo.tscn","body_scale":[1,1,1],"palette":{}},
+    "yui": {"model_scene":"res://game/scenes/characters/yui.tscn","body_scale":[1,1,1],"palette":{}}
   }
 }

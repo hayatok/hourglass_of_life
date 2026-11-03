@@ -1,0 +1,64 @@
+{
+  "reference_sha256": "3533a0db82f42c16572853c3ba918a1b574f5100781f078571398ab52ed53cbb",
+  "image_size": [
+    1024,
+    1536
+  ],
+  "bbox": [
+    201,
+    19,
+    811,
+    1498
+  ],
+  "axis_column": 502.5,
+  "axis_samples": [
+    {
+      "fraction": 0.195,
+      "row": 307,
+      "interval": [
+        369,
+        627
+      ],
+      "center": 498.0
+    },
+    {
+      "fraction": 0.35,
+      "row": 537,
+      "interval": [
+        431,
+        583
+      ],
+      "center": 507.0
+    },
+    {
+      "fraction": 0.47,
+      "row": 714,
+      "interval": [
+        363,
+        642
+      ],
+      "center": 502.5
+    }
+  ],
+  "top_row": 19,
+  "ground_row": 1497,
+  "subject_height_pixels": 1479,
+  "subject_fraction": 0.962890625,
+  "ground_fraction": 0.024739583333333332,
+  "target_height_m_inferred": 1.7,
+  "meters_per_pixel": 0.0011494252873563218,
+  "ten_band_width_over_height": [
+    0.13252197430696416,
+    0.13319810682893848,
+    0.19743069641649763,
+    0.2704530087897228,
+    0.3394185260311021,
+    0.21839080459770116,
+    0.2657200811359026,
+    0.3096686950642326,
+    0.1724137931034483,
+    0.19134550371872888
+  ],
+  "matte_method": "Per-row edge background, max RGB distance >30, enclosed holes filled; fixed before mesh import. No model-based threshold adjustment.",
+  "scale_basis": "Inferred from former variant presentation, rounded to canonical metres with body_scale1.0."
+}

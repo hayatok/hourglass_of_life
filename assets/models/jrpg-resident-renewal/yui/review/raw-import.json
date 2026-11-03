@@ -1,0 +1,55 @@
+{
+  "raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+  "raw_bytes": 3001736,
+  "raw_local_geometry_sha256_before": "3a4b374a1b1b008083e577ea373f2494738adc4a6e66685770456112dfd7f38d",
+  "raw_local_geometry_sha256_after": "3a4b374a1b1b008083e577ea373f2494738adc4a6e66685770456112dfd7f38d",
+  "local_geometry_unchanged": true,
+  "original_bounds": {
+    "min": [
+      -0.215362548828125,
+      -0.1157074049115181,
+      0.0
+    ],
+    "max": [
+      0.215362548828125,
+      0.1157074049115181,
+      1.0
+    ]
+  },
+  "review_scale": 1.7,
+  "review_height_m": 1.7,
+  "vertices": 18880,
+  "triangles": 29844,
+  "meshes": 1,
+  "materials": 1,
+  "images": [
+    {
+      "name": "CH_Yui_JRPG_Raw_basecolor.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "CH_Yui_JRPG_Raw_rm.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "CH_Yui_JRPG_Raw_normal.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color"
+    }
+  ],
+  "skins": 0,
+  "clips": [],
+  "shape_keys": [],
+  "inferred": "Side/back and physical height/joints; single front concept only."
+}

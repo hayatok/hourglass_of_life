@@ -1,0 +1,2754 @@
+{
+  "asset_acceptance": false,
+  "meeting_totals": {
+    "action_minutes_at_destination": {
+      "aoi": {
+        "eat": 150,
+        "hobby": 793,
+        "joint_work": 188,
+        "legacy": 53,
+        "prepare": 15,
+        "school": 440,
+        "sleep": 1251,
+        "social": 164
+      },
+      "fumi": {
+        "chores": 71,
+        "eat": 150,
+        "hobby": 200,
+        "joint_work": 121,
+        "legacy": 61,
+        "meet": 52,
+        "prepare": 110,
+        "sleep": 1243,
+        "social": 672
+      },
+      "haru": {
+        "eat": 150,
+        "hobby": 371,
+        "joint_work": 92,
+        "legacy": 64,
+        "meet": 26,
+        "prepare": 92,
+        "sleep": 1296,
+        "social": 180,
+        "work": 510
+      },
+      "maho": {
+        "chores": 66,
+        "eat": 150,
+        "hobby": 215,
+        "joint_work": 138,
+        "legacy": 63,
+        "meet": 26,
+        "prepare": 32,
+        "sleep": 1269,
+        "social": 575,
+        "work": 474
+      },
+      "nagisa": {
+        "chores": 70,
+        "eat": 142,
+        "hobby": 241,
+        "meet": 52,
+        "prepare": 90,
+        "rest": 30,
+        "sleep": 1106,
+        "social": 370,
+        "work": 815
+      },
+      "osamu": {
+        "chores": 63,
+        "eat": 232,
+        "hobby": 450,
+        "joint_work": 138,
+        "meet": 78,
+        "prepare": 117,
+        "sleep": 1268,
+        "social": 160,
+        "work": 655
+      },
+      "rin": {
+        "eat": 121,
+        "hobby": 207,
+        "meet": 52,
+        "prepare": 125,
+        "school": 499,
+        "sleep": 1559,
+        "social": 186
+      },
+      "ritsu": {
+        "chores": 112,
+        "eat": 114,
+        "hobby": 429,
+        "joint_work": 177,
+        "legacy": 44,
+        "meet": 26,
+        "rest": 90,
+        "sleep": 1112,
+        "social": 72,
+        "work": 1292
+      },
+      "ryo": {
+        "care": 124,
+        "chores": 106,
+        "eat": 120,
+        "hobby": 324,
+        "meet": 78,
+        "prepare": 51,
+        "sleep": 1214,
+        "social": 280,
+        "work": 450
+      },
+      "saki": {
+        "chores": 58,
+        "eat": 150,
+        "hobby": 297,
+        "joint_work": 122,
+        "legacy": 71,
+        "meet": 52,
+        "prepare": 61,
+        "sleep": 1186,
+        "social": 185,
+        "work": 435
+      },
+      "tomo": {
+        "chores": 137,
+        "eat": 150,
+        "hobby": 566,
+        "joint_work": 181,
+        "meet": 80,
+        "prepare": 49,
+        "rest": 30,
+        "sleep": 1403,
+        "social": 186,
+        "work": 301
+      },
+      "yui": {
+        "eat": 150,
+        "hobby": 379,
+        "joint_work": 138,
+        "legacy": 113,
+        "meet": 54,
+        "prepare": 61,
+        "rest": 36,
+        "sleep": 1322,
+        "social": 213,
+        "work": 233
+      }
+    },
+    "callback_events": 257,
+    "completed_meetings": 23,
+    "completed_pairs_by_group": {
+      "new_new": 5,
+      "original_new": 7,
+      "original_original": 11
+    },
+    "completed_participations_per_resident_day": 1.27777777777778,
+    "completed_projects": {
+      "new_new": 3,
+      "original_new": 3,
+      "original_original": 6
+    },
+    "completed_records": [
+      {
+        "a": "aoi",
+        "activity": "music",
+        "b": "ritsu",
+        "finished": 142,
+        "group": "original_original",
+        "id": "meeting_2",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "osamu",
+        "activity": "radio",
+        "b": "haru",
+        "finished": 157,
+        "group": "original_new",
+        "id": "meeting_1",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "rin",
+        "activity": "social",
+        "b": "fumi",
+        "finished": 447,
+        "group": "original_original",
+        "id": "meeting_4",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "tomo",
+        "activity": "bread",
+        "b": "maho",
+        "finished": 492,
+        "group": "original_new",
+        "id": "meeting_3",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "saki",
+        "activity": "social",
+        "b": "haru",
+        "finished": 1289,
+        "group": "new_new",
+        "id": "meeting_5",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "ryo",
+        "activity": "social",
+        "b": "osamu",
+        "finished": 1348,
+        "group": "original_original",
+        "id": "meeting_6",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "aoi",
+        "activity": "radio",
+        "b": "maho",
+        "finished": 1369,
+        "group": "original_original",
+        "id": "meeting_7",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "ryo",
+        "activity": "social",
+        "b": "osamu",
+        "finished": 1407,
+        "group": "original_original",
+        "id": "meeting_8",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "tomo",
+        "activity": "craft",
+        "b": "yui",
+        "finished": 1450,
+        "group": "new_new",
+        "id": "meeting_9",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "nagisa",
+        "activity": "social",
+        "b": "rin",
+        "finished": 1529,
+        "group": "original_original",
+        "id": "meeting_11",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "fumi",
+        "activity": "photo",
+        "b": "osamu",
+        "finished": 1561,
+        "group": "original_original",
+        "id": "meeting_12",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "nagisa",
+        "activity": "social",
+        "b": "yui",
+        "finished": 1590,
+        "group": "original_new",
+        "id": "meeting_13",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "haru",
+        "activity": "music",
+        "b": "saki",
+        "finished": 1621,
+        "group": "new_new",
+        "id": "meeting_10",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "ritsu",
+        "activity": "music",
+        "b": "aoi",
+        "finished": 1740,
+        "group": "original_original",
+        "id": "meeting_14",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "osamu",
+        "activity": "radio",
+        "b": "fumi",
+        "finished": 1788,
+        "group": "original_original",
+        "id": "meeting_15",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "ryo",
+        "activity": "social",
+        "b": "ritsu",
+        "finished": 1828,
+        "group": "original_original",
+        "id": "meeting_16",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "tomo",
+        "activity": "craft",
+        "b": "yui",
+        "finished": 1897,
+        "group": "new_new",
+        "id": "meeting_17",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "maho",
+        "activity": "social",
+        "b": "tomo",
+        "finished": 2788,
+        "group": "original_new",
+        "id": "meeting_19",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "ritsu",
+        "activity": "music",
+        "b": "yui",
+        "finished": 2873,
+        "group": "original_new",
+        "id": "meeting_18",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "aoi",
+        "activity": "radio",
+        "b": "maho",
+        "finished": 3354,
+        "group": "original_original",
+        "id": "meeting_20",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "project",
+        "observed_engaged_minutes": 45,
+        "origin": "resident"
+      },
+      {
+        "a": "osamu",
+        "activity": "social",
+        "b": "tomo",
+        "finished": 3388,
+        "group": "original_new",
+        "id": "meeting_21",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "fumi",
+        "activity": "social",
+        "b": "saki",
+        "finished": 3447,
+        "group": "original_new",
+        "id": "meeting_22",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      },
+      {
+        "a": "yui",
+        "activity": "social",
+        "b": "tomo",
+        "finished": 4210,
+        "group": "new_new",
+        "id": "meeting_23",
+        "introduction_event": "",
+        "introduction_observed_in_window": false,
+        "kind": "social",
+        "observed_engaged_minutes": 25,
+        "origin": "resident"
+      }
+    ],
+    "completion_signals_accounted": true,
+    "conflict_examples": [],
+    "critical_fatigue_person_minutes": 691,
+    "critical_fatigue_share": 0.013329475308642,
+    "critical_hunger_person_minutes": 6951,
+    "critical_hunger_share": 0.134085648148148,
+    "event_serial_delta": 257,
+    "high_housework_household_minutes": 0,
+    "high_housework_share": 0.0,
+    "household_minutes": 21600,
+    "initiator_counts": {
+      "aoi": 3,
+      "fumi": 2,
+      "haru": 1,
+      "maho": 1,
+      "nagisa": 2,
+      "osamu": 3,
+      "rin": 1,
+      "ritsu": 2,
+      "ryo": 3,
+      "saki": 1,
+      "tomo": 3,
+      "yui": 1
+    },
+    "introduction_linked_projects": 0,
+    "introductions_received": 15,
+    "invalid_numeric_states": 0,
+    "max_home_load": 0.528400000000028,
+    "min_household_cash": -7.67300000000167,
+    "minutes": 4320,
+    "occupied_spot_collisions": 0,
+    "pair_counts": {
+      "aoi:maho": 2,
+      "aoi:ritsu": 2,
+      "fumi:osamu": 2,
+      "fumi:rin": 1,
+      "fumi:saki": 1,
+      "haru:osamu": 1,
+      "haru:saki": 2,
+      "maho:tomo": 2,
+      "nagisa:rin": 1,
+      "nagisa:yui": 1,
+      "osamu:ryo": 2,
+      "osamu:tomo": 1,
+      "ritsu:ryo": 1,
+      "ritsu:yui": 1,
+      "tomo:yui": 3
+    },
+    "participant_counts": {
+      "aoi": 4,
+      "fumi": 4,
+      "haru": 3,
+      "maho": 4,
+      "nagisa": 2,
+      "osamu": 6,
+      "rin": 2,
+      "ritsu": 4,
+      "ryo": 3,
+      "saki": 3,
+      "tomo": 6,
+      "yui": 5
+    },
+    "person_minutes": 51840,
+    "population": 12,
+    "protected_routine_conflicts": 0,
+    "resident_completed_meetings": 23,
+    "retained_events": 258,
+    "same_minute_plan_overwrites_recovered": 0,
+    "shared_time_signals": 46,
+    "top_initiator_share": 0.130434782608696,
+    "top_pair_share": 0.130434782608696,
+    "unique_completed_pairs": 15,
+    "unique_completed_partners_per_resident": {
+      "aoi": 2,
+      "fumi": 3,
+      "haru": 2,
+      "maho": 2,
+      "nagisa": 2,
+      "osamu": 4,
+      "rin": 2,
+      "ritsu": 3,
+      "ryo": 2,
+      "saki": 2,
+      "tomo": 3,
+      "yui": 3
+    },
+    "unmatched_shared_time_signals": 0,
+    "zero_participation": []
+  },
+  "mode": "natural-candidates-only",
+  "observed_until": 4320,
+  "player_interventions": [],
+  "population": 12,
+  "residents": {
+    "saki": {
+      "conversation": {
+        "meeting": {
+          "a": "saki",
+          "agenda_id": "agenda_4",
+          "appointment_id": "agenda_4",
+          "autonomous": true,
+          "b": "haru",
+          "center": "(0.0, 0.0, 2.5)",
+          "id": "meeting_5",
+          "location": "bench",
+          "not_before": 1260,
+          "remaining": 25,
+          "spontaneous": false,
+          "state": "engaged",
+          "waited": 1
+        },
+        "state": {
+          "action": "meet",
+          "activity": {
+            "actions": [
+              "social",
+              "rest",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                -0.479999989271164,
+                0.0,
+                3.15000009536743
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                -0.479999989271164,
+                0.46000000834465,
+                2.5
+              ]
+            },
+            "group": "bench",
+            "hand_left": {
+              "__vector3": [
+                -0.349999994039536,
+                0.759999990463257,
+                2.84999990463257
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                -0.610000014305115,
+                0.759999990463257,
+                2.84999990463257
+              ]
+            },
+            "id": "bench_0_0",
+            "pair": "bench_0",
+            "pose": "seat",
+            "resident": "",
+            "site": "square",
+            "yaw": 0.0
+          },
+          "clock": "10:04",
+          "fatigue": 0.129500000000001,
+          "hunger": 0.1365,
+          "meeting_id": "meeting_5",
+          "minute": 1264,
+          "moving": false,
+          "place": "square",
+          "plan": {
+            "activity": "social",
+            "kind": "social",
+            "meeting": "meeting_5",
+            "origin": "resident",
+            "partner": "haru",
+            "reason": "席が空かなかったので、瀬戸 晴さんと今日 10:00に時間を相談し直した。",
+            "stage": "execute",
+            "started": 1264,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "近況を話す時間"
+          },
+          "position": {
+            "__vector3": [
+              -0.479999989271164,
+              0.0,
+              3.15000009536743
+            ]
+          },
+          "skills": {
+            "communication": 0.65,
+            "model": 0.34,
+            "photography": 0.58
+          }
+        }
+      },
+      "eat": {
+        "action": "eat",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              -9.55000019073486,
+              0.0,
+              -11.8699998855591
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -10.0500001907349,
+              0.46000000834465,
+              -11.9499998092651
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              -10.1800003051758,
+              0.779999971389771,
+              -12.3299999237061
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -9.92000007629395,
+              0.779999971389771,
+              -12.3299999237061
+            ]
+          },
+          "id": "home_north_shared_dine_1",
+          "pair": "",
+          "pose": "seat",
+          "resident": "",
+          "site": "home_north_shared",
+          "yaw": -3.14159250259399
+        },
+        "clock": "21:30",
+        "fatigue": 0.620875412863493,
+        "hunger": 0.862999999999995,
+        "meeting_id": "",
+        "minute": 510,
+        "moving": false,
+        "place": "home_north_shared",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -9.55000019073486,
+            0.0,
+            -11.8699998855591
+          ]
+        },
+        "skills": {
+          "communication": 0.65,
+          "model": 0.34,
+          "photography": 0.58
+        }
+      },
+      "project": {
+        "meeting": {
+          "a": "haru",
+          "appointment_id": "",
+          "autonomous": true,
+          "b": "saki",
+          "center": "(2.8, 0.0, 5.5)",
+          "id": "meeting_10",
+          "location": "project",
+          "materials_ready": false,
+          "mode": "project",
+          "not_before": 0,
+          "project": {
+            "center": "(2.8, 0.0, 5.5)",
+            "center_offset": [
+              2.8,
+              0.0,
+              4.5
+            ],
+            "cost": 2.0,
+            "duration": 45.0,
+            "fit": 0.676,
+            "goal_words": [
+              "音楽",
+              "曲",
+              "録音"
+            ],
+            "interest": "music",
+            "key": "music",
+            "learner": "saki",
+            "place": "square",
+            "roles": {
+              "haru": "teacher",
+              "saki": "learner"
+            },
+            "selection_bonus": 0.1,
+            "skill": "music",
+            "teacher": "haru",
+            "title": "音楽の小さな録音",
+            "topic": "最近聴いた音楽と、ひとりで過ごす時間"
+          },
+          "remaining": 45,
+          "spontaneous": false,
+          "state": "engaged",
+          "waited": 103
+        },
+        "state": {
+          "action": "joint_work",
+          "activity": {
+            "actions": [
+              "work",
+              "hobby",
+              "chores",
+              "joint_work",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                3.14999985694885,
+                0.0,
+                5.15999984741211
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                3.14999985694885,
+                0.0,
+                5.15999984741211
+              ]
+            },
+            "group": "music",
+            "hand_left": {
+              "__vector3": [
+                3.01999974250793,
+                0.990000009536743,
+                4.81999969482422
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                3.27999973297119,
+                0.990000009536743,
+                4.81999969482422
+              ]
+            },
+            "id": "music_work_1",
+            "pair": "music_work",
+            "pose": "work",
+            "resident": "",
+            "site": "square",
+            "yaw": -3.14159250259399
+          },
+          "clock": "15:16",
+          "fatigue": 0.347899999999999,
+          "hunger": 0.542100000000003,
+          "meeting_id": "meeting_10",
+          "minute": 1576,
+          "moving": false,
+          "place": "square",
+          "plan": {
+            "activity": "music",
+            "kind": "project",
+            "meeting": "meeting_10",
+            "origin": "resident",
+            "partner": "haru",
+            "stage": "execute",
+            "started": 1474,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "音楽の小さな録音"
+          },
+          "position": {
+            "__vector3": [
+              3.14999985694885,
+              0.0,
+              5.15999984741211
+            ]
+          },
+          "skills": {
+            "communication": 0.65,
+            "model": 0.34,
+            "photography": 0.58
+          }
+        }
+      },
+      "project_finished": {
+        "record": {
+          "a": "haru",
+          "activity": "music",
+          "b": "saki",
+          "finished": 1621,
+          "group": "new_new",
+          "id": "meeting_10",
+          "introduction_event": "",
+          "introduction_observed_in_window": false,
+          "kind": "project",
+          "observed_engaged_minutes": 45,
+          "origin": "resident"
+        },
+        "state": {
+          "action": "joint_work",
+          "activity": {
+            "actions": [
+              "work",
+              "hobby",
+              "chores",
+              "joint_work",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                3.14999985694885,
+                0.0,
+                5.15999984741211
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                3.14999985694885,
+                0.0,
+                5.15999984741211
+              ]
+            },
+            "group": "music",
+            "hand_left": {
+              "__vector3": [
+                3.01999974250793,
+                0.990000009536743,
+                4.81999969482422
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                3.27999973297119,
+                0.990000009536743,
+                4.81999969482422
+              ]
+            },
+            "id": "music_work_1",
+            "pair": "music_work",
+            "pose": "work",
+            "resident": "",
+            "site": "square",
+            "yaw": -3.14159250259399
+          },
+          "clock": "16:01",
+          "fatigue": 0.397399999999998,
+          "hunger": 0.600600000000001,
+          "meeting_id": "",
+          "minute": 1621,
+          "moving": false,
+          "place": "square",
+          "plan": {
+            "activity": "music",
+            "finished": 1621,
+            "kind": "project",
+            "meeting": "meeting_10",
+            "origin": "resident",
+            "partner": "haru",
+            "stage": "completed",
+            "started": 1474,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "音楽の小さな録音"
+          },
+          "position": {
+            "__vector3": [
+              3.14999985694885,
+              0.0,
+              5.15999984741211
+            ]
+          },
+          "skills": {
+            "communication": 0.65,
+            "model": 0.34,
+            "music": 0.03,
+            "photography": 0.58
+          }
+        }
+      },
+      "seat": {
+        "action": "social",
+        "activity": {
+          "actions": [
+            "social",
+            "rest",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              -0.479999989271164,
+              0.0,
+              3.15000009536743
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -0.479999989271164,
+              0.46000000834465,
+              2.5
+            ]
+          },
+          "group": "bench",
+          "hand_left": {
+            "__vector3": [
+              -0.349999994039536,
+              0.759999990463257,
+              2.84999990463257
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -0.610000014305115,
+              0.759999990463257,
+              2.84999990463257
+            ]
+          },
+          "id": "bench_0_0",
+          "pair": "bench_0",
+          "pose": "seat",
+          "resident": "",
+          "site": "square",
+          "yaw": 0.0
+        },
+        "clock": "09:32",
+        "fatigue": 0.1071,
+        "hunger": 0.0948999999999999,
+        "meeting_id": "",
+        "minute": 1232,
+        "moving": false,
+        "place": "square",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -0.479999989271164,
+            0.0,
+            3.15000009536743
+          ]
+        },
+        "skills": {
+          "communication": 0.65,
+          "model": 0.34,
+          "photography": 0.58
+        }
+      },
+      "sleep": {
+        "action": "sleep",
+        "activity": {
+          "actions": [
+            "sleep"
+          ],
+          "approach": {
+            "__vector3": [
+              -10.0,
+              0.0,
+              -15.5
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -10.75,
+              0.46000000834465,
+              -16.2199993133545
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              -10.6199998855591,
+              0.779999971389771,
+              -15.1599998474121
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -10.8800001144409,
+              0.779999971389771,
+              -15.1599998474121
+            ]
+          },
+          "id": "sleep_saki",
+          "pair": "",
+          "pose": "bed",
+          "resident": "saki",
+          "site": "home_north_shared",
+          "yaw": 0.0
+        },
+        "clock": "00:14",
+        "fatigue": 0.735675412863498,
+        "hunger": 0.201199999999995,
+        "meeting_id": "",
+        "minute": 674,
+        "moving": false,
+        "place": "home_north_shared",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -10.0,
+            0.0,
+            -15.4999990463257
+          ]
+        },
+        "skills": {
+          "communication": 0.65,
+          "model": 0.34,
+          "photography": 0.58
+        }
+      },
+      "wake": {
+        "action": "eat",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              -11.3499994277954,
+              0.0,
+              -11.8699998855591
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -10.8499994277954,
+              0.46000000834465,
+              -11.9499998092651
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              -10.9799995422363,
+              0.779999971389771,
+              -12.3299999237061
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -10.7199993133545,
+              0.779999971389771,
+              -12.3299999237061
+            ]
+          },
+          "id": "home_north_shared_dine_0",
+          "pair": "",
+          "pose": "seat",
+          "resident": "",
+          "site": "home_north_shared",
+          "yaw": -3.14159250259399
+        },
+        "clock": "07:54",
+        "fatigue": 0.0385,
+        "hunger": 0.799199999999991,
+        "meeting_id": "",
+        "minute": 1134,
+        "moving": false,
+        "place": "home_north_shared",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -11.3499994277954,
+            0.0,
+            -11.8699998855591
+          ]
+        },
+        "skills": {
+          "communication": 0.65,
+          "model": 0.34,
+          "photography": 0.58
+        }
+      },
+      "walk": {
+        "action": "chores",
+        "activity": {
+          "actions": [
+            "work",
+            "hobby",
+            "chores",
+            "joint_work",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              -7.90000009536743,
+              0.0,
+              -12.039999961853
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -7.90000009536743,
+              0.0,
+              -12.039999961853
+            ]
+          },
+          "group": "home_north_shared",
+          "hand_left": {
+            "__vector3": [
+              -8.02999973297119,
+              0.990000009536743,
+              -12.3800001144409
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -7.76999998092651,
+              0.990000009536743,
+              -12.3800001144409
+            ]
+          },
+          "id": "home_north_shared_desk_0",
+          "pair": "home_north_shared_desk",
+          "pose": "work",
+          "resident": "",
+          "site": "home_north_shared",
+          "yaw": -3.14159250259399
+        },
+        "clock": "13:01",
+        "fatigue": 0.241375412863493,
+        "hunger": 0.2013,
+        "meeting_id": "",
+        "minute": 1,
+        "moving": true,
+        "place": "home_north_shared",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -8.39465236663818,
+            0.0,
+            -13.6427803039551
+          ]
+        },
+        "skills": {
+          "communication": 0.65,
+          "model": 0.34,
+          "photography": 0.58
+        }
+      },
+      "work": {
+        "action": "chores",
+        "activity": {
+          "actions": [
+            "work",
+            "hobby",
+            "chores",
+            "joint_work",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              -7.90000009536743,
+              0.0,
+              -12.039999961853
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -7.90000009536743,
+              0.0,
+              -12.039999961853
+            ]
+          },
+          "group": "home_north_shared",
+          "hand_left": {
+            "__vector3": [
+              -8.02999973297119,
+              0.990000009536743,
+              -12.3800001144409
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -7.76999998092651,
+              0.990000009536743,
+              -12.3800001144409
+            ]
+          },
+          "id": "home_north_shared_desk_0",
+          "pair": "home_north_shared_desk",
+          "pose": "work",
+          "resident": "",
+          "site": "home_north_shared",
+          "yaw": -3.14159250259399
+        },
+        "clock": "13:08",
+        "fatigue": 0.246275412863493,
+        "hunger": 0.2104,
+        "meeting_id": "",
+        "minute": 8,
+        "moving": false,
+        "place": "home_north_shared",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -7.90000009536743,
+            0.0,
+            -12.039999961853
+          ]
+        },
+        "skills": {
+          "communication": 0.65,
+          "model": 0.34,
+          "photography": 0.58
+        }
+      }
+    },
+    "tomo": {
+      "conversation": {
+        "meeting": {
+          "a": "maho",
+          "appointment_id": "",
+          "b": "tomo",
+          "center": "(0.0, 0.0, 2.5)",
+          "id": "meeting_19",
+          "location": "bench",
+          "not_before": 0,
+          "remaining": 25,
+          "spontaneous": true,
+          "state": "engaged",
+          "waited": 3
+        },
+        "state": {
+          "action": "meet",
+          "activity": {
+            "actions": [
+              "social",
+              "rest",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                0.479999989271164,
+                0.0,
+                3.15000009536743
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                0.479999989271164,
+                0.46000000834465,
+                2.5
+              ]
+            },
+            "group": "bench",
+            "hand_left": {
+              "__vector3": [
+                0.610000014305115,
+                0.759999990463257,
+                2.84999990463257
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                0.349999994039536,
+                0.759999990463257,
+                2.84999990463257
+              ]
+            },
+            "id": "bench_0_1",
+            "pair": "bench_0",
+            "pose": "seat",
+            "resident": "",
+            "site": "square",
+            "yaw": 0.0
+          },
+          "clock": "11:03",
+          "fatigue": 0.153800000000001,
+          "hunger": 0.426600000000002,
+          "meeting_id": "meeting_19",
+          "minute": 2763,
+          "moving": false,
+          "place": "square",
+          "plan": {
+            "activity": "social",
+            "kind": "social",
+            "meeting": "meeting_19",
+            "origin": "resident",
+            "partner": "maho",
+            "stage": "execute",
+            "started": 2760,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "近況を話す時間"
+          },
+          "position": {
+            "__vector3": [
+              0.479999989271164,
+              0.0,
+              3.15000009536743
+            ]
+          },
+          "skills": {
+            "baking": 0.03,
+            "craft": 0.8288875,
+            "design": 0.55,
+            "repair": 0.3
+          }
+        }
+      },
+      "eat": {
+        "action": "eat",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              8.45000076293945,
+              0.0,
+              -12.8699998855591
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              7.95000028610229,
+              0.46000000834465,
+              -12.9499998092651
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              7.82000017166138,
+              0.779999971389771,
+              -13.3299999237061
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              8.07999992370605,
+              0.779999971389771,
+              -13.3299999237061
+            ]
+          },
+          "id": "home_mori_dine_1",
+          "pair": "",
+          "pose": "seat",
+          "resident": "",
+          "site": "home_mori",
+          "yaw": -3.14159250259399
+        },
+        "clock": "22:34",
+        "fatigue": 0.658743576341866,
+        "hunger": 0.946199999999993,
+        "meeting_id": "",
+        "minute": 574,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {
+          "activity": "bread",
+          "finished": 492,
+          "kind": "project",
+          "meeting": "meeting_3",
+          "origin": "resident",
+          "partner": "maho",
+          "stage": "completed",
+          "started": 399,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "季節のパンの試作"
+        },
+        "position": {
+          "__vector3": [
+            8.45000076293945,
+            0.0,
+            -12.8699998855591
+          ]
+        },
+        "skills": {
+          "baking": 0.03,
+          "craft": 0.82,
+          "design": 0.55,
+          "repair": 0.3
+        }
+      },
+      "project": {
+        "meeting": {
+          "a": "tomo",
+          "appointment_id": "",
+          "autonomous": true,
+          "b": "maho",
+          "center": "(8.5, 0.0, -4.7)",
+          "id": "meeting_3",
+          "location": "project",
+          "materials_ready": false,
+          "mode": "project",
+          "not_before": 0,
+          "project": {
+            "center": "(8.5, 0.0, -4.7)",
+            "center_offset": [
+              0.5,
+              0.0,
+              0.3
+            ],
+            "cost": 2.0,
+            "duration": 45.0,
+            "fit": 0.57,
+            "goal_words": [
+              "パン",
+              "店"
+            ],
+            "interest": "baking",
+            "key": "bread",
+            "learner": "tomo",
+            "place": "bakery_cafe",
+            "roles": {
+              "maho": "teacher",
+              "tomo": "learner"
+            },
+            "selection_bonus": 0.0,
+            "skill": "baking",
+            "teacher": "maho",
+            "title": "季節のパンの試作",
+            "topic": "季節のパンとお客さんの反応"
+          },
+          "remaining": 45,
+          "spontaneous": false,
+          "state": "engaged",
+          "waited": 49
+        },
+        "state": {
+          "action": "joint_work",
+          "activity": {
+            "actions": [
+              "work",
+              "hobby",
+              "chores",
+              "joint_work",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                7.65000009536743,
+                0.0,
+                -5.64000034332275
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                7.65000009536743,
+                0.0,
+                -5.64000034332275
+              ]
+            },
+            "group": "bread",
+            "hand_left": {
+              "__vector3": [
+                7.51999998092651,
+                0.990000009536743,
+                -5.98000049591064
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                7.78000020980835,
+                0.990000009536743,
+                -5.98000049591064
+              ]
+            },
+            "id": "bakery_work_0",
+            "pair": "bakery_work",
+            "pose": "work",
+            "resident": "",
+            "site": "bakery_cafe",
+            "yaw": -3.14159250259399
+          },
+          "clock": "20:27",
+          "fatigue": 0.551843576341864,
+          "hunger": 0.781099999999997,
+          "meeting_id": "meeting_3",
+          "minute": 447,
+          "moving": false,
+          "place": "bakery_cafe",
+          "plan": {
+            "activity": "bread",
+            "kind": "project",
+            "meeting": "meeting_3",
+            "origin": "resident",
+            "partner": "maho",
+            "stage": "execute",
+            "started": 399,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "季節のパンの試作"
+          },
+          "position": {
+            "__vector3": [
+              7.65000009536743,
+              0.0,
+              -5.64000034332275
+            ]
+          },
+          "skills": {
+            "craft": 0.82,
+            "design": 0.55,
+            "repair": 0.3
+          }
+        }
+      },
+      "project_finished": {
+        "record": {
+          "a": "tomo",
+          "activity": "bread",
+          "b": "maho",
+          "finished": 492,
+          "group": "original_new",
+          "id": "meeting_3",
+          "introduction_event": "",
+          "introduction_observed_in_window": false,
+          "kind": "project",
+          "observed_engaged_minutes": 45,
+          "origin": "resident"
+        },
+        "state": {
+          "action": "joint_work",
+          "activity": {
+            "actions": [
+              "work",
+              "hobby",
+              "chores",
+              "joint_work",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                7.65000009536743,
+                0.0,
+                -5.64000034332275
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                7.65000009536743,
+                0.0,
+                -5.64000034332275
+              ]
+            },
+            "group": "bread",
+            "hand_left": {
+              "__vector3": [
+                7.51999998092651,
+                0.990000009536743,
+                -5.98000049591064
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                7.78000020980835,
+                0.990000009536743,
+                -5.98000049591064
+              ]
+            },
+            "id": "bakery_work_0",
+            "pair": "bakery_work",
+            "pose": "work",
+            "resident": "",
+            "site": "bakery_cafe",
+            "yaw": -3.14159250259399
+          },
+          "clock": "21:12",
+          "fatigue": 0.601343576341864,
+          "hunger": 0.839599999999996,
+          "meeting_id": "",
+          "minute": 492,
+          "moving": false,
+          "place": "bakery_cafe",
+          "plan": {
+            "activity": "bread",
+            "finished": 492,
+            "kind": "project",
+            "meeting": "meeting_3",
+            "origin": "resident",
+            "partner": "maho",
+            "stage": "completed",
+            "started": 399,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "季節のパンの試作"
+          },
+          "position": {
+            "__vector3": [
+              7.65000009536743,
+              0.0,
+              -5.64000034332275
+            ]
+          },
+          "skills": {
+            "baking": 0.03,
+            "craft": 0.82,
+            "design": 0.55,
+            "repair": 0.3
+          }
+        }
+      },
+      "seat": {
+        "action": "social",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              8.51999950408936,
+              0.0,
+              -4.30000019073486
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              8.59999942779541,
+              0.46000000834465,
+              -3.79999995231628
+            ]
+          },
+          "group": "cafe",
+          "hand_left": {
+            "__vector3": [
+              8.97999954223633,
+              0.779999971389771,
+              -3.9300000667572
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              8.97999954223633,
+              0.779999971389771,
+              -3.67000007629395
+            ]
+          },
+          "id": "cafe_1_a",
+          "pair": "cafe_pair_1",
+          "pose": "seat",
+          "resident": "",
+          "site": "bakery_cafe",
+          "yaw": 1.57079637050629
+        },
+        "clock": "17:41",
+        "fatigue": 0.435643576341864,
+        "hunger": 0.565300000000003,
+        "meeting_id": "",
+        "minute": 281,
+        "moving": false,
+        "place": "bakery_cafe",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            8.51999950408936,
+            0.0,
+            -4.30000019073486
+          ]
+        },
+        "skills": {
+          "craft": 0.82,
+          "design": 0.55,
+          "repair": 0.3
+        }
+      },
+      "sleep": {
+        "action": "sleep",
+        "activity": {
+          "actions": [
+            "sleep"
+          ],
+          "approach": {
+            "__vector3": [
+              8.0,
+              0.0,
+              -16.5
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              7.25,
+              0.46000000834465,
+              -17.2199993133545
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              7.38000011444092,
+              0.779999971389771,
+              -16.1599998474121
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              7.11999988555908,
+              0.779999971389771,
+              -16.1599998474121
+            ]
+          },
+          "id": "sleep_tomo",
+          "pair": "",
+          "pose": "bed",
+          "resident": "tomo",
+          "site": "home_mori",
+          "yaw": 0.0
+        },
+        "clock": "23:10",
+        "fatigue": 0.683943576341868,
+        "hunger": 0.117999999999993,
+        "meeting_id": "",
+        "minute": 610,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {
+          "activity": "bread",
+          "finished": 492,
+          "kind": "project",
+          "meeting": "meeting_3",
+          "origin": "resident",
+          "partner": "maho",
+          "stage": "completed",
+          "started": 399,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "季節のパンの試作"
+        },
+        "position": {
+          "__vector3": [
+            8.0,
+            0.0,
+            -16.5
+          ]
+        },
+        "skills": {
+          "baking": 0.03,
+          "craft": 0.82,
+          "design": 0.55,
+          "repair": 0.3
+        }
+      },
+      "wake": {
+        "action": "hobby",
+        "activity": {
+          "actions": [
+            "work",
+            "hobby",
+            "chores",
+            "joint_work",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              10.0999994277954,
+              0.0,
+              -13.039999961853
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              10.0999994277954,
+              0.0,
+              -13.039999961853
+            ]
+          },
+          "group": "home_mori",
+          "hand_left": {
+            "__vector3": [
+              9.96999931335449,
+              0.990000009536743,
+              -13.3800001144409
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              10.2299995422363,
+              0.990000009536743,
+              -13.3800001144409
+            ]
+          },
+          "id": "home_mori_desk_0",
+          "pair": "home_mori_desk",
+          "pose": "work",
+          "resident": "",
+          "site": "home_mori",
+          "yaw": -3.14159250259399
+        },
+        "clock": "07:13",
+        "fatigue": 0.0098,
+        "hunger": 0.745899999999991,
+        "meeting_id": "",
+        "minute": 1093,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {
+          "activity": "bread",
+          "finished": 492,
+          "kind": "project",
+          "meeting": "meeting_3",
+          "origin": "resident",
+          "partner": "maho",
+          "stage": "completed",
+          "started": 399,
+          "steps": [
+            "相談する",
+            "合流する",
+            "一緒に過ごす",
+            "経験を振り返る"
+          ],
+          "title": "季節のパンの試作"
+        },
+        "position": {
+          "__vector3": [
+            10.0999994277954,
+            0.0,
+            -13.039999961853
+          ]
+        },
+        "skills": {
+          "baking": 0.03,
+          "craft": 0.82,
+          "design": 0.55,
+          "repair": 0.3
+        }
+      },
+      "walk": {
+        "action": "hobby",
+        "activity": {
+          "actions": [
+            "work",
+            "hobby",
+            "chores",
+            "joint_work",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              10.0999994277954,
+              0.0,
+              -13.039999961853
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              10.0999994277954,
+              0.0,
+              -13.039999961853
+            ]
+          },
+          "group": "home_mori",
+          "hand_left": {
+            "__vector3": [
+              9.96999931335449,
+              0.990000009536743,
+              -13.3800001144409
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              10.2299995422363,
+              0.990000009536743,
+              -13.3800001144409
+            ]
+          },
+          "id": "home_mori_desk_0",
+          "pair": "home_mori_desk",
+          "pose": "work",
+          "resident": "",
+          "site": "home_mori",
+          "yaw": -3.14159250259399
+        },
+        "clock": "13:01",
+        "fatigue": 0.214043576341867,
+        "hunger": 0.2013,
+        "meeting_id": "",
+        "minute": 1,
+        "moving": true,
+        "place": "home_mori",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            9.10000038146973,
+            0.0,
+            -14.6814212799072
+          ]
+        },
+        "skills": {
+          "craft": 0.82,
+          "design": 0.55,
+          "repair": 0.3
+        }
+      },
+      "work": {
+        "action": "hobby",
+        "activity": {
+          "actions": [
+            "work",
+            "hobby",
+            "chores",
+            "joint_work",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              10.0999994277954,
+              0.0,
+              -13.039999961853
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              10.0999994277954,
+              0.0,
+              -13.039999961853
+            ]
+          },
+          "group": "home_mori",
+          "hand_left": {
+            "__vector3": [
+              9.96999931335449,
+              0.990000009536743,
+              -13.3800001144409
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              10.2299995422363,
+              0.990000009536743,
+              -13.3800001144409
+            ]
+          },
+          "id": "home_mori_desk_0",
+          "pair": "home_mori_desk",
+          "pose": "work",
+          "resident": "",
+          "site": "home_mori",
+          "yaw": -3.14159250259399
+        },
+        "clock": "13:08",
+        "fatigue": 0.218943576341868,
+        "hunger": 0.2104,
+        "meeting_id": "",
+        "minute": 8,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            10.0999994277954,
+            0.0,
+            -13.039999961853
+          ]
+        },
+        "skills": {
+          "craft": 0.82,
+          "design": 0.55,
+          "repair": 0.3
+        }
+      }
+    },
+    "yui": {
+      "conversation": {
+        "meeting": {
+          "a": "nagisa",
+          "appointment_id": "",
+          "b": "yui",
+          "center": "(6.6, 0.0, -3.8)",
+          "id": "meeting_13",
+          "location": "standing",
+          "not_before": 0,
+          "remaining": 25,
+          "spontaneous": true,
+          "state": "engaged",
+          "waited": 5
+        },
+        "state": {
+          "action": "meet",
+          "activity": {},
+          "clock": "15:05",
+          "fatigue": 0.3162,
+          "hunger": 0.505700000000004,
+          "meeting_id": "meeting_13",
+          "minute": 1565,
+          "moving": false,
+          "place": "bakery_cafe",
+          "plan": {
+            "activity": "social",
+            "kind": "social",
+            "meeting": "meeting_13",
+            "origin": "resident",
+            "partner": "nagisa",
+            "stage": "execute",
+            "started": 1560,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "近況を話す時間"
+          },
+          "position": {
+            "__vector3": [
+              7.19999980926514,
+              0.0,
+              -3.80000019073486
+            ]
+          },
+          "skills": {
+            "communication": 0.72,
+            "craft": 0.2434,
+            "music": 0.78
+          }
+        }
+      },
+      "eat": {
+        "action": "eat",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              6.65000009536743,
+              0.0,
+              -12.8699998855591
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              7.15000009536743,
+              0.46000000834465,
+              -12.9499998092651
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              7.01999998092651,
+              0.779999971389771,
+              -13.3299999237061
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              7.28000020980835,
+              0.779999971389771,
+              -13.3299999237061
+            ]
+          },
+          "id": "home_mori_dine_0",
+          "pair": "",
+          "pose": "seat",
+          "resident": "",
+          "site": "home_mori",
+          "yaw": -3.14159250259399
+        },
+        "clock": "22:59",
+        "fatigue": 0.786503991627699,
+        "hunger": 0.978699999999992,
+        "meeting_id": "",
+        "minute": 599,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            6.65000009536743,
+            0.0,
+            -12.8699998855591
+          ]
+        },
+        "skills": {
+          "communication": 0.72,
+          "craft": 0.22,
+          "music": 0.78
+        }
+      },
+      "project": {
+        "meeting": {
+          "a": "tomo",
+          "agenda_id": "agenda_2",
+          "appointment_id": "agenda_2",
+          "autonomous": true,
+          "b": "yui",
+          "center": "(-2.8, 0.0, 7.0)",
+          "id": "meeting_9",
+          "location": "project",
+          "materials_ready": false,
+          "mode": "project",
+          "not_before": 1395,
+          "project": {
+            "center": "(-2.8, 0.0, 7.0)",
+            "center_offset": [
+              -2.8,
+              0.0,
+              6.0
+            ],
+            "cost": 1.0,
+            "duration": 45.0,
+            "fit": 0.653,
+            "goal_words": [
+              "好きなもの",
+              "小さな制作",
+              "自分のためのもの"
+            ],
+            "interest": "craft",
+            "key": "craft",
+            "learner": "yui",
+            "place": "square",
+            "roles": {
+              "tomo": "teacher",
+              "yui": "learner"
+            },
+            "selection_bonus": 0.0,
+            "skill": "craft",
+            "teacher": "tomo",
+            "title": "好きなものの小さな制作",
+            "topic": "最近の暮らしと、それぞれがやってみたいこと"
+          },
+          "remaining": 45,
+          "spontaneous": false,
+          "state": "engaged",
+          "waited": 1
+        },
+        "state": {
+          "action": "joint_work",
+          "activity": {
+            "actions": [
+              "work",
+              "hobby",
+              "chores",
+              "joint_work",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                -2.45000004768372,
+                0.0,
+                6.65999984741211
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                -2.45000004768372,
+                0.0,
+                6.65999984741211
+              ]
+            },
+            "group": "craft",
+            "hand_left": {
+              "__vector3": [
+                -2.58000016212463,
+                0.990000009536743,
+                6.31999969482422
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                -2.32000017166138,
+                0.990000009536743,
+                6.31999969482422
+              ]
+            },
+            "id": "craft_work_1",
+            "pair": "craft_work",
+            "pose": "work",
+            "resident": "",
+            "site": "square",
+            "yaw": -3.14159250259399
+          },
+          "clock": "12:25",
+          "fatigue": 0.186200000000001,
+          "hunger": 0.2977,
+          "meeting_id": "meeting_9",
+          "minute": 1405,
+          "moving": false,
+          "place": "square",
+          "plan": {
+            "activity": "craft",
+            "kind": "project",
+            "meeting": "meeting_9",
+            "origin": "resident",
+            "partner": "tomo",
+            "stage": "execute",
+            "started": 1405,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "好きなものの小さな制作"
+          },
+          "position": {
+            "__vector3": [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          },
+          "skills": {
+            "communication": 0.72,
+            "craft": 0.22,
+            "music": 0.78
+          }
+        }
+      },
+      "project_finished": {
+        "record": {
+          "a": "tomo",
+          "activity": "craft",
+          "b": "yui",
+          "finished": 1450,
+          "group": "new_new",
+          "id": "meeting_9",
+          "introduction_event": "",
+          "introduction_observed_in_window": false,
+          "kind": "project",
+          "observed_engaged_minutes": 45,
+          "origin": "resident"
+        },
+        "state": {
+          "action": "joint_work",
+          "activity": {
+            "actions": [
+              "work",
+              "hobby",
+              "chores",
+              "joint_work",
+              "meet"
+            ],
+            "approach": {
+              "__vector3": [
+                -2.45000004768372,
+                0.0,
+                6.65999984741211
+              ]
+            },
+            "contact": {
+              "__vector3": [
+                -2.45000004768372,
+                0.0,
+                6.65999984741211
+              ]
+            },
+            "group": "craft",
+            "hand_left": {
+              "__vector3": [
+                -2.58000016212463,
+                0.990000009536743,
+                6.31999969482422
+              ]
+            },
+            "hand_right": {
+              "__vector3": [
+                -2.32000017166138,
+                0.990000009536743,
+                6.31999969482422
+              ]
+            },
+            "id": "craft_work_1",
+            "pair": "craft_work",
+            "pose": "work",
+            "resident": "",
+            "site": "square",
+            "yaw": -3.14159250259399
+          },
+          "clock": "13:10",
+          "fatigue": 0.235700000000002,
+          "hunger": 0.356200000000001,
+          "meeting_id": "",
+          "minute": 1450,
+          "moving": false,
+          "place": "square",
+          "plan": {
+            "activity": "craft",
+            "finished": 1450,
+            "kind": "project",
+            "meeting": "meeting_9",
+            "origin": "resident",
+            "partner": "tomo",
+            "stage": "completed",
+            "started": 1405,
+            "steps": [
+              "相談する",
+              "合流する",
+              "一緒に過ごす",
+              "経験を振り返る"
+            ],
+            "title": "好きなものの小さな制作"
+          },
+          "position": {
+            "__vector3": [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          },
+          "skills": {
+            "communication": 0.72,
+            "craft": 0.2434,
+            "music": 0.78
+          }
+        }
+      },
+      "seat": {
+        "action": "social",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              10.2799997329712,
+              0.0,
+              -3.29999995231628
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              10.1999998092651,
+              0.46000000834465,
+              -3.79999995231628
+            ]
+          },
+          "group": "cafe",
+          "hand_left": {
+            "__vector3": [
+              9.81999969482422,
+              0.779999971389771,
+              -3.67000007629395
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              9.81999969482422,
+              0.779999971389771,
+              -3.9300000667572
+            ]
+          },
+          "id": "cafe_1_b",
+          "pair": "cafe_pair_1",
+          "pose": "seat",
+          "resident": "",
+          "site": "bakery_cafe",
+          "yaw": -1.57079637050629
+        },
+        "clock": "20:31",
+        "fatigue": 0.682903991627694,
+        "hunger": 0.786299999999997,
+        "meeting_id": "",
+        "minute": 451,
+        "moving": false,
+        "place": "bakery_cafe",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            10.2799997329712,
+            0.0,
+            -3.29999995231628
+          ]
+        },
+        "skills": {
+          "communication": 0.72,
+          "craft": 0.22,
+          "music": 0.78
+        }
+      },
+      "sleep": {
+        "action": "sleep",
+        "activity": {
+          "actions": [
+            "sleep"
+          ],
+          "approach": {
+            "__vector3": [
+              10.0,
+              0.0,
+              -16.5
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              9.25,
+              0.46000000834465,
+              -17.2199993133545
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              9.38000011444092,
+              0.779999971389771,
+              -16.1599998474121
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              9.11999988555908,
+              0.779999971389771,
+              -16.1599998474121
+            ]
+          },
+          "id": "sleep_yui",
+          "pair": "",
+          "pose": "bed",
+          "resident": "yui",
+          "site": "home_mori",
+          "yaw": 0.0
+        },
+        "clock": "00:17",
+        "fatigue": 0.736103991627701,
+        "hunger": 0.205099999999992,
+        "meeting_id": "",
+        "minute": 677,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            10.0,
+            0.0,
+            -16.5
+          ]
+        },
+        "skills": {
+          "communication": 0.72,
+          "craft": 0.22,
+          "music": 0.78
+        }
+      },
+      "wake": {
+        "action": "eat",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              8.45000076293945,
+              0.0,
+              -12.8699998855591
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              7.95000028610229,
+              0.46000000834465,
+              -12.9499998092651
+            ]
+          },
+          "group": "",
+          "hand_left": {
+            "__vector3": [
+              7.82000017166138,
+              0.779999971389771,
+              -13.3299999237061
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              8.07999992370605,
+              0.779999971389771,
+              -13.3299999237061
+            ]
+          },
+          "id": "home_mori_dine_1",
+          "pair": "",
+          "pose": "seat",
+          "resident": "",
+          "site": "home_mori",
+          "yaw": -3.14159250259399
+        },
+        "clock": "08:11",
+        "fatigue": 0.0084,
+        "hunger": 0.821299999999988,
+        "meeting_id": "",
+        "minute": 1151,
+        "moving": false,
+        "place": "home_mori",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            8.45000076293945,
+            0.0,
+            -12.8699998855591
+          ]
+        },
+        "skills": {
+          "communication": 0.72,
+          "craft": 0.22,
+          "music": 0.78
+        }
+      },
+      "walk": {
+        "action": "social",
+        "activity": {
+          "actions": [
+            "eat",
+            "rest",
+            "care",
+            "social",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              8.51999950408936,
+              0.0,
+              -4.30000019073486
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              8.59999942779541,
+              0.46000000834465,
+              -3.79999995231628
+            ]
+          },
+          "group": "cafe",
+          "hand_left": {
+            "__vector3": [
+              8.97999954223633,
+              0.779999971389771,
+              -3.9300000667572
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              8.97999954223633,
+              0.779999971389771,
+              -3.67000007629395
+            ]
+          },
+          "id": "cafe_1_a",
+          "pair": "cafe_pair_1",
+          "pose": "seat",
+          "resident": "",
+          "site": "bakery_cafe",
+          "yaw": 1.57079637050629
+        },
+        "clock": "13:01",
+        "fatigue": 0.298303991627693,
+        "hunger": 0.2013,
+        "meeting_id": "",
+        "minute": 1,
+        "moving": true,
+        "place": "home_mori",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            9.39999961853027,
+            0.0,
+            -14.2949504852295
+          ]
+        },
+        "skills": {
+          "communication": 0.72,
+          "craft": 0.22,
+          "music": 0.78
+        }
+      },
+      "work": {
+        "action": "prepare",
+        "activity": {
+          "actions": [
+            "work",
+            "hobby",
+            "chores",
+            "joint_work",
+            "meet"
+          ],
+          "approach": {
+            "__vector3": [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          },
+          "contact": {
+            "__vector3": [
+              -2.45000004768372,
+              0.0,
+              6.65999984741211
+            ]
+          },
+          "group": "craft",
+          "hand_left": {
+            "__vector3": [
+              -2.58000016212463,
+              0.990000009536743,
+              6.31999969482422
+            ]
+          },
+          "hand_right": {
+            "__vector3": [
+              -2.32000017166138,
+              0.990000009536743,
+              6.31999969482422
+            ]
+          },
+          "id": "craft_work_1",
+          "pair": "craft_work",
+          "pose": "work",
+          "resident": "",
+          "site": "square",
+          "yaw": -3.14159250259399
+        },
+        "clock": "12:05",
+        "fatigue": 0.172200000000001,
+        "hunger": 0.2717,
+        "meeting_id": "",
+        "minute": 1385,
+        "moving": false,
+        "place": "square",
+        "plan": {},
+        "position": {
+          "__vector3": [
+            -2.45000004768372,
+            0.0,
+            6.65999984741211
+          ]
+        },
+        "skills": {
+          "communication": 0.72,
+          "craft": 0.22,
+          "music": 0.78
+        }
+      }
+    }
+  },
+  "scope": "Natural twelve-person town. No action, needs, knowledge, relationship, routine or participant rewrites. Save replay is a separate branch.",
+  "screenshots": [],
+  "search_limit_minutes": 4320,
+  "seed": 711,
+  "wall_seconds": 1.15,
+  "provenance": {
+    "scope": "Identity records only; no asset acceptance, functional test count or outcome depends on SHA/hash equality.",
+    "source_sha256": {
+      "res://assets/models/jrpg-resident-renewal/saki/generation.json": "42929842e8e62f14ec25d7a968f1da77e186c496f8786065817d5c5fd40ebca4",
+      "res://assets/models/jrpg-resident-renewal/tomo/generation.json": "8479c1cecf8bcf17d530ed71207a9d05dfe24128a8041864c4a7e8e37cb82d40",
+      "res://assets/models/jrpg-resident-renewal/yui/generation.json": "ad716d6fa9aa4ab46e1365e32d0a57c3c18d066ec38f319ee24c7946c6d4af6e",
+      "res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
+      "res://game/scripts/life_course.gd": "de903d5945a65f11bd0f45666237d4a41d9f966c536423388aa7646f6a10bea7",
+      "res://game/scripts/resident_agenda.gd": "0cfdc01c2d90d0a6464b9cc4b81ca16357eaeb6540a87f1c6a751b438898827e",
+      "res://game/scripts/resident_cognition.gd": "af49a9918f9e12418d0b62e5ff205fad55e59fa29b13207d9fb9c30c01ec1f26",
+      "res://game/scripts/resident_knowledge_exchange.gd": "20ee577541776d9c7d72a5411faa3927620c74c2b1052329e1539f44a17422da",
+      "res://game/scripts/resident_planner.gd": "d4476ccd385e2fcd82906a9123275d419cc82bdfccbd7194f78760ddae83a37a",
+      "res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
+      "res://game/scripts/social_life.gd": "eb8991e1c9e1e597ac77411830d4fb0caa708b9318bc2464e92943bd624b5e25",
+      "res://game/scripts/work_family.gd": "9749bb676f8ed5a4e569ac44625741679f0931b0d46ef69326d250de9151bc5e",
+      "res://tests/test_jrpg_renewal_gameplay.gd": "c2461afb83813cc1f0e1837b088e03143de1f8cdd971c61802c566689b3fba2f",
+      "res://tools/inspect_population.gd": "2bb82a82a1b9d28f5ef9a4c7e98e8c9b179a4d261683c4e363a988136f240f0d"
+    },
+    "sources_unchanged": true
+  }
+}

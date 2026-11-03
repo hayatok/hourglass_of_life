@@ -1,0 +1,141 @@
+{
+  "fps": 30,
+  "cycle_seconds": 0.9333333333333333,
+  "method": "Mean backward foot-joint velocity in target low-support window (within40mm of each foot minimum).",
+  "support_samples": [
+    {
+      "side": "L",
+      "frame": 7,
+      "velocity_m_s": 0.1086030900478363,
+      "height_m": 0.11266449093818665
+    },
+    {
+      "side": "L",
+      "frame": 8,
+      "velocity_m_s": 0.32082997262477875,
+      "height_m": 0.11309394240379333
+    },
+    {
+      "side": "L",
+      "frame": 9,
+      "velocity_m_s": 0.5181596428155899,
+      "height_m": 0.1140870451927185
+    },
+    {
+      "side": "L",
+      "frame": 10,
+      "velocity_m_s": 0.6908512115478516,
+      "height_m": 0.11481881141662598
+    },
+    {
+      "side": "L",
+      "frame": 11,
+      "velocity_m_s": 0.8297473937273026,
+      "height_m": 0.11411523818969727
+    },
+    {
+      "side": "L",
+      "frame": 12,
+      "velocity_m_s": 0.9269405342638493,
+      "height_m": 0.11133822798728943
+    },
+    {
+      "side": "L",
+      "frame": 13,
+      "velocity_m_s": 0.9765877760946751,
+      "height_m": 0.10640883445739746
+    },
+    {
+      "side": "L",
+      "frame": 14,
+      "velocity_m_s": 1.6346650198101997,
+      "height_m": 0.09999999403953552
+    },
+    {
+      "side": "L",
+      "frame": 15,
+      "velocity_m_s": 1.5383268892765045,
+      "height_m": 0.10821199417114258
+    },
+    {
+      "side": "L",
+      "frame": 16,
+      "velocity_m_s": 1.359085589647293,
+      "height_m": 0.11803111433982849
+    },
+    {
+      "side": "L",
+      "frame": 17,
+      "velocity_m_s": 1.1141131818294525,
+      "height_m": 0.1272653341293335
+    },
+    {
+      "side": "R",
+      "frame": 0,
+      "velocity_m_s": 1.6346651874482632,
+      "height_m": 0.09999999403953552
+    },
+    {
+      "side": "R",
+      "frame": 1,
+      "velocity_m_s": 1.5383266657590866,
+      "height_m": 0.10830807685852051
+    },
+    {
+      "side": "R",
+      "frame": 2,
+      "velocity_m_s": 1.359085589647293,
+      "height_m": 0.11796984076499939
+    },
+    {
+      "side": "R",
+      "frame": 3,
+      "velocity_m_s": 1.1141131818294525,
+      "height_m": 0.127375066280365
+    },
+    {
+      "side": "R",
+      "frame": 21,
+      "velocity_m_s": 0.10860241949558258,
+      "height_m": 0.11251905560493469
+    },
+    {
+      "side": "R",
+      "frame": 22,
+      "velocity_m_s": 0.32083041965961456,
+      "height_m": 0.1129508912563324
+    },
+    {
+      "side": "R",
+      "frame": 23,
+      "velocity_m_s": 0.5181598663330078,
+      "height_m": 0.11395096778869629
+    },
+    {
+      "side": "R",
+      "frame": 24,
+      "velocity_m_s": 0.6908512115478516,
+      "height_m": 0.11469405889511108
+    },
+    {
+      "side": "R",
+      "frame": 25,
+      "velocity_m_s": 0.8297473937273026,
+      "height_m": 0.11400550603866577
+    },
+    {
+      "side": "R",
+      "frame": 26,
+      "velocity_m_s": 0.9269405342638493,
+      "height_m": 0.11139950156211853
+    },
+    {
+      "side": "R",
+      "frame": 27,
+      "velocity_m_s": 0.9765878319740295,
+      "height_m": 0.10631275177001953
+    }
+  ],
+  "speed_mps": 0.9107191183350303,
+  "limitation": "Playback best fit only; variable inherited stance velocity does not prove zero sliding."
+}

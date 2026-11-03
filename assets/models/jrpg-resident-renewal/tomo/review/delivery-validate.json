@@ -1,0 +1,130 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/jrpg-resident-renewal/tomo/CH_Tomo_Delivery.blend",
+  "summary": {
+    "tris_by_lod": {
+      "0": 29032,
+      "1": 12184,
+      "2": 4640
+    },
+    "fail": [],
+    "warn": [
+      "CH_Tomo_Body_LOD0: 3144 doubled vertices within 0.0001",
+      "CH_Tomo_Body_LOD1: 20 edges shared by more than two faces",
+      "CH_Tomo_Body_LOD2: 20 edges shared by more than two faces"
+    ]
+  },
+  "objects": [
+    {
+      "name": "CH_Tomo_Body_LOD0",
+      "type": "MESH",
+      "warn": [
+        "3144 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 29032,
+        "verts_evaluated": 17648,
+        "verts": 17648,
+        "faces": 29032,
+        "boundary_edges": 5932,
+        "nonmanifold_edges": 0,
+        "islands": 166,
+        "flipped_vs_recalc": 8262,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "tripo_material_46f53796-b627-47f8-bd88-a45d7cd24866"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Tomo_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Tomo_Body_LOD1",
+      "type": "MESH",
+      "warn": [
+        "20 edges shared by more than two faces"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 12184,
+        "verts_evaluated": 6090,
+        "verts": 6090,
+        "faces": 12184,
+        "boundary_edges": 20,
+        "nonmanifold_edges": 20,
+        "islands": 1,
+        "flipped_vs_recalc": 10,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "tripo_material_46f53796-b627-47f8-bd88-a45d7cd24866"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Tomo_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Tomo_Body_LOD2",
+      "type": "MESH",
+      "warn": [
+        "20 edges shared by more than two faces"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 4640,
+        "verts_evaluated": 2318,
+        "verts": 2318,
+        "faces": 4640,
+        "boundary_edges": 20,
+        "nonmanifold_edges": 20,
+        "islands": 1,
+        "flipped_vs_recalc": 10,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "tripo_material_46f53796-b627-47f8-bd88-a45d7cd24866"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Tomo_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Tomo_Rig",
+      "type": "ARMATURE",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "bones": 35,
+        "deform_bones": 35,
+        "roots": [
+          "DEF-root"
+        ]
+      }
+    }
+  ]
+}

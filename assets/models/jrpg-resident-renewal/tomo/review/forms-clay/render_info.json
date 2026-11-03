@@ -1,0 +1,78 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/jrpg-resident-renewal/tomo/CH_Tomo_Forms.blend",
+  "mode": "clay",
+  "engine": "workbench",
+  "bbox_min": [
+    -0.46105659008026123,
+    -0.15626220405101776,
+    0.0
+  ],
+  "bbox_max": [
+    0.46105659008026123,
+    0.15626220405101776,
+    1.700000286102295
+  ],
+  "size_xyz": [
+    0.9221131801605225,
+    0.3125244081020355,
+    1.700000286102295
+  ],
+  "objects": [
+    "CH_Tomo_Body_LOD0"
+  ],
+  "renders": {
+    "front": {
+      "file": "assets/models/jrpg-resident-renewal/tomo/review/forms-clay/clay_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 4.156262204051018
+    },
+    "side": {
+      "file": "assets/models/jrpg-resident-renewal/tomo/review/forms-clay/clay_side.png",
+      "az_el_lens": [
+        90,
+        0,
+        0
+      ],
+      "distance": 4.461056590080261
+    },
+    "threequarter": {
+      "file": "assets/models/jrpg-resident-renewal/tomo/review/forms-clay/clay_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 2.1312659963689464
+    },
+    "back": {
+      "file": "assets/models/jrpg-resident-renewal/tomo/review/forms-clay/clay_back.png",
+      "az_el_lens": [
+        180,
+        0,
+        0
+      ],
+      "distance": 4.156262204051018
+    },
+    "ref": {
+      "file": "assets/models/jrpg-resident-renewal/tomo/review/forms-clay/clay_ref.png",
+      "az_el_lens": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance": 4.156262204051018
+    },
+    "gameplay": {
+      "file": "assets/models/jrpg-resident-renewal/tomo/review/forms-clay/clay_gameplay_128px.png",
+      "subject_px": 128
+    },
+    "turntable": {
+      "frames": 8,
+      "pattern": "clay_turntable_NN.png"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/jrpg-resident-renewal/yui/ref/front-matte.png",
+  "m_per_px": 0.0011494252873563218,
+  "iou": 0.9423,
+  "ref_only_pct": 2.28,
+  "render_only_pct": 3.7,
+  "band_width_diff": [
+    -0.0007,
+    0.0068,
+    -0.0041,
+    0.0,
+    0.0054,
+    0.0007,
+    0.002,
+    0.0034,
+    0.0061,
+    -0.0034
+  ]
+}

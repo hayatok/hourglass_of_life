@@ -1,0 +1,187 @@
+{
+  "resident": "saki",
+  "renderer": "Cycles12, denoised, Standard, original material/atlas",
+  "purpose": "Body and clothing deformation evidence; not facial or gameplay acceptance",
+  "poses": [
+    {
+      "label": "full_stride",
+      "clip": "walk",
+      "frame": 7,
+      "bounds": {
+        "min": [
+          -0.23479029536247253,
+          -0.36095649003982544,
+          0.004999984055757523
+        ],
+        "max": [
+          0.2695655822753906,
+          0.33505383133888245,
+          1.651874303817749
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 4.667460951068847e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "talk_forward",
+      "clip": "talk",
+      "frame": 18,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          -0.4937463402748108,
+          0.004999999422580004
+        ],
+        "max": [
+          0.2536107301712036,
+          0.1932712346315384,
+          1.6529709100723267
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 4.345792398163795e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "work_reach",
+      "clip": "work",
+      "frame": 15,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          -0.5695608258247375,
+          0.004999999422580004
+        ],
+        "max": [
+          0.2536107301712036,
+          0.1932712346315384,
+          1.6377723217010498
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 4.2428739327471376e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "seated",
+      "clip": "sit_talk",
+      "frame": 18,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          -0.5998592376708984,
+          0.004999952390789986
+        ],
+        "max": [
+          0.2536107301712036,
+          0.11187397688627243,
+          1.3019763231277466
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 5.545276796081744e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "sleep",
+      "clip": "sleep",
+      "frame": 30,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          7.450580596923828e-09,
+          0.2986542284488678
+        ],
+        "max": [
+          0.2536107301712036,
+          1.6485224962234497,
+          0.7300350069999695
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 4.6037512385632695e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "arms_overhead",
+      "clip": "manual limit/review pose",
+      "frame": 0,
+      "bounds": {
+        "min": [
+          -0.30529534816741943,
+          -0.19256629049777985,
+          4.154200095030092e-09
+        ],
+        "max": [
+          0.30397534370422363,
+          0.1932712346315384,
+          1.9318974018096924
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 0.0,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "torso_twist",
+      "clip": "_pose_twist",
+      "frame": 0,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          -0.2515386641025543,
+          0.004999999422580004
+        ],
+        "max": [
+          0.2536107301712036,
+          0.1932712346315384,
+          1.654737949371338
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 2.9231122800066345e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": 0.25
+    },
+    {
+      "label": "deep_bend",
+      "clip": "manual limit/review pose",
+      "frame": 0,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          -0.5899847149848938,
+          0.5124136209487915
+        ],
+        "max": [
+          0.2536107301712036,
+          0.1309581696987152,
+          1.649999976158142
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 0.0,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": -0.0
+    },
+    {
+      "label": "head_turn",
+      "clip": "manual limit/review pose",
+      "frame": 18,
+      "bounds": {
+        "min": [
+          -0.2511506676673889,
+          -0.2111809104681015,
+          0.004999999422580004
+        ],
+        "max": [
+          0.2536107301712036,
+          0.1932712346315384,
+          1.654547095298767
+        ]
+      },
+      "camera_rigid_pair_max_error_m": 2.8498665538556622e-08,
+      "camera_sampled_pairs": 60,
+      "head_yaw_local_radians": 0.6000000238418579
+    }
+  ]
+}

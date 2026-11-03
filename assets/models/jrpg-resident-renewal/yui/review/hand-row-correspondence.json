@@ -1,0 +1,288 @@
+[
+  {
+    "name": "reference",
+    "source_bbox": [
+      201,
+      19,
+      811,
+      1498
+    ],
+    "rows": [
+      {
+        "fraction": 0.535,
+        "profile_y": 136,
+        "original_source_y_approx": 807.607421875,
+        "foreground_intervals_profile_pixels": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            25,
+            78
+          ],
+          [
+            93,
+            93
+          ],
+          [
+            96,
+            97
+          ],
+          [
+            99,
+            101
+          ],
+          [
+            103,
+            104
+          ]
+        ],
+        "width_over_height": 0.41015625
+      },
+      {
+        "fraction": 0.54,
+        "profile_y": 138,
+        "original_source_y_approx": 819.162109375,
+        "foreground_intervals_profile_pixels": [
+          [
+            3,
+            5
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            25,
+            78
+          ],
+          [
+            96,
+            97
+          ],
+          [
+            99,
+            100
+          ]
+        ],
+        "width_over_height": 0.3828125
+      },
+      {
+        "fraction": 0.545,
+        "profile_y": 139,
+        "original_source_y_approx": 824.939453125,
+        "foreground_intervals_profile_pixels": [
+          [
+            4,
+            5
+          ],
+          [
+            24,
+            79
+          ],
+          [
+            99,
+            100
+          ]
+        ],
+        "width_over_height": 0.37890625
+      },
+      {
+        "fraction": 0.55,
+        "profile_y": 140,
+        "original_source_y_approx": 830.716796875,
+        "foreground_intervals_profile_pixels": [
+          [
+            24,
+            79
+          ]
+        ],
+        "width_over_height": 0.21875
+      },
+      {
+        "fraction": 0.555,
+        "profile_y": 142,
+        "original_source_y_approx": 842.271484375,
+        "foreground_intervals_profile_pixels": [
+          [
+            24,
+            79
+          ]
+        ],
+        "width_over_height": 0.21875
+      },
+      {
+        "fraction": 0.56,
+        "profile_y": 143,
+        "original_source_y_approx": 848.048828125,
+        "foreground_intervals_profile_pixels": [
+          [
+            23,
+            79
+          ]
+        ],
+        "width_over_height": 0.22265625
+      }
+    ]
+  },
+  {
+    "name": "raw",
+    "source_bbox": [
+      140,
+      62,
+      500,
+      898
+    ],
+    "rows": [
+      {
+        "fraction": 0.535,
+        "profile_y": 136,
+        "original_source_y_approx": 507.7578125,
+        "foreground_intervals_profile_pixels": [
+          [
+            0,
+            8
+          ],
+          [
+            10,
+            12
+          ],
+          [
+            27,
+            82
+          ],
+          [
+            97,
+            99
+          ],
+          [
+            101,
+            106
+          ],
+          [
+            108,
+            109
+          ]
+        ],
+        "width_over_height": 0.4296875
+      },
+      {
+        "fraction": 0.54,
+        "profile_y": 138,
+        "original_source_y_approx": 514.2890625,
+        "foreground_intervals_profile_pixels": [
+          [
+            3,
+            5
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            27,
+            82
+          ],
+          [
+            100,
+            102
+          ],
+          [
+            104,
+            106
+          ]
+        ],
+        "width_over_height": 0.40625
+      },
+      {
+        "fraction": 0.545,
+        "profile_y": 139,
+        "original_source_y_approx": 517.5546875,
+        "foreground_intervals_profile_pixels": [
+          [
+            3,
+            5
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            26,
+            82
+          ],
+          [
+            101,
+            102
+          ],
+          [
+            104,
+            106
+          ]
+        ],
+        "width_over_height": 0.40625
+      },
+      {
+        "fraction": 0.55,
+        "profile_y": 140,
+        "original_source_y_approx": 520.8203125,
+        "foreground_intervals_profile_pixels": [
+          [
+            4,
+            5
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            26,
+            83
+          ],
+          [
+            101,
+            101
+          ],
+          [
+            104,
+            105
+          ]
+        ],
+        "width_over_height": 0.3984375
+      },
+      {
+        "fraction": 0.555,
+        "profile_y": 142,
+        "original_source_y_approx": 527.3515625,
+        "foreground_intervals_profile_pixels": [
+          [
+            25,
+            83
+          ]
+        ],
+        "width_over_height": 0.23046875
+      },
+      {
+        "fraction": 0.56,
+        "profile_y": 143,
+        "original_source_y_approx": 530.6171875,
+        "foreground_intervals_profile_pixels": [
+          [
+            25,
+            83
+          ]
+        ],
+        "width_over_height": 0.23046875
+      }
+    ]
+  }
+]

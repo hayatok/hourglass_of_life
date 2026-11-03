@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "body_x": 0.97,
+    "arm_inward_m": 0.015,
+    "forearm_up_m": 0.011,
+    "skirt_hem_narrowing": 0.0
+  },
+  "original_raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+  "raw_file_unchanged": true,
+  "uv_sha256_before": "633aae97205cc1da131eac8aeb80d1dfadb86a595458e138288406292623da43",
+  "uv_sha256_after": "633aae97205cc1da131eac8aeb80d1dfadb86a595458e138288406292623da43",
+  "max_vertex_displacement_m": 0.01860109755302675,
+  "hand_local_shape_policy": "Separated hands translate with the arm region; no hand local scaling. Forearm-height blend ends above the hand.",
+  "sample_hand_displacements": [
+    [
+      -0.015,
+      0.0,
+      0.011
+    ],
+    [
+      0.015,
+      0.0,
+      0.011
+    ]
+  ],
+  "reference_calibration_unchanged": true
+}

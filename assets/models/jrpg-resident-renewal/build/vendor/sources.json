@@ -1,0 +1,39 @@
+{
+  "retrieved_at_utc": "2026-11-03",
+  "package": "blender-image-to-3d",
+  "upstream_directory": "/Users/hayatok/.codex/skills/blender-image-to-3d",
+  "license_declaration": "MIT",
+  "license_evidence": "SKILL.md YAML frontmatter: license: MIT",
+  "separate_license_or_copyright_notice_supplied": false,
+  "upstream_remote_or_revision_supplied": false,
+  "files": [
+    {
+      "file": "init_master.py",
+      "source_path": "/Users/hayatok/.codex/skills/blender-image-to-3d/scripts/init_master.py",
+      "local_changes": "None."
+    },
+    {
+      "file": "export_delivery.py",
+      "source_path": "/Users/hayatok/.codex/skills/blender-image-to-3d/scripts/export_delivery.py",
+      "local_changes": "None."
+    },
+    {
+      "file": "validate.py",
+      "source_path": "/Users/hayatok/.codex/skills/blender-image-to-3d/scripts/validate.py",
+      "local_changes": "None."
+    }
+  ],
+  "imports": [
+    "argparse",
+    "bmesh (Blender)",
+    "bpy (Blender)",
+    "datetime",
+    "json",
+    "math",
+    "mathutils (Blender)",
+    "os",
+    "re",
+    "sys"
+  ],
+  "identification_policy": "Source metadata only; no fingerprint is a quality check or acceptance gate."
+}

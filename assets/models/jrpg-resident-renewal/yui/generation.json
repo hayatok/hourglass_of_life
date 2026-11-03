@@ -1,6 +1,6 @@
 {
   "resident": "yui",
-  "status": "raw_exported_review_pending",
+  "status": "dedicated_body_integrated_partial_character_acceptance",
   "service": "Tripo Studio",
   "interaction": "Chrome browser UI only",
   "task_id": "6ee22af9-ba9b-4371-95b0-c1d7a1698d8b",
@@ -31,7 +31,7 @@
     "GLB_export_additional_observed": 0,
     "basis": "All three submitted jobs accepted after re-upload; browser balance 2895 to 2805. Exported local files verified, no further balance change observed."
   },
-  "gameplay_integration": "not integrated",
+  "gameplay_integration": "Dedicated body, nine clips, compatible LODs and the two UV-eye controls are integrated. Partial real-town character acceptance is recorded; full facial/hair-aging behavior, motion/contact polish and human UI/game-fun acceptance are still incomplete.",
   "output": "assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb",
   "bytes": 3001736,
   "sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
@@ -75,5 +75,73 @@
   "observed_browser_geometry": {
     "triangle_faces": 29844,
     "vertices": 18880
-  }
+  },
+  "raw_generation_history": {
+    "status_at_export": "raw_exported_review_pending",
+    "gameplay_integration_at_export": "not integrated",
+    "scope": "Original Tripo settings, task, credits, output, bytes, SHA, glb_contents and browser geometry below refer to the immutable raw export, not the rigged runtime body."
+  },
+  "canonical_authoring_source": "assets/models/jrpg-resident-renewal/source/yui/CH_Yui_AnimationMaster.blend",
+  "runtime": {
+    "model": "game/assets/models/yui/CH_Yui.glb",
+    "manifest": "game/assets/models/yui/asset-manifest.json",
+    "scene": "game/scenes/characters/yui.tscn",
+    "bones": 36,
+    "clips": 9,
+    "lods": 3,
+    "material": "TEXTURE_TOON",
+    "face_controls": [
+      "Blink",
+      "TiredEyes"
+    ],
+    "eye_charts": 2,
+    "eyelid_method": "compress",
+    "facial_geometry_morphs": 0
+  },
+  "runtime_acceptance": {
+    "status": "partial_character_runtime_acceptance",
+    "date": "2026-11-03",
+    "scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
+    "observed_behaviors": [
+      "Actual skin deformation and walking",
+      "Conversation gesture and head attention after the ordinary transition",
+      "Natural joint work and a real skill change",
+      "Meal seating and hand/cup contact",
+      "Own-bed head/pelvis contact, sleep closure and waking reopening",
+      "All LOD rig/bind/clip compatibility",
+      "Project-in-progress save/resume and subsequent state/RNG continuation"
+    ],
+    "aggregate_functional_results": {
+      "scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident.",
+      "headless": {
+        "checks": 112,
+        "failures": 0
+      },
+      "gpu": {
+        "checks": 115,
+        "failures": 0
+      }
+    },
+    "artifacts": {
+      "images_saved": 29,
+      "images_attempted": 29,
+      "counted_as_functional_checks": false
+    },
+    "evidence": {
+      "readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
+      "headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
+      "gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
+      "review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
+    },
+    "identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts."
+  },
+  "remaining_work": [
+    "Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+    "Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+    "Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+    "Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+    "Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+    "Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+    "Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
+  ]
 }
