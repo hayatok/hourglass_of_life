@@ -1,0 +1,80 @@
+{
+  "units": "metres",
+  "blender_up": "Z",
+  "blender_front": "-Y",
+  "engine_up": "Y",
+  "engine_front": "+Z",
+  "models": {
+    "Home": {
+      "file": "AR_Home.glb",
+      "triangles": 24400,
+      "groups": [
+        "AR_Home_East_LOD0",
+        "AR_Home_Floor_LOD0",
+        "AR_Home_North_LOD0",
+        "AR_Home_Roof_LOD0",
+        "AR_Home_South_LOD0",
+        "AR_Home_West_LOD0"
+      ],
+      "materials": 1,
+      "embedded_images": 3,
+      "clear_room_m": [
+        5.6,
+        5.6
+      ],
+      "floor_top_m": 0,
+      "door_clear_width_m": 1.4
+    },
+    "Cafe": {
+      "file": "AR_Cafe.glb",
+      "triangles": 25236,
+      "groups": [
+        "AR_Cafe_East_LOD0",
+        "AR_Cafe_Floor_LOD0",
+        "AR_Cafe_North_LOD0",
+        "AR_Cafe_Roof_LOD0",
+        "AR_Cafe_South_LOD0",
+        "AR_Cafe_West_LOD0"
+      ],
+      "materials": 1,
+      "embedded_images": 3,
+      "clear_room_m": [
+        5.6,
+        5.6
+      ],
+      "floor_top_m": 0,
+      "door_clear_width_m": 1.4
+    },
+    "Workshop": {
+      "file": "AR_Workshop.glb",
+      "triangles": 23728,
+      "groups": [
+        "AR_Workshop_East_LOD0",
+        "AR_Workshop_Floor_LOD0",
+        "AR_Workshop_North_LOD0",
+        "AR_Workshop_Roof_LOD0",
+        "AR_Workshop_South_LOD0",
+        "AR_Workshop_West_LOD0"
+      ],
+      "materials": 1,
+      "embedded_images": 3,
+      "clear_room_m": [
+        5.6,
+        4.928
+      ],
+      "floor_top_m": 0,
+      "door_clear_width_m": 3.8
+    }
+  },
+  "inferred": "See asset-brief.md: perspective reference, single inhabited floor, all dimensions and hidden construction inferred",
+  "art_acceptance": "work in progress; not a passed final reference gate",
+  "texture_contract": {
+    "size": [
+      256,
+      256
+    ],
+    "BaseColor": "sRGB",
+    "ORM": "Non-Color R=AO(1) G=roughness B=metallic",
+    "Normal": "Non-Color OpenGL +Y neutral"
+  }
+}

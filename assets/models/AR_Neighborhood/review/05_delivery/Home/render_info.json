@@ -1,0 +1,83 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/AR_Neighborhood_delivery.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -3.3044214248657227,
+    -3.690000057220459,
+    -0.21000000834465027
+  ],
+  "bbox_max": [
+    3.3044214248657227,
+    3.2799999713897705,
+    4.244999885559082
+  ],
+  "size_xyz": [
+    6.608842849731445,
+    6.970000267028809,
+    4.454999923706055
+  ],
+  "objects": [
+    "AR_Home_East_LOD0",
+    "AR_Home_Floor_LOD0",
+    "AR_Home_North_LOD0",
+    "AR_Home_Roof_LOD0",
+    "AR_Home_South_LOD0",
+    "AR_Home_West_LOD0"
+  ],
+  "renders": {
+    "front": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/review/05_delivery/Home/material_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 16.702685832977295
+    },
+    "side": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/review/05_delivery/Home/material_side.png",
+      "az_el_lens": [
+        90,
+        0,
+        0
+      ],
+      "distance": 17.244421627245515
+    },
+    "back": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/review/05_delivery/Home/material_back.png",
+      "az_el_lens": [
+        180,
+        0,
+        0
+      ],
+      "distance": 16.702686224675404
+    },
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/review/05_delivery/Home/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 16.535450652193745
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/review/05_delivery/Home/material_ref.png",
+      "az_el_lens": [
+        30.0,
+        25.0,
+        50.0
+      ],
+      "distance": 16.88719988569875
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/AR_Neighborhood/review/05_delivery/Home/material_gameplay_128px.png",
+      "subject_px": 128
+    },
+    "turntable": {
+      "frames": 12,
+      "pattern": "material_turntable_NN.png"
+    }
+  }
+}

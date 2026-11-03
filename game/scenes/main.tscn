@@ -368,6 +368,13 @@ text = "WASDで移動
 ホイールでズーム"
 autowrap_mode = 3
 
+[node name="BuildingsButton" type="Button" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "建物：断面（V）"
+tooltip_text = "屋根と手前の壁を外して暮らしを見る／建物の外観を見る"
+
 [node name="DetailPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1012788735]
 layout_mode = 0
 anchor_left = 1.0

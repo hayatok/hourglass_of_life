@@ -36,6 +36,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 	if not raw is Dictionary or not encoded(raw): return false
 	if not record(raw,["rng_state"],["schema","elapsed","start_minute","epoch_weekday","budget","meeting_serial","remainder"]): return false
 	if int(raw.schema) not in [1,2,3,4] or not raw.rng_state.is_valid_int(): return false
+	if raw.has("route_layout") and (not number(raw.route_layout) or raw.route_layout<0 or raw.route_layout!=int(raw.route_layout)): return false
 	if raw.elapsed<0 or raw.start_minute<0 or raw.start_minute>=1440 or raw.epoch_weekday<0 or raw.epoch_weekday>6: return false
 	if raw.budget<0 or raw.remainder<0 or raw.remainder>=1: return false
 	for key in ["people","events","meetings","benches"]:

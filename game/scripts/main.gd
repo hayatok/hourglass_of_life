@@ -47,6 +47,7 @@ func _ready() -> void:
 	%HelpButton.pressed.connect(_show_guide)
 	%ReturnTitle.pressed.connect(_to_title)
 	%FollowButton.pressed.connect(func(): following = not following)
+	%BuildingsButton.pressed.connect(_toggle_buildings)
 	%RestButton.pressed.connect(func(): _answer(Sim.propose_rest(selected_id)))
 	%GoalButton.pressed.connect(func(): _answer(Sim.support_goal(selected_id)))
 	%MeetButton.pressed.connect(_meet)
@@ -178,6 +179,7 @@ func _process(delta: float) -> void:
 	var offset = Vector3(sin(yaw)*distance,distance*.85,cos(yaw)*distance)
 	camera.position = camera_target+offset
 	camera.look_at(camera_target+Vector3(0,.7,0))
+	$Town.update_view(camera.global_position)
 	for p in Sim.people:
 		if avatars.has(p.id):
 			avatars[p.id].update_state(p,delta,selected_id==p.id)
@@ -200,13 +202,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				_close_menu() if pause_menu.visible else _open_menu()
 		elif event.keycode == KEY_SPACE and not title.visible and not pause_menu.visible and not %JournalScreen.visible:
 			_toggle_pause()
+		elif event.keycode == KEY_V and not title.visible and not pause_menu.visible and not %JournalScreen.visible:
+			_toggle_buildings()
 	if title.visible or pause_menu.visible or %JournalScreen.visible:
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			dragging = event.pressed
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			distance = maxf(15,distance-2)
+			distance = maxf(7,distance-2)
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			distance = minf(48,distance+2)
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -233,6 +237,11 @@ func _unhandled_input(event: InputEvent) -> void:
 					_select(closest)
 	if event is InputEventMouseMotion and dragging:
 		yaw -= event.relative.x*.006
+
+func _toggle_buildings() -> void:
+	$Town.cutaway = not $Town.cutaway
+	$Town.update_view(camera.global_position)
+	%BuildingsButton.text = "建物：断面（V）" if $Town.cutaway else "建物：外観（V）"
 
 func _set_speed(value: float) -> void:
 	if not Sim.people.any(func(p): return Sim.life.is_alive(p)): return

@@ -21,12 +21,18 @@ const ENTRIES = {
 	"home_shared": Vector3(9, 0, 8.8), "bakery_cafe": Vector3(8, 0, -2.2),
 	"workshop": Vector3(0, 0, -4.8)
 }
+const OUTER_ENTRIES = {
+	"home_ogawa": Vector3(-9,0,10), "home_saeki": Vector3(-9,0,0),
+	"home_shared": Vector3(9,0,10), "bakery_cafe": Vector3(8,0,-1),
+	"workshop": Vector3(0,0,-4.3)
+}
 const WAYPOINTS = [
-	Vector3(-5, 0, -4), Vector3(0, 0, -4), Vector3(5, 0, -4),
-	Vector3(-5, 0, 1), Vector3(0, 0, 1), Vector3(5, 0, 1),
-	Vector3(-5, 0, 7), Vector3(0, 0, 7), Vector3(5, 0, 7), Vector3(13, 0, 7)
+	Vector3(-5, 0, -4), Vector3(0, 0, -4), Vector3(4.4, 0, -4),
+	Vector3(-5, 0, 1), Vector3(0, 0, 1), Vector3(4.4, 0, 1),
+	Vector3(-5, 0, 7), Vector3(0, 0, 7), Vector3(4.4, 0, 7), Vector3(13, 0, 7),
+	Vector3(4.4,0,10.3), Vector3(13,0,10.3)
 ]
-const LINKS = [[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[1,4],[2,5],[3,6],[4,7],[5,8],[8,9]]
+const LINKS = [[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[1,4],[2,5],[3,6],[4,7],[5,8],[8,10],[10,11],[11,9]]
 const ACTION_NAMES = {
 	"sleep": "眠っている", "work": "仕事に取り組む", "school": "学校で過ごす",
 	"care": "家族と過ごす", "rest": "ひと息つく", "eat": "食事をする",
@@ -394,14 +400,16 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 	if origin_place == destination and origin.distance_to(target) < 3: return [target]
 	var path: Array = []
 	var departure: Vector3 = ENTRIES.get(origin_place, origin)
-	if origin.distance_to(departure) > .15 and (activities.inside(origin_place,origin) or origin.distance_to(SITES.get(origin_place, origin)) < 3):
-		path.append_array(activities.indoor_route(origin_place,origin,departure))
-		departure = _street_corner(departure)
+	if ENTRIES.has(origin_place) and (activities.inside(origin_place,origin) or origin.distance_to(departure)<.6):
+		if origin.distance_to(departure)>.1: path.append_array(activities.indoor_route(origin_place,origin,departure))
+		path.append(OUTER_ENTRIES[origin_place])
+		departure = _street_corner(OUTER_ENTRIES[origin_place])
 		path.append(departure)
 	else:
 		departure = origin
 	var entry: Vector3 = ENTRIES.get(destination, target)
-	var approach = _street_corner(entry) if ENTRIES.has(destination) else entry
+	var outside: Vector3 = OUTER_ENTRIES.get(destination,entry)
+	var approach = _street_corner(outside) if ENTRIES.has(destination) else entry
 	var begin = graph.get_closest_point(departure)
 	var end = graph.get_closest_point(approach)
 	for point in graph.get_point_path(begin, end):
@@ -409,6 +417,8 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 			path.append(point)
 	if path.is_empty() or path[-1].distance_to(approach) > .1:
 		path.append(approach)
+	if path.is_empty() or path[-1].distance_to(outside) > .1:
+		path.append(outside)
 	if path.is_empty() or path[-1].distance_to(entry) > .1:
 		path.append(entry)
 	if entry.distance_to(target) > .1:
@@ -416,7 +426,7 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 	return path
 
 func _street_corner(entry: Vector3) -> Vector3:
-	return Vector3(-5 if entry.x < -5 else (5 if entry.x > 5 else 0),0,entry.z)
+	return Vector3(-5 if entry.x < -5 else (4.4 if entry.x > 4.4 else 0),0,entry.z)
 
 func _available_bench(origin: Vector3, participants: Array = []) -> Variant:
 	var best: Variant = null
@@ -614,6 +624,7 @@ func has_save() -> bool:
 
 func save_game(path: String = SAVE_PATH) -> bool:
 	var data = {"schema":4,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize(),"work_family":work_family.serialize(),"life":life.serialize()}
+	data.route_layout = 1
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
 		return false
@@ -653,6 +664,12 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	activities.configure_benches(benches)
 	for p in people:
 		if not activities.spots.has(p.get("activity_spot","")): p.activity_spot = ""
+		if int(data.get("route_layout",0))<1 and p.moving:
+			var origin_place: String = p.place
+			for site in activities.rooms:
+				if activities.inside(site,p.position): origin_place = site;break
+			p.path = route(p.position,origin_place,p.target,p.destination)
+			p.moving = not p.path.is_empty()
 	rejection_context.clear()
 	town_changed.emit()
 	return true
