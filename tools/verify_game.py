@@ -21,6 +21,7 @@ CHECKS={
  'resident_lod':('test_resident_lod.gd',r'Resident LOD checks: \d+ passed, 0 failed'),
  'resident_foot_plant':('test_resident_foot_plant.gd',r'Resident foot plant checks: \d+ passed, 0 failed'),
  'camera_controls':('test_camera_controls.gd',r'Camera control checks: \d+ passed, 0 failed'),
+ 'load_feedback':('test_load_feedback.gd',r'Load feedback checks: \d+ passed, 0 failed'),
  'social_motion':('test_resident_social_motion.gd',r'Resident social motion checks: \d+ passed, 0 failed'),
  'world_interactions':('test_world_interactions.gd',r'World interaction checks: \d+ passed, 0 failed'),
  'tabletop':('test_tabletop_game.gd',r'Tabletop checks: \d+ passed, 0 failed'),
@@ -78,7 +79,7 @@ for name in a.checks:
     file,marker=CHECKS[name]
     run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else (300 if name=='tabletop_presentation' else 180))
 if a.gpu:
-    gpu_checks={'character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls'}
+    gpu_checks={'character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls','load_feedback'}
     for name in a.checks:
         if name not in gpu_checks: continue
         file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker,timeout=600 if name=='social_chain_presentation' else (300 if name=='tabletop_presentation' else 180))

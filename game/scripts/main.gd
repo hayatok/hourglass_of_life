@@ -110,12 +110,16 @@ func _start_play() -> void:
 	_toast("町の住民をクリックするか、「住民を選ぶ」から見守る人を選べます。" if Sim.running else "町の記録から、ここまでの時間を読み返せます。")
 	if Sim.life.chapter_ready: _open_journal(true)
 
-func _continue_game() -> void:
-	if Sim.load_game():
+func _continue_game(path: String = "") -> void:
+	if Sim.load_game(Sim.SAVE_PATH if path.is_empty() else path):
 		_start_play()
 		_toast("保存した町の続きを開きました")
 	else:
-		_toast(Sim.load_error if not Sim.load_error.is_empty() else "保存データを読み込めませんでした")
+		# The observation HUD is hidden on the title screen. Its toast cannot
+		# explain why Continue did nothing; show the reason on this screen.
+		info_dialog.title = "保存した町を開けません"
+		info_dialog.dialog_text = Sim.load_error if not Sim.load_error.is_empty() else "保存データを読み込めませんでした。"
+		info_dialog.popup_centered(Vector2i(600,190))
 
 func _rebuild() -> void:
 	var selection_changed: bool = Sim.person(selected_id).is_empty()
