@@ -1,0 +1,26 @@
+00:00.425  blend            | Read blend: "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/CH_Maho_topology.blend"
+00:00.689  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_front.png'
+00:00.776  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_side.png'
+00:00.853  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_back.png'
+00:00.933  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_threequarter.png'
+00:01.015  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_ref.png'
+00:01.089  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_gameplay_128px.png'
+BlenderMCP: cannot start server in background mode (blender -b) - commands would never execute
+BlenderMCP: run Blender with a GUI, or use a virtual display: xvfb-run -a blender
+BlenderMCP addon registered
+[INFO ] services.locationservice ...............: Not adding link to MakeHuman user data, since neither explicit path nor auto-discovery is set in preferences.
+[INFO ] mpfb.init ..............................: Build info FROM_SOURCE
+[INFO ] mpfb.init ..............................: Online access preference is not enabled. Not checking if MakeHuman is online.
+[INFO ] mpfb.init ..............................: MPFB initialization has finished.
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_front.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_side.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_back.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_threequarter.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_ref.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/review/04_topology/wire_gameplay_128px.png
+size x 0.692 y 0.402 z 1.634 m
+BlenderMCP server stopped
+BlenderMCP addon unregistered
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

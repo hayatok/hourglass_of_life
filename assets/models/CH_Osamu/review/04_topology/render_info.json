@@ -1,0 +1,75 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/CH_Osamu_topology.blend",
+  "mode": "wire",
+  "engine": "workbench",
+  "bbox_min": [
+    -0.46905216574668884,
+    -0.1666528582572937,
+    0.006170434877276421
+  ],
+  "bbox_max": [
+    0.46905216574668884,
+    0.14578008651733398,
+    1.6999999284744263
+  ],
+  "size_xyz": [
+    0.9381043314933777,
+    0.3124329447746277,
+    1.6938295364379883
+  ],
+  "objects": [
+    "CH_Osamu_Body_LOD0",
+    "CH_Osamu_Face_LOD0"
+  ],
+  "renders": {
+    "front": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/review/04_topology/wire_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 4.156216472387314
+    },
+    "side": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/review/04_topology/wire_side.png",
+      "az_el_lens": [
+        90,
+        0,
+        0
+      ],
+      "distance": 4.469052165746689
+    },
+    "back": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/review/04_topology/wire_back.png",
+      "az_el_lens": [
+        180,
+        0,
+        0
+      ],
+      "distance": 4.156216472387314
+    },
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/review/04_topology/wire_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 3.105748677419291
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/review/04_topology/wire_ref.png",
+      "az_el_lens": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance": 4.156216472387314
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/review/04_topology/wire_gameplay_128px.png",
+      "subject_px": 128
+    }
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/CH_Maho_delivery.blend",
+  "summary": {
+    "tris_by_lod": {
+      "0": 34452,
+      "1": 14468,
+      "2": 4132
+    },
+    "fail": [],
+    "warn": [
+      "CH_Maho_Body_LOD0: 37 doubled vertices within 0.0001",
+      "CH_Maho_Body_LOD0: 36 faces flipped relative to a consistent recalculation",
+      "CH_Maho_Body_LOD1: 6 doubled vertices within 0.0001",
+      "CH_Maho_Body_LOD2: 5 doubled vertices within 0.0001"
+    ]
+  },
+  "objects": [
+    {
+      "name": "CH_Maho_Body_LOD0",
+      "type": "MESH",
+      "warn": [
+        "37 doubled vertices within 0.0001",
+        "36 faces flipped relative to a consistent recalculation"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 29440,
+        "verts_evaluated": 14884,
+        "verts": 14884,
+        "faces": 29440,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 84,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Maho_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Maho_Face_LOD0",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 5012,
+        "verts_evaluated": 2748,
+        "verts": 2748,
+        "faces": 5012,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 19,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Maho_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Maho_Body_LOD1",
+      "type": "MESH",
+      "warn": [
+        "6 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 12364,
+        "verts_evaluated": 6346,
+        "verts": 6346,
+        "faces": 12364,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 84,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Maho_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Maho_Body_LOD2",
+      "type": "MESH",
+      "warn": [
+        "5 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 3531,
+        "verts_evaluated": 1930,
+        "verts": 1930,
+        "faces": 3531,
+        "boundary_edges": 3,
+        "nonmanifold_edges": 0,
+        "islands": 84,
+        "flipped_vs_recalc": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Maho_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Maho_Face_LOD1",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2104,
+        "verts_evaluated": 1294,
+        "verts": 1294,
+        "faces": 2104,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 19,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Maho_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Maho_Face_LOD2",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 601,
+        "verts_evaluated": 471,
+        "verts": 471,
+        "faces": 601,
+        "boundary_edges": 289,
+        "nonmanifold_edges": 0,
+        "islands": 19,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Maho_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "COL_body",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 92,
+        "verts_evaluated": 48,
+        "verts": 48,
+        "faces": 92,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Maho_Body"
+        ],
+        "modifiers": []
+      }
+    },
+    {
+      "name": "SOCKET_hand.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Maho_Rig",
+        "parent_bone": "DEF-hand.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_hand.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Maho_Rig",
+        "parent_bone": "DEF-hand.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_head",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Maho_Rig",
+        "parent_bone": "DEF-head",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_chest",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Maho_Rig",
+        "parent_bone": "DEF-chest",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Maho_Rig",
+        "parent_bone": "DEF-foot.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Maho_Rig",
+        "parent_bone": "DEF-foot.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "CH_Maho_Rig",
+      "type": "ARMATURE",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "bones": 35,
+        "deform_bones": 35,
+        "roots": [
+          "DEF-root"
+        ]
+      }
+    }
+  ]
+}

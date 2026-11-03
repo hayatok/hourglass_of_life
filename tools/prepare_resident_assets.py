@@ -33,6 +33,50 @@ adult.update({'id':'rin_adult','jaw':.12,'eye_height':.016,'top_color':[.65,.34,
               'motion':{'walk_frames':24,'stride':1},'inferred_adult':True})
 PROFILES['RinAdult']=adult
 
+# Authored dimensions and motions; the generated sheets supply clothing/shape references,
+# never population measurements or predictions about older adults.
+PROFILES.update({
+ 'Osamu':{'id':'osamu','height':1.70,'head_scale':1.04,'head_x':1.07,'width':1.18,'depth':1.09,
+   'arm_length':1.06,'arm_close':-.055,'stance':.028,'foot_turn':.12,'jaw':.24,'eye_height':.0115,
+   'costume':'apron','skin_color':[.86,.60,.40],'top_color':[.57,.39,.20],
+   'pants_color':[.115,.11,.135],'shoe_color':[.12,.052,.022],'apron_color':[.045,.13,.14],
+   'hair':{'style':'swept','color':[.36,.35,.37]},'mature':True,'glasses':True,
+   'motion':{'walk_frames':29,'stride':.84},'sheet':'04-osamu-turnaround.png',
+   'ground':858,'top':20,'axis':[264,249,264],
+   'silhouette':'Swept silver hair, round spectacles, broad shoulders, teal work apron, full slate trousers.'},
+ 'Fumi':{'id':'fumi','height':1.61,'head_scale':1.01,'head_x':1.04,'width':1.01,'depth':1.02,
+   'arm_length':1.05,'arm_close':.09,'stance':.032,'foot_turn':.12,'jaw':.12,'eye_height':.013,
+   'costume':'cardigan_skirt','top_color':[.63,.31,.025],'pants_color':[.24,.185,.155],
+   'shoe_color':[.12,.052,.022],'hair':{'style':'wavy_bob','color':[.36,.35,.37]},'mature':True,
+   'motion':{'walk_frames':28,'stride':.85},'sheet':'09-fumi-turnaround.png',
+   'ground':857,'top':29,'axis':[269,236,262],
+   'silhouette':'Silver wavy bob, ochre open cardigan, flared calf-length skirt, neck camera.'},
+ 'Maho':{'id':'maho','height':1.64,'head_scale':1.0,'head_x':.99,'width':.97,'depth':1.0,
+   'arm_length':1.07,'arm_close':.03,'stance':.027,'foot_turn':.12,'jaw':.05,'eye_height':.017,
+   'costume':'apron','top_color':[.78,.70,.58],'pants_color':[.10,.085,.085],
+   'shoe_color':[.12,.052,.022],'apron_color':[.55,.18,.10],
+   'hair':{'style':'ponytail','color':[.14,.050,.017]},
+   'motion':{'walk_frames':23,'stride':1.02},'sheet':'10-maho-turnaround.png',
+   'ground':857,'top':18,'axis':[284,246,253],
+   'silhouette':'Chestnut ponytail, ivory rolled blouse, coral apron, dark cropped trousers.'},
+ 'Ritsu':{'id':'ritsu','height':1.76,'head_scale':1.03,'head_x':1.04,'width':1.11,'depth':1.04,
+   'arm_length':1.12,'arm_close':.09,'stance':.035,'shoe_stance':.05,'foot_turn':.13,
+   'jaw':.17,'eye_height':.0135,'costume':'sweater','top_color':[.075,.065,.15],
+   'pants_color':[.065,.055,.105],'shoe_color':[.78,.73,.61],
+   'hair':{'style':'parted','color':[.024,.018,.035]},
+   'motion':{'walk_frames':27,'stride':.92},'sheet':'11-ritsu-turnaround.png',
+   'ground':864,'top':18,'axis':[281,238,267],
+   'silhouette':'Short parted dark hair, closed navy crewneck sweater, neck headphones, full trousers.'},
+ 'Aoi':{'id':'aoi','height':1.71,'head_scale':1.01,'head_x':1.04,'width':1.07,'depth':1.03,
+   'arm_length':1.10,'arm_close':.09,'stance':.035,'shoe_stance':.05,'foot_turn':.14,
+   'jaw':.12,'eye_height':.0155,'costume':'hood_jacket','top_color':[.22,.23,.095],
+   'pants_color':[.075,.065,.060],'shoe_color':[.12,.052,.022],
+   'hair':{'style':'shaggy','color':[.09,.036,.014]},
+   'motion':{'walk_frames':24,'stride':.98},'sheet':'12-aoi-turnaround.png',
+   'ground':863,'top':20,'axis':[290,237,261],
+   'silhouette':'Shaggy hair, ivory hood, moss utility jacket, mustard backpack, dark trousers.'}
+})
+
 def prepare(name,profile):
     asset='CH_'+name;root=ROOT/'assets/models'/asset
     for folder in ['build','ref','review','textures','exports']:(root/folder).mkdir(parents=True,exist_ok=True)
@@ -80,13 +124,17 @@ def prepare(name,profile):
             'from pathlib import Path\nimport sys\nROOT=Path(__file__).resolve().parents[1]\n'
             'sys.path.insert(0,str(ROOT.parent/"common"))\nfrom pipeline import run\n'
             f'run(ROOT,{stage!r})\n')
+    clothing={'apron':'rolled collared blouse, bib apron, back straps, waist bow, trousers, shoes; Osamu spectacles or Maho ponytail',
+              'cardigan_skirt':'open cardigan, cream blouse, calf-length skirt, full legs below moving skirt, walking shoes, neck camera',
+              'sweater':'closed crewneck knit, ribbed cuffs/hem, trousers, sneakers, neck headphones',
+              'hood_jacket':'open utility jacket, ivory lowered hood, trousers, walking shoes, mustard backpack and straps'}.get(profile['costume'],profile['costume']+', trousers/shorts, socks, shoes')
     brief=f'''ASSET      {asset} — {name}
 CATEGORY   character / human biped / original anime JRPG townsfolk
 VIEWS      ref/turnaround.png: front, left profile, back. Individual 500x887 crops in ref/. Orthographic-like generated concept; azimuth 0/90/180, elevation 0, lens 0. Front/back A-pose, profile arms lowered. Exact crop boxes/axes/ground in ref/calibration.json.
 SCALE      Height {profile['height']}m is an authored fictional dimension. 1 unit = 1m, Z up, -Y front. No individual measurement inferred from population statistics.
 PROPORTIONS Ten horizontal silhouette widths per view and width/height ratio measured in ref/calibration.json. Head, body width, depth and arm length are authored in profile.json; compare their resulting silhouette before refining.
-PARTS      Body under costume retained in HIGH; neck/head/ears, upper/lower arms, five fingers per hand, full legs; separate shirt, {profile['costume']}, trousers/shorts, socks, shoe soles/uppers, hair cap and grouped locks. Deform with the common humanoid family; surface eye/brow/mouth meshes separate from skin.
-SILHOUETTE  {'Swept quiff, open indigo overshirt, long beige trousers, adult shoulders.' if name=='Ryo' else 'Tousled child hair, large head, mustard short overalls, bare lower legs, short child stature.'}
+PARTS      Body under costume retained in HIGH; neck/head/ears, upper/lower arms, five fingers per hand, full legs; {clothing}; hair cap and grouped locks. Deform with the common humanoid family; surface eye/brow/mouth meshes separate from skin. Rigid accessories follow the head or chest, garment layers remain separate in the source.
+SILHOUETTE  {profile.get('silhouette', 'Swept quiff, open indigo overshirt, long beige trousers, adult shoulders.' if name=='Ryo' else 'Tousled child hair, large head, mustard short overalls, bare lower legs, short child stature.')}
 MATERIALS  Skin, grouped brown hair, ivory tee and soles; colors/roughness authored, not sampled physical material. BaseColor sRGB, ORM/Normal Non-Color. No baked directional lighting.
 ARTICULATION 35 deformation bones, six face morphs, hand/head/chest/foot sockets. Nine in-place clips with individual stride/cadence. Preserve source rest pose and three LODs.
 INFERRED   Real height, hidden anatomy, garment depth and thickness, side arm A-pose, sole underside, face depth, hand contours, material response, all motion. Three generated views contain pose differences and are references rather than engineering blueprints.
@@ -99,4 +147,5 @@ TARGET     Godot 4.7 Compatibility, GLB with embedded textures, standard 60000-t
     print(asset,calibration['views']['front'])
 
 if __name__=='__main__':
-    for name,profile in PROFILES.items():prepare(name,profile)
+    import sys
+    for name in (sys.argv[1:] or PROFILES):prepare(name,PROFILES[name])

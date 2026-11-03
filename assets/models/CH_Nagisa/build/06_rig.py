@@ -18,6 +18,13 @@ def combine(items):
     total=sum(out.values());return {k:v/total for k,v in out.items()}
 def weights(tag,co):
     z=co.z
+    if tag=='chest_rigid':return {'DEF-chest':1}
+    if tag=='long_skirt':
+        # Preserve a hanging hem when seated: upper cloth follows thighs, lower cloth shins.
+        waist=smooth(.88,1.02,z);knee=smooth(.43,.60,z);left=smooth(-.06,.06,co.x)
+        return combine([('pelvis',waist),('thigh.L',(1-waist)*knee*left),
+            ('thigh.R',(1-waist)*knee*(1-left)),('shin.L',(1-waist)*(1-knee)*left),
+            ('shin.R',(1-waist)*(1-knee)*(1-left))])
     if tag=='hips':
         t=1-smooth(.64,1.0,z)
         left=smooth(-.035,.035,co.x)
@@ -125,6 +132,7 @@ def build():
             bm=bmesh.new();bm.from_mesh(copy.data)
             bmesh.ops.delete(bm,geom=[f for f in bm.faces if f.calc_area()<1e-10],context='FACES')
             bmesh.ops.delete(bm,geom=[v for v in bm.verts if not v.link_faces],context='VERTS')
+            bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces))
             bm.to_mesh(copy.data);bm.free()
             copy.data.validate(clean_customdata=True);copy.data.update()
             copy.hide_render=True;copy.hide_set(True)

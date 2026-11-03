@@ -53,7 +53,7 @@ func run() -> void:
 	await process_frame
 	var child_fraction := 0.0
 	var adult_fraction := 0.0
-	for index in [0,1,2,3]:
+	for index in stage.CHARACTERS.size():
 		stage.set_character(index)
 		await process_frame
 		var character: JrpgResidentModel = stage.character
@@ -89,7 +89,8 @@ func run() -> void:
 		if resident=="rin_adult": adult_fraction = head_fraction(character)
 		for lod in [1,2]:
 			var model := JrpgResidentModel.new()
-			var asset: String = {"nagisa":"Nagisa","ryo":"Ryo","rin":"Rin","rin_adult":"RinAdult"}[resident]
+			var asset: String = {"nagisa":"Nagisa","ryo":"Ryo","rin":"Rin","rin_adult":"RinAdult", \
+				"osamu":"Osamu","fumi":"Fumi","maho":"Maho","ritsu":"Ritsu","aoi":"Aoi"}[resident]
 			model.add_child(load("res://game/assets/models/"+resident+"/CH_"+asset+"_LOD%d.glb"%lod).instantiate())
 			root.add_child(model)
 			await process_frame
@@ -124,7 +125,7 @@ func run() -> void:
 	await process_frame
 	var simulation = root.get_node("Sim")
 	simulation.running = false
-	for resident in ["nagisa","ryo","rin"]:
+	for resident in ["nagisa","ryo","rin","osamu","fumi","maho","ritsu","aoi"]:
 		expect(game.avatars[resident].jrpg!=null and not game.avatars[resident].get_node("Visual/Hips").visible,resident+": actual town uses the imported model")
 	var person: Dictionary = simulation.person("rin")
 	var avatar = game.avatars.rin

@@ -26,7 +26,12 @@ const MODELS = {
 	"nagisa": preload("res://game/scenes/characters/nagisa.tscn"),
 	"ryo": preload("res://game/scenes/characters/ryo.tscn"),
 	"rin": preload("res://game/scenes/characters/rin.tscn"),
-	"rin_adult": preload("res://game/scenes/characters/rin_adult.tscn")
+	"rin_adult": preload("res://game/scenes/characters/rin_adult.tscn"),
+	"osamu": preload("res://game/scenes/characters/osamu.tscn"),
+	"fumi": preload("res://game/scenes/characters/fumi.tscn"),
+	"maho": preload("res://game/scenes/characters/maho.tscn"),
+	"ritsu": preload("res://game/scenes/characters/ritsu.tscn"),
+	"aoi": preload("res://game/scenes/characters/aoi.tscn")
 }
 
 func configure(p: Dictionary) -> void:

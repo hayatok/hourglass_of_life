@@ -1,0 +1,326 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/CH_Osamu_delivery.blend",
+  "summary": {
+    "tris_by_lod": {
+      "0": 33272,
+      "1": 13973,
+      "2": 3988
+    },
+    "fail": [],
+    "warn": [
+      "CH_Osamu_Body_LOD0: 38 doubled vertices within 0.0001",
+      "CH_Osamu_Body_LOD1: 9 doubled vertices within 0.0001",
+      "CH_Osamu_Body_LOD2: 1 doubled vertices within 0.0001"
+    ]
+  },
+  "objects": [
+    {
+      "name": "CH_Osamu_Body_LOD0",
+      "type": "MESH",
+      "warn": [
+        "38 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 27372,
+        "verts_evaluated": 13870,
+        "verts": 13870,
+        "faces": 27372,
+        "boundary_edges": 64,
+        "nonmanifold_edges": 0,
+        "islands": 79,
+        "flipped_vs_recalc": 36,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Osamu_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Osamu_Face_LOD0",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 5900,
+        "verts_evaluated": 3204,
+        "verts": 3204,
+        "faces": 5900,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 25,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Osamu_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Osamu_Body_LOD1",
+      "type": "MESH",
+      "warn": [
+        "9 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 11495,
+        "verts_evaluated": 5930,
+        "verts": 5930,
+        "faces": 11495,
+        "boundary_edges": 61,
+        "nonmanifold_edges": 0,
+        "islands": 79,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Osamu_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Osamu_Body_LOD2",
+      "type": "MESH",
+      "warn": [
+        "1 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 3281,
+        "verts_evaluated": 1805,
+        "verts": 1805,
+        "faces": 3281,
+        "boundary_edges": 29,
+        "nonmanifold_edges": 0,
+        "islands": 79,
+        "flipped_vs_recalc": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Osamu_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Osamu_Face_LOD1",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2478,
+        "verts_evaluated": 1493,
+        "verts": 1493,
+        "faces": 2478,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 25,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Osamu_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Osamu_Face_LOD2",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 707,
+        "verts_evaluated": 524,
+        "verts": 524,
+        "faces": 707,
+        "boundary_edges": 265,
+        "nonmanifold_edges": 0,
+        "islands": 25,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Osamu_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "COL_body",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 92,
+        "verts_evaluated": 48,
+        "verts": 48,
+        "faces": 92,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Osamu_Body"
+        ],
+        "modifiers": []
+      }
+    },
+    {
+      "name": "SOCKET_hand.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Osamu_Rig",
+        "parent_bone": "DEF-hand.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_hand.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Osamu_Rig",
+        "parent_bone": "DEF-hand.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_head",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Osamu_Rig",
+        "parent_bone": "DEF-head",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_chest",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Osamu_Rig",
+        "parent_bone": "DEF-chest",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Osamu_Rig",
+        "parent_bone": "DEF-foot.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Osamu_Rig",
+        "parent_bone": "DEF-foot.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "CH_Osamu_Rig",
+      "type": "ARMATURE",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "bones": 35,
+        "deform_bones": 35,
+        "roots": [
+          "DEF-root"
+        ]
+      }
+    }
+  ]
+}

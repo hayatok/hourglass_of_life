@@ -58,11 +58,14 @@ def run(root,stage):
     root=Path(root).resolve();prefix=root.name
     b=template(root,'02_blockout.py','02_blockout')
     if stage in ['02','03']:
-        import resident_forms as forms
+        import resident_forms
+        import cast_forms
         f=template(root,'03_forms.py','03_forms')
         profile=json.loads((root/'profile.json').read_text())
+        forms=cast_forms if profile['costume'] in cast_forms.COSTUMES else resident_forms
         if stage=='02':
             initialize(root)
+            H.OWNER_TAG='phase:02_blockout'
             b.build()
             forms.primary(root,b,f,profile)
             H.save_master(str(root/(prefix+'_canonical.blend')))

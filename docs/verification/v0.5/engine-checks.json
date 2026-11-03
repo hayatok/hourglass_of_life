@@ -43,8 +43,28 @@
     }
   },
   "aging_render_samples": {
+    "aoi": {
+      "hair_changed_samples": 837,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "fumi": {
+      "hair_changed_samples": 873,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "maho": {
+      "hair_changed_samples": 856,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
     "nagisa": {
       "hair_changed_samples": 1051,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "osamu": {
+      "hair_changed_samples": 746,
       "outside_head_changed_samples": 0,
       "sampling_step": 2
     },
@@ -55,6 +75,11 @@
     },
     "rin_adult": {
       "hair_changed_samples": 719,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "ritsu": {
+      "hair_changed_samples": 775,
       "outside_head_changed_samples": 0,
       "sampling_step": 2
     },
@@ -220,21 +245,453 @@
       ],
       "game_exports_match_source": true,
       "final_art_acceptance": false
+    },
+    "osamu": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.69383,
+          "floor_min_m": 0.00617,
+          "triangles": 33272,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.69384,
+          "floor_min_m": 0.00617,
+          "triangles": 13973,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.69397,
+          "floor_min_m": 0.00603,
+          "triangles": 3988,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Osamu_Body_LOD0: 38 doubled vertices within 0.0001",
+        "CH_Osamu_Body_LOD1: 9 doubled vertices within 0.0001",
+        "CH_Osamu_Body_LOD2: 1 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false,
+      "world_front_gate": {
+        "view": "front",
+        "az": 0.0,
+        "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/ref/front-matte.png",
+        "m_per_px": 0.0020286396181384246,
+        "iou": 0.85,
+        "ref_only_pct": 10.57,
+        "render_only_pct": 5.21,
+        "band_width_diff": [
+          0.0203,
+          0.0131,
+          -0.0238,
+          -0.0477,
+          0.0024,
+          0.0584,
+          0.0167,
+          -0.0024,
+          0.0131,
+          -0.0334
+        ]
+      }
+    },
+    "fumi": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.60516,
+          "floor_min_m": 0.00485,
+          "triangles": 31316,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.60516,
+          "floor_min_m": 0.00484,
+          "triangles": 13152,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.60471,
+          "floor_min_m": 0.00483,
+          "triangles": 3755,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Fumi_Body_LOD0: 36 doubled vertices within 0.0001",
+        "CH_Fumi_Body_LOD1: 11 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false,
+      "world_front_gate": {
+        "view": "front",
+        "az": 0.0,
+        "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/ref/front-matte.png",
+        "m_per_px": 0.0019444444444444446,
+        "iou": 0.8718,
+        "ref_only_pct": 8.27,
+        "render_only_pct": 5.22,
+        "band_width_diff": [
+          0.0085,
+          0.0073,
+          0.0109,
+          -0.0085,
+          -0.0181,
+          -0.0326,
+          0.0,
+          0.0,
+          0.0302,
+          0.0399
+        ]
+      }
+    },
+    "maho": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.63404,
+          "floor_min_m": 0.00596,
+          "triangles": 34452,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.63405,
+          "floor_min_m": 0.00595,
+          "triangles": 14468,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.63409,
+          "floor_min_m": 0.0059,
+          "triangles": 4132,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Maho_Body_LOD0: 37 doubled vertices within 0.0001",
+        "CH_Maho_Body_LOD0: 36 faces flipped relative to a consistent recalculation",
+        "CH_Maho_Body_LOD1: 6 doubled vertices within 0.0001",
+        "CH_Maho_Body_LOD2: 5 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false,
+      "world_front_gate": {
+        "view": "front",
+        "az": 0.0,
+        "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/ref/front-matte.png",
+        "m_per_px": 0.0019547079856972586,
+        "iou": 0.8741,
+        "ref_only_pct": 6.75,
+        "render_only_pct": 6.68,
+        "band_width_diff": [
+          0.0036,
+          -0.0358,
+          0.0131,
+          -0.0179,
+          0.0048,
+          0.0107,
+          0.0274,
+          0.0012,
+          -0.0084,
+          0.0012
+        ]
+      }
+    },
+    "ritsu": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.75463,
+          "floor_min_m": 0.00537,
+          "triangles": 30284,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.75464,
+          "floor_min_m": 0.00536,
+          "triangles": 12718,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.75464,
+          "floor_min_m": 0.00536,
+          "triangles": 3633,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Ritsu_Body_LOD0: 38 doubled vertices within 0.0001",
+        "CH_Ritsu_Body_LOD1: 7 doubled vertices within 0.0001",
+        "CH_Ritsu_Body_LOD2: 3 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false,
+      "world_front_gate": {
+        "view": "front",
+        "az": 0.0,
+        "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/ref/front-matte.png",
+        "m_per_px": 0.0020803782505910166,
+        "iou": 0.8796,
+        "ref_only_pct": 7.21,
+        "render_only_pct": 5.49,
+        "band_width_diff": [
+          0.0178,
+          -0.045,
+          0.0024,
+          -0.019,
+          -0.0012,
+          0.0486,
+          0.0036,
+          -0.0059,
+          0.0059,
+          -0.0059
+        ]
+      }
+    },
+    "aoi": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.70479,
+          "floor_min_m": 0.00521,
+          "triangles": 30008,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.7048,
+          "floor_min_m": 0.0052,
+          "triangles": 12602,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.7048,
+          "floor_min_m": 0.00519,
+          "triangles": 3599,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Aoi_Body_LOD0: 36 doubled vertices within 0.0001",
+        "CH_Aoi_Body_LOD1: 10 doubled vertices within 0.0001",
+        "CH_Aoi_Body_LOD2: 3 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false,
+      "world_front_gate": {
+        "view": "front",
+        "az": 0.0,
+        "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/ref/front-matte.png",
+        "m_per_px": 0.0020284697508896796,
+        "iou": 0.8827,
+        "ref_only_pct": 8.6,
+        "render_only_pct": 3.54,
+        "band_width_diff": [
+          0.0083,
+          0.0154,
+          0.0059,
+          -0.0118,
+          -0.0366,
+          0.0059,
+          0.0035,
+          -0.0047,
+          -0.013,
+          0.0142
+        ]
+      }
     }
   },
   "native_editor_edit": "character_stage.tscn Camera FOV 30 -> 34; saved in actual Godot scene editor",
   "native_ui_check": [
     "Ryo: walk",
     "Rin: sit_talk",
-    "RinAdult: wave"
+    "RinAdult: wave",
+    "Osamu: walk",
+    "Fumi: sit_talk",
+    "Maho: wave button",
+    "Ritsu: talk",
+    "Aoi: work"
   ],
   "not_complete": [
-    "five remaining residents",
     "final art/garment acceptance",
+    "older faces and posture",
     "town and prop models",
     "real furniture/prop contacts",
     "lighting and audio",
+    "automatic distance LOD",
     "v0.5 release",
     "v1.0 completion"
-  ]
+  ],
+  "runs": {
+    "full": [
+      {
+        "check": "import",
+        "passed": true,
+        "seconds": 4.7,
+        "failure": null,
+        "log": "import.log",
+        "completion": null
+      },
+      {
+        "check": "simulation",
+        "passed": true,
+        "seconds": 0.84,
+        "failure": null,
+        "log": "simulation.log",
+        "completion": "Simulation checks: 49 passed, 0 failed"
+      },
+      {
+        "check": "social",
+        "passed": true,
+        "seconds": 0.25,
+        "failure": null,
+        "log": "social.log",
+        "completion": "Social life checks: 33 passed, 0 failed"
+      },
+      {
+        "check": "work",
+        "passed": true,
+        "seconds": 0.34,
+        "failure": null,
+        "log": "work.log",
+        "completion": "Work/family checks: 41 passed, 0 failed"
+      },
+      {
+        "check": "life",
+        "passed": true,
+        "seconds": 90.58,
+        "failure": null,
+        "log": "life.log",
+        "completion": "Life course checks: 50 passed, 0 failed"
+      },
+      {
+        "check": "character",
+        "passed": true,
+        "seconds": 1.15,
+        "failure": null,
+        "log": "character.log",
+        "completion": "Character import and motion checks: PASS, errors=[]"
+      },
+      {
+        "check": "cast",
+        "passed": true,
+        "seconds": 2.45,
+        "failure": null,
+        "log": "cast.log",
+        "completion": "Resident cast and growth checks: PASS, errors=[]"
+      },
+      {
+        "check": "character-gpu",
+        "passed": true,
+        "seconds": 2.49,
+        "failure": null,
+        "log": "character-gpu.log",
+        "completion": "Character import and motion checks: PASS, errors=[]"
+      },
+      {
+        "check": "cast-gpu",
+        "passed": true,
+        "seconds": 5.3,
+        "failure": null,
+        "log": "cast-gpu.log",
+        "completion": "Resident cast and growth checks: PASS, errors=[]"
+      },
+      {
+        "check": "scene-gpu",
+        "passed": true,
+        "seconds": 83.32,
+        "failure": null,
+        "log": "scene-gpu.log",
+        "completion": "Scene/UI smoke: PASS"
+      }
+    ],
+    "after_cloth_and_lod_fix": [
+      {
+        "check": "import",
+        "passed": true,
+        "seconds": 11.89,
+        "failure": null,
+        "log": "import.log",
+        "completion": null
+      },
+      {
+        "check": "cast",
+        "passed": true,
+        "seconds": 3.85,
+        "failure": null,
+        "log": "cast.log",
+        "completion": "Resident cast and growth checks: PASS, errors=[]"
+      },
+      {
+        "check": "character-gpu",
+        "passed": true,
+        "seconds": 3.33,
+        "failure": null,
+        "log": "character-gpu.log",
+        "completion": "Character import and motion checks: PASS, errors=[]"
+      },
+      {
+        "check": "cast-gpu",
+        "passed": true,
+        "seconds": 5.86,
+        "failure": null,
+        "log": "cast-gpu.log",
+        "completion": "Resident cast and growth checks: PASS, errors=[]"
+      },
+      {
+        "check": "scene-gpu",
+        "passed": true,
+        "seconds": 79.2,
+        "failure": null,
+        "log": "scene-gpu.log",
+        "completion": "Scene/UI smoke: PASS"
+      }
+    ]
+  }
 }

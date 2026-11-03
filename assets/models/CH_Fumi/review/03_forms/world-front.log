@@ -1,0 +1,15 @@
+00:01.468  blend            | Read blend: "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/CH_Fumi_forms.blend"
+00:01.789  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/03_forms/world/sil_front.png'
+BlenderMCP: cannot start server in background mode (blender -b) - commands would never execute
+BlenderMCP: run Blender with a GUI, or use a virtual display: xvfb-run -a blender
+BlenderMCP addon registered
+[INFO ] services.locationservice ...............: Not adding link to MakeHuman user data, since neither explicit path nor auto-discovery is set in preferences.
+[INFO ] mpfb.init ..............................: Build info FROM_SOURCE
+[INFO ] mpfb.init ..............................: Online access preference is not enabled. Not checking if MakeHuman is online.
+[INFO ] mpfb.init ..............................: MPFB initialization has finished.
+front IoU 0.872  reference-only 8.3%  model-only 5.2%  bands [0.0085, 0.0073, 0.0109, -0.0085, -0.0181, -0.0326, 0.0, 0.0, 0.0302, 0.0399]
+BlenderMCP server stopped
+BlenderMCP addon unregistered
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

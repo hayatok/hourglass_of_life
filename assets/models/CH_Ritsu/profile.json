@@ -1,0 +1,56 @@
+{
+  "id": "ritsu",
+  "height": 1.76,
+  "head_scale": 1.03,
+  "head_x": 1.04,
+  "width": 1.11,
+  "depth": 1.04,
+  "arm_length": 1.12,
+  "arm_close": 0.09,
+  "stance": 0.035,
+  "shoe_stance": 0.05,
+  "foot_turn": 0.13,
+  "jaw": 0.17,
+  "eye_height": 0.0135,
+  "costume": "sweater",
+  "top_color": [
+    0.075,
+    0.065,
+    0.15
+  ],
+  "pants_color": [
+    0.065,
+    0.055,
+    0.105
+  ],
+  "shoe_color": [
+    0.78,
+    0.73,
+    0.61
+  ],
+  "hair": {
+    "style": "parted",
+    "color": [
+      0.024,
+      0.018,
+      0.035
+    ]
+  },
+  "motion": {
+    "walk_frames": 27,
+    "stride": 0.92
+  },
+  "sheet": "11-ritsu-turnaround.png",
+  "ground": 864,
+  "top": 18,
+  "axis": [
+    281,
+    238,
+    267
+  ],
+  "silhouette": "Short parted dark hair, closed navy crewneck sweater, neck headphones, full trousers.",
+  "reference": {
+    "subject_fraction": 0.9537767756482526,
+    "ground_fraction": 0.02593010146561443
+  }
+}

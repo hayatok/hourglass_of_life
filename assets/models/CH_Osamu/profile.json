@@ -1,0 +1,67 @@
+{
+  "id": "osamu",
+  "height": 1.7,
+  "head_scale": 1.04,
+  "head_x": 1.07,
+  "width": 1.18,
+  "depth": 1.09,
+  "arm_length": 1.06,
+  "arm_close": -0.055,
+  "stance": 0.028,
+  "foot_turn": 0.12,
+  "jaw": 0.24,
+  "eye_height": 0.0115,
+  "costume": "apron",
+  "skin_color": [
+    0.86,
+    0.6,
+    0.4
+  ],
+  "top_color": [
+    0.57,
+    0.39,
+    0.2
+  ],
+  "pants_color": [
+    0.115,
+    0.11,
+    0.135
+  ],
+  "shoe_color": [
+    0.12,
+    0.052,
+    0.022
+  ],
+  "apron_color": [
+    0.045,
+    0.13,
+    0.14
+  ],
+  "hair": {
+    "style": "swept",
+    "color": [
+      0.36,
+      0.35,
+      0.37
+    ]
+  },
+  "mature": true,
+  "glasses": true,
+  "motion": {
+    "walk_frames": 29,
+    "stride": 0.84
+  },
+  "sheet": "04-osamu-turnaround.png",
+  "ground": 858,
+  "top": 20,
+  "axis": [
+    264,
+    249,
+    264
+  ],
+  "silhouette": "Swept silver hair, round spectacles, broad shoulders, teal work apron, full slate trousers.",
+  "reference": {
+    "subject_fraction": 0.9447576099210823,
+    "ground_fraction": 0.03269447576099211
+  }
+}

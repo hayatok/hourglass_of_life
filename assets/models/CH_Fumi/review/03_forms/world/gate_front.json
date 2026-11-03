@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/ref/front-matte.png",
+  "m_per_px": 0.0019444444444444446,
+  "iou": 0.8718,
+  "ref_only_pct": 8.27,
+  "render_only_pct": 5.22,
+  "band_width_diff": [
+    0.0085,
+    0.0073,
+    0.0109,
+    -0.0085,
+    -0.0181,
+    -0.0326,
+    0.0,
+    0.0,
+    0.0302,
+    0.0399
+  ]
+}

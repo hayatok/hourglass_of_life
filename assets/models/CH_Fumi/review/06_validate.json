@@ -1,0 +1,321 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/CH_Fumi_delivery.blend",
+  "summary": {
+    "tris_by_lod": {
+      "0": 31316,
+      "1": 13152,
+      "2": 3755
+    },
+    "fail": [],
+    "warn": [
+      "CH_Fumi_Body_LOD0: 36 doubled vertices within 0.0001",
+      "CH_Fumi_Body_LOD1: 11 doubled vertices within 0.0001"
+    ]
+  },
+  "objects": [
+    {
+      "name": "CH_Fumi_Body_LOD0",
+      "type": "MESH",
+      "warn": [
+        "36 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 25416,
+        "verts_evaluated": 12842,
+        "verts": 12842,
+        "faces": 25416,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 69,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Fumi_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Fumi_Face_LOD0",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 5900,
+        "verts_evaluated": 3204,
+        "verts": 3204,
+        "faces": 5900,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 25,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Fumi_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Fumi_Body_LOD1",
+      "type": "MESH",
+      "warn": [
+        "11 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 10674,
+        "verts_evaluated": 5471,
+        "verts": 5471,
+        "faces": 10674,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 69,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Fumi_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Fumi_Body_LOD2",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 3048,
+        "verts_evaluated": 1658,
+        "verts": 1658,
+        "faces": 3048,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 69,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_Fumi_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Fumi_Face_LOD1",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2478,
+        "verts_evaluated": 1493,
+        "verts": 1493,
+        "faces": 2478,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 25,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Fumi_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_Fumi_Face_LOD2",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 707,
+        "verts_evaluated": 531,
+        "verts": 531,
+        "faces": 707,
+        "boundary_edges": 279,
+        "nonmanifold_edges": 0,
+        "islands": 25,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_Fumi_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "COL_body",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 92,
+        "verts_evaluated": 48,
+        "verts": 48,
+        "faces": 92,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_Fumi_Body"
+        ],
+        "modifiers": []
+      }
+    },
+    {
+      "name": "SOCKET_hand.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Fumi_Rig",
+        "parent_bone": "DEF-hand.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_hand.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Fumi_Rig",
+        "parent_bone": "DEF-hand.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_head",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Fumi_Rig",
+        "parent_bone": "DEF-head",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_chest",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Fumi_Rig",
+        "parent_bone": "DEF-chest",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Fumi_Rig",
+        "parent_bone": "DEF-foot.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_Fumi_Rig",
+        "parent_bone": "DEF-foot.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "CH_Fumi_Rig",
+      "type": "ARMATURE",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "bones": 35,
+        "deform_bones": 35,
+        "roots": [
+          "DEF-root"
+        ]
+      }
+    }
+  ]
+}

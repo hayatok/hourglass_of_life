@@ -1,0 +1,26 @@
+00:00.358  blend            | Read blend: "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/CH_Aoi_blockout.blend"
+00:00.478  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_front.png'
+00:00.500  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_side.png'
+00:00.522  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_back.png'
+00:00.542  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_threequarter.png'
+00:00.564  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_ref.png'
+00:00.574  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_gameplay_128px.png'
+BlenderMCP: cannot start server in background mode (blender -b) - commands would never execute
+BlenderMCP: run Blender with a GUI, or use a virtual display: xvfb-run -a blender
+BlenderMCP addon registered
+[INFO ] services.locationservice ...............: Not adding link to MakeHuman user data, since neither explicit path nor auto-discovery is set in preferences.
+[INFO ] mpfb.init ..............................: Build info FROM_SOURCE
+[INFO ] mpfb.init ..............................: Online access preference is not enabled. Not checking if MakeHuman is online.
+[INFO ] mpfb.init ..............................: MPFB initialization has finished.
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_front.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_side.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_back.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_threequarter.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_ref.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Aoi/review/02_blockout/clay_gameplay_128px.png
+size x 0.701 y 0.296 z 1.705 m
+BlenderMCP server stopped
+BlenderMCP addon unregistered
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

@@ -1,0 +1,56 @@
+{
+  "id": "aoi",
+  "height": 1.71,
+  "head_scale": 1.01,
+  "head_x": 1.04,
+  "width": 1.07,
+  "depth": 1.03,
+  "arm_length": 1.1,
+  "arm_close": 0.09,
+  "stance": 0.035,
+  "shoe_stance": 0.05,
+  "foot_turn": 0.14,
+  "jaw": 0.12,
+  "eye_height": 0.0155,
+  "costume": "hood_jacket",
+  "top_color": [
+    0.22,
+    0.23,
+    0.095
+  ],
+  "pants_color": [
+    0.075,
+    0.065,
+    0.06
+  ],
+  "shoe_color": [
+    0.12,
+    0.052,
+    0.022
+  ],
+  "hair": {
+    "style": "shaggy",
+    "color": [
+      0.09,
+      0.036,
+      0.014
+    ]
+  },
+  "motion": {
+    "walk_frames": 24,
+    "stride": 0.98
+  },
+  "sheet": "12-aoi-turnaround.png",
+  "ground": 863,
+  "top": 20,
+  "axis": [
+    290,
+    237,
+    261
+  ],
+  "silhouette": "Shaggy hair, ivory hood, moss utility jacket, mustard backpack, dark trousers.",
+  "reference": {
+    "subject_fraction": 0.9503945885005637,
+    "ground_fraction": 0.02705749718151071
+  }
+}

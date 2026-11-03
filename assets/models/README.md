@@ -2,7 +2,7 @@
 
 画像資料は `assets/artwork/v02-jrpg/`、編集用のBlenderファイルと検証はこのフォルダ、ゲームへ渡すGLBは `game/assets/models/` に置く。このフォルダの `.gdignore` により、原画や中間ファイルをゲームへ自動で取り込まない。
 
-現在は[渚](CH_Nagisa/README.md)、[亮](CH_Ryo/README.md)、[凛](CH_Rin/README.md)、[成長後の凛](CH_RinAdult/README.md)をGodotの町へ取り込んでいる。住人は3人分で、8人と町全体の完成を意味しない。造形の最終受け入れは継続中。制作途中でも実際の町で使い、体格ごとの動きや衣服の問題を見つける。
+現在は住人8人全員と成長後の凛をGodotの町へ取り込んでいる。[渚](CH_Nagisa/README.md)、[亮](CH_Ryo/README.md)、[凛](CH_Rin/README.md)、[成長後の凛](CH_RinAdult/README.md)、[修](CH_Osamu/README.md)、[文](CH_Fumi/README.md)、[真帆](CH_Maho/README.md)、[律](CH_Ritsu/README.md)、[葵](CH_Aoi/README.md)に原画比較と機能検査を記録する。造形の最終受け入れと町の制作は継続中。制作途中でも実際の町で使い、体格ごとの動きや衣服の問題を見つける。
 
 骨と表情の名前、素材と書き出しの契約を共通にし、体格・顔・髪・衣服を人物ごとに制作する。[共通工程](common/README.md)は原画の輪郭、身長、頭身、肩幅、腕の長さ、立ち幅を形状と骨の両方へ反映する。寸法はゲーム用の設計値であり、人間の統計の推定値ではない。
 

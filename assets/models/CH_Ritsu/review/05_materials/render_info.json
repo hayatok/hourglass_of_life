@@ -1,0 +1,79 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/CH_Ritsu_materials.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -0.3636692464351654,
+    -0.15983977913856506,
+    0.005369202699512243
+  ],
+  "bbox_max": [
+    0.3636692464351654,
+    0.13909292221069336,
+    1.7599999904632568
+  ],
+  "size_xyz": [
+    0.7273384928703308,
+    0.2989327013492584,
+    1.7546308040618896
+  ],
+  "objects": [
+    "CH_Ritsu_Body_LOD0",
+    "CH_Ritsu_Face_LOD0"
+  ],
+  "renders": {
+    "front": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/review/05_materials/material_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 4.149466350674629
+    },
+    "side": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/review/05_materials/material_side.png",
+      "az_el_lens": [
+        90,
+        0,
+        0
+      ],
+      "distance": 4.363669246435165
+    },
+    "back": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/review/05_materials/material_back.png",
+      "az_el_lens": [
+        180,
+        0,
+        0
+      ],
+      "distance": 4.149466350674629
+    },
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/review/05_materials/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 3.073411350448926
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/review/05_materials/material_ref.png",
+      "az_el_lens": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distance": 4.149466350674629
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ritsu/review/05_materials/material_gameplay_128px.png",
+      "subject_px": 128
+    },
+    "turntable": {
+      "frames": 12,
+      "pattern": "material_turntable_NN.png"
+    }
+  }
+}

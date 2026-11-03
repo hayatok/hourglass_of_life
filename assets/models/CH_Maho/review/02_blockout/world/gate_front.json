@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Maho/ref/front-matte.png",
+  "m_per_px": 0.0019547079856972586,
+  "iou": 0.874,
+  "ref_only_pct": 6.8,
+  "render_only_pct": 6.64,
+  "band_width_diff": [
+    0.0036,
+    -0.037,
+    0.0131,
+    -0.0179,
+    0.0048,
+    0.0107,
+    0.0274,
+    0.0012,
+    -0.0084,
+    0.0012
+  ]
+}

@@ -3,7 +3,8 @@ from pathlib import Path
 import json,shutil
 
 ROOT=Path(__file__).resolve().parents[1]
-ASSETS={'nagisa':'Nagisa','ryo':'Ryo','rin':'Rin','rin_adult':'RinAdult'}
+ASSETS={'nagisa':'Nagisa','ryo':'Ryo','rin':'Rin','rin_adult':'RinAdult',
+        'osamu':'Osamu','fumi':'Fumi','maho':'Maho','ritsu':'Ritsu','aoi':'Aoi'}
 
 for resident,name in ASSETS.items():
     prefix='CH_'+name;source=ROOT/'assets/models'/prefix

@@ -1,0 +1,38 @@
+00:00.660  blend            | Read blend: "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/CH_Fumi_materials.blend"
+00:02.861  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_front.png'
+00:04.021  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_side.png'
+00:05.503  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_back.png'
+00:06.857  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_threequarter.png'
+00:08.183  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_ref.png'
+00:08.384  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_gameplay_128px.png'
+00:09.764  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_00.png'
+00:11.144  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_01.png'
+00:12.320  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_02.png'
+00:13.458  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_03.png'
+00:14.436  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_04.png'
+00:15.556  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_05.png'
+00:16.943  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_06.png'
+00:18.336  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_07.png'
+00:19.553  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_08.png'
+00:20.698  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_09.png'
+00:21.791  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_10.png'
+00:22.508  render           | Saved: '/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_turntable_11.png'
+BlenderMCP: cannot start server in background mode (blender -b) - commands would never execute
+BlenderMCP: run Blender with a GUI, or use a virtual display: xvfb-run -a blender
+BlenderMCP addon registered
+[INFO ] services.locationservice ...............: Not adding link to MakeHuman user data, since neither explicit path nor auto-discovery is set in preferences.
+[INFO ] mpfb.init ..............................: Build info FROM_SOURCE
+[INFO ] mpfb.init ..............................: Online access preference is not enabled. Not checking if MakeHuman is online.
+[INFO ] mpfb.init ..............................: MPFB initialization has finished.
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_front.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_side.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_back.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_threequarter.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_ref.png
+rendered /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Fumi/review/05_materials/material_gameplay_128px.png
+size x 0.662 y 0.323 z 1.605 m
+BlenderMCP server stopped
+BlenderMCP addon unregistered
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 01:35:57)
+
+Blender quit

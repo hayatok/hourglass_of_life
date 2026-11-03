@@ -2,8 +2,8 @@ extends Node3D
 
 const CLIPS := ["idle","walk","talk","work","sit_talk","sleep","wave","eat","rest"]
 const LABELS := ["待機","歩行","会話","作業","座って会話","睡眠","手を振る","食事","休息"]
-const CHARACTERS := ["nagisa","ryo","rin","rin_adult"]
-const NAMES := ["渚","亮","凛","凛（成長後）"]
+const CHARACTERS := ["nagisa","ryo","rin","rin_adult","osamu","fumi","maho","ritsu","aoi"]
+const NAMES := ["渚","亮","凛","凛（成長後）","修","文","真帆","律","葵"]
 var character: JrpgResidentModel
 var clip_index := 0
 var character_index := 0

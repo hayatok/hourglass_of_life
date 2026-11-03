@@ -1,0 +1,133 @@
+{
+  "clips": {
+    "eat": {
+      "length_s": 2.4,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "idle": {
+      "length_s": 2.4,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "rest": {
+      "length_s": 3.0,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "sit_talk": {
+      "length_s": 2.4,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "sleep": {
+      "length_s": 3.0,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.31335
+    },
+    "talk": {
+      "length_s": 2.4,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "walk": {
+      "length_s": 0.9666666666666667,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "wave": {
+      "length_s": 2.0,
+      "loop": false,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    },
+    "work": {
+      "length_s": 2.0,
+      "loop": true,
+      "seam_max_m": 0.0,
+      "floor_min_m": 0.005
+    }
+  },
+  "morphs": {
+    "CH_Osamu_Face_LOD0/Blink": {
+      "default": 0.0,
+      "max_delta_m": 0.02031
+    },
+    "CH_Osamu_Face_LOD0/Smile": {
+      "default": 0.0,
+      "max_delta_m": 0.00415
+    },
+    "CH_Osamu_Face_LOD0/Sad": {
+      "default": 0.0,
+      "max_delta_m": 0.00831
+    },
+    "CH_Osamu_Face_LOD0/Tired": {
+      "default": 0.0,
+      "max_delta_m": 0.00433
+    },
+    "CH_Osamu_Face_LOD0/LookLeft": {
+      "default": 0.0,
+      "max_delta_m": 0.00535
+    },
+    "CH_Osamu_Face_LOD0/LookRight": {
+      "default": 0.0,
+      "max_delta_m": 0.00535
+    },
+    "CH_Osamu_Face_LOD1/Blink": {
+      "default": 0.0,
+      "max_delta_m": 0.02031
+    },
+    "CH_Osamu_Face_LOD1/Smile": {
+      "default": 0.0,
+      "max_delta_m": 0.00415
+    },
+    "CH_Osamu_Face_LOD1/Sad": {
+      "default": 0.0,
+      "max_delta_m": 0.00831
+    },
+    "CH_Osamu_Face_LOD1/Tired": {
+      "default": 0.0,
+      "max_delta_m": 0.00433
+    },
+    "CH_Osamu_Face_LOD1/LookLeft": {
+      "default": 0.0,
+      "max_delta_m": 0.00535
+    },
+    "CH_Osamu_Face_LOD1/LookRight": {
+      "default": 0.0,
+      "max_delta_m": 0.00535
+    },
+    "CH_Osamu_Face_LOD2/Blink": {
+      "default": 0.0,
+      "max_delta_m": 0.02039
+    },
+    "CH_Osamu_Face_LOD2/Smile": {
+      "default": 0.0,
+      "max_delta_m": 0.00417
+    },
+    "CH_Osamu_Face_LOD2/Sad": {
+      "default": 0.0,
+      "max_delta_m": 0.00834
+    },
+    "CH_Osamu_Face_LOD2/Tired": {
+      "default": 0.0,
+      "max_delta_m": 0.00436
+    },
+    "CH_Osamu_Face_LOD2/LookLeft": {
+      "default": 0.0,
+      "max_delta_m": 0.00535
+    },
+    "CH_Osamu_Face_LOD2/LookRight": {
+      "default": 0.0,
+      "max_delta_m": 0.00535
+    }
+  },
+  "failures": []
+}

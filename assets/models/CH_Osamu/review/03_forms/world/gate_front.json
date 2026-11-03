@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Osamu/ref/front-matte.png",
+  "m_per_px": 0.0020286396181384246,
+  "iou": 0.85,
+  "ref_only_pct": 10.57,
+  "render_only_pct": 5.21,
+  "band_width_diff": [
+    0.0203,
+    0.0131,
+    -0.0238,
+    -0.0477,
+    0.0024,
+    0.0584,
+    0.0167,
+    -0.0024,
+    0.0131,
+    -0.0334
+  ]
+}

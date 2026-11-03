@@ -17,7 +17,8 @@ p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--godot',default=os.environ.get('GODOT_BIN') or shutil.which('godot') or '/Applications/Godot.app/Contents/MacOS/Godot')
 p.add_argument('--gpu',action='store_true',help='Also render character, cast and full-scene checks on a real display')
 p.add_argument('--checks',nargs='+',choices=CHECKS,default=list(CHECKS))
-a=p.parse_args();out=ROOT/'builds/verification';out.mkdir(parents=True,exist_ok=True)
+p.add_argument('--output',type=Path,default=ROOT/'builds/verification',help='Keep separate logs for focused follow-up checks')
+a=p.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
 results=[]
 
 def run(name,args,marker=None,timeout=180):
