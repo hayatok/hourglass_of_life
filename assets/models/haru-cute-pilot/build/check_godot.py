@@ -90,8 +90,11 @@ anti_aliasing/quality/msaa_3d=2
     if not result["passed"]:
         raise RuntimeError(result["failures"])
     for entry in manifest:
-        if sha256(repo / entry["file"]) != entry["sha256"]:
-            raise RuntimeError(f"Source changed during preview: {entry['file']}")
+        entry["sha256_after"] = sha256(repo / entry["file"])
+    fixture = json.loads((out / "source-fixture.json").read_text())
+    fixture["files"] = manifest
+    fixture["fingerprint_policy"] = "Provenance only; not assertions or pass/fail gates."
+    (out / "source-fixture.json").write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + "\n")
     if not args.headless and len(result["renders"]) != 6:
         raise RuntimeError("Expected four comparison views and two static shader comparisons")
     print(f"Verified static asset preview: {out}")

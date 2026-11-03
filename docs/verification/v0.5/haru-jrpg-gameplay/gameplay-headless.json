@@ -13,7 +13,7 @@
 		"material_mode": "TEXTURE_TOON",
 		"source_model": "res://game/assets/models/haru/CH_Haru.glb"
 	},
-	"checks": 42,
+	"checks": 37,
 	"failures": [],
 	"natural": {
 		"conversation": {
@@ -865,23 +865,23 @@
 				"hand_errorR": 0.0,
 				"head": {
 					"__vector3": [
-						-7.20684862136841,
-						1.53699028491974,
-						-12.0394983291626
+						-7.20684766769409,
+						1.53698742389679,
+						-12.0400476455688
 					]
 				},
 				"head_forward": {
 					"__vector3": [
-						0.000110323380795307,
-						-0.0027451238129288,
-						-0.999996244907379
+						0.000207945166039281,
+						-0.0073276050388813,
+						-0.999973118305206
 					]
 				},
 				"mouth": {
 					"__vector3": [
-						-7.20590686798096,
-						1.44970726966858,
-						-12.1442584991455
+						-7.20589637756348,
+						1.44922542572021,
+						-12.1444072723389
 					]
 				},
 				"pelvis": {
@@ -1372,6 +1372,435 @@
 	"outcome": "passed",
 	"player_interventions": [],
 	"population": 12,
+	"provenance": {
+		"scope": "SHA/hash and pixel-hash comparisons identify the observed files only; excluded from functional check counts, failures and outcome.",
+		"source": {
+			"export_matches_manifest": true,
+			"exported_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+			"manifest": {
+				"animation_contract": "animation-contract.json",
+				"asset": "CH_Haru",
+				"blender": "5.2.1 LTS",
+				"bounds_m": {
+					"max": [
+						0.2523,
+						0.1581,
+						1.7148
+					],
+					"min": [
+						-0.2511,
+						-0.1617,
+						0.005
+					],
+					"size": [
+						0.5033,
+						0.3198,
+						1.7098
+					]
+				},
+				"canonical_rest_height_m": 1.71,
+				"colliders": [],
+				"dependencies": [],
+				"distance_lod_texture_policy": "LOD0 retains exact r1 bytes and original three images/PBR source metadata. LOD1/2 are geometry-only with one untextured material slot and no images; the actor keeps its LOD0 material override when swapping mesh and skin. Standalone distance LODs are intentionally untextured.",
+				"exported_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+				"face_controls": {
+					"controls": {
+						"Blink": {
+							"driver": "Resident blink clock; sleep forces 1.0 and waking restores the ordinary clock.",
+							"range": [
+								0.0,
+								1.0
+							],
+							"uniform": "blink"
+						},
+						"TiredEyes": {
+							"driver": "clamp((fatigue - 0.55) / 0.45, 0.0, 0.7); narrows the painted eyes and shades the under-eye region.",
+							"range": [
+								0.0,
+								0.7
+							],
+							"uniform": "tired_eyes"
+						}
+					},
+					"expression_mode": "TEXTURE_EYES",
+					"expression_mode_value": 2.0,
+					"geometry_morph_count": 0.0,
+					"implementation": "Godot UV eye shader on the unchanged source atlas; not GLB facial morph targets.",
+					"layout": "res://game/assets/models/haru/face-layout.json",
+					"limits": [
+						"Only two UV shader controls are implemented. There is no separated Face mesh or six-control blend-shape face.",
+						"Smile geometry remains a separate unmerged prototype. Mouth paint remains unchanged in production.",
+						"Head gaze uses the existing DEF-head rig/contact system; it is not an iris LookLeft/LookRight control.",
+						"Hair-aging masks for the generated atlas are not implemented; old 8x8 palette-cell remapping remains disabled."
+					],
+					"lod_policy": "The actor retains one owned shader material, source atlas and eye-uniform values when swapping LOD meshes.",
+					"material_mode": "TEXTURE_TOON",
+					"material_mode_value": 1.0,
+					"names": [
+						"Blink",
+						"TiredEyes"
+					],
+					"shader": "res://game/assets/models/haru/haru_texture_eyes.gdshader",
+					"supported": true,
+					"unsupported": [
+						"Smile",
+						"Sad",
+						"LookLeft",
+						"LookRight",
+						"Mouth or jaw deformation",
+						"Speech/lip-sync"
+					]
+				},
+				"files": {
+					"LOD1": "CH_Haru_LOD1.glb",
+					"LOD2": "CH_Haru_LOD2.glb",
+					"all": "CH_Haru.glb"
+				},
+				"forms_gate": {
+					"bbox_iou": 0.9252,
+					"bbox_max_band_width_difference": 0.0235,
+					"reference_threshold_unchanged": true,
+					"world_iou": 0.917,
+					"world_max_band_width_difference": 0.0114
+				},
+				"generated": "2026-11-03T16:52:12",
+				"inferred_from_no_reference": [
+					"real height",
+					"side and back anatomy",
+					"garment depth",
+					"hand articulation",
+					"animation transfer"
+				],
+				"locomotion_measurement": {
+					"contact_window_m": 0.15,
+					"cycle_seconds": 0.8,
+					"fps": 30.0,
+					"limitation": "The inherited FK gait has varying stance velocity. This is a best-fit playback speed, not proof of zero sliding or final walk quality.",
+					"measured_speed_m_s": 1.79632402956486,
+					"method": "Mean positive backward velocity of foot joints in the low support window (both sample endpoints z <= 0.15m, above rest foot joint z0.112m); in-place 30fps cycle. Recalculated from fitted Haru bones, not inherited Aoi speed.",
+					"support_samples": [
+						{
+							"frame": 6.0,
+							"height_m": 0.145373672246933,
+							"side": "L",
+							"velocity_m_s": 0.341515839099884
+						},
+						{
+							"frame": 7.0,
+							"height_m": 0.144487679004669,
+							"side": "L",
+							"velocity_m_s": 1.01643294095993
+						},
+						{
+							"frame": 8.0,
+							"height_m": 0.141752868890762,
+							"side": "L",
+							"velocity_m_s": 1.65875762701035
+						},
+						{
+							"frame": 9.0,
+							"height_m": 0.136988937854767,
+							"side": "L",
+							"velocity_m_s": 2.22463175654411
+						},
+						{
+							"frame": 10.0,
+							"height_m": 0.13006865978241,
+							"side": "L",
+							"velocity_m_s": 2.65319287776947
+						},
+						{
+							"frame": 11.0,
+							"height_m": 0.133387953042984,
+							"side": "L",
+							"velocity_m_s": 2.8834131360054
+						},
+						{
+							"frame": 18.0,
+							"height_m": 0.145213395357132,
+							"side": "R",
+							"velocity_m_s": 0.341515839099884
+						},
+						{
+							"frame": 19.0,
+							"height_m": 0.144306659698486,
+							"side": "R",
+							"velocity_m_s": 1.01643294095993
+						},
+						{
+							"frame": 20.0,
+							"height_m": 0.141511529684067,
+							"side": "R",
+							"velocity_m_s": 1.65875762701035
+						},
+						{
+							"frame": 21.0,
+							"height_m": 0.136652946472168,
+							"side": "R",
+							"velocity_m_s": 2.22463175654411
+						},
+						{
+							"frame": 22.0,
+							"height_m": 0.12958824634552,
+							"side": "R",
+							"velocity_m_s": 2.65319287776947
+						},
+						{
+							"frame": 23.0,
+							"height_m": 0.133455663919449,
+							"side": "R",
+							"velocity_m_s": 2.8834131360054
+						}
+					]
+				},
+				"lod_seam_repair": {
+					"animation_tracks_and_bind_matrices_identical_to_lod0": true,
+					"evidence": "assets/models/haru-cute-pilot/review/lod-seams/",
+					"images_unchanged": true,
+					"lod0_unchanged": true,
+					"method": "Weld coincident vertices within 1 micrometre before collapse, retaining UVs per loop. Target-specific weights renormalized to four influences.",
+					"original_raw_unchanged": true,
+					"r2_geometry_only_material_policy_retained": true,
+					"remaining_all_body_unmatched_boundary_length_m": 0.0308923405683943,
+					"remaining_head_neck_unmatched_boundary_length_m": 0.00856693302853186,
+					"retained_uv_loop_coordinates_preserved_by_weld": true,
+					"source_faces_removed_during_merge": 18.0,
+					"uv_loops_removed_during_merge": 54.0,
+					"watertight_claim": false
+				},
+				"lod_sha256": {
+					"CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+					"CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+					"CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59"
+				},
+				"lods": [
+					{
+						"level": 0.0,
+						"objects": [
+							"CH_Haru_Body_LOD0"
+						],
+						"tris": 29046.0
+					},
+					{
+						"level": 1.0,
+						"objects": [
+							"CH_Haru_Body_LOD1"
+						],
+						"tris": 12190.0
+					},
+					{
+						"level": 2.0,
+						"objects": [
+							"CH_Haru_Body_LOD2"
+						],
+						"tris": 3482.0
+					}
+				],
+				"materials": [
+					"tripo_material_8de33a49-b257-44fb-811b-e39974d6578d.001"
+				],
+				"production_status": "Body-animation and two-control UV-eye intermediate. Smile, mouth/jaw, iris-gaze and full facial-expression quality remain incomplete.",
+				"r2_verification": "assets/models/haru-cute-pilot/review/r2/comparison.json",
+				"raw_source": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+				"raw_source_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+				"rest_pose": "Fitted A-pose. Source clip family Aoi DEF35; target-specific joints/weights and per-frame grounding.",
+				"revision": "r3-lod-seam-repair",
+				"skeleton": [
+					{
+						"armature": "CH_Haru_Rig",
+						"bones": 35.0,
+						"deform_bones": [
+							"DEF-root",
+							"DEF-pelvis",
+							"DEF-spine_01",
+							"DEF-spine_02",
+							"DEF-chest",
+							"DEF-neck",
+							"DEF-head",
+							"DEF-clavicle.L",
+							"DEF-upper_arm.L",
+							"DEF-forearm.L",
+							"DEF-hand.L",
+							"DEF-finger0.L",
+							"DEF-finger1.L",
+							"DEF-finger2.L",
+							"DEF-finger3.L",
+							"DEF-finger4.L",
+							"DEF-clavicle.R",
+							"DEF-upper_arm.R",
+							"DEF-forearm.R",
+							"DEF-hand.R",
+							"DEF-finger0.R",
+							"DEF-finger1.R",
+							"DEF-finger2.R",
+							"DEF-finger3.R",
+							"DEF-finger4.R",
+							"DEF-apron_front",
+							"DEF-apron_back",
+							"DEF-thigh.L",
+							"DEF-shin.L",
+							"DEF-foot.L",
+							"DEF-toe.L",
+							"DEF-thigh.R",
+							"DEF-shin.R",
+							"DEF-foot.R",
+							"DEF-toe.R"
+						],
+						"rest_pose": "as exported",
+						"roots": [
+							"DEF-root"
+						]
+					}
+				],
+				"sockets": [],
+				"source": "builds/haru-cute-pilot/CH_Haru_Delivery.blend",
+				"source_images": [
+					{
+						"bytes": 610291.0,
+						"index": 0.0,
+						"mime_type": "image/jpeg",
+						"name": "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
+						"pixel_policy": "preserve original embedded image bytes",
+						"sha256": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659"
+					},
+					{
+						"bytes": 477293.0,
+						"index": 1.0,
+						"mime_type": "image/jpeg",
+						"name": "CH_Haru_JRPG_Pilot_Raw_rm.jpg",
+						"pixel_policy": "preserve original embedded image bytes",
+						"sha256": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c"
+					},
+					{
+						"bytes": 1233190.0,
+						"index": 2.0,
+						"mime_type": "image/png",
+						"name": "CH_Haru_JRPG_Pilot_Raw_normal.png",
+						"pixel_policy": "preserve original embedded image bytes",
+						"sha256": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4"
+					}
+				],
+				"target_engine": "Godot 4.7 Compatibility",
+				"target_height_m": 1.71,
+				"texture_contract": {
+					"basecolor": "sRGB",
+					"distance_lods": "LOD1/2 have no images; the actor retains its LOD0 material override for TextureToon/SourcePBR.",
+					"normal": "raw tangent normal, Non-Color",
+					"pbr": "source material metadata preserved; runtime toon mode does not promise identical PBR lighting",
+					"policy": "Original three embedded images, exact bytes, material descriptors and UVs preserved. Runtime TextureToon samples the base-color atlas; old 8x8 palette recoloring disabled."
+				},
+				"textures": [
+					{
+						"colorspace": "sRGB",
+						"filepath": "",
+						"name": "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001",
+						"packed": true,
+						"size": [
+							2048.0,
+							2048.0
+						]
+					},
+					{
+						"colorspace": "Non-Color",
+						"filepath": "",
+						"name": "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001",
+						"packed": true,
+						"size": [
+							2048.0,
+							2048.0
+						]
+					},
+					{
+						"colorspace": "Non-Color",
+						"filepath": "",
+						"name": "CH_Haru_JRPG_Pilot_Raw_normal.png.001",
+						"packed": true,
+						"size": [
+							2048.0,
+							2048.0
+						]
+					}
+				],
+				"units": {
+					"authoring_forward": "-Y",
+					"authoring_up": "Z",
+					"export_forward": "+Z",
+					"export_up": "Y",
+					"note": "glTF converts Z up to Y up; a subject facing -Y in Blender faces +Z in glTF",
+					"scale_length": 1.0,
+					"system": "METRIC"
+				},
+				"validation_notes": [
+					"Raw source immutable; derived mesh changes body width and shoulder angle, preserving hand local dimensions and UVs.",
+					"Coincident UV/normal-seam vertices retained; no destructive weld.",
+					"Four normalized bone influences maximum per vertex. Linear skinning, no cloth solver.",
+					"LOD0/1/2 share all 35 named bind poses and one surface; only mesh geometry differs.",
+					"The unchanged painted atlas is sampled by the dedicated TEXTURE_EYES shader: Blink closes eyes during sleep, TiredEyes follows fatigue; mouth/Smile controls remain unsupported."
+				]
+			},
+			"raw_albedo": {
+				"embedded_sha256": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
+				"height": 2048,
+				"pixels_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327",
+				"width": 2048
+			},
+			"raw_matches_recorded": true,
+			"raw_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+			"runtime_atlas_pixels_match_raw": true,
+			"runtime_meshes": [
+				"res://game/assets/models/haru/CH_Haru.glb::ArrayMesh_cilwc"
+			],
+			"runtime_scene": "res://game/assets/models/haru/CH_Haru.glb",
+			"runtime_textures": [
+				{
+					"height": 2048,
+					"mesh": "res://game/assets/models/haru/CH_Haru.glb::ArrayMesh_cilwc",
+					"pixels_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327",
+					"texture": "res://game/assets/models/haru/CH_Haru_CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
+					"width": 2048
+				}
+			]
+		},
+		"source_after_sha256": {
+			"res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+			"res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
+			"res://game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+			"res://game/assets/models/haru/CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+			"res://game/assets/models/haru/CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59",
+			"res://game/assets/models/haru/animation-contract.json": "1256ac20a1b682a4acb9be9498b0710bffeb5af3fe1a3a051f2959c45a098828",
+			"res://game/assets/models/haru/asset-manifest.json": "98069241978fbf5b463ed6e7d263d0820ddfe919f741dbadb3e156063ed75bc7",
+			"res://game/assets/models/haru/face-layout.json": "eb71e54866e3c9c275a8f18155a39f5be3f19e88ef92532c1bf5ae3af2e0b925",
+			"res://game/assets/models/haru/haru_texture_eyes.gdshader": "673d6b1e81da9706d7c4fac7e418ce06b4a56f464d34557d803a5c8132dfc38d",
+			"res://game/assets/ui/portraits/haru.png": "83d225aa6a9c557cdab7d255c16d491bfaec99376f90b8cc69a0ca1cf0a7d115",
+			"res://game/scenes/characters/haru.tscn": "47b122e927bcf0a2c1b0dfe681de9b02d5794b6f9f861b07ae8a82ab29f37c2d",
+			"res://game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
+			"res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
+			"res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
+			"res://game/scripts/resident_contacts.gd": "daefa8107fbf779b5cea45ef7887ec9a1215c3f7a29891957cf86b2973a6b894",
+			"res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
+			"res://tests/test_haru_jrpg_gameplay.gd": "deae4f49d666449103e7b1c65742edd13cb3a70be990313439deb0aa33c215e1"
+		},
+		"source_sha256": {
+			"res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+			"res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
+			"res://game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+			"res://game/assets/models/haru/CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+			"res://game/assets/models/haru/CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59",
+			"res://game/assets/models/haru/animation-contract.json": "1256ac20a1b682a4acb9be9498b0710bffeb5af3fe1a3a051f2959c45a098828",
+			"res://game/assets/models/haru/asset-manifest.json": "98069241978fbf5b463ed6e7d263d0820ddfe919f741dbadb3e156063ed75bc7",
+			"res://game/assets/models/haru/face-layout.json": "eb71e54866e3c9c275a8f18155a39f5be3f19e88ef92532c1bf5ae3af2e0b925",
+			"res://game/assets/models/haru/haru_texture_eyes.gdshader": "673d6b1e81da9706d7c4fac7e418ce06b4a56f464d34557d803a5c8132dfc38d",
+			"res://game/assets/ui/portraits/haru.png": "83d225aa6a9c557cdab7d255c16d491bfaec99376f90b8cc69a0ca1cf0a7d115",
+			"res://game/scenes/characters/haru.tscn": "47b122e927bcf0a2c1b0dfe681de9b02d5794b6f9f861b07ae8a82ab29f37c2d",
+			"res://game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
+			"res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
+			"res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
+			"res://game/scripts/resident_contacts.gd": "daefa8107fbf779b5cea45ef7887ec9a1215c3f7a29891957cf86b2973a6b894",
+			"res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
+			"res://tests/test_haru_jrpg_gameplay.gd": "deae4f49d666449103e7b1c65742edd13cb3a70be990313439deb0aa33c215e1"
+		},
+		"source_unchanged": true
+	},
 	"render_sampling": "Gameplay chooses the clip. AnimationPlayer.advance samples its running clip with fixed render deltas; simulation time advances only through advance_minutes.",
 	"rendered": false,
 	"renderer": "headless",
@@ -1460,22 +1889,22 @@
 				"head": {
 					"__vector3": [
 						0.349999994039536,
-						1.52508175373077,
-						-7.08990287780762
+						1.52046644687653,
+						-7.10423231124878
 					]
 				},
 				"head_forward": {
 					"__vector3": [
-						-0.000000123229881410225,
-						-0.246266439557076,
-						-0.969202160835266
+						-0.0000000956639922833347,
+						-0.365676671266556,
+						-0.930741965770721
 					]
 				},
 				"mouth": {
 					"__vector3": [
 						0.349999994039536,
-						1.41490316390991,
-						-7.17024374008179
+						1.40109586715698,
+						-7.17014598846436
 					]
 				},
 				"pelvis": {
@@ -1528,415 +1957,12 @@
 			]
 		},
 		"saved_minute": 112,
-		"test_save_path": "user://test-haru-jrpg-gameplay-53523.json"
+		"test_save_path": "user://test-haru-jrpg-gameplay-64473.json"
 	},
 	"scope": "Real 12-person town, natural seed-711 timeline. Camera/person selection and fixed-step rendering do not replace simulation actions. Save replay is recorded as a separate branch.",
 	"screenshots": [],
 	"search_limit_minutes": 4320,
 	"seed": 711,
-	"source": {
-		"exported_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
-		"manifest": {
-			"animation_contract": "animation-contract.json",
-			"asset": "CH_Haru",
-			"blender": "5.2.1 LTS",
-			"bounds_m": {
-				"max": [
-					0.2523,
-					0.1581,
-					1.7148
-				],
-				"min": [
-					-0.2511,
-					-0.1617,
-					0.005
-				],
-				"size": [
-					0.5033,
-					0.3198,
-					1.7098
-				]
-			},
-			"canonical_rest_height_m": 1.71,
-			"colliders": [],
-			"dependencies": [],
-			"distance_lod_texture_policy": "LOD0 retains exact r1 bytes and original three images/PBR source metadata. LOD1/2 are geometry-only with one untextured material slot and no images; the actor keeps its LOD0 material override when swapping mesh and skin. Standalone distance LODs are intentionally untextured.",
-			"exported_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
-			"face_controls": {
-				"controls": {
-					"Blink": {
-						"driver": "Resident blink clock; sleep forces 1.0 and waking restores the ordinary clock.",
-						"range": [
-							0.0,
-							1.0
-						],
-						"uniform": "blink"
-					},
-					"TiredEyes": {
-						"driver": "clamp((fatigue - 0.55) / 0.45, 0.0, 0.7); narrows the painted eyes and shades the under-eye region.",
-						"range": [
-							0.0,
-							0.7
-						],
-						"uniform": "tired_eyes"
-					}
-				},
-				"expression_mode": "TEXTURE_EYES",
-				"expression_mode_value": 2.0,
-				"geometry_morph_count": 0.0,
-				"implementation": "Godot UV eye shader on the unchanged source atlas; not GLB facial morph targets.",
-				"layout": "res://game/assets/models/haru/face-layout.json",
-				"limits": [
-					"Only two UV shader controls are implemented. There is no separated Face mesh or six-control blend-shape face.",
-					"Smile geometry remains a separate unmerged prototype. Mouth paint remains unchanged in production.",
-					"Head gaze uses the existing DEF-head rig/contact system; it is not an iris LookLeft/LookRight control.",
-					"Hair-aging masks for the generated atlas are not implemented; old 8x8 palette-cell remapping remains disabled."
-				],
-				"lod_policy": "The actor retains one owned shader material, source atlas and eye-uniform values when swapping LOD meshes.",
-				"material_mode": "TEXTURE_TOON",
-				"material_mode_value": 1.0,
-				"names": [
-					"Blink",
-					"TiredEyes"
-				],
-				"shader": "res://game/assets/models/haru/haru_texture_eyes.gdshader",
-				"supported": true,
-				"unsupported": [
-					"Smile",
-					"Sad",
-					"LookLeft",
-					"LookRight",
-					"Mouth or jaw deformation",
-					"Speech/lip-sync"
-				]
-			},
-			"files": {
-				"LOD1": "CH_Haru_LOD1.glb",
-				"LOD2": "CH_Haru_LOD2.glb",
-				"all": "CH_Haru.glb"
-			},
-			"forms_gate": {
-				"bbox_iou": 0.9252,
-				"bbox_max_band_width_difference": 0.0235,
-				"reference_threshold_unchanged": true,
-				"world_iou": 0.917,
-				"world_max_band_width_difference": 0.0114
-			},
-			"generated": "2026-11-03T16:52:12",
-			"inferred_from_no_reference": [
-				"real height",
-				"side and back anatomy",
-				"garment depth",
-				"hand articulation",
-				"animation transfer"
-			],
-			"locomotion_measurement": {
-				"contact_window_m": 0.15,
-				"cycle_seconds": 0.8,
-				"fps": 30.0,
-				"limitation": "The inherited FK gait has varying stance velocity. This is a best-fit playback speed, not proof of zero sliding or final walk quality.",
-				"measured_speed_m_s": 1.79632402956486,
-				"method": "Mean positive backward velocity of foot joints in the low support window (both sample endpoints z <= 0.15m, above rest foot joint z0.112m); in-place 30fps cycle. Recalculated from fitted Haru bones, not inherited Aoi speed.",
-				"support_samples": [
-					{
-						"frame": 6.0,
-						"height_m": 0.145373672246933,
-						"side": "L",
-						"velocity_m_s": 0.341515839099884
-					},
-					{
-						"frame": 7.0,
-						"height_m": 0.144487679004669,
-						"side": "L",
-						"velocity_m_s": 1.01643294095993
-					},
-					{
-						"frame": 8.0,
-						"height_m": 0.141752868890762,
-						"side": "L",
-						"velocity_m_s": 1.65875762701035
-					},
-					{
-						"frame": 9.0,
-						"height_m": 0.136988937854767,
-						"side": "L",
-						"velocity_m_s": 2.22463175654411
-					},
-					{
-						"frame": 10.0,
-						"height_m": 0.13006865978241,
-						"side": "L",
-						"velocity_m_s": 2.65319287776947
-					},
-					{
-						"frame": 11.0,
-						"height_m": 0.133387953042984,
-						"side": "L",
-						"velocity_m_s": 2.8834131360054
-					},
-					{
-						"frame": 18.0,
-						"height_m": 0.145213395357132,
-						"side": "R",
-						"velocity_m_s": 0.341515839099884
-					},
-					{
-						"frame": 19.0,
-						"height_m": 0.144306659698486,
-						"side": "R",
-						"velocity_m_s": 1.01643294095993
-					},
-					{
-						"frame": 20.0,
-						"height_m": 0.141511529684067,
-						"side": "R",
-						"velocity_m_s": 1.65875762701035
-					},
-					{
-						"frame": 21.0,
-						"height_m": 0.136652946472168,
-						"side": "R",
-						"velocity_m_s": 2.22463175654411
-					},
-					{
-						"frame": 22.0,
-						"height_m": 0.12958824634552,
-						"side": "R",
-						"velocity_m_s": 2.65319287776947
-					},
-					{
-						"frame": 23.0,
-						"height_m": 0.133455663919449,
-						"side": "R",
-						"velocity_m_s": 2.8834131360054
-					}
-				]
-			},
-			"lod_seam_repair": {
-				"animation_tracks_and_bind_matrices_identical_to_lod0": true,
-				"evidence": "assets/models/haru-cute-pilot/review/lod-seams/",
-				"images_unchanged": true,
-				"lod0_unchanged": true,
-				"method": "Weld coincident vertices within 1 micrometre before collapse, retaining UVs per loop. Target-specific weights renormalized to four influences.",
-				"original_raw_unchanged": true,
-				"r2_geometry_only_material_policy_retained": true,
-				"remaining_all_body_unmatched_boundary_length_m": 0.0308923405683943,
-				"remaining_head_neck_unmatched_boundary_length_m": 0.00856693302853186,
-				"retained_uv_loop_coordinates_preserved_by_weld": true,
-				"source_faces_removed_during_merge": 18.0,
-				"uv_loops_removed_during_merge": 54.0,
-				"watertight_claim": false
-			},
-			"lod_sha256": {
-				"CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
-				"CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
-				"CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59"
-			},
-			"lods": [
-				{
-					"level": 0.0,
-					"objects": [
-						"CH_Haru_Body_LOD0"
-					],
-					"tris": 29046.0
-				},
-				{
-					"level": 1.0,
-					"objects": [
-						"CH_Haru_Body_LOD1"
-					],
-					"tris": 12190.0
-				},
-				{
-					"level": 2.0,
-					"objects": [
-						"CH_Haru_Body_LOD2"
-					],
-					"tris": 3482.0
-				}
-			],
-			"materials": [
-				"tripo_material_8de33a49-b257-44fb-811b-e39974d6578d.001"
-			],
-			"production_status": "Body-animation and two-control UV-eye intermediate. Smile, mouth/jaw, iris-gaze and full facial-expression quality remain incomplete.",
-			"r2_verification": "assets/models/haru-cute-pilot/review/r2/comparison.json",
-			"raw_source": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
-			"raw_source_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-			"rest_pose": "Fitted A-pose. Source clip family Aoi DEF35; target-specific joints/weights and per-frame grounding.",
-			"revision": "r3-lod-seam-repair",
-			"skeleton": [
-				{
-					"armature": "CH_Haru_Rig",
-					"bones": 35.0,
-					"deform_bones": [
-						"DEF-root",
-						"DEF-pelvis",
-						"DEF-spine_01",
-						"DEF-spine_02",
-						"DEF-chest",
-						"DEF-neck",
-						"DEF-head",
-						"DEF-clavicle.L",
-						"DEF-upper_arm.L",
-						"DEF-forearm.L",
-						"DEF-hand.L",
-						"DEF-finger0.L",
-						"DEF-finger1.L",
-						"DEF-finger2.L",
-						"DEF-finger3.L",
-						"DEF-finger4.L",
-						"DEF-clavicle.R",
-						"DEF-upper_arm.R",
-						"DEF-forearm.R",
-						"DEF-hand.R",
-						"DEF-finger0.R",
-						"DEF-finger1.R",
-						"DEF-finger2.R",
-						"DEF-finger3.R",
-						"DEF-finger4.R",
-						"DEF-apron_front",
-						"DEF-apron_back",
-						"DEF-thigh.L",
-						"DEF-shin.L",
-						"DEF-foot.L",
-						"DEF-toe.L",
-						"DEF-thigh.R",
-						"DEF-shin.R",
-						"DEF-foot.R",
-						"DEF-toe.R"
-					],
-					"rest_pose": "as exported",
-					"roots": [
-						"DEF-root"
-					]
-				}
-			],
-			"sockets": [],
-			"source": "builds/haru-cute-pilot/CH_Haru_Delivery.blend",
-			"source_images": [
-				{
-					"bytes": 610291.0,
-					"index": 0.0,
-					"mime_type": "image/jpeg",
-					"name": "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
-					"pixel_policy": "preserve original embedded image bytes",
-					"sha256": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659"
-				},
-				{
-					"bytes": 477293.0,
-					"index": 1.0,
-					"mime_type": "image/jpeg",
-					"name": "CH_Haru_JRPG_Pilot_Raw_rm.jpg",
-					"pixel_policy": "preserve original embedded image bytes",
-					"sha256": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c"
-				},
-				{
-					"bytes": 1233190.0,
-					"index": 2.0,
-					"mime_type": "image/png",
-					"name": "CH_Haru_JRPG_Pilot_Raw_normal.png",
-					"pixel_policy": "preserve original embedded image bytes",
-					"sha256": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4"
-				}
-			],
-			"target_engine": "Godot 4.7 Compatibility",
-			"target_height_m": 1.71,
-			"texture_contract": {
-				"basecolor": "sRGB",
-				"distance_lods": "LOD1/2 have no images; the actor retains its LOD0 material override for TextureToon/SourcePBR.",
-				"normal": "raw tangent normal, Non-Color",
-				"pbr": "source material metadata preserved; runtime toon mode does not promise identical PBR lighting",
-				"policy": "Original three embedded images, exact bytes, material descriptors and UVs preserved. Runtime TextureToon samples the base-color atlas; old 8x8 palette recoloring disabled."
-			},
-			"textures": [
-				{
-					"colorspace": "sRGB",
-					"filepath": "",
-					"name": "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001",
-					"packed": true,
-					"size": [
-						2048.0,
-						2048.0
-					]
-				},
-				{
-					"colorspace": "Non-Color",
-					"filepath": "",
-					"name": "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001",
-					"packed": true,
-					"size": [
-						2048.0,
-						2048.0
-					]
-				},
-				{
-					"colorspace": "Non-Color",
-					"filepath": "",
-					"name": "CH_Haru_JRPG_Pilot_Raw_normal.png.001",
-					"packed": true,
-					"size": [
-						2048.0,
-						2048.0
-					]
-				}
-			],
-			"units": {
-				"authoring_forward": "-Y",
-				"authoring_up": "Z",
-				"export_forward": "+Z",
-				"export_up": "Y",
-				"note": "glTF converts Z up to Y up; a subject facing -Y in Blender faces +Z in glTF",
-				"scale_length": 1.0,
-				"system": "METRIC"
-			},
-			"validation_notes": [
-				"Raw source immutable; derived mesh changes body width and shoulder angle, preserving hand local dimensions and UVs.",
-				"Coincident UV/normal-seam vertices retained; no destructive weld.",
-				"Four normalized bone influences maximum per vertex. Linear skinning, no cloth solver.",
-				"LOD0/1/2 share all 35 named bind poses and one surface; only mesh geometry differs.",
-				"The unchanged painted atlas is sampled by the dedicated TEXTURE_EYES shader: Blink closes eyes during sleep, TiredEyes follows fatigue; mouth/Smile controls remain unsupported."
-			]
-		},
-		"raw_albedo": {
-			"embedded_sha256": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
-			"height": 2048,
-			"pixels_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327",
-			"width": 2048
-		},
-		"raw_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-		"runtime_meshes": [
-			"res://game/assets/models/haru/CH_Haru.glb::ArrayMesh_cilwc"
-		],
-		"runtime_scene": "res://game/assets/models/haru/CH_Haru.glb",
-		"runtime_textures": [
-			{
-				"height": 2048,
-				"mesh": "res://game/assets/models/haru/CH_Haru.glb::ArrayMesh_cilwc",
-				"pixels_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327",
-				"texture": "res://game/assets/models/haru/CH_Haru_CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
-				"width": 2048
-			}
-		]
-	},
-	"source_sha256": {
-		"res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-		"res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
-		"res://game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
-		"res://game/assets/models/haru/CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
-		"res://game/assets/models/haru/CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59",
-		"res://game/assets/models/haru/animation-contract.json": "1256ac20a1b682a4acb9be9498b0710bffeb5af3fe1a3a051f2959c45a098828",
-		"res://game/assets/models/haru/asset-manifest.json": "98069241978fbf5b463ed6e7d263d0820ddfe919f741dbadb3e156063ed75bc7",
-		"res://game/assets/models/haru/face-layout.json": "eb71e54866e3c9c275a8f18155a39f5be3f19e88ef92532c1bf5ae3af2e0b925",
-		"res://game/assets/models/haru/haru_texture_eyes.gdshader": "673d6b1e81da9706d7c4fac7e418ce06b4a56f464d34557d803a5c8132dfc38d",
-		"res://game/assets/ui/portraits/haru.png": "83d225aa6a9c557cdab7d255c16d491bfaec99376f90b8cc69a0ca1cf0a7d115",
-		"res://game/scenes/characters/haru.tscn": "47b122e927bcf0a2c1b0dfe681de9b02d5794b6f9f861b07ae8a82ab29f37c2d",
-		"res://game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
-		"res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
-		"res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
-		"res://game/scripts/resident_contacts.gd": "daefa8107fbf779b5cea45ef7887ec9a1215c3f7a29891957cf86b2973a6b894",
-		"res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
-		"res://tests/test_haru_jrpg_gameplay.gd": "dc113d4531aed91f014c3fdf3640fd502da481d86496f4fe716deab6f63adc54"
-	},
 	"status": "complete",
-	"wall_seconds": 3.631
+	"wall_seconds": 49.711
 }

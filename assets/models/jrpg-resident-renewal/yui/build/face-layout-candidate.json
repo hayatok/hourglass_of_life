@@ -49,5 +49,6 @@
     "Blink",
     "TiredEyes"
   ],
-  "production_status": "Raw GPU calibration candidate; rig/LOD/actor integration pending."
+  "production_status": "Raw GPU calibration candidate; rig/LOD/actor integration pending.",
+  "fingerprint_policy": "Fingerprints identify sources only, not tests or pass/fail gates."
 }

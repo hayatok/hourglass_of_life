@@ -14,8 +14,7 @@
   "verified": [
     "Own raw UV/3D eye landmarks, not copied from Haru.",
     "Front and -30-degree open/closed/half GPU views.",
-    "Original raw GLB and decoded atlas pixels unchanged.",
-    "Generic runtime reproduces all six accepted PNG files byte-for-byte."
+    "Rendered closed/half states visibly change the eye strip in front and three-quarter views; pixel-change areas are recorded in checks.json."
   ],
   "limits": [
     "Static source geometry only; production rig/LOD, sleep driver, head gaze and actual town validation are still required.",
@@ -23,5 +22,8 @@
     "No mouth/Smile/iris-look or facial blend shapes were added."
   ],
   "reproduce": "python3 assets/models/jrpg-resident-renewal/saki/build/run_texture_eyes.py saki",
-  "profile": "assets/models/jrpg-resident-renewal/saki/build/face-layout-candidate.json"
+  "profile": "assets/models/jrpg-resident-renewal/saki/build/face-layout-candidate.json",
+  "provenance_policy": "Fingerprints identify inputs/outputs only; they are not tests, checks, visual-regression verdicts or pass/fail gates.",
+  "source_mutation_scope": "Calibration scripts write layouts/review artifacts, not raw GLB or source artwork.",
+  "count_policy": "16 functional assertions from the existing GPU run; identifiers excluded, no rerender."
 }

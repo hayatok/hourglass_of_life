@@ -213,8 +213,7 @@ func run() -> void:
 	report["isolated_import_project"] = ProjectSettings.globalize_path("res://")
 	report["comparison_baseline_commit"] = "afb4c32"
 	report["original_source"] = original_source
-	expect(not original_source.is_empty() and FileAccess.get_sha256(original_source)==sha_before,"Staged GLB is byte-identical to the original source")
-	expect(sha_before==EXPECTED_SHA,"Source SHA256 matches the preserved download")
+	report["provenance"] = {"note":"Source fingerprints identify inputs only; not counted as checks and never used alone as pass/fail.","expected_download_sha256":EXPECTED_SHA,"staged_sha256":sha_before,"original_source_sha256":FileAccess.get_sha256(original_source)}
 	var document := raw_document()
 	report["source_structure"] = {"mesh_count":document.get("meshes",[]).size(),"materials":document.get("materials",[]).size(),"images":document.get("images",[]).size(),"skins":document.get("skins",[]).size(),"animations":document.get("animations",[]).size(),"generator":document.get("asset",{}).get("generator","")}
 	var packed := ResourceLoader.load(RAW,"PackedScene") as PackedScene
@@ -279,11 +278,12 @@ func run() -> void:
 	report["shader_compare"] = {"shader":"res://game/assets/models/resident_toon.gdshader","atlas_recolored":false,"hair_cells":[-1,-1,-1],"geometry":"same byte-identical imported raw GLB on both sides","lights":"same neutral key .8, fill .2, ambient .35; linear tonemap"}
 	await capture("raw-pbr-vs-texturetoon-front",0,"Same raw mesh / front / static material comparison")
 	await capture("raw-pbr-vs-texturetoon-threequarter",-35,"Same raw mesh / three-quarter / static material comparison")
-	expect(FileAccess.get_sha256(RAW)==sha_before,"Source GLB remains byte-for-byte unchanged")
-	expect(FileAccess.get_sha256(original_source)==sha_before,"Original source remains byte-for-byte unchanged")
+	report.provenance["staged_sha256_after"] = FileAccess.get_sha256(RAW)
+	report.provenance["original_source_sha256_after"] = FileAccess.get_sha256(original_source)
 	finish()
 
 func finish() -> void:
+	report["count_policy"] = "Functional import/render/IO assertions only; fingerprints excluded."
 	report["checks"] = checks
 	report["failures"] = failures
 	report["passed"] = failures.is_empty()

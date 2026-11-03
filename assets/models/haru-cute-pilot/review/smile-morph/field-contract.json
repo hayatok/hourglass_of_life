@@ -4,7 +4,7 @@
   "function_file": "assets/models/haru-cute-pilot/build/prototype_smile_morph.py",
   "function_name": "smile_delta",
   "safe_to_import": true,
-  "source_script_sha256": "8ba19180683028e86ffe9c3df6f2f18f200e64afc681f362f1e53c5ed6f81641",
+  "source_script_sha256": "54eab08c798159ab6ff9084665621deda639d39e2692f28016d14b2925a7a4ec",
   "coordinate_frame": {
     "units": "metres",
     "canonical_rest_height_m": 1.71,
@@ -47,5 +47,6 @@
     "The existing painted neutral face already smiles softly; this adds a small real mouth-corner lift.",
     "Input topology is somewhat asymmetric: at full strength the painted left/right mouth corners rise about 2.92/4.03 mm in the wider candidate; the middle rises .13 mm.",
     "No production model/skin/clip/core file changed; no actual game or Godot material acceptance in this prototype."
-  ]
+  ],
+  "fingerprint_policy": "Fingerprints identify inputs/outputs only; they are not tests, checks, visual-regression verdicts or pass/fail gates."
 }

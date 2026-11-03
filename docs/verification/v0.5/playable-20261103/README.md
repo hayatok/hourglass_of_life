@@ -8,6 +8,8 @@ Godot 4.7.2、macOS release、universal（x86_64 / arm64）。Apple M5で展開�
 
 SHA256: `d61e488e225525b385f12779f24da26a10021a25df1988a154f8c0434390d41b`
 
-[ビルド台帳](build-manifest.json)にZIP・アプリ本体・PCK・画面のハッシュを記録した。実アプリから取り出したPCKを同じGodot 4.7.2で読み、[外部検証スクリプト](verify_packaged.gd)で **15項目成功・失敗0**。12人の実生成、専用skin/35骨/9clip、2K atlas、顔JSON、睡眠の閉眼と復帰、3LODを検査した。[結果](packaged-smoke.json)と[ログ](packaged-smoke.log)を保持する。ネイティブの起動・操作確認はこのPCK検査とは別に行っている。
+[ビルド台帳](build-manifest.json)にZIP・アプリ本体・PCK・画面の識別用ハッシュを記録した。ハッシュ照合は検査の合否・件数に含めない。実アプリから取り出したPCKを同じGodot 4.7.2で読み、[外部検証スクリプト](verify_packaged.gd)で **15項目成功・失敗0**。12人の実生成、専用skin/35骨/9clip、2K atlas、顔JSON、睡眠の閉眼と復帰、3LODを検査した。[結果](packaged-smoke.json)と[ログ](packaged-smoke.log)を保持する。ネイティブの起動・操作確認はこのPCK検査とは別に行っている。
 
 既存の保存を読み込んだり上書きしたりせず、新規開始した確認用の町を一時停止してアプリを開いたままユーザーへ渡した。
+
+その後、Macの負荷を下げる依頼に合わせて確認用アプリを終了した。ZIPと展開済みappは保存している。

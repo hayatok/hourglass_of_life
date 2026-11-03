@@ -27,5 +27,6 @@
       "stage": "calibration.json"
     }
   ],
-  "note": "The existing uniform-driven shader is reused unchanged; all landmark/layout values are independently calibrated."
+  "note": "The runtime shader is a rendering dependency. Eye layouts are individually calibrated; appearance evidence comes from the rendered states and eye-strip differences.",
+  "fingerprint_policy": "Fingerprints identify inputs/outputs only; they are not tests, checks, visual-regression verdicts or pass/fail gates."
 }

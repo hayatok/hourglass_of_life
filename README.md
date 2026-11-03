@@ -35,6 +35,8 @@ Godot 4.7.2で `project.godot` を開き、プロジェクトを実行する。m
 
 ## 開発と検証
 
+検証は実際の動作と結果を基準にする。SHA照合は識別記録として分け、検査の合否・件数に含めない。[検証記録の読み方](docs/verification/README.md)を参照。
+
 [GitHub](https://github.com/hayatok/hourglass_of_life)のIssueとMilestoneで、[版ごとの中心となる遊び](docs/development-roadmap.md)を管理する。[メニュー・HUD・動きの設計](docs/interface-and-animation.md)も参照。
 
 ```sh

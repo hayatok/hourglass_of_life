@@ -1,11 +1,6 @@
 {
   "purpose": "Geometry Smile feasibility on a copied rigged LOD0; not production integration or gameplay.",
   "variant": "cheek-supported",
-  "source_files_sha256": {
-    "builds/haru-cute-pilot/CH_Haru_Delivery.blend": "59f6c4ab55db8dd95c37883e254d8afb7c0644959a9b23adbe27f2399fe5a024",
-    "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-    "game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf"
-  },
   "morph": "Smile",
   "strength_range": [
     0,
@@ -73,23 +68,6 @@
   "coincident_vertex_groups": 3061,
   "maximum_delta_difference_at_coincident_vertices_m": 0.0,
   "upper_face_displacement_m": 0.0,
-  "uv_sha256_before": "25f3dd443ae0d98c9860c0efec5611be8afe2ca59fceb50e5572664317d9d6e2",
-  "uv_sha256_after": "25f3dd443ae0d98c9860c0efec5611be8afe2ca59fceb50e5572664317d9d6e2",
-  "skin_weights_sha256_before": "57cb11183cb52b9a5ec4688105c21129043d9923ba97b1a8988838f7e7ff4652",
-  "skin_weights_sha256_after": "57cb11183cb52b9a5ec4688105c21129043d9923ba97b1a8988838f7e7ff4652",
-  "packed_images_sha256": {
-    "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
-    "CH_Haru_JRPG_Pilot_Raw_normal.png.001": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4",
-    "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c",
-    "front.png": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875"
-  },
-  "atlas_image_bytes_unchanged_in_master": true,
-  "exported_images_sha256": {
-    "CH_Haru_JRPG_Pilot_Raw_normal.png": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4",
-    "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
-    "CH_Haru_JRPG_Pilot_Raw_rm.jpg": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c"
-  },
-  "exported_atlas_image_bytes_unchanged": true,
   "exported_morph_target": {
     "name": "Smile",
     "attributes": [
@@ -172,5 +150,28 @@
     "area_ratio_max": 1.3909132693347848,
     "flipped_or_collapsed_triangles": 0
   },
-  "source_script_sha256": "8ba19180683028e86ffe9c3df6f2f18f200e64afc681f362f1e53c5ed6f81641"
+  "provenance": {
+    "source_files_sha256": {
+      "builds/haru-cute-pilot/CH_Haru_Delivery.blend": "59f6c4ab55db8dd95c37883e254d8afb7c0644959a9b23adbe27f2399fe5a024",
+      "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+      "game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf"
+    },
+    "uv_sha256_before": "25f3dd443ae0d98c9860c0efec5611be8afe2ca59fceb50e5572664317d9d6e2",
+    "uv_sha256_after": "25f3dd443ae0d98c9860c0efec5611be8afe2ca59fceb50e5572664317d9d6e2",
+    "skin_weights_sha256_before": "57cb11183cb52b9a5ec4688105c21129043d9923ba97b1a8988838f7e7ff4652",
+    "skin_weights_sha256_after": "57cb11183cb52b9a5ec4688105c21129043d9923ba97b1a8988838f7e7ff4652",
+    "packed_images_sha256": {
+      "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
+      "CH_Haru_JRPG_Pilot_Raw_normal.png.001": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4",
+      "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c",
+      "front.png": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875"
+    },
+    "exported_images_sha256": {
+      "CH_Haru_JRPG_Pilot_Raw_normal.png": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4",
+      "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
+      "CH_Haru_JRPG_Pilot_Raw_rm.jpg": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c"
+    },
+    "source_script_sha256": "8ba19180683028e86ffe9c3df6f2f18f200e64afc681f362f1e53c5ed6f81641",
+    "note": "Fingerprints identify inputs/outputs only; they are not tests, checks, visual-regression verdicts or pass/fail gates."
+  }
 }

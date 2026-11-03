@@ -66,7 +66,7 @@
       }
     ]
   },
-  "gameplay_integration": "Dedicated skinned model and nine clips verified in the actual seed-711 twelve-resident town: walking, conversation, joint work, food, sleep/waking and save replay. Headless 42/42 and GPU 43/43. Smile, hair aging and final gait/contact polish remain open.",
+  "gameplay_integration": "Dedicated skinned model and nine clips observed in the actual seed-711 twelve-resident town: walking, conversation, joint work, food, sleep/waking and save replay. Functional checks: headless 37 and GPU 38, excluding five earlier SHA provenance comparisons. Smile, hair aging and final gait/contact polish remain open.",
   "runtime_manifest": "game/assets/models/haru/asset-manifest.json",
   "gameplay_evidence": "docs/verification/v0.5/haru-jrpg-gameplay/"
 }

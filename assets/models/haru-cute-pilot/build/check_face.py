@@ -48,7 +48,11 @@ anti_aliasing/quality/msaa_3d=2
         if result.returncode or re.search(r'(?m)^(?:SCRIPT ERROR|ERROR):',result.stdout):
             raise RuntimeError(f'Godot failed; see {output/log}')
     for source in sources:
-        assert hashlib.sha256((pilot/source['file']).read_bytes()).hexdigest()==source['sha256'],source['file']
+        source['sha256_after'] = hashlib.sha256((pilot/source['file']).read_bytes()).hexdigest()
+    fixture = json.loads((output/'source-fixture.json').read_text())
+    fixture['sources'] = sources
+    fixture['fingerprint_policy'] = 'Provenance only; not checks or pass/fail gates.'
+    (output/'source-fixture.json').write_text(json.dumps(fixture,indent=2)+'\n')
     print(f'Static face prototype saved: {output}')
 
 

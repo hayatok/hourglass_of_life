@@ -44,5 +44,6 @@
     "命の砂時計.app/Contents/Resources/命の砂時計.pck": "cf89b23760f4bd66f028a056092f07ecfa73bea10cbdf47c4ba8eb4a9d9c4ed0",
     "native-play.jpg": "a62bbc4173c255c98a5b24b23e576142c321c18c40b53b2b3cd03ec5956517a3"
   },
-  "release_published": false
+  "release_published": false,
+  "post_verification_cleanup": "After delivery, the verification app was closed at the user request to reduce load. The archive and extracted app remain available."
 }

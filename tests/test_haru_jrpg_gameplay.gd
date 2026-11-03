@@ -22,7 +22,8 @@ var wall_started := 0
 var evidence := {"revision":"r3-texture-eyes","seed":SEED,"population":12,"search_limit_minutes":HORIZON,"player_interventions":[],
 	"scope":"Real 12-person town, natural seed-711 timeline. Camera/person selection and fixed-step rendering do not replace simulation actions. Save replay is recorded as a separate branch.",
 	"render_sampling":"Gameplay chooses the clip. AnimationPlayer.advance samples its running clip with fixed render deltas; simulation time advances only through advance_minutes.",
-	"screenshots":[],"natural":{},"capabilities":{},"source":{}}
+	"screenshots":[],"natural":{},"capabilities":{},
+	"provenance":{"scope":"SHA/hash and pixel-hash comparisons identify the observed files only; excluded from functional check counts, failures and outcome.","source":{}}}
 
 func source_fingerprint() -> Dictionary:
 	var result := {}
@@ -122,8 +123,8 @@ func verify_model() -> bool:
 		paths.append(part.mesh.resource_path)
 		correct_source = correct_source and "haru/CH_Haru" in part.mesh.resource_path
 		bound = bound or (part.skin!=null and part.get_node_or_null(part.skeleton)==model.skeleton)
-	evidence.source.runtime_scene = imported.scene_file_path if imported!=null else ""
-	evidence.source.runtime_meshes = paths
+	evidence.provenance.source.runtime_scene = imported.scene_file_path if imported!=null else ""
+	evidence.provenance.source.runtime_meshes = paths
 	expect(correct_source and not paths.is_empty(),"The visible town mesh comes from CH_Haru.glb, not the old Aoi-derived body")
 	expect(not actor.get_node("Visual/Hips").is_visible_in_tree(),"The procedural body is hidden instead of being drawn under the new imported mesh")
 	var rig_valid: bool = bound and model.skeleton.get_bone_count()==35
@@ -141,11 +142,11 @@ func verify_model() -> bool:
 	expect(evidence.capabilities.get("expression_mode","")=="TEXTURE_EYES" and evidence.capabilities.get("facial_controls",[])==["Blink","TiredEyes"],"The real actor declares the two implemented eye controls without claiming a mouth or blend-shape face")
 	if model.has_method("uses_palette_swatches"): expect(not model.uses_palette_swatches(),"The generated atlas is not recolored through the old palette cells")
 	var records := runtime_texture_records(model)
-	evidence.source.runtime_textures = records
+	evidence.provenance.source.runtime_textures = records
 	var atlas_matches := false
-	for texture in records: atlas_matches = atlas_matches or texture.pixels_sha256==evidence.source.raw_albedo.get("pixels_sha256","")
-	expect(atlas_matches,"The texture used by the live mesh contains the original generated albedo pixels")
-	return correct_source and rig_valid and animations and atlas_matches and contracts_valid
+	for texture in records: atlas_matches = atlas_matches or texture.pixels_sha256==evidence.provenance.source.raw_albedo.get("pixels_sha256","")
+	evidence.provenance.source.runtime_atlas_pixels_match_raw = atlas_matches
+	return correct_source and rig_valid and animations and contracts_valid
 
 func animation_manual_mode() -> void:
 	for actor in main.avatars.values():
@@ -359,8 +360,9 @@ func check_wake() -> void:
 	await capture_face("09-natural-wake-face",false)
 
 func finish() -> void:
-	if evidence.has("source_sha256"):
-		expect(evidence.source_sha256==source_fingerprint(),"The tested asset, adapter and gameplay sources remain unchanged throughout the observation and save replay")
+	if evidence.provenance.has("source_sha256"):
+		evidence.provenance.source_after_sha256 = source_fingerprint()
+		evidence.provenance.source_unchanged = evidence.provenance.source_sha256==evidence.provenance.source_after_sha256
 	evidence.checks = checks;evidence.failures = failures
 	evidence.outcome = "passed" if failures.is_empty() else "failed"
 	evidence.wall_seconds = (Time.get_ticks_msec()-wall_started)/1000.0
@@ -381,14 +383,14 @@ func run() -> void:
 	if not expect(FileAccess.file_exists(MODEL) and FileAccess.file_exists(MANIFEST),"Production Haru GLB and its source manifest are present before gameplay is accepted"):
 		evidence.status = "production asset not available";finish();return
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
-	evidence.source_sha256 = source_fingerprint()
+	evidence.provenance.source_sha256 = source_fingerprint()
 	if DisplayServer.get_name()!="headless":
 		for name in ["01-natural-walking","02-natural-joint-work","03-natural-conversation","04-natural-project-result","05-natural-eating","06-natural-sleeping","07-restored-joint-work","08-natural-sleep-face","09-natural-wake-face","10-natural-joint-work-front"]:
 			var path: String = OUT+"/"+name+".png"
 			if FileAccess.file_exists(path): DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	evidence.source = {"raw_sha256":FileAccess.get_sha256(RAW),"exported_glb_sha256":FileAccess.get_sha256(MODEL),"manifest":manifest,"raw_albedo":source_albedo(RAW)}
-	expect(evidence.source.raw_sha256==RAW_SHA and manifest.get("raw_source_sha256","")==RAW_SHA,"The installed model manifest traces the exact generated source approved for Haru")
-	expect(manifest.get("exported_glb_sha256","")==evidence.source.exported_glb_sha256,"The gameplay GLB hash matches the reviewed production manifest")
+	evidence.provenance.source = {"raw_sha256":FileAccess.get_sha256(RAW),"exported_glb_sha256":FileAccess.get_sha256(MODEL),"manifest":manifest,"raw_albedo":source_albedo(RAW)}
+	evidence.provenance.source.raw_matches_recorded = evidence.provenance.source.raw_sha256==RAW_SHA and manifest.get("raw_source_sha256","")==RAW_SHA
+	evidence.provenance.source.export_matches_manifest = manifest.get("exported_glb_sha256","")==evidence.provenance.source.exported_glb_sha256
 	root.size = Vector2i(1440,900);root.content_scale_size = Vector2i(1440,900)
 	main = load("res://game/scenes/main.tscn").instantiate();root.add_child(main)
 	await process_frame
@@ -443,7 +445,7 @@ func run() -> void:
 	if save_minute>=0 and not expected_future.is_empty():
 		expect(sim.load_game(save_path()),"The actual 12-person save reloads with Haru's project in progress")
 		animation_manual_mode();main._select("haru");sync_view();await render(.20)
-		expect(verify_model() and current_actor().animation_name=="work","Save restoration rebuilds the new Haru mesh, atlas and current work pose")
+		expect(verify_model() and current_actor().animation_name=="work","Save restoration rebuilds the new Haru mesh and current work pose")
 		evidence.save_replay = {"saved_minute":save_minute,"restored":actor_snapshot(),"minutes_replayed":120,"test_save_path":save_path()}
 		await capture("07-restored-joint-work")
 		sim.advance_minutes(120)

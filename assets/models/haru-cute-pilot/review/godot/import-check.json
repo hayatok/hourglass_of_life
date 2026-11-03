@@ -1,402 +1,413 @@
 {
-	"checks": 31,
-	"comparison_baseline_commit": "afb4c32",
-	"current_import": {
-		"animation_clips": [
-			"eat",
-			"idle",
-			"rest",
-			"sit_talk",
-			"sleep",
-			"talk",
-			"walk",
-			"wave",
-			"work"
-		],
-		"frozen_pose": "skeleton rest poses reset; animation mixer inactive; no animation playback",
-		"material_count": 2,
-		"materials": [
-			{
-				"class": "ShaderMaterial",
-				"name": "",
-				"textures": {
-					"base_palette": {
-						"height": 1024,
-						"mipmaps": true,
-						"path": "",
-						"readable": true,
-						"width": 1024
-					}
-				}
-			},
-			{
-				"class": "StandardMaterial3D",
-				"metallic": 1.0,
-				"name": "CH_Aoi_Face",
-				"normal_enabled": true,
-				"roughness": 1.0,
-				"textures": {
-					"albedo_texture": {
-						"height": 1024,
-						"mipmaps": true,
-						"path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_BaseColor.png",
-						"readable": true,
-						"width": 1024
-					},
-					"metallic_texture": {
-						"height": 1024,
-						"mipmaps": true,
-						"path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_ORM.png",
-						"readable": true,
-						"width": 1024
-					},
-					"normal_texture": {
-						"height": 1024,
-						"mipmaps": true,
-						"path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_Normal.png",
-						"readable": true,
-						"width": 1024
-					},
-					"roughness_texture": {
-						"height": 1024,
-						"mipmaps": true,
-						"path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_ORM.png",
-						"readable": true,
-						"width": 1024
-					}
-				}
-			}
-		],
-		"mesh_instances": [
-			{
-				"blend_shapes": 0,
-				"has_skin": true,
-				"local_bounds": {
-					"max": [
-						0.350564062595367,
-						1.70999991893768,
-						0.158087968826294
-					],
-					"min": [
-						-0.350564062595367,
-						0.00520760845392942,
-						-0.257499992847443
-					],
-					"size": [
-						0.701128125190735,
-						1.70479226112366,
-						0.415587961673737
-					]
-				},
-				"path": "Model/CH_Aoi_Rig/Skeleton3D/CH_Aoi_Body_LOD0",
-				"surfaces": [
-					{
-						"indices": 74988,
-						"primitive": 3,
-						"triangles": 24996,
-						"vertices": 38334
-					}
-				]
-			},
-			{
-				"blend_shapes": 6,
-				"has_skin": true,
-				"local_bounds": {
-					"max": [
-						0.0707883834838867,
-						1.59334874153137,
-						0.0971970707178116
-					],
-					"min": [
-						-0.0707904845476151,
-						1.48693382740021,
-						0.0580306015908718
-					],
-					"size": [
-						0.141578868031502,
-						0.106414914131165,
-						0.0391664691269398
-					]
-				},
-				"path": "Model/CH_Aoi_Rig/Skeleton3D/CH_Aoi_Face_LOD0",
-				"surfaces": [
-					{
-						"indices": 15036,
-						"primitive": 3,
-						"triangles": 5012,
-						"vertices": 7502
-					}
-				]
-			}
-		],
-		"rest_mesh_bounds": {
-			"max": [
-				0.350564062595367,
-				1.70999991893768,
-				0.158087968826294
-			],
-			"min": [
-				-0.350564062595367,
-				0.00520760845392942,
-				-0.257499992847443
-			],
-			"size": [
-				0.701128125190735,
-				1.70479226112366,
-				0.415587961673737
-			]
-		},
-		"skeletons": [
-			{
-				"bones": 35,
-				"path": "Model/CH_Aoi_Rig/Skeleton3D"
-			}
-		],
-		"skinned_meshes": 2,
-		"triangles": 30008,
-		"vertices": 45836
-	},
-	"current_normalization": {
-		"body_scale": [
-			1.0349999666214,
-			1.0349999666214,
-			1.0349999666214
-		],
-		"body_scaled_rest_height_m": 1.76445996761322,
-		"measurement": "static rest mesh AABB, transformed into model root space; pose/cloth collision not validated",
-		"model_offset_before_normalization": [
-			0.0,
-			-0.0053898748010397,
-			0.0514457225799561
-		],
-		"normalization_scale": 0.96913505060311,
-		"normalized_height_m": 1.71,
-		"stage_x": -0.93,
-		"target_height_m": 1.71
-	},
-	"current_scene": "res://assets/models/haru-cute-pilot/build/fixtures/haru-placeholder.tscn",
-	"display_server": "macOS",
-	"engine": {
-		"build": "official",
-		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
-		"hex": 263938,
-		"major": 4,
-		"minor": 7,
-		"patch": 2,
-		"status": "stable",
-		"string": "4.7.2-stable (official)",
-		"timestamp": 0
-	},
-	"failures": [],
-	"isolated_import_project": "/private/var/folders/_n/lm0cmjyj7l759qzv03j33fqw0000gn/T/hourglass-haru-godot-vjs_t3cp/",
-	"limitations": [
-		"Single front reference; unseen back/side are inferred by the generator.",
-		"The raw candidate has no rig, animation, facial controls or production LOD assets.",
-		"Both assets are frozen at rest. This does not validate deformation, contacts, crowds, game lighting or performance.",
-		"Current shared-rig model retains its own toon shader and palette; the raw candidate retains imported PBR materials. Same neutral lights, no claim of a final shared shading direction."
-	],
-	"original_source": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
-	"passed": true,
-	"production_actor_replaced": false,
-	"purpose": "static imported material/mesh preview; not gameplay, animation, skinning or actor integration evidence",
-	"raw_import": {
-		"animation_clips": [],
-		"material_count": 1,
-		"materials": [
-			{
-				"class": "StandardMaterial3D",
-				"metallic": 1.0,
-				"name": "tripo_material_8de33a49-b257-44fb-811b-e39974d6578d",
-				"normal_enabled": true,
-				"roughness": 1.0,
-				"textures": {
-					"albedo_texture": {
-						"height": 2048,
-						"mipmaps": true,
-						"path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
-						"readable": true,
-						"width": 2048
-					},
-					"metallic_texture": {
-						"height": 2048,
-						"mipmaps": true,
-						"path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_rm.jpg",
-						"readable": true,
-						"width": 2048
-					},
-					"normal_texture": {
-						"height": 2048,
-						"mipmaps": true,
-						"path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_normal.png",
-						"readable": true,
-						"width": 2048
-					},
-					"roughness_texture": {
-						"height": 2048,
-						"mipmaps": true,
-						"path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_rm.jpg",
-						"readable": true,
-						"width": 2048
-					}
-				}
-			}
-		],
-		"mesh_instances": [
-			{
-				"blend_shapes": 0,
-				"has_skin": false,
-				"local_bounds": {
-					"max": [
-						0.26739501953125,
-						1.0,
-						0.0945663601160049
-					],
-					"min": [
-						-0.26739501953125,
-						0.0,
-						-0.0945663601160049
-					],
-					"size": [
-						0.5347900390625,
-						1.0,
-						0.18913272023201
-					]
-				},
-				"path": "tripo_node_8de33a49-b257-44fb-811b-e39974d6578d",
-				"surfaces": [
-					{
-						"indices": 87138,
-						"primitive": 3,
-						"triangles": 29046,
-						"vertices": 17990
-					}
-				]
-			}
-		],
-		"rest_mesh_bounds": {
-			"max": [
-				0.26739501953125,
-				1.0,
-				0.0945663601160049
-			],
-			"min": [
-				-0.26739501953125,
-				0.0,
-				-0.0945663601160049
-			],
-			"size": [
-				0.5347900390625,
-				1.0,
-				0.18913272023201
-			]
-		},
-		"skeletons": [],
-		"skinned_meshes": 0,
-		"triangles": 29046,
-		"vertices": 17990
-	},
-	"raw_normalization": {
-		"body_scale": [
-			1.0,
-			1.0,
-			1.0
-		],
-		"body_scaled_rest_height_m": 1.0,
-		"measurement": "static rest mesh AABB, transformed into model root space; pose/cloth collision not validated",
-		"model_offset_before_normalization": [
-			0.0,
-			0.0,
-			0.0
-		],
-		"normalization_scale": 1.71,
-		"normalized_height_m": 1.71,
-		"stage_x": 0.93,
-		"target_height_m": 1.71
-	},
-	"raw_toon_normalization": {
-		"body_scale": [
-			1.0,
-			1.0,
-			1.0
-		],
-		"body_scaled_rest_height_m": 1.0,
-		"measurement": "static rest mesh AABB, transformed into model root space; pose/cloth collision not validated",
-		"model_offset_before_normalization": [
-			0.0,
-			0.0,
-			0.0
-		],
-		"normalization_scale": 1.71,
-		"normalized_height_m": 1.71,
-		"stage_x": -0.93,
-		"target_height_m": 1.71
-	},
-	"reference": "res://assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
-	"reference_sha256": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875",
-	"rendering_method": "gl_compatibility",
-	"renders": [
-		{
-			"description": "Front / rest pose",
-			"file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/front.png",
-			"height": 1000,
-			"width": 1600,
-			"yaw_degrees": 0.0
-		},
-		{
-			"description": "Three-quarter / rest pose",
-			"file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/threequarter.png",
-			"height": 1000,
-			"width": 1600,
-			"yaw_degrees": -35.0
-		},
-		{
-			"description": "Side / rest pose",
-			"file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/side.png",
-			"height": 1000,
-			"width": 1600,
-			"yaw_degrees": -90.0
-		},
-		{
-			"description": "Back / generated side is not established by the front reference",
-			"file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/back.png",
-			"height": 1000,
-			"width": 1600,
-			"yaw_degrees": 180.0
-		},
-		{
-			"description": "Same raw mesh / front / static material comparison",
-			"file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/raw-pbr-vs-texturetoon-front.png",
-			"height": 1000,
-			"width": 1600,
-			"yaw_degrees": 0.0
-		},
-		{
-			"description": "Same raw mesh / three-quarter / static material comparison",
-			"file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/raw-pbr-vs-texturetoon-threequarter.png",
-			"height": 1000,
-			"width": 1600,
-			"yaw_degrees": -35.0
-		}
-	],
-	"shader_compare": {
-		"atlas_recolored": false,
-		"geometry": "same byte-identical imported raw GLB on both sides",
-		"hair_cells": [
-			-1,
-			-1,
-			-1
-		],
-		"lights": "same neutral key .8, fill .2, ambient .35; linear tonemap",
-		"shader": "res://game/assets/models/resident_toon.gdshader"
-	},
-	"source_glb": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
-	"source_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-	"source_structure": {
-		"animations": 0,
-		"generator": "Tripo",
-		"images": 3,
-		"materials": 1,
-		"mesh_count": 1,
-		"skins": 0
-	}
+  "checks": 27,
+  "comparison_baseline_commit": "afb4c32",
+  "current_import": {
+    "animation_clips": [
+      "eat",
+      "idle",
+      "rest",
+      "sit_talk",
+      "sleep",
+      "talk",
+      "walk",
+      "wave",
+      "work"
+    ],
+    "frozen_pose": "skeleton rest poses reset; animation mixer inactive; no animation playback",
+    "material_count": 2,
+    "materials": [
+      {
+        "class": "ShaderMaterial",
+        "name": "",
+        "textures": {
+          "base_palette": {
+            "height": 1024,
+            "mipmaps": true,
+            "path": "",
+            "readable": true,
+            "width": 1024
+          }
+        }
+      },
+      {
+        "class": "StandardMaterial3D",
+        "metallic": 1.0,
+        "name": "CH_Aoi_Face",
+        "normal_enabled": true,
+        "roughness": 1.0,
+        "textures": {
+          "albedo_texture": {
+            "height": 1024,
+            "mipmaps": true,
+            "path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_BaseColor.png",
+            "readable": true,
+            "width": 1024
+          },
+          "metallic_texture": {
+            "height": 1024,
+            "mipmaps": true,
+            "path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_ORM.png",
+            "readable": true,
+            "width": 1024
+          },
+          "normal_texture": {
+            "height": 1024,
+            "mipmaps": true,
+            "path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_Normal.png",
+            "readable": true,
+            "width": 1024
+          },
+          "roughness_texture": {
+            "height": 1024,
+            "mipmaps": true,
+            "path": "res://game/assets/models/aoi/CH_Aoi_CH_Aoi_ORM.png",
+            "readable": true,
+            "width": 1024
+          }
+        }
+      }
+    ],
+    "mesh_instances": [
+      {
+        "blend_shapes": 0,
+        "has_skin": true,
+        "local_bounds": {
+          "max": [
+            0.350564062595367,
+            1.70999991893768,
+            0.158087968826294
+          ],
+          "min": [
+            -0.350564062595367,
+            0.00520760845392942,
+            -0.257499992847443
+          ],
+          "size": [
+            0.701128125190735,
+            1.70479226112366,
+            0.415587961673737
+          ]
+        },
+        "path": "Model/CH_Aoi_Rig/Skeleton3D/CH_Aoi_Body_LOD0",
+        "surfaces": [
+          {
+            "indices": 74988,
+            "primitive": 3,
+            "triangles": 24996,
+            "vertices": 38334
+          }
+        ]
+      },
+      {
+        "blend_shapes": 6,
+        "has_skin": true,
+        "local_bounds": {
+          "max": [
+            0.0707883834838867,
+            1.59334874153137,
+            0.0971970707178116
+          ],
+          "min": [
+            -0.0707904845476151,
+            1.48693382740021,
+            0.0580306015908718
+          ],
+          "size": [
+            0.141578868031502,
+            0.106414914131165,
+            0.0391664691269398
+          ]
+        },
+        "path": "Model/CH_Aoi_Rig/Skeleton3D/CH_Aoi_Face_LOD0",
+        "surfaces": [
+          {
+            "indices": 15036,
+            "primitive": 3,
+            "triangles": 5012,
+            "vertices": 7502
+          }
+        ]
+      }
+    ],
+    "rest_mesh_bounds": {
+      "max": [
+        0.350564062595367,
+        1.70999991893768,
+        0.158087968826294
+      ],
+      "min": [
+        -0.350564062595367,
+        0.00520760845392942,
+        -0.257499992847443
+      ],
+      "size": [
+        0.701128125190735,
+        1.70479226112366,
+        0.415587961673737
+      ]
+    },
+    "skeletons": [
+      {
+        "bones": 35,
+        "path": "Model/CH_Aoi_Rig/Skeleton3D"
+      }
+    ],
+    "skinned_meshes": 2,
+    "triangles": 30008,
+    "vertices": 45836
+  },
+  "current_normalization": {
+    "body_scale": [
+      1.0349999666214,
+      1.0349999666214,
+      1.0349999666214
+    ],
+    "body_scaled_rest_height_m": 1.76445996761322,
+    "measurement": "static rest mesh AABB, transformed into model root space; pose/cloth collision not validated",
+    "model_offset_before_normalization": [
+      0.0,
+      -0.0053898748010397,
+      0.0514457225799561
+    ],
+    "normalization_scale": 0.96913505060311,
+    "normalized_height_m": 1.71,
+    "stage_x": -0.93,
+    "target_height_m": 1.71
+  },
+  "current_scene": "res://assets/models/haru-cute-pilot/build/fixtures/haru-placeholder.tscn",
+  "display_server": "macOS",
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [],
+  "isolated_import_project": "/private/var/folders/_n/lm0cmjyj7l759qzv03j33fqw0000gn/T/hourglass-haru-godot-vjs_t3cp/",
+  "limitations": [
+    "Single front reference; unseen back/side are inferred by the generator.",
+    "The raw candidate has no rig, animation, facial controls or production LOD assets.",
+    "Both assets are frozen at rest. This does not validate deformation, contacts, crowds, game lighting or performance.",
+    "Current shared-rig model retains its own toon shader and palette; the raw candidate retains imported PBR materials. Same neutral lights, no claim of a final shared shading direction."
+  ],
+  "original_source": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+  "passed": true,
+  "production_actor_replaced": false,
+  "purpose": "static imported material/mesh preview; not gameplay, animation, skinning or actor integration evidence",
+  "raw_import": {
+    "animation_clips": [],
+    "material_count": 1,
+    "materials": [
+      {
+        "class": "StandardMaterial3D",
+        "metallic": 1.0,
+        "name": "tripo_material_8de33a49-b257-44fb-811b-e39974d6578d",
+        "normal_enabled": true,
+        "roughness": 1.0,
+        "textures": {
+          "albedo_texture": {
+            "height": 2048,
+            "mipmaps": true,
+            "path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
+            "readable": true,
+            "width": 2048
+          },
+          "metallic_texture": {
+            "height": 2048,
+            "mipmaps": true,
+            "path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_rm.jpg",
+            "readable": true,
+            "width": 2048
+          },
+          "normal_texture": {
+            "height": 2048,
+            "mipmaps": true,
+            "path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_normal.png",
+            "readable": true,
+            "width": 2048
+          },
+          "roughness_texture": {
+            "height": 2048,
+            "mipmaps": true,
+            "path": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw_CH_Haru_JRPG_Pilot_Raw_rm.jpg",
+            "readable": true,
+            "width": 2048
+          }
+        }
+      }
+    ],
+    "mesh_instances": [
+      {
+        "blend_shapes": 0,
+        "has_skin": false,
+        "local_bounds": {
+          "max": [
+            0.26739501953125,
+            1.0,
+            0.0945663601160049
+          ],
+          "min": [
+            -0.26739501953125,
+            0.0,
+            -0.0945663601160049
+          ],
+          "size": [
+            0.5347900390625,
+            1.0,
+            0.18913272023201
+          ]
+        },
+        "path": "tripo_node_8de33a49-b257-44fb-811b-e39974d6578d",
+        "surfaces": [
+          {
+            "indices": 87138,
+            "primitive": 3,
+            "triangles": 29046,
+            "vertices": 17990
+          }
+        ]
+      }
+    ],
+    "rest_mesh_bounds": {
+      "max": [
+        0.26739501953125,
+        1.0,
+        0.0945663601160049
+      ],
+      "min": [
+        -0.26739501953125,
+        0.0,
+        -0.0945663601160049
+      ],
+      "size": [
+        0.5347900390625,
+        1.0,
+        0.18913272023201
+      ]
+    },
+    "skeletons": [],
+    "skinned_meshes": 0,
+    "triangles": 29046,
+    "vertices": 17990
+  },
+  "raw_normalization": {
+    "body_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "body_scaled_rest_height_m": 1.0,
+    "measurement": "static rest mesh AABB, transformed into model root space; pose/cloth collision not validated",
+    "model_offset_before_normalization": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "normalization_scale": 1.71,
+    "normalized_height_m": 1.71,
+    "stage_x": 0.93,
+    "target_height_m": 1.71
+  },
+  "raw_toon_normalization": {
+    "body_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "body_scaled_rest_height_m": 1.0,
+    "measurement": "static rest mesh AABB, transformed into model root space; pose/cloth collision not validated",
+    "model_offset_before_normalization": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "normalization_scale": 1.71,
+    "normalized_height_m": 1.71,
+    "stage_x": -0.93,
+    "target_height_m": 1.71
+  },
+  "reference": "res://assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
+  "rendering_method": "gl_compatibility",
+  "renders": [
+    {
+      "description": "Front / rest pose",
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/front.png",
+      "height": 1000,
+      "width": 1600,
+      "yaw_degrees": 0.0
+    },
+    {
+      "description": "Three-quarter / rest pose",
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/threequarter.png",
+      "height": 1000,
+      "width": 1600,
+      "yaw_degrees": -35.0
+    },
+    {
+      "description": "Side / rest pose",
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/side.png",
+      "height": 1000,
+      "width": 1600,
+      "yaw_degrees": -90.0
+    },
+    {
+      "description": "Back / generated side is not established by the front reference",
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/back.png",
+      "height": 1000,
+      "width": 1600,
+      "yaw_degrees": 180.0
+    },
+    {
+      "description": "Same raw mesh / front / static material comparison",
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/raw-pbr-vs-texturetoon-front.png",
+      "height": 1000,
+      "width": 1600,
+      "yaw_degrees": 0.0
+    },
+    {
+      "description": "Same raw mesh / three-quarter / static material comparison",
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/raw-pbr-vs-texturetoon-threequarter.png",
+      "height": 1000,
+      "width": 1600,
+      "yaw_degrees": -35.0
+    }
+  ],
+  "shader_compare": {
+    "atlas_recolored": false,
+    "geometry": "same byte-identical imported raw GLB on both sides",
+    "hair_cells": [
+      -1,
+      -1,
+      -1
+    ],
+    "lights": "same neutral key .8, fill .2, ambient .35; linear tonemap",
+    "shader": "res://game/assets/models/resident_toon.gdshader"
+  },
+  "source_glb": "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+  "source_structure": {
+    "animations": 0,
+    "generator": "Tripo",
+    "images": 3,
+    "materials": 1,
+    "mesh_count": 1,
+    "skins": 0
+  },
+  "count_policy": "Functional assertions only; SHA/hash identity assertions excluded.",
+  "reclassification": {
+    "previous_assertion_count": 31,
+    "fingerprint_assertions_removed": 4,
+    "reason": "Removed expected-download, staged/original and before/after GLB SHA identity assertions.",
+    "same_execution_evidence_reused": true,
+    "rerendered": false
+  },
+  "provenance": {
+    "reference_sha256": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875",
+    "source_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+    "note": "Fingerprints identify inputs/outputs only; they are not tests, checks, visual-regression verdicts or pass/fail gates."
+  }
 }

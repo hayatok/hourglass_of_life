@@ -1,148 +1,161 @@
 {
-	"checks": 18,
-	"differences": {
-		"front-closed": {
-			"bounds": [
-				267,
-				386,
-				269,
-				102
-			],
-			"pixels": 11389
-		},
-		"front-half": {
-			"bounds": [
-				267,
-				386,
-				269,
-				111
-			],
-			"pixels": 11028
-		},
-		"threequarter-closed": {
-			"bounds": [
-				209,
-				392,
-				230,
-				98
-			],
-			"pixels": 9211
-		},
-		"threequarter-half": {
-			"bounds": [
-				209,
-				392,
-				230,
-				105
-			],
-			"pixels": 9175
-		}
-	},
-	"failures": [],
-	"layout": {
-		"calibration": "Each eye independently annotated on this raw atlas, then front-ray barycentric UV calibrated; no Haru coordinates reused.",
-		"eyelid_method": "compress",
-		"eyes": {
-			"left": {
-				"axis_x": [
-					0.0151305518668162,
-					-0.00266031681174852
-				],
-				"axis_y": [
-					-0.00262373804856629,
-					-0.0152874503561897
-				],
-				"center": [
-					0.9619140625,
-					0.7958984375
-				],
-				"skin_uv": [
-					0.98292031564404,
-					0.794954194895324
-				]
-			},
-			"right": {
-				"axis_x": [
-					0.0155252671126266,
-					-0.00986654344372954
-				],
-				"axis_y": [
-					-0.00861330433543136,
-					-0.00981960827310048
-				],
-				"center": [
-					0.669921875,
-					0.5263671875
-				],
-				"skin_uv": [
-					0.654992188307499,
-					0.541579309939212
-				]
-			}
-		},
-		"implementation": "UV eye shader candidate: Blink and TiredEyes only; no facial morph or mouth control.",
-		"resident": "yui",
-		"schema_version": 1.0,
-		"source_basecolor_jpeg_sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc",
-		"source_raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e"
-	},
-	"limitations": [
-		"Per-character raw UV calibration; production rig/LOD/actor validation remains pending.",
-		"Half uses Blink=.5 and TiredEyes=.7 for inspection; it is not a claim that the fatigue driver alone closes eyes halfway.",
-		"No mouth/Smile/iris-gaze controls or source image edits."
-	],
-	"passed": true,
-	"purpose": "Static raw-mesh GPU eye-layout candidate; not a rig or gameplay test",
-	"renders": [
-		{
-			"blink": 0.0,
-			"file": "front-open.png",
-			"height": 800,
-			"tired_eyes": 0.0,
-			"width": 800,
-			"yaw_degrees": 0.0
-		},
-		{
-			"blink": 1.0,
-			"file": "front-closed.png",
-			"height": 800,
-			"tired_eyes": 0.0,
-			"width": 800,
-			"yaw_degrees": 0.0
-		},
-		{
-			"blink": 0.5,
-			"file": "front-half.png",
-			"height": 800,
-			"tired_eyes": 0.7,
-			"width": 800,
-			"yaw_degrees": 0.0
-		},
-		{
-			"blink": 0.0,
-			"file": "threequarter-open.png",
-			"height": 800,
-			"tired_eyes": 0.0,
-			"width": 800,
-			"yaw_degrees": -30.0
-		},
-		{
-			"blink": 1.0,
-			"file": "threequarter-closed.png",
-			"height": 800,
-			"tired_eyes": 0.0,
-			"width": 800,
-			"yaw_degrees": -30.0
-		},
-		{
-			"blink": 0.5,
-			"file": "threequarter-half.png",
-			"height": 800,
-			"tired_eyes": 0.7,
-			"width": 800,
-			"yaw_degrees": -30.0
-		}
-	],
-	"resident": "yui",
-	"source_atlas_pixel_sha256": "a79e3deaebccd41739fc13a32e54bac9b3724c0d848ea80dfffe8f30831c53f4"
+  "checks": 16,
+  "differences": {
+    "front-closed": {
+      "bounds": [
+        267,
+        386,
+        269,
+        102
+      ],
+      "pixels": 11389
+    },
+    "front-half": {
+      "bounds": [
+        267,
+        386,
+        269,
+        111
+      ],
+      "pixels": 11028
+    },
+    "threequarter-closed": {
+      "bounds": [
+        209,
+        392,
+        230,
+        98
+      ],
+      "pixels": 9211
+    },
+    "threequarter-half": {
+      "bounds": [
+        209,
+        392,
+        230,
+        105
+      ],
+      "pixels": 9175
+    }
+  },
+  "failures": [],
+  "layout": {
+    "calibration": "Each eye independently annotated on this raw atlas, then front-ray barycentric UV calibrated; no Haru coordinates reused.",
+    "eyelid_method": "compress",
+    "eyes": {
+      "left": {
+        "axis_x": [
+          0.0151305518668162,
+          -0.00266031681174852
+        ],
+        "axis_y": [
+          -0.00262373804856629,
+          -0.0152874503561897
+        ],
+        "center": [
+          0.9619140625,
+          0.7958984375
+        ],
+        "skin_uv": [
+          0.98292031564404,
+          0.794954194895324
+        ]
+      },
+      "right": {
+        "axis_x": [
+          0.0155252671126266,
+          -0.00986654344372954
+        ],
+        "axis_y": [
+          -0.00861330433543136,
+          -0.00981960827310048
+        ],
+        "center": [
+          0.669921875,
+          0.5263671875
+        ],
+        "skin_uv": [
+          0.654992188307499,
+          0.541579309939212
+        ]
+      }
+    },
+    "implementation": "UV eye shader candidate: Blink and TiredEyes only; no facial morph or mouth control.",
+    "resident": "yui",
+    "schema_version": 1.0,
+    "source_basecolor_jpeg_sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc",
+    "source_raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e"
+  },
+  "limitations": [
+    "Per-character raw UV calibration; production rig/LOD/actor validation remains pending.",
+    "Half uses Blink=.5 and TiredEyes=.7 for inspection; it is not a claim that the fatigue driver alone closes eyes halfway.",
+    "No mouth/Smile/iris-gaze controls or source image edits."
+  ],
+  "passed": true,
+  "purpose": "Static raw-mesh GPU eye-layout candidate; not a rig or gameplay test",
+  "renders": [
+    {
+      "blink": 0.0,
+      "file": "front-open.png",
+      "height": 800,
+      "tired_eyes": 0.0,
+      "width": 800,
+      "yaw_degrees": 0.0
+    },
+    {
+      "blink": 1.0,
+      "file": "front-closed.png",
+      "height": 800,
+      "tired_eyes": 0.0,
+      "width": 800,
+      "yaw_degrees": 0.0
+    },
+    {
+      "blink": 0.5,
+      "file": "front-half.png",
+      "height": 800,
+      "tired_eyes": 0.7,
+      "width": 800,
+      "yaw_degrees": 0.0
+    },
+    {
+      "blink": 0.0,
+      "file": "threequarter-open.png",
+      "height": 800,
+      "tired_eyes": 0.0,
+      "width": 800,
+      "yaw_degrees": -30.0
+    },
+    {
+      "blink": 1.0,
+      "file": "threequarter-closed.png",
+      "height": 800,
+      "tired_eyes": 0.0,
+      "width": 800,
+      "yaw_degrees": -30.0
+    },
+    {
+      "blink": 0.5,
+      "file": "threequarter-half.png",
+      "height": 800,
+      "tired_eyes": 0.7,
+      "width": 800,
+      "yaw_degrees": -30.0
+    }
+  ],
+  "resident": "yui",
+  "count_policy": "Functional assertions only; SHA/hash identity assertions excluded.",
+  "reclassification": {
+    "previous_assertion_count": 18,
+    "fingerprint_assertions_removed": 2,
+    "reason": "Removed runtime/source atlas pixel-SHA and staged-source GLB SHA assertions; rendered-eye behavior assertions are unchanged.",
+    "same_execution_evidence_reused": true,
+    "rerendered": false
+  },
+  "provenance": {
+    "runtime_atlas_pixel_sha256": "a79e3deaebccd41739fc13a32e54bac9b3724c0d848ea80dfffe8f30831c53f4",
+    "source_raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+    "source_jpeg_sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc",
+    "note": "Fingerprints identify inputs/outputs only; they are not tests, checks, visual-regression verdicts or pass/fail gates."
+  }
 }

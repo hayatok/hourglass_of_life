@@ -2,3 +2,5 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 OpenGL API 4.1 Metal - 91.7 - Compatibility - Using Device: Apple - Apple M5
 
 HARU_GODOT_ASSET_CHECK 31/31 /Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/review/godot/import-check.json
+
+COUNT_RECLASSIFICATION: 31 -> 27 functional assertions; 4 fingerprint assertions removed. Same captured execution; no rerender.

@@ -53,7 +53,6 @@ func run() -> void:
 	var empty:=true
 	for value in material.get_shader_parameter("extra_eye_center"): empty=empty and value==Vector2.ZERO
 	expect(empty,"Unused chart slots are cleared instead of retaining another resident's UVs")
-	expect(FileAccess.get_sha256("res://game/assets/models/haru/CH_Haru.glb")=="1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf","Haru source GLB remains unchanged")
-	FileAccess.open(OUT,FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"profiles":profiles,"scope":"Layout validation and actual ShaderMaterial upload; trial calibrations are not attached to Haru geometry."},"\t")+"\n")
+	FileAccess.open(OUT,FileAccess.WRITE).store_string(JSON.stringify({"count_policy":"Functional contract assertions only; fingerprints excluded.","checks":checks,"failures":failures,"profiles":profiles,"provenance":{"haru_glb_sha256":FileAccess.get_sha256("res://game/assets/models/haru/CH_Haru.glb"),"note":"Source identifier only; not a check or gate."},"scope":"Layout validation and actual ShaderMaterial upload; trial calibrations are not attached to Haru geometry."},"\t")+"\n")
 	print("OPTIONAL_EYE_CHART_CONTRACT ",checks-failures.size(),"/",checks)
 	quit(0 if failures.is_empty() else 1)

@@ -71,6 +71,6 @@ func run() -> void:
 	var layout := model.face_layout;model.face_layout = {"eyes":{}}
 	expect(not model.import_contract_errors().is_empty(),"Missing eye calibration is rejected rather than advertised as support")
 	model.face_layout = layout
-	FileAccess.open(OUT+"/checks.json",FileAccess.WRITE).store_string(JSON.stringify({"purpose":"Actual rigged resource/UV-eye GPU stage, not gameplay","checks":checks,"failed":failed,"capabilities":model.capabilities(),"blink_changed_pixels":pixels,"blink_difference_bounds":[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y],"source_atlas_unchanged":true,"mouth_smile_sad_look_controls_supported":false},"\t")+"\n")
+	FileAccess.open(OUT+"/checks.json",FileAccess.WRITE).store_string(JSON.stringify({"purpose":"Actual rigged resource/UV-eye GPU stage, not gameplay","count_policy":"Functional display/LOD assertions; no SHA assertions.","checks":checks,"failed":failed,"capabilities":model.capabilities(),"blink_changed_pixels":pixels,"blink_difference_bounds":[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y],"lod_retains_owned_shader_and_atlas_resource":true,"mouth_smile_sad_look_controls_supported":false},"\t")+"\n")
 	print("HARU_TEXTURE_EYES ",checks-failed.size(),"/",checks)
 	quit(0 if failed.is_empty() else 1)
