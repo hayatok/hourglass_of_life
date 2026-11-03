@@ -227,7 +227,7 @@ func _trim_expectations(p: Dictionary, keep: String) -> void:
 	if not oldest.is_empty(): p.expectations.erase(oldest)
 
 func _kind(activity: String) -> String:
-	return {"meet":"social","joint_work":"hobby","project":"hobby","support_care":"care","support_chores":"chores"}.get(activity,activity)
+	return {"meet":"social","social_plan":"social","joint_work":"hobby","planned_project":"hobby","project":"hobby","support_care":"care","support_chores":"chores"}.get(activity,activity)
 
 func _condition(p: Dictionary, context: Dictionary) -> String:
 	if context.has("condition"): return str(context.condition)

@@ -128,6 +128,7 @@ func find_slot(a: Dictionary, b: Dictionary, duration: int = 25) -> int:
 func _slot_free(a: Dictionary, b: Dictionary, start: int, duration: int) -> bool:
 	for p in [a,b]:
 		for offset in range(-120,duration+16,15):
+			if sim.agenda!=null and sim.agenda.reserved(p,start+offset): return false
 			if sim.work_family!=null and sim.work_family.reserved(p,start+offset): return false
 			var absolute = sim.start_minute+start+offset
 			if not sim._routine_at(p,absolute%1440,(sim.epoch_weekday+int(absolute/1440.0))%7).is_empty():

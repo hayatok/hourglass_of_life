@@ -69,8 +69,14 @@ func tick() -> void:
 			if sim._authored_routine_at(receiver).get("id","")!="after_school_care" or (not receiver.moving and receiver.place==help.place):
 				_end_support(help,help.get("finish_completed",true),help.get("finish_reason",""))
 			continue
-		if not obligation.is_empty() or giver.fatigue>.95:
-			_end_support(help,false,"自分の予定や休息も必要になった")
+		var meal_needed: bool = giver.hunger>.75
+		if help.state=="active" and help.kind=="care":
+			# Begin the handoff while there is still time for the responsible
+			# adult to return. A need to eat must not leave the child alone.
+			var return_minutes: int = sim.resident_activities._travel(receiver.position,receiver.place,sim.SITES[help.place],help.place)+10
+			meal_needed = giver.hunger+return_minutes*sim.HUNGER_PER_MINUTE>.75
+		if not obligation.is_empty() or giver.fatigue>.95 or meal_needed:
+			_end_support(help,false,"自分の予定や休息、食事も必要になった")
 			continue
 		if help.state=="travel":
 			var arrived = not giver.moving and giver.place==help.place
@@ -163,6 +169,10 @@ func propose_support(receiver_id: String, giver_id: String) -> Dictionary:
 		return sim._reply(giver,"counteroffer","自分の予定がある。時間に余裕があるときに手伝いたい。")
 	if giver.fatigue>.8:
 		return sim._reply(giver,"decline","今日は自分も休む必要がある。落ち着いてからにしたい。")
+	var support_place: String = sim.HOME[household_id(receiver)]
+	var outward: int = sim.resident_activities._travel(giver.position,giver.place,sim.SITES[support_place],support_place)+10
+	if giver.action in ["eat","sleep"] or giver.hunger+(outward+90+15)*sim.HUNGER_PER_MINUTE>.75:
+		return sim._reply(giver,"decline","先に食事や休息を済ませたい。時間を取れるときに相談しよう。")
 	if sim.social.relation(giver,receiver_id).trust<.4:
 		return sim._reply(giver,"counteroffer","まだ慣れない家のことは分からない。まず一緒に過ごして、できることを知りたい。")
 	if giver.quiet>.8:

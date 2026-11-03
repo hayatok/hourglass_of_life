@@ -8,6 +8,7 @@ signal chapter_reached
 const SAVE_PATH = "user://life-save.json"
 const LEGACY_SAVE_PATH = "user://life-save-v01.json"
 const WALK_METERS_PER_MINUTE = .36
+const HUNGER_PER_MINUTE = .0013
 const HOME = {"ogawa": "home_ogawa", "saeki": "home_saeki", "shared_house": "home_shared", "aoi_apartment":"off_map_home"}
 const SITES = {
 	"home_ogawa": Vector3(-9, 0, 6), "home_saeki": Vector3(-9, 0, -4),
@@ -47,7 +48,7 @@ const ROUTINE_NAMES = {
 	"after_school_home":"学校のあと、家で過ごす時間",
 	"new_work":"町外の工房での仕事", "away_private":"町外で自分の暮らしを過ごす時間",
 	"model_work":"模型工房で引き受けた仕事",
-	"classes": "授業の時間", "workshop": "工房での仕事", "night_shift": "町外での夜勤", "appointment":"誰かと会う約束の準備", "support_care":"相談して引き受けた世話の時間", "support_chores":"相談して引き受けた家の用事"
+	"classes": "授業の時間", "workshop": "工房での仕事", "night_shift": "町外での夜勤", "appointment":"誰かと会う約束の準備", "agenda":"相談して決めた約束の準備", "support_care":"相談して引き受けた世話の時間", "support_chores":"相談して引き受けた家の用事"
 }
 
 var people: Array = []
@@ -76,6 +77,8 @@ var activities: ActivityPlaces
 var cognition: ResidentCognition
 var resident_activities: ResidentActivities
 var planner: ResidentPlanner
+var agenda: ResidentAgenda
+var support_plans: ResidentSupportPlans
 
 func _ready() -> void:
 	_build_graph()
@@ -151,6 +154,10 @@ func reset(seed_value: int = 71103) -> void:
 	if resident_activities==null: resident_activities = ResidentActivities.new(self)
 	if planner==null: planner = ResidentPlanner.new(self)
 	planner.reset()
+	if agenda==null: agenda = ResidentAgenda.new(self)
+	agenda.reset()
+	if support_plans==null: support_plans = ResidentSupportPlans.new(self)
+	support_plans.reset()
 	for p in people:
 		# The clock starts in an existing day, so active shifts are already underway.
 		var routine = _routine_at(p)
@@ -196,6 +203,8 @@ func advance_minutes(amount: float, stop_at_review: bool = false) -> void:
 		elapsed += 1
 		life.tick()
 		work_family.tick()
+		support_plans.tick()
+		agenda.tick()
 		social.tick()
 		for p in people:
 			_tick_person(p)
@@ -238,6 +247,9 @@ func commitment_text(p: Dictionary) -> String:
 
 func _next_commitment(p: Dictionary) -> Dictionary:
 	var result = social.next_commitment(p) if social!=null else {"minutes":2880,"id":""}
+	if agenda!=null:
+		var planned: Dictionary = agenda.next_commitment(p)
+		if planned.minutes<result.minutes: result = planned
 	for offset in range(0, 3):
 		var day = (weekday() + offset) % 7
 		for routine in life.routines(p) if life!=null else definitions[p.id].routines:
@@ -268,7 +280,7 @@ func home_for(p: Dictionary) -> String:
 
 func _tick_person(p: Dictionary) -> void:
 	if not life.is_alive(p): return
-	p.hunger = clampf(p.hunger + 0.0013, 0, 1)
+	p.hunger = clampf(p.hunger + HUNGER_PER_MINUTE, 0, 1)
 	p.fatigue = clampf(p.fatigue + 0.0007, 0, 1)
 	p.connection = clampf(p.connection + 0.0006, 0, 1)
 	p.quiet = clampf(p.quiet + (0.0005 if p.action == "meet" else -0.00015), 0, 1)
@@ -372,7 +384,7 @@ func _choose_action(p: Dictionary) -> void:
 			chosen = o
 			break
 	var reason: String = chosen.reason
-	if chosen.kind=="joint_work":
+	if chosen.kind in ["joint_work","social_plan","planned_project"]:
 		if planner.begin(p,chosen): return
 		_assign(p,"rest",home,30,"相手の予定も大切にして、次の機会を待とう")
 		return
@@ -536,6 +548,7 @@ func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: Str
 		var p = a if i == 0 else b
 		p.meeting_id = id
 		_assign(p, "meet", venue, duration, "相手と合流してから、ゆっくり話したい", center+Vector3(-.6 if i==0 else .6,0,.08 if location=="bench" else 0),pair[i].id if pair.size()==2 else "")
+	if location!="project" and planner!=null: planner.track(m)
 	return true
 
 func _tick_meetings() -> void:
@@ -556,10 +569,10 @@ func _tick_meetings() -> void:
 					b.reason = "少し早く着いた。約束の時刻を待っている"
 					continue
 				m.state = "engaged"
+				planner.engaged(m)
 				a.reason = "%sさんと、近況を話している" % b.name
 				b.reason = "%sさんと、同じ時間を過ごしている" % a.name
 				if m.get("mode","")=="project":
-					planner.engaged(m)
 					a.reason = "%sさんと、%sを一緒に進めている"%[b.name,m.project.title]
 					b.reason = "%sさんと、%sに取り組んでいる"%[a.name,m.project.title]
 				_log(a.id, "二人が合流しました", "%sと%sが、%sを始めた。" % [a.name,b.name,m.project.title if m.get("mode","")=="project" else "同じ場所で話す時間"])
@@ -585,6 +598,7 @@ func _finish_meeting(m: Dictionary, completed: bool) -> void:
 	var b = person(m.b)
 	social.finish(m,completed)
 	if completed: work_family.finish_project(m)
+	if agenda!=null: agenda.finish(m,completed)
 	if completed:
 		var used_skill: String = m.get("project",{}).get("skill","")
 		_learn_profile(a,b,used_skill)
@@ -686,6 +700,7 @@ func save_game(path: String = SAVE_PATH) -> bool:
 	var data = {"schema":4,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize(),"work_family":work_family.serialize(),"life":life.serialize()}
 	data.world_seed = world_seed
 	data.event_serial = event_serial
+	data.agenda = agenda.serialize()
 	data.route_layout = 1
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
@@ -728,9 +743,11 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	social.restore(data.get("social",{}))
 	work_family.restore(data.get("work_family",{}))
 	life.restore(data.get("life",{}))
+	agenda.restore(data.get("agenda",{}))
 	for p in people:
 		cognition.upgrade_person(p)
 		planner.upgrade_person(p)
+		support_plans.upgrade_person(p)
 	activities.configure_benches(benches)
 	for p in people:
 		if not activities.spots.has(p.get("activity_spot","")): p.activity_spot = ""

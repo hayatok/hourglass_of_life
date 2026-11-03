@@ -110,6 +110,7 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if not whole(plan.started) or plan.started>elapsed or not strings(plan.get("steps"),16): return false
 			if plan.has("finished") and (not whole(plan.finished) or plan.finished<plan.started or plan.finished>elapsed): return false
 			if plan.has("reason") and not plan.reason is String: return false
+			if plan.has("kind") and plan.kind not in ["project","social","support"]: return false
 	if p.has("plan_history"):
 		if not p.plan_history is Array or p.plan_history.size()>24: return false
 		for entry in p.plan_history:
@@ -117,6 +118,42 @@ static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary,
 			if entry.activity.is_empty() or not definitions.has(entry.partner) or entry.partner==p.id: return false
 			if not whole(entry.day) or not whole(entry.minute) or entry.minute>elapsed: return false
 	if p.has("next_plan_minute") and not whole(p.next_plan_minute): return false
+	if p.has("support_next_attempt") and not whole(p.support_next_attempt): return false
+	return true
+
+static func agenda(data: Variant, definitions: Dictionary, sites: Dictionary, elapsed: float) -> bool:
+	if not data is Dictionary or not whole(data.get("serial")) or not data.get("records") is Array: return false
+	if data.records.size()>64: return false
+	var seen := {}
+	for planned in data.records:
+		if not record(planned,["id","a","b","activity","title","place","venue","state","origin","meeting_id"],["start","duration","made_at","attempts","last_try","finished_at"]): return false
+		if not definitions.has(planned.a) or not definitions.has(planned.b) or planned.a==planned.b: return false
+		if not planned.id.begins_with("agenda_") or seen.has(planned.id): return false
+		var suffix: String = planned.id.trim_prefix("agenda_")
+		if not suffix.is_valid_int() or not whole(int(suffix),1) or int(suffix)>data.serial: return false
+		seen[planned.id] = true
+		if planned.activity not in ["social","radio","model","bread","photo","music","craft"]: return false
+		if not sites.has(planned.place) or not vector(planned.get("center")): return false
+		if planned.venue not in ["bench","cafe","project"] or planned.origin not in ["resident","player"]: return false
+		if planned.state not in ["planned","travel","kept","postponed","ended"]: return false
+		if not whole(planned.start) or not whole(planned.made_at) or planned.made_at>elapsed or planned.start<planned.made_at: return false
+		if not whole(planned.duration,1) or planned.duration>240 or not whole(planned.attempts): return false
+		if planned.last_try!=-1 and (not whole(planned.last_try) or planned.last_try<planned.made_at or planned.last_try>elapsed): return false
+		if planned.finished_at!=-1 and (not whole(planned.finished_at) or planned.finished_at<planned.made_at or planned.finished_at>elapsed): return false
+		if planned.state in ["planned","travel"]:
+			if planned.finished_at!=-1: return false
+		elif planned.finished_at==-1: return false
+		for key in ["departures","returns"]:
+			if not planned.get(key) is Dictionary or planned[key].size()!=2: return false
+			for id in [planned.a,planned.b]:
+				if not whole(planned[key].get(id)): return false
+		for id in [planned.a,planned.b]:
+			if planned.departures[id]<planned.made_at or planned.departures[id]>planned.start: return false
+			if planned.returns[id]<planned.start+planned.duration: return false
+		if not planned.get("shared_before") is Dictionary: return false
+		for id in planned.shared_before:
+			if id not in [planned.a,planned.b] or not whole(planned.shared_before[id]): return false
+		if planned.state=="travel" and (planned.meeting_id.is_empty() or planned.shared_before.size()!=2): return false
 	return true
 
 static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> bool:
@@ -207,6 +244,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		if not definitions.has(meeting.a) or not definitions.has(meeting.b): return false
 		if not meeting.get("spontaneous") is bool: return false
 		if meeting.has("autonomous") and not meeting.autonomous is bool: return false
+		if meeting.has("agenda_id") and (not meeting.agenda_id is String or meeting.agenda_id.is_empty()): return false
 		if meeting.get("mode","")=="project":
 			if not record(meeting.get("project"),["key","title","place"],["cost"]): return false
 			if not vector(meeting.project.get("center")) or not sites.has(meeting.project.place): return false
@@ -224,6 +262,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		if not social.offer.is_empty():
 			if not record(social.offer,["a","b","location"],["start","duration","made_at"]): return false
 			if not definitions.has(social.offer.a) or not definitions.has(social.offer.b): return false
+	if raw.has("agenda") and not agenda(raw.agenda,definitions,sites,raw.elapsed): return false
 	if raw.has("work_family"):
 		var life = raw.work_family
 		if not life is Dictionary or not life.get("households") is Dictionary or not life.get("supports") is Array or not number(life.get("serial")): return false
@@ -235,6 +274,12 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		for help in life.supports:
 			if not record(help,["id","giver","receiver","kind","place","state"],["requested","began"]): return false
 			if not definitions.has(help.giver) or not definitions.has(help.receiver): return false
+			if help.has("autonomous") and not help.autonomous is bool: return false
+			if help.has("initiator") and (not help.initiator is String or help.initiator!=help.receiver): return false
+			if help.has("support_plan_recorded") and not help.support_plan_recorded is bool: return false
+			if help.has("support_work_minutes") and not whole(help.support_work_minutes): return false
+			for key in ["support_receiver_fatigue","support_giver_fatigue"]:
+				if help.has(key) and not unit(help[key]): return false
 		if life.has("projects"):
 			if not life.projects is Dictionary: return false
 			for key in ["radio","model","bread","photo","music","craft"]:

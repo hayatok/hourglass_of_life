@@ -1,200 +1,206 @@
 {
-	"activity": "music",
+	"activity": "model",
 	"before": {
 		"actors": [
 			{
-				"expectations": 0,
-				"id": "ritsu",
+				"expectations": 1,
+				"id": "rin",
 				"knowledge": 0,
-				"level": 0.7,
-				"name": "三浦 律",
+				"level": 0.2,
+				"name": "小川 凛",
 				"plan": {
-					"activity": "music",
-					"meeting": "meeting_1",
+					"activity": "model",
+					"kind": "project",
+					"meeting": "meeting_2",
 					"origin": "resident",
-					"partner": "aoi",
+					"partner": "nagisa",
 					"stage": "travel",
-					"started": 70,
+					"started": 77,
 					"steps": [
 						"相談する",
 						"合流する",
-						"一緒に取り組む",
+						"一緒に過ごす",
 						"経験を振り返る"
 					],
-					"title": "音楽の小さな録音"
+					"title": "町の模型づくり"
 				},
 				"position": [
-					10.0999994277954,
+					-8.38582134246826,
 					0.0,
-					7.96000003814697
+					6.35821342468262
 				],
-				"skill": "music"
+				"skill": "model"
 			},
 			{
 				"expectations": 1,
-				"id": "aoi",
+				"id": "nagisa",
 				"knowledge": 0,
 				"level": 0.0,
-				"name": "高瀬 葵",
+				"name": "小川 渚",
 				"plan": {
-					"activity": "music",
-					"meeting": "meeting_1",
+					"activity": "model",
+					"kind": "project",
+					"meeting": "meeting_2",
 					"origin": "resident",
-					"partner": "ritsu",
+					"partner": "rin",
 					"stage": "travel",
-					"started": 70,
+					"started": 77,
 					"steps": [
 						"相談する",
 						"合流する",
-						"一緒に取り組む",
+						"一緒に過ごす",
 						"経験を振り返る"
 					],
-					"title": "音楽の小さな録音"
+					"title": "町の模型づくり"
 				},
 				"position": [
-					10.48912525177,
+					-7.54058647155762,
 					0.0,
-					8.10000038146973
+					7.98053789138794
 				],
-				"skill": "music"
+				"skill": "model"
 			}
 		],
-		"clock": "14:10",
-		"minute": 70,
+		"clock": "14:17",
+		"minute": 77,
 		"state": "travel"
 	},
 	"completed": {
 		"actors": [
 			{
-				"expectations": 1,
-				"id": "ritsu",
+				"expectations": 2,
+				"id": "rin",
 				"knowledge": 3,
-				"level": 0.7075,
-				"name": "三浦 律",
+				"level": 0.22,
+				"name": "小川 凛",
 				"plan": {
-					"activity": "music",
-					"finished": 153,
-					"meeting": "meeting_1",
+					"activity": "model",
+					"finished": 135,
+					"kind": "project",
+					"meeting": "meeting_2",
 					"origin": "resident",
-					"partner": "aoi",
+					"partner": "nagisa",
 					"stage": "completed",
-					"started": 70,
+					"started": 77,
 					"steps": [
 						"相談する",
 						"合流する",
-						"一緒に取り組む",
+						"一緒に過ごす",
 						"経験を振り返る"
 					],
-					"title": "音楽の小さな録音"
+					"title": "町の模型づくり"
 				},
 				"position": [
-					2.45000004768372,
+					-7.90000009536743,
 					0.0,
-					5.15999984741211
+					7.96000003814697
 				],
-				"skill": "music"
+				"skill": "model"
 			},
 			{
 				"expectations": 2,
-				"id": "aoi",
+				"id": "nagisa",
 				"knowledge": 3,
 				"level": 0.03,
-				"name": "高瀬 葵",
+				"name": "小川 渚",
 				"plan": {
-					"activity": "music",
-					"finished": 153,
-					"meeting": "meeting_1",
+					"activity": "model",
+					"finished": 135,
+					"kind": "project",
+					"meeting": "meeting_2",
 					"origin": "resident",
-					"partner": "ritsu",
+					"partner": "rin",
 					"stage": "completed",
-					"started": 70,
+					"started": 77,
 					"steps": [
 						"相談する",
 						"合流する",
-						"一緒に取り組む",
+						"一緒に過ごす",
 						"経験を振り返る"
 					],
-					"title": "音楽の小さな録音"
+					"title": "町の模型づくり"
 				},
 				"position": [
-					3.14999985694885,
+					-7.20000028610229,
 					0.0,
-					5.15999984741211
+					7.96000003814697
 				],
-				"skill": "music"
+				"skill": "model"
 			}
 		],
-		"clock": "15:33",
-		"minute": 153,
+		"clock": "15:15",
+		"minute": 135,
 		"state": "completed"
 	},
 	"completed_project_found": true,
-	"elapsed": 154,
+	"elapsed": 136,
 	"engaged": {
 		"actors": [
 			{
-				"expectations": 0,
-				"id": "ritsu",
+				"expectations": 1,
+				"id": "rin",
 				"knowledge": 0,
-				"level": 0.7,
-				"name": "三浦 律",
+				"level": 0.2,
+				"name": "小川 凛",
 				"plan": {
-					"activity": "music",
-					"meeting": "meeting_1",
+					"activity": "model",
+					"kind": "project",
+					"meeting": "meeting_2",
 					"origin": "resident",
-					"partner": "aoi",
+					"partner": "nagisa",
 					"stage": "execute",
-					"started": 70,
+					"started": 77,
 					"steps": [
 						"相談する",
 						"合流する",
-						"一緒に取り組む",
+						"一緒に過ごす",
 						"経験を振り返る"
 					],
-					"title": "音楽の小さな録音"
+					"title": "町の模型づくり"
 				},
 				"position": [
-					2.45000004768372,
+					-7.90000009536743,
 					0.0,
-					5.15999984741211
+					7.96000003814697
 				],
-				"skill": "music"
+				"skill": "model"
 			},
 			{
 				"expectations": 1,
-				"id": "aoi",
+				"id": "nagisa",
 				"knowledge": 0,
 				"level": 0.0,
-				"name": "高瀬 葵",
+				"name": "小川 渚",
 				"plan": {
-					"activity": "music",
-					"meeting": "meeting_1",
+					"activity": "model",
+					"kind": "project",
+					"meeting": "meeting_2",
 					"origin": "resident",
-					"partner": "ritsu",
+					"partner": "rin",
 					"stage": "execute",
-					"started": 70,
+					"started": 77,
 					"steps": [
 						"相談する",
 						"合流する",
-						"一緒に取り組む",
+						"一緒に過ごす",
 						"経験を振り返る"
 					],
-					"title": "音楽の小さな録音"
+					"title": "町の模型づくり"
 				},
 				"position": [
-					3.14999985694885,
+					-7.20000028610229,
 					0.0,
-					5.15999984741211
+					7.96000003814697
 				],
-				"skill": "music"
+				"skill": "model"
 			}
 		],
-		"clock": "14:48",
-		"minute": 108,
+		"clock": "14:30",
+		"minute": 90,
 		"state": "engaged"
 	},
-	"finished": 153,
-	"meeting": "meeting_1",
+	"finished": 135,
+	"meeting": "meeting_2",
 	"observation_controls": [
 		"select the initiator",
 		"follow",
@@ -206,22 +212,22 @@
 	"screenshots": [
 		{
 			"file": "01-resident-initiated-work.png",
-			"minute": 108,
+			"minute": 90,
 			"stage": "engaged"
 		},
 		{
 			"file": "02-after-learning.png",
-			"minute": 154,
+			"minute": 136,
 			"stage": "after completion"
 		},
 		{
 			"file": "03-relations-and-history.png",
-			"minute": 154,
+			"minute": 136,
 			"stage": "relations / history"
 		}
 	],
 	"search_limit_minutes": 2880,
 	"seed": 71103,
-	"started": 70,
-	"title": "音楽の小さな録音"
+	"started": 77,
+	"title": "町の模型づくり"
 }

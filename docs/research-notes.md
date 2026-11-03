@@ -134,6 +134,24 @@ Vezhnevets, A. S., et al. 2023. Generative agent-based modeling with actions gro
 
 仕様への反映は計画の候補を出す処理と、時間・場所・資源・同意を検査して事実を更新する処理を分けること。本作では既存の生活シミュレーションを最終の実行側に置く。Concordiaの導入や自由文による世界更新を決定したものではない。
 
+## 約束と援助の判断
+
+### R16 約束と信頼の修復
+
+Schweitzer, M. E., Hershey, J. C., & Bradlow, E. T. 2006. Promises and lies: Restoring violated trust. Organizational Behavior and Human Decision Processes, 101, 1–19. DOI 10.1016/j.obhdp.2006.05.005.
+
+[著者所属大学が公開する原著稿PDF](https://knowledge.wharton.upenn.edu/wp-content/uploads/2013/09/1321.pdf)の抄録と実験方法を確認した。金銭を使う実験室の信頼ゲームで、後に観察された行動と約束、過去の欺きによって信頼回復の経過が異なった。
+
+仕様への反映は約束、日程変更、その後の実際の履行を分けて記録すること。将来の予定に合意しただけでは共有経験や信頼を増やさない。通常の日程変更を欺きと同一視しない。今後、同じ中断に対して代案の有無、その後の履行・再中断を変えて比較する。予約変更そのものの研究ではなく、回復の計算式や期間は本作の仮説となる。
+
+### R17 援助する本人の自律性
+
+Weinstein, N., & Ryan, R. M. 2010. When helping helps: Autonomous motivation for prosocial behavior and its influence on well-being for the helper and recipient. Journal of Personality and Social Psychology, 98, 222–244. DOI 10.1037/a0016984.
+
+[原著抄録](https://pubmed.ncbi.nlm.nih.gov/20085397/)を確認した。日誌と実験を含む四研究で、自律的な援助動機による援助者・受け手双方への利益を報告している。全文の方法と対象集団の詳細は今回検討していない。
+
+仕様への反映は、支援する住人が自分の予定、食事、休息、関係から納得して引き受ける余地を残すこと。`resident_support_plans.gd`の相談先は本人が知る関係から選び、`work_family.gd`が相手自身の事情と安全な引継ぎを検査する。同じ関係でも余裕の有無、実際に得た自由時間、引き受けた側の負担を変えて比較する。辞退の効果、家事交代の条件、疲労や空腹の係数をこの研究から得たとは扱わない。
+
 ## 継続調査から実装へ渡す手順
 
 調査は[開発計画](development-roadmap.md#ネットから学び思考ルーチンへ反映する)の各段階で継続する。次に調べる対象を、現在の行動が単調になる場面や、人らしい理由を読めない場面から選ぶ。

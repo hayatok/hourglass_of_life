@@ -360,6 +360,8 @@ func _refresh_detail() -> void:
 		text = Sim.social.person_text(p)
 		var plan_text: String = Sim.planner.person_text(p)
 		if not plan_text.is_empty(): text += ("\n\n" if not text.is_empty() else "")+plan_text
+		var future: String = Sim.agenda.person_text(p)
+		if not future.is_empty(): text += ("\n\n" if not text.is_empty() else "")+future
 		var learning: String = Sim.cognition.explain(p)
 		if not learning.is_empty(): text += ("\n\n" if not text.is_empty() else "")+learning
 		if not text.is_empty(): text += "\n"

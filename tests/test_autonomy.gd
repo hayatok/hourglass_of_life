@@ -16,7 +16,7 @@ func expect(condition: bool, message: String) -> void:
 func state() -> Dictionary:
 	return sim._encode({"people":sim.people,"meetings":sim.meetings,
 		"events":sim.events,"rng":str(sim.rng.state),"work":sim.work_family.serialize(),
-		"life":sim.life.serialize(),"social":sim.social.serialize(),"serial":sim.event_serial}).duplicate(true)
+		"life":sim.life.serialize(),"social":sim.social.serialize(),"agenda":sim.agenda.serialize(),"serial":sim.event_serial}).duplicate(true)
 
 func equivalent(a: Variant, b: Variant) -> bool:
 	# JSON round-trips can change the final binary floating-point bit. Decisions,
@@ -133,6 +133,15 @@ func run() -> void:
 			var pairs := {}
 			var autonomous := 0
 			var learned := 0
+			var kept := 0
+			var postponed := 0
+			var completed_help := 0
+			for record in sim.agenda.records:
+				if record.origin!="resident": continue
+				if record.state=="kept": kept += 1
+				if record.state=="postponed": postponed += 1
+			for help in sim.work_family.supports:
+				if help.get("autonomous",false) and help.state=="completed": completed_help += 1
 			for p in sim.people:
 				learned += p.expectations.size()
 				for entry in p.plan_history:
@@ -148,7 +157,9 @@ func run() -> void:
 				signatures[signature] = true
 				total_autonomous += autonomous
 			report.append({"seed":seed_value,"intervention":intervention,"completed_participant_experiences":autonomous,
-				"recent_collaborations":keys,"learned_contexts":learned,"event_serial":sim.event_serial})
+				"recent_collaborations":keys,"learned_contexts":learned,"event_serial":sim.event_serial,
+				"retained_resident_agreements_kept":kept,"retained_resident_agreements_postponed":postponed,
+				"retained_autonomous_support_completed":completed_help})
 			print("Autonomy sample %d intervention=%s collaborations=%d"%[seed_value,intervention,pairs.size()])
 	expect(total_autonomous>0,"Residents can complete joint work without player intervention")
 	expect(signatures.size()>1,"Different seeds produce different actual collaborators or activities")
