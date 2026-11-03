@@ -1,0 +1,176 @@
+{
+  "purpose": "Geometry Smile feasibility on a copied rigged LOD0; not production integration or gameplay.",
+  "variant": "tight-corners",
+  "source_files_sha256": {
+    "builds/haru-cute-pilot/CH_Haru_Delivery.blend": "59f6c4ab55db8dd95c37883e254d8afb7c0644959a9b23adbe27f2399fe5a024",
+    "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+    "game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf"
+  },
+  "morph": "Smile",
+  "strength_range": [
+    0,
+    1
+  ],
+  "field": "Two compact C2 kernels: w=max(0,1-squared_ellipsoid_distance)^3. Same 3D field for all coincident UV/normal seam vertices.",
+  "corner_landmarks_m": {
+    "left": [
+      -0.027086401358246803,
+      -0.08098965883255005,
+      1.456065058708191
+    ],
+    "right": [
+      0.027086399495601654,
+      -0.08116593211889267,
+      1.4560649394989014
+    ],
+    "mouth_center": [
+      -7.275957614183426e-12,
+      -0.0905459076166153,
+      1.452644944190979
+    ]
+  },
+  "field_radii_m": [
+    0.023000000044703484,
+    0.024000000208616257,
+    0.020999999716877937
+  ],
+  "corner_target_lift_m": 0.0045,
+  "corner_target_spread_m": 0.0012,
+  "corner_target_forward_m": 0.0004,
+  "actual_painted_mouth_displacement_m": {
+    "left": [
+      -0.0004495754837989807,
+      -0.00014986097812652588,
+      0.0016858577728271484
+    ],
+    "right": [
+      0.0008003860712051392,
+      -0.00026679784059524536,
+      0.0030014514923095703
+    ],
+    "center": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "moved_vertices": 18,
+  "vertices": 17990,
+  "triangles": 29046,
+  "affected_bounds_m": {
+    "min": [
+      -0.03677169606089592,
+      -0.08916468918323517,
+      1.4427603483200073
+    ],
+    "max": [
+      0.037222545593976974,
+      -0.07240676134824753,
+      1.467078447341919
+    ]
+  },
+  "maximum_vertex_displacement_m": 0.0037778477270002343,
+  "coincident_vertex_groups": 3061,
+  "maximum_delta_difference_at_coincident_vertices_m": 0.0,
+  "upper_face_displacement_m": 0.0,
+  "uv_sha256_before": "25f3dd443ae0d98c9860c0efec5611be8afe2ca59fceb50e5572664317d9d6e2",
+  "uv_sha256_after": "25f3dd443ae0d98c9860c0efec5611be8afe2ca59fceb50e5572664317d9d6e2",
+  "skin_weights_sha256_before": "57cb11183cb52b9a5ec4688105c21129043d9923ba97b1a8988838f7e7ff4652",
+  "skin_weights_sha256_after": "57cb11183cb52b9a5ec4688105c21129043d9923ba97b1a8988838f7e7ff4652",
+  "packed_images_sha256": {
+    "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
+    "CH_Haru_JRPG_Pilot_Raw_normal.png.001": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4",
+    "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c",
+    "front.png": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875"
+  },
+  "atlas_image_bytes_unchanged_in_master": true,
+  "exported_images_sha256": {
+    "CH_Haru_JRPG_Pilot_Raw_normal.png": "c3cd70cd3fa4edc49bb8b631166f25aec9bfcdf81b79da49614f66fff4ae85c4",
+    "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
+    "CH_Haru_JRPG_Pilot_Raw_rm.jpg": "851de58915d17e37e2b6162570e92c2c7f0afe1a6482244f5d8989171d00352c"
+  },
+  "exported_atlas_image_bytes_unchanged": true,
+  "exported_morph_target": {
+    "name": "Smile",
+    "attributes": [
+      "POSITION",
+      "NORMAL"
+    ],
+    "skin_bind_count": 35,
+    "body_animations_exported": false,
+    "position_accessor": {
+      "count": 17990,
+      "type": "VEC3",
+      "min": [
+        -0.000959400087594986,
+        0,
+        0
+      ],
+      "max": [
+        0.0009698402136564255,
+        0.003636956214904785,
+        0.0003232806921005249
+      ],
+      "sparse": {
+        "count": 18,
+        "indices": {
+          "bufferView": 9,
+          "componentType": 5123
+        },
+        "values": {
+          "bufferView": 10
+        }
+      }
+    }
+  },
+  "basis_vertices_unchanged": true,
+  "body_binding_preserved": true,
+  "blender_version": "5.2.1 LTS",
+  "renderer": "Cycles CPU16, Standard, fixed neutral lights",
+  "renders": [
+    {
+      "file": "front-neutral.png",
+      "angle_degrees": 0,
+      "strength": 0
+    },
+    {
+      "file": "front-smile-half.png",
+      "angle_degrees": 0,
+      "strength": 0.5
+    },
+    {
+      "file": "front-smile-full.png",
+      "angle_degrees": 0,
+      "strength": 1
+    },
+    {
+      "file": "threequarter-neutral.png",
+      "angle_degrees": 30,
+      "strength": 0
+    },
+    {
+      "file": "threequarter-smile-half.png",
+      "angle_degrees": 30,
+      "strength": 0.5
+    },
+    {
+      "file": "threequarter-smile-full.png",
+      "angle_degrees": 30,
+      "strength": 1
+    }
+  ],
+  "limits": [
+    "Closed painted mouth only; no oral cavity, speech, jaw rig, or new texture.",
+    "Blender neutral render, not Godot shader/actual town evidence.",
+    "Only copied LOD0; no production LOD or adapter switch.",
+    "Exported prototype omits body animations; unchanged source body-action library remains in the .blend copy."
+  ],
+  "triangle_stability": {
+    "affected_triangles": 46,
+    "minimum_normal_dot": 0.9930212497711182,
+    "area_ratio_min": 0.4594499225269439,
+    "area_ratio_max": 1.4631841399401786,
+    "flipped_or_collapsed_triangles": 0
+  },
+  "source_script_sha256": "8ba19180683028e86ffe9c3df6f2f18f200e64afc681f362f1e53c5ed6f81641"
+}

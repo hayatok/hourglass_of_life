@@ -1,0 +1,6 @@
+{
+	"checks": 17,
+	"display_server": "macOS",
+	"failed": [],
+	"fixture": "afb4c32 shared-rig Haru used to isolate material adapters before the new rig arrives; not new-mesh gameplay"
+}

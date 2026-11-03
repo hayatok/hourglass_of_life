@@ -1,0 +1,138 @@
+{
+  "revision": "r3-texture-eyes",
+  "scope": "Real seed-711 twelve-person town, no action/participant/state rewrites. Natural walking, work, conversation, food, sleep and waking; ongoing-save replay is a separate branch. GPU images were visually reviewed. This is an automated integration observation, not a human playtest or proof of fun.",
+  "validation": {
+    "headless": {
+      "completion": "Haru JRPG gameplay checks: 42 passed, 0 failed",
+      "seconds": 3.962,
+      "engine_errors": false
+    },
+    "gpu": {
+      "completion": "Haru JRPG gameplay checks: 43 passed, 0 failed",
+      "seconds": 6.351,
+      "engine_errors": false
+    }
+  },
+  "source_raw_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+  "source_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+  "source_sha256": {
+    "res://assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+    "res://data/residents.json": "752086bd5a0065e69644d305a2cc10c00390815eac26d189774f24cbb1b44324",
+    "res://game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+    "res://game/assets/models/haru/CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+    "res://game/assets/models/haru/CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59",
+    "res://game/assets/models/haru/animation-contract.json": "1256ac20a1b682a4acb9be9498b0710bffeb5af3fe1a3a051f2959c45a098828",
+    "res://game/assets/models/haru/asset-manifest.json": "98069241978fbf5b463ed6e7d263d0820ddfe919f741dbadb3e156063ed75bc7",
+    "res://game/assets/models/haru/face-layout.json": "eb71e54866e3c9c275a8f18155a39f5be3f19e88ef92532c1bf5ae3af2e0b925",
+    "res://game/assets/models/haru/haru_texture_eyes.gdshader": "4b826e9c238f914682e845c325af86bb5b6486a92a1df24fcc41c55d0a26ccc2",
+    "res://game/assets/ui/portraits/haru.png": "83d225aa6a9c557cdab7d255c16d491bfaec99376f90b8cc69a0ca1cf0a7d115",
+    "res://game/scenes/characters/haru.tscn": "47b122e927bcf0a2c1b0dfe681de9b02d5794b6f9f861b07ae8a82ab29f37c2d",
+    "res://game/scripts/jrpg_resident_model.gd": "033f047a04a54ebcd4353a9989054e7176b3aaab37f6c88229872dedafb70667",
+    "res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
+    "res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
+    "res://game/scripts/resident_contacts.gd": "daefa8107fbf779b5cea45ef7887ec9a1215c3f7a29891957cf86b2973a6b894",
+    "res://game/scripts/simulation.gd": "1054dba199c55f251b25a19f749a6cbb9219576800fd7a9fed3ac357accff218",
+    "res://tests/test_haru_jrpg_gameplay.gd": "dc113d4531aed91f014c3fdf3640fd502da481d86496f4fe716deab6f63adc54"
+  },
+  "headless_gpu_sources_identical": true,
+  "capabilities": {
+    "contract_errors": [],
+    "expression_mode": "TEXTURE_EYES",
+    "face_layout": "res://game/assets/models/haru/face-layout.json",
+    "facial_controls": [
+      "Blink",
+      "TiredEyes"
+    ],
+    "hair_aging": false,
+    "material_mode": "TEXTURE_TOON",
+    "source_model": "res://game/assets/models/haru/CH_Haru.glb"
+  },
+  "rendered_images_reviewed": 10,
+  "natural_project": {
+    "started": 53,
+    "engaged": 112,
+    "finished": 157,
+    "repair_before": 0.52,
+    "repair_after": 0.5344
+  },
+  "motion": {
+    "walk_bone_angle_delta": 0.295000046491623,
+    "walk_foot_local_displacement": 0.226084992289543,
+    "new_mesh_vertex_displacement": 0.46322962641716,
+    "conversation_head_target_dot": 0.394503623247147
+  },
+  "eyes": {
+    "natural_sleep": [
+      {
+        "blink": 1.0,
+        "tired_eyes": 0.28677811892828
+      }
+    ],
+    "natural_wake": [
+      {
+        "blink": 0.0,
+        "tired_eyes": 0.0
+      }
+    ],
+    "sleep_minute": 552,
+    "wake_minute": 1020,
+    "visible_review": "08: eyes visibly closed on the actual bed. 09: actual waking has open irises. Mouth and clothes remain the same painted source."
+  },
+  "hud_review": {
+    "visible_names": [
+      "haru"
+    ],
+    "normal_view": "Selected Haru name is readable above the head. Nearby faces and greeting hands are not covered by other residents names. New source-derived portrait is visible. Camera-distance scaling keeps the same label legible in normal and close views.",
+    "work_front": "10 shows both actual participants at the same table with wrists at real work targets and the radio between them.",
+    "closeups": "08/09/10 now use the production _update_resident_name_label helper after moving only the camera. The name no longer dominates the closeup; closed/open eyes, both work faces, hands and radio are unobscured."
+  },
+  "observed_limits": [
+    "Default follow camera views work and food from behind; 10 adds a camera-only front view of the same natural work minute.",
+    "Work reaches the table targets, while finger/tool-specific radio repair motion remains unfinished.",
+    "Nearby passers-by can still overlap bodies in the actual public-bench conversation.",
+    "Face controls are Blink and TiredEyes only. Smile, mouth motion, iris gaze and cosmetic hair aging are not implemented for this source-textured Haru.",
+    "This actual-town audit keeps selected Haru at LOD0. LOD1/2 source hashes are fixed here; distance switching and shader retention have separate adapter/LOD checks."
+  ],
+  "r1_archive": "r1-static-atlas/",
+  "files_sha256": {
+    "01-natural-walking.png": "c5019cadd676356e63c0badb5708a770fa1519b176bc493b9ee9dad0a1fd5be9",
+    "02-natural-joint-work.png": "1e91bcbc8044d3938d69cdeaa3dc7bc12b574f615ec1f67bda992bf2a5cb6a25",
+    "03-natural-conversation.png": "81eaa41df16f585e164fede0cf0923ce77899f2e50a7b73fbc48f7043e934124",
+    "04-natural-project-result.png": "25ad943b6931d5d93d51844bc8fab2ffbf433e06487f55c4806eba68fab46ba2",
+    "05-natural-eating.png": "0e87db1cd92a4d37275369eaf21feada52b3d8e4cecaadead143eb690f8df93f",
+    "06-natural-sleeping.png": "c1c7f6f5fbadc7f17ff91d6c6956cf41b8df91556f5121ab0dcc29a46a35102e",
+    "07-restored-joint-work.png": "4eacf74f6e742d83020e8c78e0bcf7cbee89a649a4e19f7240e63f03509509d9",
+    "08-natural-sleep-face.png": "471a73fdf402c55ae1a3d4ddbeec66b2b7f4ba8f69e05568e582f795f1b8061d",
+    "09-natural-wake-face.png": "c65e51661ba1d587e06b7da86d7a52727edb54ac3fe1e77ab60c2e42334346c7",
+    "10-natural-joint-work-front.png": "b16abc1606441d5d64ac1906af3ef5b5f775294e1ababa137800d3125393b108",
+    "gameplay-headless.json": "611eb8670723224228d58f2b44a74fca045097f7e65a55d4b5621c371ac783cc",
+    "gameplay.json": "78573116d4d6d69b3302a0f6db89676cbbfcf71bfb6bcda0dcefaead8c6ab2fa"
+  },
+  "name_size_followup": {
+    "reviewed_images": [
+      "03-natural-conversation.png",
+      "08-natural-sleep-face.png",
+      "09-natural-wake-face.png",
+      "10-natural-joint-work-front.png"
+    ],
+    "production_helper": "main._update_resident_name_label(actor,resident_id) changes label visibility, position and pixel_size only; it does not update actors or simulation time.",
+    "closeup_label_metadata": [
+      {
+        "file": "10-natural-joint-work-front.png",
+        "name_camera_distance": 3.02596092224121,
+        "name_pixel_size": 0.00226947059854865
+      },
+      {
+        "file": "08-natural-sleep-face.png",
+        "name_camera_distance": 1.41421353816986,
+        "name_pixel_size": 0.00106066011358052
+      },
+      {
+        "file": "09-natural-wake-face.png",
+        "name_camera_distance": 1.21368300914764,
+        "name_pixel_size": 0.000910262227989733
+      }
+    ],
+    "result": "Oversized closeup name resolved. Ordinary bench name stays readable. Sleep/wake eye states and real hand contacts still pass."
+  }
+}

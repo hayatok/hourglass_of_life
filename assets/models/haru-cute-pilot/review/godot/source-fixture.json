@@ -1,0 +1,49 @@
+{
+  "project": "/var/folders/_n/lm0cmjyj7l759qzv03j33fqw0000gn/T/hourglass-haru-godot-vjs_t3cp",
+  "source_repository": "/Users/hayatok/Documents/dev/hourglass_of_life",
+  "files": [
+    {
+      "file": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+      "sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+      "staged_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71"
+    },
+    {
+      "file": "assets/models/haru-cute-pilot/build/check_godot.gd",
+      "sha256": "b319d374560842f9cb1f347d33d7de685df4c17e91e777e71bfcff44c9cac66a",
+      "staged_sha256": "b319d374560842f9cb1f347d33d7de685df4c17e91e777e71bfcff44c9cac66a"
+    },
+    {
+      "file": "assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
+      "sha256": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875",
+      "staged_sha256": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875"
+    },
+    {
+      "file": "assets/models/haru-cute-pilot/build/fixtures/haru-placeholder.tscn",
+      "sha256": "7b451653cbd139588fbf67f75fe6bf74068688a2eebe0f7031006cc775c769cd",
+      "staged_sha256": "7b451653cbd139588fbf67f75fe6bf74068688a2eebe0f7031006cc775c769cd"
+    },
+    {
+      "file": "assets/models/haru-cute-pilot/build/fixtures/haru-placeholder-appearance.json",
+      "sha256": "aa8081e32c72023e68041ce37f619d10c53f90abdc2dd78bce43a02b912741ec",
+      "staged_sha256": "aa8081e32c72023e68041ce37f619d10c53f90abdc2dd78bce43a02b912741ec"
+    },
+    {
+      "file": "game/scripts/jrpg_resident_model.gd",
+      "sha256": "cdd1a704b5e01ccbc9119446960ec34bc8aea5e58d636a854546fdf9af8b94be",
+      "staged_sha256": "cdd1a704b5e01ccbc9119446960ec34bc8aea5e58d636a854546fdf9af8b94be"
+    },
+    {
+      "file": "game/assets/models/aoi/CH_Aoi.glb",
+      "sha256": "ea3bcb9fb855a60b8ad664b3fcb59bf3729d75d0d2c2c7cb8cc73d5762e10ba0",
+      "staged_sha256": "ea3bcb9fb855a60b8ad664b3fcb59bf3729d75d0d2c2c7cb8cc73d5762e10ba0"
+    },
+    {
+      "file": "game/assets/models/resident_toon.gdshader",
+      "sha256": "a898eedf1d7efb01b76d2436e1e11898faeb58c5ffbc4de500a560a5ae509211",
+      "staged_sha256": "a898eedf1d7efb01b76d2436e1e11898faeb58c5ffbc4de500a560a5ae509211"
+    }
+  ],
+  "reason_for_isolation": "Production assets/models/.gdignore excludes raw production files from engine import.",
+  "comparison_baseline_commit": "afb4c32",
+  "fixture": "No Sim autoload or resident actor. Previous Haru snapshot uses its rest mesh, toon shader, age 25 and baseline palette. Raw candidate keeps imported PBR materials. Both use scene-only normalization to 1.71m."
+}

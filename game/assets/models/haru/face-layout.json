@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "implementation": "UV eye shader: Blink and TiredEyes only; no facial blend shapes or mouth control.",
+  "source_raw_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+  "source_basecolor_pixel_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327",
+  "calibration": "Front-ray barycentric UV sampling from the original raw mesh. UVs remain unchanged in the fitted DEF35 mesh.",
+  "eyes": {
+    "left": {
+      "center": [
+        0.794434272439879,
+        0.7309575287784476
+      ],
+      "axis_x": [
+        0.012799130023551254,
+        0.008884515854588972
+      ],
+      "axis_y": [
+        0.007177627954839384,
+        -0.011255812240222849
+      ],
+      "skin_uv": [
+        0.8137258428195089,
+        0.7479492127557442
+      ]
+    },
+    "right": {
+      "center": [
+        0.8369141514692765,
+        0.760253846612765
+      ],
+      "axis_x": [
+        0.012025042689189601,
+        0.007206382276451161
+      ],
+      "axis_y": [
+        0.008231898097764848,
+        -0.011135780744644816
+      ],
+      "skin_uv": [
+        0.8137258428195089,
+        0.7479492127557442
+      ]
+    }
+  }
+}

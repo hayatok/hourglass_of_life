@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/haru-cute-pilot/ref/front-matte.png",
+  "m_per_px": 0.0011911170928667564,
+  "iou": 0.917,
+  "ref_only_pct": 2.54,
+  "render_only_pct": 6.28,
+  "band_width_diff": [
+    0.0034,
+    0.0114,
+    0.0047,
+    -0.0067,
+    -0.0054,
+    0.0007,
+    0.0054,
+    0.002,
+    -0.002,
+    -0.0007
+  ]
+}

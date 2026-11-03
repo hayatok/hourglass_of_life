@@ -97,6 +97,7 @@ func _update_body(p: Dictionary) -> void:
 		jrpg.set_age(int(p.age))
 
 func _apply_variant_palette() -> void:
+	if not jrpg.uses_palette_swatches(): return
 	if appearance.get("palette",{}).is_empty(): return
 	for material in jrpg.body_materials:
 		var original: Texture2D = material.get_shader_parameter("base_palette")

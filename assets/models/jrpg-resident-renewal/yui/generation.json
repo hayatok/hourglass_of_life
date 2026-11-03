@@ -1,0 +1,79 @@
+{
+  "resident": "yui",
+  "status": "raw_exported_review_pending",
+  "service": "Tripo Studio",
+  "interaction": "Chrome browser UI only",
+  "task_id": "6ee22af9-ba9b-4371-95b0-c1d7a1698d8b",
+  "task_url": "https://studio.tripo3d.ai/ja/workspace/generate/6ee22af9-ba9b-4371-95b0-c1d7a1698d8b",
+  "input": "assets/artwork/jrpg-resident-renewal/yui-concept-v1.png",
+  "input_sha256": "3533a0db82f42c16572853c3ba918a1b574f5100781f078571398ab52ed53cbb",
+  "model_display": "H3.1 – 最高品質",
+  "requested": {
+    "triangle_target": 30000,
+    "texture_resolution": 2048,
+    "ultra_mesh": false,
+    "texture": true,
+    "pbr": true,
+    "remove_lighting": true,
+    "privacy": "private"
+  },
+  "user_approved_generation_credits": 30,
+  "credit_batch": {
+    "members": [
+      "saki",
+      "tomo",
+      "yui"
+    ],
+    "approved_total": 90,
+    "balance_before": 2895,
+    "balance_after_generation": 2805,
+    "generation": 90,
+    "GLB_export_additional_observed": 0,
+    "basis": "All three submitted jobs accepted after re-upload; browser balance 2895 to 2805. Exported local files verified, no further balance change observed."
+  },
+  "gameplay_integration": "not integrated",
+  "output": "assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb",
+  "bytes": 3001736,
+  "sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+  "glb_contents": {
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "skins": 0,
+    "animations": 0,
+    "triangles": 29844,
+    "embedded_images": [
+      {
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 519608,
+        "sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc"
+      },
+      {
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 501782,
+        "sha256": "a272b48696b27c978499c0b3aa6f0b4fd5a5ef4a788ed4e8ea6041c2e478c900"
+      },
+      {
+        "mime": "image/png",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 1016051,
+        "sha256": "c4e7672c7bd21ba5f5f144ccd627b4af45d56123c0229769387b29154cd208b5"
+      }
+    ]
+  },
+  "observed_browser_geometry": {
+    "triangle_faces": 29844,
+    "vertices": 18880
+  }
+}

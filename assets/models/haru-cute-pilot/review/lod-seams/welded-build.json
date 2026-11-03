@@ -1,0 +1,64 @@
+{
+  "revision": "r3-welded-staging",
+  "installed": false,
+  "weld_distance_m": 1e-06,
+  "source_lod0_unchanged": true,
+  "raw_source_unchanged": true,
+  "records": [
+    {
+      "level": 1,
+      "ratio": 0.42,
+      "before": {
+        "vertices": 17990,
+        "faces": 29046,
+        "boundary_edges": 6528,
+        "nonmanifold_edges": 6528
+      },
+      "after_weld": {
+        "vertices": 14506,
+        "faces": 29028,
+        "boundary_edges": 20,
+        "nonmanifold_edges": 40
+      },
+      "after_reduction": {
+        "vertices": 6087,
+        "faces": 12190,
+        "boundary_edges": 20,
+        "nonmanifold_edges": 40
+      },
+      "retained_uv_loop_coordinates_preserved_by_weld": true,
+      "uv_loops_removed_with_degenerate_faces": 54,
+      "max_weights": 4
+    },
+    {
+      "level": 2,
+      "ratio": 0.12,
+      "before": {
+        "vertices": 17990,
+        "faces": 29046,
+        "boundary_edges": 6528,
+        "nonmanifold_edges": 6528
+      },
+      "after_weld": {
+        "vertices": 14506,
+        "faces": 29028,
+        "boundary_edges": 20,
+        "nonmanifold_edges": 40
+      },
+      "after_reduction": {
+        "vertices": 1733,
+        "faces": 3482,
+        "boundary_edges": 20,
+        "nonmanifold_edges": 40
+      },
+      "retained_uv_loop_coordinates_preserved_by_weld": true,
+      "uv_loops_removed_with_degenerate_faces": 54,
+      "max_weights": 4
+    }
+  ],
+  "glb_sha256": {
+    "CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59",
+    "CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+    "CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5"
+  }
+}

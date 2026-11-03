@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "checks": 140,
+  "image_comparisons": [
+    {
+      "mode": "toon",
+      "lod": 0,
+      "different_pixels": 0,
+      "total_pixels": 409600,
+      "maximum_channel_difference": 0,
+      "mean_absolute_channel_difference": 0.0
+    },
+    {
+      "mode": "toon",
+      "lod": 1,
+      "different_pixels": 0,
+      "total_pixels": 409600,
+      "maximum_channel_difference": 0,
+      "mean_absolute_channel_difference": 0.0
+    },
+    {
+      "mode": "toon",
+      "lod": 2,
+      "different_pixels": 0,
+      "total_pixels": 409600,
+      "maximum_channel_difference": 0,
+      "mean_absolute_channel_difference": 0.0
+    },
+    {
+      "mode": "pbr",
+      "lod": 0,
+      "different_pixels": 0,
+      "total_pixels": 409600,
+      "maximum_channel_difference": 0,
+      "mean_absolute_channel_difference": 0.0
+    },
+    {
+      "mode": "pbr",
+      "lod": 1,
+      "different_pixels": 0,
+      "total_pixels": 409600,
+      "maximum_channel_difference": 0,
+      "mean_absolute_channel_difference": 0.0
+    },
+    {
+      "mode": "pbr",
+      "lod": 2,
+      "different_pixels": 0,
+      "total_pixels": 409600,
+      "maximum_channel_difference": 0,
+      "mean_absolute_channel_difference": 0.0
+    }
+  ],
+  "texture_memory_comparison": [
+    {
+      "mode": "toon",
+      "r1_empty_viewport": 16587715,
+      "r2_empty_viewport": 16587715,
+      "r1_actor_all_lods_bytes": 150999031,
+      "r2_actor_all_lods_bytes": 50335741,
+      "reduction_bytes": 100663290,
+      "reduction_fraction": 0.6666485826654079,
+      "r1_lod_prepare_extra_bytes": 100663290,
+      "r2_lod_prepare_extra_bytes": 0,
+      "r1_distinct_source_texture_resources": 9,
+      "r2_distinct_source_texture_resources": 3
+    },
+    {
+      "mode": "pbr",
+      "r1_empty_viewport": 16587715,
+      "r2_empty_viewport": 16587715,
+      "r1_actor_all_lods_bytes": 150999031,
+      "r2_actor_all_lods_bytes": 50335741,
+      "reduction_bytes": 100663290,
+      "reduction_fraction": 0.6666485826654079,
+      "r1_lod_prepare_extra_bytes": 100663290,
+      "r2_lod_prepare_extra_bytes": 0,
+      "r1_distinct_source_texture_resources": 9,
+      "r2_distinct_source_texture_resources": 3
+    }
+  ],
+  "method": "Four independent native Apple M5/OpenGL Compatibility Godot 4.7.2 processes, same minimal project and real adapter snapshot; empty viewport baseline removed. RenderingServer TextureMem is renderer accounting, not process physical memory. Not full-town performance or human testing.",
+  "policy": "LOD0/r1 source PBR preserved byte-identical. LOD1/2 contain no images and are intentionally untextured when inspected standalone; runtime actor retains the LOD0 override for both TextureToon and SourcePBR."
+}

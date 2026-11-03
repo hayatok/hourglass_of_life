@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "lod0_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+  "source_raw_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+  "checks": [
+    {
+      "level": 1,
+      "sha256": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+      "binds_identical_to_lod0": true,
+      "animation_tracks_and_samples_identical_to_lod0": true,
+      "weights_normalized_max4": true,
+      "uv_in_range": true,
+      "embedded_images": 0
+    },
+    {
+      "level": 2,
+      "sha256": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59",
+      "binds_identical_to_lod0": true,
+      "animation_tracks_and_samples_identical_to_lod0": true,
+      "weights_normalized_max4": true,
+      "uv_in_range": true,
+      "embedded_images": 0
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+[
+  {
+    "check": "import",
+    "passed": true,
+    "seconds": 2.8,
+    "failure": null,
+    "log": "import.log",
+    "completion": null
+  },
+  {
+    "check": "simulation",
+    "passed": true,
+    "seconds": 1.56,
+    "failure": null,
+    "log": "simulation.log",
+    "completion": "Simulation checks: 49 passed, 0 failed"
+  },
+  {
+    "check": "social",
+    "passed": true,
+    "seconds": 0.35,
+    "failure": null,
+    "log": "social.log",
+    "completion": "Social life checks: 33 passed, 0 failed"
+  },
+  {
+    "check": "work",
+    "passed": true,
+    "seconds": 0.65,
+    "failure": null,
+    "log": "work.log",
+    "completion": "Work/family checks: 41 passed, 0 failed"
+  },
+  {
+    "check": "life",
+    "passed": true,
+    "seconds": 292.48,
+    "failure": null,
+    "log": "life.log",
+    "completion": "Life course checks: 50 passed, 0 failed"
+  },
+  {
+    "check": "cognition",
+    "passed": true,
+    "seconds": 0.57,
+    "failure": null,
+    "log": "cognition.log",
+    "completion": "Cognition checks: 105 passed, 0 failed"
+  },
+  {
+    "check": "knowledge_exchange",
+    "passed": true,
+    "seconds": 0.56,
+    "failure": null,
+    "log": "knowledge_exchange.log",
+    "completion": "Knowledge exchange checks: 67 passed, 0 failed"
+  },
+  {
+    "check": "resident_activities",
+    "passed": true,
+    "seconds": 0.48,
+    "failure": null,
+    "log": "resident_activities.log",
+    "completion": "Resident activity checks: 24 passed, 0 failed"
+  },
+  {
+    "check": "autonomy",
+    "passed": true,
+    "seconds": 72.96,
+    "failure": null,
+    "log": "autonomy.log",
+    "completion": "Autonomy checks: 23 passed, 0 failed"
+  },
+  {
+    "check": "resident_agenda",
+    "passed": true,
+    "seconds": 0.66,
+    "failure": null,
+    "log": "resident_agenda.log",
+    "completion": "Resident agenda checks: 54 passed, 0 failed"
+  },
+  {
+    "check": "agenda_preparation",
+    "passed": true,
+    "seconds": 0.97,
+    "failure": null,
+    "log": "agenda_preparation.log",
+    "completion": "Agenda preparation checks: 34 passed, 0 failed"
+  },
+  {
+    "check": "resident_support",
+    "passed": true,
+    "seconds": 1.6,
+    "failure": null,
+    "log": "resident_support.log",
+    "completion": "Resident support plan checks: 41 passed, 0 failed"
+  },
+  {
+    "check": "support_index",
+    "passed": true,
+    "seconds": 2.48,
+    "failure": null,
+    "log": "support_index.log",
+    "completion": "Support index checks: 36 passed, 0 failed"
+  },
+  {
+    "check": "resident_lod",
+    "passed": true,
+    "seconds": 2.22,
+    "failure": null,
+    "log": "resident_lod.log",
+    "completion": "Resident LOD checks: 901 passed, 0 failed"
+  },
+  {
+    "check": "observation_hud",
+    "passed": true,
+    "seconds": 4.25,
+    "failure": null,
+    "log": "observation_hud.log",
+    "completion": "Observation HUD checks: 33 passed, 0 failed"
+  },
+  {
+    "check": "population_ui",
+    "passed": true,
+    "seconds": 5.59,
+    "failure": null,
+    "log": "population_ui.log",
+    "completion": "Population UI checks: 14 passed, 0 failed"
+  },
+  {
+    "check": "population",
+    "passed": true,
+    "seconds": 15.64,
+    "failure": null,
+    "log": "population.log",
+    "completion": "Population checks: 41 passed, 0 failed"
+  },
+  {
+    "check": "population_environment",
+    "passed": true,
+    "seconds": 3.89,
+    "failure": null,
+    "log": "population_environment.log",
+    "completion": "Population environment checks: 74 passed, 0 failed"
+  },
+  {
+    "check": "haru_jrpg",
+    "passed": true,
+    "seconds": 6.77,
+    "failure": null,
+    "log": "haru_jrpg.log",
+    "completion": "Haru JRPG gameplay checks: 37 passed, 0 failed"
+  },
+  {
+    "check": "population_collaboration",
+    "passed": true,
+    "seconds": 8.49,
+    "failure": null,
+    "log": "population_collaboration.log",
+    "completion": "Population collaboration checks: 7 passed, 0 failed"
+  },
+  {
+    "check": "new_resident_life",
+    "passed": true,
+    "seconds": 0.98,
+    "failure": null,
+    "log": "new_resident_life.log",
+    "completion": "New resident life checks: 59 passed, 0 failed"
+  },
+  {
+    "check": "autonomy_presentation",
+    "passed": true,
+    "seconds": 4.21,
+    "failure": null,
+    "log": "autonomy_presentation.log",
+    "completion": "Autonomy presentation checks: 7 passed, 0 failed"
+  },
+  {
+    "check": "social_chain_presentation",
+    "passed": true,
+    "seconds": 86.52,
+    "failure": null,
+    "log": "social_chain_presentation.log",
+    "completion": "Social chain presentation checks: 14 passed, 0 failed; completed natural chain"
+  },
+  {
+    "check": "character",
+    "passed": true,
+    "seconds": 4.89,
+    "failure": null,
+    "log": "character.log",
+    "completion": "Character import and motion checks: PASS, errors=[]"
+  },
+  {
+    "check": "cast",
+    "passed": true,
+    "seconds": 5.7,
+    "failure": null,
+    "log": "cast.log",
+    "completion": "Resident cast and growth checks: PASS, errors=[]"
+  },
+  {
+    "check": "activities",
+    "passed": true,
+    "seconds": 5.32,
+    "failure": null,
+    "log": "activities.log",
+    "completion": "Furniture and activity checks: 217 passed, 0 failed"
+  },
+  {
+    "check": "neighborhood",
+    "passed": true,
+    "seconds": 5.9,
+    "failure": null,
+    "log": "neighborhood.log",
+    "completion": "Neighborhood checks: 136 passed, 0 failed"
+  }
+]

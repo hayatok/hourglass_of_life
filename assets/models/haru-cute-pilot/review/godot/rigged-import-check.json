@@ -1,0 +1,50 @@
+{
+	"capabilities": {
+		"contract_errors": [],
+		"expression_mode": "TEXTURE_EYES",
+		"face_layout": "res://game/assets/models/haru/face-layout.json",
+		"facial_controls": [
+			"Blink",
+			"TiredEyes"
+		],
+		"hair_aging": false,
+		"material_mode": "TEXTURE_TOON",
+		"source_model": "res://game/assets/models/haru/CH_Haru.glb"
+	},
+	"checks": 31,
+	"display_server": "headless",
+	"failed": [],
+	"lods": [
+		{
+			"level": 0,
+			"skin_binds": [
+				35
+			],
+			"triangles": 29046
+		},
+		{
+			"level": 1,
+			"skin_binds": [
+				35
+			],
+			"triangles": 12190
+		},
+		{
+			"level": 2,
+			"skin_binds": [
+				35
+			],
+			"triangles": 3482
+		},
+		{
+			"level": 0,
+			"skin_binds": [
+				35
+			],
+			"triangles": 29046
+		}
+	],
+	"purpose": "Actual skinned scene/resource/LOD import contract, not gameplay or deformation-quality approval",
+	"source_jpeg_pixel_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327",
+	"texture_pixel_sha256": "6c61c56763f1cfc5cf9388264e996f285adb643f0585a2e236dc6e442390f327"
+}

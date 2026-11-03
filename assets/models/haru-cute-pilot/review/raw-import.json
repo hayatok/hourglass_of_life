@@ -1,0 +1,141 @@
+{
+  "raw_file": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+  "raw_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+  "raw_bytes": 3247068,
+  "blender_version": "5.2.1 LTS",
+  "source_bounds_m_as_imported": {
+    "min": [
+      -0.26739501953125,
+      -0.09456636011600494,
+      0.0
+    ],
+    "max": [
+      0.26739501953125,
+      0.09456636011600494,
+      1.0
+    ],
+    "size": [
+      0.5347900390625,
+      0.1891327202320099,
+      1.0
+    ]
+  },
+  "review_parent_uniform_scale": 1.77,
+  "review_parent_translation": [
+    -0.0,
+    -0.0,
+    -0.0
+  ],
+  "normalised_review_height_m": 1.77,
+  "mesh_local_geometry_unchanged": true,
+  "meshes": [
+    {
+      "source_object": "tripo_node_8de33a49-b257-44fb-811b-e39974d6578d",
+      "review_object": "CH_Haru_JRPG_Pilot_Body_LOD0",
+      "vertices": 17990,
+      "polygons": 29046,
+      "triangles": 29046,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "material_slots": 1,
+      "shape_keys": [],
+      "geometry_hash_before": "830434b9f1d193f5d5f3bd5014f02150fc0b04958f12dfba7da1cfcbdb59b770",
+      "geometry_hash_after": "830434b9f1d193f5d5f3bd5014f02150fc0b04958f12dfba7da1cfcbdb59b770"
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_8de33a49-b257-44fb-811b-e39974d6578d.001",
+      "nodes": [
+        [
+          "BSDF_PRINCIPLED",
+          ""
+        ],
+        [
+          "OUTPUT_MATERIAL",
+          ""
+        ],
+        [
+          "TEX_IMAGE",
+          "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001"
+        ],
+        [
+          "SEPARATE_COLOR",
+          ""
+        ],
+        [
+          "TEX_IMAGE",
+          "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001"
+        ],
+        [
+          "NORMAL_MAP",
+          ""
+        ],
+        [
+          "TEX_IMAGE",
+          "CH_Haru_JRPG_Pilot_Raw_normal.png.001"
+        ]
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "color_space": "sRGB",
+      "packed": true
+    },
+    {
+      "name": "CH_Haru_JRPG_Pilot_Raw_basecolor.jpg.001",
+      "size": [
+        2048,
+        2048
+      ],
+      "color_space": "sRGB",
+      "packed": true
+    },
+    {
+      "name": "CH_Haru_JRPG_Pilot_Raw_normal.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "color_space": "Non-Color",
+      "packed": true
+    },
+    {
+      "name": "CH_Haru_JRPG_Pilot_Raw_normal.png.001",
+      "size": [
+        2048,
+        2048
+      ],
+      "color_space": "Non-Color",
+      "packed": true
+    },
+    {
+      "name": "CH_Haru_JRPG_Pilot_Raw_rm.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "color_space": "Non-Color",
+      "packed": true
+    },
+    {
+      "name": "CH_Haru_JRPG_Pilot_Raw_rm.jpg.001",
+      "size": [
+        2048,
+        2048
+      ],
+      "color_space": "Non-Color",
+      "packed": true
+    }
+  ],
+  "armatures": 0,
+  "animations": [],
+  "note": "Review placement is on one empty parent; raw file, local vertices and face indices remain unchanged. Physical height is inferred. Rig/skin/animation integration is not complete."
+}

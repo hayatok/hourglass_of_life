@@ -1,0 +1,22 @@
+[
+  {
+    "variant": "r2",
+    "level": 1,
+    "actual_projected_height_pixels": 95
+  },
+  {
+    "variant": "r2",
+    "level": 2,
+    "actual_projected_height_pixels": 40
+  },
+  {
+    "variant": "r3",
+    "level": 1,
+    "actual_projected_height_pixels": 95
+  },
+  {
+    "variant": "r3",
+    "level": 2,
+    "actual_projected_height_pixels": 40
+  }
+]

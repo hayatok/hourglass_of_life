@@ -1,0 +1,51 @@
+{
+  "status": "Prototype reviewed: Blink and TiredEyes adopted as two UV shader controls; mouth/Smile portion remains unadopted.",
+  "scope": "Static raw GLB imported by Godot, shader/code only. No raw mesh, UV or source image edits.",
+  "elapsed_scope": "Bounded investigation started about 16:44 JST; completed about 17:07 JST, including a pause for priority rigged-scene integration.",
+  "findings": [
+    "Both eyes were located by a front ray and barycentric UV interpolation. Each eye lies within one face atlas island; blink removes the painted iris/white and draws a closed eyelid.",
+    "Below the nose and at the left mouth corner, adjacent 3D points jump about 460 source texels across UV islands. A single affine UV ellipse/curve breaks at these seams.",
+    "Dense front-ray tracing, splitting UV discontinuities and simplifying each UV run produces continuous native shader mouth lines without drawing across unrelated atlas islands.",
+    "Original mouth uses 3 UV runs/8 simplified segments, smile uses 2 runs/14 segments, tired uses 4 runs/11 segments.",
+    "Open, blink, smile and tired produce distinct static GPU renders. Blink was also inspected at -30 degrees."
+  ],
+  "visual_assessment": {
+    "blink": "Viable candidate: painted iris is hidden and one eyelid line remains. No invented blend-shape support.",
+    "smile_tired": "Technically viable and distinguishable. Current thin procedural mouth and skin-fill/blush appearance remain artificial in a 1000px closeup; retain as art-review prototypes.",
+    "recommendation": "Root accepted Blink/TiredEyes only. Keep mouth shader out of the game; pursue actual geometry-based mouth/Smile controls and review LOD seams separately."
+  },
+  "unverified": [
+    "Production rig deformation and head-gaze movement with this shader",
+    "All three runtime LODs and transitions",
+    "Sleep and conversation timing in the actual game",
+    "Readability at the normal town camera and multi-resident GPU cost",
+    "Eye look-left/look-right, eyebrow/sad control and speech mouth articulation"
+  ],
+  "source_glb_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+  "source_basecolor_jpeg_sha256": "100e9d4a64ea62f46479e37423ef541d49c49b0b7e7a9852602d12ebadc8e659",
+  "reproduce": "python3 assets/models/haru-cute-pilot/build/check_face.py",
+  "images": [
+    "open.png",
+    "blink.png",
+    "smile.png",
+    "tired.png",
+    "blink-threequarter.png"
+  ],
+  "production_followup": {
+    "mode": "TEXTURE_EYES",
+    "facial_controls": [
+      "Blink",
+      "TiredEyes"
+    ],
+    "adopted_shader": "game/assets/models/haru/haru_texture_eyes.gdshader",
+    "layout": "game/assets/models/haru/face-layout.json",
+    "gpu_resource_stage": "assets/models/haru-cute-pilot/review/godot/texture-eyes/checks.json",
+    "verified": "Sleep forces closure, wake opens, periodic blink/fatigue drive two real controls, LOD keeps owned shader/atlas/values; 31 GPU checks passed.",
+    "not_supported": [
+      "Smile/mouth deformation",
+      "Sad",
+      "iris look-left/look-right"
+    ],
+    "quality_issue": "Forced closeup reveals preexisting decimated-LOD seam cracks; reported for mesh repair. This is separate from the nontransparent eye shader."
+  }
+}

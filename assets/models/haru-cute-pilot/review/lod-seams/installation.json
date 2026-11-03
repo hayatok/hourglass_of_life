@@ -1,0 +1,16 @@
+{
+  "installed": true,
+  "revision": "r3-lod-seam-repair",
+  "source_lod0_sha256_unchanged": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+  "production_lod_sha256": {
+    "CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+    "CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+    "CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59"
+  },
+  "face_controls_unchanged": true,
+  "r2_archive": "builds/haru-cute-pilot/r2-production-snapshot",
+  "new_triangles": {
+    "LOD1": 12190,
+    "LOD2": 3482
+  }
+}

@@ -1,0 +1,15 @@
+# r2 candidate: distance-LOD texture deduplication
+
+Historical r2 experiment: this texture deduplication was subsequently adopted, followed by the r3 geometry seam correction. The current production state is recorded in `game/assets/models/haru/asset-manifest.json`. The measurements below compare the frozen r1 and r2 candidates, rather than the later r3 meshes. Candidate files are under `builds/haru-cute-pilot/r2/`; the exact r1 GLBs and metadata are preserved under `builds/haru-cute-pilot/r1/`.
+
+LOD0 is byte-identical to r1 and retains the original base-color, roughness/metalness and normal images. LOD1/2 contain the same mesh, UV, weight, skin, bone, node and animation data as r1, with one untextured material slot and no images. Every accessor's underlying bytes and all mesh/node/skin/animation definitions compare exactly. Runtime `JrpgResidentModel.set_lod()` retains the actor-owned LOD0 material override while replacing mesh/skin.
+
+Four independent native Godot 4.7.2 processes on Apple M5/OpenGL Compatibility compare r1/r2 in TextureToon and SourcePBR modes, using a snapshot of the real adapter in a minimal project without simulation or saves. Each passes 35 checks, for 140 total. All six r1/r2 screenshots (two material modes × three LODs) are pixel-identical, and all LOD switches retain the same atlas Texture2D, override material, skeleton, skin, animated joint pose and animation phase.
+
+After subtracting the empty viewport baseline, RenderingServer texture accounting falls from 150,999,031 to 50,335,741 bytes: 100,663,290 bytes saved, approximately 96 MiB or 66.7%. Distinct source Texture2D resources fall from nine to three. Loading distance LODs adds no texture bytes in r2. Rendering buffer accounting remains identical. These are renderer counters for one isolated actor, not process physical RAM or full-town performance.
+
+The three GLBs shrink from 11,295,084 to 6,652,612 bytes (41.1%). The raw source SHA and LOD0 source PBR inspection are unchanged. Standalone LOD1/2 files now display an untextured material; inspect source PBR through LOD0, or through the actor that retains the LOD0 material. This is the principal tooling tradeoff. External texture references would be a later alternative if textured standalone distance-LOD previews become required.
+
+The adoption changed only `CH_Haru_LOD1.glb`, `CH_Haru_LOD2.glb` and the relevant manifest keys. Current face/expression metadata was preserved. This GPU probe predates the separate eye-expression adapter change; the later texture-eye and r3 probes check that its material ownership is retained.
+
+Hair-aging memo only: a later actor-owned hair mask can share the existing atlas ownership pattern. A small single-channel mask texture or vertex mask could avoid classifying navy trousers as hair; LOD copies must preserve or transfer that mask explicitly. No UV2, mask, mesh, rig or hair shader changes are part of r2.

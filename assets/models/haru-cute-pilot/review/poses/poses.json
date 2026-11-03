@@ -1,0 +1,252 @@
+{
+  "renderer": "Cycles 12 samples, Standard, neutral light, source atlas unchanged",
+  "poses": [
+    {
+      "label": "full_stride",
+      "clip": "walk",
+      "frame": 6,
+      "bounds": {
+        "min": [
+          -0.24707990884780884,
+          -0.5416804552078247,
+          0.00499996542930603
+        ],
+        "max": [
+          0.2692640423774719,
+          0.6896508932113647,
+          1.6559810638427734
+        ]
+      },
+      "hand_heights_m": {
+        "L": 0.7956794500350952,
+        "R": 0.805435836315155
+      },
+      "head_bone_height_m": 1.3518201112747192,
+      "upper_arm_local_z_deg": {
+        "L": -18.334649034374994,
+        "R": 18.334649034374994
+      },
+      "images": [
+        "full_stride-front.png",
+        "full_stride-threequarter.png"
+      ]
+    },
+    {
+      "label": "talk_forward",
+      "clip": "talk",
+      "frame": 18,
+      "bounds": {
+        "min": [
+          -0.2506134808063507,
+          -0.4570702910423279,
+          0.004999999422580004
+        ],
+        "max": [
+          0.25151535868644714,
+          0.15069736540317535,
+          1.713196873664856
+        ]
+      },
+      "hand_heights_m": {
+        "L": 0.9940233826637268,
+        "R": 0.8338753581047058
+      },
+      "head_bone_height_m": 1.409925103187561,
+      "upper_arm_local_z_deg": {
+        "L": -18.334649034374994,
+        "R": 18.334649034374994
+      },
+      "images": [
+        "talk_forward-front.png",
+        "talk_forward-threequarter.png"
+      ]
+    },
+    {
+      "label": "work_reach",
+      "clip": "work",
+      "frame": 15,
+      "bounds": {
+        "min": [
+          -0.2506134808063507,
+          -0.5280910730361938,
+          0.004999999422580004
+        ],
+        "max": [
+          0.25151535868644714,
+          0.15069736540317535,
+          1.6978176832199097
+        ]
+      },
+      "hand_heights_m": {
+        "L": 1.014674425125122,
+        "R": 1.0763554573059082
+      },
+      "head_bone_height_m": 1.4087774753570557,
+      "upper_arm_local_z_deg": {
+        "L": -21.772395941763715,
+        "R": 21.772395941763715
+      },
+      "images": [
+        "work_reach-front.png",
+        "work_reach-threequarter.png"
+      ]
+    },
+    {
+      "label": "seated",
+      "clip": "sit_talk",
+      "frame": 18,
+      "bounds": {
+        "min": [
+          -0.23169948160648346,
+          -0.5664953589439392,
+          0.004999994300305843
+        ],
+        "max": [
+          0.23255443572998047,
+          0.13816605508327484,
+          1.37596595287323
+        ]
+      },
+      "hand_heights_m": {
+        "L": 0.8082013726234436,
+        "R": 0.800273060798645
+      },
+      "head_bone_height_m": 1.0735231637954712,
+      "upper_arm_local_z_deg": {
+        "L": -25.78310009786813,
+        "R": 25.78310009786813
+      },
+      "images": [
+        "seated-front.png",
+        "seated-threequarter.png"
+      ]
+    },
+    {
+      "label": "sleep",
+      "clip": "sleep",
+      "frame": 30,
+      "bounds": {
+        "min": [
+          -0.2506134808063507,
+          0.0,
+          0.3270699977874756
+        ],
+        "max": [
+          0.25151535868644714,
+          1.7085529565811157,
+          0.641708493232727
+        ]
+      },
+      "hand_heights_m": {
+        "L": 0.5340738892555237,
+        "R": 0.5340738892555237
+      },
+      "head_bone_height_m": 0.4823554754257202,
+      "upper_arm_local_z_deg": {
+        "L": -20.626481444332338,
+        "R": 20.626481444332338
+      },
+      "images": [
+        "sleep-front.png",
+        "sleep-threequarter.png"
+      ]
+    },
+    {
+      "label": "arms_overhead",
+      "clip": "manual extreme pose, not a game clip",
+      "frame": 0,
+      "bounds": {
+        "min": [
+          -0.3481135964393616,
+          -0.16170847415924072,
+          5.679634540456391e-10
+        ],
+        "max": [
+          0.34729206562042236,
+          0.16170847415924072,
+          1.9277225732803345
+        ]
+      },
+      "hand_heights_m": {
+        "L": 1.7755969762802124,
+        "R": 1.7755969762802124
+      },
+      "head_bone_height_m": 1.4049999713897705,
+      "upper_arm_local_z_deg": {
+        "L": 146.10423502628424,
+        "R": -146.10423502628424
+      },
+      "images": [
+        "arms_overhead-front.png",
+        "arms_overhead-threequarter.png"
+      ]
+    },
+    {
+      "label": "torso_twist",
+      "clip": "_pose_twist",
+      "frame": 0,
+      "bounds": {
+        "min": [
+          -0.2506134808063507,
+          -0.24240118265151978,
+          0.004999999422580004
+        ],
+        "max": [
+          0.26101958751678467,
+          0.1989021599292755,
+          1.7148104906082153
+        ]
+      },
+      "hand_heights_m": {
+        "L": 0.8390878438949585,
+        "R": 0.8390878438949585
+      },
+      "head_bone_height_m": 1.409999966621399,
+      "upper_arm_local_z_deg": {
+        "L": -18.334649034374994,
+        "R": 18.334649034374994
+      },
+      "images": [
+        "torso_twist-front.png",
+        "torso_twist-threequarter.png"
+      ]
+    },
+    {
+      "label": "deep_bend",
+      "clip": "manual extreme pose, not a game clip",
+      "frame": 0,
+      "bounds": {
+        "min": [
+          -0.2635546922683716,
+          -0.44106897711753845,
+          0.4904254674911499
+        ],
+        "max": [
+          0.26429593563079834,
+          0.1354210525751114,
+          1.6989859342575073
+        ]
+      },
+      "hand_heights_m": {
+        "L": 1.3939728736877441,
+        "R": 1.3939728736877441
+      },
+      "head_bone_height_m": 1.401611328125,
+      "upper_arm_local_z_deg": {
+        "L": 0.0,
+        "R": 0.0
+      },
+      "images": [
+        "deep_bend-front.png",
+        "deep_bend-threequarter.png"
+      ]
+    }
+  ],
+  "town_angle_thumbnail": {
+    "file": "town-angle-rest.png",
+    "azimuth_degrees": 30,
+    "elevation_degrees": 45,
+    "image_size": 160,
+    "kind": "Blender approximation of town-camera angle; not actual runtime evidence"
+  }
+}

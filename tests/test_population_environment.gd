@@ -226,18 +226,23 @@ func run() -> void:
 		expect(avatar.displayed_model==id,id+": presentation identity remains distinct from its source asset")
 		var original_skeleton: int = avatar.jrpg.skeleton.get_instance_id()
 		var palette: Texture2D = avatar.jrpg.body_materials[0].get_shader_parameter("base_palette")
-		var expected: Dictionary = avatar.appearance.palette
-		var pixels := palette.get_image()
-		var swatch: String = expected.keys()[0]
-		var index := int(swatch)
-		var pixel := pixels.get_pixel((index%8)*128+64,(7-index/8)*128+64)
-		expect(pixel.is_equal_approx(Color(expected[swatch])),id+": its own garment/hair palette is actually installed")
+		var capabilities: Dictionary = avatar.jrpg.capabilities()
+		if avatar.jrpg.uses_palette_swatches():
+			var expected: Dictionary = avatar.appearance.palette
+			var pixels := palette.get_image()
+			var swatch: String = expected.keys()[0]
+			var index := int(swatch)
+			var pixel := pixels.get_pixel((index%8)*128+64,(7-index/8)*128+64)
+			expect(pixel.is_equal_approx(Color(expected[swatch])),id+": its own garment/hair palette is actually installed")
+		else:
+			expect(palette.get_width()==2048 and palette.get_height()==2048 and str(capabilities.source_model).begins_with("res://game/assets/models/"+id+"/"),id+": the dedicated imported model uses its own full-resolution texture")
+			expect(avatar.jrpg.import_contract_errors().is_empty(),id+": the dedicated model has its declared real skeleton, skin and animation capabilities")
 		expect(avatar.jrpg.set_lod(1) and avatar.jrpg.set_lod(2),id+": both supplied lower-detail meshes are usable")
 		expect(avatar.jrpg.skeleton.get_instance_id()==original_skeleton,id+": LOD retains the same animation rig")
 		expect(avatar.jrpg.body_materials[0].get_shader_parameter("base_palette")==palette,id+": changing LOD preserves the resident's appearance")
 		var scalar: Array = avatar.appearance.body_scale
 		expect(avatar.visual.scale.is_equal_approx(Vector3(scalar[0],scalar[1],scalar[2])),id+": its own authored body proportions are applied")
-		report.variants[id] = {"source":BASES[id],"scale":scalar,"height":avatar.jrpg.rest_height*avatar.visual.scale.y,"lod_resources":avatar.jrpg.lod_resources_loaded,"provisional":true}
+		report.variants[id] = {"source":capabilities.source_model,"material_mode":capabilities.material_mode,"scale":scalar,"height":avatar.jrpg.rest_height*avatar.visual.scale.y,"lod_resources":avatar.jrpg.lod_resources_loaded,"provisional":true}
 		avatar.free()
 	stage.free()
 	if DisplayServer.get_name()!="headless":

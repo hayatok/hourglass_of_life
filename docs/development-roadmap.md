@@ -33,7 +33,7 @@ Godot 4.7を使用する。町、住人、家具、UI、アニメーションを
 
 各版では中心となる遊びを成立させることを優先する。装飾や小さな見た目の変更だけで版を進めない。進行不能、データ破損、操作の誤認など、その版の体験を妨げる問題は同じ版で直す。
 
-進捗は [v0.6 #12](https://github.com/hayatok/hourglass_of_life/issues/12)、[v0.7 #13](https://github.com/hayatok/hourglass_of_life/issues/13)、[v0.8 #14](https://github.com/hayatok/hourglass_of_life/issues/14)、[v0.9 #15](https://github.com/hayatok/hourglass_of_life/issues/15)と、それぞれに対応するMilestoneで管理する。v0.5の表現制作と、v0.6以降の行動の試作・検証は並行して進める。
+進捗は [v0.5 #17](https://github.com/hayatok/hourglass_of_life/issues/17)、[v0.6 #12](https://github.com/hayatok/hourglass_of_life/issues/12)、[v0.7 #13](https://github.com/hayatok/hourglass_of_life/issues/13)、[v0.8 #14](https://github.com/hayatok/hourglass_of_life/issues/14)、[v0.9 #15](https://github.com/hayatok/hourglass_of_life/issues/15)と、それぞれに対応するMilestoneで管理する。v0.5の表現制作と、v0.6以降の行動の試作・検証は並行して進める。
 
 ## 行動の組合せから展開を作る
 
@@ -80,6 +80,10 @@ Godot 4.7を使用する。町、住人、家具、UI、アニメーションを
 - 砂時計の層から実際の出来事、関わった人物、写真、作品、続く習慣を開けるようにする。創発した出来事の起点と続きは、必要なときに振り返れる形にする。
 
 全住人の詳細情報を常時並べず、住人の振る舞いと配置で関係が伝わる画面を目指す。
+
+人物制作は晴を先行し、採用した全身画像からChromeのTripoで原型を生成した。専用の骨と重み、9クリップ、3段階のLOD、元のアトラスを使うセル塗り、瞬きと睡眠時の閉眼をゲームへ接続している。[実ゲームの検証記録](verification/v0.5/haru-jrpg-gameplay/)では、12人の町で自然に選ばれた歩行、会話、共同修理、食事、睡眠と保存・再開を追う。笑顔の変形、髪の加齢、歩行時の足滑りの仕上げは別に残す。
+
+続いて咲・智・結衣の原型を同じ条件で生成し、各人の体格と衣服に合わせてリグと動作を調整する。他の住人と成長後の凛も [共通テイストの参照画像](../assets/artwork/jrpg-resident-renewal/README.md) を用意した。新しい原型は、元画像との造形、実際のスキン変形、顔の制御、家具や相手との接触、近景・遠景の見え方を確かめてから順に採用する。人口は12人を維持し、この制作をv0.5の品質改善として進める。
 
 ## 比較と試遊による判断
 

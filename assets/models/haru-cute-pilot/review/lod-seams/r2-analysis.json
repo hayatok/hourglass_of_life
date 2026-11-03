@@ -1,0 +1,56 @@
+[
+  {
+    "file": "game/assets/models/haru/CH_Haru.glb",
+    "vertices": 17990,
+    "triangles": 29046,
+    "indexed_boundary_edges": 6528,
+    "geometric_boundary_rounded_1um": {
+      "edges": 2,
+      "total_length_m": 0.0026386180701504845
+    },
+    "head_neck_geometric_boundary": {
+      "edges": 0,
+      "total_length_m": 0
+    },
+    "coincident_vertex_groups": 3061,
+    "max_coincident_weight_l1_difference": 0.0,
+    "coincident_weight_discrepancies_over_1e_5": 0,
+    "head_note": "Head/neck report filters edges above world-up glTF Y=1.30m; geometric boundaries merge equal-position UV/normal splits for analysis only."
+  },
+  {
+    "file": "game/assets/models/haru/CH_Haru_LOD1.glb",
+    "vertices": 9373,
+    "triangles": 12199,
+    "indexed_boundary_edges": 6143,
+    "geometric_boundary_rounded_1um": {
+      "edges": 3931,
+      "total_length_m": 62.87583760676884
+    },
+    "head_neck_geometric_boundary": {
+      "edges": 1458,
+      "total_length_m": 21.033773458580967
+    },
+    "coincident_vertex_groups": 1735,
+    "max_coincident_weight_l1_difference": 0.0,
+    "coincident_weight_discrepancies_over_1e_5": 0,
+    "head_note": "Head/neck report filters edges above world-up glTF Y=1.30m; geometric boundaries merge equal-position UV/normal splits for analysis only."
+  },
+  {
+    "file": "game/assets/models/haru/CH_Haru_LOD2.glb",
+    "vertices": 3584,
+    "triangles": 3485,
+    "indexed_boundary_edges": 3267,
+    "geometric_boundary_rounded_1um": {
+      "edges": 3205,
+      "total_length_m": 83.91448923420299
+    },
+    "head_neck_geometric_boundary": {
+      "edges": 1197,
+      "total_length_m": 30.652796524190247
+    },
+    "coincident_vertex_groups": 168,
+    "max_coincident_weight_l1_difference": 0.0,
+    "coincident_weight_discrepancies_over_1e_5": 0,
+    "head_note": "Head/neck report filters edges above world-up glTF Y=1.30m; geometric boundaries merge equal-position UV/normal splits for analysis only."
+  }
+]

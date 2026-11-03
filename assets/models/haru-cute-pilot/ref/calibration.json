@@ -1,0 +1,112 @@
+{
+  "image_size": [
+    1024,
+    1536
+  ],
+  "foreground_bbox": [
+    120,
+    14,
+    867,
+    1500
+  ],
+  "axis_column": 498.5,
+  "axis_samples": [
+    {
+      "row": 237,
+      "interval": [
+        443,
+        554
+      ],
+      "midpoint": 498.5
+    },
+    {
+      "row": 270,
+      "interval": [
+        438,
+        563
+      ],
+      "midpoint": 500.5
+    },
+    {
+      "row": 600,
+      "interval": [
+        353,
+        636
+      ],
+      "midpoint": 494.5
+    }
+  ],
+  "ground_row": 1499,
+  "subject_fraction": 0.9674479166666666,
+  "ground_fraction": 0.024088541666666668,
+  "review_height_m": 1.77,
+  "meters_per_pixel": 0.0011911170928667564,
+  "width_profile": [
+    {
+      "height_fraction_from_top": 0.05,
+      "row": 88,
+      "width_pixels": 216,
+      "width_over_total_height": 0.14535666218034993
+    },
+    {
+      "height_fraction_from_top": 0.15,
+      "row": 237,
+      "width_pixels": 112,
+      "width_over_total_height": 0.07537012113055182
+    },
+    {
+      "height_fraction_from_top": 0.25,
+      "row": 386,
+      "width_pixels": 372,
+      "width_over_total_height": 0.2503364737550471
+    },
+    {
+      "height_fraction_from_top": 0.35,
+      "row": 534,
+      "width_pixels": 511,
+      "width_over_total_height": 0.34387617765814266
+    },
+    {
+      "height_fraction_from_top": 0.45,
+      "row": 683,
+      "width_pixels": 621,
+      "width_over_total_height": 0.41790040376850607
+    },
+    {
+      "height_fraction_from_top": 0.55,
+      "row": 831,
+      "width_pixels": 747,
+      "width_over_total_height": 0.5026917900403769
+    },
+    {
+      "height_fraction_from_top": 0.65,
+      "row": 980,
+      "width_pixels": 312,
+      "width_over_total_height": 0.20995962314939434
+    },
+    {
+      "height_fraction_from_top": 0.75,
+      "row": 1128,
+      "width_pixels": 330,
+      "width_over_total_height": 0.22207267833109018
+    },
+    {
+      "height_fraction_from_top": 0.85,
+      "row": 1277,
+      "width_pixels": 363,
+      "width_over_total_height": 0.24427994616419918
+    },
+    {
+      "height_fraction_from_top": 0.95,
+      "row": 1426,
+      "width_pixels": 382,
+      "width_over_total_height": 0.2570659488559892
+    }
+  ],
+  "inferred": [
+    "physical scale 1.77 m from the existing Haru presentation, not image evidence",
+    "front camera approximated as orthographic",
+    "back, side depth, hidden costume surfaces and exact joints not shown"
+  ],
+  "matte_method": "row-edge background difference >30/255, outside flood fill, sole shadow cut at manual ground row; approximate concept matte, inspect before interpreting IoU"
+}

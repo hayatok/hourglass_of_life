@@ -1,0 +1,72 @@
+{
+  "status": "runtime_r3_body_and_eye_controls_verified_in_game",
+  "input": "assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
+  "input_sha256": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875",
+  "service": "Tripo Studio",
+  "interaction": "Chrome browser UI only",
+  "task_id": "5b0ff371-e44b-44b0-be05-f1433d089f00",
+  "task_url": "https://studio.tripo3d.ai/ja/workspace/generate/5b0ff371-e44b-44b0-be05-f1433d089f00",
+  "model_display": "H3.1 – 最高品質",
+  "requested": {
+    "triangle_target": 30000,
+    "texture_resolution": 2048,
+    "ultra_mesh": false,
+    "texture": true,
+    "pbr": true,
+    "remove_lighting": true,
+    "privacy": "private"
+  },
+  "observed_browser_geometry": {
+    "triangle_faces": 29046,
+    "vertices": 17990
+  },
+  "user_approved_generation_credits": 30,
+  "credits": {
+    "generation": 30,
+    "GLB_export_additional_observed": 0,
+    "total": 30,
+    "remaining_browser_balance": 2895,
+    "browser_balance_before": 2925,
+    "basis": "Displayed browser balance before generation and after successful export; no API account used."
+  },
+  "output": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+  "bytes": 3247068,
+  "sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+  "glb_contents": {
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "skins": 0,
+    "animations": 0,
+    "triangles": 29046,
+    "embedded_images": [
+      {
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 610291
+      },
+      {
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 477293
+      },
+      {
+        "mime": "image/png",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 1233190
+      }
+    ]
+  },
+  "gameplay_integration": "Dedicated skinned model and nine clips verified in the actual seed-711 twelve-resident town: walking, conversation, joint work, food, sleep/waking and save replay. Headless 42/42 and GPU 43/43. Smile, hair aging and final gait/contact polish remain open.",
+  "runtime_manifest": "game/assets/models/haru/asset-manifest.json",
+  "gameplay_evidence": "docs/verification/v0.5/haru-jrpg-gameplay/"
+}

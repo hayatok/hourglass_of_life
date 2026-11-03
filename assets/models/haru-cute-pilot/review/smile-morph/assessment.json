@@ -1,0 +1,26 @@
+{
+  "decision": "Geometry approach is viable as a modest closed-mouth Smile candidate; root should choose after viewing the two candidates.",
+  "preferred_for_review": "cheek-supported",
+  "reason": [
+    "Keeps the source soft painted mouth line; no replacement black curve or skin fill.",
+    "55 affected vertices/103 triangles, maximum rest displacement 4.67mm, upper-face movement zero.",
+    "All 3061 coincident seam groups retain identical deltas; UV/weights and the exact three embedded atlas images remain unchanged.",
+    "No triangle flips/collapse: minimum affected normal dot .9947, area ratios .561..1.391 at full strength.",
+    "Wider support gives a smoother cheek-to-lip transition than the 18-vertex tight variant."
+  ],
+  "quality_limits": [
+    "Small expression; normal town-distance readability is unverified.",
+    "Slight asymmetry remains from coarse source topology.",
+    "Only static Blender renders and one exported real morph; all repaired LODs, body clips and actual game integration remain to be checked."
+  ],
+  "comparison_images": [
+    "front-neutral.png",
+    "front-smile-half.png",
+    "front-smile-full.png",
+    "threequarter-neutral.png",
+    "threequarter-smile-half.png",
+    "threequarter-smile-full.png"
+  ],
+  "candidate_directory": "cheek-supported",
+  "elapsed_scope": "Started about 17:22 JST; frozen about 17:36 JST, within the 30 minute bound."
+}

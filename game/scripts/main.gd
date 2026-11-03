@@ -226,7 +226,9 @@ func _process(delta: float) -> void:
 	$Town.update_view(camera.global_position)
 	for p in Sim.people:
 		if avatars.has(p.id):
-			avatars[p.id].update_state(p,delta,selected_id==p.id)
+			var actor = avatars[p.id]
+			actor.update_state(p,delta,selected_id==p.id)
+			_update_resident_name_label(actor,p.id)
 	ui_timer -= delta
 	if ui_timer<=0:
 		ui_timer = .2
@@ -234,6 +236,13 @@ func _process(delta: float) -> void:
 	if toast_left>0:
 		toast_left -= delta
 		%Toast.visible = toast_left>0
+
+func _update_resident_name_label(actor, resident_id: String) -> void:
+	# Keep the selected person's face and nearby gestures readable in a crowd.
+	actor.name_label.visible = not title.visible and selected_id==resident_id
+	actor.name_label.global_position = actor.head_position()+Vector3.UP*.4
+	var label_distance := camera.global_position.distance_to(actor.name_label.global_position)
+	actor.name_label.pixel_size = .012*minf(1.0,label_distance/16.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	var focused := get_viewport().gui_get_focus_owner()
