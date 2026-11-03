@@ -25,6 +25,8 @@ jobs:
           name: engine-verification
           path: |
             builds/verification/
+            builds/weather/*.json
+            builds/weather-presentation/*.json
             builds/tabletop-presentation/*.json
             builds/interaction-presentation/*.json
             builds/foot-plant/*.json

@@ -1,0 +1,33 @@
+{
+  "schema": 8,
+  "people": 12,
+  "elapsed": 91,
+  "minute_of_day": 871,
+  "weather": {
+    "context_version": 1,
+    "origin": {
+      "elapsed": 0,
+      "minute_of_day": 780,
+      "season_day": 0,
+      "season_index": 0
+    },
+    "rng_state": "-6943989399623600929",
+    "rules_version": 1,
+    "sampling_origin": 0,
+    "schema": 2,
+    "source_id": "fictional-japan-temperate-assumptions-v1",
+    "state": {
+      "condition": "rain",
+      "elapsed": 91,
+      "next_change": 198,
+      "offset_c": 1.16549205780029,
+      "rain_intensity": 0.452379405498505,
+      "segment_started": 90,
+      "serial": 2
+    },
+    "weather_seed": 600268599
+  },
+  "physical_objects": 1,
+  "tabletop_pieces": 16,
+  "scope": "Save written by the actual native app during this dedicated test; not the player original save."
+}

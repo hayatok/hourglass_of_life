@@ -1,0 +1,182 @@
+[
+  {
+    "run": "three_day_original",
+    "outcome": "failed",
+    "seed": 711,
+    "population": 12,
+    "search_limit_minutes": 4320,
+    "observed_until": 4320,
+    "failures": [
+      "tomo: the finite natural run covers travel, actual talk, completed joint work, seated food, sleep and waking without forcing an outcome"
+    ],
+    "residents": {
+      "saki": {
+        "missing_conditions": [],
+        "conversation_encounters": {},
+        "conversation_meeting": "meeting_5"
+      },
+      "tomo": {
+        "missing_conditions": [
+          "conversation"
+        ],
+        "conversation_encounters": {},
+        "conversation_meeting": null
+      },
+      "yui": {
+        "missing_conditions": [],
+        "conversation_encounters": {},
+        "conversation_meeting": "meeting_16"
+      }
+    }
+  },
+  {
+    "run": "week_headless",
+    "outcome": "passed",
+    "seed": 711,
+    "population": 12,
+    "search_limit_minutes": 10080,
+    "observed_until": 5643,
+    "failures": [],
+    "residents": {
+      "saki": {
+        "missing_conditions": [],
+        "conversation_encounters": {
+          "meeting_22": {
+            "first_seen": 3240,
+            "partner": "haru",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          },
+          "meeting_5": {
+            "first_seen": 480,
+            "partner": "fumi",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          }
+        },
+        "conversation_meeting": "meeting_5"
+      },
+      "tomo": {
+        "missing_conditions": [],
+        "conversation_encounters": {
+          "meeting_34": {
+            "first_seen": 5643,
+            "partner": "yui",
+            "states": [
+              "engaged"
+            ]
+          }
+        },
+        "conversation_meeting": "meeting_34"
+      },
+      "yui": {
+        "missing_conditions": [],
+        "conversation_encounters": {
+          "meeting_16": {
+            "first_seen": 1980,
+            "partner": "ryo",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          },
+          "meeting_18": {
+            "first_seen": 2760,
+            "partner": "fumi",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          },
+          "meeting_34": {
+            "first_seen": 5643,
+            "partner": "tomo",
+            "states": [
+              "engaged"
+            ]
+          }
+        },
+        "conversation_meeting": "meeting_16"
+      }
+    }
+  },
+  {
+    "run": "week_gpu",
+    "outcome": "passed",
+    "seed": 711,
+    "population": 12,
+    "search_limit_minutes": 10080,
+    "observed_until": 5643,
+    "failures": [],
+    "residents": {
+      "saki": {
+        "missing_conditions": [],
+        "conversation_encounters": {
+          "meeting_22": {
+            "first_seen": 3240,
+            "partner": "haru",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          },
+          "meeting_5": {
+            "first_seen": 480,
+            "partner": "fumi",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          }
+        },
+        "conversation_meeting": "meeting_5"
+      },
+      "tomo": {
+        "missing_conditions": [],
+        "conversation_encounters": {
+          "meeting_34": {
+            "first_seen": 5643,
+            "partner": "yui",
+            "states": [
+              "engaged"
+            ]
+          }
+        },
+        "conversation_meeting": "meeting_34"
+      },
+      "yui": {
+        "missing_conditions": [],
+        "conversation_encounters": {
+          "meeting_16": {
+            "first_seen": 1980,
+            "partner": "ryo",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          },
+          "meeting_18": {
+            "first_seen": 2760,
+            "partner": "fumi",
+            "states": [
+              "travel",
+              "engaged"
+            ]
+          },
+          "meeting_34": {
+            "first_seen": 5643,
+            "partner": "tomo",
+            "states": [
+              "engaged"
+            ]
+          }
+        },
+        "conversation_meeting": "meeting_16"
+      }
+    }
+  }
+]
