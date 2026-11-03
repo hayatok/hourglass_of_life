@@ -159,11 +159,18 @@ def build():
     for side in ['L','R']:
         forearm=bpy.data.objects[P+'Forearm.'+side+'_LOD0'];forearm.hide_render=True;forearm.hide_set(True)
         sign=1 if side=='L' else -1
+        hidden_leg=B.rings('UnderlyingLegSkin.'+side,[(.07,.025,.027,sign*.069,0),
+            (.20,.030,.034,sign*.069,.01),(.40,.042,.044,sign*.069,.018),
+            (.50,.044,.046,sign*.069,.018),(.72,.056,.060,sign*.068,.008),
+            (.95,.062,.063,sign*.068,0)],skin,'leg.'+side,collection='HIGH')
+        hidden_leg.hide_render=True;hidden_leg.hide_set(True)
         B.tube('ArmSkin.'+side,[(sign*.123,0,1.30),(sign*.18,-.003,1.16),
             (sign*.210,-.005,1.075),(sign*.233,-.007,1.047),(sign*.267,-.01,.981),
             (sign*.300,-.014,.921),(sign*.312,-.012,.90)],
             [.030,.027,.027,.029,.026,.020,.017],skin,'arm_skin.'+side,n=20)
         trousers=bpy.data.objects[P+'Trousers.'+side+'_LOD0']
+        # Complete trousers remain in this master; the export copy cuts only the covered hip shell.
+        trousers['coverage_cut_z']=.76
         if not trousers.get('forms_applied'):
             for v in trousers.data.vertices:
                 z=v.co.z
@@ -234,6 +241,11 @@ def build():
 
     # Back and side locks: large readable clumps with pointed, inward-curled ends.
     cap=bpy.data.objects[P+'Hair_LOD0']
+    if not cap.get('nape_taper_v4'):
+        for v in cap.data.vertices:
+            t=max(0,min(1,(1.445-v.co.z)/.05))
+            v.co.x*=1-.12*t
+        cap['nape_taper_v4']=True
     if not cap.get('fringe_open_v2'):
         bm=bmesh.new();bm.from_mesh(cap.data)
         discard=[]
@@ -249,18 +261,24 @@ def build():
         a=-.20+i*(math.pi+.4)/12
         c,s=math.cos(a),math.sin(a)
         points=[(.018,.015,1.645),(.11*c,.116*s+.012,1.62),
-                (.136*c,.137*s+.014,1.47),(.096*c,.103*s+.018,1.407+.009*math.sin(i*1.3))]
+                (.136*c,.137*s+.014,1.47),(.080*c,.103*s+.018,1.407+.009*math.sin(i*1.3))]
         hair_lock('BobLock%02d'%i,points,.025 if i in [0,12] else .032,
                   hairmid if i%3==0 else hair,hairlight if i%4==0 else None)
     # Asymmetric parted fringe, using the original drawing's swept left-hand silhouette.
     bangs=[([(.027,-.028,1.643),(-.018,-.105,1.635),(-.078,-.122,1.535),(-.074,-.103,1.498)],.032),
            ([(.025,-.035,1.642),(.008,-.112,1.62),(-.014,-.128,1.55),(-.046,-.105,1.513)],.030),
            ([(.034,-.023,1.640),(.083,-.080,1.63),(.103,-.117,1.53),(.085,-.093,1.438)],.026),
-           ([(-.005,-.011,1.644),(-.088,-.069,1.61),(-.135,-.101,1.48),(-.092,-.081,1.414)],.026)]
+           ([(-.005,-.011,1.644),(-.088,-.069,1.61),(-.135,-.101,1.48),(-.082,-.081,1.414)],.026)]
     for i,(points,width) in enumerate(bangs):hair_lock('Fringe%02d'%i,points,width,hairmid,hairlight)
 
     # Major cloth folds, kept below 1 cm and aligned to the waist construction.
     skirt=bpy.data.objects[P+'ApronSkirt_LOD0']
+    if not skirt.get('open_hem_v4'):
+        bm=bmesh.new();bm.from_mesh(skirt.data)
+        bmesh.ops.delete(bm,geom=[f for f in bm.faces if len(f.verts)>4],context='FACES')
+        bm.to_mesh(skirt.data);bm.free()
+        thickness=skirt.modifiers.new('Open cloth hem','SOLIDIFY');thickness.thickness=.002
+        skirt['open_hem_v4']=True
     if not skirt.get('forms_applied'):
         for v in skirt.data.vertices:
             t=max(0,min(1,(1.09-v.co.z)/.55))

@@ -9,13 +9,13 @@
   ],
   "bbox_max": [
     0.37099871039390564,
-    0.1409447193145752,
-    1.6514091491699219
+    0.1409538835287094,
+    1.6514105796813965
   ],
   "size_xyz": [
     0.7419974207878113,
-    0.2966647148132324,
-    1.645409107208252
+    0.29667389392852783,
+    1.6454105377197266
   ],
   "objects": [
     "CH_Nagisa_Blouse_LOD0",
@@ -135,7 +135,7 @@
         0,
         0
       ],
-      "distance": 4.148332357406616
+      "distance": 4.148336946964264
     },
     "side": {
       "file": "assets/models/CH_Nagisa/review/03_forms/clay_side.png",
@@ -153,16 +153,7 @@
         15,
         50
       ],
-      "distance": 2.924910245877173
-    },
-    "ref": {
-      "file": "assets/models/CH_Nagisa/review/03_forms/clay_ref.png",
-      "az_el_lens": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "distance": 4.148332357406616
+      "distance": 2.924918888447185
     },
     "gameplay": {
       "file": "assets/models/CH_Nagisa/review/03_forms/clay_gameplay_128px.png",

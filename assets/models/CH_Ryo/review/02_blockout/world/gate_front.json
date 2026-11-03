@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ryo/ref/front-matte.png",
+  "m_per_px": 0.0021359223300970874,
+  "iou": 0.8902,
+  "ref_only_pct": 7.02,
+  "render_only_pct": 4.45,
+  "band_width_diff": [
+    0.0182,
+    -0.0061,
+    -0.0049,
+    -0.0352,
+    -0.0121,
+    0.0024,
+    0.0012,
+    -0.0024,
+    0.0073,
+    0.0133
+  ]
+}

@@ -8,7 +8,7 @@ Godot 4.7.2で開発する3D人生シミュレーション。v0.1で日常と働
 
 最初の3年を見守ると、その町で起きたことを振り返れる。その後も、卒業と転居、成長に伴う役割の変更、働き方の変更、別れを経て暮らしが続く。完成した取り組みの記録は3Dの町に置かれ、別の人が実際に読んで、自分の取り組みの参考にする。全員の生涯を見届けた後には、残された記録を読み返せる。
 
-v0.5の開発ブランチでは、渚のJRPG調モデル、表情と動きを制作し、実際の町へ取り込んでいる。[人物モデルの制作確認](docs/verification/v0.5/README.md)を参照。残りの人物と町、家具との位置合わせ、音と演出、導入と一連の進行の仕上げは未完了。
+v0.5の開発ブランチでは、渚・亮・凛のJRPG調モデルと、成長後の凛、表情と動きを実際の町へ取り込んでいる。年齢が進むと凛の体格が切り替わり、髪色も変わる。[人物モデルの制作確認](docs/verification/v0.5/README.md)を参照。造形の最終調整、残り5人と町、家具や道具との接触、音と演出、導入と一連の進行の仕上げは未完了。
 
 ## 起動と操作
 
@@ -36,9 +36,12 @@ godot --headless --path . --script tests/test_work_family.gd
 godot --headless --path . --script tests/test_life_course.gd
 godot --path . --script tests/test_scene.gd
 godot --path . --script tests/test_character_model.gd
+godot --path . --script tests/test_resident_models.gd
 ```
 
 `godot` はGodot実行ファイルのパスに読み替える。シーン全体の確認はGPUを使用し、操作、共同制作、3年の振り返り、全員の生涯を見届けた画面まで `docs/verification/v0.5/integration/` へ保存する。人物の確認は `docs/verification/v0.5/nagisa/` へ保存する。Godotのシーンエディタで編集した `.tscn` と、保存されたAnimationPlayerのクリップを実行時に使用する。初期シーンの作成補助は `tools/build_scenes.gd` に残しているが、再実行すると後の版の編集を上書きする。
+
+`python3 tools/verify_game.py --gpu` で、エンジンの終了コード・エラーログ・各テストの完了表示も照合できる。必要に応じて `--godot` に実行ファイルを指定する。亮・凛・成長後の姿と加齢の描画は `docs/verification/v0.5/cast/`、ローカルの実行ログは `builds/verification/` へ保存する。
 
 ## 制作方針
 

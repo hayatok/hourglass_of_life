@@ -4,6 +4,9 @@ var resident_id: String = ""
 var last_position = Vector3.ZERO
 var animation_name: String = ""
 var jrpg: JrpgResidentModel
+var displayed_age := -1
+var displayed_model := ""
+var walk_rate := 1.0
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var visual: Node3D = $Visual
 @onready var name_label: Label3D = $Name
@@ -18,6 +21,12 @@ const COLORS = {
 	"maho": [Color("#e4ddc8"),Color("#55565a"),Color("#664531"),Color("#c77c60")],
 	"ritsu": [Color("#35475c"),Color("#343d50"),Color("#242931"),Color("#35475c")],
 	"aoi": [Color("#647354"),Color("#4c4e4e"),Color("#332f2b"),Color("#647354")]
+}
+const MODELS = {
+	"nagisa": preload("res://game/scenes/characters/nagisa.tscn"),
+	"ryo": preload("res://game/scenes/characters/ryo.tscn"),
+	"rin": preload("res://game/scenes/characters/rin.tscn"),
+	"rin_adult": preload("res://game/scenes/characters/rin_adult.tscn")
 }
 
 func configure(p: Dictionary) -> void:
@@ -37,18 +46,30 @@ func configure(p: Dictionary) -> void:
 	_recolor($Visual/Hips/Head/Hair, palette[2])
 	_recolor($Visual/Hips/Apron, palette[3])
 	$Visual/Hips/Apron.visible = p.id in ["nagisa","osamu","maho","rin"]
-	if p.id == "nagisa":
+	_update_body(p)
+	selection.visible = false
+
+func _update_body(p: Dictionary) -> void:
+	displayed_age = int(p.age)
+	var model_key: String = "rin_adult" if p.id=="rin" and p.age>=12 else p.id
+	if MODELS.has(model_key):
 		$Visual/Hips.hide()
 		$AnimationPlayer.stop()
-		jrpg = preload("res://game/scenes/characters/nagisa.tscn").instantiate()
-		visual.add_child(jrpg)
-		animator = jrpg.animator
-		name_label.position.y = 1.9
-	if p.id == "rin":
-		var growth = clampf(.72+(p.age-7)*.045,.72,1)
+		if model_key != displayed_model:
+			if is_instance_valid(jrpg):
+				visual.remove_child(jrpg)
+				jrpg.queue_free()
+			jrpg = MODELS[model_key].instantiate()
+			visual.add_child(jrpg)
+			animator = jrpg.animator
+			displayed_model = model_key
+			animation_name = ""
+		var growth := 1.0
+		if model_key=="rin": growth = clampf(1+(p.age-7)*.035,1,1.14)
+		if model_key=="rin_adult": growth = clampf(.88+(p.age-12)*.024,.88,1)
 		visual.scale = Vector3.ONE*growth
-		name_label.position.y = 2.1*growth
-	selection.visible = false
+		name_label.position.y = jrpg.rest_height*growth+.25
+		jrpg.set_age(int(p.age))
 
 func _recolor(mesh: MeshInstance3D, color: Color) -> void:
 	var mat = mesh.material_override.duplicate() as StandardMaterial3D
@@ -56,8 +77,11 @@ func _recolor(mesh: MeshInstance3D, color: Color) -> void:
 	mesh.material_override = mat
 
 func update_state(p: Dictionary, delta: float, selected: bool) -> void:
+	if int(p.age)!=displayed_age: _update_body(p)
 	visible = p.get("alive",true) and (p.moving or not p.place.begins_with("off_map_"))
+	var previous_position := global_position
 	global_position = global_position.lerp(p.position, minf(1,delta*12))
+	var actual_speed := global_position.distance_to(previous_position)/maxf(delta,.0001)
 	var direction: Vector3 = p.position-last_position
 	if direction.length_squared()>.00001:
 		visual.rotation.y = lerp_angle(visual.rotation.y,atan2(direction.x,direction.z),minf(1,delta*12))
@@ -85,5 +109,9 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 		animation_name = wanted
 	animator.speed_scale = clampf(Sim.speed,.5,3) if Sim.running else 0
 	if is_instance_valid(jrpg):
+		if wanted=="walk" and Sim.running:
+			var target := clampf(actual_speed/maxf(.1,jrpg.walk_speed*visual.scale.y),.35,6)
+			walk_rate = lerpf(walk_rate,target,minf(1,delta*8))
+			animator.speed_scale = walk_rate
 		jrpg.set_expression(p.fatigue,.4 if wanted in ["talk","sit_talk"] else 0)
 

@@ -6,9 +6,12 @@ from pathlib import Path
 from mathutils import Vector
 sys.path.insert(0,str(Path(__file__).parent))
 import mesh_helpers as H
+from dimensions import Dimensions
 ROOT=Path(__file__).resolve().parents[1]
+D=Dimensions(ROOT)
 CLIPS={'idle':(72,True),'walk':(24,True),'talk':(72,True),'work':(60,True),
        'sit_talk':(72,True),'sleep':(90,True),'wave':(60,False),'eat':(72,True),'rest':(90,True)}
+CLIPS['walk']=(int(D.motion.get('walk_frames',24)),True)
 
 def pose(arm,name,t):
     p={b.name.removeprefix('DEF-'):b for b in arm.pose.bones}
@@ -24,12 +27,12 @@ def pose(arm,name,t):
     if name=='walk':
         for side,s in [('L',1),('R',-1)]:
             swing=math.sin(phase)*s
-            p['thigh.'+side].rotation_euler.x=.49*swing
-            p['shin.'+side].rotation_euler.x=-.72*max(0,-swing)
+            p['thigh.'+side].rotation_euler.x=.49*swing*D.motion.get('stride',1)
+            p['shin.'+side].rotation_euler.x=-.72*max(0,-swing)*D.motion.get('stride',1)
             p['upper_arm.'+side].rotation_euler.x=-.28*swing
             p['forearm.'+side].rotation_euler.x=.15+.16*max(0,swing)
             p['foot.'+side].rotation_euler.x=-.10*swing
-        p['pelvis'].location.y=.012*(1-math.cos(phase*2))
+        p['pelvis'].location.y=.012*D.body_scale*(1-math.cos(phase*2))
         p['pelvis'].rotation_euler.z=.035*math.sin(phase)
         p['apron_front'].rotation_euler.x=.46*abs(math.sin(phase))
         p['apron_back'].rotation_euler.x=-.36*abs(math.sin(phase))
@@ -48,7 +51,7 @@ def pose(arm,name,t):
             for i in range(5):p['finger%d.%s'%(i,side)].rotation_euler.x=.38
         p['chest'].rotation_euler.x=.12;p['head'].rotation_euler.x=.18
     if name in ['sit_talk','eat','rest','_pose_sit']:
-        p['pelvis'].location.y=-.50
+        p['pelvis'].location.y=-.50*D.body_scale
         for side,s in [('L',1),('R',-1)]:
             p['thigh.'+side].rotation_euler.x=1.42
             p['shin.'+side].rotation_euler.x=-1.50
@@ -95,7 +98,9 @@ def build():
     for name,(frames,loop) in {**CLIPS,**{n:(1,False) for n in ['_pose_reach','_pose_sit','_pose_stride','_pose_twist','_pose_sleep','_pose_overhead']}}.items():
         action=bpy.data.actions.new(name);action.use_fake_user=True
         action['loop']=loop;action['root_motion']=False;action['interruptible']=True;action['locomotion_allowed']=name=='walk'
-        if name=='walk':action['speed_mps']=1.6;action['blend_direction']='forward'
+        if name=='walk':
+            action['speed_mps']=1.6*D.body_scale*D.motion.get('stride',1)*24/frames
+            action['blend_direction']='forward'
         arm.animation_data.action=action
         arm.animation_data.action_slot=action.slots.new(id_type='OBJECT',name=arm.name)
         step=1 if name=='walk' else 3
@@ -105,7 +110,7 @@ def build():
             for bone in p.values():
                 bone.keyframe_insert('rotation_euler',frame=frame,group=bone.name)
                 bone.keyframe_insert('location',frame=frame,group=bone.name)
-        events={'walk':{'footstep.L':0,'footstep.R':12},'work':{'contact.L':15,'contact.R':45},
+        events={'walk':{'footstep.L':0,'footstep.R':frames//2},'work':{'contact.L':15,'contact.R':45},
                 'wave':{'greeting':15},'eat':{'sip':36}}.get(name,{})
         for event,frame in events.items():marker=action.pose_markers.new(event);marker.frame=frame
         for layer in action.layers:

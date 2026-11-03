@@ -1,5 +1,5 @@
 {
-  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_delivery.blend",
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_topology.blend",
   "mode": "wire",
   "engine": "workbench",
   "bbox_min": [
@@ -9,13 +9,13 @@
   ],
   "bbox_max": [
     0.37099871039390564,
-    0.1409447193145752,
-    1.6514091491699219
+    0.1409538835287094,
+    1.6514105796813965
   ],
   "size_xyz": [
     0.7419974207878113,
-    0.2966647148132324,
-    1.645409107208252
+    0.29667389392852783,
+    1.6454105377197266
   ],
   "objects": [
     "CH_Nagisa_Body_LOD0",
@@ -29,7 +29,7 @@
         0,
         0
       ],
-      "distance": 4.148332357406616
+      "distance": 4.148336946964264
     },
     "threequarter": {
       "file": "assets/models/CH_Nagisa/review/04_topology/wire_threequarter.png",
@@ -38,7 +38,7 @@
         15,
         50
       ],
-      "distance": 2.924910245877173
+      "distance": 2.924918888447185
     }
   }
 }

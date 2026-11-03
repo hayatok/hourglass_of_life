@@ -5,6 +5,8 @@ import bpy,json,struct,sys
 from pathlib import Path
 from mathutils import Vector,Matrix
 ROOT=Path(__file__).resolve().parents[1]
+profile_path=ROOT/'profile.json'
+expected_height=json.loads(profile_path.read_text()).get('height',1.65) if profile_path.exists() else 1.65
 manifest=json.loads((ROOT/'exports/asset-manifest.json').read_text())
 contract=json.loads((ROOT/'exports/animation-contract.json').read_text())
 report={'lods':[],'failures':[]}
@@ -29,7 +31,7 @@ for lod in [0,1,2]:
         points.extend(e.matrix_world@Vector(v) for v in e.bound_box);e.to_mesh_clear()
     height=max(p.z for p in points)-min(p.z for p in points);floor=min(p.z for p in points)
     expected=next(r['tris'] for r in manifest['lods'] if r['level']==lod)
-    if abs(height-1.65)/1.65>.01:report['failures'].append(f'LOD{lod} rest height {height}')
+    if abs(height-expected_height)/expected_height>.01:report['failures'].append(f'LOD{lod} rest height {height}')
     if floor<-.002:report['failures'].append(f'LOD{lod} below floor')
     if tris!=expected:report['failures'].append(f'LOD{lod} triangle count {tris} != {expected}')
     expected_bones=set(manifest['skeleton'][0]['deform_bones'])

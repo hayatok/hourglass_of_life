@@ -1,21 +1,21 @@
 {
-  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_materials.blend",
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Nagisa/CH_Nagisa_delivery.blend",
   "mode": "material",
   "engine": "cycles",
   "bbox_min": [
-    -0.37099871039390564,
+    -0.21019861102104187,
     -0.15571999549865723,
-    0.006000000052154064
+    0.005000010598450899
   ],
   "bbox_max": [
-    0.37099871039390564,
-    0.1409447193145752,
-    1.6514091491699219
+    0.21019861102104187,
+    0.13877025246620178,
+    1.6506232023239136
   ],
   "size_xyz": [
-    0.7419974207878113,
-    0.2966647148132324,
-    1.645409107208252
+    0.42039722204208374,
+    0.294490247964859,
+    1.6456232070922852
   ],
   "objects": [
     "CH_Nagisa_Body_LOD0",
@@ -29,7 +29,7 @@
         0,
         0
       ],
-      "distance": 4.148332357406616
+      "distance": 4.1472451239824295
     },
     "side": {
       "file": "assets/models/CH_Nagisa/review/05_materials/material_side.png",
@@ -38,7 +38,7 @@
         0,
         0
       ],
-      "distance": 4.370998710393906
+      "distance": 4.210198611021042
     },
     "threequarter": {
       "file": "assets/models/CH_Nagisa/review/05_materials/material_threequarter.png",
@@ -47,7 +47,7 @@
         15,
         50
       ],
-      "distance": 2.924910245877173
+      "distance": 2.785382104778869
     },
     "gameplay": {
       "file": "assets/models/CH_Nagisa/review/05_materials/material_gameplay_128px.png",

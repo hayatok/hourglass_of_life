@@ -32,6 +32,8 @@ def build():
             if any(word in ob.name for word in ['Iris','Pupil','Glint']):
                 tag=ob.vertex_groups.new(name='GAZE');tag.add(list(range(len(ob.data.vertices))),1,'REPLACE')
         bm=bmesh.new();bm.from_mesh(ob.data)
+        if 'coverage_cut_z' in ob:
+            bmesh.ops.delete(bm,geom=[f for f in bm.faces if f.calc_center_median().z>ob['coverage_cut_z']],context='FACES')
         bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.000001)
         bad=[f for f in bm.faces if f.calc_area()<1e-10]
         bmesh.ops.delete(bm,geom=bad,context='FACES')

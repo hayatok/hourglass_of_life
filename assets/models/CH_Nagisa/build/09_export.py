@@ -24,7 +24,7 @@ for lod in [1,2]:
 for ob in lod0:ob.hide_render=False
 manifest['texture_contract']=json.loads((ROOT/'textures/texture-contract.json').read_text())
 manifest['rest_pose']='A-pose in the source; game clips begin from their authored pose. In-place locomotion.'
-manifest['lod_policy']='Separate GLBs, no simultaneous overlapping LOD meshes. LOD1 at <100 px, LOD2 at <45 px; validate transitions in engine.'
+manifest['lod_policy']='Separate GLBs with the same rig/morphs. Authored targets: LOD1 below 100 px, LOD2 below 45 px. Automatic distance switching in the town is not implemented yet.'
 manifest['validation_notes']=['Coincident seam vertices are intentional between cloth layers and eye/lash corners.',
     'No cloth solver; apron front/back bones have authored motion.']
 manifest['source_texture_files']=manifest['dependencies']
@@ -32,4 +32,9 @@ manifest['dependencies']=[]  # All three textures are embedded in each GLB.
 manifest['files']={k:Path(v).name for k,v in manifest['files'].items()}
 manifest['source']='../CH_Nagisa_delivery.blend'
 manifest_path.write_text(json.dumps(manifest,indent=2))
+contract_path=ROOT/'exports/animation-contract.json'
+contract=json.loads(contract_path.read_text())
+for clip in contract['clips']:
+    if clip['name']=='walk':clip['speed_mps']=float(bpy.data.actions['walk'].get('speed_mps',1.6))
+contract_path.write_text(json.dumps(contract,indent=2))
 print('EXPORTED THREE LODS')

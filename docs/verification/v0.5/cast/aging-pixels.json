@@ -1,0 +1,22 @@
+{
+	"nagisa": {
+		"hair_changed_samples": 1051,
+		"outside_head_changed_samples": 0,
+		"sampling_step": 2
+	},
+	"rin": {
+		"hair_changed_samples": 722,
+		"outside_head_changed_samples": 0,
+		"sampling_step": 2
+	},
+	"rin_adult": {
+		"hair_changed_samples": 719,
+		"outside_head_changed_samples": 0,
+		"sampling_step": 2
+	},
+	"ryo": {
+		"hair_changed_samples": 732,
+		"outside_head_changed_samples": 0,
+		"sampling_step": 2
+	}
+}

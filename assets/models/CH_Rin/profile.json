@@ -1,0 +1,55 @@
+{
+  "id": "rin",
+  "height": 1.22,
+  "head_scale": 0.98,
+  "head_x": 1.03,
+  "width": 0.86,
+  "depth": 0.9,
+  "arm_length": 1.0,
+  "arm_close": 0.11,
+  "stance": 0.04,
+  "shoulder_width": 0.68,
+  "shoulder_z": 1.3,
+  "foot_turn": 0.15,
+  "jaw": 0.12,
+  "costume": "overalls",
+  "top_color": [
+    0.78,
+    0.73,
+    0.61
+  ],
+  "pants_color": [
+    0.65,
+    0.34,
+    0.035
+  ],
+  "shoe_color": [
+    0.19,
+    0.073,
+    0.025
+  ],
+  "hair": {
+    "style": "shaggy",
+    "color": [
+      0.12,
+      0.046,
+      0.018
+    ]
+  },
+  "motion": {
+    "walk_frames": 20,
+    "stride": 1.05
+  },
+  "sheet": "08-rin-turnaround.png",
+  "ground": 858,
+  "top": 22,
+  "axis": [
+    261,
+    225,
+    258
+  ],
+  "reference": {
+    "subject_fraction": 0.9425028184892897,
+    "ground_fraction": 0.03269447576099211
+  }
+}

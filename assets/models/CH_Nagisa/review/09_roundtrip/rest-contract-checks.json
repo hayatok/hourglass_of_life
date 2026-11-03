@@ -4,25 +4,25 @@
       "level": 0,
       "rest_height_m": 1.64541,
       "floor_min_m": 0.006,
-      "triangles": 30528,
+      "triangles": 30856,
       "bones": 35,
       "clips": 9,
       "embedded_images": 3
     },
     {
       "level": 1,
-      "rest_height_m": 1.64541,
+      "rest_height_m": 1.64542,
       "floor_min_m": 0.006,
-      "triangles": 12820,
+      "triangles": 12958,
       "bones": 35,
       "clips": 9,
       "embedded_images": 3
     },
     {
       "level": 2,
-      "rest_height_m": 1.64542,
+      "rest_height_m": 1.64543,
       "floor_min_m": 0.0059,
-      "triangles": 3661,
+      "triangles": 3699,
       "bones": 35,
       "clips": 9,
       "embedded_images": 3

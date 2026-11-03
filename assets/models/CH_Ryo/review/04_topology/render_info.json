@@ -1,0 +1,44 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_Ryo/CH_Ryo_topology.blend",
+  "mode": "wire",
+  "engine": "workbench",
+  "bbox_min": [
+    -0.3734981417655945,
+    -0.16012056171894073,
+    0.005369202699512243
+  ],
+  "bbox_max": [
+    0.3734981417655945,
+    0.13272514939308167,
+    1.7599999904632568
+  ],
+  "size_xyz": [
+    0.746996283531189,
+    0.2928457260131836,
+    1.7546308040618896
+  ],
+  "objects": [
+    "CH_Ryo_Body_LOD0",
+    "CH_Ryo_Face_LOD0"
+  ],
+  "renders": {
+    "front": {
+      "file": "assets/models/CH_Ryo/review/04_topology/wire_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 4.146422863006592
+    },
+    "threequarter": {
+      "file": "assets/models/CH_Ryo/review/04_topology/wire_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 3.079048612724161
+    }
+  }
+}

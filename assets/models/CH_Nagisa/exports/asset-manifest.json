@@ -1,6 +1,6 @@
 {
   "asset": "CH_Nagisa",
-  "generated": "2026-11-03T06:49:29",
+  "generated": "2026-11-03T08:17:43",
   "blender": "5.2.1 LTS",
   "source": "../CH_Nagisa_delivery.blend",
   "target_engine": "Godot 4.7 Compatibility",
@@ -43,7 +43,7 @@
         "CH_Nagisa_Body_LOD0",
         "CH_Nagisa_Face_LOD0"
       ],
-      "tris": 30528
+      "tris": 30856
     },
     {
       "level": 1,
@@ -51,7 +51,7 @@
         "CH_Nagisa_Body_LOD1",
         "CH_Nagisa_Face_LOD1"
       ],
-      "tris": 12820
+      "tris": 12958
     },
     {
       "level": 2,
@@ -59,7 +59,7 @@
         "CH_Nagisa_Body_LOD2",
         "CH_Nagisa_Face_LOD2"
       ],
-      "tris": 3661
+      "tris": 3699
     }
   ],
   "materials": [
@@ -515,7 +515,7 @@
   ],
   "dependencies": [],
   "rest_pose": "A-pose in the source; game clips begin from their authored pose. In-place locomotion.",
-  "lod_policy": "Separate GLBs, no simultaneous overlapping LOD meshes. LOD1 at <100 px, LOD2 at <45 px; validate transitions in engine.",
+  "lod_policy": "Separate GLBs with the same rig/morphs. Authored targets: LOD1 below 100 px, LOD2 below 45 px. Automatic distance switching in the town is not implemented yet.",
   "validation_notes": [
     "Coincident seam vertices are intentional between cloth layers and eye/lash corners.",
     "No cloth solver; apron front/back bones have authored motion."

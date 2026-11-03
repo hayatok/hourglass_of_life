@@ -1,0 +1,32 @@
+{
+  "lods": [
+    {
+      "level": 0,
+      "rest_height_m": 1.75463,
+      "floor_min_m": 0.00537,
+      "triangles": 27336,
+      "bones": 35,
+      "clips": 9,
+      "embedded_images": 3
+    },
+    {
+      "level": 1,
+      "rest_height_m": 1.75465,
+      "floor_min_m": 0.00536,
+      "triangles": 11480,
+      "bones": 35,
+      "clips": 9,
+      "embedded_images": 3
+    },
+    {
+      "level": 2,
+      "rest_height_m": 1.75395,
+      "floor_min_m": 0.00536,
+      "triangles": 3271,
+      "bones": 35,
+      "clips": 9,
+      "embedded_images": 3
+    }
+  ],
+  "failures": []
+}

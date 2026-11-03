@@ -4,7 +4,9 @@ from pathlib import Path
 from mathutils import Vector,Matrix
 sys.path.insert(0,str(Path(__file__).parent))
 import mesh_helpers as H
+from dimensions import Dimensions
 ROOT=Path(__file__).resolve().parents[1]
+D=Dimensions(ROOT)
 H.OWNER_TAG='phase:06_rig'
 
 def smooth(a,b,x):
@@ -16,6 +18,10 @@ def combine(items):
     total=sum(out.values());return {k:v/total for k,v in out.items()}
 def weights(tag,co):
     z=co.z
+    if tag=='hips':
+        t=1-smooth(.64,1.0,z)
+        left=smooth(-.035,.035,co.x)
+        return combine([('pelvis',1-t),('thigh.L',t*left),('thigh.R',t*(1-left))])
     if tag=='chest':
         if z<1.12:
             t=smooth(1.06,1.12,z);return combine([('pelvis',1-t),('spine_01',t)])
@@ -24,7 +30,10 @@ def weights(tag,co):
         t=smooth(1.33,1.405,z);return combine([('neck',1-t),('head',t)])
     if tag=='pelvis':
         t=1-smooth(.96,1.075,z)
-        front=1-smooth(-.055,.045,co.y)
+        # Garment layers use the same angular weights: an offset pocket must not peel off the cloth.
+        rx=.108+max(0,min(.55,1.07-z))*.165
+        flank=min(1,abs(co.x)/rx)
+        front=.5+(.5 if co.y<-.008 else -.5)*math.sqrt(max(0,1-flank*flank))
         return combine([('pelvis',1-t),('apron_front',t*front),('apron_back',t*(1-front))])
     if tag.startswith('leg.'):
         side=tag[-1];t=smooth(.43,.57,z)
@@ -47,10 +56,10 @@ def morphs(ob):
     for name in ['Blink','Smile','Sad','Tired','LookLeft','LookRight']:
         key=ob.shape_key_add(name=name,from_mix=False);key.value=0;key.slider_min=0;key.slider_max=1
         for v in ob.data.vertices:
-            co=key.data[v.index].co;tags=masks[v.index];x=v.co.x
+            co=D.to_base(v.co);tags=masks[v.index];x=co.x
             eye=any(s.startswith('FACE_eye.') for s in tags)
-            if name=='Blink' and eye:co.z=1.484+(v.co.z-1.484)*.018
-            if name=='Tired' and eye:co.z=1.489+(v.co.z-1.489)*.72
+            if name=='Blink' and eye:co.z=1.484+(co.z-1.484)*.018
+            if name=='Tired' and eye:co.z=1.489+(co.z-1.489)*.72
             if name=='Smile':
                 if 'FACE_mouth' in tags:co.z+=.004*(abs(x)/.022)**1.5
                 if any(s.startswith('FACE_brow.') for s in tags):co.z+=.002
@@ -59,6 +68,7 @@ def morphs(ob):
                 if any(s.startswith('FACE_brow.') for s in tags):co.z+=.005*(1-abs(x)/.065)
             if name in ['LookLeft','LookRight'] and 'GAZE' in tags:
                 co.x+=.005*(1 if name=='LookLeft' else -1)
+            key.data[v.index].co=D.to_model(co)
 
 def build():
     H.open_master(str(ROOT/'CH_Nagisa_materials.blend'));H.clear_owned()
@@ -67,7 +77,7 @@ def build():
     bpy.ops.object.select_all(action='DESELECT');arm.select_set(True);bpy.context.view_layer.objects.active=arm
     bpy.ops.object.mode_set(mode='EDIT')
     def bone(name,head,tail,parent=None):
-        b=armdata.edit_bones.new('DEF-'+name);b.head=head;b.tail=tail
+        b=armdata.edit_bones.new('DEF-'+name);b.head=D.to_model(head);b.tail=D.to_model(tail)
         if parent:b.parent=armdata.edit_bones['DEF-'+parent]
         b.align_roll(Vector((0,-1,0)));return b
     bone('root',(0,0,0),(0,0,.15))
@@ -100,7 +110,7 @@ def build():
         for v in ob.data.vertices:
             candidates=[(g.weight,tags[g.group]) for g in v.groups if g.group in tags]
             tag=max(candidates)[1] if candidates else 'head'
-            for name,weight in weights(tag,v.co).items():bone_groups[name].add([v.index],weight,'REPLACE')
+            for name,weight in weights(tag,D.to_base(v.co)).items():bone_groups[name].add([v.index],weight,'REPLACE')
         modifier=ob.modifiers.new('Humanoid skin','ARMATURE');modifier.object=arm
         ob.parent=arm
         # Distance copies preserve the regional tags so their face morphs can be rebuilt too.
@@ -135,7 +145,7 @@ def build():
         empty.empty_display_type='ARROWS';empty.empty_display_size=.04
         empty.parent=arm;empty.parent_type='BONE';empty.parent_bone='DEF-'+parent
         bpy.context.view_layer.update()
-        empty.matrix_world=Matrix.Translation(Vector(pos))@Matrix.Rotation(math.pi,4,'Z')
+        empty.matrix_world=Matrix.Translation(D.to_model(pos))@Matrix.Rotation(math.pi,4,'Z')
         empty['axes']='local +Y attachment forward; +Z up'
     # Optional physics proxy stays separate from the visible costume and animation deformation.
     import importlib
@@ -143,6 +153,7 @@ def build():
     collider=B.rings('Collision',[(.005,.04,.04,0,0),(.18,.23,.23,0,0),
         (1.43,.23,.23,0,0),(1.645,.025,.025,0,0)],bpy.data.materials['CH_Nagisa_Body'],n=12,collection='COLLISION')
     collider.name='COL_body';collider.parent=arm;collider['owner']=H.OWNER_TAG
+    for vertex in collider.data.vertices:vertex.co=D.to_model(vertex.co)
     bm=bmesh.new();bm.from_mesh(collider.data);bmesh.ops.triangulate(bm,faces=list(bm.faces));bm.to_mesh(collider.data);bm.free()
     collider.data.uv_layers.new(name='ProxyUV')
     collider.hide_render=True;collider.hide_set(True)

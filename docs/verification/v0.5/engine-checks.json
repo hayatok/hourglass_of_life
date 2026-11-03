@@ -1,0 +1,240 @@
+{
+  "date": "2026-11-03",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "blender": "5.2.1 LTS",
+  "renderer": "macOS Apple M5 / OpenGL Compatibility",
+  "stage": "v0.5 work in progress",
+  "checks": {
+    "simulation": {
+      "passed": 49,
+      "failed": 0
+    },
+    "social": {
+      "passed": 33,
+      "failed": 0
+    },
+    "work": {
+      "passed": 41,
+      "failed": 0
+    },
+    "life": {
+      "passed": 50,
+      "failed": 0
+    },
+    "character": {
+      "passed": true,
+      "completion": "Character import and motion checks: PASS"
+    },
+    "cast": {
+      "passed": true,
+      "completion": "Resident cast and growth checks: PASS"
+    },
+    "character-gpu": {
+      "passed": true,
+      "completion": "Character import and motion checks: PASS"
+    },
+    "cast-gpu": {
+      "passed": true,
+      "completion": "Resident cast and growth checks: PASS"
+    },
+    "scene-gpu": {
+      "passed": true,
+      "completion": "Scene/UI smoke: PASS"
+    }
+  },
+  "aging_render_samples": {
+    "nagisa": {
+      "hair_changed_samples": 1051,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "rin": {
+      "hair_changed_samples": 722,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "rin_adult": {
+      "hair_changed_samples": 719,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    },
+    "ryo": {
+      "hair_changed_samples": 732,
+      "outside_head_changed_samples": 0,
+      "sampling_step": 2
+    }
+  },
+  "models": {
+    "nagisa": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.64541,
+          "floor_min_m": 0.006,
+          "triangles": 30856,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.64542,
+          "floor_min_m": 0.006,
+          "triangles": 12958,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.64543,
+          "floor_min_m": 0.0059,
+          "triangles": 3699,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Nagisa_Body_LOD0: 25 doubled vertices within 0.0001",
+        "CH_Nagisa_Face_LOD0: 22 doubled vertices within 0.0001",
+        "CH_Nagisa_Body_LOD1: 2 doubled vertices within 0.0001",
+        "CH_Nagisa_Body_LOD2: 6 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false
+    },
+    "ryo": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.75463,
+          "floor_min_m": 0.00537,
+          "triangles": 27336,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.75465,
+          "floor_min_m": 0.00536,
+          "triangles": 11480,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.75395,
+          "floor_min_m": 0.00536,
+          "triangles": 3271,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Ryo_Body_LOD0: 40 doubled vertices within 0.0001",
+        "CH_Ryo_Body_LOD1: 7 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false
+    },
+    "rin": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.21654,
+          "floor_min_m": 0.00346,
+          "triangles": 30164,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.21656,
+          "floor_min_m": 0.00346,
+          "triangles": 12666,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.21653,
+          "floor_min_m": 0.00345,
+          "triangles": 3610,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_Rin_Body_LOD0: 27 doubled vertices within 0.0001",
+        "CH_Rin_Body_LOD1: 3 doubled vertices within 0.0001",
+        "CH_Rin_Body_LOD2: 3 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false
+    },
+    "rin_adult": {
+      "lods": [
+        {
+          "level": 0,
+          "rest_height_m": 1.67488,
+          "floor_min_m": 0.00512,
+          "triangles": 29480,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 1,
+          "rest_height_m": 1.67489,
+          "floor_min_m": 0.00511,
+          "triangles": 12380,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        },
+        {
+          "level": 2,
+          "rest_height_m": 1.67487,
+          "floor_min_m": 0.00511,
+          "triangles": 3529,
+          "bones": 35,
+          "clips": 9,
+          "embedded_images": 3
+        }
+      ],
+      "rig_validation_failures": 0,
+      "rig_warnings": [
+        "CH_RinAdult_Body_LOD0: 34 doubled vertices within 0.0001",
+        "CH_RinAdult_Body_LOD1: 2 doubled vertices within 0.0001",
+        "CH_RinAdult_Body_LOD2: 1 doubled vertices within 0.0001"
+      ],
+      "game_exports_match_source": true,
+      "final_art_acceptance": false
+    }
+  },
+  "native_editor_edit": "character_stage.tscn Camera FOV 30 -> 34; saved in actual Godot scene editor",
+  "native_ui_check": [
+    "Ryo: walk",
+    "Rin: sit_talk",
+    "RinAdult: wave"
+  ],
+  "not_complete": [
+    "five remaining residents",
+    "final art/garment acceptance",
+    "town and prop models",
+    "real furniture/prop contacts",
+    "lighting and audio",
+    "v0.5 release",
+    "v1.0 completion"
+  ]
+}

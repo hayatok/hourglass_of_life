@@ -1,6 +1,10 @@
 class_name JrpgResidentModel
 extends Node3D
 
+@export var rest_height := 1.65
+@export var walk_speed := 1.6
+@export var hair_cells := Vector3i(-1,-1,-1)
+var body_materials: Array[ShaderMaterial] = []
 var animator: AnimationPlayer
 var skeleton: Skeleton3D
 var face: MeshInstance3D
@@ -44,8 +48,15 @@ func _collect(node: Node) -> void:
 				var toon := ShaderMaterial.new()
 				toon.shader = preload("res://game/assets/models/resident_toon.gdshader")
 				toon.set_shader_parameter("base_palette",original.albedo_texture)
+				toon.set_shader_parameter("hair_cells",hair_cells)
+				body_materials.append(toon)
 				part.set_surface_override_material(surface,toon)
 	for child in node.get_children(): _collect(child)
+
+func set_age(age: int) -> void:
+	# Fictional cosmetic progression; no prediction of an individual's biological aging.
+	var silver := clampf((age-45.0)/30.0,0,.9)
+	for material in body_materials: material.set_shader_parameter("hair_age",silver)
 
 func set_expression(tiredness: float, friendliness: float, look: float = 0) -> void:
 	fatigue = clampf(tiredness,0,1)

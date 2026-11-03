@@ -88,7 +88,7 @@
         "footstep.L": 0.0,
         "footstep.R": 0.4
       },
-      "speed_mps": 1.6,
+      "speed_mps": 1.6000000000000003,
       "blend_direction": "forward",
       "root_motion": false,
       "interruptible": true,

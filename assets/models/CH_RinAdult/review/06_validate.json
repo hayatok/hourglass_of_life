@@ -1,0 +1,325 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/CH_RinAdult_delivery.blend",
+  "summary": {
+    "tris_by_lod": {
+      "0": 29480,
+      "1": 12380,
+      "2": 3529
+    },
+    "fail": [],
+    "warn": [
+      "CH_RinAdult_Body_LOD0: 34 doubled vertices within 0.0001",
+      "CH_RinAdult_Body_LOD1: 2 doubled vertices within 0.0001",
+      "CH_RinAdult_Body_LOD2: 1 doubled vertices within 0.0001"
+    ]
+  },
+  "objects": [
+    {
+      "name": "CH_RinAdult_Body_LOD0",
+      "type": "MESH",
+      "warn": [
+        "34 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 24468,
+        "verts_evaluated": 12384,
+        "verts": 12384,
+        "faces": 24468,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 76,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_RinAdult_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_RinAdult_Face_LOD0",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 5012,
+        "verts_evaluated": 2748,
+        "verts": 2748,
+        "faces": 5012,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 19,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_RinAdult_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_RinAdult_Body_LOD1",
+      "type": "MESH",
+      "warn": [
+        "2 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 10276,
+        "verts_evaluated": 5288,
+        "verts": 5288,
+        "faces": 10276,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 76,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_RinAdult_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_RinAdult_Body_LOD2",
+      "type": "MESH",
+      "warn": [
+        "1 doubled vertices within 0.0001"
+      ],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2928,
+        "verts_evaluated": 1618,
+        "verts": 1618,
+        "faces": 2928,
+        "boundary_edges": 24,
+        "nonmanifold_edges": 0,
+        "islands": 76,
+        "flipped_vs_recalc": 5,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Body"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "skin": {
+          "armature": "CH_RinAdult_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_RinAdult_Face_LOD1",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 2104,
+        "verts_evaluated": 1294,
+        "verts": 1294,
+        "faces": 2104,
+        "boundary_edges": 432,
+        "nonmanifold_edges": 0,
+        "islands": 19,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_RinAdult_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "CH_RinAdult_Face_LOD2",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 601,
+        "verts_evaluated": 470,
+        "verts": 470,
+        "faces": 601,
+        "boundary_edges": 287,
+        "nonmanifold_edges": 0,
+        "islands": 19,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Face"
+        ],
+        "modifiers": [
+          "ARMATURE:Humanoid skin"
+        ],
+        "shape_keys": 7,
+        "skin": {
+          "armature": "CH_RinAdult_Rig",
+          "unweighted": 0,
+          "over_influences": 0,
+          "not_normalised": 0,
+          "tiny_weights": 0,
+          "orphan_groups": []
+        }
+      }
+    },
+    {
+      "name": "COL_body",
+      "type": "MESH",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "tris_evaluated": 92,
+        "verts_evaluated": 48,
+        "verts": 48,
+        "faces": 92,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "islands": 1,
+        "uv_loops_outside_0_1": 0,
+        "materials": [
+          "CH_RinAdult_Body"
+        ],
+        "modifiers": []
+      }
+    },
+    {
+      "name": "SOCKET_hand.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_RinAdult_Rig",
+        "parent_bone": "DEF-hand.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_hand.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_RinAdult_Rig",
+        "parent_bone": "DEF-hand.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_head",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_RinAdult_Rig",
+        "parent_bone": "DEF-head",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_chest",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_RinAdult_Rig",
+        "parent_bone": "DEF-chest",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.L",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_RinAdult_Rig",
+        "parent_bone": "DEF-foot.L",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "SOCKET_foot.R",
+      "type": "SOCKET",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "parent": "CH_RinAdult_Rig",
+        "parent_bone": "DEF-foot.R",
+        "props": {
+          "owner": "phase:06_rig",
+          "axes": "local +Y attachment forward; +Z up"
+        }
+      }
+    },
+    {
+      "name": "CH_RinAdult_Rig",
+      "type": "ARMATURE",
+      "warn": [],
+      "fail": [],
+      "info": {
+        "bones": 35,
+        "deform_bones": 35,
+        "roots": [
+          "DEF-root"
+        ]
+      }
+    }
+  ]
+}
