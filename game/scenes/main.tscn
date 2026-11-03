@@ -368,47 +368,62 @@ custom_minimum_size = Vector2(0, 40)
 text = "閉じる"
 theme_type_variation = &"QuietButton"
 
-[node name="Tabs" type="GridContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn"]
+[node name="Tabs" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn"]
 layout_mode = 2
-columns = 2
-theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 6
+theme_override_constants/separation = 6
 
-[node name="NowTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+[node name="Current" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NowTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs/Current"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 40)
+theme_type_variation = &"TabButton"
+toggle_mode = true
 text = "いまの暮らし"
-theme_type_variation = &"TabButton"
-toggle_mode = true
-size_flags_horizontal = 3
 
-[node name="RelationsTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+[node name="PlansTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs/Current"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 40)
+theme_type_variation = &"TabButton"
+toggle_mode = true
+text = "約束の一覧"
+
+[node name="Personal" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="RelationsTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs/Personal"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 40)
+theme_type_variation = &"TabButton"
+toggle_mode = true
 text = "人間関係"
-theme_type_variation = &"TabButton"
-toggle_mode = true
-size_flags_horizontal = 3
 
-[node name="MemoriesTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+[node name="MemoriesTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs/Personal"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 40)
+theme_type_variation = &"TabButton"
+toggle_mode = true
 text = "思い出"
-theme_type_variation = &"TabButton"
-toggle_mode = true
-size_flags_horizontal = 3
 
-[node name="LifeTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs"]
+[node name="LifeTab" type="Button" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Tabs/Personal"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 40)
-text = "家計・仕事"
 theme_type_variation = &"TabButton"
 toggle_mode = true
-size_flags_horizontal = 3
+text = "家計・仕事"
 
 [node name="DetailScroll" type="ScrollContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn"]
 layout_mode = 2

@@ -47,7 +47,8 @@ func run() -> void:
 	proposals.close_panel()
 	expect(not proposals.visible and not sim.running,"Cancelling the packaged proposal preserves the original pause")
 	main.get_node("%DetailToggle").button_pressed = true
-	expect(main.get_node("%DetailText").is_visible_in_tree(),"The packaged notebook is explicitly reachable from the resident card")
+	main.get_node("%PlansTab").pressed.emit()
+	expect(main.detail_tab==4 and main.get_node("%DetailText").is_visible_in_tree() and not main.get_node("%DetailText").text.is_empty(),"The packaged notebook exposes the full confirmed-promise page")
 	main.get_node("%DetailToggle").button_pressed = false
 	var before_benches: Array = sim.benches.duplicate(true)
 	var before_budget: int = sim.shared_budget

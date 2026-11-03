@@ -202,6 +202,9 @@ func _present_reply(reply: Dictionary) -> void:
 		offered_pair = offer.duplicate(true)
 	%OfferDetails.visible = not offered_pair.is_empty()
 	if not offered_pair.is_empty():
+		%ReplyHeading.text = "別の時間を提案しています"
+		%Done.theme_type_variation = &"QuietButton"
+		%Done.text = "保留して戻る"
 		%OfferWhen.text = "%s · %d分"%[sim.social.when_text(int(offered_pair.start)),int(offered_pair.duration)]
 		%OfferWho.text = "%sさんと%sさん"%[_name(str(offered_pair.a)),_name(str(offered_pair.b))]
 		%OfferWhere.text = {"bench":"広場のベンチ","cafe":"喫茶店","workshop":"工房"}.get(offered_pair.location,"待ち合わせ場所")

@@ -4,7 +4,7 @@
 
 ## 確認した範囲
 
-- [HUD headless](logs/hud-headless.log) / [GPU](logs/hud-gpu.log): 各60機能確認。住民選択、人物手帳のページ、出来事を読む導線、停止したままの速度変更、提案中の背景入力の遮断、配置プレビューと取消し、記録の閲覧と時間復帰を確認。1024×768、1280×800、1440×900で主要操作の重なりと到達を確認した。
+- [HUD headless](logs/hud-headless.log) / [GPU](logs/hud-gpu.log): 各61機能確認。住民選択、人物手帳のページ、出来事を読む導線、停止したままの速度変更、提案中の背景入力の遮断、配置プレビューと取消し、記録の閲覧と時間復帰を確認。1024×768、1280×800、1440×900で主要操作の重なりと到達を確認した。
 - [住民一覧](logs/population-ui-headless.log): 12人の検索、選択、個別肖像、検索中のキー操作、8人へのfixture切替を確認。個別画像のない旧8人も元のラインアップから顔を切り出す。凛には子ども用の位置を使う。
 - [提案画面](../ui-rebuild/proposals-gpu.json): headless/GPU各58機能確認。5種類を本物のSimへ送り、同じ初期状態へ直接APIを呼んだ独立worldと返答・副作用を比較した。手伝う人と受ける人の方向、相手選択だけでは実行しないこと、実在する別案の合意、取消し、SpaceによるGUI操作、背景入力の遮断を確認。2D画面の確認であり、町の自然経過の証拠とは分ける。
 - [実ゲームの短い一連の操作](logs/game-flow-gpu.log): seed 71103の8人fixtureで、会話への合流と記憶、真帆・文への会話の別案と実約束、葵・修の共同作業への合流・完了、可視の人物手帳と完了した活動名のプレビューを確認した。`test_scene.gd -- --ui-only` の完了記録である。
@@ -16,11 +16,13 @@
 
 初回の実ウィンドウ操作では、OptionButtonを開くと元の大きな肖像がメニューの行へ出て、数人しか見えない問題が残っていた。閉じたボタンの縮小だけでは足りなかった。PopupMenu側の各画像幅を32、一覧の高さを420以下へ制限し、実GUIから開いて末尾を選ぶ経路を追加した。[開いた一覧](../ui-rebuild/proposal-partner-popup.png)では、11人が平均約46pxの行高でスクロールできる。
 
+後から決まった約束も「約束の一覧」で日時順に読めるようにした。別案では「この日時で約束する」を主ボタンにし、戻る操作は「保留して戻る」と区別する。日本語の折り返し言語を指定し、「今日」だけが別行へ残る表示を修正した。
+
 旧肖像の欠落、同じ大きさのボタン内でアイコンが消える問題、選択後も残る初回案内、ベンチ設置後に消える選択状態、modalを開く前の右ドラッグが残る問題も修正した。同じ時刻の記録では共有体験の内容を優先して要約し、活動名と相手を読めるようにした。全文はその人物の出来事へ開ける。
 
 ## 画像と限界
 
-[新規開始](01-new-town-1440.png)、[1280幅](03-observation-1280.png)、[1024幅](03-observation-1024.png)、[人物のきっかけと予定](04-introduction-fixture-1280.png)、[記録の閲覧](08-live-journal.png)、[実約束](integration/05-appointment.png)、[実作業後の記録](integration/07-household.png)、[5つの提案](../ui-rebuild/proposal-five-choices.png)、[手助けの方向](../ui-rebuild/proposal-support-confirm.png)、[実際の別案](../ui-rebuild/proposal-counteroffer.png)。提案画面の11画像はartifactsとして機能確認の件数から分離する。
+[新規開始](01-new-town-1440.png)、[1280幅](03-observation-1280.png)、[1024幅](03-observation-1024.png)、[人物のきっかけと予定](04-introduction-fixture-1280.png)、[記録の閲覧](08-live-journal.png)、[実約束](integration/05-appointment.png)、[実作業後の記録](integration/07-household.png)、[5つの提案](../ui-rebuild/proposal-five-choices.png)、[手助けの方向](../ui-rebuild/proposal-support-confirm.png)、[実際の別案](../ui-rebuild/proposal-counteroffer.png)。提案画面の12画像はartifactsとして機能確認の件数から分離する。
 
 フル生涯のGPU検査はUI操作の後も年月の計算を繰り返していたため途中で終了し、短いUI経路と記録の画面確認へ範囲を絞った。その中断実行を成功扱いにしていない。人生の全進行は既存のシミュレーション検査と区別する。
 

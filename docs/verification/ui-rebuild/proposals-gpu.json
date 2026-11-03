@@ -55,6 +55,11 @@
 			"error": 0,
 			"file": "proposal-counteroffer.png",
 			"saved": true
+		},
+		{
+			"error": 0,
+			"file": "proposal-counteroffer-accepted.png",
+			"saved": true
 		}
 	],
 	"checks": 58,

@@ -29,6 +29,7 @@ var event_focus := ""
 @onready var info_dialog: AcceptDialog = %InfoDialog
 
 func _ready() -> void:
+	TranslationServer.set_locale("ja")
 	%StartButton.pressed.connect(_new_game)
 	%ContinueButton.pressed.connect(_continue_game)
 	%ContinueButton.disabled = not Sim.has_save()
@@ -62,6 +63,7 @@ func _ready() -> void:
 	%NowTab.pressed.connect(func(): detail_tab=0; _refresh_detail())
 	%RelationsTab.pressed.connect(func(): detail_tab=1; _refresh_detail())
 	%MemoriesTab.pressed.connect(func(): detail_tab=2; _refresh_detail())
+	%PlansTab.pressed.connect(func(): detail_tab=4; _refresh_detail())
 	%LifeTab.pressed.connect(func(): detail_tab=3; _refresh_detail())
 	Sim.town_changed.connect(_rebuild)
 	Sim.chapter_reached.connect(func(): _open_journal(true))
@@ -428,7 +430,8 @@ func _refresh_detail() -> void:
 	var plan: Dictionary = p.get("cognition_plan",{})
 	var plan_reason: String = plan.get("reason","")
 	var active_plan: bool = plan.get("stage","") in ["travel","execute"]
-	%Reason.text = "「%s」" % (plan_reason if active_plan and not plan_reason.is_empty() else p.reason)
+	var shown_reason: String = plan_reason if active_plan and not plan_reason.is_empty() else str(p.reason)
+	%Reason.text = "「%s」"%shown_reason
 	%NextPlan.text = _next_agreement_text(p)
 	%Fatigue.value = (1-p.fatigue)*100
 	%Hunger.value = (1-p.hunger)*100
@@ -460,15 +463,38 @@ func _refresh_detail() -> void:
 			text += "・%s\n%s\n\n" % [memory.title,memory.text]
 		if p.memories.is_empty():
 			text += "町で過ごす時間が、これから積もっていく。"
+	elif detail_tab==4:
+		text = _appointments_text(p)
 	else:
 		text = Sim.work_family.person_text(p)
 		var personal: String = Sim.social.person_text(p)
 		if not personal.is_empty(): text += "\n\n"+personal
 		text += "\n\n"+("暮らしの背景\n\n" if p.alive else "大切にしていたこと\n\n")+Sim.definitions[p.id].public_private_difference+"\n\n暮らしの始まりに気にかけていたこと\n"+Sim.definitions[p.id].goals[1]
 	%DetailText.text = text
-	var tabs := [%NowTab,%RelationsTab,%MemoriesTab,%LifeTab]
+	var tabs := [%NowTab,%RelationsTab,%MemoriesTab,%LifeTab,%PlansTab]
 	for index in tabs.size(): tabs[index].set_pressed_no_signal(index==detail_tab)
 	for element in [%Reason,%NextPlan,%Goal,%GoalProgress,%GoalHeading]: element.visible = detail_tab==0
+	%Reason.visible = detail_tab==0 and shown_reason.strip_edges()!=str(p.current_goal).strip_edges()
+
+func _appointments_text(p: Dictionary) -> String:
+	var records: Array = []
+	for record in Sim.agenda.records+Sim.social.appointments:
+		if record.state!="planned" or p.id not in [record.a,record.b] or int(record.start)<Sim.elapsed: continue
+		var other: Dictionary = Sim.person(record.b if record.a==p.id else record.a)
+		if Sim.life.is_alive(other): records.append(record)
+	records.sort_custom(func(a,b): return int(a.start)<int(b.start))
+	if records.is_empty(): return "これからの約束はまだありません。会話や共同制作を相談すると、決まった予定をここで読み返せます。"
+	var places := {"bench":"広場のベンチ","cafe":"喫茶店","bakery_cafe":"パン屋・喫茶店","workshop":"工房","square":"広場","garden":"庭","home_ogawa":"小川家","home_saeki":"佐伯家","home_shared":"共同住宅","home_north_shared":"北側の共同住宅","home_mori":"森家"}
+	var text := ""
+	for record in records:
+		var other: Dictionary = Sim.person(record.b if record.a==p.id else record.a)
+		text += Sim.social.when_text(int(record.start))
+		if int(record.get("duration",0))>0: text += "・%d分"%int(record.duration)
+		text += "\n%sさんと %s"%[other.name,record.get("title","ゆっくり話す")]
+		var place: String = places.get(record.get("location",record.get("place","")),"")
+		if not place.is_empty(): text += "\n"+place
+		text += "\n\n"
+	return text.strip_edges()
 
 func _next_agreement_text(p: Dictionary) -> String:
 	if not Sim.life.is_alive(p): return Sim.commitment_text(p)

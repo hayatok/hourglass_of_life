@@ -24,6 +24,7 @@ func verify_person_context(main, sim) -> void:
 	sim.reset(71103)
 	sim.running = false
 	main._select("aoi")
+	main.get_node("%DetailToggle").button_pressed = true
 	main.get_node("%NowTab").pressed.emit()
 	main.toast_left = 0
 	main.get_node("%Toast").visible = false
@@ -68,6 +69,10 @@ func verify_person_context(main, sim) -> void:
 	await process_frame
 	await process_frame
 	await capture("05-completed-context-fixture-1440")
+	main.get_node("%PlansTab").pressed.emit()
+	var promises: String = main.get_node("%DetailText").text
+	expect(main.get_node("%DetailText").is_visible_in_tree() and "15:30" in promises and "18:00" in promises and "佐伯 文" in promises and "佐伯 修" in promises and promises.find("15:30")<promises.find("18:00"),"The promise page retains both the next and later confirmed agreements in chronological order")
+	await capture("09-confirmed-promises")
 	main.get_node("%LifeTab").pressed.emit()
 	expect(sim.definitions[p.id].public_private_difference in main.get_node("%DetailText").text,"The life tab preserves the person's fixed background")
 	expect(sim.agenda.records==agreements_before and p.relationships==relationships_before and p.knowledge==knowledge_before,"Reading activity, introductions and results leaves agreements, relationships and knowledge unchanged")
