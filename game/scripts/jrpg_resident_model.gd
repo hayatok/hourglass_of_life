@@ -12,6 +12,11 @@ var elapsed := 0.0
 var fatigue := 0.0
 var warmth := 0.0
 var gaze := 0.0
+var lod_level := 0
+var lod_variants: Array[Dictionary] = []
+var lod_parts: Dictionary = {}
+var lod_prepared := false
+var lod_resources_loaded := 0
 
 func _ready() -> void:
 	_collect(self)
@@ -31,6 +36,7 @@ func _collect(node: Node) -> void:
 		skeleton = node
 	elif node is MeshInstance3D:
 		var part := node as MeshInstance3D
+		lod_parts[_lod_key(part.name)] = part
 		var is_face := "Face" in part.name
 		if is_face:
 			face = part
@@ -52,6 +58,77 @@ func _collect(node: Node) -> void:
 				body_materials.append(toon)
 				part.set_surface_override_material(surface,toon)
 	for child in node.get_children(): _collect(child)
+
+func _lod_key(part_name: String) -> String:
+	for level in range(3): part_name = part_name.replace("_LOD%d"%level,"")
+	return part_name
+
+func _mesh_records(source: Node) -> Dictionary:
+	var records := {}
+	for part in source.find_children("*","MeshInstance3D",true,false):
+		records[_lod_key(part.name)] = {"mesh":part.mesh,"skin":part.skin}
+	return records
+
+func prepare_lods() -> void:
+	if lod_prepared: return
+	lod_prepared = true
+	lod_variants = [_mesh_records(self),{},{}]
+	var path := ""
+	for child in get_children():
+		if child.scene_file_path.ends_with(".glb"):
+			path = child.scene_file_path.trim_suffix(".glb")
+			break
+	if path.is_empty(): return
+	for level in [1,2]:
+		var asset_path := path+"_LOD%d.glb"%level
+		if not ResourceLoader.exists(asset_path): continue
+		var source = load(asset_path).instantiate()
+		var records := _mesh_records(source)
+		if _compatible_lod(records):
+			lod_variants[level] = records
+			lod_resources_loaded += 1
+		source.free()
+
+func _compatible_lod(records: Dictionary) -> bool:
+	if records.size()!=lod_parts.size(): return false
+	for key in lod_parts:
+		if not records.has(key): return false
+		var original: MeshInstance3D = lod_parts[key]
+		var mesh: Mesh = records[key].mesh
+		var skin: Skin = records[key].skin
+		if mesh==null or skin==null or original.skin==null: return false
+		if mesh.get_surface_count()!=original.mesh.get_surface_count(): return false
+		if mesh.get_blend_shape_count()!=original.mesh.get_blend_shape_count(): return false
+		for index in mesh.get_blend_shape_count():
+			if mesh.get_blend_shape_name(index)!=original.mesh.get_blend_shape_name(index): return false
+		if skin.get_bind_count()!=original.skin.get_bind_count(): return false
+		for index in skin.get_bind_count():
+			if skin.get_bind_name(index)!=original.skin.get_bind_name(index): return false
+			if not skin.get_bind_pose(index).is_equal_approx(original.skin.get_bind_pose(index)): return false
+	return true
+
+func set_lod(level: int) -> bool:
+	level = clampi(level,0,2)
+	if level==lod_level: return true
+	prepare_lods()
+	if lod_variants[level].is_empty(): return false
+	# Keep the original skeleton, animation player and modifier nodes. Mesh and
+	# skin resources share the verified named binds; no pose or clock is restarted.
+	for key in lod_parts:
+		var part: MeshInstance3D = lod_parts[key]
+		var record: Dictionary = lod_variants[level][key]
+		var expressions := {}
+		var materials := []
+		for index in part.mesh.get_blend_shape_count():
+			expressions[part.mesh.get_blend_shape_name(index)] = part.get_blend_shape_value(index)
+		for surface in part.mesh.get_surface_count(): materials.append(part.get_surface_override_material(surface))
+		part.mesh = record.mesh
+		part.skin = record.skin
+		for surface in materials.size(): part.set_surface_override_material(surface,materials[surface])
+		for index in part.mesh.get_blend_shape_count():
+			part.set_blend_shape_value(index,expressions.get(part.mesh.get_blend_shape_name(index),0.0))
+	lod_level = level
+	return true
 
 func set_age(age: int) -> void:
 	# Fictional cosmetic progression; no prediction of an individual's biological aging.

@@ -10,6 +10,9 @@ var walk_rate := 1.0
 var contacts: ResidentContacts
 var others: Dictionary = {}
 var greeted_meeting := ""
+const LOD1_DISTANCE := 20.0
+const LOD2_DISTANCE := 34.0
+const LOD_HYSTERESIS := 3.0
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var visual: Node3D = $Visual
 @onready var name_label: Label3D = $Name
@@ -42,7 +45,7 @@ func configure(p: Dictionary) -> void:
 	name_label.text = p.name
 	global_position = p.position
 	last_position = p.position
-	var palette: Array = COLORS[p.id]
+	var palette: Array = COLORS.get(p.id,COLORS.nagisa)
 	_recolor($Visual/Hips/Torso, palette[0])
 	_recolor($Visual/Hips/Pelvis, palette[1])
 	_recolor($Visual/Hips/LeftLeg/Thigh, palette[1])
@@ -93,6 +96,8 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 	visible = p.get("alive",true) and (p.moving or not p.place.begins_with("off_map_"))
 	var previous_position := global_position
 	global_position = global_position.lerp(p.position, minf(1,delta*12))
+	var camera := get_viewport().get_camera_3d()
+	if camera!=null and visible: update_lod(camera.global_position.distance_to(global_position),selected)
 	var actual_speed := global_position.distance_to(previous_position)/maxf(delta,.0001)
 	var direction: Vector3 = p.position-last_position
 	if direction.length_squared()>.00001:
@@ -137,6 +142,19 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 		jrpg.set_expression(p.fatigue,.4 if wanted in ["talk","sit_talk"] else 0)
 		contacts.update_contact(p,activity,wanted,attention,attend,delta)
 		name_label.global_position = head_position()+Vector3.UP*.28
+
+func update_lod(camera_distance: float, selected: bool) -> void:
+	if not is_instance_valid(jrpg): return
+	var next := jrpg.lod_level
+	if selected or camera_distance<LOD1_DISTANCE-LOD_HYSTERESIS:
+		next = 0
+	elif camera_distance>LOD2_DISTANCE+LOD_HYSTERESIS:
+		next = 2
+	elif next==0 and camera_distance>LOD1_DISTANCE+LOD_HYSTERESIS:
+		next = 1
+	elif next==2 and camera_distance<LOD2_DISTANCE-LOD_HYSTERESIS:
+		next = 1
+	if next!=jrpg.lod_level: jrpg.set_lod(next)
 
 func head_position() -> Vector3:
 	return contacts.point("head",Vector3(0,.12,0)) if is_instance_valid(contacts) else global_position+Vector3.UP*1.6
