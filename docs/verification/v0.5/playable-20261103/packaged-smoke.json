@@ -1,0 +1,29 @@
+{
+	"capabilities": {
+		"contract_errors": [],
+		"expression_mode": "TEXTURE_EYES",
+		"face_layout": "res://game/assets/models/haru/face-layout.json",
+		"facial_controls": [
+			"Blink",
+			"TiredEyes"
+		],
+		"hair_aging": false,
+		"material_mode": "TEXTURE_TOON",
+		"source_model": "res://game/assets/models/haru/CH_Haru.glb"
+	},
+	"checks": 15,
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"failed": [],
+	"scope": "Actual bundled PCK loaded by matching Godot 4.7.2, external verification script. Native app launch is checked separately; does not invoke save/load.",
+	"source_revision": "3885558f2c55f5391c57532fc77bbc523cc608c8"
+}
