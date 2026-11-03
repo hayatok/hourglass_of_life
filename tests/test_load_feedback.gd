@@ -8,6 +8,10 @@ func expect(ok: bool, message: String) -> void:
 	checks += 1
 	if not ok: failures.append(message);push_error(message)
 
+func luminance(color: Color) -> float:
+	var linear:=color.srgb_to_linear()
+	return .2126*linear.r+.7152*linear.g+.0722*linear.b
+
 func run() -> void:
 	root.size=Vector2i(1280,800)
 	var main=load("res://game/scenes/main.tscn").instantiate();root.add_child(main)
@@ -23,6 +27,10 @@ func run() -> void:
 	await process_frame
 	expect(main.title.visible and not main.get_node("%HUD").visible and main.info_dialog.visible,"Rejected Continue displays its actual dialog above the title, where the HUD toast would be hidden")
 	expect("新しい町" in main.info_dialog.dialog_text and not sim.load_error.is_empty(),"The actual incompatible-format response explains how to proceed")
+	var panel: StyleBoxFlat=main.info_dialog.get_theme_stylebox("panel")
+	var ink: Color=main.info_dialog.get_label().get_theme_color("font_color")
+	var light:=maxf(luminance(panel.bg_color),luminance(ink));var dark:=minf(luminance(panel.bg_color),luminance(ink))
+	expect((light+.05)/(dark+.05)>=4.5,"The actual dialog body has readable text/background contrast instead of dark ink on the default dark panel")
 	expect(sim._encode({"people":sim.people,"elapsed":sim.elapsed,"rng":str(sim.rng.state)})==before and FileAccess.get_file_as_string(path)==saved_text,"The failed load preserves the live town and the original save contents")
 	if DisplayServer.get_name()!="headless":
 		await RenderingServer.frame_post_draw

@@ -535,6 +535,7 @@ default_font = SubResource("FontBody")
 default_font_size = 16
 Panel/styles/panel = SubResource("PaperPanel")
 PanelContainer/styles/panel = SubResource("PaperPanel")
+AcceptDialog/styles/panel = SubResource("PaperPanel")
 Label/colors/font_color = Color(0.152941, 0.219608, 0.325490, 1.000000)
 Label/font_sizes/font_size = 16
 RichTextLabel/colors/default_color = Color(0.152941, 0.219608, 0.325490, 1.000000)

@@ -2,7 +2,7 @@
   {
     "check": "import",
     "passed": true,
-    "seconds": 2.91,
+    "seconds": 4.15,
     "failure": null,
     "log": "import.log",
     "completion": null
@@ -10,23 +10,23 @@
   {
     "check": "load_feedback",
     "passed": true,
-    "seconds": 1.42,
+    "seconds": 2.12,
     "failure": null,
     "log": "load_feedback.log",
-    "completion": "Load feedback checks: 6 passed, 0 failed"
+    "completion": "Load feedback checks: 7 passed, 0 failed"
   },
   {
     "check": "load_feedback-gpu",
     "passed": true,
-    "seconds": 2.63,
+    "seconds": 3.81,
     "failure": null,
     "log": "load_feedback-gpu.log",
-    "completion": "Load feedback checks: 6 passed, 0 failed"
+    "completion": "Load feedback checks: 7 passed, 0 failed"
   },
   {
     "check": "scene-gpu",
     "passed": true,
-    "seconds": 4.66,
+    "seconds": 6.69,
     "failure": null,
     "log": "scene-gpu.log",
     "completion": "Scene/UI smoke: PASS (focused UI flow through completed collaboration)"
