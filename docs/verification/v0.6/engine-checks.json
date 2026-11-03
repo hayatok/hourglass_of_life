@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-03",
+  "environment": "Godot 4.7.2, macOS Apple M5; GPU Compatibility OpenGL/Metal",
+  "headless_checks": [
+    {
+      "check": "activities",
+      "passed": true,
+      "seconds": 2.36,
+      "failure": null,
+      "log": "logs/activities.log",
+      "completion": "Furniture and activity checks: 156 passed, 0 failed"
+    },
+    {
+      "check": "autonomy",
+      "passed": true,
+      "seconds": 25.26,
+      "failure": null,
+      "log": "logs/autonomy.log",
+      "completion": "Autonomy checks: 23 passed, 0 failed"
+    },
+    {
+      "check": "cast",
+      "passed": true,
+      "seconds": 2.55,
+      "failure": null,
+      "log": "logs/cast.log",
+      "completion": "Resident cast and growth checks: PASS, errors=[]"
+    },
+    {
+      "check": "character",
+      "passed": true,
+      "seconds": 1.25,
+      "failure": null,
+      "log": "logs/character.log",
+      "completion": "Character import and motion checks: PASS, errors=[]"
+    },
+    {
+      "check": "cognition",
+      "passed": true,
+      "seconds": 0.33,
+      "failure": null,
+      "log": "logs/cognition.log",
+      "completion": "Cognition checks: 87 passed, 0 failed"
+    },
+    {
+      "check": "life",
+      "passed": true,
+      "seconds": 121.79,
+      "failure": null,
+      "log": "logs/life.log",
+      "completion": "Life course checks: 50 passed, 0 failed"
+    },
+    {
+      "check": "neighborhood",
+      "passed": true,
+      "seconds": 1.36,
+      "failure": null,
+      "log": "logs/neighborhood.log",
+      "completion": "Neighborhood checks: 96 passed, 0 failed"
+    },
+    {
+      "check": "observation_hud",
+      "passed": true,
+      "seconds": 1.05,
+      "failure": null,
+      "log": "logs/observation_hud.log",
+      "completion": "Observation HUD checks: 16 passed, 0 failed"
+    },
+    {
+      "check": "resident_activities",
+      "passed": true,
+      "seconds": 0.24,
+      "failure": null,
+      "log": "logs/resident_activities.log",
+      "completion": "Resident activity checks: 24 passed, 0 failed"
+    },
+    {
+      "check": "simulation",
+      "passed": true,
+      "seconds": 1.05,
+      "failure": null,
+      "log": "logs/simulation.log",
+      "completion": "Simulation checks: 49 passed, 0 failed"
+    },
+    {
+      "check": "social",
+      "passed": true,
+      "seconds": 0.34,
+      "failure": null,
+      "log": "logs/social.log",
+      "completion": "Social life checks: 33 passed, 0 failed"
+    },
+    {
+      "check": "work",
+      "passed": true,
+      "seconds": 0.44,
+      "failure": null,
+      "log": "logs/work.log",
+      "completion": "Work/family checks: 41 passed, 0 failed"
+    }
+  ],
+  "gpu_logs": [
+    "logs/scene-gpu.log",
+    "logs/presentation-gpu.log"
+  ],
+  "source_sha256": {
+    "data/resident-activities.json": "597ba9f8ed105dfdeb0ec8bdfb18963f2c45659501ce01e8b81cfef6ba8b0087",
+    "game/scenes/main.tscn": "42cf12000719b317b430fa0060db0d99f24df2578763f600893d3f9398f83fd9",
+    "game/scripts/activity_places.gd": "2abbeb60b463af560b71df131d6b92af435fcc3ada406d2fd4edb0d217933c3a",
+    "game/scripts/activity_spot.gd": "caccfed1ae901538e467b7f64167f075d01c128cff7efb0b82b0c64d6f491b77",
+    "game/scripts/character_stage.gd": "913f1bb1d3868fc220bc738eb94a9d17945c145772b0dbb9ac3abc764f49a892",
+    "game/scripts/contact_rotation.gd": "f322e3537075b918641fa18d2cdc8f44c867ddebc8e62b2dac3597d5794d79c1",
+    "game/scripts/jrpg_resident_model.gd": "198433248c7f45d59b254401eef45c9a36ec3067411dcd5d121beb6b37ece43f",
+    "game/scripts/life_course.gd": "26a6d6e3f94557491fb1be0371adc07a03bed9cad9711f0d92195d62981b6aa2",
+    "game/scripts/main.gd": "373240c2112dcf75768df70ca91cb46ac128108e85482cc738969e4446b34a78",
+    "game/scripts/observation_hud.gd": "f20cddfe127fd12329f80e538883888fe07da15290c1cfd7b4d6d7f14d8e7572",
+    "game/scripts/resident_activities.gd": "d79f53149497df0a8aaa05d6ea57b30b8437d65b34080fb51ae0ec9411d62d62",
+    "game/scripts/resident_avatar.gd": "2ff6c09567e74dc9d7576a11479eb2af54997190773375cc1d9e7142ba254ba3",
+    "game/scripts/resident_cognition.gd": "5ad5620e248b58acfce07859ad8544de1daf91a93e71cc018c8596180a617fd7",
+    "game/scripts/resident_contacts.gd": "3ee077b656613823df55ddbb2e48eec51b6955fdf0da8039da97f677e0fef962",
+    "game/scripts/resident_planner.gd": "c8505c6b61434d11301ff1bceef9fc80915758b52346bd81c0f1a4df39672771",
+    "game/scripts/save_validation.gd": "04f7b56403633370e314c0f87d54dc11101f6cd59d85eac5e4ab8754def0a816",
+    "game/scripts/simulation.gd": "e2f07d19a418347b7bbdc57ded7690477a68c8fb86c919bd5e72cb2e10309476",
+    "game/scripts/social_life.gd": "f4122487cf654ec3cfcf4989db554bb44adfe664fd0d833d4a67b53cf2bc1551",
+    "game/scripts/town_building.gd": "6c091275caf0fb036d18994a9755a3f10d52fa08a1431d4f32abbf1f065f93de",
+    "game/scripts/town_environment.gd": "b99124ef8f53d6c15d103d1e9cef363db323f19b9504fd9a5b2e60ace5746ca4",
+    "game/scripts/work_family.gd": "649567eb24eb24650c87628b3b223fa12659cec5c6f1d36c5dd673399e329eac",
+    "project.godot": "87597ffc3e75841de24361b168f6b1c8f4037650593a6ec141a34e9cd7ba66b8",
+    "export_presets.cfg": "277ad4356e7295536476067cbfb9bdbbcbf7dc6149bdf95b83fefc5a07ff9ac9"
+  },
+  "limits": [
+    "No human playtest or fun/behavioral-validity conclusion",
+    "v0.5 art/audio acceptance and complete v0.6 remain open",
+    "Population is still the authored eight residents"
+  ]
+}

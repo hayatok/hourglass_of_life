@@ -66,11 +66,16 @@ var rng = RandomNumberGenerator.new()
 var graph = AStar3D.new()
 var minute_remainder: float = 0
 var meeting_serial: int = 0
+var event_serial: int = 0
+var world_seed: int = 71103
 var rejection_context: Dictionary = {}
 var social: SocialLife
 var work_family: WorkFamily
 var life: LifeCourse
 var activities: ActivityPlaces
+var cognition: ResidentCognition
+var resident_activities: ResidentActivities
+var planner: ResidentPlanner
 
 func _ready() -> void:
 	_build_graph()
@@ -106,6 +111,8 @@ func reset(seed_value: int = 71103) -> void:
 	running = false
 	minute_remainder = 0
 	meeting_serial = 0
+	event_serial = 0
+	world_seed = seed_value
 	rejection_context.clear()
 	rng.seed = seed_value
 	for i in data.residents.size():
@@ -139,6 +146,11 @@ func reset(seed_value: int = 71103) -> void:
 	work_family.reset()
 	if life==null: life = LifeCourse.new(self)
 	life.reset()
+	if cognition==null: cognition = ResidentCognition.new(self)
+	cognition.reset()
+	if resident_activities==null: resident_activities = ResidentActivities.new(self)
+	if planner==null: planner = ResidentPlanner.new(self)
+	planner.reset()
 	for p in people:
 		# The clock starts in an existing day, so active shifts are already underway.
 		var routine = _routine_at(p)
@@ -324,6 +336,7 @@ func _choose_action(p: Dictionary) -> void:
 	]
 	work_family.add_options(p,options)
 	life.add_options(p,options)
+	planner.add_options(p,options)
 	# A place the player adds becomes an actual alternative for free time.
 	var seat := activities.reserve(p,"social","square")
 	if not seat.is_empty():
@@ -339,6 +352,7 @@ func _choose_action(p: Dictionary) -> void:
 		o.score = .26*o.need+.20*o.goal+.16*o.relation+.10*o.role+.08*o.habit+.08*o.fun-.12*o.cost
 		o.score += social.habit_bonus(p,o)
 		o.score += life.action_bonus(p,o)
+		o.score += cognition.action_bonus(p,o.kind,o.place,o.get("partner",""))
 		if p.supported and o.kind == "hobby":
 			o.score += 0.06
 	options.sort_custom(func(a,b): return a.score > b.score)
@@ -358,6 +372,10 @@ func _choose_action(p: Dictionary) -> void:
 			chosen = o
 			break
 	var reason: String = chosen.reason
+	if chosen.kind=="joint_work":
+		if planner.begin(p,chosen): return
+		_assign(p,"rest",home,30,"相手の予定も大切にして、次の機会を待とう")
+		return
 	if not p.inspiration.is_empty() and elapsed<p.inspiration.until and chosen.kind==p.inspiration.kind:
 		reason += "。%sさんの記録を参考にしてみたい"%person(p.inspiration.source).name
 	_assign(p, chosen.kind, chosen.place, rng.randi_range(35, 75), reason, chosen.get("target"))
@@ -372,6 +390,7 @@ func _hobby_place(p: Dictionary) -> String:
 	return home_for(p)
 
 func _assign(p: Dictionary, kind: String, place: String, duration: float, reason: String, exact_target: Variant = null, spot_id: String = "") -> void:
+	_finish_activity_experience(p)
 	var activity: Dictionary = activities.spots.get(spot_id,{})
 	if activity.is_empty() and exact_target==null: activity = activities.reserve(p,kind,place)
 	p.activity_spot = activity.get("id","")
@@ -384,6 +403,7 @@ func _assign(p: Dictionary, kind: String, place: String, duration: float, reason
 	p.legacy_read_id = ""
 	p.legacy_read_recorded = false
 	p.destination = place
+	p.cognition_session = {"kind":kind,"place":place,"fatigue":p.fatigue,"quiet":p.quiet}
 	var index = people.find(p)
 	p.target = exact_target if exact_target != null else SITES.get(place, Vector3.ZERO) + _offset(index)
 	if not activity.is_empty(): p.target = activity.approach
@@ -391,6 +411,16 @@ func _assign(p: Dictionary, kind: String, place: String, duration: float, reason
 	p.moving = not p.path.is_empty()
 	if not p.moving:
 		p.place = place
+
+func _finish_activity_experience(p: Dictionary) -> void:
+	if cognition==null or not p.meeting_id.is_empty() or p.moving or p.get("action_elapsed",0)<20: return
+	var session: Dictionary = p.get("cognition_session",{})
+	if session.is_empty(): return
+	var kind: String = session.kind
+	var relief := maxf(0,float(session.fatigue)-float(p.fatigue))
+	var enjoyment := clampf(.5+relief+(.12 if kind in ["hobby","photo"] else 0),0,1)
+	cognition.experience(p,"",kind,{"place":session.place},
+		{"enjoyment":enjoyment,"burden":clampf(p.fatigue-float(session.fatigue)+.25,0,1)})
 
 func route(origin: Vector3, origin_place: String, target: Vector3, destination: String) -> Array:
 	if origin.distance_to(target) < .1:
@@ -529,6 +559,7 @@ func _tick_meetings() -> void:
 				a.reason = "%sさんと、近況を話している" % b.name
 				b.reason = "%sさんと、同じ時間を過ごしている" % a.name
 				if m.get("mode","")=="project":
+					planner.engaged(m)
 					a.reason = "%sさんと、%sを一緒に進めている"%[b.name,m.project.title]
 					b.reason = "%sさんと、%sに取り組んでいる"%[a.name,m.project.title]
 				_log(a.id, "二人が合流しました", "%sと%sが、%sを始めた。" % [a.name,b.name,m.project.title if m.get("mode","")=="project" else "同じ場所で話す時間"])
@@ -554,12 +585,39 @@ func _finish_meeting(m: Dictionary, completed: bool) -> void:
 	var b = person(m.b)
 	social.finish(m,completed)
 	if completed: work_family.finish_project(m)
+	if completed:
+		var used_skill: String = m.get("project",{}).get("skill","")
+		_learn_profile(a,b,used_skill)
+		_learn_profile(b,a,used_skill)
+	planner.finish(m,completed)
+	if not completed and m.get("mode","")=="project" and m.state=="engaged":
+		for pair in [[a,b],[b,a]]:
+			cognition.experience(pair[0],pair[1].id,"joint_work",{"place":pair[0].place},
+				{"completed":false,"enjoyment":.3,"burden":.65})
 	if not completed:
 		_log(a.id,"予定を見直しました","次の予定や移動の都合で、今回は話す時間を取れなかった。")
 	for p in [a,b]:
 		p.meeting_id = ""
 		p.remaining = 0
 		p.routine_id = ""
+
+func _learn_profile(observer: Dictionary, other: Dictionary, practiced_skill: String = "") -> void:
+	var skill := practiced_skill
+	if skill.is_empty():
+		for interest in other.interests:
+			if other.skills.has(interest):
+				skill = interest
+				break
+	var skills := {}
+	if not skill.is_empty(): skills[skill] = other.skills.get(skill,0)
+	_log(other.id,"得意なことを知った","%sさんの%sについて、%sさんと話した。"%[
+		other.name,ResidentCognition.INTEREST_LABELS.get(skill,"好きなこと"),observer.name])
+	var fact: Dictionary = events[-1]
+	fact.fact = "profile"
+	fact.value = {"person":other.id,"skills":skills,"interests":other.interests.slice(0,1)}
+	fact.participants = [observer.id,other.id]
+	cognition.observe(other,fact)
+	cognition.observe(observer,fact)
 
 func _try_spontaneous() -> void:
 	for a in people:
@@ -611,9 +669,11 @@ func place_bench(position: Vector3) -> Dictionary:
 func _remember(p: Dictionary, other: String, title: String, text: String, kind: String) -> void:
 	p.memories.append({"minute":elapsed,"other":other,"title":title,"text":text,"kind":kind})
 	_log(p.id,title,text)
+	if cognition!=null: cognition.observe(p,events[-1])
 
 func _log(id: String, title: String, text: String) -> void:
-	var e = {"minute":elapsed,"clock":clock_text(),"day":day_index(),"resident_id":id,"title":title,"text":text}
+	event_serial += 1
+	var e = {"event_id":"event_%d"%event_serial,"minute":elapsed,"clock":clock_text(),"day":day_index(),"resident_id":id,"title":title,"text":text}
 	events.append(e)
 	if events.size()>500:
 		events.pop_front()
@@ -624,6 +684,8 @@ func has_save() -> bool:
 
 func save_game(path: String = SAVE_PATH) -> bool:
 	var data = {"schema":4,"elapsed":elapsed,"start_minute":start_minute,"epoch_weekday":epoch_weekday,"rng_state":str(rng.state),"people":people,"events":events,"meetings":meetings,"benches":benches,"budget":shared_budget,"meeting_serial":meeting_serial,"remainder":minute_remainder,"social":social.serialize(),"work_family":work_family.serialize(),"life":life.serialize()}
+	data.world_seed = world_seed
+	data.event_serial = event_serial
 	data.route_layout = 1
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
@@ -657,10 +719,18 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	benches = data.benches
 	shared_budget = int(data.budget)
 	meeting_serial = int(data.meeting_serial)
+	world_seed = int(data.get("world_seed",71103))
+	event_serial = int(data.get("event_serial",0))
+	for event in events:
+		var event_id: String = event.get("event_id","")
+		if event_id.begins_with("event_"): event_serial = maxi(event_serial,int(event_id.trim_prefix("event_")))
 	minute_remainder = float(data.remainder)
 	social.restore(data.get("social",{}))
 	work_family.restore(data.get("work_family",{}))
 	life.restore(data.get("life",{}))
+	for p in people:
+		cognition.upgrade_person(p)
+		planner.upgrade_person(p)
 	activities.configure_benches(benches)
 	for p in people:
 		if not activities.spots.has(p.get("activity_spot","")): p.activity_spot = ""

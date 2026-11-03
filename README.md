@@ -10,6 +10,8 @@ Godot 4.7.2で開発する3D人生シミュレーション。v0.1で日常と働
 
 v0.5の開発ブランチでは、8人全員のJRPG調モデルと、成長後の凛、表情と動きを実際の町へ取り込んでいる。年齢が進むと凛の体格が切り替わり、髪色も変わる。家具10点と予約する席・作業場所を接続し、着席、カップを使う食事、子どもの踏み台、専用の寝床を使用する。[人物モデル](docs/verification/v0.5/README.md)と[家具・動作の制作確認](docs/verification/v0.5/activities/README.md)を参照。人物と町の造形、道具ごとの細かな操作や衣服との重なり、音と演出、導入と一連の進行の仕上げは未完了。
 
+v0.6の開発では共同活動6種類を人物の組合せから独立した定義へ移した。住人は関心、技能、本人が知る相手の情報、実際に空いている場所と時間から、自分で共同作業を相談する。合流して作業した経験から技能と状況別の期待を更新し、実際の会話で得意なことが第三者へ伝わる。住人一覧・人物詳細・履歴は畳めるようにし、人物追従では近くへ寄って見る。[制作と検証の範囲](docs/verification/v0.6/README.md)を参照。増員、複数人の集まり、経験から変わる人生、表現全体の仕上げは引き続き開発する。
+
 ## 起動と操作
 
 Godot 4.7.2で `project.godot` を開き、プロジェクトを実行する。macOS向けの配布物はGitHubのリリースへ版ごとに保存する。
@@ -21,6 +23,7 @@ Godot 4.7.2で `project.godot` を開き、プロジェクトを実行する。m
 - WASDでカメラ移動、右ドラッグで回転、ホイールでズーム。人物への追従も選べる。
 - Spaceで一時停止、Escapeでメニュー。メニューから保存と再開ができる。
 - ×0.5でゆっくり観察し、×30で年月を早く見届けられる。早送りでも移動と参加を省略しない。「町の記録」で、実際の節目と残された物を振り返れる。
+- 「住人」「人物」「履歴」で画面を畳める。進行速度は上部の速度メニューで変更する。
 
 保存先はGodotの `user://life-save.json`。macOSでは `~/Library/Application Support/Godot/app_userdata/命の砂時計/` に置かれる。新しい保存がない場合にはv0.1の `life-save-v01.json` も読み込める。
 
@@ -34,13 +37,19 @@ godot --headless --path . --script tests/test_simulation.gd
 godot --headless --path . --script tests/test_social_life.gd
 godot --headless --path . --script tests/test_work_family.gd
 godot --headless --path . --script tests/test_life_course.gd
+godot --headless --path . --script tests/test_cognition.gd
+godot --headless --path . --script tests/test_resident_activities.gd
+godot --headless --path . --script tests/test_autonomy.gd
+godot --path . --script tests/test_observation_hud.gd
 godot --path . --script tests/test_scene.gd
 godot --path . --script tests/test_character_model.gd
 godot --path . --script tests/test_resident_models.gd
 godot --path . --script tests/test_activity_furniture.gd
 ```
 
-`godot` はGodot実行ファイルのパスに読み替える。シーン全体の確認はGPUを使用し、操作、共同制作、3年の振り返り、全員の生涯を見届けた画面まで `docs/verification/v0.5/integration/` へ保存する。人物の確認は `docs/verification/v0.5/nagisa/` へ保存する。Godotのシーンエディタで編集した `.tscn` と、保存されたAnimationPlayerのクリップを実行時に使用する。初期シーンの作成補助は `tools/build_scenes.gd` に残しているが、再実行すると後の版の編集を上書きする。
+`godot` はGodot実行ファイルのパスに読み替える。シーン全体の確認はGPUを使用し、操作、共同制作、3年の振り返り、全員の生涯を見届けた画面まで `docs/verification/v0.6/integration/` へ保存する。人物の確認は `docs/verification/v0.5/nagisa/` へ保存する。Godotのシーンエディタで編集した `.tscn` と、保存されたAnimationPlayerのクリップを実行時に使用する。初期シーンの作成補助は `tools/build_scenes.gd` に残しているが、再実行すると後の版の編集を上書きする。
+
+通常の新規開始は初期乱数を変える。開発時に同じ開始条件を使う場合は、`godot --path . -- --world-seed=71103` のように指定する。保存には初期seedと現在の乱数状態、知識、経験、進行中の計画を含める。
 
 `python3 tools/verify_game.py --gpu` で、エンジンの終了コード・エラーログ・各テストの完了表示も照合できる。必要に応じて `--godot` に実行ファイルを指定する。亮・凛・成長後の姿と加齢の描画は `docs/verification/v0.5/cast/`、ローカルの実行ログは `builds/verification/` へ保存する。
 

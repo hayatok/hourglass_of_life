@@ -96,7 +96,7 @@ func run() -> void:
 		await process_frame
 	for actor in main.avatars.values(): actor.get_node("Name").hide()
 	await capture("05-home-interior",Vector3(-2,6,14),Vector3(-9,1,6))
-	sim.start_minute = 22*60;sim.elapsed = 0;town.update_lighting()
+	sim.start_minute = posmod(22*60-sim.elapsed,1440);town.update_lighting()
 	expect(town.daylight<.01 and town.lamps.all(func(l): return l.visible and l.light_energy>1),"Night uses cool light and turns on actual street lights")
 	var nighttime: Image = await capture("06-cutaway-night",Vector3(23,22,29),Vector3(0,0,1))
 	if daytime!=null and nighttime!=null:

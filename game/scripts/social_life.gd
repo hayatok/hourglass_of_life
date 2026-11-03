@@ -198,6 +198,7 @@ func finish(m: Dictionary, completed: bool) -> void:
 	if not completed: return
 	var a = sim.person(m.a)
 	var b = sim.person(m.b)
+	var previous_knowledge := {a.id:a.knowledge.duplicate(true),b.id:b.knowledge.duplicate(true)}
 	var topic = _topic(a,b)
 	for pair in [[a,b],[b,a]]:
 		var p = pair[0]
@@ -221,6 +222,15 @@ func finish(m: Dictionary, completed: bool) -> void:
 		elif r.familiarity>.6: text += "よく知る相手だから、近況を落ち着いて伝えられた。"
 		else: text += "相手の好きなことを、少し知ることができた。"
 		sim._remember(p,other.id,"約束して過ごした時間" if not m.get("appointment_id","").is_empty() else "一緒に過ごした時間",text,"shared_time")
+		if m.get("mode","")!="project":
+			sim.cognition.experience(p,other.id,"social",{"place":p.place},
+				{"enjoyment":.3 if uneasy else .7,"burden":p.quiet*.6})
+	# Only people who actually spent time together can exchange what they know.
+	for pair in [[a,b],[b,a]]:
+		var known: Array = previous_knowledge[pair[0].id]
+		known.reverse()
+		for fact in known:
+			if sim.cognition.share(pair[0],pair[1],fact.event_id): break
 
 func _postpone(planned: Dictionary, reason: String) -> void:
 	planned.state = "postponed"
@@ -232,13 +242,7 @@ func _postpone(planned: Dictionary, reason: String) -> void:
 		sim._remember(p,other.id,"会う日を改めることにした","%sさんとは、また時間を相談したい。%s"%[other.name,reason],"promise_change")
 
 func _topic(a: Dictionary, b: Dictionary) -> String:
-	var ids = [a.id,b.id]
-	if "aoi" in ids and "osamu" in ids: return "譲り受けたラジオの気になる箇所"
-	if "ryo" in ids and "rin" in ids: return "作りかけの町の模型"
-	if "nagisa" in ids and "maho" in ids: return "季節のパンとお客さんの反応"
-	if "fumi" in ids: return "写真に残したい町の景色"
-	if "ritsu" in ids: return "最近聴いた音楽と、ひとりで過ごす時間"
-	return "最近の暮らしと、それぞれがやってみたいこと"
+	return sim.resident_activities.topic(a,b)
 
 func person_text(p: Dictionary) -> String:
 	var text = ""

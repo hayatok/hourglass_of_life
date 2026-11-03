@@ -46,7 +46,7 @@ func _ready() -> void:
 	%LoadButton.pressed.connect(_continue_game)
 	%HelpButton.pressed.connect(_show_guide)
 	%ReturnTitle.pressed.connect(_to_title)
-	%FollowButton.pressed.connect(func(): following = not following)
+	%FollowButton.pressed.connect(_toggle_follow)
 	%BuildingsButton.pressed.connect(_toggle_buildings)
 	%RestButton.pressed.connect(func(): _answer(Sim.propose_rest(selected_id)))
 	%GoalButton.pressed.connect(func(): _answer(Sim.support_goal(selected_id)))
@@ -72,7 +72,11 @@ func _ready() -> void:
 	Sim.running = false
 
 func _new_game() -> void:
-	Sim.reset()
+	var seed_value: int = int(Time.get_unix_time_from_system()*1000)^Time.get_ticks_usec()
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--world-seed=") and argument.trim_prefix("--world-seed=").is_valid_int():
+			seed_value = maxi(0,int(argument.trim_prefix("--world-seed=")))
+	Sim.reset(seed_value)
 	_start_play()
 
 func _start_play() -> void:
@@ -158,6 +162,7 @@ func _select(id: String) -> void:
 	atlas.region = Rect2(x,10,200,235)
 	portrait.texture = atlas
 	portrait.modulate = Color.WHITE if Sim.life.is_alive(Sim.person(id)) else Color(.65,.65,.65)
+	if %HUD.has_method("reveal_person"): %HUD.reveal_person()
 	_refresh_detail()
 
 func _process(delta: float) -> void:
@@ -179,6 +184,13 @@ func _process(delta: float) -> void:
 	var offset = Vector3(sin(yaw)*distance,distance*.85,cos(yaw)*distance)
 	camera.position = camera_target+offset
 	camera.look_at(camera_target+Vector3(0,.7,0))
+	var right_panel: Control = %HUD.get_node("DetailPanel")
+	var left_panel: Control = %HUD.get_node("ResidentsPanel")
+	var covered_right: float = right_panel.size.x+12 if right_panel.visible and not title.visible else 0.0
+	var covered_left: float = left_panel.size.x+12 if left_panel.visible and not title.visible else 0.0
+	var pixel_shift := (covered_right-covered_left)*.5
+	var units_per_pixel := 2*camera.position.distance_to(camera_target)*tan(deg_to_rad(camera.fov)*.5)/maxf(1,get_viewport().get_visible_rect().size.y)
+	camera.h_offset = lerpf(camera.h_offset,pixel_shift*units_per_pixel,minf(1,delta*5))
 	$Town.update_view(camera.global_position)
 	for p in Sim.people:
 		if avatars.has(p.id):
@@ -242,6 +254,10 @@ func _toggle_buildings() -> void:
 	$Town.cutaway = not $Town.cutaway
 	$Town.update_view(camera.global_position)
 	%BuildingsButton.text = "建物：断面（V）" if $Town.cutaway else "建物：外観（V）"
+
+func _toggle_follow() -> void:
+	following = not following
+	if following: distance = 10
 
 func _set_speed(value: float) -> void:
 	if not Sim.people.any(func(p): return Sim.life.is_alive(p)): return
@@ -310,7 +326,7 @@ func _refresh_ui() -> void:
 	%PauseButton.text = "再開" if not Sim.running else "一時停止"
 	%Budget.text = "共有予算  %d" % Sim.shared_budget
 	%FollowButton.text = "追従中" if following else "この人を追う"
-	%Version.text = "v0.4 開発版 · 年月と人生"
+	%Version.text = "v0.6 開発版 · 個性と経験"
 	var alive = Sim.life.is_alive(Sim.person(selected_id))
 	var living_town = Sim.people.any(func(p): return Sim.life.is_alive(p))
 	for action in [%PauseButton,%SpeedHalf,%Speed1,%Speed3,%Speed6,%Speed30]: action.disabled = not living_town
@@ -342,6 +358,10 @@ func _refresh_detail() -> void:
 	var text: String = ""
 	if detail_tab == 0:
 		text = Sim.social.person_text(p)
+		var plan_text: String = Sim.planner.person_text(p)
+		if not plan_text.is_empty(): text += ("\n\n" if not text.is_empty() else "")+plan_text
+		var learning: String = Sim.cognition.explain(p)
+		if not learning.is_empty(): text += ("\n\n" if not text.is_empty() else "")+learning
 		if not text.is_empty(): text += "\n"
 		text += ("暮らしの背景\n\n" if p.alive else "大切にしていたこと\n\n")+Sim.definitions[p.id].public_private_difference+"\n\n暮らしの始まりに気にかけていたこと\n"+Sim.definitions[p.id].goals[1]
 	elif detail_tab == 1:
@@ -372,5 +392,5 @@ func _refresh_events() -> void:
 
 func _show_guide() -> void:
 	info_dialog.title = "町を見守る操作"
-	info_dialog.dialog_text = "住人一覧または町の人物をクリックすると、その人の事情が見られます。\n\n右ドラッグ：カメラ回転　 ホイール：ズーム\nWASD：町を見渡す　 Space：一時停止　 Escape：メニュー\n\n相手を選んで「話す機会を作る」を提案できます。\n二人が合流し、話す時間を過ごすと記憶が残ります。\n断られたときも、その人の予定や疲れに理由があります。\n\n「ベンチを置く」から広場の地面をクリックすると、場所を整えられます。\n\n開発版では仮の人物モデルを使っています。完成用のJRPG調モデルは後の版で組み込みます。"
+	info_dialog.dialog_text = "町の人物や「住人」から選ぶと、その人の様子が見られます。\n\n右ドラッグ：カメラ回転　 ホイール：ズーム\nWASD：町を見渡す　 Space：一時停止　 Escape：メニュー\n\n相手を選んで、会話や共同制作を相談できます。\n住人は予定や疲れ、関心から返答し、自分から相談することもあります。\n実際に一緒に過ごした経験や教わったことが、その後の判断へ残ります。\n\n「この人を追う」で近くから見守れます。「住人」「人物」「履歴」で画面を畳めます。\n\n「ベンチを置く」から広場の地面をクリックすると、場所を整えられます。"
 	info_dialog.popup_centered(Vector2i(700,430))

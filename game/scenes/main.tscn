@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b4psilvqt2yvs" path="res://game/scripts/main.gd" id="1_gp8w2"]
 [ext_resource type="PackedScene" path="res://game/scenes/town.tscn" id="2_8buom"]
 [ext_resource type="Texture2D" uid="uid://bsdn0cb4rgfhr" path="res://game/assets/ui/title.png" id="3_ejk4j"]
+[ext_resource type="Script" path="res://game/scripts/observation_hud.gd" id="4_hud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3qal"]
 content_margin_left = 12.0
@@ -246,6 +247,7 @@ anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+script = ExtResource("4_hud")
 
 [node name="TimePanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=697945934]
 layout_mode = 0
@@ -253,26 +255,26 @@ anchor_right = 1.0
 offset_left = 12.0
 offset_top = 12.0
 offset_right = -12.0
-offset_bottom = 68.0
+offset_bottom = 64.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_12hk3")
 
 [node name="TimeControls" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/TimePanel" unique_id=1240828661]
 layout_mode = 2
-theme_override_constants/separation = 7
+theme_override_constants/separation = 6
 
 [node name="Calendar" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=995844013]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 17
 text = "1年目　春1日　土曜"
 autowrap_mode = 3
 
 [node name="Clock" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=476524496]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(85, 0)
+custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 24
 text = "13:00"
 autowrap_mode = 3
 
@@ -284,21 +286,53 @@ text = "一時停止"
 
 [node name="Speed1" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=1120836573]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "×1"
 
 [node name="Speed3" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=26274695]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "×3"
 
 [node name="Speed6" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=1550399956]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "×6"
+
+[node name="SpeedMenu" type="MenuButton" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72, 34)
+flat = false
+text = "×1 ▾"
+tooltip_text = "時間の進み方"
+
+[node name="RosterToggle" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "住人"
+tooltip_text = "町の人を選ぶ"
+
+[node name="DetailToggle" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "人物"
+tooltip_text = "選んだ人の様子"
+
+[node name="HistoryToggle" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "履歴"
+tooltip_text = "最近の出来事"
 
 [node name="Spacer" type="Control" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=461999875]
 layout_mode = 2
@@ -306,9 +340,9 @@ size_flags_horizontal = 3
 
 [node name="Budget" type="Label" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls" unique_id=46867515]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(116, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "共有予算 100"
 autowrap_mode = 3
 
@@ -320,11 +354,13 @@ text = "メニュー"
 
 [node name="SpeedHalf" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "×0.5"
 
 [node name="Speed30" type="Button" parent="Interface/InterfaceRoot/HUD/TimePanel/TimeControls"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "×30"
 
@@ -334,19 +370,21 @@ layout_mode = 2
 text = "町の記録"
 
 [node name="ResidentsPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1809890037]
+visible = false
 layout_mode = 0
 anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = 80.0
 offset_right = 222.0
-offset_bottom = -181.0
+offset_bottom = -77.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3v7cf")
 
 [node name="ResidentsColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/ResidentsPanel" unique_id=1085604637]
 layout_mode = 2
-theme_override_constants/separation = 7
+theme_override_constants/separation = 6
 
 [node name="RosterTitle" type="Label" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=2024984227]
+visible = false
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
@@ -360,6 +398,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 7
 
 [node name="CameraGuide" type="Label" parent="Interface/InterfaceRoot/HUD/ResidentsPanel/ResidentsColumn" unique_id=560154937]
+visible = false
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -376,19 +415,20 @@ text = "建物：断面（V）"
 tooltip_text = "屋根と手前の壁を外して暮らしを見る／建物の外観を見る"
 
 [node name="DetailPanel" type="PanelContainer" parent="Interface/InterfaceRoot/HUD" unique_id=1012788735]
+visible = false
 layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -346.0
+offset_left = -334.0
 offset_top = 80.0
 offset_right = -12.0
-offset_bottom = -181.0
+offset_bottom = -77.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_r75lq")
 
 [node name="DetailColumn" type="VBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel" unique_id=1889402142]
 layout_mode = 2
-theme_override_constants/separation = 7
+theme_override_constants/separation = 6
 
 [node name="Identity" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=227940391]
 layout_mode = 2
@@ -396,7 +436,7 @@ theme_override_constants/separation = 7
 
 [node name="Portrait" type="TextureRect" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn/Identity" unique_id=754748171]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(85, 98)
+custom_minimum_size = Vector2(70, 81)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 6
@@ -429,13 +469,13 @@ text = "この人を追う"
 [node name="Activity" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=457912344]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 17
 text = "好きなことに取り組む"
 autowrap_mode = 3
 
 [node name="Reason" type="Label" parent="Interface/InterfaceRoot/HUD/DetailPanel/DetailColumn" unique_id=1964996904]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "「ラジオを直したい」"
@@ -565,7 +605,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = -169.0
+offset_top = -65.0
 offset_right = -12.0
 offset_bottom = -12.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cxktm")
@@ -576,19 +616,19 @@ theme_override_constants/separation = 7
 
 [node name="Actions" type="HBoxContainer" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn" unique_id=1864866975]
 layout_mode = 2
-theme_override_constants/separation = 7
+theme_override_constants/separation = 6
 
 [node name="RestButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=1549529787]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-text = "休むことを提案"
+text = "休息を提案"
 
 [node name="GoalButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=1132710888]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-text = "やりたいことを応援"
+text = "目標を応援"
 
 [node name="Partner" type="OptionButton" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=342374533]
 unique_name_in_owner = true
@@ -599,7 +639,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-text = "話す機会を作る"
+text = "話す機会"
 
 [node name="SupportButton" type="Button" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions"]
 unique_name_in_owner = true
@@ -611,7 +651,7 @@ text = "手助けを相談"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-text = "一緒に作る相談"
+text = "一緒に作る"
 
 [node name="Flex" type="Control" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn/Actions" unique_id=264781472]
 layout_mode = 2
@@ -625,6 +665,7 @@ text = "ベンチを置く  20"
 
 [node name="EventText" type="Label" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn" unique_id=1378913187]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 14
@@ -632,10 +673,11 @@ text = "町の出来事がここに残ります。"
 autowrap_mode = 3
 
 [node name="Version" type="Label" parent="Interface/InterfaceRoot/HUD/ActionsPanel/ActionColumn" unique_id=798463988]
+visible = false
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "v0.4 開発版 · 年月と人生"
+text = "v0.6 開発版 · 個性と経験"
 autowrap_mode = 3
 
 [node name="Toast" type="Label" parent="Interface/InterfaceRoot/HUD" unique_id=582779342]
@@ -644,9 +686,9 @@ visible = false
 layout_mode = 0
 anchor_left = 0.17
 anchor_right = 0.75
-offset_top = 80.0
-offset_bottom = 130.0
-theme_override_font_sizes/font_size = 17
+offset_top = 76.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_aju45")
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -729,7 +771,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8392157, 0.8666667, 0.81960785, 1)
 theme_override_font_sizes/font_size = 12
-text = "v0.4 開発版 · 年月と人生"
+text = "v0.6 開発版 · 個性と経験"
 autowrap_mode = 3
 
 [node name="PauseMenu" type="Control" parent="Interface/InterfaceRoot" unique_id=1313611870]

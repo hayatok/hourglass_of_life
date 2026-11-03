@@ -6,8 +6,12 @@ static func number(value: Variant) -> bool:
 
 static func encoded(value: Variant, depth: int = 0) -> bool:
 	if depth>32: return false
+	if value is int or value is float: return number(value)
 	if value is Dictionary:
 		if value.has("__vector3"):
+			# _decode treats this reserved wrapper as a Vector3. An otherwise
+			# valid record must not turn into a vector after validation succeeds.
+			if value.size()!=1: return false
 			var xyz = value.__vector3
 			if not xyz is Array or xyz.size()!=3: return false
 			for coordinate in xyz:
@@ -32,11 +36,96 @@ static func record(value: Variant, text_keys: Array, numeric_keys: Array) -> boo
 		if not number(value.get(key)): return false
 	return true
 
+static func whole(value: Variant, minimum: int = 0) -> bool:
+	return number(value) and value>=minimum and value==int(value)
+
+static func unit(value: Variant) -> bool:
+	return number(value) and value>=0 and value<=1
+
+static func strings(value: Variant, limit: int = 64) -> bool:
+	if not value is Array or value.size()>limit: return false
+	for entry in value:
+		if not entry is String or entry.is_empty(): return false
+	return true
+
+static func skills(value: Variant) -> bool:
+	if not value is Dictionary or value.size()>64: return false
+	for key in value:
+		if not key is String or key.is_empty() or not unit(value[key]): return false
+	return true
+
+static func profile(value: Variant, definitions: Dictionary) -> bool:
+	if not value is Dictionary or not value.get("person") is String or not definitions.has(value.person): return false
+	if not value.has("skills") and not value.has("interests"): return false
+	if value.has("skills") and not skills(value.skills): return false
+	if value.has("interests") and not strings(value.interests): return false
+	return true
+
+static func cognition(p: Dictionary, definitions: Dictionary, sites: Dictionary, elapsed: float) -> bool:
+	if p.has("skills") and not skills(p.skills): return false
+	if p.has("interests") and not strings(p.interests): return false
+	if p.has("known_profiles"):
+		if not p.known_profiles is Dictionary or p.known_profiles.size()>definitions.size(): return false
+		for other in p.known_profiles:
+			var known = p.known_profiles[other]
+			if not definitions.has(other) or not record(known,["source"],["observed_at"]): return false
+			if known.source!="initial_profile" or not whole(known.observed_at) or known.observed_at>elapsed: return false
+			if not skills(known.get("skills")) or not strings(known.get("interests")): return false
+	if p.has("knowledge"):
+		if not p.knowledge is Array or p.knowledge.size()>128: return false
+		for known in p.knowledge:
+			if not record(known,["event_id","fact","source","mode"],["observed_at","confidence"]): return false
+			if known.event_id.is_empty() or known.fact.is_empty() or not known.has("value"): return false
+			if known.mode not in ["observed","told"] or not unit(known.confidence): return false
+			if not whole(known.observed_at) or known.observed_at>elapsed: return false
+			if known.has("received_from") and (not known.received_from is String or (not known.received_from.is_empty() and not definitions.has(known.received_from))): return false
+			if known.has("origin_observed_at") and (not whole(known.origin_observed_at) or known.origin_observed_at>known.observed_at): return false
+			if known.fact=="profile" and not profile(known.value,definitions): return false
+	if p.has("expectations"):
+		if not p.expectations is Dictionary or p.expectations.size()>96: return false
+		for key in p.expectations:
+			var estimate = p.expectations[key]
+			if not key is String or not record(estimate,["activity","place","other","condition"],["enjoyment","burden","familiarity","samples","updated_at"]): return false
+			var components = JSON.parse_string(key)
+			if not components is Array or components!=[estimate.activity,estimate.place,estimate.other,estimate.condition]: return false
+			if estimate.activity.is_empty() or not sites.has(estimate.place) or estimate.condition.is_empty(): return false
+			if not estimate.other.is_empty() and not definitions.has(estimate.other): return false
+			for dimension in ["enjoyment","burden","familiarity"]:
+				if not unit(estimate[dimension]): return false
+			if not whole(estimate.samples,1) or not whole(estimate.updated_at) or estimate.updated_at>elapsed: return false
+			if estimate.has("skill") and (not estimate.skill is String or estimate.skill.is_empty()): return false
+	if p.has("cognition_session"):
+		var session = p.cognition_session
+		if not session is Dictionary: return false
+		if not session.is_empty():
+			if not record(session,["kind","place"],["fatigue","quiet"]) or session.kind.is_empty() or not sites.has(session.place): return false
+			if not unit(session.fatigue) or not unit(session.quiet): return false
+	if p.has("cognition_plan"):
+		var plan = p.cognition_plan
+		if not plan is Dictionary: return false
+		if not plan.is_empty():
+			if not record(plan,["meeting","activity","title","partner","stage","origin"],["started"]): return false
+			if plan.meeting.is_empty() or plan.activity.is_empty() or not definitions.has(plan.partner) or plan.partner==p.id: return false
+			if plan.stage not in ["travel","execute","completed","interrupted"] or plan.origin not in ["resident","player"]: return false
+			if not whole(plan.started) or plan.started>elapsed or not strings(plan.get("steps"),16): return false
+			if plan.has("finished") and (not whole(plan.finished) or plan.finished<plan.started or plan.finished>elapsed): return false
+			if plan.has("reason") and not plan.reason is String: return false
+	if p.has("plan_history"):
+		if not p.plan_history is Array or p.plan_history.size()>24: return false
+		for entry in p.plan_history:
+			if not record(entry,["activity","partner"],["day","minute"]) or not entry.get("completed") is bool: return false
+			if entry.activity.is_empty() or not definitions.has(entry.partner) or entry.partner==p.id: return false
+			if not whole(entry.day) or not whole(entry.minute) or entry.minute>elapsed: return false
+	if p.has("next_plan_minute") and not whole(p.next_plan_minute): return false
+	return true
+
 static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> bool:
 	if not raw is Dictionary or not encoded(raw): return false
 	if not record(raw,["rng_state"],["schema","elapsed","start_minute","epoch_weekday","budget","meeting_serial","remainder"]): return false
-	if int(raw.schema) not in [1,2,3,4] or not raw.rng_state.is_valid_int(): return false
+	if not whole(raw.schema,1) or int(raw.schema) not in [1,2,3,4] or not raw.rng_state.is_valid_int(): return false
 	if raw.has("route_layout") and (not number(raw.route_layout) or raw.route_layout<0 or raw.route_layout!=int(raw.route_layout)): return false
+	if raw.has("world_seed") and not whole(raw.world_seed): return false
+	if raw.has("event_serial") and not whole(raw.event_serial): return false
 	if raw.elapsed<0 or raw.start_minute<0 or raw.start_minute>=1440 or raw.epoch_weekday<0 or raw.epoch_weekday>6: return false
 	if raw.budget<0 or raw.remainder<0 or raw.remainder>=1: return false
 	for key in ["people","events","meetings","benches"]:
@@ -45,6 +134,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 	var seen = {}
 	for p in raw.people:
 		if not record(p,["id","name","occupation","place","destination","action","reason","meeting_id","routine_id"],["age","remaining","fatigue","hunger","connection","quiet","goal_progress","travel_minutes","activity_minutes"]): return false
+		if not cognition(p,definitions,sites,raw.elapsed): return false
 		if not definitions.has(p.id) or seen.has(p.id): return false
 		seen[p.id] = true
 		if not sites.has(p.place) or not sites.has(p.destination): return false
@@ -91,18 +181,40 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 				if not record(habit,["kind","place","cue"],["strength"]) or not habit.get("days") is Array: return false
 				for day in habit.days:
 					if not number(day): return false
+	var event_ids = {}
 	for e in raw.events:
 		if not record(e,["clock","resident_id","title","text"],["minute","day"]): return false
+		if e.has("event_id"):
+			if not e.event_id is String or e.event_id.is_empty() or event_ids.has(e.event_id): return false
+			event_ids[e.event_id] = true
+			if e.event_id.begins_with("event_"):
+				var suffix: String = e.event_id.trim_prefix("event_")
+				if not suffix.is_valid_int() or int(suffix)<1: return false
+				if raw.has("event_serial") and int(suffix)>raw.event_serial: return false
+		for key in ["participants","witnesses"]:
+			if e.has(key):
+				if not strings(e[key],definitions.size()): return false
+				for witness in e[key]:
+					if not definitions.has(witness): return false
+		if e.has("fact") and not e.fact is String: return false
+		if e.get("fact","")=="profile" and not profile(e.get("value"),definitions): return false
+		if e.has("source") and not e.source is String: return false
+		if e.has("public") and not e.public is bool: return false
 	for bench in raw.benches:
 		if not vector(bench): return false
 	for meeting in raw.meetings:
 		if not record(meeting,["id","a","b","location","state"],["remaining","waited"]): return false
 		if not definitions.has(meeting.a) or not definitions.has(meeting.b): return false
 		if not meeting.get("spontaneous") is bool: return false
+		if meeting.has("autonomous") and not meeting.autonomous is bool: return false
 		if meeting.get("mode","")=="project":
 			if not record(meeting.get("project"),["key","title","place"],["cost"]): return false
 			if not vector(meeting.project.get("center")) or not sites.has(meeting.project.place): return false
 			if meeting.project.key not in ["radio","model","bread","photo","music","craft"] or not meeting.get("materials_ready") is bool: return false
+			for key in ["skill","interest","topic","teacher","learner"]:
+				if meeting.project.has(key) and not meeting.project[key] is String: return false
+			for key in ["teacher","learner"]:
+				if meeting.project.has(key) and not meeting.project[key].is_empty() and not definitions.has(meeting.project[key]): return false
 	if raw.has("social"):
 		var social = raw.social
 		if not social is Dictionary or not social.get("appointments") is Array or not social.get("offer") is Dictionary or not number(social.get("serial")): return false

@@ -1,0 +1,12 @@
+{
+  "artifact": "hourglass-of-life-v0.6.0-dev-macOS.zip",
+  "bytes": 92038940,
+  "sha256": "c15dc6b2dc25499ef03d8554305cbf113f7156739644708e14bb36bef60c60f9",
+  "bundle_version": "0.6.0",
+  "boot": "headless packaged executable, 30 frames",
+  "exit_code": 0,
+  "engine_errors": [],
+  "excluded_material_found": [],
+  "notarized": false,
+  "scope": "development build; visual play was checked in the project, not in this packaged headless boot"
+}

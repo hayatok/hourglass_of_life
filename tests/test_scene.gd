@@ -13,8 +13,8 @@ func expect(condition: bool, message: String) -> void:
 func capture(filename: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.5/integration"))
-	var path = "res://docs/verification/v0.5/integration/"+filename+".png"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://docs/verification/v0.6/integration"))
+	var path = "res://docs/verification/v0.6/integration/"+filename+".png"
 	root.get_texture().get_image().save_png(path)
 
 func run() -> void:
@@ -29,6 +29,9 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	var sim = root.get_node("Sim")
+	# Production starts use a fresh seed; fixtures keep controlled starting conditions.
+	sim.reset(71103)
+	await process_frame
 	sim.running = false
 	expect(main.get_node("Residents").get_child_count()==8,"Eight real 3D actors are instantiated")
 	expect(main.get_node("%Roster").get_child_count()==8,"The roster contains eight clickable residents")
@@ -47,6 +50,7 @@ func run() -> void:
 	main.get_node("%ResumeButton").pressed.emit()
 	expect(not sim.running,"Leaving the menu preserves an existing pause")
 	main.following = false
+	main.distance = 31
 	main.camera_target = Vector3.ZERO
 	main._select("aoi")
 	var reply = sim.propose_meeting("aoi","fumi")

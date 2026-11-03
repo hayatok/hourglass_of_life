@@ -202,38 +202,32 @@ func _end_support(help: Dictionary, completed: bool, reason: String) -> void:
 		sim._log(giver.id,"手助けの予定を見直した",reason+"。残りはまた相談することにした。")
 
 func project_definition(a: Dictionary, b: Dictionary) -> Dictionary:
-	var ids = [a.id,b.id]
-	if "aoi" in ids and "osamu" in ids:
-		return {"key":"radio","title":"ラジオの調整","place":"workshop","center":sim.SITES.workshop+Vector3(0,0,.1),"cost":4}
-	if "ryo" in ids and "rin" in ids:
-		return {"key":"model","title":"町の模型づくり","place":"home_ogawa","center":sim.SITES.home_ogawa+Vector3(1,0,.3),"cost":3}
-	if "nagisa" in ids and "maho" in ids:
-		return {"key":"bread","title":"季節のパンの試作","place":"bakery_cafe","center":sim.SITES.bakery_cafe+Vector3(.5,0,.3),"cost":2}
-	if "fumi" in ids:
-		return {"key":"photo","title":"町の写真を選ぶ時間","place":"garden","center":sim.SITES.garden+Vector3(1.8,0,.8),"cost":1}
-	if "ritsu" in ids:
-		return {"key":"music","title":"音楽の小さな録音","place":"square","center":Vector3(2.8,0,4.5),"cost":2}
-	return {"key":"craft","title":"好きなものの小さな制作","place":"square","center":Vector3(-2.8,0,6),"cost":1}
+	return sim.resident_activities.definition(a,b)
 
 func meeting_compatible(p: Dictionary, meeting: Dictionary) -> bool:
 	var routine = sim._routine_at(p)
 	if routine.is_empty(): return true
 	return meeting.get("mode","")=="project" and meeting.get("project",{}).get("key","")=="model" and routine.id in ["after_school_care","after_school_home"]
 
-func propose_project(first: String, second: String) -> Dictionary:
+func propose_project(first: String, second: String, preferred: String = "", autonomous: bool = false) -> Dictionary:
 	var a = sim.person(first)
 	var b = sim.person(second)
 	if not sim.life.is_alive(a) or not sim.life.is_alive(b) or first==second:
 		return {"status":"decline","text":"一緒に取り組む相手を選んでください"}
-	var project = project_definition(a,b)
+	var project: Dictionary = sim.resident_activities.definition(a,b,preferred)
+	if project.is_empty(): return {"status":"decline","text":"一緒に取り組めることを、まず相談したい。"}
 	var hypothetical = {"mode":"project","project":project}
 	for p in [a,b]:
 		if not p.meeting_id.is_empty() or not meeting_compatible(p,hypothetical):
 			return sim._reply(p,"counteroffer","今は外せない予定がある。%sは、二人の空いた時間に進めたい。"%project.title)
 		if p.fatigue>.8:
 			return sim._reply(p,"decline","今日は休んでからにしたい。好きなことも、気持ちに余裕があるときに取り組みたい。")
+		if p.hunger>.75 or (autonomous and p.action=="eat" and p.get("action_elapsed",0)<20):
+			return sim._reply(p,"defer","まず食事を済ませてから、落ち着いて取り組みたい。")
 		if p.quiet>.8 and sim.social.relation(p,(b if p.id==a.id else a).id).familiarity<.4:
 			return sim._reply(p,"counteroffer","まずは少し話して、お互いのやりたいことを知ってからにしたい。")
+		if autonomous and not _wants_to_join(p,b if p.id==a.id else a,project):
+			return sim._reply(p,"defer","今は自分の取り組みを進めたい。また余裕があるときに相談しよう。")
 	if household(a).cash<project.cost:
 		return sim._reply(a,"defer","一緒に取り組みたいけれど、材料の用意を先に考えたい。")
 	if not sim._begin_meeting(a,b,project.center,"project",false,45,0,"",project.place,project.key):
@@ -242,11 +236,22 @@ func propose_project(first: String, second: String) -> Dictionary:
 	meeting.mode = "project"
 	meeting.project = project
 	meeting.materials_ready = false
+	meeting.autonomous = autonomous
+	sim.planner.track(meeting)
 	a.action = "joint_work"
 	b.action = "joint_work"
 	a.reason = "%sさんと、%sを一緒に進めたい"%[b.name,project.title]
 	b.reason = "%sさんと、%sに取り組むことにした"%[a.name,project.title]
 	return sim._reply(a,"accept","%sさんと、%sを進めよう。まずは道具を広げる場所へ。"%[b.name,project.title])
+
+func _wants_to_join(p: Dictionary, other: Dictionary, project: Dictionary) -> bool:
+	var values: Dictionary = sim.definitions[p.id].values
+	var relation: Dictionary = sim.social.relation(p,other.id)
+	var interest := 1.0 if project.interest in p.interests else 0.0
+	if "learning" in p.interests and project.get("learner","")==p.id: interest = maxf(interest,.7)
+	var teaching: float = p.skills.get(project.skill,0)*(.4+.6*float(sim.definitions[p.id].traits.open_mindedness))
+	var willingness: float = .35*interest+.25*teaching+.4*float(relation.trust)+.25*float(values.care)+.15*float(values.belonging)-.3*p.quiet-.2*p.fatigue
+	return willingness>=.25
 
 func project_tick(meeting: Dictionary) -> bool:
 	if meeting.get("mode","")!="project": return true
@@ -273,12 +278,22 @@ func finish_project(meeting: Dictionary) -> void:
 	projects[key] = minf(1,projects[key]+.18)
 	for id in [meeting.a,meeting.b]:
 		var p = sim.person(id)
-		if (key=="radio" and id in ["aoi","osamu"] and p.goal_kind!="career") or (key=="model" and (id=="rin" or (id=="ryo" and p.goal_kind=="model"))) or (key=="bread" and id in ["nagisa","maho"]) or (key=="photo" and id=="fumi") or (key=="music" and id=="ritsu"):
+		var other: Dictionary = sim.person(meeting.b if id==meeting.a else meeting.a)
+		if _advances_goal(p,meeting.project):
 			p.goal_progress = minf(1,p.goal_progress+.18)
 		else:
 			p.private_project = minf(1,p.private_project+.18)
 		if before<1 and projects[key]>=1:
 			sim._remember(p,meeting.b if id==meeting.a else meeting.a,"二人で形にしたもの",meeting.project.title+"が、ひとつの形になった。次の誰かにも見せてみたい。","creation")
+		sim.cognition.experience(p,other.id,"joint_work",{"place":meeting.project.place},
+			{"enjoyment":.75 if p.quiet<.75 else .45,"burden":p.fatigue*.6,
+			"skill":meeting.project.get("skill",""),"practice":.025+maxf(0,float(other.skills.get(meeting.project.get("skill",""),0))-float(p.skills.get(meeting.project.get("skill",""),0)))*.04})
+
+func _advances_goal(p: Dictionary, project: Dictionary) -> bool:
+	if p.goal_kind=="career": return false
+	for word in project.get("goal_words",[]):
+		if word in p.current_goal: return true
+	return false
 
 func _settle_day() -> void:
 	for id in households:

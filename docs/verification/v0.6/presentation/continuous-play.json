@@ -1,0 +1,227 @@
+{
+	"activity": "music",
+	"before": {
+		"actors": [
+			{
+				"expectations": 0,
+				"id": "ritsu",
+				"knowledge": 0,
+				"level": 0.7,
+				"name": "三浦 律",
+				"plan": {
+					"activity": "music",
+					"meeting": "meeting_1",
+					"origin": "resident",
+					"partner": "aoi",
+					"stage": "travel",
+					"started": 70,
+					"steps": [
+						"相談する",
+						"合流する",
+						"一緒に取り組む",
+						"経験を振り返る"
+					],
+					"title": "音楽の小さな録音"
+				},
+				"position": [
+					10.0999994277954,
+					0.0,
+					7.96000003814697
+				],
+				"skill": "music"
+			},
+			{
+				"expectations": 1,
+				"id": "aoi",
+				"knowledge": 0,
+				"level": 0.0,
+				"name": "高瀬 葵",
+				"plan": {
+					"activity": "music",
+					"meeting": "meeting_1",
+					"origin": "resident",
+					"partner": "ritsu",
+					"stage": "travel",
+					"started": 70,
+					"steps": [
+						"相談する",
+						"合流する",
+						"一緒に取り組む",
+						"経験を振り返る"
+					],
+					"title": "音楽の小さな録音"
+				},
+				"position": [
+					10.48912525177,
+					0.0,
+					8.10000038146973
+				],
+				"skill": "music"
+			}
+		],
+		"clock": "14:10",
+		"minute": 70,
+		"state": "travel"
+	},
+	"completed": {
+		"actors": [
+			{
+				"expectations": 1,
+				"id": "ritsu",
+				"knowledge": 3,
+				"level": 0.7075,
+				"name": "三浦 律",
+				"plan": {
+					"activity": "music",
+					"finished": 153,
+					"meeting": "meeting_1",
+					"origin": "resident",
+					"partner": "aoi",
+					"stage": "completed",
+					"started": 70,
+					"steps": [
+						"相談する",
+						"合流する",
+						"一緒に取り組む",
+						"経験を振り返る"
+					],
+					"title": "音楽の小さな録音"
+				},
+				"position": [
+					2.45000004768372,
+					0.0,
+					5.15999984741211
+				],
+				"skill": "music"
+			},
+			{
+				"expectations": 2,
+				"id": "aoi",
+				"knowledge": 3,
+				"level": 0.03,
+				"name": "高瀬 葵",
+				"plan": {
+					"activity": "music",
+					"finished": 153,
+					"meeting": "meeting_1",
+					"origin": "resident",
+					"partner": "ritsu",
+					"stage": "completed",
+					"started": 70,
+					"steps": [
+						"相談する",
+						"合流する",
+						"一緒に取り組む",
+						"経験を振り返る"
+					],
+					"title": "音楽の小さな録音"
+				},
+				"position": [
+					3.14999985694885,
+					0.0,
+					5.15999984741211
+				],
+				"skill": "music"
+			}
+		],
+		"clock": "15:33",
+		"minute": 153,
+		"state": "completed"
+	},
+	"completed_project_found": true,
+	"elapsed": 154,
+	"engaged": {
+		"actors": [
+			{
+				"expectations": 0,
+				"id": "ritsu",
+				"knowledge": 0,
+				"level": 0.7,
+				"name": "三浦 律",
+				"plan": {
+					"activity": "music",
+					"meeting": "meeting_1",
+					"origin": "resident",
+					"partner": "aoi",
+					"stage": "execute",
+					"started": 70,
+					"steps": [
+						"相談する",
+						"合流する",
+						"一緒に取り組む",
+						"経験を振り返る"
+					],
+					"title": "音楽の小さな録音"
+				},
+				"position": [
+					2.45000004768372,
+					0.0,
+					5.15999984741211
+				],
+				"skill": "music"
+			},
+			{
+				"expectations": 1,
+				"id": "aoi",
+				"knowledge": 0,
+				"level": 0.0,
+				"name": "高瀬 葵",
+				"plan": {
+					"activity": "music",
+					"meeting": "meeting_1",
+					"origin": "resident",
+					"partner": "ritsu",
+					"stage": "execute",
+					"started": 70,
+					"steps": [
+						"相談する",
+						"合流する",
+						"一緒に取り組む",
+						"経験を振り返る"
+					],
+					"title": "音楽の小さな録音"
+				},
+				"position": [
+					3.14999985694885,
+					0.0,
+					5.15999984741211
+				],
+				"skill": "music"
+			}
+		],
+		"clock": "14:48",
+		"minute": 108,
+		"state": "engaged"
+	},
+	"finished": 153,
+	"meeting": "meeting_1",
+	"observation_controls": [
+		"select the initiator",
+		"follow",
+		"open person / relations / history"
+	],
+	"player_interventions": [],
+	"rendered": true,
+	"renderer": "macOS",
+	"screenshots": [
+		{
+			"file": "01-resident-initiated-work.png",
+			"minute": 108,
+			"stage": "engaged"
+		},
+		{
+			"file": "02-after-learning.png",
+			"minute": 154,
+			"stage": "after completion"
+		},
+		{
+			"file": "03-relations-and-history.png",
+			"minute": 154,
+			"stage": "relations / history"
+		}
+	],
+	"search_limit_minutes": 2880,
+	"seed": 71103,
+	"started": 70,
+	"title": "音楽の小さな録音"
+}

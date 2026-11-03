@@ -252,6 +252,7 @@ func _end_life(p: Dictionary) -> void:
 	p.path.clear()
 	for m in sim.meetings.duplicate():
 		if p.id not in [m.a,m.b]: continue
+		if sim.planner!=null: sim.planner.finish(m,false)
 		for id in [m.a,m.b]:
 			var participant = sim.person(id)
 			participant.meeting_id = ""

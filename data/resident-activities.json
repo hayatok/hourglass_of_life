@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "note": "共同活動の定義。適合度、所要時間、費用は架空のゲーム用の調整値。人物IDでは活動を選ばず、関心、技能、本人が知る相手の情報、使える実際の場所から候補を作る。",
+  "activities": [
+    {"key":"radio","title":"ラジオの調整","topic":"譲り受けたラジオの気になる箇所","place":"workshop","center_offset":[0,0,0.1],"cost":4,"duration":45,"skill":"repair","interest":"repair","goal_words":["ラジオ","修理","道具"],"selection_bonus":0.0},
+    {"key":"model","title":"町の模型づくり","topic":"作りかけの町の模型","place":"home_ogawa","center_offset":[1,0,0.3],"cost":3,"duration":45,"skill":"model","interest":"model","goal_words":["模型"],"selection_bonus":0.0},
+    {"key":"bread","title":"季節のパンの試作","topic":"季節のパンとお客さんの反応","place":"bakery_cafe","center_offset":[0.5,0,0.3],"cost":2,"duration":45,"skill":"baking","interest":"baking","goal_words":["パン","店"],"selection_bonus":0.0},
+    {"key":"photo","title":"町の写真を選ぶ時間","topic":"写真に残したい町の景色","place":"garden","center_offset":[1.8,0,0.8],"cost":1,"duration":45,"skill":"photography","interest":"photography","goal_words":["写真","景色"],"selection_bonus":0.2},
+    {"key":"music","title":"音楽の小さな録音","topic":"最近聴いた音楽と、ひとりで過ごす時間","place":"square","center_offset":[2.8,0,4.5],"cost":2,"duration":45,"skill":"music","interest":"music","goal_words":["音楽","曲","録音"],"selection_bonus":0.1},
+    {"key":"craft","title":"好きなものの小さな制作","topic":"最近の暮らしと、それぞれがやってみたいこと","place":"square","center_offset":[-2.8,0,6],"cost":1,"duration":45,"skill":"craft","interest":"craft","goal_words":["好きなもの","小さな制作","自分のためのもの"],"selection_bonus":0.0}
+  ]
+}
