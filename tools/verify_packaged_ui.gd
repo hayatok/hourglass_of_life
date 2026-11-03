@@ -17,6 +17,10 @@ func expect(ok: bool, description: String) -> void:
 	checks += 1
 	if not ok: failures.append(description);push_error(description)
 func run() -> void:
+	var text_server := TextServerManager.get_primary_interface()
+	var support_file: String = text_server.get_support_data_filename()
+	if not support_file.begins_with("res://"): support_file = "res://"+support_file
+	expect(ProjectSettings.get_setting("internationalization/locale/include_text_server_data",false) and FileAccess.file_exists(support_file),"The package includes the actual Japanese word/line-break support data, not just editor-side support")
 	main = load("res://game/scenes/main.tscn").instantiate();root.add_child(main)
 	await process_frame
 	var sim = root.get_node("Sim")
@@ -58,7 +62,7 @@ func run() -> void:
 	main.get_node("%CancelPlacement").pressed.emit()
 	expect(not main.placement and sim.benches==before_benches and sim.shared_budget==before_budget,"Cancelling the packaged placement leaves the starting benches unchanged")
 	var report := {"scope":"Actual exported PCK loaded by matching Godot; package/control smoke only. No save/load or fabricated town actions. Native app interaction is recorded separately.",
-		"checks":checks,"failures":failures,"models":models,"engine":Engine.get_version_info(),
+		"checks":checks,"failures":failures,"models":models,"text_server_support_file":support_file,"engine":Engine.get_version_info(),
 		"provenance":{"source_revision":revision,"scope":"Identification only; no SHA or hash affects the outcome or count."}}
 	if not output.is_empty():
 		var file := FileAccess.open(output,FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()

@@ -34,6 +34,11 @@ window/stretch/mode="canvas_items"
 
 theme/default_font_multichannel_signed_distance_field=true
 
+[internationalization]
+
+locale/fallback="ja"
+locale/include_text_server_data=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
