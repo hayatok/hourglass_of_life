@@ -9,6 +9,8 @@
 	"capabilities": {
 		"contract_errors": [],
 		"expression_mode": "TEXTURE_EYES",
+		"eye_charts": 2,
+		"eyelid_method": "compress",
 		"face_layout": "res://game/assets/models/haru/face-layout.json",
 		"facial_controls": [
 			"Blink",

@@ -11,6 +11,7 @@ enum ExpressionMode { BLEND_SHAPES, STATIC_ATLAS, TEXTURE_EYES }
 @export_file("*.json") var face_layout_path := ""
 const REQUIRED_CLIPS := ["eat","idle","rest","sit_talk","sleep","talk","walk","wave","work"]
 const FACE_CONTROLS := ["Blink","Smile","Sad","Tired","LookLeft","LookRight"]
+const MAX_EXTRA_EYE_CHARTS := 4
 const REQUIRED_BONES := ["root","pelvis","apron_back","apron_front","spine_01","spine_02","chest","clavicle.L","upper_arm.L","forearm.L","hand.L","finger0.L","finger1.L","finger2.L","finger3.L","finger4.L","clavicle.R","upper_arm.R","forearm.R","hand.R","finger0.R","finger1.R","finger2.R","finger3.R","finger4.R","neck","head","thigh.L","shin.L","foot.L","toe.L","thigh.R","shin.R","foot.R","toe.R"]
 var body_materials: Array[ShaderMaterial] = []
 var animator: AnimationPlayer
@@ -90,16 +91,31 @@ func _valid_pair(value: Variant, uv: bool) -> bool:
 func _texture_eye_errors() -> Array[String]:
 	var errors: Array[String] = []
 	if material_mode!=MaterialMode.TEXTURE_TOON: errors.append("texture eyes require texture toon material mode")
+	if face_layout.get("eyelid_method","compress") not in ["compress","occlusion"]: errors.append("unsupported texture-eye eyelid method")
 	var eyes = face_layout.get("eyes",{})
 	for side in ["left","right"]:
 		if not eyes is Dictionary or not eyes.get(side) is Dictionary:
 			errors.append("missing texture-eye layout for "+side);continue
-		var eye: Dictionary = eyes[side]
-		for key in ["center","skin_uv","axis_x","axis_y"]:
-			if not _valid_pair(eye.get(key),key in ["center","skin_uv"]): errors.append("invalid "+side+" texture-eye "+key)
-		if _valid_pair(eye.get("axis_x"),false) and _valid_pair(eye.get("axis_y"),false):
-			var x: Array = eye.axis_x;var y: Array = eye.axis_y
-			if absf(x[0]*y[1]-x[1]*y[0])<.00000001: errors.append("degenerate "+side+" texture-eye UV basis")
+		errors.append_array(_eye_chart_errors(eyes[side],side))
+	var extra = face_layout.get("additional_eye_patches",[])
+	if not extra is Array:
+		errors.append("additional eye charts must be an array")
+	elif extra.size()>MAX_EXTRA_EYE_CHARTS:
+		errors.append("too many additional eye charts")
+	else:
+		for index in extra.size():
+			if not extra[index] is Dictionary or extra[index].get("eye","") not in ["left","right"]:
+				errors.append("additional eye chart must identify its physical eye");continue
+			errors.append_array(_eye_chart_errors(extra[index],"additional %d"%index))
+	return errors
+
+func _eye_chart_errors(eye: Dictionary, label: String) -> Array[String]:
+	var errors: Array[String] = []
+	for key in ["center","skin_uv","axis_x","axis_y"]:
+		if not _valid_pair(eye.get(key),key in ["center","skin_uv"]): errors.append("invalid "+label+" texture-eye "+key)
+	if _valid_pair(eye.get("axis_x"),false) and _valid_pair(eye.get("axis_y"),false):
+		var x: Array = eye.axis_x;var y: Array = eye.axis_y
+		if absf(x[0]*y[1]-x[1]*y[0])<.00000001: errors.append("degenerate "+label+" texture-eye UV basis")
 	return errors
 
 func _configure_texture_eyes(material: ShaderMaterial) -> void:
@@ -110,6 +126,16 @@ func _configure_texture_eyes(material: ShaderMaterial) -> void:
 		for pair in [["center",""],["axis_x","_x"],["axis_y","_y"],["skin_uv","_skin"]]:
 			var value: Array = eye[pair[0]]
 			material.set_shader_parameter(prefix+pair[1],Vector2(value[0],value[1]))
+	var extra: Array = face_layout.get("additional_eye_patches",[])
+	material.set_shader_parameter("extra_eye_count",extra.size())
+	material.set_shader_parameter("eyelid_occlusion",face_layout.get("eyelid_method","compress")=="occlusion")
+	for pair in [["center","extra_eye_center"],["axis_x","extra_eye_x"],["axis_y","extra_eye_y"],["skin_uv","extra_eye_skin"]]:
+		var values := PackedVector2Array()
+		for chart in extra:
+			var value: Array = chart[pair[0]]
+			values.append(Vector2(value[0],value[1]))
+		while values.size()<MAX_EXTRA_EYE_CHARTS: values.append(Vector2.ZERO)
+		material.set_shader_parameter(pair[1],values)
 	material.set_shader_parameter("blink",0.0)
 	material.set_shader_parameter("tired_eyes",0.0)
 
@@ -154,7 +180,7 @@ func capabilities() -> Dictionary:
 			if face.find_blend_shape_by_name(control)>=0: controls.append(control)
 	elif expression_mode==ExpressionMode.TEXTURE_EYES and _texture_eye_errors().is_empty():
 		controls.assign(["Blink","TiredEyes"])
-	return {"source_model":source,"material_mode":MaterialMode.keys()[material_mode],"expression_mode":ExpressionMode.keys()[expression_mode],"facial_controls":controls,"face_layout":face_layout_path,"hair_aging":uses_palette_swatches() and hair_cells!=Vector3i(-1,-1,-1),"contract_errors":import_contract_errors()}
+	return {"source_model":source,"material_mode":MaterialMode.keys()[material_mode],"expression_mode":ExpressionMode.keys()[expression_mode],"facial_controls":controls,"face_layout":face_layout_path,"eye_charts":2+face_layout.get("additional_eye_patches",[]).size() if expression_mode==ExpressionMode.TEXTURE_EYES and _texture_eye_errors().is_empty() else 0,"eyelid_method":face_layout.get("eyelid_method","compress") if expression_mode==ExpressionMode.TEXTURE_EYES else "","hair_aging":uses_palette_swatches() and hair_cells!=Vector3i(-1,-1,-1),"contract_errors":import_contract_errors()}
 
 func _lod_key(part_name: String) -> String:
 	for level in range(3): part_name = part_name.replace("_LOD%d"%level,"")

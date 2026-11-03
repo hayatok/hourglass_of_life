@@ -2,6 +2,8 @@
 	"capabilities": {
 		"contract_errors": [],
 		"expression_mode": "TEXTURE_EYES",
+		"eye_charts": 2,
+		"eyelid_method": "compress",
 		"face_layout": "res://game/assets/models/haru/face-layout.json",
 		"facial_controls": [
 			"Blink",
@@ -864,22 +866,22 @@
 				"head": {
 					"__vector3": [
 						-7.20684862136841,
-						1.53699040412903,
-						-12.0394458770752
+						1.53699028491974,
+						-12.0394983291626
 					]
 				},
 				"head_forward": {
 					"__vector3": [
-						0.00010112678137375,
-						-0.00231350120157003,
-						-0.999997317790985
+						0.000110323380795307,
+						-0.0027451238129288,
+						-0.999996244907379
 					]
 				},
 				"mouth": {
 					"__vector3": [
-						-7.20590782165527,
-						1.4497526884079,
-						-12.1442441940308
+						-7.20590686798096,
+						1.44970726966858,
+						-12.1442584991455
 					]
 				},
 				"pelvis": {
@@ -1458,22 +1460,22 @@
 				"head": {
 					"__vector3": [
 						0.349999994039536,
-						1.52574253082275,
-						-7.08716821670532
+						1.52508175373077,
+						-7.08990287780762
 					]
 				},
 				"head_forward": {
 					"__vector3": [
-						-0.000000128219710404665,
-						-0.223477989435196,
-						-0.97470897436142
+						-0.000000123229881410225,
+						-0.246266439557076,
+						-0.969202160835266
 					]
 				},
 				"mouth": {
 					"__vector3": [
 						0.349999994039536,
-						1.41747772693634,
-						-7.1700701713562
+						1.41490316390991,
+						-7.17024374008179
 					]
 				},
 				"pelvis": {
@@ -1526,7 +1528,7 @@
 			]
 		},
 		"saved_minute": 112,
-		"test_save_path": "user://test-haru-jrpg-gameplay-49631.json"
+		"test_save_path": "user://test-haru-jrpg-gameplay-53523.json"
 	},
 	"scope": "Real 12-person town, natural seed-711 timeline. Camera/person selection and fixed-step rendering do not replace simulation actions. Save replay is recorded as a separate branch.",
 	"screenshots": [],
@@ -1925,10 +1927,10 @@
 		"res://game/assets/models/haru/animation-contract.json": "1256ac20a1b682a4acb9be9498b0710bffeb5af3fe1a3a051f2959c45a098828",
 		"res://game/assets/models/haru/asset-manifest.json": "98069241978fbf5b463ed6e7d263d0820ddfe919f741dbadb3e156063ed75bc7",
 		"res://game/assets/models/haru/face-layout.json": "eb71e54866e3c9c275a8f18155a39f5be3f19e88ef92532c1bf5ae3af2e0b925",
-		"res://game/assets/models/haru/haru_texture_eyes.gdshader": "4b826e9c238f914682e845c325af86bb5b6486a92a1df24fcc41c55d0a26ccc2",
+		"res://game/assets/models/haru/haru_texture_eyes.gdshader": "673d6b1e81da9706d7c4fac7e418ce06b4a56f464d34557d803a5c8132dfc38d",
 		"res://game/assets/ui/portraits/haru.png": "83d225aa6a9c557cdab7d255c16d491bfaec99376f90b8cc69a0ca1cf0a7d115",
 		"res://game/scenes/characters/haru.tscn": "47b122e927bcf0a2c1b0dfe681de9b02d5794b6f9f861b07ae8a82ab29f37c2d",
-		"res://game/scripts/jrpg_resident_model.gd": "033f047a04a54ebcd4353a9989054e7176b3aaab37f6c88229872dedafb70667",
+		"res://game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
 		"res://game/scripts/main.gd": "a2b9e9e5729d087de8ac235065833e0d0cec079be0cc0efdbc6025d5638b8376",
 		"res://game/scripts/resident_avatar.gd": "b29cec9435ba86b8e7f03a5a668d738c4f084743b70e6b9ae518cdb956df272d",
 		"res://game/scripts/resident_contacts.gd": "daefa8107fbf779b5cea45ef7887ec9a1215c3f7a29891957cf86b2973a6b894",
@@ -1936,5 +1938,5 @@
 		"res://tests/test_haru_jrpg_gameplay.gd": "dc113d4531aed91f014c3fdf3640fd502da481d86496f4fe716deab6f63adc54"
 	},
 	"status": "complete",
-	"wall_seconds": 3.962
+	"wall_seconds": 3.631
 }

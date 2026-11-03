@@ -1,0 +1,19 @@
+{
+  "all_pixel_files_identical": true,
+  "accepted_sha256": {
+    "front-closed.png": "200d9acee5628f8261c210c464fc73e7f562216627f16fd852fda5ade4ba78d9",
+    "front-half.png": "79aceae66d13e8c88b1312ea550a65a80299601cb195e52b5e74af1a285c78f2",
+    "threequarter-half.png": "8a1ae6b702a28540c432d79f52462c20684b8c1fe59fdc832b925122f11ddaef",
+    "threequarter-closed.png": "9ad2e19bf340d4dcc7f6868e7a544e0f7d26f941850fadce2a121ca396cae602",
+    "front-open.png": "9ac179575d91aff39d43965bca4338ae5f51c1d6f49f70a1636abf884d903d59",
+    "threequarter-open.png": "e6e029c0d2faef3880b7da5ff0f6bf70139ecc37a6e9fba317d197c0347fd458"
+  },
+  "current_sha256": {
+    "front-closed.png": "200d9acee5628f8261c210c464fc73e7f562216627f16fd852fda5ade4ba78d9",
+    "front-half.png": "79aceae66d13e8c88b1312ea550a65a80299601cb195e52b5e74af1a285c78f2",
+    "threequarter-half.png": "8a1ae6b702a28540c432d79f52462c20684b8c1fe59fdc832b925122f11ddaef",
+    "threequarter-closed.png": "9ad2e19bf340d4dcc7f6868e7a544e0f7d26f941850fadce2a121ca396cae602",
+    "front-open.png": "9ac179575d91aff39d43965bca4338ae5f51c1d6f49f70a1636abf884d903d59",
+    "threequarter-open.png": "e6e029c0d2faef3880b7da5ff0f6bf70139ecc37a6e9fba317d197c0347fd458"
+  }
+}

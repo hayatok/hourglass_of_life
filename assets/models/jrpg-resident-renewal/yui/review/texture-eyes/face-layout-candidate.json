@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "implementation": "UV eye shader candidate: Blink and TiredEyes only; no facial morph or mouth control.",
+  "resident": "yui",
+  "source_raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+  "source_basecolor_jpeg_sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc",
+  "calibration": "Each eye independently annotated on this raw atlas, then front-ray barycentric UV calibrated; no Haru coordinates reused.",
+  "eyes": {
+    "left": {
+      "center": [
+        0.9619140625,
+        0.7958984375
+      ],
+      "axis_x": [
+        0.015130551866816182,
+        -0.0026603168117485263
+      ],
+      "axis_y": [
+        -0.0026237380485662942,
+        -0.015287450356189706
+      ],
+      "skin_uv": [
+        0.9829203156440398,
+        0.7949541948953245
+      ]
+    },
+    "right": {
+      "center": [
+        0.6699218749999999,
+        0.5263671874999999
+      ],
+      "axis_x": [
+        0.015525267112626567,
+        -0.009866543443729548
+      ],
+      "axis_y": [
+        -0.00861330433543136,
+        -0.009819608273100487
+      ],
+      "skin_uv": [
+        0.6549921883074991,
+        0.5415793099392118
+      ]
+    }
+  },
+  "eyelid_method": "compress"
+}

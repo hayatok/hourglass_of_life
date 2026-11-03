@@ -1,0 +1,49 @@
+{
+	"checks": 37,
+	"failures": [],
+	"profiles": {
+		"saki": {
+			"contract_errors": [],
+			"expression_mode": "TEXTURE_EYES",
+			"eye_charts": 3,
+			"eyelid_method": "occlusion",
+			"face_layout": "res://game/assets/models/haru/face-layout.json",
+			"facial_controls": [
+				"Blink",
+				"TiredEyes"
+			],
+			"hair_aging": false,
+			"material_mode": "TEXTURE_TOON",
+			"source_model": "res://game/assets/models/haru/CH_Haru.glb"
+		},
+		"tomo": {
+			"contract_errors": [],
+			"expression_mode": "TEXTURE_EYES",
+			"eye_charts": 2,
+			"eyelid_method": "compress",
+			"face_layout": "res://game/assets/models/haru/face-layout.json",
+			"facial_controls": [
+				"Blink",
+				"TiredEyes"
+			],
+			"hair_aging": false,
+			"material_mode": "TEXTURE_TOON",
+			"source_model": "res://game/assets/models/haru/CH_Haru.glb"
+		},
+		"yui": {
+			"contract_errors": [],
+			"expression_mode": "TEXTURE_EYES",
+			"eye_charts": 2,
+			"eyelid_method": "compress",
+			"face_layout": "res://game/assets/models/haru/face-layout.json",
+			"facial_controls": [
+				"Blink",
+				"TiredEyes"
+			],
+			"hair_aging": false,
+			"material_mode": "TEXTURE_TOON",
+			"source_model": "res://game/assets/models/haru/CH_Haru.glb"
+		}
+	},
+	"scope": "Layout validation and actual ShaderMaterial upload; trial calibrations are not attached to Haru geometry."
+}

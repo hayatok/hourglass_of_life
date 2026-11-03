@@ -1,0 +1,74 @@
+{
+  "stable_commit": "74d4c6c",
+  "tracked_artifact_comparison": {
+    "all_identical": false,
+    "files": {
+      "blink-lod1.png": {
+        "stable_sha256": "8bf3622b759eafb93f65434c1c29cb9cdfd955605c47b92b363fba54eca76b09",
+        "current_sha256": "e0705c1a21f37d1682175d30a3437d3c259598975c8b83c7188a3bcc4b50039a",
+        "identical": false
+      },
+      "blink-lod0.png": {
+        "stable_sha256": "111b236e530e30f17b74dea9dfa5c90743f8064fb5d5e1bc6200428eb3181c13",
+        "current_sha256": "111b236e530e30f17b74dea9dfa5c90743f8064fb5d5e1bc6200428eb3181c13",
+        "identical": true
+      },
+      "blink-lod2.png": {
+        "stable_sha256": "e4ca96335a3d918e21d1b0bb5949a97eac9d33feab4a5ca4aaf9d54d232f9419",
+        "current_sha256": "62e4070302bfb530dabfb963ee7b4fa385373b6ebb6941a3abcf433a26ea9c4e",
+        "identical": false
+      },
+      "sleep.png": {
+        "stable_sha256": "6739a46aa536d2156fc9adcc1c3fb4176bda7bda54bcacd851748093b0253bd6",
+        "current_sha256": "6739a46aa536d2156fc9adcc1c3fb4176bda7bda54bcacd851748093b0253bd6",
+        "identical": true
+      },
+      "tired-lod0.png": {
+        "stable_sha256": "7f95796adece0fbe3dabdbe1d4705d10a6bc2cb4a493fc64c01ebd8ab43633e7",
+        "current_sha256": "7f95796adece0fbe3dabdbe1d4705d10a6bc2cb4a493fc64c01ebd8ab43633e7",
+        "identical": true
+      },
+      "open-lod0.png": {
+        "stable_sha256": "4d9cea284191438039227564f19eb5c30e0320e2fe6c32ccc8663167d8cca704",
+        "current_sha256": "4d9cea284191438039227564f19eb5c30e0320e2fe6c32ccc8663167d8cca704",
+        "identical": true
+      }
+    }
+  },
+  "same_r3_assets_old_shader_reference": {
+    "all_identical": true,
+    "files": {
+      "blink-lod1.png": {
+        "same_pixels_file": true,
+        "old_shader_sha256": "e0705c1a21f37d1682175d30a3437d3c259598975c8b83c7188a3bcc4b50039a",
+        "new_shader_sha256": "e0705c1a21f37d1682175d30a3437d3c259598975c8b83c7188a3bcc4b50039a"
+      },
+      "blink-lod0.png": {
+        "same_pixels_file": true,
+        "old_shader_sha256": "111b236e530e30f17b74dea9dfa5c90743f8064fb5d5e1bc6200428eb3181c13",
+        "new_shader_sha256": "111b236e530e30f17b74dea9dfa5c90743f8064fb5d5e1bc6200428eb3181c13"
+      },
+      "blink-lod2.png": {
+        "same_pixels_file": true,
+        "old_shader_sha256": "62e4070302bfb530dabfb963ee7b4fa385373b6ebb6941a3abcf433a26ea9c4e",
+        "new_shader_sha256": "62e4070302bfb530dabfb963ee7b4fa385373b6ebb6941a3abcf433a26ea9c4e"
+      },
+      "sleep.png": {
+        "same_pixels_file": true,
+        "old_shader_sha256": "6739a46aa536d2156fc9adcc1c3fb4176bda7bda54bcacd851748093b0253bd6",
+        "new_shader_sha256": "6739a46aa536d2156fc9adcc1c3fb4176bda7bda54bcacd851748093b0253bd6"
+      },
+      "tired-lod0.png": {
+        "same_pixels_file": true,
+        "old_shader_sha256": "7f95796adece0fbe3dabdbe1d4705d10a6bc2cb4a493fc64c01ebd8ab43633e7",
+        "new_shader_sha256": "7f95796adece0fbe3dabdbe1d4705d10a6bc2cb4a493fc64c01ebd8ab43633e7"
+      },
+      "open-lod0.png": {
+        "same_pixels_file": true,
+        "old_shader_sha256": "4d9cea284191438039227564f19eb5c30e0320e2fe6c32ccc8663167d8cca704",
+        "new_shader_sha256": "4d9cea284191438039227564f19eb5c30e0320e2fe6c32ccc8663167d8cca704"
+      }
+    }
+  },
+  "note": "The shader-only comparison holds the current r3 geometry, pose, camera and lights fixed. Stable-checkpoint distance-LOD PNGs differ from current renders and are recorded separately."
+}

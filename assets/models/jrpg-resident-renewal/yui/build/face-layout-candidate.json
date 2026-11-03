@@ -1,0 +1,53 @@
+{
+  "calibration": "Each eye independently annotated on this raw atlas, then front-ray barycentric UV calibrated; no Haru coordinates reused.",
+  "eyelid_method": "compress",
+  "eyes": {
+    "left": {
+      "axis_x": [
+        0.0151305518668162,
+        -0.00266031681174852
+      ],
+      "axis_y": [
+        -0.00262373804856629,
+        -0.0152874503561897
+      ],
+      "center": [
+        0.9619140625,
+        0.7958984375
+      ],
+      "skin_uv": [
+        0.98292031564404,
+        0.794954194895324
+      ]
+    },
+    "right": {
+      "axis_x": [
+        0.0155252671126266,
+        -0.00986654344372954
+      ],
+      "axis_y": [
+        -0.00861330433543136,
+        -0.00981960827310048
+      ],
+      "center": [
+        0.669921875,
+        0.5263671875
+      ],
+      "skin_uv": [
+        0.654992188307499,
+        0.541579309939212
+      ]
+    }
+  },
+  "implementation": "UV eye shader candidate: Blink and TiredEyes only; no facial morph or mouth control.",
+  "resident": "yui",
+  "schema_version": 1.0,
+  "source_basecolor_jpeg_sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc",
+  "source_raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+  "source_basecolor_pixel_sha256": "a79e3deaebccd41739fc13a32e54bac9b3724c0d848ea80dfffe8f30831c53f4",
+  "candidate_controls": [
+    "Blink",
+    "TiredEyes"
+  ],
+  "production_status": "Raw GPU calibration candidate; rig/LOD/actor integration pending."
+}

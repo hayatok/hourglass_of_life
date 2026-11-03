@@ -1,0 +1,28 @@
+{
+	"blink_changed_pixels": 6645,
+	"blink_difference_bounds": [
+		224,
+		264,
+		191,
+		80
+	],
+	"capabilities": {
+		"contract_errors": [],
+		"expression_mode": "TEXTURE_EYES",
+		"eye_charts": 2,
+		"eyelid_method": "compress",
+		"face_layout": "res://game/assets/models/haru/face-layout.json",
+		"facial_controls": [
+			"Blink",
+			"TiredEyes"
+		],
+		"hair_aging": false,
+		"material_mode": "TEXTURE_TOON",
+		"source_model": "res://game/assets/models/haru/CH_Haru.glb"
+	},
+	"checks": 31,
+	"failed": [],
+	"mouth_smile_sad_look_controls_supported": false,
+	"purpose": "Actual rigged resource/UV-eye GPU stage, not gameplay",
+	"source_atlas_unchanged": true
+}

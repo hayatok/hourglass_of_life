@@ -1,0 +1,78 @@
+{
+  "status": "Eye runtime/profile source freeze; new body scene/appearance connections await rig output.",
+  "cast": {
+    "saki": {
+      "raw_sha256": "f8b647466b582c4eb38bc318a287e47ced5231208f41ae3e157e3ad18bb7a8bd",
+      "source_atlas_pixel_sha256": "079cfdcec85688314bbd1ac497cd5664cd3435720d3b4817ab30d58e43dcf64f",
+      "eye_charts": 3,
+      "eyelid_method": "occlusion",
+      "checks": 18,
+      "failures": [],
+      "accepted_png_files_identical": true,
+      "candidate_profile": "assets/models/jrpg-resident-renewal/saki/build/face-layout-candidate.json",
+      "frames": [
+        "front-open.png",
+        "front-closed.png",
+        "front-half.png",
+        "threequarter-open.png",
+        "threequarter-closed.png",
+        "threequarter-half.png"
+      ]
+    },
+    "tomo": {
+      "raw_sha256": "dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65",
+      "source_atlas_pixel_sha256": "b83863b788f42d7fdc4fdaaeeb8c0b30d7bb5bd980fcbef575cf2ba16029c9da",
+      "eye_charts": 2,
+      "eyelid_method": "compress",
+      "checks": 18,
+      "failures": [],
+      "accepted_png_files_identical": true,
+      "candidate_profile": "assets/models/jrpg-resident-renewal/tomo/build/face-layout-candidate.json",
+      "frames": [
+        "front-open.png",
+        "front-closed.png",
+        "front-half.png",
+        "threequarter-open.png",
+        "threequarter-closed.png",
+        "threequarter-half.png"
+      ]
+    },
+    "yui": {
+      "raw_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+      "source_atlas_pixel_sha256": "a79e3deaebccd41739fc13a32e54bac9b3724c0d848ea80dfffe8f30831c53f4",
+      "eye_charts": 2,
+      "eyelid_method": "compress",
+      "checks": 18,
+      "failures": [],
+      "accepted_png_files_identical": true,
+      "candidate_profile": "assets/models/jrpg-resident-renewal/yui/build/face-layout-candidate.json",
+      "frames": [
+        "front-open.png",
+        "front-closed.png",
+        "front-half.png",
+        "threequarter-open.png",
+        "threequarter-closed.png",
+        "threequarter-half.png"
+      ]
+    }
+  },
+  "gpu_eye_checks": 54,
+  "optional_chart_contract": {
+    "checks": 37,
+    "failures": [],
+    "file": "assets/models/jrpg-resident-renewal/saki/review/texture-eyes/optional-chart-contract.json"
+  },
+  "haru_regression": {
+    "headless_gameplay": 42,
+    "gpu_gameplay": 43,
+    "eye_lod_gpu": 31,
+    "same_r3_geometry_old_shader_reference_all_six_pngs_identical": true,
+    "file": "assets/models/jrpg-resident-renewal/saki/review/texture-eyes/haru-image-regression.json"
+  },
+  "production_source_sha256": {
+    "game/scripts/jrpg_resident_model.gd": "f2915b4905bed5f9a161303b5971cf07df47b185cdd10d44f683360860a4523d",
+    "game/assets/models/haru/haru_texture_eyes.gdshader": "673d6b1e81da9706d7c4fac7e418ce06b4a56f464d34557d803a5c8132dfc38d",
+    "game/assets/models/haru/CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf"
+  },
+  "production_body_glbs_scenes_appearance_changed": false
+}

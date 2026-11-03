@@ -1,0 +1,27 @@
+{
+  "status": "Root reviewed and accepted these static raw-eye calibration views; rig/LOD/actual actor gates remain pending.",
+  "current_runtime_support": true,
+  "controls": [
+    "Blink",
+    "TiredEyes"
+  ],
+  "method": "occlusion",
+  "eye_charts": 3,
+  "key_findings": [
+    "The outer/lower part of the left eye crosses an internal UV seam.",
+    "One additional affine chart plus non-resampling eyelid occlusion removes the residual white and black compression fragments."
+  ],
+  "verified": [
+    "Own raw UV/3D eye landmarks, not copied from Haru.",
+    "Front and -30-degree open/closed/half GPU views.",
+    "Original raw GLB and decoded atlas pixels unchanged.",
+    "Generic runtime reproduces all six accepted PNG files byte-for-byte."
+  ],
+  "limits": [
+    "Static source geometry only; production rig/LOD, sleep driver, head gaze and actual town validation are still required.",
+    "Half display uses Blink=.5 plus TiredEyes=.7.",
+    "No mouth/Smile/iris-look or facial blend shapes were added."
+  ],
+  "reproduce": "python3 assets/models/jrpg-resident-renewal/saki/build/run_texture_eyes.py saki",
+  "profile": "assets/models/jrpg-resident-renewal/saki/build/face-layout-candidate.json"
+}

@@ -1,0 +1,15 @@
+{
+  "iris_pixels": [
+    [
+      1372,
+      1078
+    ],
+    [
+      1970,
+      1630
+    ]
+  ],
+  "radius_x_fraction": 0.34,
+  "radius_y_fraction": 0.28,
+  "annotation": "Manual iris-centre picks from this resident raw embedded 2048px atlas; calibrated to geometry rays before GPU review."
+}

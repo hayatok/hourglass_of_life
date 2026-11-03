@@ -1,0 +1,148 @@
+{
+	"checks": 18,
+	"differences": {
+		"front-closed": {
+			"bounds": [
+				279,
+				401,
+				249,
+				79
+			],
+			"pixels": 7742
+		},
+		"front-half": {
+			"bounds": [
+				279,
+				401,
+				249,
+				88
+			],
+			"pixels": 7995
+		},
+		"threequarter-closed": {
+			"bounds": [
+				233,
+				399,
+				215,
+				81
+			],
+			"pixels": 6807
+		},
+		"threequarter-half": {
+			"bounds": [
+				233,
+				399,
+				215,
+				90
+			],
+			"pixels": 7037
+		}
+	},
+	"failures": [],
+	"layout": {
+		"calibration": "Each eye independently annotated on this raw atlas, then front-ray barycentric UV calibrated; no Haru coordinates reused.",
+		"eyelid_method": "compress",
+		"eyes": {
+			"left": {
+				"axis_x": [
+					0.00569203213310177,
+					-0.0160350901197615
+				],
+				"axis_y": [
+					-0.0129231319756913,
+					-0.00627733099858996
+				],
+				"center": [
+					0.13037109375,
+					0.10009765625
+				],
+				"skin_uv": [
+					0.139310578566309,
+					0.080213877318383
+				]
+			},
+			"right": {
+				"axis_x": [
+					-0.0141118978179805,
+					0.0117861274244724
+				],
+				"axis_y": [
+					0.0106084504954154,
+					0.0106565292891792
+				],
+				"center": [
+					0.43701171875,
+					0.95361328125
+				],
+				"skin_uv": [
+					0.449451916073648,
+					0.933990086617257
+				]
+			}
+		},
+		"implementation": "UV eye shader candidate: Blink and TiredEyes only; no facial morph or mouth control.",
+		"resident": "tomo",
+		"schema_version": 1.0,
+		"source_basecolor_jpeg_sha256": "3b2fd274123578d7a56ca7e659390973a31d106f47ef750ef578dc90bb6c6d0a",
+		"source_raw_sha256": "dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65"
+	},
+	"limitations": [
+		"Per-character raw UV calibration; production rig/LOD/actor validation remains pending.",
+		"Half uses Blink=.5 and TiredEyes=.7 for inspection; it is not a claim that the fatigue driver alone closes eyes halfway.",
+		"No mouth/Smile/iris-gaze controls or source image edits."
+	],
+	"passed": true,
+	"purpose": "Static raw-mesh GPU eye-layout candidate; not a rig or gameplay test",
+	"renders": [
+		{
+			"blink": 0.0,
+			"file": "front-open.png",
+			"height": 800,
+			"tired_eyes": 0.0,
+			"width": 800,
+			"yaw_degrees": 0.0
+		},
+		{
+			"blink": 1.0,
+			"file": "front-closed.png",
+			"height": 800,
+			"tired_eyes": 0.0,
+			"width": 800,
+			"yaw_degrees": 0.0
+		},
+		{
+			"blink": 0.5,
+			"file": "front-half.png",
+			"height": 800,
+			"tired_eyes": 0.7,
+			"width": 800,
+			"yaw_degrees": 0.0
+		},
+		{
+			"blink": 0.0,
+			"file": "threequarter-open.png",
+			"height": 800,
+			"tired_eyes": 0.0,
+			"width": 800,
+			"yaw_degrees": -30.0
+		},
+		{
+			"blink": 1.0,
+			"file": "threequarter-closed.png",
+			"height": 800,
+			"tired_eyes": 0.0,
+			"width": 800,
+			"yaw_degrees": -30.0
+		},
+		{
+			"blink": 0.5,
+			"file": "threequarter-half.png",
+			"height": 800,
+			"tired_eyes": 0.7,
+			"width": 800,
+			"yaw_degrees": -30.0
+		}
+	],
+	"resident": "tomo",
+	"source_atlas_pixel_sha256": "b83863b788f42d7fdc4fdaaeeb8c0b30d7bb5bd980fcbef575cf2ba16029c9da"
+}

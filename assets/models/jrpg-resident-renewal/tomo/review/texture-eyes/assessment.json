@@ -1,0 +1,26 @@
+{
+  "status": "Root reviewed and accepted these static raw-eye calibration views; rig/LOD/actual actor gates remain pending.",
+  "current_runtime_support": true,
+  "controls": [
+    "Blink",
+    "TiredEyes"
+  ],
+  "method": "compress",
+  "eye_charts": 2,
+  "key_findings": [
+    "Each eye fits one UV chart; the existing compression method is retained."
+  ],
+  "verified": [
+    "Own raw UV/3D eye landmarks, not copied from Haru.",
+    "Front and -30-degree open/closed/half GPU views.",
+    "Original raw GLB and decoded atlas pixels unchanged.",
+    "Generic runtime reproduces all six accepted PNG files byte-for-byte."
+  ],
+  "limits": [
+    "Static source geometry only; production rig/LOD, sleep driver, head gaze and actual town validation are still required.",
+    "Half display uses Blink=.5 plus TiredEyes=.7.",
+    "No mouth/Smile/iris-look or facial blend shapes were added."
+  ],
+  "reproduce": "python3 assets/models/jrpg-resident-renewal/saki/build/run_texture_eyes.py tomo",
+  "profile": "assets/models/jrpg-resident-renewal/tomo/build/face-layout-candidate.json"
+}
