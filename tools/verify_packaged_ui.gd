@@ -38,6 +38,9 @@ func run() -> void:
 		for level in [0,1,2,0]: lods = model.set_lod(level) and lods
 		expect(lods,id+": every packaged distance LOD swaps with its compatible skin")
 		models[id] = capability
+		var contacts = main.avatars[id].contacts
+		var grip: Dictionary = contacts.interaction_motion._play_grip_solution(contacts,"L")
+		expect(grip.get("supported",false) and grip.get("pads",{}).size()==2,id+": packaged finger measurements bind to the real current rig and solve the physical disc grip")
 	var portraits := true
 	for button in main.roster.get_children(): portraits = portraits and button.icon!=null
 	expect(portraits,"All twelve portrait choices work, including the original atlas and the four new portraits")
