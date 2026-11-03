@@ -1,0 +1,101 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/PR_LifeFurniture_forms.blend",
+  "mode": "clay",
+  "engine": "workbench",
+  "bbox_min": [
+    -0.8753337860107422,
+    -0.3100000023841858,
+    -0.0015619512414559722
+  ],
+  "bbox_max": [
+    0.8753337860107422,
+    0.3336583077907562,
+    1.0248082876205444
+  ],
+  "size_xyz": [
+    1.7506675720214844,
+    0.6436582803726196,
+    1.0263702869415283
+  ],
+  "objects": [
+    "PR_Bench_Arm",
+    "PR_Bench_Arm.001",
+    "PR_Bench_BackPost",
+    "PR_Bench_BackPost.001",
+    "PR_Bench_BackSlat00",
+    "PR_Bench_BackSlat01",
+    "PR_Bench_BackSlat02",
+    "PR_Bench_Bolt",
+    "PR_Bench_Bolt.001",
+    "PR_Bench_Bolt.002",
+    "PR_Bench_Bolt.003",
+    "PR_Bench_Bolt.004",
+    "PR_Bench_Bolt.005",
+    "PR_Bench_Leg",
+    "PR_Bench_Leg.001",
+    "PR_Bench_Leg.002",
+    "PR_Bench_Leg.003",
+    "PR_Bench_SeatRail",
+    "PR_Bench_SeatRail.001",
+    "PR_Bench_SeatSlat00",
+    "PR_Bench_SeatSlat01",
+    "PR_Bench_SeatSlat02",
+    "PR_Bench_SeatSlat03",
+    "PR_Bench_SeatSlat04"
+  ],
+  "renders": {
+    "front": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/03_forms/clay_front.png",
+      "az_el_lens": [
+        0,
+        0,
+        0
+      ],
+      "distance": 4.32182914018631
+    },
+    "side": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/03_forms/clay_side.png",
+      "az_el_lens": [
+        90,
+        0,
+        0
+      ],
+      "distance": 4.875333786010742
+    },
+    "back": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/03_forms/clay_back.png",
+      "az_el_lens": [
+        180,
+        0,
+        0
+      ],
+      "distance": 4.32182914018631
+    },
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/03_forms/clay_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 3.243332397711049
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/03_forms/clay_ref.png",
+      "az_el_lens": [
+        -30.0,
+        25.0,
+        50.0
+      ],
+      "distance": 3.2965605536132663
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/03_forms/clay_gameplay_128px.png",
+      "subject_px": 128
+    },
+    "turntable": {
+      "frames": 8,
+      "pattern": "clay_turntable_NN.png"
+    }
+  }
+}

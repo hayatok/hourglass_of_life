@@ -188,6 +188,9 @@ func run() -> void:
 	sim.start_minute = 900
 	sim.epoch_weekday = 0
 	for p in sim.people: sim._choose_action(p)
+	# This case verifies care while modelling, with the shared desk actually available.
+	# A third person's solo hobby may otherwise reserve one of its two places.
+	sim._assign(sim.person("nagisa"),"rest","home_ogawa",90,"食卓でひと息つく")
 	ryo = sim.person("ryo")
 	rin = sim.person("rin")
 	for p in [ryo,rin]:

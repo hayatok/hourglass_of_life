@@ -40,6 +40,16 @@
     "scene-gpu": {
       "passed": true,
       "completion": "Scene/UI smoke: PASS"
+    },
+    "activities": {
+      "passed": 156,
+      "failed": 0,
+      "completion": "Furniture and activity checks: 156 passed, 0 failed"
+    },
+    "activities-gpu": {
+      "passed": 156,
+      "failed": 0,
+      "completion": "Furniture and activity checks: 156 passed, 0 failed"
     }
   },
   "aging_render_samples": {
@@ -559,10 +569,10 @@
     "Aoi: work"
   ],
   "not_complete": [
-    "final art/garment acceptance",
+    "final character and furniture art/garment acceptance",
     "older faces and posture",
-    "town and prop models",
-    "real furniture/prop contacts",
+    "JRPG town/architecture and remaining props",
+    "prop-specific fingers, sit/get-up transitions and garment contact acceptance",
     "lighting and audio",
     "automatic distance LOD",
     "v0.5 release",
@@ -692,6 +702,329 @@
         "log": "scene-gpu.log",
         "completion": "Scene/UI smoke: PASS"
       }
+    ],
+    "furniture_initial_full": [
+      {
+        "check": "import",
+        "passed": true,
+        "seconds": 2.71,
+        "failure": null,
+        "log": "import.log",
+        "completion": null
+      },
+      {
+        "check": "simulation",
+        "passed": true,
+        "seconds": 0.94,
+        "failure": null,
+        "log": "simulation.log",
+        "completion": "Simulation checks: 49 passed, 0 failed"
+      },
+      {
+        "check": "social",
+        "passed": true,
+        "seconds": 0.24,
+        "failure": null,
+        "log": "social.log",
+        "completion": "Social life checks: 33 passed, 0 failed"
+      },
+      {
+        "check": "work",
+        "passed": true,
+        "seconds": 0.35,
+        "failure": null,
+        "log": "work.log",
+        "completion": "Work/family checks: 41 passed, 0 failed"
+      },
+      {
+        "check": "life",
+        "passed": true,
+        "seconds": 76.9,
+        "failure": null,
+        "log": "life.log",
+        "completion": "Life course checks: 50 passed, 0 failed"
+      },
+      {
+        "check": "character",
+        "passed": true,
+        "seconds": 1.15,
+        "failure": null,
+        "log": "character.log",
+        "completion": "Character import and motion checks: PASS, errors=[]"
+      },
+      {
+        "check": "cast",
+        "passed": true,
+        "seconds": 2.56,
+        "failure": null,
+        "log": "cast.log",
+        "completion": "Resident cast and growth checks: PASS, errors=[]"
+      },
+      {
+        "check": "activities",
+        "passed": false,
+        "seconds": 2.25,
+        "failure": "engine reported an error",
+        "log": "activities.log",
+        "completion": null
+      }
+    ],
+    "furniture_after_body_blend_test_fix": [
+      {
+        "check": "import",
+        "passed": true,
+        "seconds": 2.68,
+        "failure": null,
+        "log": "import.log",
+        "completion": null
+      },
+      {
+        "check": "activities",
+        "passed": true,
+        "seconds": 2.28,
+        "failure": null,
+        "log": "activities.log",
+        "completion": "Furniture and activity checks: 156 passed, 0 failed"
+      },
+      {
+        "check": "character-gpu",
+        "passed": true,
+        "seconds": 2.66,
+        "failure": null,
+        "log": "character-gpu.log",
+        "completion": "Character import and motion checks: PASS, errors=[]"
+      },
+      {
+        "check": "cast-gpu",
+        "passed": true,
+        "seconds": 5.48,
+        "failure": null,
+        "log": "cast-gpu.log",
+        "completion": "Resident cast and growth checks: PASS, errors=[]"
+      },
+      {
+        "check": "activities-gpu",
+        "passed": true,
+        "seconds": 3.64,
+        "failure": null,
+        "log": "activities-gpu.log",
+        "completion": "Furniture and activity checks: 156 passed, 0 failed"
+      },
+      {
+        "check": "scene-gpu",
+        "passed": true,
+        "seconds": 81.41,
+        "failure": null,
+        "log": "scene-gpu.log",
+        "completion": "Scene/UI smoke: PASS"
+      }
     ]
+  },
+  "latest_verification_note": "The first furniture run passed the existing 173 checks, character and cast, then failed one new adult-body contact assertion measured during its 0.2s animation blend. The fixture now waits for that blend before seeking the sip. The focused rerun passed all 156 contact assertions on headless/GPU, plus character/cast GPU and the full-scene GPU progression.",
+  "furniture": {
+    "models": {
+      "Bench": {
+        "file": "PR_Bench.glb",
+        "triangles": 3584,
+        "dimensions_m": [
+          1.7492283582687378,
+          0.6436582803726196,
+          1.0256506204605103
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "9defe7a32cb461561bf749d407a365f43104a21e5374cd869f50ef456e40da9a"
+      },
+      "Chair": {
+        "file": "PR_Chair.glb",
+        "triangles": 1980,
+        "dimensions_m": [
+          0.5099999904632568,
+          0.5099999904632568,
+          1.063354253768921
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "c427f428cc45ae62bf71cc3e894ae33fbc144aa0e77a1bee2108dfeb4ee38c8b"
+      },
+      "RoundTable": {
+        "file": "PR_RoundTable.glb",
+        "triangles": 1224,
+        "dimensions_m": [
+          1.100000023841858,
+          1.100000023841858,
+          0.7509909868240356
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "da2c1adc782827b022cf69588919467294794c94c9b862287d57c2cb2fa40083"
+      },
+      "Worktable": {
+        "file": "PR_Worktable.glb",
+        "triangles": 2304,
+        "dimensions_m": [
+          1.5499999523162842,
+          0.8399999737739563,
+          0.9500000476837158
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "5ddab8fc022386622f9c1b065c8419ed037c7ee2e26ba9dd2e4ed9b2d0692024"
+      },
+      "Bed": {
+        "file": "PR_Bed.glb",
+        "triangles": 1296,
+        "dimensions_m": [
+          1.0,
+          2.0824999809265137,
+          0.8250000476837158
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "83bc514edebe3942121ef88ce1f8ab8eed61fc335b196b1dbec838ee2a624af6"
+      },
+      "Footstool": {
+        "file": "PR_Footstool.glb",
+        "triangles": 216,
+        "dimensions_m": [
+          0.47999998927116394,
+          0.49499979615211487,
+          0.23000000417232513
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "5c535e976d214b09a63395e26900ed074df1c923f97f9b94221ed0ae33df425d"
+      },
+      "Radio": {
+        "file": "PR_Radio.glb",
+        "triangles": 1372,
+        "dimensions_m": [
+          0.36000001430511475,
+          0.1734999120235443,
+          0.2942500114440918
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "01ca21c0a62a05427f14cf2c0ae1d4f6bc6fb9ee38b8729d3f37679bb60b0b95"
+      },
+      "TownModel": {
+        "file": "PR_TownModel.glb",
+        "triangles": 672,
+        "dimensions_m": [
+          0.550000011920929,
+          0.3799999952316284,
+          0.27950000762939453
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "878f57fe634765acf432449b041ad9b86a662fdbfd31de253c027b2e5ec41a37"
+      },
+      "BreadPlate": {
+        "file": "PR_BreadPlate.glb",
+        "triangles": 2108,
+        "dimensions_m": [
+          0.41999998688697815,
+          0.41999998688697815,
+          0.11500000208616257
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "db2408caa45079db9b3f4eebce40f98996eee15a620948a3e9ee9296f015f24b"
+      },
+      "Mug": {
+        "file": "PR_Mug.glb",
+        "triangles": 460,
+        "dimensions_m": [
+          0.156088724732399,
+          0.11400000005960464,
+          0.11500000208616257
+        ],
+        "materials": 1,
+        "embedded_images": 3,
+        "source_game_sha256": "0a75a845ad6fd8e6b242666b9855fbaec401d781222b6a7e83582db2ea188a9f"
+      }
+    },
+    "validation": {
+      "tris_by_lod": {
+        "0": 15216
+      },
+      "fail": [],
+      "warn": [
+        "PR_Bench_LOD0: numeric suffix in object or mesh name",
+        "PR_Bench_LOD0: 64 doubled vertices within 0.0001",
+        "PR_Chair_LOD0: numeric suffix in object or mesh name",
+        "PR_Chair_LOD0: 128 doubled vertices within 0.0001",
+        "PR_RoundTable_LOD0: numeric suffix in object or mesh name",
+        "PR_RoundTable_LOD0: 68 doubled vertices within 0.0001",
+        "PR_Worktable_LOD0: numeric suffix in object or mesh name",
+        "PR_Bed_LOD0: numeric suffix in object or mesh name",
+        "PR_Bed_LOD0: 72 zero-area faces",
+        "PR_Bed_LOD0: 36 doubled vertices within 0.0001",
+        "PR_Footstool_LOD0: numeric suffix in object or mesh name",
+        "PR_Radio_LOD0: numeric suffix in object or mesh name",
+        "PR_Radio_LOD0: 48 zero-area faces",
+        "PR_Radio_LOD0: 120 doubled vertices within 0.0001",
+        "PR_TownModel_LOD0: numeric suffix in object or mesh name",
+        "PR_TownModel_LOD0: 24 zero-area faces",
+        "PR_TownModel_LOD0: 12 doubled vertices within 0.0001",
+        "PR_BreadPlate_LOD0: numeric suffix in object or mesh name",
+        "PR_BreadPlate_LOD0: 96 doubled vertices within 0.0001",
+        "PR_Mug_LOD0: numeric suffix in object or mesh name",
+        "PR_Mug_LOD0: 16 doubled vertices within 0.0001"
+      ]
+    },
+    "roundtrip_failures": [],
+    "fixed_spots": 36,
+    "initial_bench_spots": 2,
+    "final_art_acceptance": false,
+    "actual_contact_metrics": "activities/contact-metrics.json",
+    "native_editor_inspection": "activity_layout.tscn: Ogawa/Bed_nagisaAssembly/sleep_nagisa/Contact, position (0,0.46,-0.72) inspected in actual Godot editor; no new native edit claimed"
+  },
+  "source_game_glb_sha256": {
+    "nagisa": {
+      "CH_Nagisa.glb": "3bfe5914355beaf26c77655ddfdad0fdc2690f25be3feead5bead5d015924ea6",
+      "CH_Nagisa_LOD1.glb": "58ec2c0b6b01cbb7fde7825a3f88eb91aa54591233de8e6797c16fdd55e9ceb4",
+      "CH_Nagisa_LOD2.glb": "2440f944fd5d6223c9f1284ee3b0ce7475ff8ca35f01bb0b4bb8cb6f27f74883"
+    },
+    "ryo": {
+      "CH_Ryo.glb": "4151af0c8dc4696a04d444cc1419ba7ad809bee7959eda9d52d5abace16f31ae",
+      "CH_Ryo_LOD1.glb": "e13c5467a2610034b1d6f8b7da924947822d07a29bff78969f77f72db176fbdc",
+      "CH_Ryo_LOD2.glb": "5292ada747b5119bcfdffb798d3aa1c8a3d4c388100129fad2da9a5e3e01f706"
+    },
+    "rin": {
+      "CH_Rin.glb": "a1dc8ea6eb7ca63f64737e4312f7c32fbeec5b16e969be11718a95b96d4ca7f9",
+      "CH_Rin_LOD1.glb": "580e0e60821729096fee870036f77fbc599e74c9e96cb452e4cc673a3265ffee",
+      "CH_Rin_LOD2.glb": "d1413bcde0349c12a29d3700ea986023c9c6f29e783fff4ea99fa39584e6c16d"
+    },
+    "rin_adult": {
+      "CH_RinAdult.glb": "eda6fbb55a2451af02018a6c9a3277a0dc4c057e3cdb194d7a5c9483559e4f6e",
+      "CH_RinAdult_LOD1.glb": "dca3d2a6c2bf4652c8c95db57ce067fcc6c116bcbfb544e1fc7c4f7bbd72f0dd",
+      "CH_RinAdult_LOD2.glb": "b5ee1c7570fc2e024842b64565a56979e26ac7ff6bcdb6eb5c990fa3875b0c39"
+    },
+    "osamu": {
+      "CH_Osamu.glb": "3dce77d2776db63157f445e373c372ce54271fd63a3f8cccf8ff298c723be3d0",
+      "CH_Osamu_LOD1.glb": "90f9e3e9ffe464d57f7646301a81f9e83fc384be5884b1ec54e9e62d38e391d8",
+      "CH_Osamu_LOD2.glb": "7ceaf3e011369d8f8acdf30dc0b4dbbafe02e4d1dbe332104d2713fb93438fde"
+    },
+    "fumi": {
+      "CH_Fumi.glb": "e5cd5e11fd9e6f5b84aa9d07d85ee2a96b44c70091b2635536cbcf2affb8c272",
+      "CH_Fumi_LOD1.glb": "e749cc20eda12c876bf775077b3ed23c5beddb90be8bd6d03f7fa47198be1ebc",
+      "CH_Fumi_LOD2.glb": "0691594aeb06559b68995eb25621bce9bbb8f6298642ac37261a633156fa5a8d"
+    },
+    "maho": {
+      "CH_Maho.glb": "9232cc8b48c5dc4c1af5f1646e9f8fd837771272a9fb91f259a3b75067356462",
+      "CH_Maho_LOD1.glb": "f2b316be61f905b2f7403ba8d5683ffd4ca7e70f532cccfb99bded6fc3e6443b",
+      "CH_Maho_LOD2.glb": "e3947f9646d88b2719a9327b9d47317d38100b12573b628468ffa56474bc4f87"
+    },
+    "ritsu": {
+      "CH_Ritsu.glb": "80a69022c601ba906ff2539510c2be80d966765fba148bc53978039c04fe4ccf",
+      "CH_Ritsu_LOD1.glb": "20d0e40554c03eba24d2a23d8dcea448203e399ae048182430c8dea772e6398e",
+      "CH_Ritsu_LOD2.glb": "a6aefefe12c784cccb0359022f59888a576559ac9630d9cf35a80157faa9512d"
+    },
+    "aoi": {
+      "CH_Aoi.glb": "ea3bcb9fb855a60b8ad664b3fcb59bf3729d75d0d2c2c7cb8cc73d5762e10ba0",
+      "CH_Aoi_LOD1.glb": "682a4d3b286718aad3efac05a5293c6d6874b21cc2418acb997afc18c6c14045",
+      "CH_Aoi_LOD2.glb": "9292a5effaaa1f75056891f2081adff513a4ede888169a894bd717558311df6a"
+    }
   }
 }

@@ -1,0 +1,51 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/PR_LifeFurniture_delivery.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -0.8746141791343689,
+    -0.3100000023841858,
+    -0.0008423775434494019
+  ],
+  "bbox_max": [
+    0.8746141791343689,
+    0.3336583077907562,
+    1.0248082876205444
+  ],
+  "size_xyz": [
+    1.7492283582687378,
+    0.6436582803726196,
+    1.0256506204605103
+  ],
+  "objects": [
+    "PR_Bench_LOD0"
+  ],
+  "renders": {
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Bench/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 3.2409575068249237
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Bench/material_ref.png",
+      "az_el_lens": [
+        -30.0,
+        25.0,
+        50.0
+      ],
+      "distance": 3.294091514032673
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Bench/material_gameplay_128px.png",
+      "subject_px": 128
+    },
+    "turntable": {
+      "frames": 12,
+      "pattern": "material_turntable_NN.png"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/PR_LifeFurniture_delivery.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -0.2549999952316284,
+    -0.2549999952316284,
+    -0.0009377598762512207
+  ],
+  "bbox_max": [
+    0.2549999952316284,
+    0.2549999952316284,
+    1.0624165534973145
+  ],
+  "size_xyz": [
+    0.5099999904632568,
+    0.5099999904632568,
+    1.063354253768921
+  ],
+  "objects": [
+    "PR_Chair_LOD0"
+  ],
+  "renders": {
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Chair/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 2.1396057934810715
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Chair/material_ref.png",
+      "az_el_lens": [
+        -30.0,
+        25.0,
+        50.0
+      ],
+      "distance": 2.100553498913844
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Chair/material_gameplay_128px.png",
+      "subject_px": 128
+    }
+  }
+}

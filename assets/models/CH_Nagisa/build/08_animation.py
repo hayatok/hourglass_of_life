@@ -67,7 +67,8 @@ def pose(arm,name,t):
             p['upper_arm.R'].rotation_euler.x=.80+.1*math.sin(phase)
             p['forearm.R'].rotation_euler.x=1.1+.25*math.sin(phase)
     if name in ['sleep','_pose_sleep']:
-        p['root'].rotation_euler.x=math.pi/2;p['root'].location.y=.48
+        # Face up on a mattress; the town aligns the head to its pillow contact.
+        p['root'].rotation_euler.x=-math.pi/2;p['root'].location.y=.48
         for side,s in [('L',1),('R',-1)]:
             p['upper_arm.'+side].rotation_euler.z=-s*.36
             p['forearm.'+side].rotation_euler.x=.2

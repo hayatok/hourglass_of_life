@@ -89,8 +89,9 @@ func run() -> void:
 	expect(equivalent(sim.people,future) and sim.rng.state==future_rng,"The same saved state produces the same subsequent choices")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://test-life-save.json"))
 	sim.reset()
-	expect(sim.place_bench(Vector3(4,0,4)).status=="accept" and sim.shared_budget==80,"A valid place uses the shared budget")
-	expect(sim.place_bench(Vector3(4,0,4)).status=="decline" and sim.shared_budget==80,"Overlapping furniture is rejected without charging")
+	# The public worktables now occupy the old (4,4) fixture's footprint.
+	expect(sim.place_bench(Vector3(4,0,2.5)).status=="accept" and sim.shared_budget==80,"A valid place uses the shared budget")
+	expect(sim.place_bench(Vector3(4,0,2.5)).status=="decline" and sim.shared_budget==80,"Overlapping furniture is rejected without charging")
 	expect(sim.place_bench(Vector3(20,0,4)).status=="decline","A bench cannot be placed inside an out-of-bounds building")
 	# A week crosses midnight and all seven routine start days.
 	sim.reset(71103)

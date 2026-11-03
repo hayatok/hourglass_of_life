@@ -96,11 +96,12 @@ func propose(first: String, second: String, location: String) -> Dictionary:
 	var center = _center(a,b,location)
 	if center==null:
 		return _counteroffer(a,b,location,a,"今はベンチが使われている。")
-	sim._begin_meeting(a,b,center,location,false)
+	if not sim._begin_meeting(a,b,center,location,false):
+		return _counteroffer(a,b,location,a,"今は席が使われている。")
 	return sim._reply(a,"accept","%sさんと話してみよう。まずは待ち合わせの場所へ。"%b.name)
 
 func _center(a: Dictionary, b: Dictionary, location: String) -> Variant:
-	if location=="bench": return sim._available_bench((a.position+b.position)*.5)
+	if location=="bench": return sim._available_bench((a.position+b.position)*.5,[a.id,b.id])
 	if location=="cafe": return sim.SITES.bakery_cafe+Vector3(0,0,1.2)
 	return sim.SITES.workshop+Vector3(0,0,1)
 
@@ -183,8 +184,10 @@ func tick() -> void:
 			if sim.elapsed>planned.start+15:
 				_postpone(planned,"待ち合わせの場所が空かなかった。")
 			continue
+		if not sim._begin_meeting(a,b,center,planned.location,false,planned.duration,planned.start,planned.id):
+			if sim.elapsed>planned.start+15: _postpone(planned,"待ち合わせの席が空かなかった。")
+			continue
 		planned.state = "on_the_way"
-		sim._begin_meeting(a,b,center,planned.location,false,planned.duration,planned.start,planned.id)
 		sim._log(a.id,"約束の時間に向けて","%sさんと会うために、待ち合わせの場所へ向かった。"%b.name)
 
 func finish(m: Dictionary, completed: bool) -> void:

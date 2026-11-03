@@ -64,6 +64,7 @@ var rejection_context: Dictionary = {}
 var social: SocialLife
 var work_family: WorkFamily
 var life: LifeCourse
+var activities: ActivityPlaces
 
 func _ready() -> void:
 	_build_graph()
@@ -89,6 +90,8 @@ func reset(seed_value: int = 71103) -> void:
 	events.clear()
 	meetings.clear()
 	benches = [Vector3(0, 0, 2.5)]
+	if activities==null: activities = ActivityPlaces.new(self)
+	activities.configure_benches(benches)
 	elapsed = 0
 	start_minute = 780
 	epoch_weekday = 5
@@ -113,7 +116,7 @@ func reset(seed_value: int = 71103) -> void:
 			"id": d.id, "name": d.name, "age": int(d.age_years), "occupation": d.occupation,
 			"position": SITES[home] + _offset(i), "place": home, "destination": home,
 			"target": SITES[home] + _offset(i), "path": [], "moving": false,
-			"action": "rest", "reason": "今日はどんな時間にしよう", "remaining": 0.0,
+			"action": "rest", "reason": "今日はどんな時間にしよう", "remaining": 0.0,"activity_spot":"",
 			"fatigue": 0.20 + rng.randf_range(0, 0.12), "hunger": 0.20,
 			"connection": 0.35 + rng.randf_range(0, 0.15), "quiet": 0.20,
 			"goal_progress": 0.0, "goal_notified": false, "meeting_id": "",
@@ -316,9 +319,9 @@ func _choose_action(p: Dictionary) -> void:
 	work_family.add_options(p,options)
 	life.add_options(p,options)
 	# A place the player adds becomes an actual alternative for free time.
-	var seat = _available_bench(p.position)
-	if seat != null:
-		options.append({"kind":"social", "place":"square", "target":seat+Vector3(-.6,0,.08), "need":p.connection, "goal":d.values.belonging, "relation":.5, "role":.3, "habit":.3, "fun":d.traits.extraversion, "cost":p.position.distance_to(seat)*.015+p.quiet*.6, "reason":"広場で休みながら、誰かと話せたらいいな"})
+	var seat := activities.reserve(p,"social","square")
+	if not seat.is_empty():
+		options.append({"kind":"social", "place":"square", "need":p.connection, "goal":d.values.belonging, "relation":.5, "role":.3, "habit":.3, "fun":d.traits.extraversion, "cost":p.position.distance_to(seat.approach)*.015+p.quiet*.6, "reason":"広場で休みながら、誰かと話せたらいいな"})
 	if p.fatigue > 0.78:
 		_assign(p, "rest", home, 60, "疲れたので、まず休みたい")
 		return
@@ -362,7 +365,10 @@ func _hobby_place(p: Dictionary) -> String:
 		return "garden"
 	return home_for(p)
 
-func _assign(p: Dictionary, kind: String, place: String, duration: float, reason: String, exact_target: Variant = null) -> void:
+func _assign(p: Dictionary, kind: String, place: String, duration: float, reason: String, exact_target: Variant = null, spot_id: String = "") -> void:
+	var activity: Dictionary = activities.spots.get(spot_id,{})
+	if activity.is_empty() and exact_target==null: activity = activities.reserve(p,kind,place)
+	p.activity_spot = activity.get("id","")
 	p.action = kind
 	p.reason = reason
 	p.remaining = duration
@@ -374,6 +380,7 @@ func _assign(p: Dictionary, kind: String, place: String, duration: float, reason
 	p.destination = place
 	var index = people.find(p)
 	p.target = exact_target if exact_target != null else SITES.get(place, Vector3.ZERO) + _offset(index)
+	if not activity.is_empty(): p.target = activity.approach
 	p.path = route(p.position, p.place, p.target, place)
 	p.moving = not p.path.is_empty()
 	if not p.moving:
@@ -382,12 +389,13 @@ func _assign(p: Dictionary, kind: String, place: String, duration: float, reason
 func route(origin: Vector3, origin_place: String, target: Vector3, destination: String) -> Array:
 	if origin.distance_to(target) < .1:
 		return []
-	if origin_place == destination and origin.distance_to(target) < 3:
-		return [target]
+	if origin_place == destination and activities.inside(destination,origin) and activities.inside(destination,target):
+		return activities.indoor_route(destination,origin,target)
+	if origin_place == destination and origin.distance_to(target) < 3: return [target]
 	var path: Array = []
 	var departure: Vector3 = ENTRIES.get(origin_place, origin)
-	if origin.distance_to(departure) > .15 and origin.distance_to(SITES.get(origin_place, origin)) < 3:
-		path.append(departure)
+	if origin.distance_to(departure) > .15 and (activities.inside(origin_place,origin) or origin.distance_to(SITES.get(origin_place, origin)) < 3):
+		path.append_array(activities.indoor_route(origin_place,origin,departure))
 		departure = _street_corner(departure)
 		path.append(departure)
 	else:
@@ -404,17 +412,18 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 	if path.is_empty() or path[-1].distance_to(entry) > .1:
 		path.append(entry)
 	if entry.distance_to(target) > .1:
-		path.append(target)
+		path.append_array(activities.indoor_route(destination,entry,target))
 	return path
 
 func _street_corner(entry: Vector3) -> Vector3:
 	return Vector3(-5 if entry.x < -5 else (5 if entry.x > 5 else 0),0,entry.z)
 
-func _available_bench(origin: Vector3) -> Variant:
+func _available_bench(origin: Vector3, participants: Array = []) -> Variant:
 	var best: Variant = null
 	var distance = INF
 	for bench in benches:
 		var busy = false
+		if activities.pair_for("bench",bench,participants).size()<2: busy = true
 		for m in meetings:
 			if m.location == "bench" and m.get("center",Vector3.ZERO).distance_to(bench)<1.8:
 				busy = true
@@ -473,7 +482,12 @@ func propose_support(receiver: String, giver: String) -> Dictionary:
 func propose_project(first: String, second: String) -> Dictionary:
 	return work_family.propose_project(first,second)
 
-func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: String, spontaneous: bool, duration: int = 25, not_before: int = 0, appointment_id: String = "", venue_override: String = "") -> void:
+func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: String, spontaneous: bool, duration: int = 25, not_before: int = 0, appointment_id: String = "", venue_override: String = "", activity_group: String = "") -> bool:
+	var venue = "square" if location == "bench" else (a.place if spontaneous else ("bakery_cafe" if location=="cafe" else "workshop"))
+	if not venue_override.is_empty(): venue = venue_override
+	var group := activity_group if not activity_group.is_empty() else location
+	var pair := activities.pair_for(group,center,[a.id,b.id])
+	if group in ["bench","cafe","radio","model","bread","photo","music","craft"] and pair.size()<2: return false
 	meeting_serial += 1
 	var id = "meeting_%d" % meeting_serial
 	var m = {"id":id,"a":a.id,"b":b.id,"location":location,"center":center,"state":"travel","remaining":duration,"not_before":not_before,"appointment_id":appointment_id,"waited":0,"spontaneous":spontaneous}
@@ -481,9 +495,8 @@ func _begin_meeting(a: Dictionary, b: Dictionary, center: Vector3, location: Str
 	for i in 2:
 		var p = a if i == 0 else b
 		p.meeting_id = id
-		var venue = "square" if location == "bench" else (a.place if spontaneous else ("bakery_cafe" if location=="cafe" else "workshop"))
-		if not venue_override.is_empty(): venue = venue_override
-		_assign(p, "meet", venue, duration, "相手と合流してから、ゆっくり話したい", center+Vector3(-.6 if i==0 else .6,0,.08 if location=="bench" else 0))
+		_assign(p, "meet", venue, duration, "相手と合流してから、ゆっくり話したい", center+Vector3(-.6 if i==0 else .6,0,.08 if location=="bench" else 0),pair[i].id if pair.size()==2 else "")
+	return true
 
 func _tick_meetings() -> void:
 	var ended: Array = []
@@ -551,7 +564,7 @@ func _try_spontaneous() -> void:
 				continue
 			if a.position.distance_to(b.position) < 2.8 and _routine_at(b).is_empty():
 				if _next_commitment(a).minutes >= 60 and _next_commitment(b).minutes >= 60:
-					var seat = _available_bench((a.position+b.position)*.5) if a.place=="square" else null
+					var seat = _available_bench((a.position+b.position)*.5,[a.id,b.id]) if a.place=="square" else null
 					_begin_meeting(a,b,seat if seat!=null else (a.position+b.position)*.5,"bench" if seat!=null else "standing",true)
 					return
 
@@ -568,14 +581,18 @@ func _reply(p: Dictionary, status: String, text: String) -> Dictionary:
 	return {"status":status,"text":text,"resident_id":p.id}
 
 func place_bench(position: Vector3) -> Dictionary:
+	position = Vector3(snappedf(position.x,.5),0,snappedf(position.z,.5))
 	if shared_budget < 20:
 		return {"status":"decline","text":"町の共有予算が足りません"}
 	if absf(position.x)>5 or position.z<0 or position.z>8:
 		return {"status":"decline","text":"広場の中の、通りや入口から離れた場所に置いてください"}
+	if activities.bench_overlaps_furniture(position):
+		return {"status":"decline","text":"作業台や家具と重ならない場所を選んでください"}
 	for bench in benches:
 		if bench.distance_to(position)<1.8:
 			return {"status":"decline","text":"ベンチ同士の間を少し空けてください"}
 	benches.append(Vector3(snappedf(position.x,.5),0,snappedf(position.z,.5)))
+	activities.configure_benches(benches)
 	shared_budget -= 20
 	_log("", "座って過ごせる場所が増えました", "このベンチを使うか、誰と過ごすかは住人が決めます。")
 	town_changed.emit()
@@ -633,6 +650,9 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	social.restore(data.get("social",{}))
 	work_family.restore(data.get("work_family",{}))
 	life.restore(data.get("life",{}))
+	activities.configure_benches(benches)
+	for p in people:
+		if not activities.spots.has(p.get("activity_spot","")): p.activity_spot = ""
 	rejection_context.clear()
 	town_changed.emit()
 	return true

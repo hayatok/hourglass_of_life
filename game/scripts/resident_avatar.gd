@@ -7,6 +7,9 @@ var jrpg: JrpgResidentModel
 var displayed_age := -1
 var displayed_model := ""
 var walk_rate := 1.0
+var contacts: ResidentContacts
+var others: Dictionary = {}
+var greeted_meeting := ""
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var visual: Node3D = $Visual
 @onready var name_label: Label3D = $Name
@@ -61,12 +64,16 @@ func _update_body(p: Dictionary) -> void:
 		$Visual/Hips.hide()
 		$AnimationPlayer.stop()
 		if model_key != displayed_model:
+			if is_instance_valid(contacts):
+				contacts.detach();contacts.free()
 			if is_instance_valid(jrpg):
 				visual.remove_child(jrpg)
 				jrpg.queue_free()
 			jrpg = MODELS[model_key].instantiate()
 			visual.add_child(jrpg)
 			animator = jrpg.animator
+			contacts = ResidentContacts.new();contacts.name = "Contacts";add_child(contacts)
+			contacts.bind_model(self,jrpg)
 			displayed_model = model_key
 			animation_name = ""
 		var growth := 1.0
@@ -93,22 +100,31 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 	last_position = p.position
 	selection.visible = selected
 	name_label.modulate = Color("#fce7aa") if selected else Color("#fff6e2")
-	var wanted = "walk" if p.moving else "idle"
+	var activity := Sim.activities.for_person(p) if not p.moving else {}
+	var wanted := "walk" if p.moving else "idle"
+	var attention := Vector3.ZERO
+	var attend := false
 	if not p.moving:
-		if p.action == "work" or p.action == "hobby" or p.action == "care":
-			wanted = "work"
-		elif p.action == "sleep":
-			wanted = "sleep"
-		elif p.action in ["meet","joint_work"]:
-			for meeting in Sim.meetings:
-				if meeting.id == p.meeting_id and meeting.state == "engaged":
-					wanted = "sit_talk" if meeting.location == "bench" else "talk"
-					if meeting.get("mode","")=="project": wanted = "work"
-					var other = Sim.person(meeting.b if meeting.a==p.id else meeting.a)
-					var toward: Vector3 = other.position-p.position
-					var face_angle = 0.0 if meeting.location=="bench" else atan2(toward.x,toward.z)
-					if meeting.get("mode","")=="project": face_angle = PI
-					visual.rotation.y = lerp_angle(visual.rotation.y,face_angle,minf(1,delta*5))
+		if not activity.is_empty():
+			if activity.pose=="bed" and p.action=="sleep": wanted = "sleep"
+			elif activity.pose=="seat": wanted = "eat" if p.action=="eat" else "rest"
+			elif activity.pose=="work" and p.action in ["work","hobby","chores"]: wanted = "work"
+		if p.action=="care" and others.has("rin") and not Sim.person("rin").moving and Sim.person("rin").place==p.place:
+			attention = others.rin.head_position();attend = true
+		for meeting in Sim.meetings:
+			if meeting.id!=p.meeting_id or meeting.state!="engaged": continue
+			var other_id: String = meeting.b if meeting.a==p.id else meeting.a
+			attention = others[other_id].head_position() if others.has(other_id) else Sim.person(other_id).position+Vector3.UP*1.5
+			attend = true
+			wanted = "sit_talk" if activity.get("pose","")=="seat" else "talk"
+			if meeting.get("mode","")=="project":
+				wanted = "work"
+				attend = false
+			elif greeted_meeting!=meeting.id and is_instance_valid(contacts):
+				greeted_meeting = meeting.id;contacts.greet()
+			if activity.is_empty():
+				var toward: Vector3 = attention-global_position
+				visual.rotation.y = lerp_angle(visual.rotation.y,atan2(toward.x,toward.z),minf(1,delta*5))
 	if wanted != animation_name:
 		animator.play(wanted,.2)
 		animation_name = wanted
@@ -119,4 +135,12 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 			walk_rate = lerpf(walk_rate,target,minf(1,delta*8))
 			animator.speed_scale = walk_rate
 		jrpg.set_expression(p.fatigue,.4 if wanted in ["talk","sit_talk"] else 0)
+		contacts.update_contact(p,activity,wanted,attention,attend,delta)
+		name_label.global_position = head_position()+Vector3.UP*.28
+
+func head_position() -> Vector3:
+	return contacts.point("head",Vector3(0,.12,0)) if is_instance_valid(contacts) else global_position+Vector3.UP*1.6
+
+func focus_position() -> Vector3:
+	return contacts.point("pelvis")+Vector3.UP*.18 if is_instance_valid(contacts) else global_position+Vector3.UP
 

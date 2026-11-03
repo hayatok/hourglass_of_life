@@ -1,0 +1,47 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/PR_LifeFurniture_delivery.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -0.20999999344348907,
+    -0.20999999344348907,
+    0.0030000004917383194
+  ],
+  "bbox_max": [
+    0.20999999344348907,
+    0.20999999344348907,
+    0.11800000071525574
+  ],
+  "size_xyz": [
+    0.41999998688697815,
+    0.41999998688697815,
+    0.11500000208616257
+  ],
+  "objects": [
+    "PR_BreadPlate_LOD0"
+  ],
+  "renders": {
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/BreadPlate/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 0.9989843222328461
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/BreadPlate/material_ref.png",
+      "az_el_lens": [
+        -30.0,
+        25.0,
+        50.0
+      ],
+      "distance": 1.010339518127637
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/BreadPlate/material_gameplay_128px.png",
+      "subject_px": 128
+    }
+  }
+}

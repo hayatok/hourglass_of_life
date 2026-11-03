@@ -99,6 +99,7 @@ func _rebuild() -> void:
 	for p in Sim.people:
 		var actor = AVATAR.instantiate()
 		$Residents.add_child(actor)
+		actor.others = avatars
 		actor.configure(p)
 		avatars[p.id] = actor
 	for b in $PlacedBenches.get_children():
@@ -160,7 +161,9 @@ func _select(id: String) -> void:
 
 func _process(delta: float) -> void:
 	if following and not title.visible:
-		camera_target = camera_target.lerp(Sim.person(selected_id).position,minf(1,delta*2))
+		var target: Vector3 = avatars[selected_id].focus_position()
+		target.y = 0
+		camera_target = camera_target.lerp(target,minf(1,delta*2))
 	if not title.visible and not pause_menu.visible and not %JournalScreen.visible:
 		var motion = Vector3.ZERO
 		if Input.is_physical_key_pressed(KEY_W): motion.z -= 1
@@ -217,9 +220,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				var closest = ""
 				var best: float = 40
 				for p in Sim.people:
-					if camera.is_position_behind(p.position):
+					if not avatars.has(p.id) or not avatars[p.id].visible: continue
+					var focus: Vector3 = avatars[p.id].focus_position()
+					if camera.is_position_behind(focus):
 						continue
-					var screen = camera.unproject_position(p.position+Vector3(0,1,0))
+					var screen = camera.unproject_position(focus)
 					var gap = screen.distance_to(event.position)
 					if gap<best:
 						best = gap

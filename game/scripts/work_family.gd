@@ -236,7 +236,8 @@ func propose_project(first: String, second: String) -> Dictionary:
 			return sim._reply(p,"counteroffer","まずは少し話して、お互いのやりたいことを知ってからにしたい。")
 	if household(a).cash<project.cost:
 		return sim._reply(a,"defer","一緒に取り組みたいけれど、材料の用意を先に考えたい。")
-	sim._begin_meeting(a,b,project.center,"project",false,45,0,"",project.place)
+	if not sim._begin_meeting(a,b,project.center,"project",false,45,0,"",project.place,project.key):
+		return sim._reply(a,"defer","作業台が使われている。空いてから一緒に取り組みたい。")
 	var meeting = sim.meetings[-1]
 	meeting.mode = "project"
 	meeting.project = project

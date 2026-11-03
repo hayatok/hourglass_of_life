@@ -14,7 +14,7 @@ jobs:
           curl -fL --retry 3 -o /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
           unzip -q /tmp/godot.zip -d /tmp/godot
           sudo install /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 /usr/local/bin/godot
-      - name: Verify simulation, character imports, poses, growth and aging with strict engine logs
+      - name: Verify simulation, character imports, furniture contacts, growth and aging with strict engine logs
         run: python3 tools/verify_game.py --godot godot
       - name: Boot the complete scene
         run: godot --headless --path . --quit-after 10

@@ -11,7 +11,8 @@ CHECKS={
  'work':('test_work_family.gd',r'Work/family checks: \d+ passed, 0 failed'),
  'life':('test_life_course.gd',r'Life course checks: \d+ passed, 0 failed'),
  'character':('test_character_model.gd',r'Character import and motion checks: PASS'),
- 'cast':('test_resident_models.gd',r'Resident cast and growth checks: PASS')
+ 'cast':('test_resident_models.gd',r'Resident cast and growth checks: PASS'),
+ 'activities':('test_activity_furniture.gd',r'Furniture and activity checks: \d+ passed, 0 failed')
 }
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--godot',default=os.environ.get('GODOT_BIN') or shutil.which('godot') or '/Applications/Godot.app/Contents/MacOS/Godot')
@@ -48,7 +49,7 @@ for name in a.checks:
     file,marker=CHECKS[name]
     run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name=='life' else 180)
 if a.gpu:
-    for name in ['character','cast']:
+    for name in ['character','cast','activities']:
         file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker)
     run('scene-gpu',['--script','tests/test_scene.gd'],r'Scene/UI smoke: PASS',timeout=600)
 print('All requested engine checks completed.',flush=True)

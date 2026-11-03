@@ -1,0 +1,25 @@
+{
+  "version": "0.3",
+  "date": "2026-11-03",
+  "generator": "built-in image_gen",
+  "stage": "concept_reference",
+  "actual_game_capture": false,
+  "assets": [
+    {
+      "file": "01-town-daily-life.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 3277910,
+      "sha256": "0e0282a763e0c8400d6ceac26c19e6c6e04c25b12b8b58a369ee2b25839df237"
+    },
+    {
+      "file": "02-nagisa-3d-look.png",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "bytes": 1723457,
+      "sha256": "6335c0b891ea32d3d8ca3676d69d76f89029a891672f383a6ba81080fc695258"
+    }
+  ]
+}

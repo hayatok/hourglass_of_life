@@ -56,6 +56,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary) -> b
 		for key in ["session_meal_paid","habit_recorded","career_retired"]:
 			if p.has(key) and not p[key] is bool: return false
 		if p.has("alive") and not p.alive is bool: return false
+		if p.has("activity_spot") and not p.activity_spot is String: return false
 		for key in ["base_age"]:
 			if p.has(key) and not number(p[key]): return false
 		for key in ["stage","current_goal","goal_kind","legacy_read_id","household_override"]:

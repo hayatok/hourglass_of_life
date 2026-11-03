@@ -1,0 +1,47 @@
+{
+  "blend": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/PR_LifeFurniture_delivery.blend",
+  "mode": "material",
+  "engine": "cycles",
+  "bbox_min": [
+    -0.18000000715255737,
+    -0.1084999069571495,
+    0.009999997913837433
+  ],
+  "bbox_max": [
+    0.18000000715255737,
+    0.06499999761581421,
+    0.30425000190734863
+  ],
+  "size_xyz": [
+    0.36000001430511475,
+    0.1734999120235443,
+    0.2942500114440918
+  ],
+  "objects": [
+    "PR_Radio_LOD0"
+  ],
+  "renders": {
+    "threequarter": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Radio/material_threequarter.png",
+      "az_el_lens": [
+        35,
+        15,
+        50
+      ],
+      "distance": 0.7283680302918784
+    },
+    "ref": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Radio/material_ref.png",
+      "az_el_lens": [
+        -30.0,
+        25.0,
+        50.0
+      ],
+      "distance": 0.7363550708525709
+    },
+    "gameplay": {
+      "file": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/PR_LifeFurniture/review/05_materials/Radio/material_gameplay_128px.png",
+      "subject_px": 128
+    }
+  }
+}
