@@ -1,0 +1,51 @@
+{
+  "created_at": "2026-11-03T14:00:23.572555+00:00",
+  "source_revision": "31827784cf2da1074f075390908291c87c00cca4",
+  "provenance_scope": "Identification only; revisions and hashes are not tests or acceptance criteria.",
+  "engine": "Godot 4.7.2 stable official",
+  "archive": "hourglass-of-life-ui-20261103-3182778-macOS.zip",
+  "archive_bytes": 123611669,
+  "app": "命の砂時計.app",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "native_tested_architecture": "arm64",
+  "population": 12,
+  "renewed_characters": [
+    "haru",
+    "saki",
+    "tomo",
+    "yui"
+  ],
+  "packaged_probe": {
+    "report": "packaged-ui.json",
+    "scope": "Actual exported PCK and controls; separate from native app interaction.",
+    "failures": []
+  },
+  "native_observation": {
+    "method": "Agent-operated exported app with mouse/keyboard and visual observations; no fixture state injection.",
+    "world_day": 1,
+    "paused_time": "14:56",
+    "selected": "saki",
+    "first_partner": "haru",
+    "first_result": "deferred because of existing social plans",
+    "second_partner": "tomo",
+    "counteroffer": "today 17:00, 25 minutes, town-square bench",
+    "accepted": true,
+    "promise_visible_in_notebook": true,
+    "pause_preserved": true,
+    "japanese_line_breaking": "Included ICU support data; observed real counteroffer and accepted text in native app.",
+    "save_load_tested_in_native_app": false,
+    "human_first_use_playtest": false,
+    "app_closed_after_check": true
+  },
+  "source_ci": "https://github.com/hayatok/hourglass_of_life/actions/runs/41646759460",
+  "limitations": [
+    "Intel native execution untested",
+    "No full-life native playthrough",
+    "Human first-use usability and fun remain untested",
+    "Facial controls are Blink/TiredEyes; remaining resident models and animation polish are ongoing"
+  ],
+  "release_published": false
+}
