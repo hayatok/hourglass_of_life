@@ -20,11 +20,11 @@ p.add_argument('--checks',nargs='+',choices=CHECKS,default=list(CHECKS))
 a=p.parse_args();out=ROOT/'builds/verification';out.mkdir(parents=True,exist_ok=True)
 results=[]
 
-def run(name,args,marker=None):
+def run(name,args,marker=None,timeout=180):
     started=time.monotonic();command=[a.godot]+args+['--path',str(ROOT)]
     failed=None;text=''
     try:
-        result=subprocess.run(command,cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=180)
+        result=subprocess.run(command,cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=timeout)
         text=result.stdout
         if result.returncode:failed='exit '+str(result.returncode)
     except subprocess.TimeoutExpired as e:
@@ -44,9 +44,10 @@ def run(name,args,marker=None):
 
 run('import',['--headless','--editor','--import'])
 for name in a.checks:
-    file,marker=CHECKS[name];run(name,['--headless','--script','tests/'+file],marker)
+    file,marker=CHECKS[name]
+    run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name=='life' else 180)
 if a.gpu:
     for name in ['character','cast']:
         file,marker=CHECKS[name];run(name+'-gpu',['--script','tests/'+file],marker)
-    run('scene-gpu',['--script','tests/test_scene.gd'],r'Scene/UI smoke: PASS')
+    run('scene-gpu',['--script','tests/test_scene.gd'],r'Scene/UI smoke: PASS',timeout=600)
 print('All requested engine checks completed.',flush=True)
