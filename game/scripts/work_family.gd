@@ -4,9 +4,16 @@ extends RefCounted
 var sim
 var config: Dictionary
 var households: Dictionary = {}
-var supports: Array = []
+var supports: Array = []:
+	set(value):
+		supports = value
+		_invalidate_support_index()
 var serial: int = 0
 var projects: Dictionary = {}
+var _support_index: Array = []
+var _support_index_source: Array = []
+var _support_index_minute: int = -1
+var _support_index_size: int = -1
 
 func _init(simulation) -> void:
 	sim = simulation
@@ -15,6 +22,7 @@ func _init(simulation) -> void:
 func reset() -> void:
 	households.clear()
 	supports.clear()
+	_invalidate_support_index()
 	serial = 0
 	projects = {"radio":0.0,"model":0.0,"bread":0.0,"photo":0.0,"music":0.0,"craft":0.0}
 	for id in config.households:
@@ -37,6 +45,25 @@ func worry(p: Dictionary) -> float:
 	var d = config.households[household_id(p)]
 	return clampf(1-household(p).cash/(d.daily_basics*4+d.season_housing),0,1)
 
+func _invalidate_support_index() -> void:
+	_support_index_minute = -1
+	_support_index_size = -1
+	# Assign new arrays; do not clear the array that an in-progress loop uses.
+	_support_index = []
+	_support_index_source = []
+
+func _active_supports() -> Array:
+	if _support_index_minute!=int(sim.elapsed) or _support_index_size!=supports.size() or not is_same(_support_index_source,supports):
+		_support_index = []
+		for help in supports:
+			if help.state in ["travel","active","handoff"]: _support_index.append(help)
+		_support_index_source = supports
+		_support_index_size = supports.size()
+		_support_index_minute = int(sim.elapsed)
+	# Keep the original order and Dictionary references. A state changed during
+	# iteration is still checked by each consumer before it has any effect.
+	return _support_index
+
 func add_options(p: Dictionary, options: Array) -> void:
 	var d = sim.definitions[p.id]
 	var home = sim.home_for(p)
@@ -54,12 +81,13 @@ func tick() -> void:
 			if p.get("alive",true) and household_id(p)==id: members += 1
 		h.home_load = minf(1,h.home_load+.00006*members)
 	if sim.minute_of_day()==0: _settle_day()
-	for help in supports:
+	for help in _active_supports():
 		if help.state not in ["travel","active","handoff"]: continue
 		var giver = sim.person(help.giver)
 		var receiver = sim.person(help.receiver)
 		if not sim.life.is_alive(giver) or not sim.life.is_alive(receiver):
 			help.state = "interrupted"
+			_invalidate_support_index()
 			giver.support_id = ""
 			giver.routine_id = ""
 			receiver.routine_id = ""
@@ -85,6 +113,7 @@ func tick() -> void:
 				arrived = arrived and not child.moving and child.place==help.place
 			if arrived:
 				help.state = "active"
+				_invalidate_support_index()
 				help.began = sim.elapsed
 				receiver.routine_id = ""
 				receiver.remaining = 0
@@ -98,7 +127,7 @@ func tick() -> void:
 func adjust_routine(p: Dictionary, base: Dictionary, minute: int, week: int) -> Dictionary:
 	# Current temporary support does not erase the person's authored future schedule.
 	if minute>=0 or week>=0: return base
-	for help in supports:
+	for help in _active_supports():
 		if help.state not in ["travel","active","handoff"]: continue
 		if help.giver==p.id:
 			return {"id":"support_care" if help.kind=="care" else "support_chores","place":help.place}
@@ -119,7 +148,7 @@ func activity_tick(p: Dictionary) -> void:
 		p.fatigue = minf(1,p.fatigue+.0003)
 		if p.goal_kind=="career" or (p.id=="rin" and p.age>=22): p.goal_progress = minf(1,p.goal_progress+.0004)
 	elif p.action=="chores":
-		for help in supports:
+		for help in _active_supports():
 			if help.giver==p.id and help.state=="active": h = household(sim.person(help.receiver))
 		h.home_load = maxf(0,h.home_load-.005)
 		p.fatigue = minf(1,p.fatigue+.0004)
@@ -162,7 +191,7 @@ func propose_support(receiver_id: String, giver_id: String) -> Dictionary:
 	if giver.age<18:
 		return sim._reply(giver,"decline","大人の代わりに世話を引き受けるのは難しい。自分の道具なら片付けるよ。")
 	var care = sim._authored_routine_at(receiver).get("id","")=="after_school_care"
-	for help in supports:
+	for help in _active_supports():
 		if help.state in ["travel","active","handoff"] and (receiver_id in [help.giver,help.receiver] or giver_id in [help.giver,help.receiver]):
 			return sim._reply(giver,"defer","今の手助けが終わってから、次のことを相談したい。")
 	if not sim._routine_at(giver).is_empty() or not giver.meeting_id.is_empty() or sim._next_commitment(giver).minutes<(360 if care else 180):
@@ -182,6 +211,7 @@ func propose_support(receiver_id: String, giver_id: String) -> Dictionary:
 	serial += 1
 	var help = {"id":"support_%d"%serial,"giver":giver_id,"receiver":receiver_id,"kind":"care" if care else "chores","place":sim.HOME[household_id(receiver)],"state":"travel","requested":sim.elapsed,"began":-1}
 	supports.append(help)
+	_invalidate_support_index()
 	giver.support_id = help.id
 	giver.routine_id = ""
 	sim._assign(giver,"care" if care else "chores",help.place,90,"%sさんの家で、できることを手伝いたい"%receiver.name)
@@ -192,6 +222,7 @@ func _end_support(help: Dictionary, completed: bool, reason: String) -> void:
 	var receiver = sim.person(help.receiver)
 	if (completed or help.state in ["active","handoff"]) and help.kind=="care" and sim._authored_routine_at(receiver).get("id","")=="after_school_care" and (receiver.moving or receiver.place!=help.place):
 		help.state = "handoff"
+		_invalidate_support_index()
 		help.finish_completed = completed
 		help.finish_reason = reason
 		receiver.routine_id = ""
@@ -199,6 +230,7 @@ func _end_support(help: Dictionary, completed: bool, reason: String) -> void:
 		sim._log(giver.id,"交代して戻るのを待っている","%sさんが家に戻るまで、凛と一緒に過ごす。"%receiver.name)
 		return
 	help.state = "completed" if completed else "interrupted"
+	_invalidate_support_index()
 	giver.support_id = ""
 	giver.routine_id = ""
 	giver.remaining = 0
@@ -331,7 +363,7 @@ func person_text(p: Dictionary) -> String:
 	if p.id=="ryo": text += "\n凛との模型づくり：%d%%\n"%int(p.private_project*100)
 	var own_project = {"aoi":"radio","osamu":"radio","rin":"model","nagisa":"bread","maho":"bread","fumi":"photo","ritsu":"music"}.get(p.id,"model")
 	text += "\n二人で進める制作：%d%%\n"%int(projects[own_project]*100)
-	for help in supports:
+	for help in _active_supports():
 		if help.state in ["travel","active","handoff"] and p.id in [help.giver,help.receiver]:
 			text += "\n%sさんが%s。\n"%[sim.person(help.giver).name,"家に向かっている" if help.state=="travel" else "暮らしの用事を引き受けている"]
 	if not h.ledger.is_empty():
@@ -340,7 +372,7 @@ func person_text(p: Dictionary) -> String:
 	return text
 
 func reserved(p: Dictionary, minute: int) -> bool:
-	for help in supports:
+	for help in _active_supports():
 		if help.state in ["travel","active","handoff"] and help.giver==p.id and minute>=help.requested and minute<help.requested+(360 if help.kind=="care" else 180):
 			return true
 	return false

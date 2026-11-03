@@ -1,0 +1,30 @@
+{
+  "scope": "Mac Apple M5, local microbenchmark of WorkFamily.adjust_routine, 100000 calls; not a frame-rate or whole-game speed benchmark",
+  "samples": [
+    {
+      "cached_usec": 29522,
+      "calls": 100000,
+      "completed_supports": 0,
+      "history_retained": 0,
+      "reference_usec": 20801,
+      "same_output": true
+    },
+    {
+      "cached_usec": 28593,
+      "calls": 100000,
+      "completed_supports": 42,
+      "history_retained": 42,
+      "reference_usec": 525686,
+      "same_output": true
+    },
+    {
+      "cached_usec": 28303,
+      "calls": 100000,
+      "completed_supports": 256,
+      "history_retained": 256,
+      "reference_usec": 3235767,
+      "same_output": true
+    }
+  ],
+  "correctness": "test_support_index.gd compares an uncached reference during actual support/save/handoff/death; full serialized history and RNG are preserved"
+}
