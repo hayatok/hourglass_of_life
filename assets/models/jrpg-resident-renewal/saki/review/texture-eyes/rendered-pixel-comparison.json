@@ -1,0 +1,46 @@
+{
+	"assertions_added": 0,
+	"interpretation": "One rendered regression comparison group, not six new tests.",
+	"maximum_channel_error": 0.0,
+	"method": "Decode PNG to RGBA8 and compare actual pixel channels directly. No SHA/file-identity test.",
+	"scenarios": {
+		"blink-lod0": {
+			"changed_pixels": 0,
+			"height": 640,
+			"maximum_channel_error": 0.0,
+			"width": 640
+		},
+		"blink-lod1": {
+			"changed_pixels": 0,
+			"height": 640,
+			"maximum_channel_error": 0.0,
+			"width": 640
+		},
+		"blink-lod2": {
+			"changed_pixels": 0,
+			"height": 640,
+			"maximum_channel_error": 0.0,
+			"width": 640
+		},
+		"open-lod0": {
+			"changed_pixels": 0,
+			"height": 640,
+			"maximum_channel_error": 0.0,
+			"width": 640
+		},
+		"sleep": {
+			"changed_pixels": 0,
+			"height": 640,
+			"maximum_channel_error": 0.0,
+			"width": 640
+		},
+		"tired-lod0": {
+			"changed_pixels": 0,
+			"height": 640,
+			"maximum_channel_error": 0.0,
+			"width": 640
+		}
+	},
+	"scope": "Same r3 Haru geometry, pose, camera and lighting; stable-commit shader versus current optional-chart shader.",
+	"total_changed_pixels": 0
+}
