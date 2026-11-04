@@ -35,6 +35,10 @@ func _ready() -> void:
 		%ProjectActivity.set_item_metadata(%ProjectActivity.item_count-1,entry.key)
 	%ProjectActivity.item_selected.connect(func(_index): sync_partner_preview())
 	partner.item_selected.connect(func(_index): sync_partner_preview())
+	for option: OptionButton in [partner,%ProjectActivity]:
+		var popup := option.get_popup()
+		popup.about_to_popup.connect(_contain_popup.call_deferred.bind(popup))
+		popup.size_changed.connect(_contain_popup.call_deferred.bind(popup))
 	%Close.focus_previous = %Close.get_path_to(%Done)
 	%Done.focus_next = %Done.get_path_to(%Close)
 	get_viewport().size_changed.connect(_fit_dialog)
@@ -99,9 +103,24 @@ func _fit_dialog() -> void:
 
 func _fit_partner_popup() -> void:
 	if not is_instance_valid(partner): return
-	var viewport := get_viewport_rect().size
-	partner.get_popup().max_size = Vector2i(maxi(1,int(viewport.x-32)),maxi(1,mini(420,int(viewport.y-32))))
-	%ProjectActivity.get_popup().max_size = partner.get_popup().max_size
+	for option: OptionButton in [partner,%ProjectActivity]:
+		var popup := option.get_popup()
+		var bounds := _popup_viewport_bounds(popup)
+		popup.max_size = Vector2i(maxi(1,bounds.size.x-32),maxi(1,mini(420,bounds.size.y-32)))
+		_contain_popup.call_deferred(popup)
+
+func _popup_viewport_bounds(popup: PopupMenu) -> Rect2i:
+	if popup.is_embedded():
+		return Rect2i(Vector2i.ZERO,Vector2i(get_viewport_rect().size))
+	var window := get_window()
+	return Rect2i(window.position,window.size)
+
+func _contain_popup(popup: PopupMenu) -> void:
+	if not is_instance_valid(popup) or not popup.visible: return
+	var bounds := _popup_viewport_bounds(popup)
+	var fitted := Vector2i(clampi(popup.position.x,bounds.position.x,maxi(bounds.position.x,bounds.end.x-popup.size.x)),
+		clampi(popup.position.y,bounds.position.y,maxi(bounds.position.y,bounds.end.y-popup.size.y)))
+	if popup.position!=fitted: popup.position = fitted
 
 func _show_choices() -> void:
 	proposal_kind = ""
