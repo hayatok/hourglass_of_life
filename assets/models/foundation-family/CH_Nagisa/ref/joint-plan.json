@@ -1,0 +1,571 @@
+{
+  "status": "provisional_image_derived_plan_not_a_bound_rig",
+  "reference": "ref/turnaround-v1.png",
+  "height_m": 1.65,
+  "axes": {
+    "up": "+Z",
+    "forward": "-Y",
+    "left": "+X"
+  },
+  "rest_pose": "front reference relaxed A-pose; side reference uses different arm pose",
+  "bone_family": "existing 35-bone DEF family with image-faithful joint locations",
+  "inferred": [
+    "all joint depths",
+    "covered hip/knee pivots",
+    "finger flexion axes",
+    "apron deformation and seat-clearance poses"
+  ],
+  "reference_uncertainty_px": [
+    2,
+    4
+  ],
+  "bones": [
+    {
+      "name": "DEF-root",
+      "parent": null,
+      "head_m": [
+        0,
+        0,
+        0
+      ],
+      "tail_m": [
+        0,
+        0,
+        0.15
+      ],
+      "evidence": "authored floor origin"
+    },
+    {
+      "name": "DEF-pelvis",
+      "parent": "DEF-root",
+      "head_m": [
+        0,
+        0,
+        0.945
+      ],
+      "tail_m": [
+        0,
+        -0.008,
+        1.045
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-spine_01",
+      "parent": "DEF-pelvis",
+      "head_m": [
+        0,
+        -0.008,
+        1.045
+      ],
+      "tail_m": [
+        0,
+        -0.015,
+        1.155
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-spine_02",
+      "parent": "DEF-spine_01",
+      "head_m": [
+        0,
+        -0.015,
+        1.155
+      ],
+      "tail_m": [
+        0,
+        -0.02,
+        1.24
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-chest",
+      "parent": "DEF-spine_02",
+      "head_m": [
+        0,
+        -0.02,
+        1.24
+      ],
+      "tail_m": [
+        0,
+        -0.02,
+        1.318
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-neck",
+      "parent": "DEF-chest",
+      "head_m": [
+        0,
+        -0.02,
+        1.318
+      ],
+      "tail_m": [
+        0,
+        -0.018,
+        1.398
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-head",
+      "parent": "DEF-neck",
+      "head_m": [
+        0,
+        -0.018,
+        1.398
+      ],
+      "tail_m": [
+        0,
+        -0.004,
+        1.622
+      ],
+      "evidence": "front chin/crown measured; pivot and depth inferred"
+    },
+    {
+      "name": "DEF-apron_front",
+      "parent": "DEF-pelvis",
+      "head_m": [
+        0,
+        -0.115,
+        1.065
+      ],
+      "tail_m": [
+        0,
+        -0.166,
+        0.641
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-apron_back",
+      "parent": "DEF-pelvis",
+      "head_m": [
+        0,
+        0.086,
+        1.065
+      ],
+      "tail_m": [
+        0,
+        0.135,
+        0.641
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-clavicle.L",
+      "parent": "DEF-chest",
+      "head_m": [
+        0.034,
+        -0.02,
+        1.318
+      ],
+      "tail_m": [
+        0.146,
+        0.002,
+        1.318
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-upper_arm.L",
+      "parent": "DEF-clavicle.L",
+      "head_m": [
+        0.146,
+        0.002,
+        1.318
+      ],
+      "tail_m": [
+        0.251,
+        0.014,
+        1.082
+      ],
+      "evidence": "front shoulder/elbow measured 2-4px; depth inferred"
+    },
+    {
+      "name": "DEF-forearm.L",
+      "parent": "DEF-upper_arm.L",
+      "head_m": [
+        0.251,
+        0.014,
+        1.082
+      ],
+      "tail_m": [
+        0.324,
+        0.008,
+        0.917
+      ],
+      "evidence": "front elbow/wrist measured 2-4px; depth inferred"
+    },
+    {
+      "name": "DEF-hand.L",
+      "parent": "DEF-forearm.L",
+      "head_m": [
+        0.324,
+        0.008,
+        0.917
+      ],
+      "tail_m": [
+        0.354,
+        0.005,
+        0.847
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger0.L",
+      "parent": "DEF-hand.L",
+      "head_m": [
+        0.32999999999999996,
+        0.003,
+        0.873
+      ],
+      "tail_m": [
+        0.35,
+        -0.004,
+        0.821
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger1.L",
+      "parent": "DEF-hand.L",
+      "head_m": [
+        0.34199999999999997,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        0.362,
+        -0.004,
+        0.782
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger2.L",
+      "parent": "DEF-hand.L",
+      "head_m": [
+        0.355,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        0.375,
+        -0.004,
+        0.775
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger3.L",
+      "parent": "DEF-hand.L",
+      "head_m": [
+        0.368,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        0.388,
+        -0.004,
+        0.78
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger4.L",
+      "parent": "DEF-hand.L",
+      "head_m": [
+        0.379,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        0.399,
+        -0.004,
+        0.7929999999999999
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-thigh.L",
+      "parent": "DEF-pelvis",
+      "head_m": [
+        0.09,
+        0,
+        0.945
+      ],
+      "tail_m": [
+        0.108,
+        0.028,
+        0.485
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-shin.L",
+      "parent": "DEF-thigh.L",
+      "head_m": [
+        0.108,
+        0.028,
+        0.485
+      ],
+      "tail_m": [
+        0.111,
+        0.027,
+        0.105
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-foot.L",
+      "parent": "DEF-shin.L",
+      "head_m": [
+        0.111,
+        0.027,
+        0.105
+      ],
+      "tail_m": [
+        0.112,
+        -0.083,
+        0.037
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-toe.L",
+      "parent": "DEF-foot.L",
+      "head_m": [
+        0.112,
+        -0.083,
+        0.037
+      ],
+      "tail_m": [
+        0.112,
+        -0.145,
+        0.028
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-clavicle.R",
+      "parent": "DEF-chest",
+      "head_m": [
+        -0.034,
+        -0.02,
+        1.318
+      ],
+      "tail_m": [
+        -0.146,
+        0.002,
+        1.318
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-upper_arm.R",
+      "parent": "DEF-clavicle.R",
+      "head_m": [
+        -0.146,
+        0.002,
+        1.318
+      ],
+      "tail_m": [
+        -0.251,
+        0.014,
+        1.082
+      ],
+      "evidence": "front shoulder/elbow measured 2-4px; depth inferred"
+    },
+    {
+      "name": "DEF-forearm.R",
+      "parent": "DEF-upper_arm.R",
+      "head_m": [
+        -0.251,
+        0.014,
+        1.082
+      ],
+      "tail_m": [
+        -0.324,
+        0.008,
+        0.917
+      ],
+      "evidence": "front elbow/wrist measured 2-4px; depth inferred"
+    },
+    {
+      "name": "DEF-hand.R",
+      "parent": "DEF-forearm.R",
+      "head_m": [
+        -0.324,
+        0.008,
+        0.917
+      ],
+      "tail_m": [
+        -0.354,
+        0.005,
+        0.847
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger0.R",
+      "parent": "DEF-hand.R",
+      "head_m": [
+        -0.32999999999999996,
+        0.003,
+        0.873
+      ],
+      "tail_m": [
+        -0.35,
+        -0.004,
+        0.821
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger1.R",
+      "parent": "DEF-hand.R",
+      "head_m": [
+        -0.34199999999999997,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        -0.362,
+        -0.004,
+        0.782
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger2.R",
+      "parent": "DEF-hand.R",
+      "head_m": [
+        -0.355,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        -0.375,
+        -0.004,
+        0.775
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger3.R",
+      "parent": "DEF-hand.R",
+      "head_m": [
+        -0.368,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        -0.388,
+        -0.004,
+        0.78
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-finger4.R",
+      "parent": "DEF-hand.R",
+      "head_m": [
+        -0.379,
+        0.003,
+        0.846
+      ],
+      "tail_m": [
+        -0.399,
+        -0.004,
+        0.7929999999999999
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-thigh.R",
+      "parent": "DEF-pelvis",
+      "head_m": [
+        -0.09,
+        0,
+        0.945
+      ],
+      "tail_m": [
+        -0.108,
+        0.028,
+        0.485
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-shin.R",
+      "parent": "DEF-thigh.R",
+      "head_m": [
+        -0.108,
+        0.028,
+        0.485
+      ],
+      "tail_m": [
+        -0.111,
+        0.027,
+        0.105
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-foot.R",
+      "parent": "DEF-shin.R",
+      "head_m": [
+        -0.111,
+        0.027,
+        0.105
+      ],
+      "tail_m": [
+        -0.112,
+        -0.083,
+        0.037
+      ],
+      "evidence": "inferred"
+    },
+    {
+      "name": "DEF-toe.R",
+      "parent": "DEF-foot.R",
+      "head_m": [
+        -0.112,
+        -0.083,
+        0.037
+      ],
+      "tail_m": [
+        -0.112,
+        -0.145,
+        0.028
+      ],
+      "evidence": "inferred"
+    }
+  ],
+  "skin_contract": {
+    "max_influences": 4,
+    "normalised_weights": true,
+    "no_unweighted_vertices": true,
+    "no_negative_scale": true
+  },
+  "face_shape_keys": [
+    "Blink",
+    "Smile",
+    "Sad",
+    "Tired",
+    "LookLeft",
+    "LookRight"
+  ],
+  "sockets": [
+    "hand.L",
+    "hand.R",
+    "head",
+    "chest",
+    "foot.L",
+    "foot.R"
+  ]
+}

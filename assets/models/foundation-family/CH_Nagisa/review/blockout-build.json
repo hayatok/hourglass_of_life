@@ -1,0 +1,8 @@
+{
+  "phase": "02_blockout",
+  "parts": 50,
+  "height_target_m": 1.65,
+  "reference_heads": 6.5,
+  "inferred": "hidden anatomy, cross-section roundness and cloth thickness; see brief",
+  "render_gate": "pending; run fixed/world-registered silhouettes before forms"
+}
