@@ -179,6 +179,7 @@ func add_visuals(house: LivingHouse) -> void:
 			if id in ["bathroom","washroom","toilet"]: child.material_override=_tiles("wet_floor","c4d1bf",.22)
 			elif id=="entrance": child.material_override=_tiles("entry_floor","b5b3a1",.33)
 			elif id=="outside": child.material_override=_tiles("patio_floor","b9b8a3",.42)
+			elif house.definition.get("external_zones",[]).any(func(zone):return zone.id==id):child.material_override=_tiles("courtyard_stone","c6bda7",.30)
 			else: child.material_override=_wood("floor","bda174",true)
 	for wall: Node3D in house.wall_nodes: _wall_details(wall,house.definition.house)
 	for record in house.definition.doors: _door_details(house,record)
@@ -193,6 +194,7 @@ func add_visuals(house: LivingHouse) -> void:
 	for light in house.definition.get("ceiling_lights",[]):
 		if light.get("kind","")=="pendant":_pendant(architecture,_v(light.at))
 	_roof_details(house)
+	_foundation_details(house)
 
 func _wall_details(wall: Node3D, house: Dictionary) -> void:
 	_clear_art(wall)
@@ -205,7 +207,7 @@ func _wall_details(wall: Node3D, house: Dictionary) -> void:
 	var high: float=wall.position.y+size.y*.5
 	if low<.03:
 		_box(art,"Skirting",Vector3(0,-size.y*.5+.062,0),Vector3(size.x+.002,.124,size.z+.002),_wood("skirting","a47751"))
-	if high>=float(house.get("wall_height",2.65))-.01:
+	if high>=float(wall.get_meta("wall_height",house.get("wall_height",2.65)))-.01:
 		_box(art,"Cornice",Vector3(0,size.y*.5-.045,0),Vector3(size.x+.004,.09,size.z+.004),_wood("trim","95704e"))
 
 func _door_details(house: LivingHouse, record: Dictionary) -> void:
@@ -401,11 +403,12 @@ func _table(parent: Node3D, size: Vector3, record: Dictionary) -> void:
 		_box(parent,"EndApron",Vector3(0,size.y-.10,side*(size.z*.5-.06)),Vector3(size.x-.11,.12,.04),wood)
 	if record.type=="dining_table":
 		_slab(parent,"TableRunner",Vector3(0,size.y+.003,0),Vector3(size.x*.25,.006,size.z*.92),.015,_cloth("runner","c4baa0",.55))
-		_cylinder(parent,"CeramicVase",Vector3(0,size.y+.072,-size.z*.12),.045,.14,_paint("pottery","a6b5a1",.74),.028)
+		var centerpiece := _node(parent,"Centerpiece",_v(record.get("centerpiece_offset",[0,0,-size.z*.12])))
+		_cylinder(centerpiece,"CeramicVase",Vector3(0,size.y+.072,0),.045,.14,_paint("pottery","a6b5a1",.74),.028)
 		for index in 3:
-			var tip := Vector3((index-1)*.035,size.y+.31,-size.z*.12+.02*index)
-			_rod(parent,"Stem",Vector3(0,size.y+.13,-size.z*.12),tip,.0025,_paint("stem","70846a"))
-			_sphere(parent,"Leaf",tip,Vector3(.06,.025,.035),_paint("leaf","869b73"))
+			var tip := Vector3((index-1)*.035,size.y+.31,.02*index)
+			_rod(centerpiece,"Stem",Vector3(0,size.y+.13,0),tip,.0025,_paint("stem","70846a"))
+			_sphere(centerpiece,"Leaf",tip,Vector3(.06,.025,.035),_paint("leaf","869b73"))
 		return
 	var content: String=str(record.get("desk_content",""))
 	parent.set_meta("desk_content",content)
@@ -610,12 +613,17 @@ func _pendant(parent: Node3D, at: Vector3) -> void:
 
 func _roof_details(house: LivingHouse) -> void:
 	if not is_instance_valid(house.roof_root):return
-	_clear_art(house.roof_root)
-	var art := _node(house.roof_root,"RoofFinish");art.set_meta("home_art",true)
-	var roof: Dictionary=house.definition.house.roof
-	var bounds: Array=house.definition.house.bounds
+	for entry: Dictionary in house.roof_volumes.values():_roof_finish(house,entry)
+
+func _roof_finish(house: LivingHouse, entry: Dictionary) -> void:
+	var parent: Node3D=entry.node
+	_clear_art(parent)
+	var art := _node(parent,"RoofFinish");art.set_meta("home_art",true)
+	var spec: Dictionary=entry.spec
+	var roof: Dictionary=spec.roof
+	var bounds: Array=spec.bounds
 	var low := Vector2(bounds[0],bounds[1]);var high := low+Vector2(bounds[2],bounds[3])
-	var height: float=float(house.definition.house.get("wall_height",2.65))
+	var height: float=float(spec.height)
 	var rise: float=float(roof.rise);var eaves: float=float(roof.get("eaves",.35))
 	var along_x: bool=roof.get("ridge_axis","x")=="x"
 	var middle: float=(low.y+high.y)*.5 if along_x else (low.x+high.x)*.5
@@ -626,7 +634,10 @@ func _roof_details(house: LivingHouse) -> void:
 	var ridge := _paint("roof_ridge_"+base.to_html(false),base.lightened(.08).to_html(false),.87)
 	var first := Vector3(low.x-eaves,height+rise+.035,middle) if along_x else Vector3(middle,height+rise+.035,low.y-eaves)
 	var last := Vector3(high.x+eaves,height+rise+.035,middle) if along_x else Vector3(middle,height+rise+.035,high.y+eaves)
-	_rod(art,"RidgeCap",first,last,.055,ridge)
+	for part in house.roof_edge_parts(spec,first,last):_rod(art,"RidgeCap",part[0],part[1],.055,ridge)
+	if roof.get("style","")=="shingle":
+		_shingle_roof(house,art,spec)
+		return
 	for side in [-1,1]:
 		var edge: float=middle+side*(half+eaves)
 		for row in range(7):
@@ -636,3 +647,85 @@ func _roof_details(house: LivingHouse) -> void:
 			var a := Vector3(low.x-eaves,y,across) if along_x else Vector3(across,y,low.y-eaves)
 			var b := Vector3(high.x+eaves,y,across) if along_x else Vector3(across,y,high.y+eaves)
 			_rod(art,"TileCourse",a,b,.009,seams)
+
+func _shingle_roof(house: LivingHouse, parent: Node3D, spec: Dictionary) -> void:
+	var roof: Dictionary=spec.roof;var b: Array=spec.bounds
+	var along_x: bool=roof.get("ridge_axis","x")=="x"
+	var low: float=float(b[0] if along_x else b[1])-float(roof.eaves)
+	var high: float=float(b[0]+b[2] if along_x else b[1]+b[3])+float(roof.eaves)
+	var middle: float=float(b[1]+b[3]*.5 if along_x else b[0]+b[2]*.5)
+	var half: float=float(b[3] if along_x else b[2])*.5
+	var extent: float=half+float(roof.eaves)
+	var rise: float=float(roof.rise)
+	var rows: int=ceili(sqrt(extent*extent+pow(rise*extent/half,2))/.32)
+	var columns: int=ceili((high-low)/.31)
+	var surface := SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var base := Color(roof.color)
+	for side in [-1,1]:
+		var normal := Vector3(0,half,side*rise).normalized() if along_x else Vector3(side*rise,half,0).normalized()
+		for row in rows:
+			var near: float=middle+side*extent*(1-float(row)/rows)
+			var far: float=middle+side*maxf(0,extent*(1-float(row+1)/rows)-.035)
+			for column in range(-1,columns+1):
+				var stagger: float=.5 if row%2 else 0.0
+				var left: float=maxf(low,low+(column+stagger)*(high-low)/columns+.003)
+				var right: float=minf(high,low+(column+stagger+1)*(high-low)/columns-.003)
+				if right-left<.015:continue
+				var pa := Vector2(left,near) if along_x else Vector2(near,left)
+				var pb := Vector2(right,near) if along_x else Vector2(near,right)
+				var pc := Vector2(right,far) if along_x else Vector2(far,right)
+				var pd := Vector2(left,far) if along_x else Vector2(far,left)
+				var a := Vector3(pa.x,house.roof_height_at(spec,pa)+.022,pa.y)
+				var b3 := Vector3(pb.x,house.roof_height_at(spec,pb)+.022,pb.y)
+				var c := Vector3(pc.x,house.roof_height_at(spec,pc)+.007,pc.y)
+				var d := Vector3(pd.x,house.roof_height_at(spec,pd)+.007,pd.y)
+				var shade: float=float(posmod(column*3+row*5,7)-3)*.012
+				surface.set_color(base.lightened(shade) if shade>=0 else base.darkened(-shade))
+				_roof_polygon(surface,house,spec,[a,b3,c,d],normal)
+				var front := Vector3(0,0,side) if along_x else Vector3(side,0,0)
+				_roof_polygon(surface,house,spec,[a-Vector3.UP*.017,b3-Vector3.UP*.017,b3,a],front)
+	var material := _paint("shingle_vertex","ffffff",.92);material.vertex_color_use_as_albedo=true
+	_mesh(parent,"IndividualShingles",surface.commit(),Vector3.ZERO,material)
+	var timber := _wood("roof_fascia","81664d")
+	for side in [-1,1]:
+		var edge: float=middle+side*extent
+		var at := Vector2((low+high)*.5,edge) if along_x else Vector2(edge,(low+high)*.5)
+		var fa := Vector3(low,house.roof_height_at(spec,at)-.055,edge) if along_x else Vector3(edge,house.roof_height_at(spec,at)-.055,low)
+		var fb := Vector3(high,fa.y,edge) if along_x else Vector3(edge,fa.y,high)
+		for part in house.roof_edge_parts(spec,fa,fb):
+			var length: float=part[0].distance_to(part[1])
+			_box(parent,"EavesFascia",(part[0]+part[1])*.5,Vector3(length,.13,.065) if along_x else Vector3(.065,.13,length),timber)
+		for index in range(ceili((high-low)/.85)+1):
+			var along: float=lerpf(low+.08,high-.08,float(index)/maxi(1,ceili((high-low)/.85)))
+			var outer := Vector2(along,edge) if along_x else Vector2(edge,along)
+			var inner := Vector2(along,edge-side*.42) if along_x else Vector2(edge-side*.42,along)
+			for part in house.roof_edge_parts(spec,Vector3(outer.x,house.roof_height_at(spec,outer)-.10,outer.y),Vector3(inner.x,house.roof_height_at(spec,inner)-.10,inner.y)):
+				_rod(parent,"ExposedRafter",part[0],part[1],.022,timber)
+
+func _foundation_details(house: LivingHouse) -> void:
+	for foundation: MeshInstance3D in house.foundation_nodes:
+		_clear_art(foundation)
+		var art := _node(foundation,"StoneJoints");art.set_meta("home_art",true)
+		var size: Vector3=foundation.mesh.size
+		var surface := SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for axis in [0,2]:
+			var length: float=size[2 if axis==0 else 0]
+			for sign in [-1,1]:
+				var normal := Vector3(sign,0,0) if axis==0 else Vector3(0,0,sign)
+				for row in 2:
+					var y: float=-size.y*.5+size.y*float(row+1)/3
+					var a := Vector3(sign*(size.x*.5+.001),y,-length*.5) if axis==0 else Vector3(-length*.5,y,sign*(size.z*.5+.001))
+					var b3 := Vector3(sign*(size.x*.5+.001),y,length*.5) if axis==0 else Vector3(length*.5,y,sign*(size.z*.5+.001))
+					_triangle(surface,a,b3,b3+Vector3.UP*.008,normal);_triangle(surface,a,b3+Vector3.UP*.008,a+Vector3.UP*.008,normal)
+				for index in range(ceili(length/.55)):
+					var along: float=-length*.5+(index+.5)*length/ceili(length/.55)
+					var a := Vector3(sign*(size.x*.5+.001),-size.y*.5,along) if axis==0 else Vector3(along,-size.y*.5,sign*(size.z*.5+.001))
+					var b3: Vector3=a+Vector3.UP*size.y
+					var offset := Vector3(0,0,.006) if axis==0 else Vector3(.006,0,0)
+					_triangle(surface,a,b3,b3+offset,normal);_triangle(surface,a,b3+offset,a+offset,normal)
+		_mesh(art,"MortarLines",surface.commit(),Vector3.ZERO,_paint("foundation_mortar","c2bba5",.98))
+
+func _roof_polygon(surface: SurfaceTool, house: LivingHouse, spec: Dictionary, polygon: Array, normal: Vector3) -> void:
+	for part in house.roof_polygon_parts(spec,polygon):
+		for i in range(1,part.size()-1):
+			if (part[i]-part[0]).cross(part[i+1]-part[0]).length_squared()>.000000000001:_triangle(surface,part[0],part[i],part[i+1],normal)

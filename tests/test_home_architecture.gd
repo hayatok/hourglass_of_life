@@ -43,8 +43,8 @@ func collider_rids(node: Node) -> Array[RID]:
 	return result
 
 func wall_meshes_match(house: LivingHouse) -> bool:
-	var height: float=float(house.definition.house.wall_height)
 	for wall in house.definition.walls:
+		var height: float=float(wall.get("height",house.definition.house.wall_height))
 		var a := Vector2(wall.start[0],wall.start[1]);var b := Vector2(wall.end[0],wall.end[1])
 		var direction := (b-a).normalized();var length := a.distance_to(b)
 		var panes: Array[Rect2]=[]
@@ -91,7 +91,10 @@ func aperture_rays(house: LivingHouse) -> bool:
 		hit=ray(house,sample,inward,excluded)
 		if not hit.is_empty():return aperture_failure(record.id,"excluded glass",hit)
 		var below: Vector3=sample;below.y=(center.y-float(record.height)*.5)*.5
-		var above: Vector3=sample;above.y=lerpf(center.y+float(record.height)*.5,float(house.definition.house.wall_height),.5)
+		var wall_height: float=float(house.definition.house.wall_height)
+		for wall in house.definition.walls:
+			if wall.id==record.wall:wall_height=float(wall.get("height",wall_height))
+		var above: Vector3=sample;above.y=lerpf(center.y+float(record.height)*.5,wall_height,.5)
 		hit=ray(house,below,inward,roof_excluded)
 		if not tagged(hit,"wall_id",record.wall):return aperture_failure(record.id,"below",hit)
 		hit=ray(house,above,inward,roof_excluded)

@@ -179,6 +179,16 @@ def check_plan(plan):
                     queue.append(other)
         return seen
 
+    # Public exterior surfaces can meet without an invented wall/door. Actual
+    # body support across their union is checked by design_paths below.
+    for index, first in enumerate(plan['external_zones']):
+        for second in plan['external_zones'][index+1:]:
+            a, b = first['bounds'], second['bounds']
+            dx = min(a[0]+a[2], b[0]+b[2])-max(a[0], b[0])
+            dz = min(a[1]+a[3], b[1]+b[3])-max(a[1], b[1])
+            if dx >= -EPS and dz >= -EPS and max(dx, dz) > 2*radius:
+                graph[first['id']].append(second['id'])
+                graph[second['id']].append(first['id'])
     require(reachable("outside", set(zones)) == set(zones),
             "The room graph is disconnected from the front entrance")
     sanitary = {"outside"} | {r["id"] for r in rooms.values() if r["type"] in ["entrance", "circulation", "toilet", "washroom_laundry", "bathroom"]}
@@ -366,6 +376,18 @@ def _authored_contract_errors(plan):
         seat = fixtures[resident['dining_seat']]
         if id not in room['allowed_residents'] or seat['type'] != 'dining_seat' or seat['owner'] != id:
             errors.append(id+': bedroom admission or assigned dining seat is inconsistent')
+    volumes = {v['id']:v for v in house.get('volumes',[])}
+    for room in rooms.values():
+        if not volumes:
+            continue
+        volume = volumes.get(room.get('volume'))
+        if not volume:
+            errors.append(room['id']+': missing actual building volume')
+            continue
+        pieces = volume.get('footprint',[volume['bounds']] if 'bounds' in volume else [])
+        bounds = room['bounds']
+        if not any(inside(bounds[:2],p) and inside([bounds[0]+bounds[2],bounds[1]+bounds[3]],p) for p in pieces):
+            errors.append(room['id']+': room leaves its actual building footprint')
     for fixture in fixtures.values():
         for reference in ['serves', 'use_via', 'support_fixture']:
             if reference in fixture and (fixture[reference] not in fixtures or fixtures[fixture[reference]]['room'] != fixture['room']):
@@ -403,7 +425,7 @@ def _art_intent_errors(plan):
         fixed = c[2 if axis == 0 else 0]
         low, high = horizontal-win['width']/2, horizontal+win['width']/2
         sill, head = c[1]-win['height']/2, c[1]+win['height']/2
-        if not (win['width'] > 0 and win['height'] > 0 and sill > 0 and head <= plan['house']['wall_height']+EPS):
+        if not (win['width'] > 0 and win['height'] > 0 and sill > 0 and head <= wall.get('height',plan['house']['wall_height'])+EPS):
             errors.append(id+': sill/head or window dimensions leave the wall')
         if abs(fixed-a[1-axis]) > EPS or low < min(a[axis], b[axis])-EPS or high > max(a[axis], b[axis])+EPS:
             errors.append(id+': window center/span leaves its authored wall')
@@ -469,7 +491,11 @@ def design_paths(plan):
     radius = plan['house']['design_body_radius']
     thickness = plan['house']['wall_thickness']
     step = .1
-    floors = [plan['house']['bounds']] + [z['bounds'] for z in plan['external_zones']]
+    floors = [z['bounds'] for z in plan['rooms']+plan['external_zones']]
+    for door in plan['doors']:
+        cx, _, cz = door['center']
+        w, d = (door['width'],thickness) if door['axis']=='x' else (thickness,door['width'])
+        floors.append([cx-w/2,cz-d/2,w,d])
     solids = [expanded(wall_footprint(a, b, thickness), radius)
               for wall in plan['walls'] for a, b in wall_sections(plan, wall)]
     solids += [expanded(footprint(f), radius) for f in plan['fixtures'] if f.get('blocking', True)]
@@ -561,7 +587,7 @@ def render(plan, output, paths):
     """Generate the diagram directly from plan coordinates, without an engine."""
     ns = 'http://www.w3.org/2000/svg'
     ET.register_namespace('', ns)
-    scale, left, top, legend = 70, 65, 95, 1010
+    scale, left, top, legend = min(70,875/plan['house']['width']), 65, 95, 1010
     notes_height = sum(17*math.ceil(len(f)/48)+12 for f in plan['house']['design_features'])
     notes_top = max(top+(plan['house']['depth']+2.4)*scale+42, 970)
     height = math.ceil(max(notes_top+notes_height+55,

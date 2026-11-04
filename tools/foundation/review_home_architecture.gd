@@ -42,7 +42,8 @@ func run() -> void:
 		var center := Vector3(float(bounds[0])+float(bounds[2])*.5,0,float(bounds[1])+float(bounds[3])*.5)
 		var ground := MeshInstance3D.new();var plane := PlaneMesh.new()
 		plane.size=Vector2(float(bounds[2])+10,float(bounds[3])+10);ground.mesh=plane
-		ground.position=center+Vector3.DOWN*.16
+		var ground_depth: float=maxf(.16,.15+float(house.definition.house.get("foundation",{}).get("depth",0)))
+		ground.position=center+Vector3.DOWN*ground_depth
 		var grass := StandardMaterial3D.new();grass.albedo_color=Color("8ea77d");grass.roughness=1
 		ground.material_override=grass;stage.add_child(ground)
 		var item: Dictionary={"source":path,"house":house.definition.house.id,"label":house.definition.house.label,
