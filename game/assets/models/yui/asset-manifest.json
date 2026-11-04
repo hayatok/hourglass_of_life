@@ -1,0 +1,683 @@
+{
+  "asset": "CH_Yui",
+  "generated": "2026-11-03T20:07:45",
+  "blender": "5.2.1 LTS",
+  "source": "assets/models/jrpg-resident-renewal/source/yui/CH_Yui_AnimationMaster.blend",
+  "target_engine": "Godot4.7 Compatibility",
+  "units": {
+    "system": "METRIC",
+    "scale_length": 1.0,
+    "authoring_up": "Z",
+    "authoring_forward": "-Y",
+    "export_up": "Y",
+    "export_forward": "+Z",
+    "note": "glTF converts Z up to Y up; a subject facing -Y in Blender faces +Z in glTF"
+  },
+  "target_height_m": 1.7,
+  "bounds_m": {
+    "min": [
+      -0.2658,
+      -0.1967,
+      0.005
+    ],
+    "max": [
+      0.2747,
+      0.1971,
+      1.7051
+    ],
+    "size": [
+      0.5405,
+      0.3938,
+      1.7001
+    ]
+  },
+  "files": {
+    "all": "CH_Yui.glb",
+    "LOD1": "CH_Yui_LOD1.glb",
+    "LOD2": "CH_Yui_LOD2.glb"
+  },
+  "lods": [
+    {
+      "level": 0,
+      "objects": [
+        "CH_Yui_Body_LOD0"
+      ],
+      "tris": 29844
+    },
+    {
+      "level": 1,
+      "objects": [
+        "CH_Yui_Body_LOD1"
+      ],
+      "tris": 12520,
+      "preweld_vertices": 18880,
+      "welded_vertices": 14891,
+      "ratio": 0.42
+    },
+    {
+      "level": 2,
+      "objects": [
+        "CH_Yui_Body_LOD2"
+      ],
+      "tris": 4770,
+      "preweld_vertices": 18880,
+      "welded_vertices": 14891,
+      "ratio": 0.16
+    }
+  ],
+  "materials": [
+    "tripo_material_2d424f3b-2d6b-46a9-8737-46842c95cc40"
+  ],
+  "textures": [
+    {
+      "name": "CH_Yui_JRPG_Raw_basecolor.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "sRGB",
+      "packed": true,
+      "filepath": ""
+    },
+    {
+      "name": "CH_Yui_JRPG_Raw_rm.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "filepath": ""
+    },
+    {
+      "name": "CH_Yui_JRPG_Raw_normal.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "filepath": ""
+    }
+  ],
+  "texture_contract": {
+    "policy": "LOD0 exact original encoded images/UVs/material metadata; distance LODs have zero images and one slot, retaining actor override.",
+    "basecolor": "sRGB",
+    "normal": "raw tangent normal, Non-Color",
+    "distance_lod_standalone_preview": "intentionally untextured; source PBR inspection through LOD0/actor"
+  },
+  "skeleton": [
+    {
+      "armature": "CH_Yui_Rig",
+      "bones": 36,
+      "deform_bones": [
+        "DEF-root",
+        "DEF-pelvis",
+        "DEF-spine_01",
+        "DEF-spine_02",
+        "DEF-chest",
+        "DEF-neck",
+        "DEF-head",
+        "DEF-clavicle.L",
+        "DEF-upper_arm.L",
+        "DEF-forearm.L",
+        "DEF-hand.L",
+        "DEF-finger0.L",
+        "DEF-finger1.L",
+        "DEF-finger2.L",
+        "DEF-finger3.L",
+        "DEF-finger4.L",
+        "DEF-clavicle.R",
+        "DEF-upper_arm.R",
+        "DEF-forearm.R",
+        "DEF-hand.R",
+        "DEF-finger0.R",
+        "DEF-finger1.R",
+        "DEF-finger2.R",
+        "DEF-finger3.R",
+        "DEF-finger4.R",
+        "DEF-apron_front",
+        "DEF-apron_back",
+        "DEF-thigh.L",
+        "DEF-shin.L",
+        "DEF-foot.L",
+        "DEF-toe.L",
+        "DEF-thigh.R",
+        "DEF-shin.R",
+        "DEF-foot.R",
+        "DEF-toe.R",
+        "DEF-skirt_middle"
+      ],
+      "roots": [
+        "DEF-root"
+      ],
+      "rest_pose": "as exported"
+    }
+  ],
+  "sockets": [],
+  "colliders": [],
+  "animation_contract": "animation-contract.json",
+  "inferred_from_no_reference": [
+    "real height",
+    "side/back anatomy",
+    "hidden garment depth",
+    "joints",
+    "body animation retarget"
+  ],
+  "dependencies": [],
+  "resident": "yui",
+  "revision": "body-r1",
+  "raw_source": "assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb",
+  "raw_source_sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
+  "exported_glb_sha256": "a9cb13b6cbf444bf5e0e41afba90ba2795053cf117cde8f2d39d16a8f4ea4352",
+  "lod_sha256": {
+    "CH_Yui.glb": "a9cb13b6cbf444bf5e0e41afba90ba2795053cf117cde8f2d39d16a8f4ea4352",
+    "CH_Yui_LOD1.glb": "6d4ba8cfff24359d76b1b8fe11e52569ec299ddfc8214122e8182c959a854c46",
+    "CH_Yui_LOD2.glb": "23c0b7b5fca41ab5a4fb8b9389d257267e137403dc3b6c77a25e947ce94e3d9c"
+  },
+  "source_images": [
+    {
+      "name": "CH_Yui_JRPG_Raw_basecolor.jpg",
+      "mime_type": "image/jpeg",
+      "sha256": "b3d9d790c5839dc339ddb81f7462979d1594b4d64692d089adb6ed1366b618dc",
+      "pixel_policy": "original encoded bytes retained in LOD0, no re-encode"
+    },
+    {
+      "name": "CH_Yui_JRPG_Raw_rm.jpg",
+      "mime_type": "image/jpeg",
+      "sha256": "a272b48696b27c978499c0b3aa6f0b4fd5a5ef4a788ed4e8ea6041c2e478c900",
+      "pixel_policy": "original encoded bytes retained in LOD0, no re-encode"
+    },
+    {
+      "name": "CH_Yui_JRPG_Raw_normal.png",
+      "mime_type": "image/png",
+      "sha256": "c4e7672c7bd21ba5f5f144ccd627b4af45d56123c0229769387b29154cd208b5",
+      "pixel_policy": "original encoded bytes retained in LOD0, no re-encode"
+    }
+  ],
+  "canonical_rest_height_m": 1.7,
+  "locomotion_measurement": {
+    "fps": 30,
+    "cycle_seconds": 0.7666666666666667,
+    "method": "Mean backward foot-joint velocity in target low-support window (within40mm of each foot minimum).",
+    "support_samples": [
+      {
+        "side": "L",
+        "frame": 6,
+        "velocity_m_s": 0.2508088946342468,
+        "height_m": 0.14151370525360107
+      },
+      {
+        "side": "L",
+        "frame": 7,
+        "velocity_m_s": 0.5688004195690155,
+        "height_m": 0.14292973279953003
+      },
+      {
+        "side": "L",
+        "frame": 8,
+        "velocity_m_s": 0.8474671840667725,
+        "height_m": 0.14513996243476868
+      },
+      {
+        "side": "L",
+        "frame": 9,
+        "velocity_m_s": 1.0653021186590195,
+        "height_m": 0.14584922790527344
+      },
+      {
+        "side": "L",
+        "frame": 10,
+        "velocity_m_s": 1.2038047285750508,
+        "height_m": 0.14242252707481384
+      },
+      {
+        "side": "L",
+        "frame": 11,
+        "velocity_m_s": 1.6636788798496127,
+        "height_m": 0.13437768816947937
+      },
+      {
+        "side": "L",
+        "frame": 12,
+        "velocity_m_s": 1.9834065064787865,
+        "height_m": 0.1351388692855835
+      },
+      {
+        "side": "L",
+        "frame": 13,
+        "velocity_m_s": 1.7260091006755829,
+        "height_m": 0.14899715781211853
+      },
+      {
+        "side": "L",
+        "frame": 14,
+        "velocity_m_s": 1.3444317877292633,
+        "height_m": 0.16087552905082703
+      },
+      {
+        "side": "R",
+        "frame": 0,
+        "velocity_m_s": 2.052699141204357,
+        "height_m": 0.1300000548362732
+      },
+      {
+        "side": "R",
+        "frame": 1,
+        "velocity_m_s": 1.8730176240205765,
+        "height_m": 0.14197790622711182
+      },
+      {
+        "side": "R",
+        "frame": 2,
+        "velocity_m_s": 1.54784694314003,
+        "height_m": 0.15514922142028809
+      },
+      {
+        "side": "R",
+        "frame": 17,
+        "velocity_m_s": 0.0840720534324646,
+        "height_m": 0.14157253503799438
+      },
+      {
+        "side": "R",
+        "frame": 18,
+        "velocity_m_s": 0.4133234918117523,
+        "height_m": 0.14207413792610168
+      },
+      {
+        "side": "R",
+        "frame": 19,
+        "velocity_m_s": 0.7144340872764587,
+        "height_m": 0.1440993845462799
+      },
+      {
+        "side": "R",
+        "frame": 20,
+        "velocity_m_s": 0.9652477875351906,
+        "height_m": 0.14586779475212097
+      },
+      {
+        "side": "R",
+        "frame": 21,
+        "velocity_m_s": 1.1454305425286293,
+        "height_m": 0.14497563242912292
+      },
+      {
+        "side": "R",
+        "frame": 22,
+        "velocity_m_s": 1.2390593066811562,
+        "height_m": 0.13887473940849304
+      }
+    ],
+    "speed_mps": 1.149380033214887,
+    "limitation": "Playback best fit only; variable inherited stance velocity does not prove zero sliding."
+  },
+  "body_binding": {
+    "source_animation_master": "assets/models/CH_Maho/CH_Maho_animation_master.blend",
+    "source_height_m": 1.64,
+    "target_height_m": 1.7,
+    "bones": 36,
+    "clips": [
+      "eat",
+      "idle",
+      "rest",
+      "sit_talk",
+      "sleep",
+      "talk",
+      "walk",
+      "wave",
+      "work"
+    ],
+    "source_motion_profile": {
+      "walk_frames": 23,
+      "stride": 1.02
+    },
+    "retarget_translation_scale": 1.0365853658536586,
+    "upper_arm_local_z_bias_radians": {
+      "L": -0.00689160724505411,
+      "R": 0.00689160724505411
+    },
+    "landmarks_inferred_from_forms": {
+      "pelvis": 0.89,
+      "neck": 1.33,
+      "head": 1.41,
+      "shoulder": [
+        0.145,
+        1.32
+      ],
+      "elbow": [
+        0.22,
+        1.095
+      ],
+      "wrist": [
+        0.292,
+        0.885
+      ],
+      "palm": [
+        0.317,
+        0.813
+      ],
+      "arm_depth": [
+        -0.014,
+        -0.07,
+        -0.072
+      ],
+      "knee": [
+        0.098,
+        0.47
+      ],
+      "ankle": [
+        0.11,
+        0.125
+      ],
+      "skirt_min": 0.345
+    },
+    "maximum_influences": 4,
+    "unweighted": 0,
+    "uv_coordinate_max_abs_difference": 0.0,
+    "uv_loop_count": 89532,
+    "uv_sha256_before": "633aae97205cc1da131eac8aeb80d1dfadb86a595458e138288406292623da43",
+    "uv_sha256_after": "633aae97205cc1da131eac8aeb80d1dfadb86a595458e138288406292623da43",
+    "camera_rigid_chest_vertices": 0,
+    "skirt_weighted_vertices": 7741,
+    "yui_low_ponytail_head_vertices": 1216,
+    "coincident_seam_weights_synchronized": true,
+    "grounding_max_corrections_m": {
+      "_pose_overhead": 0.005991519540548325,
+      "_pose_reach": 0.005991519540548325,
+      "_pose_sit": 0.025666930824518205,
+      "_pose_sleep": 0,
+      "_pose_stride": 0.016534858494997026,
+      "_pose_twist": 0.005991519540548325,
+      "eat": 0.025666930824518205,
+      "idle": 0.005991519540548325,
+      "rest": 0.025666930824518205,
+      "sit_talk": 0.025666930824518205,
+      "sleep": 0,
+      "talk": 0.005991519540548325,
+      "walk": 0.09483875811100007,
+      "wave": 0.005991519540548325,
+      "work": 0.005991519540548325
+    },
+    "arm_partition": "Surface-distance seeds with 100-step adjacency smoothing; hands fixed to arm family, torso centers fixed, UV seam copies share adjacency.",
+    "skirt_middle_bone": true,
+    "camera_rigid_region_m": null,
+    "acceptance": "Body candidate. Extreme poses/camera/skirt contact review pending."
+  },
+  "forms_gate": {
+    "bbox": {
+      "ref": {
+        "aspect_w_over_h": 0.4102,
+        "band_widths": [
+          0.1328,
+          0.1328,
+          0.1953,
+          0.2695,
+          0.3359,
+          0.2188,
+          0.2656,
+          0.3086,
+          0.1719,
+          0.1914
+        ]
+      },
+      "render": {
+        "aspect_w_over_h": 0.4102,
+        "band_widths": [
+          0.1289,
+          0.1406,
+          0.1914,
+          0.2695,
+          0.3477,
+          0.2148,
+          0.2656,
+          0.3125,
+          0.1758,
+          0.1836
+        ]
+      },
+      "iou": 0.9382,
+      "band_width_diff": [
+        -0.0039,
+        0.0078,
+        -0.0039,
+        0.0,
+        0.0118,
+        -0.004,
+        0.0,
+        0.0039,
+        0.0039,
+        -0.0078
+      ],
+      "aspect_diff": 0.0
+    },
+    "world": {
+      "view": "front",
+      "az": 0.0,
+      "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/jrpg-resident-renewal/yui/ref/front-matte.png",
+      "m_per_px": 0.0011494252873563218,
+      "iou": 0.9423,
+      "ref_only_pct": 2.28,
+      "render_only_pct": 3.7,
+      "band_width_diff": [
+        -0.0007,
+        0.0068,
+        -0.0041,
+        0.0,
+        0.0054,
+        0.0007,
+        0.002,
+        0.0034,
+        0.0061,
+        -0.0034
+      ]
+    }
+  },
+  "face_controls": {
+    "supported": true,
+    "names": [
+      "Blink",
+      "TiredEyes"
+    ],
+    "implementation": "Godot UV eye shader on the unchanged source atlas; not GLB facial morph targets.",
+    "expression_mode": "TEXTURE_EYES",
+    "expression_mode_value": 2,
+    "material_mode": "TEXTURE_TOON",
+    "material_mode_value": 1,
+    "shader": "res://game/assets/models/haru/haru_texture_eyes.gdshader",
+    "layout": "res://game/assets/models/yui/face-layout.json",
+    "geometry_morph_count": 0,
+    "controls": {
+      "Blink": {
+        "uniform": "blink",
+        "range": [
+          0,
+          1
+        ],
+        "driver": "Resident blink clock; sleep forces 1.0 and waking restores the ordinary clock."
+      },
+      "TiredEyes": {
+        "uniform": "tired_eyes",
+        "range": [
+          0,
+          0.7
+        ],
+        "driver": "clamp((fatigue - 0.55) / 0.45, 0.0, 0.7); narrows the painted eyes and shades the under-eye region."
+      }
+    },
+    "lod_policy": "The actor retains one owned shader material, source atlas and eye-uniform values when swapping LOD meshes.",
+    "unsupported": [
+      "Smile",
+      "Sad",
+      "LookLeft",
+      "LookRight",
+      "Mouth or jaw deformation",
+      "Speech/lip-sync"
+    ],
+    "limits": [
+      "Only two UV shader controls are implemented. There is no separated Face mesh or six-control blend-shape face.",
+      "Head gaze uses the existing DEF-head rig/contact system; it is not an iris LookLeft/LookRight control.",
+      "Hair-aging masks for the generated atlas are not implemented; old 8x8 palette-cell remapping remains disabled.",
+      "Yui has no production Smile/mouth morph. The two controls are shader effects on the unchanged painted atlas."
+    ],
+    "eye_charts": 2,
+    "eyelid_method": "compress"
+  },
+  "production_status": "Dedicated body, nine clips, compatible LODs and the two UV-eye controls are integrated. Partial real-town character acceptance is recorded; full facial/hair-aging behavior, motion/contact polish and human UI/game-fun acceptance are still incomplete.",
+  "runtime_contract": {
+    "bone_count": 36,
+    "required_named_bones": [
+      "DEF-root",
+      "DEF-pelvis",
+      "DEF-apron_back",
+      "DEF-apron_front",
+      "DEF-skirt_middle",
+      "DEF-spine_01",
+      "DEF-spine_02",
+      "DEF-chest",
+      "DEF-clavicle.L",
+      "DEF-upper_arm.L",
+      "DEF-forearm.L",
+      "DEF-hand.L",
+      "DEF-finger0.L",
+      "DEF-finger1.L",
+      "DEF-finger2.L",
+      "DEF-finger3.L",
+      "DEF-finger4.L",
+      "DEF-clavicle.R",
+      "DEF-upper_arm.R",
+      "DEF-forearm.R",
+      "DEF-hand.R",
+      "DEF-finger0.R",
+      "DEF-finger1.R",
+      "DEF-finger2.R",
+      "DEF-finger3.R",
+      "DEF-finger4.R",
+      "DEF-neck",
+      "DEF-head",
+      "DEF-thigh.L",
+      "DEF-shin.L",
+      "DEF-foot.L",
+      "DEF-toe.L",
+      "DEF-thigh.R",
+      "DEF-shin.R",
+      "DEF-foot.R",
+      "DEF-toe.R"
+    ],
+    "skin_bind_count": 36,
+    "skin_bind_names": [
+      "DEF-root",
+      "DEF-pelvis",
+      "DEF-apron_back",
+      "DEF-apron_front",
+      "DEF-skirt_middle",
+      "DEF-spine_01",
+      "DEF-spine_02",
+      "DEF-chest",
+      "DEF-clavicle.L",
+      "DEF-upper_arm.L",
+      "DEF-forearm.L",
+      "DEF-hand.L",
+      "DEF-finger0.L",
+      "DEF-finger1.L",
+      "DEF-finger2.L",
+      "DEF-finger3.L",
+      "DEF-finger4.L",
+      "DEF-clavicle.R",
+      "DEF-upper_arm.R",
+      "DEF-forearm.R",
+      "DEF-hand.R",
+      "DEF-finger0.R",
+      "DEF-finger1.R",
+      "DEF-finger2.R",
+      "DEF-finger3.R",
+      "DEF-finger4.R",
+      "DEF-neck",
+      "DEF-head",
+      "DEF-thigh.L",
+      "DEF-shin.L",
+      "DEF-foot.L",
+      "DEF-toe.L",
+      "DEF-thigh.R",
+      "DEF-shin.R",
+      "DEF-foot.R",
+      "DEF-toe.R"
+    ],
+    "mesh_part_keys": [
+      "CH_Yui_Body"
+    ],
+    "surface_counts": {
+      "CH_Yui_Body": 1
+    }
+  },
+  "body_acceptance_evidence": {
+    "data_check": "assets/models/jrpg-resident-renewal/yui/review/delivery-data-check.json",
+    "roundtrip": "assets/models/jrpg-resident-renewal/yui/review/roundtrip-check.json",
+    "pose_sheet": "assets/models/jrpg-resident-renewal/yui/review/poses/extreme-pose-sheet.png",
+    "provenance_hashes_are_quality_checks": false
+  },
+  "topology_review": {
+    "tris_by_lod": {
+      "0": 29844,
+      "1": 12520,
+      "2": 4770
+    },
+    "fail": [],
+    "warn": [
+      "CH_Yui_Body_LOD0: 3990 doubled vertices within 0.0001",
+      "CH_Yui_Body_LOD1: 30 edges shared by more than two faces",
+      "CH_Yui_Body_LOD2: 30 edges shared by more than two faces"
+    ]
+  },
+  "source_history": {
+    "body_delivery_staging": "builds/jrpg-resident-renewal/yui/CH_Yui_Delivery.blend",
+    "note": "Retained as the historical export working file. Canonical editable master is source; runtime delivery of record is this game/assets/models folder."
+  },
+  "runtime_acceptance": {
+    "status": "partial_character_runtime_acceptance",
+    "date": "2026-11-03",
+    "scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
+    "observed_behaviors": [
+      "Actual skin deformation and walking",
+      "Conversation gesture and head attention after the ordinary transition",
+      "Natural joint work and a real skill change",
+      "Meal seating and hand/cup contact",
+      "Own-bed head/pelvis contact, sleep closure and waking reopening",
+      "All LOD rig/bind/clip compatibility",
+      "Project-in-progress save/resume and subsequent state/RNG continuation"
+    ],
+    "aggregate_functional_results": {
+      "scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident.",
+      "headless": {
+        "checks": 112,
+        "failures": 0
+      },
+      "gpu": {
+        "checks": 115,
+        "failures": 0
+      }
+    },
+    "artifacts": {
+      "images_saved": 29,
+      "images_attempted": 29,
+      "counted_as_functional_checks": false
+    },
+    "evidence": {
+      "readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
+      "headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
+      "gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
+      "review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
+    },
+    "identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts."
+  },
+  "remaining_work": [
+    "Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+    "Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+    "Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+    "Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+    "Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+    "Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+    "Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
+  ]
+}

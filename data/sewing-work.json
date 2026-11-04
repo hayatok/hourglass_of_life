@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "recipe": "drawstring_pouch",
+  "title": "小さな巾着づくり",
+  "site": "square",
+  "group": "craft",
+  "piece_count": 6,
+  "minimum_maker_age": 12,
+  "source_position": [
+    -4.25,
+    0.95,
+    8.42
+  ],
+  "source_approach": [
+    -4.25,
+    0.0,
+    9.05
+  ],
+  "target_position": [
+    -2.8,
+    0.95,
+    8.55
+  ],
+  "carry_offset": [
+    0.0,
+    1.0,
+    0.3
+  ],
+  "show_offset": [
+    0.0,
+    1.15,
+    0.3
+  ],
+  "source_yaw": 0.0,
+  "target_yaw": 0.0,
+  "cut_minutes": 12,
+  "sew_minutes": 33,
+  "timeout_minutes": 360,
+  "phase_minutes": {
+    "take": 5,
+    "place": 5,
+    "lift_show": 5,
+    "show": 6,
+    "lower": 5,
+    "take_store": 5,
+    "store": 5
+  },
+  "slots": {
+    "craft_art_0": [
+      -3.15,
+      0.0,
+      8.96
+    ],
+    "craft_art_1": [
+      -2.45,
+      0.0,
+      8.96
+    ]
+  },
+  "storage_slots": [
+    [
+      -5.275,
+      0.95,
+      8.42
+    ],
+    [
+      -4.985,
+      0.95,
+      8.42
+    ],
+    [
+      -4.695,
+      0.95,
+      8.42
+    ],
+    [
+      -4.405,
+      0.95,
+      8.42
+    ],
+    [
+      -4.115,
+      0.95,
+      8.42
+    ],
+    [
+      -3.825,
+      0.95,
+      8.42
+    ]
+  ],
+  "tools": {
+    "scissors": {
+      "id": "sewing_scissors",
+      "position": [
+        -2.8,
+        0.9505,
+        8.65
+      ],
+      "yaw": 0.0,
+      "pitch": 0.0
+    },
+    "needle": {
+      "id": "sewing_needle",
+      "position": [
+        -2.8,
+        0.951,
+        8.55
+      ],
+      "yaw": 0.0,
+      "pitch": 1.5707963267948966
+    },
+    "spool": {
+      "id": "sewing_spool",
+      "position": [
+        -3.22,
+        0.95,
+        8.27
+      ],
+      "yaw": 0.0,
+      "pitch": 0.0
+    }
+  },
+  "note": "Fictional finite shared sewing supplies. A workpiece keeps one ID from folded fabric through a completed pouch. Positions are prop bottom centres in metres.",
+  "tool_minutes": {
+    "reach": 4,
+    "return": 4
+  },
+  "tool_operation_offsets": {
+    "scissors": [
+      0.055,
+      0.0005,
+      0.075
+    ],
+    "needle": [
+      0.07,
+      0.049,
+      0.01
+    ]
+  },
+  "tool_operation_yaws": {
+    "scissors": 1.5707963267948966,
+    "needle": 0.0
+  }
+}

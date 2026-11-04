@@ -1,0 +1,56 @@
+{
+  "id": "fumi",
+  "height": 1.61,
+  "head_scale": 1.01,
+  "head_x": 1.04,
+  "width": 1.01,
+  "depth": 1.02,
+  "arm_length": 1.05,
+  "arm_close": 0.09,
+  "stance": 0.032,
+  "foot_turn": 0.12,
+  "jaw": 0.12,
+  "eye_height": 0.013,
+  "costume": "cardigan_skirt",
+  "top_color": [
+    0.63,
+    0.31,
+    0.025
+  ],
+  "pants_color": [
+    0.24,
+    0.185,
+    0.155
+  ],
+  "shoe_color": [
+    0.12,
+    0.052,
+    0.022
+  ],
+  "hair": {
+    "style": "wavy_bob",
+    "color": [
+      0.36,
+      0.35,
+      0.37
+    ]
+  },
+  "mature": true,
+  "motion": {
+    "walk_frames": 28,
+    "stride": 0.85
+  },
+  "sheet": "09-fumi-turnaround.png",
+  "ground": 857,
+  "top": 29,
+  "axis": [
+    269,
+    236,
+    262
+  ],
+  "silhouette": "Silver wavy bob, ochre open cardigan, flared calf-length skirt, neck camera.",
+  "reference": {
+    "subject_fraction": 0.9334836527621195,
+    "ground_fraction": 0.033821871476888386
+  }
+}

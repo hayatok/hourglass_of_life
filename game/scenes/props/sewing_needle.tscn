@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Material_needle"]
+albedo_color = Color(0.74, 0.79, 0.78, 1)
+roughness = 0.28
+metallic = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Material_grip"]
+albedo_color = Color(0.49, 0.57, 0.58, 1)
+roughness = 0.44
+metallic = 0.75
+
+[sub_resource type="CylinderMesh" id="Mesh_shaft"]
+material = SubResource("Material_needle")
+top_radius = 0.00085
+bottom_radius = 0.00085
+height = 0.033
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id="Mesh_tip"]
+material = SubResource("Material_needle")
+top_radius = 0.00085
+bottom_radius = 0.0
+height = 0.004
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id="Mesh_grip"]
+material = SubResource("Material_grip")
+top_radius = 0.002
+bottom_radius = 0.002
+height = 0.009
+radial_segments = 12
+
+[sub_resource type="TorusMesh" id="Mesh_eye"]
+material = SubResource("Material_needle")
+inner_radius = 0.00125
+outer_radius = 0.002
+rings = 20
+ring_segments = 8
+
+[node name="SewingNeedle" type="Node3D"]
+metadata/bottom_origin = true
+metadata/tool = "needle"
+metadata/axis = "+Y"
+metadata/grip_radius = 0.002
+metadata/length = 0.045
+
+[node name="Shaft" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_shaft")
+position = Vector3(0.0, 0.0205, 0.0)
+
+[node name="Tip" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_tip")
+position = Vector3(0.0, 0.002, 0.0)
+
+[node name="GripBand" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_grip")
+position = Vector3(0.0, 0.029, 0.0)
+
+[node name="Eye" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_eye")
+position = Vector3(0.0, 0.041, 0.0)
+scale = Vector3(1.0, 0.5, 2.0)
+rotation = Vector3(1.570796327, 0.0, 0.0)
+
+[node name="GripCenter" type="Marker3D" parent="."]
+position = Vector3(0.0, 0.029, 0.0)
+
+[node name="TipCenter" type="Marker3D" parent="."]
+position = Vector3(0.0, 0.0, 0.0)
+
+[node name="EyeCenter" type="Marker3D" parent="."]
+position = Vector3(0.0, 0.041, 0.0)

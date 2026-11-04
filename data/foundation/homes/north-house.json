@@ -1,0 +1,2335 @@
+{
+  "schema_version": 1,
+  "status": "north_l_rebuild_static_design_pending_engine",
+  "units": "m",
+  "coordinates": {
+    "origin": "north_west_outer_corner",
+    "axes": "x east, y up, z south; bounding extent is 15.4x9.4m, with a southeast courtyard and inset entry",
+    "room_bounds": "clear internal [x,z,width,depth], excluding wall thickness",
+    "wall_points": "[x,z], wall thickness centered on start/end line",
+    "door_axis": "opening width direction, x or z, parallel to its wall",
+    "fixture_position": "[x,y,z] bottom center; size [x,y,z] in house-local axes",
+    "interaction_point": "standing floor approach; seating/lying entry requires separate runtime acceptance",
+    "facing": "actor yaw degrees at interaction_point: 0=+Z, 90=+X, 180=-Z, 270=-X",
+    "local_to_world": "All positions share the house-local origin [0,0,0]. Town placement is intentionally unassigned."
+  },
+  "house": {
+    "id": "north_house_home",
+    "label": "咲と晴の共同住宅",
+    "household": "north_house",
+    "width": 15.4,
+    "depth": 9.4,
+    "bounds": [
+      0.0,
+      0.0,
+      15.4,
+      9.4
+    ],
+    "wall_thickness": 0.2,
+    "wall_height": 2.85,
+    "floor_y": 0.0,
+    "front": "south",
+    "front_z": 9.4,
+    "design_body_radius": 0.24,
+    "local_origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "world_placement": null,
+    "design_features": [
+      "個室と共用LDKの縦棟、晴と水回りの横棟、低い玄関つなぎで中庭を囲む実L字。",
+      "通りへ向く共用LDKの窓と、庭へ向く晴の窓。修理道具室は玄関通路から入る立位の作業室。",
+      "中庭・玄関ポーチは実床として定義。個室や脱衣室を通らず全設備へ到達する。"
+    ],
+    "source_residents": "data/residents.json",
+    "source_household": "north_house",
+    "assumptions": [
+      "架空の温帯町の平屋。実住宅の調査図や建築・バリアフリー認証ではない。",
+      "壁・家具・開口は実寸mの設計。Godotでの経路、扉、人体動作、24時間生活は未受入。",
+      "玄関外のポーチが街接続境界。町の仕事場・学校・目的地はこの平面図で代用しない。"
+    ],
+    "roof": {
+      "shape": "gable",
+      "ridge_axis": "z",
+      "rise": 1.8,
+      "eaves": 0.45,
+      "color": "#8b6b53",
+      "style": "shingle"
+    },
+    "foundation": {
+      "depth": 0.3,
+      "color": "#a9a18a"
+    },
+    "volumes": [
+      {
+        "id": "west_wing",
+        "bounds": [
+          0.0,
+          0.0,
+          4.6,
+          9.4
+        ],
+        "wall_height": 2.85,
+        "roof": {
+          "shape": "gable",
+          "ridge_axis": "z",
+          "rise": 1.8,
+          "eaves": 0.45,
+          "color": "#8b6b53",
+          "style": "shingle"
+        }
+      },
+      {
+        "id": "east_wing",
+        "bounds": [
+          6.0,
+          1.6,
+          9.4,
+          4.4
+        ],
+        "wall_height": 2.65,
+        "roof": {
+          "shape": "gable",
+          "ridge_axis": "x",
+          "rise": 1.6,
+          "eaves": 0.45,
+          "color": "#877363",
+          "style": "shingle"
+        }
+      },
+      {
+        "id": "entrance_link",
+        "footprint": [
+          [
+            4.4,
+            0.0,
+            11.0,
+            1.8
+          ],
+          [
+            4.4,
+            1.6,
+            1.8,
+            6.6
+          ]
+        ],
+        "wall_height": 2.45,
+        "roofs": [
+          {
+            "id": "back_gallery",
+            "bounds": [
+              4.4,
+              0.0,
+              11.0,
+              1.8
+            ],
+            "shape": "gable",
+            "ridge_axis": "x",
+            "rise": 0.55,
+            "eaves": 0.28,
+            "color": "#7e8b6c",
+            "style": "shingle"
+          },
+          {
+            "id": "entry_gallery",
+            "bounds": [
+              4.4,
+              1.6,
+              1.8,
+              6.6
+            ],
+            "shape": "gable",
+            "ridge_axis": "z",
+            "rise": 0.55,
+            "eaves": 0.28,
+            "color": "#7e8b6c",
+            "style": "shingle"
+          }
+        ]
+      }
+    ],
+    "canopies": [
+      {
+        "id": "porch_canopy",
+        "bounds": [
+          4.25,
+          8.1,
+          2.1,
+          1.6
+        ],
+        "wall_height": 2.3,
+        "roof": {
+          "shape": "gable",
+          "ridge_axis": "z",
+          "rise": 0.4,
+          "eaves": 0.2,
+          "color": "#8b6b53",
+          "style": "shingle"
+        },
+        "posts": [
+          "porch_post_west",
+          "porch_post_east"
+        ]
+      }
+    ],
+    "street_connection": {
+      "zone": "outside",
+      "door": "D01",
+      "approach": [
+        5.3,
+        0,
+        11.2
+      ],
+      "destination": "town_navigation_not_yet_connected"
+    },
+    "plot": {
+      "courtyard_zone": "courtyard",
+      "street_edge": [
+        [
+          0.0,
+          11.8
+        ],
+        [
+          15.4,
+          11.8
+        ]
+      ],
+      "household_entry": "D01"
+    }
+  },
+  "rooms": [
+    {
+      "id": "saki_bedroom",
+      "label": "咲の写真と模型の個室",
+      "type": "bedroom",
+      "kind": "bedroom",
+      "bounds": [
+        0.2,
+        0.2,
+        4.2,
+        3.6
+      ],
+      "label_point": [
+        2.3,
+        2.0
+      ],
+      "owner": "saki",
+      "private": true,
+      "private_scope": "resident",
+      "allowed_residents": [
+        "saki"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "west_wing",
+      "ceiling_height": 2.85
+    },
+    {
+      "id": "ldk",
+      "label": "通りに向く共用LDK",
+      "type": "living_kitchen_dining",
+      "kind": "living_kitchen_dining",
+      "bounds": [
+        0.2,
+        5.8,
+        4.2,
+        3.4
+      ],
+      "label_point": [
+        2.3,
+        7.5
+      ],
+      "owner": "north_house",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "west_wing",
+      "ceiling_height": 2.85
+    },
+    {
+      "id": "repair_room",
+      "label": "玄関側の道具室",
+      "type": "work_room",
+      "kind": "work_room",
+      "bounds": [
+        0.2,
+        4.0,
+        4.2,
+        1.6
+      ],
+      "label_point": [
+        2.3,
+        4.8
+      ],
+      "owner": "north_house",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "west_wing",
+      "ceiling_height": 2.85
+    },
+    {
+      "id": "back_hall",
+      "label": "個室と水回りをつなぐ廊下",
+      "type": "circulation",
+      "kind": "circulation",
+      "bounds": [
+        4.6,
+        0.2,
+        10.6,
+        1.4
+      ],
+      "label_point": [
+        9.9,
+        0.9
+      ],
+      "owner": "north_house",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "entrance_link",
+      "ceiling_height": 2.45
+    },
+    {
+      "id": "hall",
+      "label": "低い玄関のつなぎ",
+      "type": "circulation",
+      "kind": "circulation",
+      "bounds": [
+        4.6,
+        1.8,
+        1.4,
+        4.0
+      ],
+      "label_point": [
+        5.3,
+        3.8
+      ],
+      "owner": "north_house",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "entrance_link",
+      "ceiling_height": 2.45
+    },
+    {
+      "id": "entrance",
+      "label": "奥まった玄関",
+      "type": "entrance",
+      "kind": "entrance",
+      "bounds": [
+        4.6,
+        6.0,
+        1.4,
+        2.0
+      ],
+      "label_point": [
+        5.3,
+        7.0
+      ],
+      "owner": "north_house",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "entrance_link",
+      "ceiling_height": 2.45
+    },
+    {
+      "id": "haru_bedroom",
+      "label": "庭に向く晴の個室",
+      "type": "bedroom",
+      "kind": "bedroom",
+      "bounds": [
+        6.2,
+        1.8,
+        3.6,
+        4.0
+      ],
+      "label_point": [
+        8.0,
+        3.8
+      ],
+      "owner": "haru",
+      "private": true,
+      "private_scope": "resident",
+      "allowed_residents": [
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "east_wing",
+      "ceiling_height": 2.65
+    },
+    {
+      "id": "toilet",
+      "label": "独立トイレ",
+      "type": "toilet",
+      "kind": "toilet",
+      "bounds": [
+        10.0,
+        1.8,
+        2.0,
+        1.8
+      ],
+      "label_point": [
+        11.0,
+        2.7
+      ],
+      "owner": "north_house",
+      "private": true,
+      "private_scope": "exclusive_when_occupied",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 1,
+      "guest_requires_consent": true,
+      "volume": "east_wing",
+      "ceiling_height": 2.65
+    },
+    {
+      "id": "bathroom",
+      "label": "庭側の浴室",
+      "type": "bathroom",
+      "kind": "bathroom",
+      "bounds": [
+        10.0,
+        3.8,
+        2.0,
+        2.0
+      ],
+      "label_point": [
+        11.0,
+        4.8
+      ],
+      "owner": "north_house",
+      "private": true,
+      "private_scope": "exclusive_when_occupied",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 1,
+      "guest_requires_consent": true,
+      "volume": "east_wing",
+      "ceiling_height": 2.65
+    },
+    {
+      "id": "washroom",
+      "label": "洗面・脱衣・洗濯",
+      "type": "washroom_laundry",
+      "kind": "washroom_laundry",
+      "bounds": [
+        12.2,
+        1.8,
+        3.0,
+        4.0
+      ],
+      "label_point": [
+        13.7,
+        3.8
+      ],
+      "owner": "north_house",
+      "private": true,
+      "private_scope": "exclusive_while_changing",
+      "allowed_residents": [
+        "saki",
+        "haru"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true,
+      "volume": "east_wing",
+      "ceiling_height": 2.65
+    }
+  ],
+  "external_zones": [
+    {
+      "id": "outside",
+      "label": "屋根のある玄関と街への小径",
+      "bounds": [
+        4.4,
+        8.2,
+        1.8,
+        3.6
+      ],
+      "floor_y": 0.0,
+      "covered": true,
+      "surface": "entry_paving",
+      "foundation_depth": 0.3,
+      "connection_kind": "street_boundary"
+    },
+    {
+      "id": "courtyard",
+      "label": "二翼に囲まれた中庭",
+      "bounds": [
+        6.2,
+        6.0,
+        9.2,
+        3.4
+      ],
+      "floor_y": 0.0,
+      "covered": false,
+      "surface": "stone_paving",
+      "foundation_depth": 0.3,
+      "connection_kind": "shared_courtyard"
+    }
+  ],
+  "walls": [
+    {
+      "id": "north_west",
+      "start": [
+        0,
+        0.1
+      ],
+      "end": [
+        4.5,
+        0.1
+      ],
+      "exterior": true,
+      "volume": "west_wing",
+      "height": 2.85
+    },
+    {
+      "id": "north_link",
+      "start": [
+        4.5,
+        0.1
+      ],
+      "end": [
+        15.4,
+        0.1
+      ],
+      "exterior": true,
+      "volume": "entrance_link",
+      "height": 2.45
+    },
+    {
+      "id": "west",
+      "start": [
+        0.1,
+        0
+      ],
+      "end": [
+        0.1,
+        9.4
+      ],
+      "exterior": true,
+      "volume": "west_wing",
+      "height": 2.85
+    },
+    {
+      "id": "south_west",
+      "start": [
+        0,
+        9.3
+      ],
+      "end": [
+        4.6,
+        9.3
+      ],
+      "exterior": true,
+      "volume": "west_wing",
+      "height": 2.85
+    },
+    {
+      "id": "hall_west",
+      "start": [
+        4.5,
+        0.2
+      ],
+      "end": [
+        4.5,
+        9.2
+      ],
+      "volume": "west_wing",
+      "height": 2.85
+    },
+    {
+      "id": "east_link",
+      "start": [
+        15.3,
+        0
+      ],
+      "end": [
+        15.3,
+        1.7
+      ],
+      "exterior": true,
+      "volume": "entrance_link",
+      "height": 2.45
+    },
+    {
+      "id": "east_wing",
+      "start": [
+        15.3,
+        1.7
+      ],
+      "end": [
+        15.3,
+        6.0
+      ],
+      "exterior": true,
+      "volume": "east_wing",
+      "height": 2.65
+    },
+    {
+      "id": "garden_front",
+      "start": [
+        6.2,
+        5.9
+      ],
+      "end": [
+        15.4,
+        5.9
+      ],
+      "exterior": true,
+      "volume": "east_wing",
+      "height": 2.65
+    },
+    {
+      "id": "east_rooms_back",
+      "start": [
+        6.1,
+        1.7
+      ],
+      "end": [
+        15.2,
+        1.7
+      ],
+      "volume": "east_wing",
+      "height": 2.65
+    },
+    {
+      "id": "link_elbow",
+      "start": [
+        4.6,
+        1.7
+      ],
+      "end": [
+        6.1,
+        1.7
+      ],
+      "volume": "entrance_link",
+      "height": 2.45
+    },
+    {
+      "id": "hall_east",
+      "start": [
+        6.1,
+        1.8
+      ],
+      "end": [
+        6.1,
+        5.9
+      ],
+      "volume": "east_wing",
+      "height": 2.65
+    },
+    {
+      "id": "entry_east",
+      "start": [
+        6.1,
+        5.9
+      ],
+      "end": [
+        6.1,
+        8.2
+      ],
+      "exterior": true,
+      "volume": "entrance_link",
+      "height": 2.45
+    },
+    {
+      "id": "entry_front",
+      "start": [
+        4.4,
+        8.1
+      ],
+      "end": [
+        6.2,
+        8.1
+      ],
+      "exterior": true,
+      "volume": "entrance_link",
+      "height": 2.45
+    },
+    {
+      "id": "hall_entry",
+      "start": [
+        4.6,
+        5.9
+      ],
+      "end": [
+        6.0,
+        5.9
+      ],
+      "volume": "entrance_link",
+      "height": 2.45
+    },
+    {
+      "id": "saki_tools",
+      "start": [
+        0.2,
+        3.9
+      ],
+      "end": [
+        4.4,
+        3.9
+      ],
+      "volume": "west_wing",
+      "height": 2.85
+    },
+    {
+      "id": "tools_ldk",
+      "start": [
+        0.2,
+        5.7
+      ],
+      "end": [
+        4.4,
+        5.7
+      ],
+      "volume": "west_wing",
+      "height": 2.85
+    },
+    {
+      "id": "haru_services",
+      "start": [
+        9.9,
+        1.8
+      ],
+      "end": [
+        9.9,
+        5.8
+      ],
+      "volume": "east_wing",
+      "height": 2.65
+    },
+    {
+      "id": "toilet_bath",
+      "start": [
+        10.0,
+        3.7
+      ],
+      "end": [
+        12.0,
+        3.7
+      ],
+      "volume": "east_wing",
+      "height": 2.65
+    },
+    {
+      "id": "bath_wash",
+      "start": [
+        12.1,
+        1.8
+      ],
+      "end": [
+        12.1,
+        5.8
+      ],
+      "volume": "east_wing",
+      "height": 2.65
+    }
+  ],
+  "doors": [
+    {
+      "id": "D01",
+      "label": "庇の下の玄関扉",
+      "wall": "entry_front",
+      "room_a": "outside",
+      "room_b": "entrance",
+      "width": 1.0,
+      "height": 2.1,
+      "center": [
+        5.3,
+        0,
+        8.1
+      ],
+      "axis": "x",
+      "kind": "hinged",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "outside": [
+          5.3,
+          0,
+          9.55
+        ],
+        "entrance": [
+          5.3,
+          0,
+          7.35
+        ]
+      },
+      "hinge": [
+        4.8,
+        0,
+        8.1
+      ],
+      "open_end": [
+        4.8,
+        0,
+        9.1
+      ],
+      "swing_room": "outside",
+      "swing_clearance": [
+        4.8,
+        8.1,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "id": "D02",
+      "label": "玄関からつなぎ廊下",
+      "wall": "hall_entry",
+      "room_a": "entrance",
+      "room_b": "hall",
+      "width": 1.0,
+      "height": 2.1,
+      "center": [
+        5.3,
+        0,
+        5.9
+      ],
+      "axis": "x",
+      "kind": "opening",
+      "default_state": "open",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "entrance": [
+          5.3,
+          0,
+          6.55
+        ],
+        "hall": [
+          5.3,
+          0,
+          5.25
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "label": "咲個室の引戸",
+      "wall": "hall_west",
+      "room_a": "hall",
+      "room_b": "saki_bedroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        4.5,
+        0,
+        2.35
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "resident:saki",
+      "approaches": {
+        "hall": [
+          5.15,
+          0,
+          2.35
+        ],
+        "saki_bedroom": [
+          3.85,
+          0,
+          2.35
+        ]
+      },
+      "pocket_interval": [
+        2.9,
+        3.8
+      ]
+    },
+    {
+      "id": "D04",
+      "label": "晴個室の引戸",
+      "wall": "east_rooms_back",
+      "room_a": "back_hall",
+      "room_b": "haru_bedroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        7.1,
+        0,
+        1.7
+      ],
+      "axis": "x",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "resident:haru",
+      "approaches": {
+        "back_hall": [
+          7.1,
+          0,
+          1.05
+        ],
+        "haru_bedroom": [
+          7.1,
+          0,
+          2.35
+        ]
+      },
+      "pocket_interval": [
+        8.0,
+        8.9
+      ]
+    },
+    {
+      "id": "D05",
+      "label": "共用LDKの引戸",
+      "wall": "hall_west",
+      "room_a": "entrance",
+      "room_b": "ldk",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        4.5,
+        0,
+        7.4
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "entrance": [
+          5.15,
+          0,
+          7.4
+        ],
+        "ldk": [
+          3.85,
+          0,
+          7.4
+        ]
+      },
+      "pocket_interval": [
+        6.0,
+        6.9
+      ]
+    },
+    {
+      "id": "D06",
+      "label": "道具室の開き戸",
+      "wall": "hall_west",
+      "room_a": "hall",
+      "room_b": "repair_room",
+      "width": 0.85,
+      "height": 2.1,
+      "center": [
+        4.5,
+        0,
+        4.8
+      ],
+      "axis": "z",
+      "kind": "hinged",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "hall": [
+          5.3,
+          0,
+          4.8
+        ],
+        "repair_room": [
+          3.1,
+          0,
+          4.8
+        ]
+      },
+      "hinge": [
+        4.5,
+        0,
+        4.375
+      ],
+      "open_end": [
+        3.65,
+        0,
+        4.375
+      ],
+      "swing_room": "repair_room",
+      "swing_clearance": [
+        3.65,
+        4.375,
+        0.85,
+        0.85
+      ]
+    },
+    {
+      "id": "D07",
+      "label": "トイレの引戸",
+      "wall": "east_rooms_back",
+      "room_a": "back_hall",
+      "room_b": "toilet",
+      "width": 0.85,
+      "height": 2.1,
+      "center": [
+        11.5,
+        0,
+        1.7
+      ],
+      "axis": "x",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "exclusive_when_occupied",
+      "approaches": {
+        "back_hall": [
+          11.5,
+          0,
+          1.0
+        ],
+        "toilet": [
+          11.5,
+          0,
+          2.3
+        ]
+      },
+      "pocket_interval": [
+        10.15,
+        11.0
+      ]
+    },
+    {
+      "id": "D08",
+      "label": "洗面脱衣室の引戸",
+      "wall": "east_rooms_back",
+      "room_a": "back_hall",
+      "room_b": "washroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        14.1,
+        0,
+        1.7
+      ],
+      "axis": "x",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "exclusive_while_changing",
+      "approaches": {
+        "back_hall": [
+          14.1,
+          0,
+          1.05
+        ],
+        "washroom": [
+          14.1,
+          0,
+          2.35
+        ]
+      },
+      "pocket_interval": [
+        12.6,
+        13.5
+      ]
+    },
+    {
+      "id": "D09",
+      "label": "浴室の引戸",
+      "wall": "bath_wash",
+      "room_a": "washroom",
+      "room_b": "bathroom",
+      "width": 0.85,
+      "height": 2.1,
+      "center": [
+        12.1,
+        0,
+        5.1
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "exclusive_when_occupied",
+      "approaches": {
+        "washroom": [
+          12.75,
+          0,
+          5.1
+        ],
+        "bathroom": [
+          11.45,
+          0,
+          5.1
+        ]
+      },
+      "pocket_interval": [
+        3.8,
+        4.65
+      ]
+    },
+    {
+      "id": "D10",
+      "label": "つなぎ廊下の曲がり角",
+      "wall": "link_elbow",
+      "room_a": "hall",
+      "room_b": "back_hall",
+      "width": 1.0,
+      "height": 2.1,
+      "center": [
+        5.3,
+        0,
+        1.7
+      ],
+      "axis": "x",
+      "kind": "opening",
+      "default_state": "open",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "hall": [
+          5.3,
+          0,
+          2.35
+        ],
+        "back_hall": [
+          5.3,
+          0,
+          1.05
+        ]
+      }
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "bed_saki",
+      "label": "白井 咲の寝床",
+      "type": "bed",
+      "room": "saki_bedroom",
+      "position": [
+        1.0,
+        0.0,
+        1.55
+      ],
+      "size": [
+        1.0,
+        0.5,
+        2.05
+      ],
+      "facing": 270,
+      "interaction_point": [
+        1.85,
+        0.0,
+        1.65
+      ],
+      "owner": "saki",
+      "private": true,
+      "capacity": 1,
+      "use_facing": 180,
+      "head_end": "north",
+      "sheet_y": 0.422,
+      "duvet_top_y": 0.4765,
+      "pillow_point": [
+        1.0,
+        0.4995,
+        0.894
+      ],
+      "usage_region": {
+        "center": [
+          1.0,
+          0.422,
+          1.55
+        ],
+        "half_extents": [
+          0.43,
+          0.22,
+          0.925
+        ],
+        "postures": [
+          "lie"
+        ]
+      }
+    },
+    {
+      "id": "bed_haru",
+      "label": "瀬戸 晴の寝床",
+      "type": "bed",
+      "room": "haru_bedroom",
+      "position": [
+        9.0,
+        0.0,
+        3.1
+      ],
+      "size": [
+        1.0,
+        0.5,
+        2.05
+      ],
+      "facing": 90,
+      "interaction_point": [
+        8.15,
+        0.0,
+        3.2
+      ],
+      "owner": "haru",
+      "private": true,
+      "capacity": 1,
+      "use_facing": 180,
+      "head_end": "north",
+      "sheet_y": 0.422,
+      "duvet_top_y": 0.4765,
+      "pillow_point": [
+        9.0,
+        0.4995,
+        2.444
+      ],
+      "usage_region": {
+        "center": [
+          9.0,
+          0.422,
+          3.1
+        ],
+        "half_extents": [
+          0.43,
+          0.22,
+          0.925
+        ],
+        "postures": [
+          "lie"
+        ]
+      }
+    },
+    {
+      "id": "saki_desk",
+      "label": "写真から模型を考える机",
+      "type": "desk",
+      "room": "saki_bedroom",
+      "position": [
+        3.25,
+        0.0,
+        0.65
+      ],
+      "size": [
+        1.5,
+        0.74,
+        0.6
+      ],
+      "facing": 180,
+      "interaction_point": [
+        3.25,
+        0.0,
+        2.15
+      ],
+      "owner": "saki",
+      "private": true,
+      "capacity": 1,
+      "use_via": "saki_desk_chair",
+      "support_point": [
+        3.25,
+        0.74,
+        0.77
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "activity": "model",
+      "desk_content": "drawing"
+    },
+    {
+      "id": "saki_desk_chair",
+      "label": "写真から模型を考える机の椅子",
+      "type": "chair",
+      "room": "saki_bedroom",
+      "position": [
+        3.25,
+        0.0,
+        1.4
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 180,
+      "interaction_point": [
+        3.25,
+        0.0,
+        2.15
+      ],
+      "owner": "saki",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "saki_desk",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          3.25,
+          0,
+          1.12
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "saki_storage",
+      "label": "咲の衣類と写真",
+      "type": "storage",
+      "room": "saki_bedroom",
+      "position": [
+        1.0,
+        0.0,
+        3.45
+      ],
+      "size": [
+        1.2,
+        1.8,
+        0.5
+      ],
+      "facing": 270,
+      "interaction_point": [
+        2.0,
+        0.0,
+        3.15
+      ],
+      "owner": "saki",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "haru_desk",
+      "label": "録音と音楽の机",
+      "type": "desk",
+      "room": "haru_bedroom",
+      "position": [
+        7.3,
+        0.0,
+        5.35
+      ],
+      "size": [
+        1.4,
+        0.74,
+        0.6
+      ],
+      "facing": 0,
+      "interaction_point": [
+        7.3,
+        0.0,
+        3.85
+      ],
+      "owner": "haru",
+      "private": true,
+      "capacity": 1,
+      "use_via": "haru_desk_chair",
+      "support_point": [
+        7.3,
+        0.74,
+        5.23
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "activity": "music",
+      "desk_content": "computer"
+    },
+    {
+      "id": "haru_desk_chair",
+      "label": "音楽机の椅子",
+      "type": "chair",
+      "room": "haru_bedroom",
+      "position": [
+        7.3,
+        0.0,
+        4.6
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 0,
+      "interaction_point": [
+        7.3,
+        0.0,
+        3.85
+      ],
+      "owner": "haru",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "haru_desk",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          7.3,
+          0,
+          4.88
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "haru_storage",
+      "label": "晴の衣類と楽器",
+      "type": "storage",
+      "room": "haru_bedroom",
+      "position": [
+        9.35,
+        0.0,
+        5.45
+      ],
+      "size": [
+        0.7,
+        1.8,
+        0.5
+      ],
+      "facing": 90,
+      "interaction_point": [
+        8.55,
+        0.0,
+        5.1
+      ],
+      "owner": "haru",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "fridge",
+      "label": "冷蔵庫",
+      "type": "fridge",
+      "room": "ldk",
+      "position": [
+        0.65,
+        0.0,
+        6.25
+      ],
+      "size": [
+        0.7,
+        1.85,
+        0.7
+      ],
+      "facing": 180,
+      "interaction_point": [
+        0.65,
+        0.0,
+        7.2
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1
+    },
+    {
+      "id": "sink",
+      "label": "流し",
+      "type": "sink",
+      "room": "ldk",
+      "position": [
+        1.6,
+        0.0,
+        6.25
+      ],
+      "size": [
+        1.0,
+        0.85,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        1.6,
+        0.0,
+        7.2
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        1.6,
+        0.71,
+        6.37
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "prep",
+      "label": "調理台",
+      "type": "prep",
+      "room": "ldk",
+      "position": [
+        2.55,
+        0.0,
+        6.25
+      ],
+      "size": [
+        0.9,
+        0.85,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        2.55,
+        0.0,
+        7.2
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        2.55,
+        0.85,
+        6.37
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "stove",
+      "label": "コンロ",
+      "type": "stove",
+      "room": "ldk",
+      "position": [
+        3.5,
+        0.0,
+        6.25
+      ],
+      "size": [
+        0.9,
+        0.85,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        3.5,
+        0.0,
+        7.2
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        3.5,
+        0.85,
+        6.37
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "dining_table",
+      "label": "食卓",
+      "type": "dining_table",
+      "room": "ldk",
+      "position": [
+        2.3,
+        0.0,
+        8.05
+      ],
+      "size": [
+        1.05,
+        0.74,
+        0.8
+      ],
+      "facing": 0,
+      "interaction_point": [
+        2.3,
+        0.0,
+        7.1
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        2.3,
+        0.74,
+        8.05
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "eat",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "dining_saki",
+      "label": "白井 咲の食卓席",
+      "type": "dining_seat",
+      "room": "ldk",
+      "position": [
+        1.375,
+        0.0,
+        8.05
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 90,
+      "interaction_point": [
+        0.725,
+        0.0,
+        8.05
+      ],
+      "owner": "saki",
+      "private": false,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "dining_table",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          1.655,
+          0,
+          8.05
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "dining_haru",
+      "label": "瀬戸 晴の食卓席",
+      "type": "dining_seat",
+      "room": "ldk",
+      "position": [
+        3.225,
+        0.0,
+        8.05
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 270,
+      "interaction_point": [
+        3.875,
+        0.0,
+        8.05
+      ],
+      "owner": "haru",
+      "private": false,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "dining_table",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          2.945,
+          0,
+          8.05
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "repair_bench",
+      "label": "部品を調べる立位作業台",
+      "type": "desk",
+      "room": "repair_room",
+      "position": [
+        1.5,
+        0.0,
+        4.45
+      ],
+      "size": [
+        1.8,
+        0.85,
+        0.6
+      ],
+      "facing": 180,
+      "interaction_point": [
+        1.5,
+        0.0,
+        5.25
+      ],
+      "owner": "haru",
+      "private": true,
+      "capacity": 1,
+      "desk_content": "tools",
+      "support_point": [
+        1.5,
+        0.85,
+        4.57
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "activity": "repair",
+      "work_posture": "stand"
+    },
+    {
+      "id": "repair_storage",
+      "label": "修理道具と清掃用品",
+      "type": "storage",
+      "room": "repair_room",
+      "position": [
+        0.55,
+        0.0,
+        5.25
+      ],
+      "size": [
+        0.7,
+        1.8,
+        0.5
+      ],
+      "facing": 270,
+      "interaction_point": [
+        1.25,
+        0.0,
+        5.25
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "display_contents": "tools"
+    },
+    {
+      "id": "shoes",
+      "label": "二人の靴収納",
+      "type": "shoes",
+      "room": "entrance",
+      "position": [
+        5.75,
+        0,
+        7.45
+      ],
+      "size": [
+        0.3,
+        0.95,
+        0.5
+      ],
+      "facing": 90,
+      "interaction_point": [
+        5.0,
+        0,
+        7.45
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "resident_slots": [
+        "saki",
+        "haru"
+      ]
+    },
+    {
+      "id": "toilet",
+      "label": "便器",
+      "type": "toilet",
+      "room": "toilet",
+      "position": [
+        11.1,
+        0.0,
+        3.05
+      ],
+      "size": [
+        0.65,
+        0.78,
+        0.8
+      ],
+      "facing": 0,
+      "interaction_point": [
+        11.1,
+        0.0,
+        2.1
+      ],
+      "owner": "north_house",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.43,
+      "private_scope": "exclusive_when_occupied"
+    },
+    {
+      "id": "bath",
+      "label": "浴槽",
+      "type": "bath",
+      "room": "bathroom",
+      "position": [
+        11.0,
+        0.0,
+        4.25
+      ],
+      "size": [
+        1.65,
+        0.6,
+        0.75
+      ],
+      "facing": 180,
+      "interaction_point": [
+        10.9,
+        0.0,
+        5.15
+      ],
+      "owner": "north_house",
+      "private": true,
+      "capacity": 1,
+      "private_scope": "exclusive_when_occupied"
+    },
+    {
+      "id": "shower",
+      "label": "洗い場シャワー",
+      "type": "shower",
+      "room": "bathroom",
+      "position": [
+        10.15,
+        0,
+        5.25
+      ],
+      "size": [
+        0.14,
+        1.9,
+        0.14
+      ],
+      "facing": 270,
+      "interaction_point": [
+        10.7,
+        0,
+        5.25
+      ],
+      "owner": "north_house",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "washbasin",
+      "label": "洗面台",
+      "type": "washbasin",
+      "room": "washroom",
+      "position": [
+        14.85,
+        0.0,
+        2.5
+      ],
+      "size": [
+        0.6,
+        0.85,
+        0.8
+      ],
+      "facing": 90,
+      "interaction_point": [
+        13.95,
+        0.0,
+        2.5
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1
+    },
+    {
+      "id": "washer",
+      "label": "洗濯機",
+      "type": "washer",
+      "room": "washroom",
+      "position": [
+        14.8,
+        0.0,
+        3.75
+      ],
+      "size": [
+        0.65,
+        0.95,
+        0.65
+      ],
+      "facing": 90,
+      "interaction_point": [
+        13.95,
+        0.0,
+        3.75
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        14.8,
+        0.23,
+        3.75
+      ],
+      "put_down_kinds": []
+    },
+    {
+      "id": "linen_storage",
+      "label": "タオルと洗濯物の収納",
+      "type": "storage",
+      "room": "washroom",
+      "position": [
+        14.0,
+        0.0,
+        5.45
+      ],
+      "size": [
+        1.6,
+        2.0,
+        0.5
+      ],
+      "facing": 0,
+      "interaction_point": [
+        14.0,
+        0.0,
+        4.65
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        14.0,
+        0.63,
+        5.45
+      ],
+      "put_down_kinds": [
+        "laundry",
+        "hang_laundry",
+        "fold_laundry",
+        "bath"
+      ],
+      "display_contents": "linen"
+    },
+    {
+      "id": "towel_basket",
+      "label": "脱衣かご",
+      "type": "towel_basket",
+      "room": "washroom",
+      "position": [
+        12.55,
+        0.0,
+        2.9
+      ],
+      "size": [
+        0.38,
+        0.42,
+        0.38
+      ],
+      "facing": 270,
+      "interaction_point": [
+        13.2,
+        0.0,
+        2.9
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        12.55,
+        0.06,
+        2.9
+      ],
+      "put_down_kinds": [
+        "bath",
+        "laundry",
+        "hang_laundry",
+        "fold_laundry"
+      ]
+    },
+    {
+      "id": "changing_space",
+      "label": "着替える場所",
+      "type": "changing_space",
+      "room": "washroom",
+      "position": [
+        13.25,
+        0.0,
+        4.35
+      ],
+      "size": [
+        0.75,
+        0.02,
+        0.75
+      ],
+      "facing": 0,
+      "interaction_point": [
+        13.25,
+        0.0,
+        4.35
+      ],
+      "owner": "north_house",
+      "private": true,
+      "capacity": 1,
+      "blocking": false,
+      "private_scope": "exclusive_while_changing",
+      "support_point": [
+        12.55,
+        0.06,
+        2.9
+      ],
+      "support_fixture": "towel_basket",
+      "put_down_kinds": [
+        "bath"
+      ]
+    },
+    {
+      "id": "drying_rack",
+      "label": "室内の物干し",
+      "type": "drying_rack",
+      "room": "washroom",
+      "position": [
+        12.55,
+        0.0,
+        4.2
+      ],
+      "size": [
+        0.35,
+        1.65,
+        0.8
+      ],
+      "facing": 270,
+      "interaction_point": [
+        13.25,
+        0.0,
+        4.2
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "put_down_kinds": []
+    },
+    {
+      "id": "porch_post_west",
+      "label": "玄関庇の木柱",
+      "type": "porch_post",
+      "room": "outside",
+      "position": [
+        4.5,
+        0.0,
+        9.55
+      ],
+      "size": [
+        0.14,
+        2.295238,
+        0.14
+      ],
+      "facing": 0,
+      "interaction_point": [
+        5.15,
+        0.0,
+        10.1
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "structural": true
+    },
+    {
+      "id": "porch_post_east",
+      "label": "玄関庇の木柱",
+      "type": "porch_post",
+      "room": "outside",
+      "position": [
+        6.1,
+        0.0,
+        9.55
+      ],
+      "size": [
+        0.14,
+        2.295238,
+        0.14
+      ],
+      "facing": 0,
+      "interaction_point": [
+        5.65,
+        0.0,
+        10.1
+      ],
+      "owner": "north_house",
+      "private": false,
+      "capacity": 1,
+      "structural": true
+    }
+  ],
+  "residents": [
+    {
+      "id": "saki",
+      "bed": "bed_saki",
+      "bedroom": "saki_bedroom",
+      "dining_seat": "dining_saki",
+      "authored_age_years": 42,
+      "occupation": "午前に図書館で働く人"
+    },
+    {
+      "id": "haru",
+      "bed": "bed_haru",
+      "bedroom": "haru_bedroom",
+      "dining_seat": "dining_haru",
+      "authored_age_years": 25,
+      "occupation": "早番で自転車修理を手伝う人"
+    }
+  ],
+  "circulation": [],
+  "windows": [
+    {
+      "id": "W01",
+      "room": "saki_bedroom",
+      "wall": "north_west",
+      "center": [
+        2.0,
+        1.7,
+        0.1
+      ],
+      "width": 1.7,
+      "height": 1.05,
+      "inward": [
+        0,
+        0,
+        1
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W02",
+      "room": "saki_bedroom",
+      "wall": "west",
+      "center": [
+        0.1,
+        1.65,
+        2.5
+      ],
+      "width": 1.2,
+      "height": 1.1,
+      "inward": [
+        1,
+        0,
+        0
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W03",
+      "room": "ldk",
+      "wall": "south_west",
+      "center": [
+        2.35,
+        1.65,
+        9.3
+      ],
+      "width": 2.2,
+      "height": 1.2,
+      "inward": [
+        0,
+        0,
+        -1
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W04",
+      "room": "ldk",
+      "wall": "west",
+      "center": [
+        0.1,
+        1.7,
+        7.25
+      ],
+      "width": 1.6,
+      "height": 1.1,
+      "inward": [
+        1,
+        0,
+        0
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W05",
+      "room": "repair_room",
+      "wall": "west",
+      "center": [
+        0.1,
+        1.8,
+        4.8
+      ],
+      "width": 1.0,
+      "height": 0.8,
+      "inward": [
+        1,
+        0,
+        0
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W06",
+      "room": "haru_bedroom",
+      "wall": "garden_front",
+      "center": [
+        8.1,
+        1.7,
+        5.9
+      ],
+      "width": 1.8,
+      "height": 1.1,
+      "inward": [
+        0,
+        0,
+        -1
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W07",
+      "room": "bathroom",
+      "wall": "garden_front",
+      "center": [
+        11.0,
+        2.1,
+        5.9
+      ],
+      "width": 0.9,
+      "height": 0.45,
+      "inward": [
+        0,
+        0,
+        -1
+      ],
+      "frosted": true,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W08",
+      "room": "washroom",
+      "wall": "east_wing",
+      "center": [
+        15.3,
+        2.15,
+        4.75
+      ],
+      "width": 0.85,
+      "height": 0.45,
+      "inward": [
+        -1,
+        0,
+        0
+      ],
+      "frosted": true,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W09",
+      "room": "toilet",
+      "wall": "east_rooms_back",
+      "center": [
+        10.25,
+        2.18,
+        1.7
+      ],
+      "width": 0.35,
+      "height": 0.35,
+      "inward": [
+        0,
+        0,
+        1
+      ],
+      "frosted": true,
+      "source": "borrowed_light",
+      "ventilation": "mechanical_extract_required",
+      "note": "廊下側の高い曇り採光窓。排気機能は未実装。"
+    },
+    {
+      "id": "W10",
+      "room": "entrance",
+      "wall": "entry_east",
+      "center": [
+        6.1,
+        1.65,
+        7.2
+      ],
+      "width": 0.6,
+      "height": 0.65,
+      "inward": [
+        -1,
+        0,
+        0
+      ],
+      "frosted": true,
+      "source": "exterior_daylight"
+    }
+  ],
+  "ceiling_lights": [
+    {
+      "at": [
+        2.3,
+        2.45,
+        8.05
+      ],
+      "kind": "pendant",
+      "room": "ldk"
+    }
+  ]
+}

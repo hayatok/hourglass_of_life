@@ -1,0 +1,1036 @@
+{
+  "status": "manually_registered_source_landmarks_not_mesh_fit",
+  "reference": "ref/turnaround-v1.png",
+  "height_m": 1.65,
+  "heads": 6.5,
+  "metres_per_source_pixel": 0.0016923076923076922,
+  "landmark_uncertainty_px": [
+    2,
+    4
+  ],
+  "axes": "Blender +Z up,-Y forward,+X anatomical left",
+  "views": {
+    "front": {
+      "crop": [
+        235,
+        0,
+        408,
+        185
+      ],
+      "axis_source_x": 318,
+      "landmarks": [
+        {
+          "index": 1,
+          "feature": "hair_crown",
+          "source_px": [
+            318,
+            14
+          ],
+          "world_projection_m": [
+            0.0,
+            null,
+            1.65
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 2,
+          "feature": "hair_part",
+          "source_px": [
+            332,
+            27
+          ],
+          "world_projection_m": [
+            0.02369230769230769,
+            null,
+            1.628
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 3,
+          "feature": "brow_outer.R",
+          "source_px": [
+            286,
+            88
+          ],
+          "world_projection_m": [
+            -0.05415384615384615,
+            null,
+            1.5247692307692307
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 4,
+          "feature": "brow_peak.R",
+          "source_px": [
+            298,
+            84
+          ],
+          "world_projection_m": [
+            -0.033846153846153845,
+            null,
+            1.5315384615384615
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 5,
+          "feature": "brow_inner.R",
+          "source_px": [
+            307,
+            87
+          ],
+          "world_projection_m": [
+            -0.018615384615384614,
+            null,
+            1.5264615384615383
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 6,
+          "feature": "brow_inner.L",
+          "source_px": [
+            334,
+            87
+          ],
+          "world_projection_m": [
+            0.027076923076923075,
+            null,
+            1.5264615384615383
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 7,
+          "feature": "brow_peak.L",
+          "source_px": [
+            344,
+            84
+          ],
+          "world_projection_m": [
+            0.044,
+            null,
+            1.5315384615384615
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 8,
+          "feature": "brow_outer.L",
+          "source_px": [
+            356,
+            88
+          ],
+          "world_projection_m": [
+            0.0643076923076923,
+            null,
+            1.5247692307692307
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 9,
+          "feature": "eye_outer.R",
+          "source_px": [
+            282,
+            106
+          ],
+          "world_projection_m": [
+            -0.06092307692307692,
+            null,
+            1.4943076923076921
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 10,
+          "feature": "eye_upper.R",
+          "source_px": [
+            298,
+            95
+          ],
+          "world_projection_m": [
+            -0.033846153846153845,
+            null,
+            1.5129230769230768
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 11,
+          "feature": "eye_inner.R",
+          "source_px": [
+            309,
+            106
+          ],
+          "world_projection_m": [
+            -0.01523076923076923,
+            null,
+            1.4943076923076921
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 12,
+          "feature": "eye_lower.R",
+          "source_px": [
+            298,
+            118
+          ],
+          "world_projection_m": [
+            -0.033846153846153845,
+            null,
+            1.474
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 13,
+          "feature": "pupil.R",
+          "source_px": [
+            298,
+            107
+          ],
+          "world_projection_m": [
+            -0.033846153846153845,
+            null,
+            1.4926153846153845
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 14,
+          "feature": "eye_inner.L",
+          "source_px": [
+            332,
+            106
+          ],
+          "world_projection_m": [
+            0.02369230769230769,
+            null,
+            1.4943076923076921
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 15,
+          "feature": "eye_upper.L",
+          "source_px": [
+            343,
+            95
+          ],
+          "world_projection_m": [
+            0.0423076923076923,
+            null,
+            1.5129230769230768
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 16,
+          "feature": "eye_outer.L",
+          "source_px": [
+            359,
+            106
+          ],
+          "world_projection_m": [
+            0.06938461538461538,
+            null,
+            1.4943076923076921
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 17,
+          "feature": "eye_lower.L",
+          "source_px": [
+            343,
+            118
+          ],
+          "world_projection_m": [
+            0.0423076923076923,
+            null,
+            1.474
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 18,
+          "feature": "pupil.L",
+          "source_px": [
+            343,
+            107
+          ],
+          "world_projection_m": [
+            0.0423076923076923,
+            null,
+            1.4926153846153845
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 19,
+          "feature": "nose_root",
+          "source_px": [
+            320,
+            114
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.4807692307692306
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 20,
+          "feature": "nose_tip",
+          "source_px": [
+            320,
+            128
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.457076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 21,
+          "feature": "nose_wing.R",
+          "source_px": [
+            315,
+            130
+          ],
+          "world_projection_m": [
+            -0.005076923076923076,
+            null,
+            1.4536923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 22,
+          "feature": "nose_wing.L",
+          "source_px": [
+            325,
+            130
+          ],
+          "world_projection_m": [
+            0.011846153846153845,
+            null,
+            1.4536923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 23,
+          "feature": "mouth_corner.R",
+          "source_px": [
+            308,
+            141
+          ],
+          "world_projection_m": [
+            -0.016923076923076923,
+            null,
+            1.435076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 24,
+          "feature": "lip_upper",
+          "source_px": [
+            320,
+            141
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.435076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 25,
+          "feature": "mouth_seam",
+          "source_px": [
+            320,
+            143
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.4316923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 26,
+          "feature": "lip_lower",
+          "source_px": [
+            320,
+            146
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.4266153846153844
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 27,
+          "feature": "mouth_corner.L",
+          "source_px": [
+            333,
+            141
+          ],
+          "world_projection_m": [
+            0.025384615384615384,
+            null,
+            1.435076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 28,
+          "feature": "cheek.R",
+          "source_px": [
+            284,
+            130
+          ],
+          "world_projection_m": [
+            -0.05753846153846153,
+            null,
+            1.4536923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 29,
+          "feature": "jaw.R",
+          "source_px": [
+            295,
+            154
+          ],
+          "world_projection_m": [
+            -0.03892307692307692,
+            null,
+            1.413076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 30,
+          "feature": "chin",
+          "source_px": [
+            320,
+            164
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.396153846153846
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 31,
+          "feature": "jaw.L",
+          "source_px": [
+            345,
+            154
+          ],
+          "world_projection_m": [
+            0.04569230769230769,
+            null,
+            1.413076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 32,
+          "feature": "cheek.L",
+          "source_px": [
+            357,
+            130
+          ],
+          "world_projection_m": [
+            0.06599999999999999,
+            null,
+            1.4536923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 33,
+          "feature": "temple_skin.R",
+          "source_px": [
+            280,
+            113
+          ],
+          "world_projection_m": [
+            -0.0643076923076923,
+            null,
+            1.4824615384615383
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "partly occluded; construction guide only",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 34,
+          "feature": "temple_skin.L",
+          "source_px": [
+            361,
+            113
+          ],
+          "world_projection_m": [
+            0.07276923076923077,
+            null,
+            1.4824615384615383
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "partly occluded; construction guide only",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 35,
+          "feature": "ear_inner.R",
+          "source_px": [
+            273,
+            122
+          ],
+          "world_projection_m": [
+            -0.07615384615384614,
+            null,
+            1.4672307692307691
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 36,
+          "feature": "ear_inner.L",
+          "source_px": [
+            368,
+            121
+          ],
+          "world_projection_m": [
+            0.0846153846153846,
+            null,
+            1.4689230769230768
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 37,
+          "feature": "neck_front_midline",
+          "source_px": [
+            320,
+            181
+          ],
+          "world_projection_m": [
+            0.0033846153846153844,
+            null,
+            1.3673846153846152
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "partly occluded; construction guide only",
+          "uncertainty_px": 4
+        }
+      ]
+    },
+    "side": {
+      "crop": [
+        650,
+        0,
+        835,
+        185
+      ],
+      "axis_source_x": 746,
+      "landmarks": [
+        {
+          "index": 1,
+          "feature": "hair_crown",
+          "source_px": [
+            755,
+            13
+          ],
+          "world_projection_m": [
+            null,
+            -0.01523076923076923,
+            1.6516923076923076
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 2,
+          "feature": "hair_back_high",
+          "source_px": [
+            686,
+            65
+          ],
+          "world_projection_m": [
+            null,
+            0.10153846153846154,
+            1.5636923076923075
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 3,
+          "feature": "hair_back_mid",
+          "source_px": [
+            662,
+            119
+          ],
+          "world_projection_m": [
+            null,
+            0.14215384615384613,
+            1.472307692307692
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 4,
+          "feature": "hair_nape",
+          "source_px": [
+            728,
+            171
+          ],
+          "world_projection_m": [
+            null,
+            0.03046153846153846,
+            1.3843076923076922
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 5,
+          "feature": "forehead_visible",
+          "source_px": [
+            808,
+            80
+          ],
+          "world_projection_m": [
+            null,
+            -0.10492307692307691,
+            1.5383076923076922
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 6,
+          "feature": "brow_ridge",
+          "source_px": [
+            805,
+            85
+          ],
+          "world_projection_m": [
+            null,
+            -0.09984615384615383,
+            1.5298461538461536
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 7,
+          "feature": "eye_upper",
+          "source_px": [
+            799,
+            96
+          ],
+          "world_projection_m": [
+            null,
+            -0.08969230769230768,
+            1.5112307692307692
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 8,
+          "feature": "pupil",
+          "source_px": [
+            796,
+            107
+          ],
+          "world_projection_m": [
+            null,
+            -0.0846153846153846,
+            1.4926153846153845
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 9,
+          "feature": "eye_lower",
+          "source_px": [
+            796,
+            117
+          ],
+          "world_projection_m": [
+            null,
+            -0.0846153846153846,
+            1.4756923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 10,
+          "feature": "nose_root",
+          "source_px": [
+            808,
+            113
+          ],
+          "world_projection_m": [
+            null,
+            -0.10492307692307691,
+            1.4824615384615383
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 11,
+          "feature": "nose_bridge",
+          "source_px": [
+            814,
+            119
+          ],
+          "world_projection_m": [
+            null,
+            -0.11507692307692306,
+            1.472307692307692
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 12,
+          "feature": "nose_tip",
+          "source_px": [
+            818,
+            126
+          ],
+          "world_projection_m": [
+            null,
+            -0.12184615384615384,
+            1.4604615384615383
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 13,
+          "feature": "nose_under",
+          "source_px": [
+            813,
+            132
+          ],
+          "world_projection_m": [
+            null,
+            -0.11338461538461538,
+            1.4503076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 14,
+          "feature": "philtrum",
+          "source_px": [
+            810,
+            137
+          ],
+          "world_projection_m": [
+            null,
+            -0.1083076923076923,
+            1.4418461538461538
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 15,
+          "feature": "lip_upper",
+          "source_px": [
+            810,
+            141
+          ],
+          "world_projection_m": [
+            null,
+            -0.1083076923076923,
+            1.435076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 16,
+          "feature": "mouth_seam",
+          "source_px": [
+            808,
+            143
+          ],
+          "world_projection_m": [
+            null,
+            -0.10492307692307691,
+            1.4316923076923076
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 17,
+          "feature": "lip_lower",
+          "source_px": [
+            806,
+            147
+          ],
+          "world_projection_m": [
+            null,
+            -0.10153846153846154,
+            1.4249230769230767
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 18,
+          "feature": "chin_front",
+          "source_px": [
+            800,
+            157
+          ],
+          "world_projection_m": [
+            null,
+            -0.09138461538461538,
+            1.408
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 19,
+          "feature": "chin",
+          "source_px": [
+            796,
+            163
+          ],
+          "world_projection_m": [
+            null,
+            -0.0846153846153846,
+            1.3978461538461537
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 20,
+          "feature": "jaw_under",
+          "source_px": [
+            782,
+            161
+          ],
+          "world_projection_m": [
+            null,
+            -0.06092307692307692,
+            1.401230769230769
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 21,
+          "feature": "ear_upper",
+          "source_px": [
+            758,
+            112
+          ],
+          "world_projection_m": [
+            null,
+            -0.020307692307692304,
+            1.484153846153846
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 22,
+          "feature": "ear_inner",
+          "source_px": [
+            757,
+            122
+          ],
+          "world_projection_m": [
+            null,
+            -0.018615384615384614,
+            1.4672307692307691
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 23,
+          "feature": "ear_lobe",
+          "source_px": [
+            760,
+            132
+          ],
+          "world_projection_m": [
+            null,
+            -0.02369230769230769,
+            1.4503076923076923
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        },
+        {
+          "index": 24,
+          "feature": "neck_front",
+          "source_px": [
+            779,
+            179
+          ],
+          "world_projection_m": [
+            null,
+            -0.055846153846153844,
+            1.3707692307692307
+          ],
+          "use_for_skin_fit": false,
+          "visibility": "partly occluded; construction guide only",
+          "uncertainty_px": 4
+        },
+        {
+          "index": 25,
+          "feature": "neck_back",
+          "source_px": [
+            742,
+            176
+          ],
+          "world_projection_m": [
+            null,
+            0.006769230769230769,
+            1.3758461538461537
+          ],
+          "use_for_skin_fit": true,
+          "visibility": "visible reference feature",
+          "uncertainty_px": 2
+        }
+      ]
+    }
+  },
+  "mesh_fit": "not run; silhouette blockout gate must pass before forms",
+  "notes": [
+    "Visible iris/pupil registration refines the older broad eye-centre marker; the body calibration is not changed.",
+    "Unknown depth in front and lateral coordinate in profile are kept null, not invented.",
+    "Front/profile smile and hair occlusion differ; compare per-view residuals against the stated uncertainty.",
+    "Actual eyes/lids/lips require geometry and close rendered overlays; landmark count alone is not quality proof.",
+    "Published .L/.R suffixes are anatomical: L is +X/image-right in the front view."
+  ]
+}

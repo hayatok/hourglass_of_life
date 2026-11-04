@@ -1,0 +1,81 @@
+{
+  "rules_version": 1,
+  "source_id": "fictional-japan-temperate-assumptions-v1",
+  "context_version": 1,
+  "synthetic": true,
+  "assumptions": "日本の架空の温帯町のために選んだゲーム用仮定値。実測統計・気象予報・実在地域の再現ではない。",
+  "days_per_season": 3,
+  "seasons": [
+    {
+      "id": "spring",
+      "label": "春",
+      "mean_c": 16.0,
+      "diurnal_amplitude_c": 4.0,
+      "rain_start": 0.28,
+      "rain_continue": 0.52
+    },
+    {
+      "id": "summer",
+      "label": "夏",
+      "mean_c": 28.0,
+      "diurnal_amplitude_c": 4.0,
+      "rain_start": 0.32,
+      "rain_continue": 0.58
+    },
+    {
+      "id": "autumn",
+      "label": "秋",
+      "mean_c": 19.0,
+      "diurnal_amplitude_c": 4.0,
+      "rain_start": 0.26,
+      "rain_continue": 0.5
+    },
+    {
+      "id": "winter",
+      "label": "冬",
+      "mean_c": 6.0,
+      "diurnal_amplitude_c": 3.0,
+      "rain_start": 0.2,
+      "rain_continue": 0.42
+    }
+  ],
+  "segment_minutes": {
+    "clear": [
+      180,
+      600
+    ],
+    "rain": [
+      90,
+      360
+    ]
+  },
+  "rain_intensity": [
+    0.25,
+    0.9
+  ],
+  "segment_offset_c": 2.5,
+  "rain_cooling_c": 2.0,
+  "warmest_minute": 900,
+  "cost": {
+    "comfort_low_c": 16.0,
+    "comfort_high_c": 26.0,
+    "thermal_span_c": 18.0,
+    "exposure_minutes": 120.0,
+    "rain_weight": 0.55,
+    "thermal_weight": 0.6,
+    "exertion_weight": 0.2
+  },
+  "choice": {
+    "free_kinds": [
+      "rest",
+      "eat",
+      "social",
+      "hobby",
+      "photo",
+      "legacy"
+    ],
+    "expected_minutes": 55.0,
+    "walk_cap_minutes": 90.0,
+    "score_weight": 0.18
+  }
+}

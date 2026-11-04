@@ -172,22 +172,33 @@ func run() -> void:
 	expect(sim.propose_project("aoi","osamu").status=="accept","A radio project can be initiated by two free interested residents")
 	expect(aoi.goal_progress==0 and sim.work_family.projects.radio==0,"Proposing joint work does not advance the project")
 	limit = 0
-	while sim.meetings[0].state=="travel" and limit<180:
+	while sim.interactions.pose_for("aoi").get("phase","") not in ["take","carry_to_target","place","working"] and limit<180:
 		sim.advance_minutes(1)
 		limit += 1
 	expect(not sim.meetings[0].materials_ready,"Materials are not consumed during the journey")
 	var spending_before = sim.work_family.household(aoi).spent_today
-	sim.advance_minutes(44)
+	limit = 0
+	while sim.interactions.pose_for("aoi").get("phase","")!="working" and limit<240:
+		sim.advance_minutes(1);limit += 1
+	expect(sim.interactions.pose_for("aoi").get("phase","")=="working","The same radio reaches the table before actual joint repair begins")
+	sim.advance_minutes(1) # Entered the working phase; now execute its first real minute.
 	expect(sim.meetings[0].materials_ready and sim.work_family.household(aoi).spent_today-spending_before>=4,"Materials are consumed when actual work begins")
+	sim.advance_minutes(int(sim.meetings[0].remaining)-1)
 	expect(aoi.goal_progress==0 and osamu.goal_progress==0,"Incomplete work has not completed a shared project step")
 	sim.advance_minutes(1)
 	expect(aoi.goal_progress>=.18 and osamu.goal_progress>=.18 and sim.work_family.projects.radio>=.18,"Finishing real joint work advances both participants' relevant wishes")
-	expect("ラジオ" in aoi.memories[-1].text and "一緒に取り組んだ" in aoi.memories[-1].text,"A work memory describes the actual shared activity")
+	limit = 0
+	while not sim.meetings.is_empty() and limit<120:
+		sim.advance_minutes(1);limit += 1
+	expect(aoi.memories.any(func(memory): return "ラジオ" in memory.text and "一緒に取り組んだ" in memory.text),"After returning the radio, a work memory describes the actual shared activity")
 	# Making the model together is also a legitimate way to spend family care time.
 	sim.reset()
 	sim.start_minute = 900
 	sim.epoch_weekday = 0
 	for p in sim.people: sim._choose_action(p)
+	# This case verifies care while modelling, with the shared desk actually available.
+	# A third person's solo hobby may otherwise reserve one of its two places.
+	sim._assign(sim.person("nagisa"),"rest","home_ogawa",90,"食卓でひと息つく")
 	ryo = sim.person("ryo")
 	rin = sim.person("rin")
 	for p in [ryo,rin]:

@@ -1,0 +1,243 @@
+{
+  "format": 1,
+  "target": "rin",
+  "source": {
+    "path": "assets/motion-sources/quaternius/Unreal-Godot/UAL1_Standard.glb",
+    "bytes": 7618436,
+    "sha256_identification_only": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997"
+  },
+  "source_rm": {
+    "path": "assets/motion-sources/quaternius/Unreal-Godot/UAL1_Standard_RM.glb",
+    "bytes": 7620504,
+    "sha256_identification_only": "be684571ed655a1b892c2c07e6e2aeca053b606c442d34004adaf1d944090d01"
+  },
+  "target_input_identification": {
+    "path": "game/assets/models/rin/CH_Rin.glb",
+    "bytes": 4104260,
+    "sha256_identification_only": "a1dc8ea6eb7ca63f64737e4312f7c32fbeec5b16e969be11718a95b96d4ca7f9"
+  },
+  "license": "CC0-1.0",
+  "license_file": "assets/motion-sources/quaternius/License.txt",
+  "track_prefix": "Skeleton3D:",
+  "target_skeleton_relative_path": "Skeleton3D",
+  "track_transform_convention": "Godot4 absolute parent-relative bone TRS; target local lengths and unit scale preserved",
+  "world_movement_owner": "ResidentMotor only; clips have no root X/Z or yaw movement",
+  "geometry_policy": "No model output, skin edits, old animation output or foundation library overwrite",
+  "source_mapping": {
+    "DEF-pelvis": "pelvis",
+    "DEF-spine_01": "spine_01",
+    "DEF-spine_02": "spine_02",
+    "DEF-chest": "spine_03",
+    "DEF-neck": "neck_01",
+    "DEF-head": "Head",
+    "DEF-clavicle.L": "clavicle_l",
+    "DEF-upper_arm.L": "upperarm_l",
+    "DEF-forearm.L": "lowerarm_l",
+    "DEF-hand.L": "hand_l",
+    "DEF-thigh.L": "thigh_l",
+    "DEF-shin.L": "calf_l",
+    "DEF-foot.L": "foot_l",
+    "DEF-toe.L": "ball_l",
+    "DEF-finger0.L": "thumb_01_l",
+    "DEF-finger1.L": "index_01_l",
+    "DEF-finger2.L": "middle_01_l",
+    "DEF-finger3.L": "ring_01_l",
+    "DEF-finger4.L": "pinky_01_l",
+    "DEF-clavicle.R": "clavicle_r",
+    "DEF-upper_arm.R": "upperarm_r",
+    "DEF-forearm.R": "lowerarm_r",
+    "DEF-hand.R": "hand_r",
+    "DEF-thigh.R": "thigh_r",
+    "DEF-shin.R": "calf_r",
+    "DEF-foot.R": "foot_r",
+    "DEF-toe.R": "ball_r",
+    "DEF-finger0.R": "thumb_01_r",
+    "DEF-finger1.R": "index_01_r",
+    "DEF-finger2.R": "middle_01_r",
+    "DEF-finger3.R": "ring_01_r",
+    "DEF-finger4.R": "pinky_01_r"
+  },
+  "translation_scale": 0.685835768598287,
+  "clips": {
+    "pickup_table": {
+      "source_clip": "PickUp_Table",
+      "length_seconds": 0.8333333134651184,
+      "loop": false,
+      "sample_rate_hz": 30,
+      "samples": 26,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 0.685835768598287,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": null,
+      "loop_seam_angle_rad": null,
+      "max_unreachable_ankle_residual_m": 0.006454755398190022,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.0001114497717935592,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            0.8333333134651184
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            0.8333333134651184
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    },
+    "interact": {
+      "source_clip": "Interact",
+      "length_seconds": 2.0,
+      "loop": false,
+      "sample_rate_hz": 30,
+      "samples": 61,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 0.685835768598287,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": null,
+      "loop_seam_angle_rad": null,
+      "max_unreachable_ankle_residual_m": 9.18569267238524e-08,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.00010595662024570629,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            2.0
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            2.0
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    },
+    "fixing_kneeling": {
+      "source_clip": "Fixing_Kneeling",
+      "length_seconds": 5.199999809265137,
+      "loop": false,
+      "sample_rate_hz": 30,
+      "samples": 157,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 0.685835768598287,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": null,
+      "loop_seam_angle_rad": null,
+      "max_unreachable_ankle_residual_m": 0.001614680750928023,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.03252101317048073,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            5.199999809265137
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            4.766666491826375
+          ],
+          [
+            4.833333156047723,
+            5.199999809265137
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    },
+    "push_loop": {
+      "source_clip": "Push_Loop",
+      "length_seconds": 2.6666667461395264,
+      "loop": true,
+      "sample_rate_hz": 30,
+      "samples": 81,
+      "root_motion": false,
+      "authored_stride_m": 0.5486686230544291,
+      "authored_speed_mps": 0.2057507275135614,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.800000011920929
+      ],
+      "translation_scale": 0.685835768598287,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": 0.0,
+      "loop_seam_angle_rad": 0.0,
+      "max_unreachable_ankle_residual_m": 8.462232866585662e-08,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.008181890472769737,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            2.166666731238365
+          ],
+          [
+            2.400000071525574,
+            2.6666667461395264
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            1.1666667014360428
+          ],
+          [
+            1.4000000417232514,
+            2.6666667461395264
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    }
+  },
+  "missing_source_coverage": [
+    "two_hand_carry",
+    "food_preparation",
+    "stir_pot",
+    "eat_with_utensil",
+    "wash_dish",
+    "fold_laundry",
+    "write_notebook"
+  ],
+  "runtime_authoring": "Semantic whole-body work paths are authored in FoundationHouseholdPose against actual world targets. Carry/seated actions preserve incoming lower body.",
+  "master_preview_alias": "idle in the new .blend aliases Interact only; it is excluded from the runtime AnimationLibrary",
+  "review_status": "baked_not_rendered_or_visually_accepted"
+}

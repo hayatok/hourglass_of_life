@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "note": "Authored logical radio workflow. Positions are world-space prop bottom centres; navigation approaches are floor positions. Effects run on simulation minutes, never animation callbacks.",
+  "radio": {
+    "object_id": "workshop_radio",
+    "owner": "town",
+    "site": "workshop",
+    "source_container": "radio_shelf",
+    "target_container": "radio_table",
+    "source_position": [-1.7, 0.95, -7.6],
+    "source_approach": [-1.7, 0.0, -7.18],
+    "source_yaw": 0.0,
+    "target_position": [0.0, 0.95, -7.395],
+    "target_yaw": 0.0,
+    "carry_offset": [0.0, 0.98, 0.34],
+    "minimum_carrier_age": 12,
+    "phase_minutes": {"take": 6, "place": 6, "take_return": 6, "return": 6},
+    "timeout_minutes": 240
+  }
+}

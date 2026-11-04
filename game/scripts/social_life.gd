@@ -6,9 +6,11 @@ var sim
 var appointments: Array = []
 var offer: Dictionary = {}
 var serial: int = 0
+var knowledge_exchange
 
 func _init(simulation) -> void:
 	sim = simulation
+	knowledge_exchange = preload("res://game/scripts/resident_knowledge_exchange.gd").new(sim)
 
 func reset() -> void:
 	appointments.clear()
@@ -96,11 +98,12 @@ func propose(first: String, second: String, location: String) -> Dictionary:
 	var center = _center(a,b,location)
 	if center==null:
 		return _counteroffer(a,b,location,a,"今はベンチが使われている。")
-	sim._begin_meeting(a,b,center,location,false)
+	if not sim._begin_meeting(a,b,center,location,false):
+		return _counteroffer(a,b,location,a,"今は席が使われている。")
 	return sim._reply(a,"accept","%sさんと話してみよう。まずは待ち合わせの場所へ。"%b.name)
 
 func _center(a: Dictionary, b: Dictionary, location: String) -> Variant:
-	if location=="bench": return sim._available_bench((a.position+b.position)*.5)
+	if location=="bench": return sim._available_bench((a.position+b.position)*.5,[a.id,b.id])
 	if location=="cafe": return sim.SITES.bakery_cafe+Vector3(0,0,1.2)
 	return sim.SITES.workshop+Vector3(0,0,1)
 
@@ -127,6 +130,7 @@ func find_slot(a: Dictionary, b: Dictionary, duration: int = 25) -> int:
 func _slot_free(a: Dictionary, b: Dictionary, start: int, duration: int) -> bool:
 	for p in [a,b]:
 		for offset in range(-120,duration+16,15):
+			if sim.agenda!=null and sim.agenda.reserved(p,start+offset): return false
 			if sim.work_family!=null and sim.work_family.reserved(p,start+offset): return false
 			var absolute = sim.start_minute+start+offset
 			if not sim._routine_at(p,absolute%1440,(sim.epoch_weekday+int(absolute/1440.0))%7).is_empty():
@@ -183,8 +187,10 @@ func tick() -> void:
 			if sim.elapsed>planned.start+15:
 				_postpone(planned,"待ち合わせの場所が空かなかった。")
 			continue
+		if not sim._begin_meeting(a,b,center,planned.location,false,planned.duration,planned.start,planned.id):
+			if sim.elapsed>planned.start+15: _postpone(planned,"待ち合わせの席が空かなかった。")
+			continue
 		planned.state = "on_the_way"
-		sim._begin_meeting(a,b,center,planned.location,false,planned.duration,planned.start,planned.id)
 		sim._log(a.id,"約束の時間に向けて","%sさんと会うために、待ち合わせの場所へ向かった。"%b.name)
 
 func finish(m: Dictionary, completed: bool) -> void:
@@ -195,6 +201,7 @@ func finish(m: Dictionary, completed: bool) -> void:
 	if not completed: return
 	var a = sim.person(m.a)
 	var b = sim.person(m.b)
+	var previous_knowledge := {a.id:a.knowledge.duplicate(true),b.id:b.knowledge.duplicate(true)}
 	var topic = _topic(a,b)
 	for pair in [[a,b],[b,a]]:
 		var p = pair[0]
@@ -218,6 +225,10 @@ func finish(m: Dictionary, completed: bool) -> void:
 		elif r.familiarity>.6: text += "よく知る相手だから、近況を落ち着いて伝えられた。"
 		else: text += "相手の好きなことを、少し知ることができた。"
 		sim._remember(p,other.id,"約束して過ごした時間" if not m.get("appointment_id","").is_empty() else "一緒に過ごした時間",text,"shared_time")
+		if m.get("mode","")!="project":
+			sim.cognition.experience(p,other.id,"social",{"place":p.place},
+				{"enjoyment":.3 if uneasy else .7,"burden":p.quiet*.6})
+	knowledge_exchange.exchange(a,b,previous_knowledge[a.id],previous_knowledge[b.id],m)
 
 func _postpone(planned: Dictionary, reason: String) -> void:
 	planned.state = "postponed"
@@ -229,13 +240,7 @@ func _postpone(planned: Dictionary, reason: String) -> void:
 		sim._remember(p,other.id,"会う日を改めることにした","%sさんとは、また時間を相談したい。%s"%[other.name,reason],"promise_change")
 
 func _topic(a: Dictionary, b: Dictionary) -> String:
-	var ids = [a.id,b.id]
-	if "aoi" in ids and "osamu" in ids: return "譲り受けたラジオの気になる箇所"
-	if "ryo" in ids and "rin" in ids: return "作りかけの町の模型"
-	if "nagisa" in ids and "maho" in ids: return "季節のパンとお客さんの反応"
-	if "fumi" in ids: return "写真に残したい町の景色"
-	if "ritsu" in ids: return "最近聴いた音楽と、ひとりで過ごす時間"
-	return "最近の暮らしと、それぞれがやってみたいこと"
+	return sim.resident_activities.topic(a,b)
 
 func person_text(p: Dictionary) -> String:
 	var text = ""

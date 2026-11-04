@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://game/scripts/jrpg_resident_model.gd" id="1"]
+[ext_resource type="PackedScene" path="res://game/assets/models/osamu/CH_Osamu.glb" id="2"]
+
+[node name="Osamu" type="Node3D"]
+script = ExtResource("1")
+rest_height = 1.700000
+walk_speed = 1.143871
+hair_cells = Vector3i(6,7,8)
+
+[node name="Model" parent="." instance=ExtResource("2")]

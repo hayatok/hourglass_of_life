@@ -1,0 +1,109 @@
+{
+  "resident": "nagisa",
+  "service": "Tripo Studio",
+  "interaction": "Chrome native UI via CUA only; no API or CLI",
+  "task_id": "f8a25d0b-bd76-4332-9378-6da16d751a0e",
+  "task_url": "https://studio.tripo3d.ai/ja/workspace/generate/f8a25d0b-bd76-4332-9378-6da16d751a0e",
+  "input": "assets/models/foundation-family/CH_Nagisa/ref/front.png",
+  "preserved_input": "reference-front.png",
+  "input_sha256": "9cc06dfa7a81eafd2dd844068889eefe5afd4eae043a701e9cc6d33395e4cfe3",
+  "identification_policy": "Hashes identify the input/output only; no quality check or test count.",
+  "approval": {
+    "maximum_credits": 30,
+    "question_call_id": "call_ae7d3295e3d347029313d3c02a1f8faf",
+    "scope": "ONE image-to-model; no paid rig, extra texture, extra convert or reroll"
+  },
+  "model_display": "H3.1 – 最高品質",
+  "requested": {
+    "triangle_target": 30000,
+    "texture_resolution": 2048,
+    "texture": true,
+    "pbr": true,
+    "remove_lighting": true,
+    "ultra_mesh": false,
+    "ai_completion": false,
+    "part_generation": false,
+    "8k": false,
+    "privacy": "private"
+  },
+  "credit_observation": {
+    "balance_before": 2805,
+    "balance_after_submission": 2775,
+    "displayed_generation_price": 30,
+    "additional_paid_steps": 0,
+    "status": "success confirmed in browser;30credit balance decrease; original export no additional observed charge",
+    "balance_after_success": 2775,
+    "balance_after_original_glb_export": 2775
+  },
+  "status": "raw_glb_and_embedded_textures_saved_not_rigged_or_integrated",
+  "submitted_recorded_utc": "2026-11-04T23:15:52.290270+00:00",
+  "output": "CH_Nagisa_Tripo_Raw.glb",
+  "acceptance": "not reviewed; generation is not rig, runtime integration or game-quality acceptance",
+  "saved_utc": "2026-11-04T23:20:40.298105+00:00",
+  "bytes": 3259404,
+  "sha256": "6d1afd98ac828e997c1c34012361e8b4d486d4b680cb4906e67e4c26f9281924",
+  "observed_browser_geometry": {
+    "triangles": 29254,
+    "vertices": 18285
+  },
+  "glb_contents": {
+    "meshes": 1,
+    "materials": 1,
+    "images": [
+      {
+        "file": "textures/00_BaseColor.jpg",
+        "roles": [
+          "BaseColor"
+        ],
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 617512
+      },
+      {
+        "file": "textures/01_MetallicRoughness.jpg",
+        "roles": [
+          "MetallicRoughness"
+        ],
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 593428
+      },
+      {
+        "file": "textures/02_Normal.png",
+        "roles": [
+          "Normal"
+        ],
+        "mime": "image/png",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 1110251
+      }
+    ],
+    "skins": 0,
+    "animations": 0,
+    "morph_targets": 0,
+    "triangles": 29254,
+    "vertices": 18285
+  },
+  "cost_breakdown": [
+    {
+      "step": "single image-to-model H3.1",
+      "task_id": "f8a25d0b-bd76-4332-9378-6da16d751a0e",
+      "observed_credits": 30
+    },
+    {
+      "step": "original GLB/current2K download",
+      "observed_additional_credits": 0
+    }
+  ],
+  "observed_total_credits": 30,
+  "remaining_display_balance": 2775
+}

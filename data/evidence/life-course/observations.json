@@ -1,0 +1,2741 @@
+{
+  "schema_version": 1,
+  "status": "source_fixture_not_connected_to_runtime",
+  "generated_by": "tools/evidence/life_course_data.py",
+  "rounding": "up to 6 decimal places; original source text retained",
+  "series": [
+    {
+      "id": "maternal_employment",
+      "source_id": "oecd_lmf12_2023",
+      "metric": "maternal_employment_rate",
+      "measure_kind": "state_share",
+      "unit": "percent",
+      "period": "survey_reference_year",
+      "comparison": "Descriptive only; national cohorts, age bands and source years differ. Repeated cross-sections are not maternal return-to-work transitions.",
+      "observations": [
+        {
+          "id": "maternal.JPN.2019.0-2",
+          "country": "JPN",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 56.9,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z102",
+            "raw": "56.9"
+          }
+        },
+        {
+          "id": "maternal.JPN.2020.0-2",
+          "country": "JPN",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": null,
+          "missing_reason": "source_not_available_or_suppressed",
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA102",
+            "raw": ".."
+          }
+        },
+        {
+          "id": "maternal.JPN.2021.0-2",
+          "country": "JPN",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 63.1,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB102",
+            "raw": "63.1"
+          }
+        },
+        {
+          "id": "maternal.JPN.2019.3-5",
+          "country": "JPN",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 68.7,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z103",
+            "raw": "68.7"
+          }
+        },
+        {
+          "id": "maternal.JPN.2020.3-5",
+          "country": "JPN",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": null,
+          "missing_reason": "source_not_available_or_suppressed",
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA103",
+            "raw": ".."
+          }
+        },
+        {
+          "id": "maternal.JPN.2021.3-5",
+          "country": "JPN",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 74.6,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB103",
+            "raw": "74.599999999999994"
+          }
+        },
+        {
+          "id": "maternal.JPN.2019.6-14",
+          "country": "JPN",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 77.7,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z104",
+            "raw": "77.7"
+          }
+        },
+        {
+          "id": "maternal.JPN.2020.6-14",
+          "country": "JPN",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": null,
+          "missing_reason": "source_not_available_or_suppressed",
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA104",
+            "raw": ".."
+          }
+        },
+        {
+          "id": "maternal.JPN.2021.6-14",
+          "country": "JPN",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": null,
+            "label": "15 years and over"
+          },
+          "population_unit": "households_classified_by_youngest_mother",
+          "denominator": "households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 80.3,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB104",
+            "raw": "80.3"
+          }
+        },
+        {
+          "id": "maternal.FRA.2019.0-2",
+          "country": "FRA",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 60.148287,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z62",
+            "raw": "60.148286819458008"
+          }
+        },
+        {
+          "id": "maternal.FRA.2020.0-2",
+          "country": "FRA",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 62.637067,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA62",
+            "raw": "62.637066841125488"
+          }
+        },
+        {
+          "id": "maternal.FRA.2021.0-2",
+          "country": "FRA",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 64.240283,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB62",
+            "raw": "64.240282773971558"
+          }
+        },
+        {
+          "id": "maternal.FRA.2019.3-5",
+          "country": "FRA",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 73.602509,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z63",
+            "raw": "73.602509498596191"
+          }
+        },
+        {
+          "id": "maternal.FRA.2020.3-5",
+          "country": "FRA",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 71.47904,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA63",
+            "raw": "71.479040384292603"
+          }
+        },
+        {
+          "id": "maternal.FRA.2021.3-5",
+          "country": "FRA",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 73.714727,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB63",
+            "raw": "73.714727163314819"
+          }
+        },
+        {
+          "id": "maternal.FRA.2019.6-14",
+          "country": "FRA",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 80.021483,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z64",
+            "raw": "80.021482706069946"
+          }
+        },
+        {
+          "id": "maternal.FRA.2020.6-14",
+          "country": "FRA",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 79.587603,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA64",
+            "raw": "79.587602615356445"
+          }
+        },
+        {
+          "id": "maternal.FRA.2021.6-14",
+          "country": "FRA",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 79.597217,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB64",
+            "raw": "79.597216844558716"
+          }
+        },
+        {
+          "id": "maternal.SWE.2019.0-2",
+          "country": "SWE",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 82.026893,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z172",
+            "raw": "82.026892900466919"
+          }
+        },
+        {
+          "id": "maternal.SWE.2020.0-2",
+          "country": "SWE",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": 74.20243,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA172",
+            "raw": "74.202430248260498"
+          }
+        },
+        {
+          "id": "maternal.SWE.2021.0-2",
+          "country": "SWE",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 2
+          },
+          "marital_scope": "all reported",
+          "value": null,
+          "missing_reason": "source_not_available_or_suppressed",
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB172",
+            "raw": ".."
+          }
+        },
+        {
+          "id": "maternal.SWE.2019.3-5",
+          "country": "SWE",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 86.127269,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z173",
+            "raw": "86.127269268035889"
+          }
+        },
+        {
+          "id": "maternal.SWE.2020.3-5",
+          "country": "SWE",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": 84.556848,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA173",
+            "raw": "84.556847810745239"
+          }
+        },
+        {
+          "id": "maternal.SWE.2021.3-5",
+          "country": "SWE",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 3,
+            "maximum": 5
+          },
+          "marital_scope": "all reported",
+          "value": null,
+          "missing_reason": "source_not_available_or_suppressed",
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB173",
+            "raw": ".."
+          }
+        },
+        {
+          "id": "maternal.SWE.2019.6-14",
+          "country": "SWE",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 88.745272,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z174",
+            "raw": "88.745272159576416"
+          }
+        },
+        {
+          "id": "maternal.SWE.2020.6-14",
+          "country": "SWE",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": 87.519825,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA174",
+            "raw": "87.519824504852295"
+          }
+        },
+        {
+          "id": "maternal.SWE.2021.6-14",
+          "country": "SWE",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 64,
+            "label": "15-64 years"
+          },
+          "population_unit": "women",
+          "denominator": "women aged 15-64 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 6,
+            "maximum": 14
+          },
+          "marital_scope": "all reported",
+          "value": null,
+          "missing_reason": "source_not_available_or_suppressed",
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB174",
+            "raw": ".."
+          }
+        },
+        {
+          "id": "maternal.KOR.2019.0-6",
+          "country": "KOR",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 6
+          },
+          "marital_scope": "married only",
+          "value": 49.1,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z107",
+            "raw": "49.1"
+          }
+        },
+        {
+          "id": "maternal.KOR.2020.0-6",
+          "country": "KOR",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 6
+          },
+          "marital_scope": "married only",
+          "value": 47.5,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA107",
+            "raw": "47.5"
+          }
+        },
+        {
+          "id": "maternal.KOR.2021.0-6",
+          "country": "KOR",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 0,
+            "maximum": 6
+          },
+          "marital_scope": "married only",
+          "value": 47.5,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB107",
+            "raw": "47.5"
+          }
+        },
+        {
+          "id": "maternal.KOR.2019.7-12",
+          "country": "KOR",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 7,
+            "maximum": 12
+          },
+          "marital_scope": "married only",
+          "value": 61.2,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z108",
+            "raw": "61.2"
+          }
+        },
+        {
+          "id": "maternal.KOR.2020.7-12",
+          "country": "KOR",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 7,
+            "maximum": 12
+          },
+          "marital_scope": "married only",
+          "value": 58.5,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA108",
+            "raw": "58.5"
+          }
+        },
+        {
+          "id": "maternal.KOR.2021.7-12",
+          "country": "KOR",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 7,
+            "maximum": 12
+          },
+          "marital_scope": "married only",
+          "value": 59.0,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB108",
+            "raw": "59"
+          }
+        },
+        {
+          "id": "maternal.KOR.2019.13-17",
+          "country": "KOR",
+          "year": 2019,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 13,
+            "maximum": 17
+          },
+          "marital_scope": "married only",
+          "value": 66.1,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "Z109",
+            "raw": "66.099999999999994"
+          }
+        },
+        {
+          "id": "maternal.KOR.2020.13-17",
+          "country": "KOR",
+          "year": 2020,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 13,
+            "maximum": 17
+          },
+          "marital_scope": "married only",
+          "value": 65.3,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AA109",
+            "raw": "65.3"
+          }
+        },
+        {
+          "id": "maternal.KOR.2021.13-17",
+          "country": "KOR",
+          "year": 2021,
+          "sex": "female",
+          "age": {
+            "minimum": 15,
+            "maximum": 54,
+            "label": "15-54 years"
+          },
+          "population_unit": "married_women",
+          "denominator": "married women aged 15-54 with their youngest child in this age band",
+          "youngest_child_age": {
+            "minimum": 13,
+            "maximum": 17
+          },
+          "marital_scope": "married only",
+          "value": 66.1,
+          "missing_reason": null,
+          "source_location": {
+            "sheet": "MER-Child-Age-15-64",
+            "cell": "AB109",
+            "raw": "66.099999999999994"
+          }
+        }
+      ],
+      "individual_transition_probability": false
+    },
+    {
+      "id": "employment_flows",
+      "source_id": "mhlw_employment_2024",
+      "measure_kind": "annual_gross_flow_rate",
+      "unit": "percent_of_beginning_year_employees",
+      "period": "calendar_year",
+      "comparison": "2023/2024 benchmark break; do not infer a simple year-on-year trend or individual re-employment probability.",
+      "observations": [
+        {
+          "id": "employment.2024.all.hires",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "all",
+          "metric": "hires",
+          "value": 14.8,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "E7",
+            "raw": "14.8"
+          }
+        },
+        {
+          "id": "employment.2024.all.separations",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "all",
+          "metric": "separations",
+          "value": 14.2,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "F7",
+            "raw": "14.2"
+          }
+        },
+        {
+          "id": "employment.2024.all.hires_with_job_in_previous_year",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "all",
+          "metric": "hires_with_job_in_previous_year",
+          "value": 9.7,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表3-2性・就業形態、職歴別入職率",
+            "cell": "E7",
+            "raw": "9.6999999999999993"
+          }
+        },
+        {
+          "id": "employment.2024.general.hires",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "general",
+          "metric": "hires",
+          "value": 11.8,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "E10",
+            "raw": "11.8"
+          }
+        },
+        {
+          "id": "employment.2024.general.separations",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "general",
+          "metric": "separations",
+          "value": 11.5,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "F10",
+            "raw": "11.5"
+          }
+        },
+        {
+          "id": "employment.2024.general.hires_with_job_in_previous_year",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "general",
+          "metric": "hires_with_job_in_previous_year",
+          "value": 8.3,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表3-2性・就業形態、職歴別入職率",
+            "cell": "E10",
+            "raw": "8.3000000000000007"
+          }
+        },
+        {
+          "id": "employment.2024.part_time.hires",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "part_time",
+          "metric": "hires",
+          "value": 22.7,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "E11",
+            "raw": "22.7"
+          }
+        },
+        {
+          "id": "employment.2024.part_time.separations",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "part_time",
+          "metric": "separations",
+          "value": 21.4,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "F11",
+            "raw": "21.4"
+          }
+        },
+        {
+          "id": "employment.2024.part_time.hires_with_job_in_previous_year",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "part_time",
+          "metric": "hires_with_job_in_previous_year",
+          "value": 13.5,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2024_benchmark",
+          "source_location": {
+            "sheet": "表3-2性・就業形態、職歴別入職率",
+            "cell": "E11",
+            "raw": "13.5"
+          }
+        },
+        {
+          "id": "employment.2023.all.hires",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "all",
+          "metric": "hires",
+          "value": 16.4,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "E13",
+            "raw": "16.399999999999999"
+          }
+        },
+        {
+          "id": "employment.2023.all.separations",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "all",
+          "metric": "separations",
+          "value": 15.4,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "F13",
+            "raw": "15.4"
+          }
+        },
+        {
+          "id": "employment.2023.all.hires_with_job_in_previous_year",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "all",
+          "metric": "hires_with_job_in_previous_year",
+          "value": 10.4,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表3-2性・就業形態、職歴別入職率",
+            "cell": "E13",
+            "raw": "10.4"
+          }
+        },
+        {
+          "id": "employment.2023.general.hires",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "general",
+          "metric": "hires",
+          "value": 12.1,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "E16",
+            "raw": "12.1"
+          }
+        },
+        {
+          "id": "employment.2023.general.separations",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "general",
+          "metric": "separations",
+          "value": 12.1,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "F16",
+            "raw": "12.1"
+          }
+        },
+        {
+          "id": "employment.2023.general.hires_with_job_in_previous_year",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "general",
+          "metric": "hires_with_job_in_previous_year",
+          "value": 8.5,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表3-2性・就業形態、職歴別入職率",
+            "cell": "E16",
+            "raw": "8.5"
+          }
+        },
+        {
+          "id": "employment.2023.part_time.hires",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "part_time",
+          "metric": "hires",
+          "value": 27.5,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "E17",
+            "raw": "27.5"
+          }
+        },
+        {
+          "id": "employment.2023.part_time.separations",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "part_time",
+          "metric": "separations",
+          "value": 23.8,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表1-2常用労働者の動き（率）",
+            "cell": "F17",
+            "raw": "23.8"
+          }
+        },
+        {
+          "id": "employment.2023.part_time.hires_with_job_in_previous_year",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered regular employees"
+          },
+          "employment_type": "part_time",
+          "metric": "hires_with_job_in_previous_year",
+          "value": 15.3,
+          "missing_reason": null,
+          "population_unit": "establishment_worker_flows",
+          "denominator": "regular employees on 1 January of the same year in covered establishments",
+          "comparison_basis": "2023_original_publication_not_benchmark_adjusted",
+          "source_location": {
+            "sheet": "表3-2性・就業形態、職歴別入職率",
+            "cell": "E17",
+            "raw": "15.3"
+          }
+        }
+      ],
+      "individual_transition_probability": false
+    },
+    {
+      "id": "job_change_wage",
+      "source_id": "mhlw_employment_2024",
+      "measure_kind": "composition_share",
+      "unit": "percent",
+      "period": "calendar_year",
+      "comparison": "Conditional on former employees who entered and remained registered at the survey; excludes former self-employed and entrants no longer registered. Not all unemployed people. Unstated category remains in denominator.",
+      "observations": [
+        {
+          "id": "wage.2024.increase",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered job-changing entrants"
+          },
+          "direction": "increase",
+          "value": 40.5,
+          "missing_reason": null,
+          "population_unit": "job_changing_former_employees_still_registered_at_survey",
+          "denominator": "job-changing entrants previously employed as workers and still registered at the survey; excludes former self-employed; includes wage-change status not stated",
+          "source_location": {
+            "sheet": "表6転職入職者の賃金変動状況別割合",
+            "cell": "F7",
+            "raw": "40.5"
+          }
+        },
+        {
+          "id": "wage.2024.unchanged",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered job-changing entrants"
+          },
+          "direction": "unchanged",
+          "value": 28.4,
+          "missing_reason": null,
+          "population_unit": "job_changing_former_employees_still_registered_at_survey",
+          "denominator": "job-changing entrants previously employed as workers and still registered at the survey; excludes former self-employed; includes wage-change status not stated",
+          "source_location": {
+            "sheet": "表6転職入職者の賃金変動状況別割合",
+            "cell": "I7",
+            "raw": "28.4"
+          }
+        },
+        {
+          "id": "wage.2024.decrease",
+          "country": "JPN",
+          "year": 2024,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered job-changing entrants"
+          },
+          "direction": "decrease",
+          "value": 29.4,
+          "missing_reason": null,
+          "population_unit": "job_changing_former_employees_still_registered_at_survey",
+          "denominator": "job-changing entrants previously employed as workers and still registered at the survey; excludes former self-employed; includes wage-change status not stated",
+          "source_location": {
+            "sheet": "表6転職入職者の賃金変動状況別割合",
+            "cell": "J7",
+            "raw": "29.4"
+          }
+        },
+        {
+          "id": "wage.2023.increase",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered job-changing entrants"
+          },
+          "direction": "increase",
+          "value": 37.2,
+          "missing_reason": null,
+          "population_unit": "job_changing_former_employees_still_registered_at_survey",
+          "denominator": "job-changing entrants previously employed as workers and still registered at the survey; excludes former self-employed; includes wage-change status not stated",
+          "source_location": {
+            "sheet": "表6転職入職者の賃金変動状況別割合",
+            "cell": "F21",
+            "raw": "37.200000000000003"
+          }
+        },
+        {
+          "id": "wage.2023.unchanged",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered job-changing entrants"
+          },
+          "direction": "unchanged",
+          "value": 28.8,
+          "missing_reason": null,
+          "population_unit": "job_changing_former_employees_still_registered_at_survey",
+          "denominator": "job-changing entrants previously employed as workers and still registered at the survey; excludes former self-employed; includes wage-change status not stated",
+          "source_location": {
+            "sheet": "表6転職入職者の賃金変動状況別割合",
+            "cell": "I21",
+            "raw": "28.8"
+          }
+        },
+        {
+          "id": "wage.2023.decrease",
+          "country": "JPN",
+          "year": 2023,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all ages of covered job-changing entrants"
+          },
+          "direction": "decrease",
+          "value": 32.4,
+          "missing_reason": null,
+          "population_unit": "job_changing_former_employees_still_registered_at_survey",
+          "denominator": "job-changing entrants previously employed as workers and still registered at the survey; excludes former self-employed; includes wage-change status not stated",
+          "source_location": {
+            "sheet": "表6転職入職者の賃金変動状況別割合",
+            "cell": "J21",
+            "raw": "32.4"
+          }
+        }
+      ],
+      "individual_transition_probability": false
+    },
+    {
+      "id": "care_time",
+      "source_id": "mhlw_csls_2022_care82",
+      "measure_kind": "standardized_composition",
+      "unit": "per_100000_care_recipients",
+      "period": "June_2022_survey",
+      "comparison": "Not incidence, recovery, care hours, or a count of 45865 real people. Qualitative all-day/half-day categories do not specify exact hours.",
+      "observations": [
+        {
+          "id": "care.2022.all.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "all",
+          "care_time_category": "almost_all_day",
+          "value": 8705.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 45865.0,
+          "derived_conditional_percent": 18.979614,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 2,
+            "raw": "8705",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.all.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "all",
+          "care_time_category": "about_half_day",
+          "value": 5077.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 45865.0,
+          "derived_conditional_percent": 11.069443,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 2,
+            "raw": "5077",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.all.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "all",
+          "care_time_category": "two_to_three_hours",
+          "value": 4989.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 45865.0,
+          "derived_conditional_percent": 10.877575,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 2,
+            "raw": "4989",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.all.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "all",
+          "care_time_category": "as_needed",
+          "value": 20618.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 45865.0,
+          "derived_conditional_percent": 44.953668,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 2,
+            "raw": "20618",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.all.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "all",
+          "care_time_category": "other",
+          "value": 4746.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 45865.0,
+          "derived_conditional_percent": 10.34776,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 2,
+            "raw": "4746",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.all.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "all",
+          "care_time_category": "unknown",
+          "value": 1729.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 45865.0,
+          "derived_conditional_percent": 3.769759,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 2,
+            "raw": "1729",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_1.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_1",
+          "care_time_category": "almost_all_day",
+          "value": 185.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5951.0,
+          "derived_conditional_percent": 3.108721,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 4,
+            "raw": "185",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_1.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_1",
+          "care_time_category": "about_half_day",
+          "value": 241.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5951.0,
+          "derived_conditional_percent": 4.04974,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 4,
+            "raw": "241",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_1.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_1",
+          "care_time_category": "two_to_three_hours",
+          "value": 192.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5951.0,
+          "derived_conditional_percent": 3.226349,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 4,
+            "raw": "192",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_1.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_1",
+          "care_time_category": "as_needed",
+          "value": 3902.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5951.0,
+          "derived_conditional_percent": 65.568812,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 4,
+            "raw": "3902",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_1.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_1",
+          "care_time_category": "other",
+          "value": 1140.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5951.0,
+          "derived_conditional_percent": 19.156444,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 4,
+            "raw": "1140",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_1.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_1",
+          "care_time_category": "unknown",
+          "value": 291.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5951.0,
+          "derived_conditional_percent": 4.889934,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 4,
+            "raw": "291",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_2.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_2",
+          "care_time_category": "almost_all_day",
+          "value": 251.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 6703.0,
+          "derived_conditional_percent": 3.744592,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 5,
+            "raw": "251",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_2.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_2",
+          "care_time_category": "about_half_day",
+          "value": 117.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 6703.0,
+          "derived_conditional_percent": 1.745487,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 5,
+            "raw": "117",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_2.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_2",
+          "care_time_category": "two_to_three_hours",
+          "value": 581.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 6703.0,
+          "derived_conditional_percent": 8.667761,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 5,
+            "raw": "581",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_2.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_2",
+          "care_time_category": "as_needed",
+          "value": 4271.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 6703.0,
+          "derived_conditional_percent": 63.717738,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 5,
+            "raw": "4271",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_2.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_2",
+          "care_time_category": "other",
+          "value": 1315.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 6703.0,
+          "derived_conditional_percent": 19.618081,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 5,
+            "raw": "1315",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.support_2.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "support_2",
+          "care_time_category": "unknown",
+          "value": 167.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 6703.0,
+          "derived_conditional_percent": 2.491422,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 5,
+            "raw": "167",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_1.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_1",
+          "care_time_category": "almost_all_day",
+          "value": 1178.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9981.0,
+          "derived_conditional_percent": 11.802425,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 7,
+            "raw": "1178",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_1.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_1",
+          "care_time_category": "about_half_day",
+          "value": 884.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9981.0,
+          "derived_conditional_percent": 8.856828,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 7,
+            "raw": "884",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_1.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_1",
+          "care_time_category": "two_to_three_hours",
+          "value": 1235.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9981.0,
+          "derived_conditional_percent": 12.37351,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 7,
+            "raw": "1235",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_1.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_1",
+          "care_time_category": "as_needed",
+          "value": 5515.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9981.0,
+          "derived_conditional_percent": 55.254984,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 7,
+            "raw": "5515",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_1.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_1",
+          "care_time_category": "other",
+          "value": 991.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9981.0,
+          "derived_conditional_percent": 9.928865,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 7,
+            "raw": "991",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_1.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_1",
+          "care_time_category": "unknown",
+          "value": 178.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9981.0,
+          "derived_conditional_percent": 1.783388,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 7,
+            "raw": "178",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_2.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_2",
+          "care_time_category": "almost_all_day",
+          "value": 1645.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9698.0,
+          "derived_conditional_percent": 16.96226,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 8,
+            "raw": "1645",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_2.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_2",
+          "care_time_category": "about_half_day",
+          "value": 1193.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9698.0,
+          "derived_conditional_percent": 12.301505,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 8,
+            "raw": "1193",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_2.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_2",
+          "care_time_category": "two_to_three_hours",
+          "value": 1588.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9698.0,
+          "derived_conditional_percent": 16.37451,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 8,
+            "raw": "1588",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_2.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_2",
+          "care_time_category": "as_needed",
+          "value": 4362.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9698.0,
+          "derived_conditional_percent": 44.978346,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 8,
+            "raw": "4362",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_2.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_2",
+          "care_time_category": "other",
+          "value": 489.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9698.0,
+          "derived_conditional_percent": 5.042277,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 8,
+            "raw": "489",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_2.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_2",
+          "care_time_category": "unknown",
+          "value": 421.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 9698.0,
+          "derived_conditional_percent": 4.341101,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 8,
+            "raw": "421",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_3.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_3",
+          "care_time_category": "almost_all_day",
+          "value": 1718.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5389.0,
+          "derived_conditional_percent": 31.879755,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 9,
+            "raw": "1718",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_3.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_3",
+          "care_time_category": "about_half_day",
+          "value": 1179.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5389.0,
+          "derived_conditional_percent": 21.877899,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 9,
+            "raw": "1179",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_3.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_3",
+          "care_time_category": "two_to_three_hours",
+          "value": 620.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5389.0,
+          "derived_conditional_percent": 11.504917,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 9,
+            "raw": "620",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_3.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_3",
+          "care_time_category": "as_needed",
+          "value": 1402.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5389.0,
+          "derived_conditional_percent": 26.015958,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 9,
+            "raw": "1402",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_3.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_3",
+          "care_time_category": "other",
+          "value": 297.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5389.0,
+          "derived_conditional_percent": 5.511227,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 9,
+            "raw": "297",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_3.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_3",
+          "care_time_category": "unknown",
+          "value": 173.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 5389.0,
+          "derived_conditional_percent": 3.210243,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 9,
+            "raw": "173",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_4.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_4",
+          "care_time_category": "almost_all_day",
+          "value": 1768.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 4288.0,
+          "derived_conditional_percent": 41.231343,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 10,
+            "raw": "1768",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_4.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_4",
+          "care_time_category": "about_half_day",
+          "value": 859.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 4288.0,
+          "derived_conditional_percent": 20.032649,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 10,
+            "raw": "859",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_4.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_4",
+          "care_time_category": "two_to_three_hours",
+          "value": 403.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 4288.0,
+          "derived_conditional_percent": 9.398321,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 10,
+            "raw": "403",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_4.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_4",
+          "care_time_category": "as_needed",
+          "value": 748.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 4288.0,
+          "derived_conditional_percent": 17.44403,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 10,
+            "raw": "748",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_4.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_4",
+          "care_time_category": "other",
+          "value": 296.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 4288.0,
+          "derived_conditional_percent": 6.902985,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 10,
+            "raw": "296",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_4.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_4",
+          "care_time_category": "unknown",
+          "value": 216.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 4288.0,
+          "derived_conditional_percent": 5.037313,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 10,
+            "raw": "216",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_5.almost_all_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_5",
+          "care_time_category": "almost_all_day",
+          "value": 1821.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 2885.0,
+          "derived_conditional_percent": 63.119584,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 6,
+            "column_1_based": 11,
+            "raw": "1821",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_5.about_half_day",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_5",
+          "care_time_category": "about_half_day",
+          "value": 497.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 2885.0,
+          "derived_conditional_percent": 17.227036,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 7,
+            "column_1_based": 11,
+            "raw": "497",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_5.two_to_three_hours",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_5",
+          "care_time_category": "two_to_three_hours",
+          "value": 263.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 2885.0,
+          "derived_conditional_percent": 9.116118,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 8,
+            "column_1_based": 11,
+            "raw": "263",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_5.as_needed",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_5",
+          "care_time_category": "as_needed",
+          "value": 72.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 2885.0,
+          "derived_conditional_percent": 2.495667,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 9,
+            "column_1_based": 11,
+            "raw": "72",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_5.other",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_5",
+          "care_time_category": "other",
+          "value": 140.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 2885.0,
+          "derived_conditional_percent": 4.852686,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 10,
+            "column_1_based": 11,
+            "raw": "140",
+            "denominator_row_1_based": 5
+          }
+        },
+        {
+          "id": "care.2022.care_5.unknown",
+          "country": "JPN",
+          "year": 2022,
+          "sex": "all_reported",
+          "age": {
+            "minimum": null,
+            "maximum": null,
+            "label": "all reported co-resident main caregivers; recipient is home-based and certified for long-term care/support"
+          },
+          "care_grade": "care_5",
+          "care_time_category": "unknown",
+          "value": 92.0,
+          "missing_reason": null,
+          "population_unit": "standardized_composition_not_actual_person_count",
+          "denominator": "100000 home-based people certified as needing long-term care or support, across all grades",
+          "grade_total_per_100000": 2885.0,
+          "derived_conditional_percent": 3.188908,
+          "derivation": "100 * published cell / published co-resident-main-carer total in the same grade column; inputs are rounded",
+          "source_location": {
+            "row_1_based": 11,
+            "column_1_based": 11,
+            "raw": "92",
+            "denominator_row_1_based": 5
+          }
+        }
+      ],
+      "individual_transition_probability": false
+    }
+  ]
+}

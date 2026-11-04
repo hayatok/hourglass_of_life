@@ -1,0 +1,3 @@
+# Plain Python 3.11.16 tools; Blender modules are bundled with Blender 5.2.1.
+# Actual production environment: /tmp/hourglass-haru-review-venv (not required).
+Pillow==13.0.0

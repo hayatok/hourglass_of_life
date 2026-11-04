@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Material_wood"]
+albedo_color = Color(0.76, 0.57, 0.34, 1)
+roughness = 0.78
+
+[sub_resource type="StandardMaterial3D" id="Material_paint"]
+albedo_color = Color(0.70, 0.26, 0.20, 1)
+roughness = 0.7
+
+[sub_resource type="CylinderMesh" id="Mesh_foot"]
+material = SubResource("Material_wood")
+top_radius = 0.018
+bottom_radius = 0.017
+height = 0.003
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_side"]
+material = SubResource("Material_paint")
+top_radius = 0.018
+bottom_radius = 0.018
+height = 0.011
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_rim"]
+material = SubResource("Material_wood")
+top_radius = 0.017
+bottom_radius = 0.018
+height = 0.0015
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_face"]
+material = SubResource("Material_paint")
+top_radius = 0.0145
+bottom_radius = 0.0145
+height = 0.0005
+radial_segments = 24
+
+[node name="TabletopPiece" type="Node3D"]
+metadata/bottom_origin = true
+metadata/radius = 0.018
+metadata/height = 0.016
+metadata/pinch_center = Vector3(0, 0.008, 0)
+
+[node name="WoodFoot" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.0015, 0)
+mesh = SubResource("Mesh_foot")
+
+[node name="PaintedSide" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.0085, 0)
+mesh = SubResource("Mesh_side")
+
+[node name="WoodRim" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.01475, 0)
+mesh = SubResource("Mesh_rim")
+
+[node name="Face" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.01575, 0)
+mesh = SubResource("Mesh_face")
+
+[node name="PinchCenter" type="Marker3D" parent="."]
+position = Vector3(0, 0.008, 0)

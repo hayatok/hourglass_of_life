@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Material_wood"]
+albedo_color = Color(0.72, 0.53, 0.30, 1)
+roughness = 0.78
+
+[sub_resource type="StandardMaterial3D" id="Material_edge"]
+albedo_color = Color(0.51, 0.33, 0.17, 1)
+roughness = 0.82
+
+[sub_resource type="StandardMaterial3D" id="Material_brass"]
+albedo_color = Color(0.77, 0.61, 0.30, 1)
+metallic = 0.55
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="Mesh_board"]
+material = SubResource("Material_wood")
+size = Vector3(0.68, 0.05, 0.4)
+
+[sub_resource type="BoxMesh" id="Mesh_post"]
+material = SubResource("Material_edge")
+size = Vector3(0.045, 0.9, 0.045)
+
+[sub_resource type="BoxMesh" id="Mesh_back_slat"]
+material = SubResource("Material_wood")
+size = Vector3(0.055, 0.57, 0.02)
+
+[sub_resource type="BoxMesh" id="Mesh_top_trim"]
+material = SubResource("Material_edge")
+size = Vector3(0.68, 0.035, 0.024)
+
+[sub_resource type="BoxMesh" id="Mesh_back_rim"]
+material = SubResource("Material_edge")
+size = Vector3(0.68, 0.04, 0.025)
+
+[sub_resource type="BoxMesh" id="Mesh_brass_cap"]
+material = SubResource("Material_brass")
+size = Vector3(0.048, 0.055, 0.008)
+
+[node name="RadioShelf" type="Node3D"]
+metadata/footprint = Vector2(0.68, 0.4)
+metadata/interaction_container = "radio_shelf"
+metadata/interaction_surface_height = 0.95
+
+[node name="Top" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.925, 0)
+mesh = SubResource("Mesh_board")
+
+[node name="LowerShelf" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.325, 0)
+mesh = SubResource("Mesh_board")
+
+[node name="FrontLeftPost" type="MeshInstance3D" parent="."]
+position = Vector3(-0.2925, 0.47, 0.1525)
+mesh = SubResource("Mesh_post")
+
+[node name="FrontRightPost" type="MeshInstance3D" parent="."]
+position = Vector3(0.2925, 0.47, 0.1525)
+mesh = SubResource("Mesh_post")
+
+[node name="BackLeftPost" type="MeshInstance3D" parent="."]
+position = Vector3(-0.2925, 0.47, -0.1525)
+mesh = SubResource("Mesh_post")
+
+[node name="BackRightPost" type="MeshInstance3D" parent="."]
+position = Vector3(0.2925, 0.47, -0.1525)
+mesh = SubResource("Mesh_post")
+
+[node name="BackSlatLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-0.2, 0.635, -0.175)
+mesh = SubResource("Mesh_back_slat")
+
+[node name="BackSlatMiddle" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.635, -0.175)
+mesh = SubResource("Mesh_back_slat")
+
+[node name="BackSlatRight" type="MeshInstance3D" parent="."]
+position = Vector3(0.2, 0.635, -0.175)
+mesh = SubResource("Mesh_back_slat")
+
+[node name="FrontTimberEdge" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.9325, 0.194)
+mesh = SubResource("Mesh_top_trim")
+
+[node name="BackStop" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.97, -0.1875)
+mesh = SubResource("Mesh_back_rim")
+
+[node name="LeftCornerCap" type="MeshInstance3D" parent="."]
+position = Vector3(-0.2925, 0.875, 0.179)
+mesh = SubResource("Mesh_brass_cap")
+
+[node name="RightCornerCap" type="MeshInstance3D" parent="."]
+position = Vector3(0.2925, 0.875, 0.179)
+mesh = SubResource("Mesh_brass_cap")
+
+[node name="RadioSurface" type="Marker3D" parent="."]
+position = Vector3(0, 0.95, 0)
+
+[node name="Approach" type="Marker3D" parent="."]
+position = Vector3(0, 0, 0.42)

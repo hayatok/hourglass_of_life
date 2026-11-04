@@ -1,51 +1,50 @@
 [gd_scene format=3]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yndhd"]
-albedo_color = Color(0.21568628, 0.37254903, 0.39607844, 1)
-roughness = 0.85
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Bench.glb" id="1_y4f5o"]
+[ext_resource type="Script" path="res://game/scripts/activity_spot.gd" id="2_1g0ff"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_bqm1r"]
-size = Vector3(0.12, 0.5, 0.55)
+[node name="Bench" type="Node3D" unique_id=75093417]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4f5o"]
-albedo_color = Color(0.21568628, 0.37254903, 0.39607844, 1)
-roughness = 0.85
+[node name="PR_LifeFurniture" type="Node3D" parent="." unique_id=1120005011 instance=ExtResource("1_y4f5o")]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1g0ff"]
-size = Vector3(0.12, 0.5, 0.55)
+[node name="Seat0" type="Node3D" parent="." unique_id=1711461866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48, 0, 0)
+script = ExtResource("2_1g0ff")
+spot_id = "Seat0"
+site = "square"
+actions = PackedStringArray("social", "rest", "meet")
+group = "bench"
+pair = "bench"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ooqtd"]
-albedo_color = Color(0.53333336, 0.3882353, 0.27450982, 1)
-roughness = 0.85
+[node name="Approach" type="Marker3D" parent="Seat0" unique_id=642510803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.65)
 
-[sub_resource type="BoxMesh" id="BoxMesh_jdfjf"]
-size = Vector3(2, 0.12, 0.65)
+[node name="Contact" type="Marker3D" parent="Seat0" unique_id=1337555653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_royr7"]
-albedo_color = Color(0.53333336, 0.3882353, 0.27450982, 1)
-roughness = 0.85
+[node name="HandLeft" type="Marker3D" parent="Seat0" unique_id=239922948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.76, 0.35)
 
-[sub_resource type="BoxMesh" id="BoxMesh_tjluf"]
-size = Vector3(2, 0.42, 0.1)
+[node name="HandRight" type="Marker3D" parent="Seat0" unique_id=1698976073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.76, 0.35)
 
-[node name="Bench" type="Node3D" unique_id=362730889]
+[node name="Seat1" type="Node3D" parent="." unique_id=36370490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48, 0, 0)
+script = ExtResource("2_1g0ff")
+spot_id = "Seat1"
+site = "square"
+actions = PackedStringArray("social", "rest", "meet")
+group = "bench"
+pair = "bench"
 
-[node name="Leg" type="MeshInstance3D" parent="." unique_id=1541272744]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.25, 0)
-material_override = SubResource("StandardMaterial3D_yndhd")
-mesh = SubResource("BoxMesh_bqm1r")
+[node name="Approach" type="Marker3D" parent="Seat1" unique_id=1091847173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.65)
 
-[node name="@MeshInstance3D@2" type="MeshInstance3D" parent="." unique_id=1168010485]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.25, 0)
-material_override = SubResource("StandardMaterial3D_y4f5o")
-mesh = SubResource("BoxMesh_1g0ff")
+[node name="Contact" type="Marker3D" parent="Seat1" unique_id=526761776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
 
-[node name="Seat" type="MeshInstance3D" parent="." unique_id=1633369861]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
-material_override = SubResource("StandardMaterial3D_ooqtd")
-mesh = SubResource("BoxMesh_jdfjf")
+[node name="HandLeft" type="Marker3D" parent="Seat1" unique_id=1134059634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.76, 0.35)
 
-[node name="Back" type="MeshInstance3D" parent="." unique_id=1678566082]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94, -0.3)
-material_override = SubResource("StandardMaterial3D_royr7")
-mesh = SubResource("BoxMesh_tjluf")
+[node name="HandRight" type="Marker3D" parent="Seat1" unique_id=247068274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.76, 0.35)

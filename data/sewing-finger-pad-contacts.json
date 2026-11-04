@@ -1,0 +1,1772 @@
+{
+  "schema_version": 1,
+  "method": "Ray at 60% of the measured distal index local-Y extent. First try the bone axis toward the thumb side (+X for L, -X for R). If the skin is off the bone axis, cast inward from the thumb side of its actual triangle cross section. The first real triangle hit supplies the barycentric point. All three triangle vertices must have index-bone weight >=0.999.",
+  "scope": "Sewing-only index-side contacts. Existing distal thumb/index contacts and board behavior remain separate. Contact data generation is not a rendering or quality test.",
+  "generator": "tools/measure_sewing_finger_pads.py",
+  "models": {
+    "res://game/assets/models/aoi/CH_Aoi.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/aoi/CH_Aoi.glb",
+          "mesh": "CH_Aoi_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2249,
+          "vertex_indices": [
+            6813,
+            6777,
+            6781
+          ],
+          "vertices_bind_local": [
+            [
+              0.0037301300321050113,
+              0.07775974744791081,
+              -0.0036068761272857325
+            ],
+            [
+              0.0016016698057152445,
+              0.03954693651539565,
+              0.002036710429382499
+            ],
+            [
+              -0.00027425651704868215,
+              0.03946934833344551,
+              -0.0023237675551307374
+            ]
+          ],
+          "barycentric": [
+            0.21107072820368494,
+            0.5950251841735922,
+            0.19390408762272288
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.001687175673588924,
+            0.04759749768000001,
+            -1.6263032587282567e-19
+          ],
+          "normal": [
+            0.9138582353593677,
+            -0.10868043069686506,
+            -0.3912182123181463
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.04759749768,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0016871756735889246
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/aoi/CH_Aoi.glb",
+          "mesh": "CH_Aoi_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 14936,
+          "vertex_indices": [
+            8403,
+            8371,
+            8342
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0037301300321050113,
+              0.07775974744791081,
+              -0.0036068761272857325
+            ],
+            [
+              0.00027425651704868215,
+              0.03946934833344551,
+              -0.0023237675551307374
+            ],
+            [
+              -0.0016016698057152445,
+              0.03954693651539565,
+              0.002036710429382499
+            ]
+          ],
+          "barycentric": [
+            0.21127939502652004,
+            0.19363401877239086,
+            0.5950865862010891
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.001688126441887192,
+            0.047605492379999996,
+            5.963111948670274e-19
+          ],
+          "normal": [
+            -0.9138582353593677,
+            -0.10868043069686506,
+            -0.3912182123181463
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.047605492379999996,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0016881264418871914
+        }
+      }
+    },
+    "res://game/assets/models/fumi/CH_Fumi.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/fumi/CH_Fumi.glb",
+          "mesh": "CH_Fumi_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2249,
+          "vertex_indices": [
+            6813,
+            6776,
+            6780
+          ],
+          "vertices_bind_local": [
+            [
+              0.0035199280766092522,
+              0.06910398466876277,
+              -0.0035718158876467676
+            ],
+            [
+              0.0015114599128160933,
+              0.03520797721927693,
+              0.0020142733867230256
+            ],
+            [
+              -0.00025873373989246384,
+              0.03505014150299968,
+              -0.002299289353014017
+            ]
+          ],
+          "barycentric": [
+            0.21096084742808874,
+            0.5952718863876785,
+            0.1937672661842328
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.001592162473980217,
+            0.042328124280000004,
+            7.047314121155779e-19
+          ],
+          "normal": [
+            0.9203596188956714,
+            -0.11607943277063767,
+            -0.37344843980643594
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.042328124280000004,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.001592162473980218
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/fumi/CH_Fumi.glb",
+          "mesh": "CH_Fumi_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 15202,
+          "vertex_indices": [
+            8408,
+            8376,
+            8348
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0035199280766092522,
+              0.06910398466876277,
+              -0.0035718158876467676
+            ],
+            [
+              0.00025873373989246384,
+              0.03505014150299968,
+              -0.002299289353014017
+            ],
+            [
+              -0.0015114599128160933,
+              0.03520797721927693,
+              0.0020142733867230256
+            ]
+          ],
+          "barycentric": [
+            0.2112604690838844,
+            0.19337925436690356,
+            0.5953602765492121
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.0015934511105932779,
+            0.04233834149999999,
+            6.505213034913027e-19
+          ],
+          "normal": [
+            -0.9203596188956714,
+            -0.11607943277063767,
+            -0.37344843980643594
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.042338341499999994,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0015934511105932785
+        }
+      }
+    },
+    "res://game/assets/models/haru/CH_Haru.glb": {
+      "hands": {
+        "L": {
+          "supported": false,
+          "reason": "No fully weighted index-side triangle intersects the ray."
+        },
+        "R": {
+          "supported": false,
+          "reason": "No fully weighted index-side triangle intersects the ray."
+        }
+      }
+    },
+    "res://game/assets/models/maho/CH_Maho.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/maho/CH_Maho.glb",
+          "mesh": "CH_Maho_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2547,
+          "vertex_indices": [
+            8071,
+            8034,
+            8039
+          ],
+          "vertices_bind_local": [
+            [
+              0.0033895739530092617,
+              0.07172812950770013,
+              -0.0034845541128995516
+            ],
+            [
+              0.001455444613729484,
+              0.03652338795821253,
+              0.0019837003304979117
+            ],
+            [
+              -0.00024919479317342397,
+              0.036517276611515936,
+              -0.0022565690122660076
+            ]
+          ],
+          "barycentric": [
+            0.21360556160146316,
+            0.5940361933902993,
+            0.1923582450082375
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.0015406839527724815,
+            0.04404214098,
+            0.0
+          ],
+          "normal": [
+            0.922432964167386,
+            -0.10825359330137581,
+            -0.3706731527298821
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.04404214098,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0015406839527724815
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/maho/CH_Maho.glb",
+          "mesh": "CH_Maho_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 18432,
+          "vertex_indices": [
+            12302,
+            12270,
+            12242
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0033895739530092617,
+              0.07172812950770013,
+              -0.0034845541128995516
+            ],
+            [
+              0.00024919479317342397,
+              0.036517276611515936,
+              -0.0022565690122660076
+            ],
+            [
+              -0.001455444613729484,
+              0.03652338795821253,
+              0.0019837003304979117
+            ]
+          ],
+          "barycentric": [
+            0.21289240200012705,
+            0.19327793615132782,
+            0.5938296618485451
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.001537736868099257,
+            0.04401702875999999,
+            4.336808689942018e-19
+          ],
+          "normal": [
+            -0.922432964167386,
+            -0.10825359330137581,
+            -0.3706731527298821
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.04401702876,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0015377368680992575
+        }
+      }
+    },
+    "res://game/assets/models/nagisa/CH_Nagisa.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/nagisa/CH_Nagisa.glb",
+          "mesh": "CH_Nagisa_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2821,
+          "vertex_indices": [
+            9558,
+            9518,
+            9526
+          ],
+          "vertices_bind_local": [
+            [
+              0.0034944057237469295,
+              0.0674250617732729,
+              -0.0034745847535934404
+            ],
+            [
+              0.0015004915925219686,
+              0.03437738331774831,
+              0.0019864545570730807
+            ],
+            [
+              -0.00025687333481205776,
+              0.0343774210685559,
+              -0.0022561894415421
+            ]
+          ],
+          "barycentric": [
+            0.21455541096825248,
+            0.5934041954174861,
+            0.1920403936142614
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.001590811606013222,
+            0.0414679488,
+            -1.0842021724855044e-19
+          ],
+          "normal": [
+            0.9174081888905545,
+            -0.118146113053646,
+            -0.3800048827671399
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.0414679488,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0015908116060132222
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/nagisa/CH_Nagisa.glb",
+          "mesh": "CH_Nagisa_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 16629,
+          "vertex_indices": [
+            14258,
+            14226,
+            14195
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0034944057237469295,
+              0.0674250617732729,
+              -0.0034745847535934404
+            ],
+            [
+              0.00025687333481205776,
+              0.0343774210685559,
+              -0.0022561894415421
+            ],
+            [
+              -0.0015004915925219686,
+              0.03437738331774831,
+              0.0019864545570730807
+            ]
+          ],
+          "barycentric": [
+            0.21410736855004686,
+            0.19261710409467522,
+            0.5932755273552779
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.0015889047571326681,
+            0.04145314205999999,
+            4.87890977618477e-19
+          ],
+          "normal": [
+            -0.9174081888905545,
+            -0.118146113053646,
+            -0.3800048827671399
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.041453142059999996,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0015889047571326683
+        }
+      }
+    },
+    "res://game/assets/models/osamu/CH_Osamu.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/osamu/CH_Osamu.glb",
+          "mesh": "CH_Osamu_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 16161,
+          "vertex_indices": [
+            8056,
+            8020,
+            8027
+          ],
+          "vertices_bind_local": [
+            [
+              0.005815474478045868,
+              0.07343914591343026,
+              0.00010436016975289009
+            ],
+            [
+              0.001765769796133465,
+              0.03746699518707264,
+              0.002174848046608946
+            ],
+            [
+              -0.0003022705386581115,
+              0.03759665176022653,
+              -0.002460937562366469
+            ]
+          ],
+          "barycentric": [
+            0.22292191405726763,
+            0.40749867253096955,
+            0.36957941341176287
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.0019042325813479195,
+            0.04553389428000001,
+            -6.098637220230962e-20
+          ],
+          "normal": [
+            0.9047438976851093,
+            -0.12528773589119366,
+            -0.40711357486187405
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.04553389428,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.001904232581347919
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/osamu/CH_Osamu.glb",
+          "mesh": "CH_Osamu_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 3296,
+          "vertex_indices": [
+            11064,
+            11060,
+            11030
+          ],
+          "vertices_bind_local": [
+            [
+              -0.005815474478045868,
+              0.07343914591343026,
+              0.00010436016975289009
+            ],
+            [
+              0.0003022705386581115,
+              0.03759665176022653,
+              -0.002460937562366469
+            ],
+            [
+              -0.001765769796133465,
+              0.03746699518707264,
+              0.002174848046608946
+            ]
+          ],
+          "barycentric": [
+            0.22267873142248057,
+            0.36968802643653553,
+            0.4076332421409839
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.0019030231473771491,
+            0.04552516056000001,
+            -6.437450399132683e-20
+          ],
+          "normal": [
+            -0.9047438976851093,
+            -0.12528773589119366,
+            -0.40711357486187405
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.04552516056,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0019030231473771485
+        }
+      }
+    },
+    "res://game/assets/models/rin/CH_Rin.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/rin/CH_Rin.glb",
+          "mesh": "CH_Rin_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2249,
+          "vertex_indices": [
+            6849,
+            6812,
+            6816
+          ],
+          "vertices_bind_local": [
+            [
+              0.0029846846877791267,
+              0.04736697809121848,
+              -0.0031631405087122755
+            ],
+            [
+              0.0012816114009107094,
+              0.02427207111306373,
+              0.001764308190253347
+            ],
+            [
+              -0.0002193965505882245,
+              0.023905381976650375,
+              -0.002022121557369125
+            ]
+          ],
+          "barycentric": [
+            0.20777226648678845,
+            0.5966553723630115,
+            0.19557236115020007
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.0013419071285365933,
+            0.028998838020000004,
+            -3.7947076036992655e-19
+          ],
+          "normal": [
+            0.9246885673394055,
+            -0.14343368545917204,
+            -0.35267241359000123
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.02899883802,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0013419071285365935
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/rin/CH_Rin.glb",
+          "mesh": "CH_Rin_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 15018,
+          "vertex_indices": [
+            8456,
+            8424,
+            8396
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0029846846877791267,
+              0.04736697809121848,
+              -0.0031631405087122755
+            ],
+            [
+              0.0002193965505882245,
+              0.023905381976650375,
+              -0.002022121557369125
+            ],
+            [
+              -0.0012816114009107094,
+              0.02427207111306373,
+              0.001764308190253347
+            ]
+          ],
+          "barycentric": [
+            0.20774158699157175,
+            0.19561228573585632,
+            0.5966461272725719
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.0013417949519873048,
+            0.02899811484,
+            -1.0842021724855044e-19
+          ],
+          "normal": [
+            -0.9246885673394055,
+            -0.14343368545917204,
+            -0.35267241359000123
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.02899811484,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0013417949519873048
+        }
+      }
+    },
+    "res://game/assets/models/rin_adult/CH_RinAdult.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/rin_adult/CH_RinAdult.glb",
+          "mesh": "CH_RinAdult_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2249,
+          "vertex_indices": [
+            6812,
+            6776,
+            6780
+          ],
+          "vertices_bind_local": [
+            [
+              0.003793315030745592,
+              0.07793581274416805,
+              -0.003511012555168086
+            ],
+            [
+              0.001628839980582636,
+              0.03961841391828691,
+              0.0019819724428695312
+            ],
+            [
+              -0.0002788442179192385,
+              0.039556389860222585,
+              -0.002261577467810069
+            ]
+          ],
+          "barycentric": [
+            0.2113553706263249,
+            0.5951744027838421,
+            0.19347022658983296
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.0017172333128752592,
+            0.04770500214,
+            4.336808689942018e-19
+          ],
+          "normal": [
+            0.9071902884321221,
+            -0.10947993949781051,
+            -0.40622644352872816
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.04770500214,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0017172333128752588
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/rin_adult/CH_RinAdult.glb",
+          "mesh": "CH_RinAdult_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 14676,
+          "vertex_indices": [
+            8404,
+            8372,
+            8343
+          ],
+          "vertices_bind_local": [
+            [
+              -0.003793315030745592,
+              0.07793581274416805,
+              -0.003511012555168086
+            ],
+            [
+              0.0002788442179192385,
+              0.039556389860222585,
+              -0.002261577467810069
+            ],
+            [
+              -0.001628839980582636,
+              0.03961841391828691,
+              0.0019819724428695312
+            ]
+          ],
+          "barycentric": [
+            0.21156265499924942,
+            0.19320191115234128,
+            0.5952354338484093
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.00171819383584906,
+            0.047712961379999995,
+            -5.421010862427522e-20
+          ],
+          "normal": [
+            -0.9071902884321221,
+            -0.10947993949781051,
+            -0.40622644352872816
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.047712961379999995,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0017181938358490597
+        }
+      }
+    },
+    "res://game/assets/models/ritsu/CH_Ritsu.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/ritsu/CH_Ritsu.glb",
+          "mesh": "CH_Ritsu_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2249,
+          "vertex_indices": [
+            6803,
+            6767,
+            6771
+          ],
+          "vertices_bind_local": [
+            [
+              0.0038698099154959587,
+              0.0816223766231764,
+              -0.0036422447452377216
+            ],
+            [
+              0.001661647681619416,
+              0.04148796715609049,
+              0.0020571806137336113
+            ],
+            [
+              -0.0002845238437191866,
+              0.041436686172548476,
+              -0.0023469025442534597
+            ]
+          ],
+          "barycentric": [
+            0.21344004109961257,
+            0.5956700504421548,
+            0.19088990845823262
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.0017614534152567327,
+            0.050044468140000006,
+            -2.168404344971009e-19
+          ],
+          "normal": [
+            0.9098832146452592,
+            -0.1069827252258852,
+            -0.4008331725419588
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.05004446814,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0017614534152567327
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/ritsu/CH_Ritsu.glb",
+          "mesh": "CH_Ritsu_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 15030,
+          "vertex_indices": [
+            8391,
+            8359,
+            8330
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0038698099154959587,
+              0.0816223766231764,
+              -0.0036422447452377216
+            ],
+            [
+              0.0002845238437191866,
+              0.041436686172548476,
+              -0.0023469025442534597
+            ],
+            [
+              -0.001661647681619416,
+              0.04148796715609049,
+              0.0020571806137336113
+            ]
+          ],
+          "barycentric": [
+            0.2136635233674229,
+            0.19060069491281428,
+            0.5957357817197628
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.0017625097595272878,
+            0.050053452299999995,
+            -5.421010862427522e-20
+          ],
+          "normal": [
+            -0.9098832146452592,
+            -0.1069827252258852,
+            -0.4008331725419588
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.050053452299999995,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0017625097595272876
+        }
+      }
+    },
+    "res://game/assets/models/ryo/CH_Ryo.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/ryo/CH_Ryo.glb",
+          "mesh": "CH_Ryo_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 2249,
+          "vertex_indices": [
+            6816,
+            6780,
+            6784
+          ],
+          "vertices_bind_local": [
+            [
+              0.003973878239838413,
+              0.08164705069595835,
+              -0.003678198820421419
+            ],
+            [
+              0.0017063305271184381,
+              0.041505027635533986,
+              0.002076353285355159
+            ],
+            [
+              -0.0002921799561926286,
+              0.0414400343162693,
+              -0.002369268460360563
+            ]
+          ],
+          "barycentric": [
+            0.21328229588808945,
+            0.5957412223080578,
+            0.19097648180385274
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.0018082898083722754,
+            0.050054198280000003,
+            1.0842021724855044e-19
+          ],
+          "normal": [
+            0.9071915955048357,
+            -0.10947966151269772,
+            -0.40622359946272923
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.050054198280000003,
+            0
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0018082898083722754
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/ryo/CH_Ryo.glb",
+          "mesh": "CH_Ryo_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 13604,
+          "vertex_indices": [
+            8404,
+            8372,
+            8343
+          ],
+          "vertices_bind_local": [
+            [
+              -0.003973878239838413,
+              0.08164705069595835,
+              -0.003678198820421419
+            ],
+            [
+              0.0002921799561926286,
+              0.0414400343162693,
+              -0.002369268460360563
+            ],
+            [
+              -0.0017063305271184381,
+              0.041505027635533986,
+              0.002076353285355159
+            ]
+          ],
+          "barycentric": [
+            0.21350582957084097,
+            0.1906871327997388,
+            0.5958070376294202
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.0018093749486813718,
+            0.050063190179999995,
+            4.336808689942018e-19
+          ],
+          "normal": [
+            -0.9071915955048357,
+            -0.10947966151269772,
+            -0.40622359946272923
+          ],
+          "query_method": "bone_axis_toward_thumb",
+          "query_section": {},
+          "query_origin": [
+            0,
+            0.05006319018,
+            0
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0018093749486813723
+        }
+      }
+    },
+    "res://game/assets/models/saki/CH_Saki.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/saki/CH_Saki.glb",
+          "mesh": "CH_Saki_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 13,
+          "triangle": 28836,
+          "vertex_indices": [
+            18083,
+            18082,
+            18085
+          ],
+          "vertices_bind_local": [
+            [
+              0.02224776139513407,
+              0.03439652140875993,
+              -0.032211204176284536
+            ],
+            [
+              0.028179492840062825,
+              0.047450928216500876,
+              -0.0367590432031526
+            ],
+            [
+              0.018514334982035696,
+              0.04285469514660745,
+              -0.029803967217023164
+            ]
+          ],
+          "barycentric": [
+            0.418842680287,
+            0.34299344443868046,
+            0.2381638752743196
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.023393139092320405,
+            0.0408885288,
+            -0.03319776626594141
+          ],
+          "normal": [
+            0.5769428852884319,
+            0.022287567454773012,
+            0.816480355827382
+          ],
+          "query_method": "thumb_side_of_actual_triangle_section",
+          "query_section": {
+            "minimum": [
+              -0.0030575795934696818,
+              0.0408885288,
+              -0.04819761532151028
+            ],
+            "maximum": [
+              0.027431923709752674,
+              0.0408885288,
+              -0.018197917210372536
+            ],
+            "z_fraction": 0.5
+          },
+          "query_origin": [
+            0.032431923709752675,
+            0.0408885288,
+            -0.03319776626594141
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.009038784617432273
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/saki/CH_Saki.glb",
+          "mesh": "CH_Saki_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 22,
+          "triangle": 1260,
+          "vertex_indices": [
+            776,
+            779,
+            778
+          ],
+          "vertices_bind_local": [
+            [
+              -0.027288046247533893,
+              0.04853700427778007,
+              -0.041861638978389015
+            ],
+            [
+              -0.026497514978821024,
+              0.037764420723434555,
+              -0.0404476373185485
+            ],
+            [
+              -0.026966492737550474,
+              0.04168208961277131,
+              -0.0352062784508822
+            ]
+          ],
+          "barycentric": [
+            0.16786691211923271,
+            0.5484432020979005,
+            0.28368988578286675
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.026763263268642215,
+            0.0406841841,
+            -0.03919808091240213
+          ],
+          "normal": [
+            -0.9965162888106928,
+            -0.07725242486054335,
+            -0.031422109861212646
+          ],
+          "query_method": "thumb_side_of_actual_triangle_section",
+          "query_section": {
+            "minimum": [
+              -0.02684703509474736,
+              0.0406841841,
+              -0.04847433160158252
+            ],
+            "maximum": [
+              0.007714793765593864,
+              0.0406841841,
+              -0.011369328844860955
+            ],
+            "z_fraction": 0.25
+          },
+          "query_origin": [
+            -0.03184703509474736,
+            0.0406841841,
+            -0.03919808091240213
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.0050837718261051434
+        }
+      }
+    },
+    "res://game/assets/models/tomo/CH_Tomo.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/tomo/CH_Tomo.glb",
+          "mesh": "CH_Tomo_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 12,
+          "triangle": 28707,
+          "vertex_indices": [
+            17408,
+            17409,
+            17410
+          ],
+          "vertices_bind_local": [
+            [
+              0.031070591561512595,
+              0.048125999124943086,
+              -0.02269449819413094
+            ],
+            [
+              0.020299036639412904,
+              0.032421210055233685,
+              -0.01985247562139092
+            ],
+            [
+              0.03418328842841667,
+              0.038124856796987294,
+              -0.023685517019091384
+            ]
+          ],
+          "barycentric": [
+            0.3255933573627763,
+            0.22824653488430152,
+            0.44616010775292225
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            0.030000782644767503,
+            0.0400793247,
+            -0.02248796945556959
+          ],
+          "normal": [
+            0.2703870204683066,
+            -0.011239438067461466,
+            0.9626861036673372
+          ],
+          "query_method": "thumb_side_of_actual_triangle_section",
+          "query_section": {
+            "minimum": [
+              -0.004054330726491591,
+              0.040079324699999995,
+              -0.03946715648970028
+            ],
+            "maximum": [
+              0.03605347104687376,
+              0.040079324699999995,
+              -0.005508782421438899
+            ],
+            "z_fraction": 0.5
+          },
+          "query_origin": [
+            0.041053471046873756,
+            0.040079324699999995,
+            -0.02248796945556959
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.011052688402106254
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/tomo/CH_Tomo.glb",
+          "mesh": "CH_Tomo_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 21,
+          "triangle": 1355,
+          "vertex_indices": [
+            841,
+            840,
+            842
+          ],
+          "vertices_bind_local": [
+            [
+              -0.034342059579906214,
+              0.03850908990175095,
+              -0.024419539501764453
+            ],
+            [
+              -0.025931529496649453,
+              0.040477275486906716,
+              -0.019546984312841076
+            ],
+            [
+              -0.030231424218866265,
+              0.05031484717957557,
+              -0.023250563563213533
+            ]
+          ],
+          "barycentric": [
+            0.6734114239539551,
+            0.2585145114780848,
+            0.06807406456796004
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.031887987847178584,
+            0.03982156032,
+            -0.023080336333930612
+          ],
+          "normal": [
+            -0.5156014979481908,
+            0.09521124810606946,
+            0.8515221157126023
+          ],
+          "query_method": "thumb_side_of_actual_triangle_section",
+          "query_section": {
+            "minimum": [
+              -0.03625354806015011,
+              0.03982156032,
+              -0.0399749708377299
+            ],
+            "maximum": [
+              0.0062046227127620845,
+              0.03982156032,
+              -0.006185701830131324
+            ],
+            "z_fraction": 0.5
+          },
+          "query_origin": [
+            -0.04125354806015011,
+            0.03982156032,
+            -0.023080336333930612
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.009365560212971526
+        }
+      }
+    },
+    "res://game/assets/models/yui/CH_Yui.glb": {
+      "hands": {
+        "L": {
+          "supported": true,
+          "bone": "DEF-finger1.L",
+          "mode": "index_side",
+          "source": "res://game/assets/models/yui/CH_Yui.glb",
+          "mesh": "CH_Yui_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 13,
+          "triangle": 29784,
+          "vertex_indices": [
+            18838,
+            18837,
+            18839
+          ],
+          "vertices_bind_local": [
+            [
+              -0.0027107888126828295,
+              0.01944411254568812,
+              -0.0037108108626382474
+            ],
+            [
+              -0.007727663383989003,
+              0.022030561127188264,
+              -0.007923839822729928
+            ],
+            [
+              -0.002456660666670496,
+              0.03025646377774316,
+              -0.002475794660213332
+            ]
+          ],
+          "barycentric": [
+            0.1345305992118554,
+            0.7769688360188186,
+            0.08850056476932598
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.006586253524357124,
+            0.02241060168,
+            -0.006874903438460381
+          ],
+          "normal": [
+            0.6623388847390638,
+            0.06963840278402728,
+            -0.745960920303673
+          ],
+          "query_method": "thumb_side_of_actual_triangle_section",
+          "query_section": {
+            "minimum": [
+              -0.007728321220467805,
+              0.02241060168,
+              -0.02203202541159125
+            ],
+            "maximum": [
+              0.012965350671643863,
+              0.02241060168,
+              0.00828221853467049
+            ],
+            "z_fraction": 0.5
+          },
+          "query_origin": [
+            0.017965350671643864,
+            0.02241060168,
+            -0.006874903438460381
+          ],
+          "query_direction": [
+            -1,
+            0,
+            0
+          ],
+          "ray_distance": 0.024551604196000984
+        },
+        "R": {
+          "supported": true,
+          "bone": "DEF-finger1.R",
+          "mode": "index_side",
+          "source": "res://game/assets/models/yui/CH_Yui.glb",
+          "mesh": "CH_Yui_Body_LOD0",
+          "mesh_index": 0,
+          "surface": 0,
+          "skin_index": 0,
+          "bind_index": 22,
+          "triangle": 557,
+          "vertex_indices": [
+            383,
+            380,
+            384
+          ],
+          "vertices_bind_local": [
+            [
+              -0.005732664097301221,
+              0.02146256582840822,
+              -0.010101547188635818
+            ],
+            [
+              0.003184172641905736,
+              0.009188078300556235,
+              -0.02160648068629137
+            ],
+            [
+              -0.010470052857177392,
+              0.028129611415627642,
+              -0.016490789323161115
+            ]
+          ],
+          "barycentric": [
+            0.3933446944508349,
+            0.1563957388367855,
+            0.4502595667123796
+          ],
+          "skin_weights": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "minimum_skin_weight": 1.0,
+          "point": [
+            -0.006471163437755899,
+            0.02254478934,
+            -0.01477768715838158
+          ],
+          "normal": [
+            0.812054870829405,
+            0.5835414135280075,
+            0.006804811531062393
+          ],
+          "query_method": "thumb_side_of_actual_triangle_section",
+          "query_section": {
+            "minimum": [
+              -0.014419005548506055,
+              0.02254478934,
+              -0.02219278755083705
+            ],
+            "maximum": [
+              0.004477133847832232,
+              0.02254478934,
+              0.00746761401898484
+            ],
+            "z_fraction": 0.25
+          },
+          "query_origin": [
+            -0.019419005548506056,
+            0.02254478934,
+            -0.01477768715838158
+          ],
+          "query_direction": [
+            1,
+            0,
+            0
+          ],
+          "ray_distance": 0.012947842110750157
+        }
+      }
+    }
+  }
+}

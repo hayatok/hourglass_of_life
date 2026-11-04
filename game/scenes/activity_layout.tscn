@@ -1,0 +1,1374 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Bed.glb" id="1_kx7dn"]
+[ext_resource type="Script" path="res://game/scripts/activity_spot.gd" id="2_wnwp1"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_RoundTable.glb" id="3_3cejc"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Chair.glb" id="4_eyv1a"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_BreadPlate.glb" id="5_4w8k0"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Mug.glb" id="6_7rc3p"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Worktable.glb" id="7_i6tvr"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_TownModel.glb" id="8_0pl5r"]
+[ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Radio.glb" id="9_bewk6"]
+[ext_resource type="PackedScene" path="res://game/scenes/props/radio_shelf.tscn" id="10_radio_shelf"]
+
+[ext_resource type="PackedScene" path="res://game/scenes/props/sewing_cabinet.tscn" id="11_sewing_cabinet"]
+
+[node name="ActivityLayout" type="Node3D" unique_id=963921295]
+
+[node name="Ogawa" type="Node3D" parent="." unique_id=1711990862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 6)
+metadata/site = "home_ogawa"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_nagisaAssembly" type="Node3D" parent="Ogawa" unique_id=1229665434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Ogawa/Bed_nagisaAssembly" unique_id=1831929874 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_nagisa" type="Node3D" parent="Ogawa/Bed_nagisaAssembly" unique_id=695422485]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_nagisa"
+site = "home_ogawa"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "nagisa"
+
+[node name="Approach" type="Marker3D" parent="Ogawa/Bed_nagisaAssembly/sleep_nagisa" unique_id=1245334635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Ogawa/Bed_nagisaAssembly/sleep_nagisa" unique_id=1735578767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/Bed_nagisaAssembly/sleep_nagisa" unique_id=1752049089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/Bed_nagisaAssembly/sleep_nagisa" unique_id=1475191839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_ryoAssembly" type="Node3D" parent="Ogawa" unique_id=2057113774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Ogawa/Bed_ryoAssembly" unique_id=357026854 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_ryo" type="Node3D" parent="Ogawa/Bed_ryoAssembly" unique_id=1253372715]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_ryo"
+site = "home_ogawa"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "ryo"
+
+[node name="Approach" type="Marker3D" parent="Ogawa/Bed_ryoAssembly/sleep_ryo" unique_id=2129622323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Ogawa/Bed_ryoAssembly/sleep_ryo" unique_id=531917362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/Bed_ryoAssembly/sleep_ryo" unique_id=2087818865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/Bed_ryoAssembly/sleep_ryo" unique_id=920182079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_rinAssembly" type="Node3D" parent="Ogawa" unique_id=1142212269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Ogawa/Bed_rinAssembly" unique_id=45487958 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_rin" type="Node3D" parent="Ogawa/Bed_rinAssembly" unique_id=1369176439]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_rin"
+site = "home_ogawa"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "rin"
+
+[node name="Approach" type="Marker3D" parent="Ogawa/Bed_rinAssembly/sleep_rin" unique_id=1369055362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Ogawa/Bed_rinAssembly/sleep_rin" unique_id=667963078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/Bed_rinAssembly/sleep_rin" unique_id=903990068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/Bed_rinAssembly/sleep_rin" unique_id=1339034736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="Ogawa" unique_id=1027446031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="Ogawa/DiningAssembly" unique_id=394837786 instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_ogawa_dine_0Assembly" type="Node3D" parent="Ogawa/DiningAssembly" unique_id=1786301132]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_0Assembly" unique_id=1525797675 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_ogawa_dine_0" type="Node3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_0Assembly" unique_id=1229383410]
+script = ExtResource("2_wnwp1")
+spot_id = "home_ogawa_dine_0"
+site = "home_ogawa"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_0Assembly/home_ogawa_dine_0" unique_id=558948829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_0Assembly/home_ogawa_dine_0" unique_id=1620104310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_0Assembly/home_ogawa_dine_0" unique_id=2035465368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_0Assembly/home_ogawa_dine_0" unique_id=894025388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_ogawa_dine_1Assembly" type="Node3D" parent="Ogawa/DiningAssembly" unique_id=1696389788]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_1Assembly" unique_id=1451593109 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_ogawa_dine_1" type="Node3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_1Assembly" unique_id=1487027902]
+script = ExtResource("2_wnwp1")
+spot_id = "home_ogawa_dine_1"
+site = "home_ogawa"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_1Assembly/home_ogawa_dine_1" unique_id=300223846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_1Assembly/home_ogawa_dine_1" unique_id=1343492683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_1Assembly/home_ogawa_dine_1" unique_id=1430382394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_1Assembly/home_ogawa_dine_1" unique_id=608040602]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_ogawa_dine_2Assembly" type="Node3D" parent="Ogawa/DiningAssembly" unique_id=1996586901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
+[node name="Chair" type="Node3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_2Assembly" unique_id=1837384515 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_ogawa_dine_2" type="Node3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_2Assembly" unique_id=1584550487]
+script = ExtResource("2_wnwp1")
+spot_id = "home_ogawa_dine_2"
+site = "home_ogawa"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_2Assembly/home_ogawa_dine_2" unique_id=2104001960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_2Assembly/home_ogawa_dine_2" unique_id=272613683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_2Assembly/home_ogawa_dine_2" unique_id=2048727565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/DiningAssembly/home_ogawa_dine_2Assembly/home_ogawa_dine_2" unique_id=500616671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Ogawa/DiningAssembly" unique_id=416792352 instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Ogawa/DiningAssembly" unique_id=936088305 instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_ogawa_deskAssembly" type="Node3D" parent="Ogawa" unique_id=240321755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="Ogawa/home_ogawa_deskAssembly" unique_id=1970048680 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_ogawa_desk_0" type="Node3D" parent="Ogawa/home_ogawa_deskAssembly" unique_id=1046790757]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_ogawa_desk_0"
+site = "home_ogawa"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "model"
+pair = "home_ogawa_desk"
+
+[node name="Approach" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_0" unique_id=1947279202]
+
+[node name="Contact" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_0" unique_id=1852873428]
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_0" unique_id=2109109592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_0" unique_id=1485150720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_ogawa_desk_1" type="Node3D" parent="Ogawa/home_ogawa_deskAssembly" unique_id=1393564028]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_ogawa_desk_1"
+site = "home_ogawa"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "model"
+pair = "home_ogawa_desk"
+
+[node name="Approach" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_1" unique_id=1056954118]
+
+[node name="Contact" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_1" unique_id=474467001]
+
+[node name="HandLeft" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_1" unique_id=1881236062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Ogawa/home_ogawa_deskAssembly/home_ogawa_desk_1" unique_id=384768122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="TownModel" type="Node3D" parent="Ogawa/home_ogawa_deskAssembly" unique_id=1567796509 instance=ExtResource("8_0pl5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.22)
+
+[node name="Saeki" type="Node3D" parent="." unique_id=776482318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -4)
+metadata/site = "home_saeki"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_osamuAssembly" type="Node3D" parent="Saeki" unique_id=25168812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Saeki/Bed_osamuAssembly" unique_id=1474576800 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_osamu" type="Node3D" parent="Saeki/Bed_osamuAssembly" unique_id=1665276644]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_osamu"
+site = "home_saeki"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "osamu"
+
+[node name="Approach" type="Marker3D" parent="Saeki/Bed_osamuAssembly/sleep_osamu" unique_id=548141718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Saeki/Bed_osamuAssembly/sleep_osamu" unique_id=1910116157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Saeki/Bed_osamuAssembly/sleep_osamu" unique_id=1740139601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Saeki/Bed_osamuAssembly/sleep_osamu" unique_id=1664981930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_fumiAssembly" type="Node3D" parent="Saeki" unique_id=2109981730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Saeki/Bed_fumiAssembly" unique_id=395580690 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_fumi" type="Node3D" parent="Saeki/Bed_fumiAssembly" unique_id=794916598]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_fumi"
+site = "home_saeki"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "fumi"
+
+[node name="Approach" type="Marker3D" parent="Saeki/Bed_fumiAssembly/sleep_fumi" unique_id=894816490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Saeki/Bed_fumiAssembly/sleep_fumi" unique_id=1419312805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Saeki/Bed_fumiAssembly/sleep_fumi" unique_id=1198447888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Saeki/Bed_fumiAssembly/sleep_fumi" unique_id=1746772882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="Saeki" unique_id=565790389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="Saeki/DiningAssembly" unique_id=802175513 instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_saeki_dine_0Assembly" type="Node3D" parent="Saeki/DiningAssembly" unique_id=1084962609]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Saeki/DiningAssembly/home_saeki_dine_0Assembly" unique_id=246388593 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_saeki_dine_0" type="Node3D" parent="Saeki/DiningAssembly/home_saeki_dine_0Assembly" unique_id=108679724]
+script = ExtResource("2_wnwp1")
+spot_id = "home_saeki_dine_0"
+site = "home_saeki"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_0Assembly/home_saeki_dine_0" unique_id=1017302880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_0Assembly/home_saeki_dine_0" unique_id=1647935293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_0Assembly/home_saeki_dine_0" unique_id=1323838365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_0Assembly/home_saeki_dine_0" unique_id=2083557330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_saeki_dine_1Assembly" type="Node3D" parent="Saeki/DiningAssembly" unique_id=1467825369]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Saeki/DiningAssembly/home_saeki_dine_1Assembly" unique_id=1640271460 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_saeki_dine_1" type="Node3D" parent="Saeki/DiningAssembly/home_saeki_dine_1Assembly" unique_id=1043085809]
+script = ExtResource("2_wnwp1")
+spot_id = "home_saeki_dine_1"
+site = "home_saeki"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_1Assembly/home_saeki_dine_1" unique_id=800205761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_1Assembly/home_saeki_dine_1" unique_id=1890406533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_1Assembly/home_saeki_dine_1" unique_id=1273448510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Saeki/DiningAssembly/home_saeki_dine_1Assembly/home_saeki_dine_1" unique_id=711693762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Saeki/DiningAssembly" unique_id=354094704 instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Saeki/DiningAssembly" unique_id=573698333 instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_saeki_deskAssembly" type="Node3D" parent="Saeki" unique_id=108843759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="Saeki/home_saeki_deskAssembly" unique_id=1358478345 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_saeki_desk_0" type="Node3D" parent="Saeki/home_saeki_deskAssembly" unique_id=770168473]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_saeki_desk_0"
+site = "home_saeki"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_saeki"
+pair = "home_saeki_desk"
+
+[node name="Approach" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_0" unique_id=1125251529]
+
+[node name="Contact" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_0" unique_id=875845756]
+
+[node name="HandLeft" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_0" unique_id=2025174901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_0" unique_id=155968901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_saeki_desk_1" type="Node3D" parent="Saeki/home_saeki_deskAssembly" unique_id=1309575629]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_saeki_desk_1"
+site = "home_saeki"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_saeki"
+pair = "home_saeki_desk"
+
+[node name="Approach" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_1" unique_id=1766960886]
+
+[node name="Contact" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_1" unique_id=1559932364]
+
+[node name="HandLeft" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_1" unique_id=1707215432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Saeki/home_saeki_deskAssembly/home_saeki_desk_1" unique_id=1946394557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Shared" type="Node3D" parent="." unique_id=1849889798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
+metadata/site = "home_shared"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_mahoAssembly" type="Node3D" parent="Shared" unique_id=1185089000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Shared/Bed_mahoAssembly" unique_id=1920315563 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_maho" type="Node3D" parent="Shared/Bed_mahoAssembly" unique_id=684705828]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_maho"
+site = "home_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "maho"
+
+[node name="Approach" type="Marker3D" parent="Shared/Bed_mahoAssembly/sleep_maho" unique_id=518634858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Shared/Bed_mahoAssembly/sleep_maho" unique_id=980136251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Shared/Bed_mahoAssembly/sleep_maho" unique_id=656494647]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Shared/Bed_mahoAssembly/sleep_maho" unique_id=1227074615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_ritsuAssembly" type="Node3D" parent="Shared" unique_id=352799728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Shared/Bed_ritsuAssembly" unique_id=1467088245 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_ritsu" type="Node3D" parent="Shared/Bed_ritsuAssembly" unique_id=555101751]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_ritsu"
+site = "home_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "ritsu"
+
+[node name="Approach" type="Marker3D" parent="Shared/Bed_ritsuAssembly/sleep_ritsu" unique_id=1278885514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Shared/Bed_ritsuAssembly/sleep_ritsu" unique_id=745706234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Shared/Bed_ritsuAssembly/sleep_ritsu" unique_id=439627855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Shared/Bed_ritsuAssembly/sleep_ritsu" unique_id=9609211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_aoiAssembly" type="Node3D" parent="Shared" unique_id=1469597822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Shared/Bed_aoiAssembly" unique_id=825879329 instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_aoi" type="Node3D" parent="Shared/Bed_aoiAssembly" unique_id=1653592656]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_aoi"
+site = "home_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "aoi"
+
+[node name="Approach" type="Marker3D" parent="Shared/Bed_aoiAssembly/sleep_aoi" unique_id=1376051992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Shared/Bed_aoiAssembly/sleep_aoi" unique_id=2082219092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Shared/Bed_aoiAssembly/sleep_aoi" unique_id=2009133088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Shared/Bed_aoiAssembly/sleep_aoi" unique_id=256169799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="Shared" unique_id=1010616818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="Shared/DiningAssembly" unique_id=1602363860 instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_shared_dine_0Assembly" type="Node3D" parent="Shared/DiningAssembly" unique_id=252275234]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Shared/DiningAssembly/home_shared_dine_0Assembly" unique_id=1420489107 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_shared_dine_0" type="Node3D" parent="Shared/DiningAssembly/home_shared_dine_0Assembly" unique_id=1442772826]
+script = ExtResource("2_wnwp1")
+spot_id = "home_shared_dine_0"
+site = "home_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_0Assembly/home_shared_dine_0" unique_id=1121773874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_0Assembly/home_shared_dine_0" unique_id=1059506707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_0Assembly/home_shared_dine_0" unique_id=954736125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_0Assembly/home_shared_dine_0" unique_id=120777288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_shared_dine_1Assembly" type="Node3D" parent="Shared/DiningAssembly" unique_id=1479449669]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Shared/DiningAssembly/home_shared_dine_1Assembly" unique_id=1410714477 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_shared_dine_1" type="Node3D" parent="Shared/DiningAssembly/home_shared_dine_1Assembly" unique_id=1075897668]
+script = ExtResource("2_wnwp1")
+spot_id = "home_shared_dine_1"
+site = "home_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_1Assembly/home_shared_dine_1" unique_id=163187027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_1Assembly/home_shared_dine_1" unique_id=1866766289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_1Assembly/home_shared_dine_1" unique_id=1711890348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_1Assembly/home_shared_dine_1" unique_id=424177360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_shared_dine_2Assembly" type="Node3D" parent="Shared/DiningAssembly" unique_id=1393305090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
+[node name="Chair" type="Node3D" parent="Shared/DiningAssembly/home_shared_dine_2Assembly" unique_id=695669795 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_shared_dine_2" type="Node3D" parent="Shared/DiningAssembly/home_shared_dine_2Assembly" unique_id=529622813]
+script = ExtResource("2_wnwp1")
+spot_id = "home_shared_dine_2"
+site = "home_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_2Assembly/home_shared_dine_2" unique_id=2095988942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_2Assembly/home_shared_dine_2" unique_id=498095958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_2Assembly/home_shared_dine_2" unique_id=3689328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Shared/DiningAssembly/home_shared_dine_2Assembly/home_shared_dine_2" unique_id=2026943353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Shared/DiningAssembly" unique_id=250449064 instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Shared/DiningAssembly" unique_id=1600396102 instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_shared_deskAssembly" type="Node3D" parent="Shared" unique_id=1203554847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="Shared/home_shared_deskAssembly" unique_id=1372918369 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_shared_desk_0" type="Node3D" parent="Shared/home_shared_deskAssembly" unique_id=1967263178]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_shared_desk_0"
+site = "home_shared"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_shared"
+pair = "home_shared_desk"
+
+[node name="Approach" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_0" unique_id=1306687218]
+
+[node name="Contact" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_0" unique_id=1387116426]
+
+[node name="HandLeft" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_0" unique_id=1855968175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_0" unique_id=1411236025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_shared_desk_1" type="Node3D" parent="Shared/home_shared_deskAssembly" unique_id=1311915315]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_shared_desk_1"
+site = "home_shared"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_shared"
+pair = "home_shared_desk"
+
+[node name="Approach" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_1" unique_id=372178410]
+
+[node name="Contact" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_1" unique_id=2086140871]
+
+[node name="HandLeft" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_1" unique_id=1494178685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Shared/home_shared_deskAssembly/home_shared_desk_1" unique_id=1263195149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Cafe" type="Node3D" parent="." unique_id=738894430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -5)
+metadata/site = "bakery_cafe"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="bakery_workAssembly" type="Node3D" parent="Cafe" unique_id=2085216068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3)
+
+[node name="Worktable" type="Node3D" parent="Cafe/bakery_workAssembly" unique_id=1915772759 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="bakery_work_0" type="Node3D" parent="Cafe/bakery_workAssembly" unique_id=1294898864]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "bakery_work_0"
+site = "bakery_cafe"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "bread"
+pair = "bakery_work"
+
+[node name="Approach" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_0" unique_id=1775026280]
+
+[node name="Contact" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_0" unique_id=1360022065]
+
+[node name="HandLeft" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_0" unique_id=210571773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_0" unique_id=796708100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="bakery_work_1" type="Node3D" parent="Cafe/bakery_workAssembly" unique_id=1822607447]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "bakery_work_1"
+site = "bakery_cafe"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "bread"
+pair = "bakery_work"
+
+[node name="Approach" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_1" unique_id=841230630]
+
+[node name="Contact" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_1" unique_id=784848526]
+
+[node name="HandLeft" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_1" unique_id=1652202935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Cafe/bakery_workAssembly/bakery_work_1" unique_id=2112664402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Bread" type="Node3D" parent="Cafe/bakery_workAssembly" unique_id=129670575 instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.23)
+
+[node name="CafeTable0Assembly" type="Node3D" parent="Cafe" unique_id=185499942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1.2)
+
+[node name="Table" type="Node3D" parent="Cafe/CafeTable0Assembly" unique_id=159526810 instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="cafe_0_aAssembly" type="Node3D" parent="Cafe/CafeTable0Assembly" unique_id=1206838895]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.8, 0, 0)
+
+[node name="Chair" type="Node3D" parent="Cafe/CafeTable0Assembly/cafe_0_aAssembly" unique_id=860989768 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="cafe_0_a" type="Node3D" parent="Cafe/CafeTable0Assembly/cafe_0_aAssembly" unique_id=1884135269]
+script = ExtResource("2_wnwp1")
+spot_id = "cafe_0_a"
+site = "bakery_cafe"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+group = "cafe"
+pair = "cafe_pair_0"
+
+[node name="Approach" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_aAssembly/cafe_0_a" unique_id=907733021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_aAssembly/cafe_0_a" unique_id=1784883745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_aAssembly/cafe_0_a" unique_id=1877104940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_aAssembly/cafe_0_a" unique_id=1484725389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="cafe_0_bAssembly" type="Node3D" parent="Cafe/CafeTable0Assembly" unique_id=2132264650]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.8, 0, 0)
+
+[node name="Chair" type="Node3D" parent="Cafe/CafeTable0Assembly/cafe_0_bAssembly" unique_id=1081834138 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="cafe_0_b" type="Node3D" parent="Cafe/CafeTable0Assembly/cafe_0_bAssembly" unique_id=1043605842]
+script = ExtResource("2_wnwp1")
+spot_id = "cafe_0_b"
+site = "bakery_cafe"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+group = "cafe"
+pair = "cafe_pair_0"
+
+[node name="Approach" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_bAssembly/cafe_0_b" unique_id=1385467170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_bAssembly/cafe_0_b" unique_id=550565357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_bAssembly/cafe_0_b" unique_id=916018317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Cafe/CafeTable0Assembly/cafe_0_bAssembly/cafe_0_b" unique_id=580023137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Cafe/CafeTable0Assembly" unique_id=640506383 instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Cafe/CafeTable0Assembly" unique_id=1644278290 instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, -0.26)
+
+[node name="CafeTable1Assembly" type="Node3D" parent="Cafe" unique_id=344697350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, 1.2)
+
+[node name="Table" type="Node3D" parent="Cafe/CafeTable1Assembly" unique_id=449564847 instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="cafe_1_aAssembly" type="Node3D" parent="Cafe/CafeTable1Assembly" unique_id=925663110]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.8, 0, 0)
+
+[node name="Chair" type="Node3D" parent="Cafe/CafeTable1Assembly/cafe_1_aAssembly" unique_id=799455412 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="cafe_1_a" type="Node3D" parent="Cafe/CafeTable1Assembly/cafe_1_aAssembly" unique_id=816219703]
+script = ExtResource("2_wnwp1")
+spot_id = "cafe_1_a"
+site = "bakery_cafe"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+group = "cafe"
+pair = "cafe_pair_1"
+
+[node name="Approach" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_aAssembly/cafe_1_a" unique_id=1665761119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_aAssembly/cafe_1_a" unique_id=2056485129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_aAssembly/cafe_1_a" unique_id=1990803946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_aAssembly/cafe_1_a" unique_id=1319003630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="cafe_1_bAssembly" type="Node3D" parent="Cafe/CafeTable1Assembly" unique_id=145029028]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.8, 0, 0)
+
+[node name="Chair" type="Node3D" parent="Cafe/CafeTable1Assembly/cafe_1_bAssembly" unique_id=978390094 instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="cafe_1_b" type="Node3D" parent="Cafe/CafeTable1Assembly/cafe_1_bAssembly" unique_id=2120164159]
+script = ExtResource("2_wnwp1")
+spot_id = "cafe_1_b"
+site = "bakery_cafe"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+group = "cafe"
+pair = "cafe_pair_1"
+
+[node name="Approach" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_bAssembly/cafe_1_b" unique_id=1063158155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_bAssembly/cafe_1_b" unique_id=147018165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_bAssembly/cafe_1_b" unique_id=1965116775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Cafe/CafeTable1Assembly/cafe_1_bAssembly/cafe_1_b" unique_id=1750137967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Cafe/CafeTable1Assembly" unique_id=447866594 instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Cafe/CafeTable1Assembly" unique_id=1895390203 instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, -0.26)
+
+[node name="Workshop" type="Node3D" parent="." unique_id=230095238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+metadata/site = "workshop"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="RadioShelf" parent="Workshop" instance=ExtResource("10_radio_shelf")]
+position = Vector3(-1.7, 0, -0.6)
+
+[node name="radio_workAssembly" type="Node3D" parent="Workshop" unique_id=131283078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
+
+[node name="Worktable" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=71260665 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+metadata/interaction_container = "radio_table"
+metadata/interaction_surface_height = 0.95
+
+[node name="radio_work_0" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=1108392413]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.24, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "radio_work_0"
+site = "workshop"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "radio"
+pair = "radio_work"
+
+[node name="Approach" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_0" unique_id=976788684]
+
+[node name="Contact" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_0" unique_id=1467703890]
+
+[node name="HandLeft" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_0" unique_id=199987155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_0" unique_id=1014373029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="radio_work_1" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=375260678]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.24, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "radio_work_1"
+site = "workshop"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "radio"
+pair = "radio_work"
+
+[node name="Approach" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_1" unique_id=64073959]
+
+[node name="Contact" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_1" unique_id=1434286075]
+
+[node name="HandLeft" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_1" unique_id=116058310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Workshop/radio_workAssembly/radio_work_1" unique_id=1567043524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Radio" type="Node3D" parent="Workshop/radio_workAssembly" unique_id=1046370632 instance=ExtResource("9_bewk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.24)
+metadata/legacy_interaction_object_id = "workshop_radio"
+
+[node name="Photo" type="Node3D" parent="." unique_id=1986883852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, 3.8)
+
+[node name="photo_workAssembly" type="Node3D" parent="Photo" unique_id=403524377]
+
+[node name="Worktable" type="Node3D" parent="Photo/photo_workAssembly" unique_id=227308724 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="photo_work_0" type="Node3D" parent="Photo/photo_workAssembly" unique_id=1291939146]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "photo_work_0"
+site = "garden"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "photo"
+pair = "photo_work"
+
+[node name="Approach" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_0" unique_id=1027641417]
+
+[node name="Contact" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_0" unique_id=625599999]
+
+[node name="HandLeft" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_0" unique_id=561661280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_0" unique_id=1853170898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="photo_work_1" type="Node3D" parent="Photo/photo_workAssembly" unique_id=193936947]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "photo_work_1"
+site = "garden"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "photo"
+pair = "photo_work"
+
+[node name="Approach" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_1" unique_id=1013457929]
+
+[node name="Contact" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_1" unique_id=1957056789]
+
+[node name="HandLeft" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_1" unique_id=1785963944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Photo/photo_workAssembly/photo_work_1" unique_id=1554491877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="PhotoMug" type="Node3D" parent="Photo" unique_id=2031229025 instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.2)
+
+[node name="Music" type="Node3D" parent="." unique_id=247042859]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 0, 4.5)
+
+[node name="music_workAssembly" type="Node3D" parent="Music" unique_id=617666297]
+
+[node name="Worktable" type="Node3D" parent="Music/music_workAssembly" unique_id=2141012802 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="music_work_0" type="Node3D" parent="Music/music_workAssembly" unique_id=1440345603]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "music_work_0"
+site = "square"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "music"
+pair = "music_work"
+
+[node name="Approach" type="Marker3D" parent="Music/music_workAssembly/music_work_0" unique_id=1166960202]
+
+[node name="Contact" type="Marker3D" parent="Music/music_workAssembly/music_work_0" unique_id=412974136]
+
+[node name="HandLeft" type="Marker3D" parent="Music/music_workAssembly/music_work_0" unique_id=1801145864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Music/music_workAssembly/music_work_0" unique_id=1676370219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="music_work_1" type="Node3D" parent="Music/music_workAssembly" unique_id=474443172]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "music_work_1"
+site = "square"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "music"
+pair = "music_work"
+
+[node name="Approach" type="Marker3D" parent="Music/music_workAssembly/music_work_1" unique_id=2011301888]
+
+[node name="Contact" type="Marker3D" parent="Music/music_workAssembly/music_work_1" unique_id=617532893]
+
+[node name="HandLeft" type="Marker3D" parent="Music/music_workAssembly/music_work_1" unique_id=1935751792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Music/music_workAssembly/music_work_1" unique_id=154758098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Craft" type="Node3D" parent="." unique_id=553275881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 6)
+
+[node name="craft_workAssembly" type="Node3D" parent="Craft" unique_id=535765165]
+
+[node name="Worktable" type="Node3D" parent="Craft/craft_workAssembly" unique_id=1439629727 instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="craft_work_0" type="Node3D" parent="Craft/craft_workAssembly" unique_id=1252781116]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "craft_work_0"
+site = "square"
+actions = PackedStringArray("play")
+pose_kind = "work"
+group = "tabletop"
+pair = "craft_work"
+
+[node name="Approach" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_0" unique_id=476783427]
+
+[node name="Contact" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_0" unique_id=1466249998]
+
+[node name="HandLeft" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_0" unique_id=1697190017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_0" unique_id=1517863441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="craft_work_1" type="Node3D" parent="Craft/craft_workAssembly" unique_id=762819671]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "craft_work_1"
+site = "square"
+actions = PackedStringArray("play")
+pose_kind = "work"
+group = "tabletop"
+pair = "craft_work"
+
+[node name="Approach" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=1033259035]
+
+[node name="Contact" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=623168109]
+
+[node name="HandLeft" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=1228016740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Craft/craft_workAssembly/craft_work_1" unique_id=1580300429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="CraftArt" type="Node3D" parent="."]
+position = Vector3(-2.8, 0, 8.3)
+
+[node name="craft_artAssembly" type="Node3D" parent="CraftArt"]
+
+[node name="Worktable" type="Node3D" parent="CraftArt/craft_artAssembly" instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="craft_art_0" type="Node3D" parent="CraftArt/craft_artAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "craft_art_0"
+site = "square"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "craft"
+pair = "craft_art"
+
+[node name="Approach" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+
+[node name="Contact" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+
+[node name="HandLeft" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+position = Vector3(0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_0"]
+position = Vector3(-0.13, 0.99, 0.34)
+
+[node name="craft_art_1" type="Node3D" parent="CraftArt/craft_artAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "craft_art_1"
+site = "square"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "craft"
+pair = "craft_art"
+
+[node name="Approach" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+
+[node name="Contact" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+
+[node name="HandLeft" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+position = Vector3(0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="CraftArt/craft_artAssembly/craft_art_1"]
+position = Vector3(-0.13, 0.99, 0.34)
+
+[node name="NorthShared" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+metadata/site = "home_north_shared"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_sakiAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="NorthShared/Bed_sakiAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_saki" type="Node3D" parent="NorthShared/Bed_sakiAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_saki"
+site = "home_north_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "saki"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/Bed_sakiAssembly/sleep_saki"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_haruAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="NorthShared/Bed_haruAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_haru" type="Node3D" parent="NorthShared/Bed_haruAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_haru"
+site = "home_north_shared"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "haru"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/Bed_haruAssembly/sleep_haru"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="NorthShared/DiningAssembly" instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_north_shared_dine_0Assembly" type="Node3D" parent="NorthShared/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_north_shared_dine_0" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_dine_0"
+site = "home_north_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_0Assembly/home_north_shared_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_north_shared_dine_1Assembly" type="Node3D" parent="NorthShared/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_north_shared_dine_1" type="Node3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_dine_1"
+site = "home_north_shared"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/DiningAssembly/home_north_shared_dine_1Assembly/home_north_shared_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="NorthShared/DiningAssembly" instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="NorthShared/DiningAssembly" instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_north_shared_deskAssembly" type="Node3D" parent="NorthShared"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="NorthShared/home_north_shared_deskAssembly" instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_north_shared_desk_0" type="Node3D" parent="NorthShared/home_north_shared_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_desk_0"
+site = "home_north_shared"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_north_shared"
+pair = "home_north_shared_desk"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+
+[node name="Contact" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_north_shared_desk_1" type="Node3D" parent="NorthShared/home_north_shared_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_north_shared_desk_1"
+site = "home_north_shared"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_north_shared"
+pair = "home_north_shared_desk"
+
+[node name="Approach" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+
+[node name="Contact" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+
+[node name="HandLeft" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="NorthShared/home_north_shared_deskAssembly/home_north_shared_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="Mori" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -15)
+metadata/site = "home_mori"
+metadata/room_size = Vector2(5.6, 5.6)
+
+[node name="Bed_tomoAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Mori/Bed_tomoAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_tomo" type="Node3D" parent="Mori/Bed_tomoAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_tomo"
+site = "home_mori"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "tomo"
+
+[node name="Approach" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/Bed_tomoAssembly/sleep_tomo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="Bed_yuiAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1.5)
+
+[node name="Bed" type="Node3D" parent="Mori/Bed_yuiAssembly" instance=ExtResource("1_kx7dn")]
+metadata/footprint = Vector2(1, 2.05)
+
+[node name="sleep_yui" type="Node3D" parent="Mori/Bed_yuiAssembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "sleep_yui"
+site = "home_mori"
+actions = PackedStringArray("sleep")
+pose_kind = "bed"
+resident = "yui"
+
+[node name="Approach" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="Contact" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, -0.72)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/Bed_yuiAssembly/sleep_yui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.34)
+
+[node name="DiningAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 0, 1.3)
+
+[node name="DiningTable" type="Node3D" parent="Mori/DiningAssembly" instance=ExtResource("3_3cejc")]
+metadata/footprint = Vector2(1.1, 1.1)
+
+[node name="home_mori_dine_0Assembly" type="Node3D" parent="Mori/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_mori_dine_0" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_dine_0"
+site = "home_mori"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_0Assembly/home_mori_dine_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="home_mori_dine_1Assembly" type="Node3D" parent="Mori/DiningAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4, 0, 0.75)
+
+[node name="Chair" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly" instance=ExtResource("4_eyv1a")]
+metadata/footprint = Vector2(0.51, 0.51)
+
+[node name="home_mori_dine_1" type="Node3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly"]
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_dine_1"
+site = "home_mori"
+actions = PackedStringArray("eat", "rest", "care", "social", "meet")
+
+[node name="Approach" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.08)
+
+[node name="Contact" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+
+[node name="HandLeft" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.78, 0.38)
+
+[node name="HandRight" type="Marker3D" parent="Mori/DiningAssembly/home_mori_dine_1Assembly/home_mori_dine_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.78, 0.38)
+
+[node name="Meal" type="Node3D" parent="Mori/DiningAssembly" instance=ExtResource("5_4w8k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0)
+
+[node name="Drink" type="Node3D" parent="Mori/DiningAssembly" instance=ExtResource("6_7rc3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.76, 0)
+
+[node name="home_mori_deskAssembly" type="Node3D" parent="Mori"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 0, 1.3)
+
+[node name="Worktable" type="Node3D" parent="Mori/home_mori_deskAssembly" instance=ExtResource("7_i6tvr")]
+metadata/footprint = Vector2(1.55, 0.84)
+
+[node name="home_mori_desk_0" type="Node3D" parent="Mori/home_mori_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_desk_0"
+site = "home_mori"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_mori"
+pair = "home_mori_desk"
+
+[node name="Approach" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+
+[node name="Contact" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+
+[node name="HandLeft" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="home_mori_desk_1" type="Node3D" parent="Mori/home_mori_deskAssembly"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.35, 0, 0.66)
+script = ExtResource("2_wnwp1")
+spot_id = "home_mori_desk_1"
+site = "home_mori"
+actions = PackedStringArray("work", "hobby", "chores", "joint_work", "meet")
+pose_kind = "work"
+group = "home_mori"
+pair = "home_mori_desk"
+
+[node name="Approach" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+
+[node name="Contact" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+
+[node name="HandLeft" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
+
+[node name="HandRight" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="SewingCabinet" parent="." instance=ExtResource("11_sewing_cabinet")]
+position = Vector3(-4.55, 0, 8.35)

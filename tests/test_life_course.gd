@@ -19,6 +19,13 @@ func advance_to(day: int, minute: int = 0) -> void:
 func has_memory(p: Dictionary, kind: String) -> bool:
 	return p.memories.any(func(m): return m.kind==kind)
 
+func live_state() -> Dictionary:
+	return sim._encode({"people":sim.people,"definitions":sim.definitions,"events":sim.events,"meetings":sim.meetings,
+		"elapsed":sim.elapsed,"start_minute":sim.start_minute,"epoch_weekday":sim.epoch_weekday,"remainder":sim.minute_remainder,
+		"rng":str(sim.rng.state),"world_seed":sim.world_seed,"event_serial":sim.event_serial,"meeting_serial":sim.meeting_serial,
+		"benches":sim.benches,"budget":sim.shared_budget,"social":sim.social.serialize(),"work":sim.work_family.serialize(),
+		"life":sim.life.serialize(),"agenda":sim.agenda.serialize(),"interactions":sim.interactions.serialize(),"tabletop":sim.tabletop.serialize(),"weather":sim.weather.serialize()})
+
 func run() -> void:
 	sim = LifeSimulation.new()
 	root.add_child(sim)
@@ -97,24 +104,25 @@ func run() -> void:
 	sim.reset()
 	expect(sim.load_game("user://test-life-course.json"),"A farewell and inherited record can be loaded")
 	expect(not sim.person("osamu").alive and sim.life.legacy[0].uses==1,"Loading preserves absence and actual use of the record")
-	# A schema-3 town gains current roles, not fabricated historical encounters.
-	sim.reset()
-	sim.advance_minutes(25*1440)
-	sim.save_game("user://test-life-course.json")
-	var old = JSON.parse_string(FileAccess.get_file_as_string("user://test-life-course.json"))
+	# Earlier development formats are rejected rather than inventing a calendar,
+	# household role or historical encounter for their missing life-course state.
+	var current_text := FileAccess.get_file_as_string("user://test-life-course.json")
+	var old: Dictionary = JSON.parse_string(current_text)
 	old.schema = 3
 	old.erase("life")
 	old.work_family.households.erase("aoi_apartment")
 	for p in old.people:
 		for key in ["base_age","alive","stage","current_goal","goal_kind","known_plans","goal_history","legacy_read_id","legacy_read_recorded","household_override","career_retired","inspiration"]: p.erase(key)
 		p.age = sim.definitions[p.id].age_years
-	var file = FileAccess.open("user://test-life-course.json",FileAccess.WRITE)
+	var old_path := "user://test-life-course-old.json"
+	var file = FileAccess.open(old_path,FileAccess.WRITE)
 	file.store_string(JSON.stringify(old))
 	file.close()
-	sim.reset()
-	expect(sim.load_game("user://test-life-course.json"),"An older town can adopt the life-course rules")
-	expect(sim.person("aoi").age==22 and sim.person("aoi").stage=="moved","Migration reconciles actual age and household role")
-	expect(sim.life.announced.size()==2 and not sim.person("aoi").known_plans.has("aoi_move"),"Migration does not pretend an old NPC had foreknowledge of an unimplemented event")
+	var old_text := FileAccess.get_file_as_string(old_path)
+	var before := live_state()
+	expect(not sim.load_game(old_path) and not sim.load_error.is_empty(),"A schema-3 life-course save is rejected with a readable incompatible-format reason")
+	expect(live_state()==before,"Rejecting an older life-course save preserves actual ages, roles, memories, records and RNG")
+	expect(FileAccess.get_file_as_string("user://test-life-course.json")==current_text and FileAccess.get_file_as_string(old_path)==old_text,"Rejecting an older life-course save preserves both existing saved files")
 	# Run the real authored calendar long enough to reach the first life ending.
 	sim.reset()
 	sim.advance_minutes(20*12*1440)
@@ -136,6 +144,7 @@ func run() -> void:
 	expect(sim.load_game("user://test-life-course.json"),"A complete lifetime remains recoverable from its save")
 	print("Long play: 88 representative years reached")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://test-life-course.json"))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(old_path))
 	print("Life course checks: %d passed, %d failed"%[checks-failures.size(),failures.size()])
 	sim.free()
 	quit(0 if failures.is_empty() else 1)

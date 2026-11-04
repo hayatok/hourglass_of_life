@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://game/scripts/sewing_prop_thread.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="Material_thread"]
+albedo_color = Color(0.97, 0.87, 0.64, 1)
+roughness = 0.95
+
+[sub_resource type="CylinderMesh" id="Mesh_thread_segment"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 1.0
+radial_segments = 6
+
+[sub_resource type="MultiMesh" id="MultiMesh_thread"]
+transform_format = 1
+mesh = SubResource("Mesh_thread_segment")
+instance_count = 0
+
+[node name="SewingThread" type="Node3D"]
+script = ExtResource("1")
+metadata/presentation_only = true
+metadata/radius = 0.0007
+
+[node name="ThreadSegments" type="MultiMeshInstance3D" parent="."]
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_thread")

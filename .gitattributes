@@ -1,0 +1,7 @@
+# Preserve the publisher's CP932/CRLF bytes; normalized observations are JSON.
+data/evidence/life-course/raw/*.csv binary
+# Official input responses retain their original encoding and line endings.
+data/evidence/education-mortality-2024/raw/* binary
+# Original licensed motion capture inputs retain their publisher's CRLF bytes.
+assets/motion-sources/cmu/*.asf binary
+assets/motion-sources/cmu/*.amc binary

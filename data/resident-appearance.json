@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "note": "咲・晴・智・結衣は個別atlasと9動作を使い、UVシェーダーで閉眼と疲れ目に対応。晴・智は35骨、咲・結衣は裾補助骨を含む36骨。口や笑顔の変形は未対応。paletteのキーは旧モデルの8×8色見本の番号。",
+  "residents": {
+    "saki": {"model_scene":"res://game/scenes/characters/saki.tscn","body_scale":[1,1,1],"palette":{}},
+    "haru": {"model_scene":"res://game/scenes/characters/haru.tscn","body_scale":[1,1,1],"palette":{}},
+    "tomo": {"model_scene":"res://game/scenes/characters/tomo.tscn","body_scale":[1,1,1],"palette":{}},
+    "yui": {"model_scene":"res://game/scenes/characters/yui.tscn","body_scale":[1,1,1],"palette":{}}
+  }
+}

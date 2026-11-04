@@ -1,0 +1,484 @@
+{
+  "asset": "CH_RinAdult",
+  "generated": "2026-11-03T10:01:25",
+  "blender": "5.2.1 LTS",
+  "source": "../CH_RinAdult_delivery.blend",
+  "target_engine": "Godot 4.7 Compatibility",
+  "units": {
+    "system": "METRIC",
+    "scale_length": 1.0,
+    "authoring_up": "Z",
+    "authoring_forward": "-Y",
+    "export_up": "Y",
+    "export_forward": "+Z",
+    "note": "glTF converts Z up to Y up; a subject facing -Y in Blender faces +Z in glTF"
+  },
+  "target_height_m": 1.68,
+  "bounds_m": {
+    "min": [
+      -0.2169,
+      -0.1528,
+      0.005
+    ],
+    "max": [
+      0.2169,
+      0.1254,
+      1.6802
+    ],
+    "size": [
+      0.4338,
+      0.2782,
+      1.6752
+    ]
+  },
+  "files": {
+    "all": "CH_RinAdult.glb",
+    "LOD1": "CH_RinAdult_LOD1.glb",
+    "LOD2": "CH_RinAdult_LOD2.glb"
+  },
+  "lods": [
+    {
+      "level": 0,
+      "objects": [
+        "CH_RinAdult_Body_LOD0",
+        "CH_RinAdult_Face_LOD0"
+      ],
+      "tris": 29480
+    },
+    {
+      "level": 1,
+      "objects": [
+        "CH_RinAdult_Body_LOD1",
+        "CH_RinAdult_Face_LOD1"
+      ],
+      "tris": 12380
+    },
+    {
+      "level": 2,
+      "objects": [
+        "CH_RinAdult_Body_LOD2",
+        "CH_RinAdult_Face_LOD2"
+      ],
+      "tris": 3529
+    }
+  ],
+  "materials": [
+    "CH_RinAdult_Body",
+    "CH_RinAdult_Face"
+  ],
+  "textures": [
+    {
+      "name": "CH_RinAdult_BaseColor.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "colorspace": "sRGB",
+      "packed": false,
+      "filepath": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/textures/CH_RinAdult_BaseColor.png"
+    },
+    {
+      "name": "CH_RinAdult_ORM.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "colorspace": "Non-Color",
+      "packed": false,
+      "filepath": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/textures/CH_RinAdult_ORM.png"
+    },
+    {
+      "name": "CH_RinAdult_Normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "colorspace": "Non-Color",
+      "packed": false,
+      "filepath": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/textures/CH_RinAdult_Normal.png"
+    }
+  ],
+  "texture_contract": {
+    "base_color": "sRGB",
+    "ORM": "Non-Color: R=AO(1), G=roughness, B=metallic",
+    "normal": "Non-Color, tangent OpenGL +Y, neutral because forms are modelled",
+    "size": [
+      1024,
+      1024
+    ],
+    "palette": [
+      {
+        "name": "Brass",
+        "linear_color": [
+          0.6299999952316284,
+          0.3799999952316284,
+          0.10000000149011612,
+          1.0
+        ],
+        "roughness": 0.4000000059604645,
+        "metallic": 0.6499999761581421
+      },
+      {
+        "name": "Eye glint",
+        "linear_color": [
+          1.0,
+          1.0,
+          0.9800000190734863,
+          1.0
+        ],
+        "roughness": 0.3499999940395355,
+        "metallic": 0.0
+      },
+      {
+        "name": "Eyes ink",
+        "linear_color": [
+          0.017999999225139618,
+          0.008999999612569809,
+          0.006000000052154064,
+          1.0
+        ],
+        "roughness": 0.75,
+        "metallic": 0.0
+      },
+      {
+        "name": "Eyes ivory",
+        "linear_color": [
+          0.9399999976158142,
+          0.8999999761581421,
+          0.800000011920929,
+          1.0
+        ],
+        "roughness": 0.6000000238418579,
+        "metallic": 0.0
+      },
+      {
+        "name": "Hair",
+        "linear_color": [
+          0.11999999731779099,
+          0.04600000008940697,
+          0.017999999225139618,
+          1.0
+        ],
+        "roughness": 0.7599999904632568,
+        "metallic": 0.0
+      },
+      {
+        "name": "Hair mid",
+        "linear_color": [
+          0.16200000047683716,
+          0.06210000067949295,
+          0.024299999698996544,
+          1.0
+        ],
+        "roughness": 0.75,
+        "metallic": 0.0
+      },
+      {
+        "name": "Hair strand",
+        "linear_color": [
+          0.20999999344348907,
+          0.08049999922513962,
+          0.03150000050663948,
+          1.0
+        ],
+        "roughness": 0.7200000286102295,
+        "metallic": 0.0
+      },
+      {
+        "name": "Iris amber",
+        "linear_color": [
+          0.47999998927116394,
+          0.20999999344348907,
+          0.02800000086426735,
+          1.0
+        ],
+        "roughness": 0.699999988079071,
+        "metallic": 0.0
+      },
+      {
+        "name": "Iris lower",
+        "linear_color": [
+          0.7799999713897705,
+          0.41999998688697815,
+          0.07000000029802322,
+          1.0
+        ],
+        "roughness": 0.699999988079071,
+        "metallic": 0.0
+      },
+      {
+        "name": "Iris rim",
+        "linear_color": [
+          0.0949999988079071,
+          0.03200000151991844,
+          0.006000000052154064,
+          1.0
+        ],
+        "roughness": 0.699999988079071,
+        "metallic": 0.0
+      },
+      {
+        "name": "Ivory",
+        "linear_color": [
+          0.7799999713897705,
+          0.7300000190734863,
+          0.6100000143051147,
+          1.0
+        ],
+        "roughness": 0.949999988079071,
+        "metallic": 0.0
+      },
+      {
+        "name": "Leather",
+        "linear_color": [
+          0.1899999976158142,
+          0.0729999989271164,
+          0.02500000037252903,
+          1.0
+        ],
+        "roughness": 0.6499999761581421,
+        "metallic": 0.0
+      },
+      {
+        "name": "Mouth",
+        "linear_color": [
+          0.20000000298023224,
+          0.057999998331069946,
+          0.03099999949336052,
+          1.0
+        ],
+        "roughness": 0.8999999761581421,
+        "metallic": 0.0
+      },
+      {
+        "name": "Skin",
+        "linear_color": [
+          0.9100000262260437,
+          0.6499999761581421,
+          0.44999998807907104,
+          1.0
+        ],
+        "roughness": 0.8199999928474426,
+        "metallic": 0.0
+      },
+      {
+        "name": "Top",
+        "linear_color": [
+          0.6499999761581421,
+          0.3400000035762787,
+          0.03500000014901161,
+          1.0
+        ],
+        "roughness": 0.949999988079071,
+        "metallic": 0.0
+      },
+      {
+        "name": "Trousers",
+        "linear_color": [
+          0.054999999701976776,
+          0.07500000298023224,
+          0.11999999731779099,
+          1.0
+        ],
+        "roughness": 0.9399999976158142,
+        "metallic": 0.0
+      }
+    ],
+    "uv_policy": "Intentional shared solid-color swatches; >50 px padding; no directional lighting baked.",
+    "material_groups": 2,
+    "inferred": "Material response is authored, not measured from a physical garment."
+  },
+  "skeleton": [
+    {
+      "armature": "CH_RinAdult_Rig",
+      "bones": 35,
+      "deform_bones": [
+        "DEF-root",
+        "DEF-pelvis",
+        "DEF-spine_01",
+        "DEF-spine_02",
+        "DEF-chest",
+        "DEF-neck",
+        "DEF-head",
+        "DEF-clavicle.L",
+        "DEF-upper_arm.L",
+        "DEF-forearm.L",
+        "DEF-hand.L",
+        "DEF-finger0.L",
+        "DEF-finger1.L",
+        "DEF-finger2.L",
+        "DEF-finger3.L",
+        "DEF-finger4.L",
+        "DEF-clavicle.R",
+        "DEF-upper_arm.R",
+        "DEF-forearm.R",
+        "DEF-hand.R",
+        "DEF-finger0.R",
+        "DEF-finger1.R",
+        "DEF-finger2.R",
+        "DEF-finger3.R",
+        "DEF-finger4.R",
+        "DEF-apron_front",
+        "DEF-apron_back",
+        "DEF-thigh.L",
+        "DEF-shin.L",
+        "DEF-foot.L",
+        "DEF-toe.L",
+        "DEF-thigh.R",
+        "DEF-shin.R",
+        "DEF-foot.R",
+        "DEF-toe.R"
+      ],
+      "roots": [
+        "DEF-root"
+      ],
+      "rest_pose": "as exported"
+    }
+  ],
+  "sockets": [
+    {
+      "name": "SOCKET_hand.L",
+      "parent": "CH_RinAdult_Rig",
+      "parent_bone": "DEF-hand.L",
+      "world_location": [
+        0.1413,
+        -0.0467,
+        0.7761
+      ],
+      "world_rotation_deg": [
+        5.95,
+        -18.21,
+        177.12
+      ],
+      "axes": "local +Y forward of the attachment, +Z up",
+      "props": {
+        "owner": "phase:06_rig",
+        "axes": "local +Y attachment forward; +Z up"
+      }
+    },
+    {
+      "name": "SOCKET_hand.R",
+      "parent": "CH_RinAdult_Rig",
+      "parent_bone": "DEF-hand.R",
+      "world_location": [
+        -0.1413,
+        -0.0467,
+        0.7761
+      ],
+      "world_rotation_deg": [
+        5.95,
+        18.21,
+        -177.12
+      ],
+      "axes": "local +Y forward of the attachment, +Z up",
+      "props": {
+        "owner": "phase:06_rig",
+        "axes": "local +Y attachment forward; +Z up"
+      }
+    },
+    {
+      "name": "SOCKET_head",
+      "parent": "CH_RinAdult_Rig",
+      "parent_bone": "DEF-head",
+      "world_location": [
+        0.0,
+        -0.0768,
+        1.5212
+      ],
+      "world_rotation_deg": [
+        -1.03,
+        -0.0,
+        180.0
+      ],
+      "axes": "local +Y forward of the attachment, +Z up",
+      "props": {
+        "owner": "phase:06_rig",
+        "axes": "local +Y attachment forward; +Z up"
+      }
+    },
+    {
+      "name": "SOCKET_chest",
+      "parent": "CH_RinAdult_Rig",
+      "parent_bone": "DEF-chest",
+      "world_location": [
+        0.0,
+        -0.0802,
+        1.2812
+      ],
+      "world_rotation_deg": [
+        -0.0,
+        -0.0,
+        180.0
+      ],
+      "axes": "local +Y forward of the attachment, +Z up",
+      "props": {
+        "owner": "phase:06_rig",
+        "axes": "local +Y attachment forward; +Z up"
+      }
+    },
+    {
+      "name": "SOCKET_foot.L",
+      "parent": "CH_RinAdult_Rig",
+      "parent_bone": "DEF-foot.L",
+      "world_location": [
+        0.1651,
+        -0.0592,
+        0.0153
+      ],
+      "world_rotation_deg": [
+        0.0,
+        -0.0,
+        180.0
+      ],
+      "axes": "local +Y forward of the attachment, +Z up",
+      "props": {
+        "owner": "phase:06_rig",
+        "axes": "local +Y attachment forward; +Z up"
+      }
+    },
+    {
+      "name": "SOCKET_foot.R",
+      "parent": "CH_RinAdult_Rig",
+      "parent_bone": "DEF-foot.R",
+      "world_location": [
+        -0.1651,
+        -0.0592,
+        0.0153
+      ],
+      "world_rotation_deg": [
+        0.0,
+        0.0,
+        -180.0
+      ],
+      "axes": "local +Y forward of the attachment, +Z up",
+      "props": {
+        "owner": "phase:06_rig",
+        "axes": "local +Y attachment forward; +Z up"
+      }
+    }
+  ],
+  "colliders": [],
+  "animation_contract": "animation-contract.json",
+  "inferred_from_no_reference": [
+    "real height",
+    "hidden anatomy",
+    "garment depth",
+    "hand contours",
+    "shoe underside",
+    "face depth",
+    "material response",
+    "all animation"
+  ],
+  "dependencies": [],
+  "rest_pose": "A-pose in the source; game clips begin from their authored pose. In-place locomotion.",
+  "lod_policy": "Separate GLBs with the same rig/morphs. Authored targets: LOD1 below 100 px, LOD2 below 45 px. Automatic distance switching in the town is not implemented yet.",
+  "validation_notes": [
+    "Coincident seam vertices are intentional between cloth layers and eye/lash corners.",
+    "No cloth solver; apron front/back bones have authored motion."
+  ],
+  "source_texture_files": [
+    "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/textures/CH_RinAdult_BaseColor.png",
+    "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/textures/CH_RinAdult_ORM.png",
+    "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/CH_RinAdult/textures/CH_RinAdult_Normal.png"
+  ]
+}

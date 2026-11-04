@@ -4,7 +4,7 @@
 
 参考にしたのは、日本ファルコムが公開している[空の軌跡 the 1stのキャラクターページ](https://www.falcom.co.jp/sora/character/estelle.html)と[空の軌跡 the 2ndのキャラクターページ](https://www.falcom.co.jp/sora2/character/estelle.html)のゲーム画面。住人の年齢、職業、服の配色、町の用途は「命の砂時計」の設定を引き継いでいる。
 
-内蔵の画像生成ツールで制作した最終画像6点。3Dモデル化前の画像資料であり、モデル、リグ、アニメーション、シェーダーの実装は含まない。
+内蔵の画像生成ツールで制作した画像資料12点。住人8人全員の三面図、町、建物、家具をそろえた。画像資料と、別フォルダで制作する3Dモデル・リグ・アニメーションは区別する。
 
 ## 画像一覧
 
@@ -16,8 +16,14 @@
 | [04-osamu-turnaround.png](04-osamu-turnaround.png) | 修の正面、側面、背面 |
 | [05-buildings-and-cutaways.png](05-buildings-and-cutaways.png) | パン屋兼喫茶店、工房、住宅の外観と断面 |
 | [06-props-atlas.png](06-props-atlas.png) | 家具・小物12点の透過PNG |
+| [07-ryo-turnaround.png](07-ryo-turnaround.png) | 亮の正面、側面、背面 |
+| [08-rin-turnaround.png](08-rin-turnaround.png) | 凛の正面、側面、背面 |
+| [09-fumi-turnaround.png](09-fumi-turnaround.png) | 文の正面、側面、背面 |
+| [10-maho-turnaround.png](10-maho-turnaround.png) | 真帆の正面、側面、背面 |
+| [11-ritsu-turnaround.png](11-ritsu-turnaround.png) | 律の正面、側面、背面 |
+| [12-aoi-turnaround.png](12-aoi-turnaround.png) | 葵の正面、側面、背面 |
 
-[生成プロンプト](prompts.json)と[ファイル情報](manifest.json)も収録している。以前のアートワークはv01として別に保存している。
+[生成プロンプト](prompts.json)、[追加した6人の生成プロンプト](additional-prompts.json)、[ファイル情報](manifest.json)も収録している。以前のアートワークはv01として別に保存している。
 
 ## 町
 
@@ -62,5 +68,7 @@
 肌、髪、服の陰影は少数の明暗面を軸にし、立体を補う緩やかなグラデーションを組み合わせる。輪郭線は形の判別を助ける程度に抑える。昼夜の光や影を素材の色へ固定しない。
 
 三面図は形状の資料、集合図は人物の識別と相対的な身長の資料として使う。衣装の紐やポケット、関節位置はモデル化時に各視点でそろえる。建物の断面図は配置の資料であり、寸法図ではない。
+
+追加の三面図は集合図を参照して制作した。正面・背面では腕を開き、側面では下ろしているため、腕を含む全身の輪郭を三方向でそのまま重ねることはできない。頭身や身長は制作時の目標値であり、画像が実寸や統計を示すものではない。凛の成長後の姿と、ほかの住人の加齢後の姿は、この一組の三面図には含まない。
 
 小物シートは一枚の透過画像。物ごとの切り出し済みスプライトや、3DモデルのUVテクスチャではない。

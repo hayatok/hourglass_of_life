@@ -1,0 +1,222 @@
+{
+  "asset": "CH_Tomo",
+  "fps": 30,
+  "time_unit": "seconds from clip start",
+  "clips": [
+    {
+      "name": "eat",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {
+        "sip": 1.2
+      },
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "idle",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "rest",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 90,
+      "length_s": 3.0,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false,
+      "intentional_hold_pose": true
+    },
+    {
+      "name": "sit_talk",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "sleep",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 90,
+      "length_s": 3.0,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "talk",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "walk",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 26,
+      "length_s": 0.8667,
+      "loop": true,
+      "events_s": {
+        "footstep.L": 0.0,
+        "footstep.R": 0.4333
+      },
+      "speed_mps": 2.1366055203335628,
+      "blend_direction": "forward",
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": true
+    },
+    {
+      "name": "wave",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 60,
+      "length_s": 2.0,
+      "loop": false,
+      "events_s": {
+        "greeting": 0.5
+      },
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "work",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 60,
+      "length_s": 2.0,
+      "loop": true,
+      "events_s": {
+        "contact.L": 0.5,
+        "contact.R": 1.5
+      },
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    }
+  ],
+  "note": "events come from pose markers on each action; loop/speed/root_motion from action custom properties",
+  "locomotion_measurement": {
+    "fps": 30,
+    "cycle_seconds": 0.8666666666666667,
+    "method": "Mean backward foot-joint velocity in target low-support window (within40mm of each foot minimum).",
+    "support_samples": [
+      {
+        "side": "L",
+        "frame": 7,
+        "velocity_m_s": 0.5775967240333557,
+        "height_m": 0.14948418736457825
+      },
+      {
+        "side": "L",
+        "frame": 8,
+        "velocity_m_s": 1.1407470703125,
+        "height_m": 0.14812606573104858
+      },
+      {
+        "side": "L",
+        "frame": 9,
+        "velocity_m_s": 1.6661694645881653,
+        "height_m": 0.1453057825565338
+      },
+      {
+        "side": "L",
+        "frame": 10,
+        "velocity_m_s": 2.118043899536133,
+        "height_m": 0.14087161421775818
+      },
+      {
+        "side": "L",
+        "frame": 11,
+        "velocity_m_s": 2.4523240327835083,
+        "height_m": 0.13492202758789062
+      },
+      {
+        "side": "L",
+        "frame": 12,
+        "velocity_m_s": 2.628163956105709,
+        "height_m": 0.13769307732582092
+      },
+      {
+        "side": "L",
+        "frame": 13,
+        "velocity_m_s": 4.373193271458149,
+        "height_m": 0.12000009417533875
+      },
+      {
+        "side": "R",
+        "frame": 0,
+        "velocity_m_s": 4.37319366261363,
+        "height_m": 0.12000009417533875
+      },
+      {
+        "side": "R",
+        "frame": 20,
+        "velocity_m_s": 0.5775967240333557,
+        "height_m": 0.14906015992164612
+      },
+      {
+        "side": "R",
+        "frame": 21,
+        "velocity_m_s": 1.1407470703125,
+        "height_m": 0.1477234959602356
+      },
+      {
+        "side": "R",
+        "frame": 22,
+        "velocity_m_s": 1.6661694645881653,
+        "height_m": 0.14506390690803528
+      },
+      {
+        "side": "R",
+        "frame": 23,
+        "velocity_m_s": 2.118043899536133,
+        "height_m": 0.14085653424263
+      },
+      {
+        "side": "R",
+        "frame": 24,
+        "velocity_m_s": 2.4523240327835083,
+        "height_m": 0.13497984409332275
+      },
+      {
+        "side": "R",
+        "frame": 25,
+        "velocity_m_s": 2.6281640119850636,
+        "height_m": 0.1379019320011139
+      }
+    ],
+    "speed_mps": 2.1366055203335628,
+    "limitation": "Playback best fit only; variable inherited stance velocity does not prove zero sliding."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "retrieved_utc": "2026-11-04T22:07:10.213558+00:00",
+  "catalog": "https://mocap.cs.cmu.edu/search.php?subjectnumber=79",
+  "terms": "https://mocap.cs.cmu.edu/",
+  "transport": "Original public HTTP endpoint; HTTPS certificate verification failed. No certificate checks disabled.",
+  "files": [
+    {
+      "path": "assets/motion-sources/cmu/79.asf",
+      "url": "http://mocap.cs.cmu.edu/subjects/79/79.asf",
+      "bytes": 7257
+    },
+    {
+      "path": "assets/motion-sources/cmu/79_10.amc",
+      "url": "http://mocap.cs.cmu.edu/subjects/79/79_10.amc",
+      "bytes": 532956
+    },
+    {
+      "path": "assets/motion-sources/cmu/79_13.amc",
+      "url": "http://mocap.cs.cmu.edu/subjects/79/79_13.amc",
+      "bytes": 500815
+    },
+    {
+      "path": "assets/motion-sources/cmu/79_23.amc",
+      "url": "http://mocap.cs.cmu.edu/subjects/79/79_23.amc",
+      "bytes": 550947
+    },
+    {
+      "path": "assets/motion-sources/cmu/79_25.amc",
+      "url": "http://mocap.cs.cmu.edu/subjects/79/79_25.amc",
+      "bytes": 486332
+    },
+    {
+      "path": "assets/motion-sources/cmu/79_42.amc",
+      "url": "http://mocap.cs.cmu.edu/subjects/79/79_42.amc",
+      "bytes": 603349
+    }
+  ],
+  "scope": "Selected source data only; no target retarget, contact or natural-animation acceptance."
+}

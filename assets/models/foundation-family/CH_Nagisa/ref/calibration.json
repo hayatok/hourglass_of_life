@@ -1,0 +1,339 @@
+{
+  "source": "ref/turnaround-v1.png",
+  "source_size_px": [
+    1536,
+    1024
+  ],
+  "height_m": 1.65,
+  "hair_crown_y": 14,
+  "ground_y": 989,
+  "m_per_px": 0.0016923076923076922,
+  "landmarks_front": {
+    "hair_crown": [
+      318,
+      14
+    ],
+    "chin": [
+      318,
+      164
+    ],
+    "hair_lower_edge": [
+      318,
+      174
+    ],
+    "eye_left": [
+      298,
+      106
+    ],
+    "eye_right": [
+      345,
+      105
+    ],
+    "mouth_center": [
+      320,
+      143
+    ],
+    "collar_center": [
+      319,
+      193
+    ],
+    "shoulder_left": [
+      232,
+      210
+    ],
+    "shoulder_right": [
+      405,
+      210
+    ],
+    "elbow_left": [
+      169,
+      350
+    ],
+    "elbow_right": [
+      466,
+      351
+    ],
+    "wrist_left": [
+      128,
+      447
+    ],
+    "wrist_right": [
+      511,
+      447
+    ],
+    "fingertip_left": [
+      86,
+      523
+    ],
+    "fingertip_right": [
+      551,
+      522
+    ],
+    "waist_center": [
+      320,
+      363
+    ],
+    "hem_left": [
+      186,
+      605
+    ],
+    "hem_right": [
+      446,
+      605
+    ],
+    "shoe_sole_left": [
+      251,
+      989
+    ],
+    "shoe_sole_right": [
+      384,
+      989
+    ]
+  },
+  "ratios": {
+    "head_heights": 6.5,
+    "head_height_over_height": 0.15384615384615385,
+    "hair_width_over_height": 0.1641025641025641,
+    "shoulder_joint_width_over_height": 0.17743589743589744,
+    "waist_width_over_height": 0.14358974358974358,
+    "apron_hem_width_over_height": 0.26666666666666666,
+    "apron_hem_height_over_height": 0.38564102564102565,
+    "waist_height_over_height": 0.642051282051282,
+    "wrist_height_over_height": 0.5558974358974359,
+    "hand_tip_span_over_height": 0.47692307692307695,
+    "trouser_hem_width_over_height": 0.0758974358974359,
+    "shoe_front_width_over_height": 0.06666666666666667,
+    "shoe_side_length_over_height": 0.1517948717948718,
+    "upper_forearm_width_over_height": 0.0441025641025641
+  },
+  "views": {
+    "front": {
+      "box": [
+        60,
+        0,
+        580,
+        1004
+      ],
+      "axis_source_x": 318,
+      "azimuth": 0,
+      "axis_col": 258,
+      "ground_row": 989,
+      "m_per_px": 0.0016923076923076922,
+      "matte_bbox_px": [
+        21,
+        13,
+        495,
+        988
+      ],
+      "width_bands": [
+        {
+          "height_fraction_from_top": 0.05,
+          "row": 63,
+          "width_px": 131
+        },
+        {
+          "height_fraction_from_top": 0.15,
+          "row": 160,
+          "width_px": 113
+        },
+        {
+          "height_fraction_from_top": 0.25,
+          "row": 258,
+          "width_px": 249
+        },
+        {
+          "height_fraction_from_top": 0.35,
+          "row": 355,
+          "width_px": 336
+        },
+        {
+          "height_fraction_from_top": 0.45,
+          "row": 453,
+          "width_px": 435
+        },
+        {
+          "height_fraction_from_top": 0.55,
+          "row": 550,
+          "width_px": 244
+        },
+        {
+          "height_fraction_from_top": 0.65,
+          "row": 648,
+          "width_px": 199
+        },
+        {
+          "height_fraction_from_top": 0.75,
+          "row": 745,
+          "width_px": 199
+        },
+        {
+          "height_fraction_from_top": 0.85,
+          "row": 843,
+          "width_px": 207
+        },
+        {
+          "height_fraction_from_top": 0.95,
+          "row": 940,
+          "width_px": 198
+        }
+      ],
+      "lens_mm": 0,
+      "elevation": 0
+    },
+    "side": {
+      "box": [
+        635,
+        0,
+        900,
+        1004
+      ],
+      "axis_source_x": 746,
+      "azimuth": 270,
+      "axis_col": 111,
+      "ground_row": 989,
+      "m_per_px": 0.0016923076923076922,
+      "matte_bbox_px": [
+        25,
+        12,
+        218,
+        988
+      ],
+      "width_bands": [
+        {
+          "height_fraction_from_top": 0.05,
+          "row": 63,
+          "width_px": 144
+        },
+        {
+          "height_fraction_from_top": 0.15,
+          "row": 160,
+          "width_px": 112
+        },
+        {
+          "height_fraction_from_top": 0.25,
+          "row": 258,
+          "width_px": 137
+        },
+        {
+          "height_fraction_from_top": 0.35,
+          "row": 355,
+          "width_px": 108
+        },
+        {
+          "height_fraction_from_top": 0.45,
+          "row": 453,
+          "width_px": 170
+        },
+        {
+          "height_fraction_from_top": 0.55,
+          "row": 550,
+          "width_px": 172
+        },
+        {
+          "height_fraction_from_top": 0.65,
+          "row": 648,
+          "width_px": 117
+        },
+        {
+          "height_fraction_from_top": 0.75,
+          "row": 745,
+          "width_px": 108
+        },
+        {
+          "height_fraction_from_top": 0.85,
+          "row": 843,
+          "width_px": 95
+        },
+        {
+          "height_fraction_from_top": 0.95,
+          "row": 940,
+          "width_px": 106
+        }
+      ],
+      "lens_mm": 0,
+      "elevation": 0
+    },
+    "back": {
+      "box": [
+        950,
+        0,
+        1490,
+        1004
+      ],
+      "axis_source_x": 1217,
+      "azimuth": 180,
+      "axis_col": 267,
+      "ground_row": 989,
+      "m_per_px": 0.0016923076923076922,
+      "matte_bbox_px": [
+        31,
+        13,
+        503,
+        988
+      ],
+      "width_bands": [
+        {
+          "height_fraction_from_top": 0.05,
+          "row": 63,
+          "width_px": 131
+        },
+        {
+          "height_fraction_from_top": 0.15,
+          "row": 160,
+          "width_px": 114
+        },
+        {
+          "height_fraction_from_top": 0.25,
+          "row": 258,
+          "width_px": 249
+        },
+        {
+          "height_fraction_from_top": 0.35,
+          "row": 355,
+          "width_px": 337
+        },
+        {
+          "height_fraction_from_top": 0.45,
+          "row": 453,
+          "width_px": 434
+        },
+        {
+          "height_fraction_from_top": 0.55,
+          "row": 550,
+          "width_px": 243
+        },
+        {
+          "height_fraction_from_top": 0.65,
+          "row": 648,
+          "width_px": 204
+        },
+        {
+          "height_fraction_from_top": 0.75,
+          "row": 745,
+          "width_px": 202
+        },
+        {
+          "height_fraction_from_top": 0.85,
+          "row": 843,
+          "width_px": 206
+        },
+        {
+          "height_fraction_from_top": 0.95,
+          "row": 940,
+          "width_px": 203
+        }
+      ],
+      "lens_mm": 0,
+      "elevation": 0
+    }
+  },
+  "measurement_note": "Hand-measured image landmarks, approximate orthographic AI turnaround. 2-4px landmark uncertainty; silhouette mattes use row-local background contrast and erase the printed floor line.",
+  "prompt_vs_image": "Prompt intent was 5.3 heads; measured front crown-to-chin is 6.5 heads. Parent approved using actual image proportions without enlarging the head.",
+  "inferred": [
+    "Crotch/knee centres behind apron and loose trousers",
+    "Underlying torso/back anatomy",
+    "Side reference neutral root axis at source x746",
+    "Exact camera lens: orthographic approximation",
+    "Front/back A-pose vs side relaxed-arm pose inconsistency"
+  ]
+}

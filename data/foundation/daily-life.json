@@ -1,0 +1,394 @@
+{
+  "schema": 1,
+  "note": "Authored fictional household day for G1. Physiological coefficients and action durations are game rules, not medical or behavioural estimates. Ages, skills and unchanged routines come from data/residents.json. Offsite work/school/shopping are explicit boundary abstractions; no shop/school interior is simulated here.",
+  "start_minute": 240,
+  "weekday": 0,
+  "resident_source": "res://data/residents.json",
+  "initial_needs": {
+    "hunger": 0.45,
+    "fatigue": 0.32,
+    "hygiene": 0.3,
+    "bladder": 0.32,
+    "quiet": 0.25
+  },
+  "initial_inventory": {
+    "ingredients": 9,
+    "prepared_servings": 0,
+    "table_servings": 0,
+    "clean_dishes": 6,
+    "dirty_dishes": 0,
+    "dirty_laundry": 3,
+    "wet_laundry": 0,
+    "clean_laundry": 6,
+    "clean_towels": 6,
+    "dirty_towels": 0,
+    "wet_towels": 0,
+    "dry_towels": 0
+  },
+  "initial_cash": 35.0,
+  "passive_per_minute": {
+    "hunger": 0.0011,
+    "fatigue": 0.00045,
+    "hygiene": 0.00035,
+    "bladder": 0.00145,
+    "quiet": 0.0002
+  },
+  "arrival_distance": 0.18,
+  "recipe_servings": 3,
+  "shopping_units": 6,
+  "shopping_cost": 6.0,
+  "wash_cycle_minutes": 45,
+  "drying_minutes": 180,
+  "routine_actions": {
+    "sleep": "sleep",
+    "bakery_shift": "work",
+    "remote_work": "work",
+    "school": "school",
+    "after_school_care": "care",
+    "after_school_home": "quiet"
+  },
+  "meal_windows": [
+    [
+      240,
+      510
+    ],
+    [
+      690,
+      840
+    ],
+    [
+      1050,
+      1230
+    ]
+  ],
+  "actions": {
+    "cook": {
+      "label": "食事を作る",
+      "min_age": 13,
+      "shared": true,
+      "phases": [
+        {
+          "name": "材料を取り出して確かめる",
+          "fixture": "fridge",
+          "minutes": 2
+        },
+        {
+          "name": "野菜に切れ目を入れる",
+          "fixture": "prep",
+          "minutes": 6
+        },
+        {
+          "name": "火を使って調理する",
+          "fixture": "stove",
+          "minutes": 12
+        }
+      ]
+    },
+    "serve": {
+      "label": "食卓に料理を運ぶ",
+      "min_age": 13,
+      "shared": true,
+      "phases": [
+        {
+          "name": "料理と器を用意する",
+          "fixture": "stove",
+          "minutes": 2
+        },
+        {
+          "name": "食卓に配る",
+          "fixture": "dining_table",
+          "minutes": 3
+        }
+      ]
+    },
+    "eat": {
+      "label": "食事をする",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "席で食べる",
+          "fixture": "$dining_seat",
+          "minutes": 12,
+          "need_delta": {
+            "hunger": -0.055
+          }
+        }
+      ]
+    },
+    "wash_dishes": {
+      "label": "食器を洗う",
+      "min_age": 10,
+      "shared": true,
+      "phases": [
+        {
+          "name": "食器を洗う",
+          "fixture": "sink",
+          "minutes": 6
+        }
+      ]
+    },
+    "toilet": {
+      "label": "トイレを使う",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "用を足す",
+          "fixture": "toilet",
+          "minutes": 5,
+          "need_delta": {
+            "bladder": -0.18
+          }
+        }
+      ]
+    },
+    "hygiene": {
+      "label": "顔と手を洗う",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "顔と手を洗う",
+          "fixture": "washbasin",
+          "minutes": 4,
+          "need_delta": {
+            "hygiene": -0.025
+          }
+        }
+      ]
+    },
+    "bath": {
+      "label": "入浴する",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "着替えを準備して脱ぐ",
+          "fixture": "changing_space",
+          "minutes": 2
+        },
+        {
+          "name": "体を洗う",
+          "fixture": "shower",
+          "minutes": 8,
+          "need_delta": {
+            "hygiene": -0.055
+          },
+          "keep_carried": true
+        },
+        {
+          "name": "湯につかる",
+          "fixture": "bath",
+          "minutes": 7,
+          "need_delta": {
+            "hygiene": -0.025
+          },
+          "keep_carried": true
+        },
+        {
+          "name": "体を拭いて着替える",
+          "fixture": "changing_space",
+          "minutes": 3
+        }
+      ]
+    },
+    "sleep": {
+      "label": "寝床で眠る",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "眠る",
+          "fixture": "$bed",
+          "minutes": 60,
+          "need_delta": {
+            "fatigue": -0.0038,
+            "quiet": -0.0005
+          }
+        }
+      ]
+    },
+    "quiet": {
+      "label": "自分の時間を過ごす",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "静かに好きなことをする",
+          "fixture": "$quiet",
+          "minutes": 25,
+          "need_delta": {
+            "quiet": -0.005,
+            "fatigue": -0.0003
+          }
+        }
+      ]
+    },
+    "care": {
+      "label": "子どもと過ごす",
+      "min_age": 13,
+      "phases": [
+        {
+          "name": "一緒に過ごす",
+          "fixture": "sofa",
+          "minutes": 25,
+          "need_delta": {
+            "quiet": 0.0003
+          }
+        }
+      ]
+    },
+    "work": {
+      "label": "仕事をする",
+      "min_age": 16,
+      "phases": [
+        {
+          "name": "勤務する",
+          "fixture": "$work",
+          "minutes": 60,
+          "need_delta": {
+            "fatigue": 0.0003
+          }
+        }
+      ]
+    },
+    "school": {
+      "label": "学校で過ごす",
+      "min_age": 5,
+      "phases": [
+        {
+          "name": "学校で過ごす",
+          "fixture": "$outside",
+          "minutes": 60,
+          "need_delta": {
+            "fatigue": 0.0002
+          }
+        }
+      ]
+    },
+    "return_home": {
+      "label": "帰宅する",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "家に入る",
+          "fixture": "$entrance",
+          "minutes": 1
+        }
+      ]
+    },
+    "wait_outside": {
+      "label": "帰宅予定を待つ",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "外出先で過ごす",
+          "fixture": "$outside",
+          "minutes": 10
+        }
+      ]
+    },
+    "shop": {
+      "label": "食材を買い足す",
+      "min_age": 13,
+      "shared": true,
+      "phases": [
+        {
+          "name": "外で食材を購入する",
+          "fixture": "$outside",
+          "minutes": 25
+        },
+        {
+          "name": "食材を冷蔵庫へしまう",
+          "fixture": "fridge",
+          "minutes": 2
+        }
+      ]
+    },
+    "laundry": {
+      "label": "洗濯機に衣類を入れる",
+      "min_age": 13,
+      "shared": true,
+      "phases": [
+        {
+          "name": "洗濯物を集める",
+          "fixture": "linen_storage",
+          "minutes": 2
+        },
+        {
+          "name": "洗濯機に入れて運転を始める",
+          "fixture": "washer",
+          "minutes": 3
+        }
+      ]
+    },
+    "hang_laundry": {
+      "label": "洗濯物を干す",
+      "min_age": 13,
+      "shared": true,
+      "phases": [
+        {
+          "name": "洗い終わった衣類を取り出す",
+          "fixture": "washer",
+          "minutes": 2
+        },
+        {
+          "name": "干す",
+          "fixture": "$drying_rack",
+          "minutes": 5
+        }
+      ]
+    },
+    "fold_laundry": {
+      "label": "乾いた衣類をしまう",
+      "min_age": 8,
+      "shared": true,
+      "phases": [
+        {
+          "name": "衣類をたたんで収納する",
+          "fixture": "linen_storage",
+          "minutes": 5
+        }
+      ]
+    },
+    "family_time": {
+      "label": "家族の誘いに応じて一緒に過ごす",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "家族と同じ場で過ごす",
+          "fixture": "sofa",
+          "minutes": 25,
+          "need_delta": {
+            "quiet": -0.002
+          }
+        }
+      ]
+    },
+    "personal_project": {
+      "label": "自分の制作を進める",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "手元のノートや制作に取り組む",
+          "fixture": "$quiet",
+          "minutes": 15,
+          "need_delta": {
+            "quiet": -0.003,
+            "fatigue": 0.0002
+          }
+        }
+      ]
+    },
+    "tidy_tools": {
+      "label": "自分の使った道具を片付ける",
+      "min_age": 5,
+      "phases": [
+        {
+          "name": "使った物をまとめて片付ける",
+          "fixture": "$quiet",
+          "minutes": 5
+        }
+      ]
+    }
+  },
+  "inventory_semantics": "Laundry counts are total textile items; *_towels are subsets. Washing/drying machine contents retain their towel subtype so a used towel can return to the clean towel supply.",
+  "biography_source": "res://data/foundation/ogawa-biographies.json",
+  "recipe_id": "scored_vegetable_soup",
+  "recipe_preparation": "score_connected"
+}

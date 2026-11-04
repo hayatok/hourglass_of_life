@@ -9,20 +9,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Verify human-motion source parsing and kinematics
+        run: python3 -m unittest discover -s tests -p 'test_cmu_*.py'
       - name: Install Godot 4.7.2
         run: |
           curl -fL --retry 3 -o /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
           unzip -q /tmp/godot.zip -d /tmp/godot
           sudo install /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 /usr/local/bin/godot
-      - name: Import editable project
-        run: godot --headless --editor --import --path .
-      - name: Simulate invitations, overnight schedules and save continuity
-        run: godot --headless --path . --script tests/test_simulation.gd
-      - name: Simulate promises, social history, habits and save migration
-        run: godot --headless --path . --script tests/test_social_life.gd
-      - name: Simulate work, household expenses, care handover and joint projects
-        run: godot --headless --path . --script tests/test_work_family.gd
-      - name: Simulate years, changing roles, inheritance and farewell
-        run: godot --headless --path . --script tests/test_life_course.gd
+      - name: Verify simulation, character imports, furniture contacts, growth and aging with strict engine logs
+        run: python3 tools/verify_game.py --godot godot
       - name: Boot the complete scene
         run: godot --headless --path . --quit-after 10
+      - name: Retain engine verification logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine-verification
+          path: |
+            builds/verification/
+            builds/resident-motor/*.json
+            builds/foundation-home/*.json
+            builds/sewing-integration/*.json
+            builds/sewing-presentation/*.json
+            builds/sewing-rigs/*.json
+            builds/autonomy/*.json
+            builds/weather/*.json
+            builds/weather-presentation/*.json
+            builds/tabletop-presentation/*.json
+            builds/interaction-presentation/*.json
+            builds/foot-plant/*.json
+            builds/social-motion/*.json
+            builds/haru-jrpg-gameplay/*.json
+            builds/jrpg-renewal-gameplay/*.json

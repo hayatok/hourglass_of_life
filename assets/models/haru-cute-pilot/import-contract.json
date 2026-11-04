@@ -1,0 +1,240 @@
+{
+  "status": "Body candidate r3 installed after r2 texture deduplication and r3 LOD seam correction. LOD0/raw immutable. Current runtime eye shader supports Blink/TiredEyes; Smile, full facial controls, hair aging and gait sliding remain separate acceptance work.",
+  "delivery_route": "Tripo through the user-authorized Chrome browser; no CLI or direct API execution",
+  "resident": {
+    "id": "haru",
+    "name": "瀬戸 晴",
+    "age": 25
+  },
+  "reference": {
+    "path": "assets/artwork/cute-cast-pilot/haru-concept-v2-jrpg.png",
+    "sha256": "116ac6bfba46ff1fe5cf0679020c1e4f19b5e65e5994475c29ce7ae7aedb7875",
+    "selection": "current selected 2D candidate, v2",
+    "view": "single full-body front A-pose",
+    "style": "anime JRPG linework and cel shading; approximately six-head adult proportions",
+    "direction": "Closer to Trails in the Sky, as requested; preserve the original Haru identity and outfit"
+  },
+  "source_rig": {
+    "path": "game/assets/models/aoi/CH_Aoi.glb",
+    "sha256": "ea3bcb9fb855a60b8ad664b3fcb59bf3729d75d0d2c2c7cb8cc73d5762e10ba0",
+    "bones": [
+      "DEF-root",
+      "DEF-pelvis",
+      "DEF-apron_back",
+      "DEF-apron_front",
+      "DEF-spine_01",
+      "DEF-spine_02",
+      "DEF-chest",
+      "DEF-clavicle.L",
+      "DEF-upper_arm.L",
+      "DEF-forearm.L",
+      "DEF-hand.L",
+      "DEF-finger0.L",
+      "DEF-finger1.L",
+      "DEF-finger2.L",
+      "DEF-finger3.L",
+      "DEF-finger4.L",
+      "DEF-clavicle.R",
+      "DEF-upper_arm.R",
+      "DEF-forearm.R",
+      "DEF-hand.R",
+      "DEF-finger0.R",
+      "DEF-finger1.R",
+      "DEF-finger2.R",
+      "DEF-finger3.R",
+      "DEF-finger4.R",
+      "DEF-neck",
+      "DEF-head",
+      "DEF-thigh.L",
+      "DEF-shin.L",
+      "DEF-foot.L",
+      "DEF-toe.L",
+      "DEF-thigh.R",
+      "DEF-shin.R",
+      "DEF-foot.R",
+      "DEF-toe.R"
+    ]
+  },
+  "required_clips": [
+    "eat",
+    "idle",
+    "rest",
+    "sit_talk",
+    "sleep",
+    "talk",
+    "walk",
+    "wave",
+    "work"
+  ],
+  "face_blend_shapes": [
+    "Blink",
+    "Smile",
+    "Sad",
+    "Tired",
+    "LookLeft",
+    "LookRight"
+  ],
+  "contact_roles": {
+    "pelvis": "DEF-pelvis",
+    "head": "DEF-head",
+    "left_upper_arm": "DEF-upper_arm.L",
+    "left_forearm": "DEF-forearm.L",
+    "left_hand": "DEF-hand.L",
+    "right_upper_arm": "DEF-upper_arm.R",
+    "right_forearm": "DEF-forearm.R",
+    "right_hand": "DEF-hand.R",
+    "left_thigh": "DEF-thigh.L",
+    "left_shin": "DEF-shin.L",
+    "left_foot": "DEF-foot.L",
+    "right_thigh": "DEF-thigh.R",
+    "right_shin": "DEF-shin.R",
+    "right_foot": "DEF-foot.R"
+  },
+  "material_requirements": [
+    "Keep the generated texture atlas and its UVs; do not apply the old eight-by-eight Haru palette swatch replacements.",
+    "Disable the current hair_cells aging remap until a real hair mask or separate hair material exists.",
+    "A separate skinned Face mesh with the six controls is needed to retain current expressions without a runtime adapter."
+  ],
+  "lod_requirements": [
+    "Reuse one skeleton and animation clock; preserve skin bind names/order/rest poses.",
+    "LOD1/LOD2 mesh part names, surface counts and blend-shape names/counts must match LOD0.",
+    "Native GLB import alone does not satisfy the existing contact, face or LOD contract."
+  ],
+  "proposed_geometry_budget": {
+    "lod0_target_triangles": 12000,
+    "lod1_target_triangles": 6000,
+    "lod2_target_triangles": 2000,
+    "status": "Historical 12k/6k/2k targets were not adopted in r1. Actual compatible LODs are 29046/12199/3485 triangles; performance acceptance remains separate.",
+    "source_generation_setting_triangles": 30000
+  },
+  "rejected_references": [
+    {
+      "path": "assets/artwork/cute-cast-pilot/haru-concept-v1.png",
+      "sha256": "33c81892f070e2fa84d406b6f9c704742a0cb541690bd208447426a42a0491b2",
+      "selection": "rejected direction, v1",
+      "reason": "rounded rendered-3D style and five-head proportions were superseded by the anime JRPG direction"
+    }
+  ],
+  "chrome_generation_setup": {
+    "provenance": "Main agent observation in the logged-in Chrome session, reported with the v2 selection",
+    "model_display": "H3.1",
+    "source_triangle_setting": 30000,
+    "texture_resolution_display": "2K",
+    "texture_enabled": true,
+    "pbr_enabled": true,
+    "ultra_enabled": false,
+    "visibility": "private",
+    "displayed_estimate_credits": 30,
+    "displayed_balance_at_check": 2925,
+    "paid_generation_clicked": true,
+    "generation_approval": "explicitly approved 30 credits",
+    "actual_credits_consumed": 30,
+    "result_glb": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+    "task_id": "5b0ff371-e44b-44b0-be05-f1433d089f00",
+    "browser_balance_after": 2895,
+    "remove_lighting_enabled": true
+  },
+  "raw_result": {
+    "path": "assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb",
+    "sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
+    "bytes": 3247068,
+    "triangles": 29046,
+    "vertices": 17990,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "texture_dimensions": [
+      2048,
+      2048
+    ],
+    "skins": 0,
+    "animations": 0,
+    "shape_keys": 0
+  },
+  "raw_review": {
+    "master_blend": "builds/haru-cute-pilot/CH_Haru_JRPG_Pilot_Review.blend",
+    "reference_calibration": "ref/calibration.json",
+    "source_geometry_unchanged": true,
+    "bbox_aligned_silhouette_iou": 0.875,
+    "world_registered_silhouette_iou": 0.8758,
+    "maximum_band_width_difference_as_fraction_of_height": 0.0352,
+    "full_hand_span_relative_width_excess": 0.0639,
+    "decision": "base mesh candidate; forms tolerance 0.90 not passed; local hand/proportion review and rig work still required",
+    "unseen_regions": "side and back are generated inference, not reference-confirmed"
+  },
+  "derived_result": {
+    "revision": "r1",
+    "production_path": "game/assets/models/haru/CH_Haru.glb",
+    "exported_glb_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+    "canonical_rest_height_m": 1.71,
+    "lod_triangles": [
+      29046,
+      12199,
+      3485
+    ],
+    "lod_sha256": {
+      "CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+      "CH_Haru_LOD1.glb": "917e61f778152b1e1a38ca523252a30a4aa0b2641065a9ac79bbd89344f14c4a",
+      "CH_Haru_LOD2.glb": "e3ca45b3b4e9af9470a7db5b0c99940e25c29a98227ef8400d2aa35dc061060b"
+    },
+    "max_weights_per_vertex": 4,
+    "unweighted_vertices": 0,
+    "uvs_unchanged": true,
+    "original_embedded_images_preserved": true,
+    "face_controls": {
+      "supported": false,
+      "names": [],
+      "reason": "Generated face is painted onto the single body atlas. No separated eyelids/iris/mouth control exists; static atlas is an explicit intermediate capability."
+    },
+    "hair_aging_supported": false,
+    "walk_speed_m_s": 1.7963240295648575,
+    "walk_speed_method": "review/walk-measurement.json",
+    "forms_gate": {
+      "bbox_iou": 0.9252,
+      "bbox_max_band_width_difference": 0.0235,
+      "world_iou": 0.917,
+      "world_max_band_width_difference": 0.0114,
+      "reference_threshold_unchanged": true
+    },
+    "roundtrip_check": "review/roundtrip-check.json",
+    "deformation_sheet": "review/poses/extreme-pose-sheet.png",
+    "runtime_verification": "handled separately by gameplay/observation agents; no runtime acceptance inferred from Blender checks"
+  },
+  "production_assets_changed": true,
+  "production_core_changed_by_this_asset_task": false,
+  "current_geometry_revision": {
+    "revision": "r3-lod-seam-repair",
+    "source_lod0_sha256": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+    "lod_triangles": [
+      29046,
+      12190,
+      3482
+    ],
+    "lod_sha256": {
+      "CH_Haru.glb": "1fe9857d04300aee6de13d905f34a8ec86630bc0b86008f1095a908faf47b7cf",
+      "CH_Haru_LOD1.glb": "b2b5e85f8a09b138e2feb1b26cf34699bef6e67a8a072145e2a43095feca1df5",
+      "CH_Haru_LOD2.glb": "9cf96f9efefdb3b26e430d8d7410494b0d029f3fa74da97db2674c8b5aba6d59"
+    },
+    "distance_lod_images": 0,
+    "texture_memory_evidence": "review/r2/comparison.json",
+    "seam_repair_evidence": "review/lod-seams/notes.md",
+    "remaining_head_neck_unmatched_boundary_length_m": 0.00856693302853186,
+    "watertight_claim": false
+  },
+  "current_face_capabilities": {
+    "implementation": "UV shader, original atlas unchanged",
+    "supported_controls": [
+      "Blink",
+      "TiredEyes"
+    ],
+    "blend_shapes": [],
+    "unsupported_controls": [
+      "Smile",
+      "Sad",
+      "LookLeft",
+      "LookRight"
+    ],
+    "hair_aging": false,
+    "evidence": "review/godot/texture-eyes/"
+  }
+}

@@ -12,6 +12,7 @@ var chapter_ready: bool = false
 var chapter_acknowledged: bool = false
 var chapter_mode: String = "three_years"
 var final_reviewed: bool = false
+var _retirement_ages: Dictionary = {}
 
 const LEGACY_LABELS = {"nagisa":"季節のパンのレシピ", "ryo":"仕事と暮らしのスケッチ", "rin":"町の模型と作り方", "osamu":"ラジオと修理の記録", "fumi":"町の写真帖", "maho":"店に集まる人のノート", "ritsu":"音楽の録音とメモ", "aoi":"制作と暮らしの記録"}
 const NEXT_WISHES = {"nagisa":"家族の休日に焼くパンを考えたい", "ryo":"凛と、今の年齢ならではの町の模型を作りたい", "rin":"自分で見つけた町の好きな場所を模型にしたい", "osamu":"工房で、自分のためのものをもう一つ作りたい", "fumi":"以前の景色と今の景色を、一冊に並べたい", "maho":"初めて来た人の居場所になる店を続けたい", "ritsu":"暮らしの変わった友人にも聴いてもらえる曲を作りたい", "aoi":"町外の仕事の経験と、町で過ごす時間をつなぎたい"}
@@ -31,10 +32,11 @@ func reset() -> void:
 	chapter_mode = "three_years"
 	final_reviewed = false
 	for p in sim.people: upgrade_person(p)
+	_refresh_retirement_ages()
 
 func upgrade_person(p: Dictionary) -> void:
 	var d = sim.definitions[p.id]
-	var defaults = {"base_age":int(d.age_years),"alive":true,"stage":"initial","current_goal":d.goals[0],"goal_kind":"career" if p.id in ["ryo","maho"] else "creative","known_plans":[],"goal_history":[],"legacy_read_id":"","legacy_read_recorded":false,"household_override":"","career_retired":false,"inspiration":{}}
+	var defaults = {"base_age":int(d.age_years),"alive":true,"stage":"initial","current_goal":d.goals[0],"goal_kind":d.get("goal_kind","career" if p.id in ["ryo","maho"] else "creative"),"known_plans":[],"goal_history":[],"legacy_read_id":"","legacy_read_recorded":false,"household_override":"","career_retired":false,"inspiration":{}}
 	for key in defaults:
 		if not p.has(key): p[key] = defaults[key]
 
@@ -58,6 +60,7 @@ func routines(p: Dictionary) -> Array:
 		result.append({"id":"sleep","on_days":[0,1,2,3,4,5,6],"start_minute":1380,"duration_minutes":480,"place":"home"})
 	for r in sim.definitions[p.id].routines:
 		if p.career_retired and r.id in ["bakery_shift","remote_work","cafe_shift","night_shift","post_shift_sleep","off_shift_sleep","school"]: continue
+		if p.career_retired and sim.definitions[p.id].has("retirement") and r.get("action","")=="work": continue
 		if p.id=="osamu" and p.stage=="retired" and r.id=="workshop": continue
 		if p.id=="ryo" and sim.person("rin").age>=config.care_independence_age and r.id=="after_school_care": continue
 		if p.id=="rin" and p.age>=config.care_independence_age:
@@ -94,7 +97,7 @@ func tick() -> void:
 			if p.id=="rin" and p.age>=22: p.occupation = "町の模型工房で働く人"
 			elif p.id=="rin" and p.age>=18: p.occupation = "町から専門学校へ通う学生"
 			elif p.id=="rin" and p.age>=12: p.occupation = "自分で過ごす時間が増えた生徒"
-			if p.age>=config.end_ages[p.id]:
+			if p.age>=_end_age(p):
 				_end_life(p)
 				continue
 			if p.goal_notified: _next_wish(p)
@@ -108,10 +111,10 @@ func tick() -> void:
 	if day>=config.transition_day and (day>config.transition_day or minute>=540):
 		if not "aoi_move" in applied: _move_aoi()
 		if not "osamu_retire" in applied: _retire_osamu()
-	for id in config.career_changes:
+	for id in _retirement_ages:
 		var p = sim.person(id)
 		if not is_alive(p): continue
-		var due = (int(config.career_changes[id])-int(p.base_age))*12
+		var due = (int(_retirement_ages[id])-int(p.base_age))*12
 		var key = "career_"+id
 		if day>=due-6 and not key in announced:
 			_announce(key,id,"仕事に使う時間を変えたい","次の春で定時の勤務を終え、自分の制作や身近な人との時間を増やすことにした。")
@@ -171,10 +174,11 @@ func _retire_osamu() -> void:
 	sim.town_changed.emit()
 
 func _next_wish(p: Dictionary) -> void:
+	var d: Dictionary = sim.definitions[p.id]
 	p.goal_history.append({"goal":p.current_goal,"progress":p.goal_progress,"minute":sim.elapsed,"reason":"新しい年"})
-	p.current_goal = NEXT_WISHES[p.id]
+	p.current_goal = d.get("next_wish",NEXT_WISHES.get(p.id,"自分の好きなことを、もう少し続けたい"))
 	if p.id=="aoi" and p.stage!="moved": p.current_goal = "直したラジオを通じて、もう少し道具のことを知りたい"
-	p.goal_kind = "model" if p.id=="ryo" else ("career" if not p.career_retired and p.id in ["maho","aoi"] and (p.id!="aoi" or p.stage=="moved") else "creative")
+	p.goal_kind = d.get("next_goal_kind","model" if p.id=="ryo" else ("career" if not p.career_retired and p.id in ["maho","aoi"] and (p.id!="aoi" or p.stage=="moved") else "creative"))
 	p.goal_progress = 0.0
 	p.goal_notified = false
 	sim._remember(p,"","次にやってみたいこと",p.current_goal,"new_wish")
@@ -190,31 +194,36 @@ func action_bonus(p: Dictionary, option: Dictionary) -> float:
 	return bonus
 
 func _retire_career(p: Dictionary, key: String) -> void:
+	var retirement: Dictionary = sim.definitions[p.id].get("retirement",{})
 	applied.append(key)
 	p.career_retired = true
 	p.goal_history.append({"goal":p.current_goal,"progress":p.goal_progress,"minute":sim.elapsed,"reason":"働く時間の変更"})
-	p.current_goal = "これまでの仕事や好きなことを、自分の手で記録にまとめたい" if p.id=="aoi" else NEXT_WISHES[p.id]
-	p.goal_kind = "model" if p.id=="ryo" else "creative"
+	p.current_goal = retirement.get("goal","これまでの仕事や好きなことを、自分の手で記録にまとめたい" if p.id=="aoi" else NEXT_WISHES.get(p.id,"自分の好きなことを、暮らしの記録にまとめたい"))
+	p.goal_kind = retirement.get("goal_kind","model" if p.id=="ryo" else "creative")
 	p.goal_progress = 0.0
 	p.goal_notified = false
 	p.routine_id = ""
 	p.remaining = 0
-	p.occupation = {"nagisa":"朝の製造担当を終え、好きなパンを焼く人","ryo":"定時の受注を終え、模型と暮らしを続ける人","maho":"定時勤務を終え、町の集まりを楽しむ人","ritsu":"夜勤を終え、音楽と自分の暮らしを続ける人","rin":"模型工房の定時勤務を終えた人","aoi":"町外の定時勤務を終え、日曜には帰省する人"}[p.id]
+	p.occupation = retirement.get("occupation",{"nagisa":"朝の製造担当を終え、好きなパンを焼く人","ryo":"定時の受注を終え、模型と暮らしを続ける人","maho":"定時勤務を終え、町の集まりを楽しむ人","ritsu":"夜勤を終え、音楽と自分の暮らしを続ける人","rin":"模型工房の定時勤務を終えた人","aoi":"町外の定時勤務を終え、日曜には帰省する人"}.get(p.id,"定時の仕事を終え、自分の暮らしを続ける人"))
 	sim._remember(p,"","働く時間を変えた","定時の勤務を終えた。これから何に時間を使うか、自分のペースで考えたい。","retirement")
 	_record(key,p.name+"の働き方が変わった","勤務に使っていた時間を、自分の取り組みや暮らしの時間として選べるようになった。")
 	sim.town_changed.emit()
 
 func goal_completed(p: Dictionary) -> void:
+	var d: Dictionary = sim.definitions[p.id]
 	var existing: Dictionary = {}
 	for item in legacy:
 		if item.owner==p.id:
 			existing = item
 			break
 	if existing.is_empty():
-		var place = "workshop" if p.id in ["aoi","osamu"] else ("bakery_cafe" if p.id in ["nagisa","maho"] else ("home_ogawa" if p.id in ["ryo","rin"] else "square"))
+		var place: String = d.get("legacy_place","workshop" if p.id in ["aoi","osamu"] else ("bakery_cafe" if p.id in ["nagisa","maho"] else ("home_ogawa" if p.id in ["ryo","rin"] else "square")))
 		var side = -1 if p.id in ["nagisa","ryo","osamu","fumi"] else 1
 		var center: Vector3 = sim.SITES[place]+Vector3(side*(2.7 if place=="square" else 1.7),0,4.6 if place=="square" else 1.3)
-		existing = {"id":"legacy_"+p.id,"owner":p.id,"label":LEGACY_LABELS[p.id],"place":place,"position":center,"created":sim.elapsed,"edition":0,"entries":[],"readers":[],"uses":0}
+		if d.has("legacy_offset"):
+			var offset: Array = d.legacy_offset
+			center = sim.SITES[place]+Vector3(float(offset[0]),float(offset[1]),float(offset[2]))
+		existing = {"id":"legacy_"+p.id,"owner":p.id,"label":d.get("legacy_label",LEGACY_LABELS.get(p.id,p.name+"の記録")),"place":place,"position":center,"created":sim.elapsed,"edition":0,"entries":[],"readers":[],"uses":0}
 		legacy.append(existing)
 	existing.edition += 1
 	existing.entries.append({"goal":p.current_goal,"minute":sim.elapsed})
@@ -239,7 +248,7 @@ func activity_tick(p: Dictionary) -> void:
 		item.uses += 1
 		p.legacy_read_recorded = true
 		p.private_project = minf(1,p.private_project+.05)
-		p.inspiration = {"kind":"photo" if item.owner=="fumi" else "hobby","source":item.owner,"title":item.label,"until":sim.elapsed+2880}
+		p.inspiration = {"kind":sim.definitions[item.owner].get("goal_activity","photo" if item.owner=="fumi" else "hobby"),"source":item.owner,"title":item.label,"until":sim.elapsed+2880}
 		sim._remember(p,item.owner,"誰かが残したものから","%sさんの%sを見た。作り方や、その人が気にかけていたことを、自分の取り組みの参考にしたい。"%[sim.person(item.owner).name,item.label],"inheritance")
 
 func _end_life(p: Dictionary) -> void:
@@ -252,6 +261,8 @@ func _end_life(p: Dictionary) -> void:
 	p.path.clear()
 	for m in sim.meetings.duplicate():
 		if p.id not in [m.a,m.b]: continue
+		if sim.planner!=null: sim.planner.finish(m,false)
+		if sim.agenda!=null: sim.agenda.finish(m,false)
 		for id in [m.a,m.b]:
 			var participant = sim.person(id)
 			participant.meeting_id = ""
@@ -283,6 +294,7 @@ func serialize() -> Dictionary:
 	return {"announced":announced,"applied":applied,"legacy":legacy,"chronicle":chronicle,"year_seen":year_seen,"chapter_ready":chapter_ready,"chapter_acknowledged":chapter_acknowledged,"chapter_mode":chapter_mode,"final_reviewed":final_reviewed}
 
 func restore(data: Dictionary) -> void:
+	_refresh_retirement_ages()
 	for p in sim.people: upgrade_person(p)
 	announced = data.get("announced",[])
 	applied = data.get("applied",[])
@@ -301,18 +313,29 @@ func restore(data: Dictionary) -> void:
 				if p.age>=22: p.occupation = "町の模型工房で働く人"
 				elif p.age>=18: p.occupation = "町から専門学校へ通う学生"
 				elif p.age>=12: p.occupation = "自分で過ごす時間が増えた生徒"
-			if p.age>=config.end_ages[p.id]: _end_life(p)
+			if p.age>=_end_age(p): _end_life(p)
 		if sim.day_index()>=config.transition_day:
 			# Apply new roles at resumption without inventing old announcements or encounters.
 			announced = ["aoi_move","osamu_retire"]
 			_move_aoi()
 			_retire_osamu()
-		for id in config.career_changes:
+		for id in _retirement_ages:
 			var p = sim.person(id)
-			if is_alive(p) and p.age>=config.career_changes[id]:
+			if is_alive(p) and p.age>=_retirement_ages[id]:
 				var key = "career_"+id
 				announced.append(key)
 				_retire_career(p,key)
 		if sim.day_index()>=config.chapter_review_day:
 			chapter_ready = true
 			chapter_mode = "resumed" if sim.people.any(func(p): return is_alive(p)) else "last"
+
+func _end_age(p: Dictionary) -> int:
+	return int(sim.definitions[p.id].get("end_age",config.end_ages.get(p.id,config.get("default_end_age",94))))
+
+func _refresh_retirement_ages() -> void:
+	# Keep the original eight residents' event order. New schedules follow the
+	# cast's authored order, and the derived table is rebuilt on reset/load.
+	_retirement_ages = config.career_changes.duplicate(true)
+	for p in sim.people:
+		var retirement: Dictionary = sim.definitions[p.id].get("retirement",{})
+		if retirement.has("age"): _retirement_ages[p.id] = int(retirement.age)

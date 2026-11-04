@@ -3,6 +3,21 @@ extends Node3D
 var resident_id: String = ""
 var last_position = Vector3.ZERO
 var animation_name: String = ""
+var jrpg: JrpgResidentModel
+var displayed_age := -1
+var displayed_model := ""
+var motion_initialized := false
+var walk_rate := 1.0
+var contacts: ResidentContacts
+var others: Dictionary = {}
+var greeted_meeting := ""
+var conversation_role := ""
+var appearance: Dictionary = {}
+static var appearance_definitions: Dictionary = {}
+static var variant_palettes: Dictionary = {}
+const LOD1_DISTANCE := 20.0
+const LOD2_DISTANCE := 34.0
+const LOD_HYSTERESIS := 3.0
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var visual: Node3D = $Visual
 @onready var name_label: Label3D = $Name
@@ -18,13 +33,27 @@ const COLORS = {
 	"ritsu": [Color("#35475c"),Color("#343d50"),Color("#242931"),Color("#35475c")],
 	"aoi": [Color("#647354"),Color("#4c4e4e"),Color("#332f2b"),Color("#647354")]
 }
+const MODELS = {
+	"nagisa": preload("res://game/scenes/characters/nagisa.tscn"),
+	"ryo": preload("res://game/scenes/characters/ryo.tscn"),
+	"rin": preload("res://game/scenes/characters/rin.tscn"),
+	"rin_adult": preload("res://game/scenes/characters/rin_adult.tscn"),
+	"osamu": preload("res://game/scenes/characters/osamu.tscn"),
+	"fumi": preload("res://game/scenes/characters/fumi.tscn"),
+	"maho": preload("res://game/scenes/characters/maho.tscn"),
+	"ritsu": preload("res://game/scenes/characters/ritsu.tscn"),
+	"aoi": preload("res://game/scenes/characters/aoi.tscn")
+}
 
 func configure(p: Dictionary) -> void:
 	resident_id = p.id
+	if appearance_definitions.is_empty():
+		appearance_definitions = JSON.parse_string(FileAccess.get_file_as_string("res://data/resident-appearance.json")).residents
+	appearance = appearance_definitions.get(p.id,{})
 	name_label.text = p.name
 	global_position = p.position
 	last_position = p.position
-	var palette: Array = COLORS[p.id]
+	var palette: Array = COLORS.get(p.id,COLORS.nagisa)
 	_recolor($Visual/Hips/Torso, palette[0])
 	_recolor($Visual/Hips/Pelvis, palette[1])
 	_recolor($Visual/Hips/LeftLeg/Thigh, palette[1])
@@ -36,11 +65,59 @@ func configure(p: Dictionary) -> void:
 	_recolor($Visual/Hips/Head/Hair, palette[2])
 	_recolor($Visual/Hips/Apron, palette[3])
 	$Visual/Hips/Apron.visible = p.id in ["nagisa","osamu","maho","rin"]
-	if p.id == "rin":
-		var growth = clampf(.72+(p.age-7)*.045,.72,1)
-		visual.scale = Vector3.ONE*growth
-		name_label.position.y = 2.1*growth
+	_update_body(p)
 	selection.visible = false
+
+func _update_body(p: Dictionary) -> void:
+	displayed_age = int(p.age)
+	var model_key: String = "rin_adult" if p.id=="rin" and p.age>=12 else p.id
+	var model_scene: PackedScene = MODELS.get(model_key)
+	if appearance.has("model_scene"): model_scene = load(appearance.model_scene)
+	if model_scene!=null:
+		$Visual/Hips.hide()
+		$AnimationPlayer.stop()
+		if model_key != displayed_model:
+			motion_initialized = false
+			if is_instance_valid(contacts):
+				contacts.detach();contacts.free()
+			if is_instance_valid(jrpg):
+				visual.remove_child(jrpg)
+				jrpg.queue_free()
+			jrpg = model_scene.instantiate()
+			visual.add_child(jrpg)
+			_apply_variant_palette()
+			animator = jrpg.animator
+			contacts = ResidentContacts.new();contacts.name = "Contacts";add_child(contacts)
+			contacts.bind_model(self,jrpg)
+			displayed_model = model_key
+			animation_name = ""
+		var growth := 1.0
+		if model_key=="rin": growth = clampf(1+(p.age-7)*.035,1,1.14)
+		if model_key=="rin_adult": growth = clampf(.88+(p.age-12)*.024,.88,1)
+		var body: Array = appearance.get("body_scale",[1,1,1])
+		visual.scale = Vector3(body[0],body[1],body[2])*growth
+		name_label.position.y = jrpg.rest_height*growth+.25
+		jrpg.set_age(int(p.age))
+
+func _apply_variant_palette() -> void:
+	if not jrpg.uses_palette_swatches(): return
+	if appearance.get("palette",{}).is_empty(): return
+	for material in jrpg.body_materials:
+		var original: Texture2D = material.get_shader_parameter("base_palette")
+		if original==null: continue
+		var key := resident_id+":"+original.resource_path
+		if not variant_palettes.has(key):
+			var source := original.get_image()
+			if source.is_compressed(): source.decompress()
+			var image := source.duplicate() as Image
+			var width := image.get_width()/8
+			var height := image.get_height()/8
+			for swatch in appearance.palette:
+				var index := int(swatch)
+				image.fill_rect(Rect2i((index%8)*width,(7-index/8)*height,width,height),Color(appearance.palette[swatch]))
+			image.generate_mipmaps()
+			variant_palettes[key] = ImageTexture.create_from_image(image)
+		material.set_shader_parameter("base_palette",variant_palettes[key])
 
 func _recolor(mesh: MeshInstance3D, color: Color) -> void:
 	var mat = mesh.material_override.duplicate() as StandardMaterial3D
@@ -48,32 +125,99 @@ func _recolor(mesh: MeshInstance3D, color: Color) -> void:
 	mesh.material_override = mat
 
 func update_state(p: Dictionary, delta: float, selected: bool) -> void:
+	if int(p.age)!=displayed_age: _update_body(p)
 	visible = p.get("alive",true) and (p.moving or not p.place.begins_with("off_map_"))
+	var previous_position := global_position
 	global_position = global_position.lerp(p.position, minf(1,delta*12))
+	var camera := get_viewport().get_camera_3d()
+	if camera!=null and visible: update_lod(camera.global_position.distance_to(global_position),selected)
+	var actual_speed := global_position.distance_to(previous_position)/maxf(delta,.0001)
 	var direction: Vector3 = p.position-last_position
 	if direction.length_squared()>.00001:
 		visual.rotation.y = lerp_angle(visual.rotation.y,atan2(direction.x,direction.z),minf(1,delta*12))
 	last_position = p.position
 	selection.visible = selected
 	name_label.modulate = Color("#fce7aa") if selected else Color("#fff6e2")
-	var wanted = "walk" if p.moving else "idle"
+	var activity := Sim.activities.for_person(p) if not p.moving else {}
+	var wanted := "walk" if p.moving else "idle"
+	var attention := Vector3.ZERO
+	var attend := false
+	conversation_role = ""
 	if not p.moving:
-		if p.action == "work" or p.action == "hobby" or p.action == "care":
-			wanted = "work"
-		elif p.action == "sleep":
-			wanted = "sleep"
-		elif p.action in ["meet","joint_work"]:
-			for meeting in Sim.meetings:
-				if meeting.id == p.meeting_id and meeting.state == "engaged":
-					wanted = "sit_talk" if meeting.location == "bench" else "talk"
-					if meeting.get("mode","")=="project": wanted = "work"
-					var other = Sim.person(meeting.b if meeting.a==p.id else meeting.a)
-					var toward: Vector3 = other.position-p.position
-					var face_angle = 0.0 if meeting.location=="bench" else atan2(toward.x,toward.z)
-					if meeting.get("mode","")=="project": face_angle = PI
-					visual.rotation.y = lerp_angle(visual.rotation.y,face_angle,minf(1,delta*5))
+		if not activity.is_empty():
+			if activity.pose=="bed" and p.action=="sleep": wanted = "sleep"
+			elif activity.pose=="seat": wanted = "eat" if p.action=="eat" else "rest"
+			elif activity.pose=="work" and p.action in ["work","hobby","chores"]: wanted = "work"
+		if p.action=="care" and others.has("rin") and not Sim.person("rin").moving and Sim.person("rin").place==p.place:
+			attention = others.rin.head_position();attend = true
+		for meeting in Sim.meetings:
+			if meeting.id!=p.meeting_id or meeting.state!="engaged": continue
+			var other_id: String = meeting.b if meeting.a==p.id else meeting.a
+			attention = others[other_id].head_position() if others.has(other_id) else Sim.person(other_id).position+Vector3.UP*1.5
+			attend = true
+			wanted = "sit_talk" if activity.get("pose","")=="seat" else "talk"
+			if meeting.get("mode","")=="project":
+				wanted = "work"
+				attend = false
+			else:
+				# Turn-taking derives from this actual meeting's elapsed time, so
+				# pause, replay and load retain the same speaker without new RNG.
+				var turn := int(maxf(0,float(meeting.get("duration",25))-float(meeting.remaining))/8.0)
+				var speaker: String = meeting.a if turn%2==0 else meeting.b
+				conversation_role = "speaker" if p.id==speaker else "listener"
+				if conversation_role=="listener": wanted = "rest" if activity.get("pose","")=="seat" else "idle"
+				if greeted_meeting!=meeting.id and is_instance_valid(contacts):
+					greeted_meeting = meeting.id;contacts.greet()
+			if activity.is_empty():
+				var toward: Vector3 = attention-global_position
+				visual.rotation.y = lerp_angle(visual.rotation.y,atan2(toward.x,toward.z),minf(1,delta*5))
+	if is_instance_valid(contacts) and Sim.interactions!=null:
+		var pose: Dictionary = Sim.interactions.pose_for(p.id)
+		if pose.is_empty() and Sim.sewing!=null: pose = Sim.sewing.pose_for(p.id)
+		if pose.is_empty() and Sim.tabletop!=null: pose = Sim.tabletop.pose_for(p.id)
+		var motion: Dictionary = contacts.prepare_motion(p,activity if wanted=="work" or not pose.is_empty() else {},pose,delta)
+		# A rebuilt actor already belongs to the saved operation. Restore its
+		# body stance before solving held-tool contacts; turning from the default
+		# idle body would pull a saved needle out of the opposite hand for frames.
+		if not motion_initialized and pose.get("key","")=="sewing":
+			if motion.has("body_yaw"): visual.rotation.y=float(motion.body_yaw)
+			contacts.social_motion.action_lean=motion.get("lean",Vector3.ZERO)
+			motion=contacts.prepare_motion(p,activity,pose,0)
+		motion_initialized=true
+		if motion.has("clip"): wanted = motion.clip
+		if motion.has("conversation_role"): conversation_role=motion.conversation_role
+		if motion.has("body_yaw"): visual.rotation.y = lerp_angle(visual.rotation.y,float(motion.body_yaw),minf(1,delta*10))
+		if motion.has("gaze"):
+			attention = motion.gaze;attend = true
 	if wanted != animation_name:
 		animator.play(wanted,.2)
 		animation_name = wanted
 	animator.speed_scale = clampf(Sim.speed,.5,3) if Sim.running else 0
+	if is_instance_valid(jrpg):
+		if wanted=="walk" and Sim.running:
+			var target := clampf(actual_speed/maxf(.1,jrpg.walk_speed*visual.scale.y),.35,6)
+			walk_rate = lerpf(walk_rate,target,minf(1,delta*8))
+			animator.speed_scale = walk_rate
+		jrpg.set_expression(p.fatigue,.4 if wanted in ["talk","sit_talk"] else 0)
+		contacts.update_contact(p,activity,wanted,attention,attend,delta)
+		name_label.global_position = head_position()+Vector3.UP*.28
+
+func update_lod(camera_distance: float, selected: bool) -> void:
+	if not is_instance_valid(jrpg): return
+	var next := jrpg.lod_level
+	if selected or camera_distance<LOD1_DISTANCE-LOD_HYSTERESIS:
+		next = 0
+	elif camera_distance>LOD2_DISTANCE+LOD_HYSTERESIS:
+		next = 2
+	elif next==0 and camera_distance>LOD1_DISTANCE+LOD_HYSTERESIS:
+		next = 1
+	elif next==2 and camera_distance<LOD2_DISTANCE-LOD_HYSTERESIS:
+		next = 1
+	if next!=jrpg.lod_level: jrpg.set_lod(next)
+
+func head_position() -> Vector3:
+	return contacts.point("head",Vector3(0,.12,0)) if is_instance_valid(contacts) else global_position+Vector3.UP*1.6
+
+func focus_position() -> Vector3:
+	return contacts.point("pelvis")+Vector3.UP*.18 if is_instance_valid(contacts) else global_position+Vector3.UP
 

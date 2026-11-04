@@ -1,0 +1,128 @@
+{
+  "asset": "CH_Nagisa",
+  "fps": 30,
+  "time_unit": "seconds from clip start",
+  "clips": [
+    {
+      "name": "eat",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {
+        "sip": 1.2
+      },
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "idle",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "rest",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 90,
+      "length_s": 3.0,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "sit_talk",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "sleep",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 90,
+      "length_s": 3.0,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "talk",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 72,
+      "length_s": 2.4,
+      "loop": true,
+      "events_s": {},
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "walk",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 24,
+      "length_s": 0.8,
+      "loop": true,
+      "events_s": {
+        "footstep.L": 0.0,
+        "footstep.R": 0.4
+      },
+      "speed_mps": 1.6000000000000003,
+      "blend_direction": "forward",
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": true
+    },
+    {
+      "name": "wave",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 60,
+      "length_s": 2.0,
+      "loop": false,
+      "events_s": {
+        "greeting": 0.5
+      },
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    },
+    {
+      "name": "work",
+      "fps": 30,
+      "frame_start": 0,
+      "frame_end": 60,
+      "length_s": 2.0,
+      "loop": true,
+      "events_s": {
+        "contact.L": 0.5,
+        "contact.R": 1.5
+      },
+      "root_motion": false,
+      "interruptible": true,
+      "locomotion_allowed": false
+    }
+  ],
+  "note": "events come from pose markers on each action; loop/speed/root_motion from action custom properties"
+}

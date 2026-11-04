@@ -12,7 +12,7 @@ config_version=5
 
 config/name="命の砂時計"
 config/description="住人の時間が重なり、人生が少しずつ変わる3Dシミュレーション"
-config/version="0.4.0"
+config/version="0.6.0-dev"
 run/main_scene="res://game/scenes/main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
@@ -26,15 +26,23 @@ window/size/viewport_width=1440
 window/size/viewport_height=900
 window/size/window_width_override=1440
 window/size/window_height_override=900
+window/size/min_width=1024
+window/size/min_height=700
 window/stretch/mode="canvas_items"
 
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
 
+[internationalization]
+
+locale/fallback="ja"
+locale/include_text_server_data=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.56, 0.72, 0.82, 1)

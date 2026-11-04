@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Material_wood"]
+albedo_color = Color(0.75, 0.55, 0.31, 1)
+roughness = 0.84
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_thread"]
+albedo_color = Color(0.96, 0.86, 0.61, 1)
+roughness = 0.97
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_hole"]
+albedo_color = Color(0.32, 0.25, 0.17, 1)
+roughness = 0.9
+metallic = 0
+
+[sub_resource type="CylinderMesh" id="Mesh_cap"]
+material = SubResource("Material_wood")
+top_radius = 0.022
+bottom_radius = 0.022
+height = 0.004
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_thread"]
+material = SubResource("Material_thread")
+top_radius = 0.017
+bottom_radius = 0.017
+height = 0.034
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_hole"]
+material = SubResource("Material_hole")
+top_radius = 0.003
+bottom_radius = 0.003
+height = 0.0005
+radial_segments = 12
+
+[sub_resource type="TorusMesh" id="Mesh_thread_ridge"]
+material = SubResource("Material_thread")
+inner_radius = 0.0165
+outer_radius = 0.0175
+rings = 24
+ring_segments = 6
+
+[node name="SewingSpool" type="Node3D"]
+metadata/bottom_origin = true
+metadata/tool = "thread_spool"
+
+[node name="BottomCap" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_cap")
+position = Vector3(0.0, 0.002, 0.0)
+
+[node name="ThreadCore" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread")
+position = Vector3(0.0, 0.021, 0.0)
+
+[node name="TopCap" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_cap")
+position = Vector3(0.0, 0.04, 0.0)
+
+[node name="SpindleHole" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_hole")
+position = Vector3(0.0, 0.0423, 0.0)
+
+[node name="ThreadRidge0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.006, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0097, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0134, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0171, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0208, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0245, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge6" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0282, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge7" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0319, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="ThreadRidge8" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_thread_ridge")
+position = Vector3(0.0, 0.0356, 0.0)
+scale = Vector3(1.0, 0.2, 1.0)
+
+[node name="GripCenter" type="Marker3D" parent="."]
+position = Vector3(0.0, 0.021, 0.0)
+
+[node name="ThreadStart" type="Marker3D" parent="."]
+position = Vector3(0.017, 0.021, 0.0)

@@ -1,0 +1,60 @@
+{
+  "id": "maho",
+  "height": 1.64,
+  "head_scale": 1.0,
+  "head_x": 0.99,
+  "width": 0.97,
+  "depth": 1.0,
+  "arm_length": 1.07,
+  "arm_close": 0.03,
+  "stance": 0.027,
+  "foot_turn": 0.12,
+  "jaw": 0.05,
+  "eye_height": 0.017,
+  "costume": "apron",
+  "top_color": [
+    0.78,
+    0.7,
+    0.58
+  ],
+  "pants_color": [
+    0.1,
+    0.085,
+    0.085
+  ],
+  "shoe_color": [
+    0.12,
+    0.052,
+    0.022
+  ],
+  "apron_color": [
+    0.55,
+    0.18,
+    0.1
+  ],
+  "hair": {
+    "style": "ponytail",
+    "color": [
+      0.14,
+      0.05,
+      0.017
+    ]
+  },
+  "motion": {
+    "walk_frames": 23,
+    "stride": 1.02
+  },
+  "sheet": "10-maho-turnaround.png",
+  "ground": 857,
+  "top": 18,
+  "axis": [
+    284,
+    246,
+    253
+  ],
+  "silhouette": "Chestnut ponytail, ivory rolled blouse, coral apron, dark cropped trousers.",
+  "reference": {
+    "subject_fraction": 0.9458850056369785,
+    "ground_fraction": 0.033821871476888386
+  }
+}

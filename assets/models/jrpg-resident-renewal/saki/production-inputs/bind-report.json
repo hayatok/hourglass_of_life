@@ -1,0 +1,100 @@
+{
+  "source_animation_master": "assets/models/CH_Fumi/CH_Fumi_animation_master.blend",
+  "source_height_m": 1.61,
+  "target_height_m": 1.65,
+  "bones": 36,
+  "clips": [
+    "eat",
+    "idle",
+    "rest",
+    "sit_talk",
+    "sleep",
+    "talk",
+    "walk",
+    "wave",
+    "work"
+  ],
+  "source_motion_profile": {
+    "walk_frames": 28,
+    "stride": 0.85
+  },
+  "retarget_translation_scale": 1.0248447204968942,
+  "upper_arm_local_z_bias_radians": {
+    "L": -0.14791339733992498,
+    "R": 0.14791339733992498
+  },
+  "landmarks_inferred_from_forms": {
+    "pelvis": 0.875,
+    "neck": 1.295,
+    "head": 1.375,
+    "shoulder": [
+      0.145,
+      1.3
+    ],
+    "elbow": [
+      0.254,
+      1.065
+    ],
+    "wrist": [
+      0.35,
+      0.855
+    ],
+    "palm": [
+      0.38,
+      0.78
+    ],
+    "arm_depth": [
+      -0.016,
+      -0.109,
+      -0.122
+    ],
+    "knee": [
+      0.103,
+      0.455
+    ],
+    "ankle": [
+      0.108,
+      0.095
+    ],
+    "skirt_min": 0.335
+  },
+  "maximum_influences": 4,
+  "unweighted": 0,
+  "uv_coordinate_max_abs_difference": 0.0,
+  "uv_loop_count": 87186,
+  "uv_sha256_before": "f5241c5295799f5c2e214b01e2b171cd2d680c711d7971594cd30494eb59d10a",
+  "uv_sha256_after": "f5241c5295799f5c2e214b01e2b171cd2d680c711d7971594cd30494eb59d10a",
+  "camera_rigid_chest_vertices": 710,
+  "skirt_weighted_vertices": 7010,
+  "yui_low_ponytail_head_vertices": 0,
+  "coincident_seam_weights_synchronized": true,
+  "grounding_max_corrections_m": {
+    "_pose_overhead": 0.004841447497601621,
+    "_pose_reach": 0.004841447497601621,
+    "_pose_sit": 0.009448575899004937,
+    "_pose_sleep": 0,
+    "_pose_stride": 0.006791004091501236,
+    "_pose_twist": 0.004841447497601621,
+    "eat": 0.009448575899004937,
+    "idle": 0.004841447497601621,
+    "rest": 0.009448575899004937,
+    "sit_talk": 0.009448575899004937,
+    "sleep": 0,
+    "talk": 0.004841447497601621,
+    "walk": 0.061352213025093076,
+    "wave": 0.004841447497601621,
+    "work": 0.004841447497601621
+  },
+  "arm_partition": "Surface-distance seeds with 100-step adjacency smoothing; hands fixed to arm family, torso centers fixed, UV seam copies share adjacency.",
+  "skirt_middle_bone": true,
+  "camera_rigid_region_m": {
+    "max_y": -0.125,
+    "max_abs_x": 0.115,
+    "z": [
+      0.9,
+      1.12
+    ],
+    "transition_m": 0.04
+  },
+  "acceptance": "Body candidate. Extreme poses/camera/skirt contact review pending."
+}

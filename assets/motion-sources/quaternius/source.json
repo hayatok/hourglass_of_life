@@ -1,0 +1,32 @@
+{
+  "author": "Quaternius",
+  "title": "Universal Animation Library",
+  "edition": "Standard (free)",
+  "version_from_official_changelog": "v3.0",
+  "changelog_date": "2026-06-16",
+  "upload_id": "17958403",
+  "upload_timestamp_utc": "2026-06-16T23:03:00Z",
+  "retrieved_utc": "2026-11-04T17:03:09.048013+00:00",
+  "official_product_url": "https://quaternius.com/packs/universalanimationlibrary.html",
+  "official_distribution_url": "https://quaternius.itch.io/universal-animation-library",
+  "official_free_download_page": "https://quaternius.itch.io/universal-animation-library/purchase",
+  "free_route": "No thanks, just take me to the downloads; anonymous Standard-only download. No purchase, account, email, external upload or terms-acceptance action.",
+  "license_spdx": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "archive_file": "Universal Animation Library[Standard].zip",
+  "archive_bytes": 15904933,
+  "inspection_scope": "ZIP and GLB JSON/BIN parsing only. No Blender/Godot import, rendered quality review or retarget success established.",
+  "import_policy": ".gdignore prevents raw source files from automatic Godot import; runtime retargeted derivatives are a separate future step.",
+  "retained_license_file": "License.txt",
+  "retained_archive_readme": "README.txt",
+  "extracted_glb_files": [
+    "Unreal-Godot/UAL1_Standard.glb",
+    "Unreal-Godot/UAL1_Standard_RM.glb"
+  ],
+  "machine_inventory": "inventory.json",
+  "human_inventory": "INVENTORY.md",
+  "reproduction_script": "inspect_glb.py",
+  "download_status": "completed",
+  "clip_count_per_glb": 43,
+  "joint_count": 65
+}

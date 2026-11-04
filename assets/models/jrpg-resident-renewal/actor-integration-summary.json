@@ -1,0 +1,130 @@
+{
+  "scope": "Production actor import and explicit clip stage, separate from autonomous town/gameplay acceptance. No SHA/fingerprint or image-write operations are counted as functional checks.",
+  "residents": {
+    "saki": {
+      "capabilities": {
+        "contract_errors": [],
+        "expression_mode": "TEXTURE_EYES",
+        "eye_charts": 3,
+        "eyelid_method": "occlusion",
+        "face_layout": "res://game/assets/models/saki/face-layout.json",
+        "facial_controls": [
+          "Blink",
+          "TiredEyes"
+        ],
+        "hair_aging": false,
+        "material_mode": "TEXTURE_TOON",
+        "source_model": "res://game/assets/models/saki/CH_Saki.glb"
+      },
+      "actor_function_checks": {
+        "headless": {
+          "checks": 44,
+          "failures": []
+        },
+        "gpu": {
+          "checks": 44,
+          "failures": []
+        }
+      },
+      "rendered_artifacts": {
+        "failures": [],
+        "written": 8
+      },
+      "skirt_middle": {
+        "poses": {
+          "eat": {
+            "rotation_from_standing_rad": 1.41838896274567
+          },
+          "rest": {
+            "rotation_from_standing_rad": 1.41838896274567
+          },
+          "sit_talk": {
+            "rotation_from_standing_rad": 1.41838896274567
+          }
+        },
+        "weighted_vertices": 2839
+      },
+      "review_directory": "assets/models/jrpg-resident-renewal/saki/review/actor-import",
+      "remaining": "Natural-town contacts, sleep, meals, actions and save/resume acceptance belong to the separate gameplay review; mouth/Smile/lip-sync and atlas hair-aging remain unsupported."
+    },
+    "tomo": {
+      "capabilities": {
+        "contract_errors": [],
+        "expression_mode": "TEXTURE_EYES",
+        "eye_charts": 2,
+        "eyelid_method": "compress",
+        "face_layout": "res://game/assets/models/tomo/face-layout.json",
+        "facial_controls": [
+          "Blink",
+          "TiredEyes"
+        ],
+        "hair_aging": false,
+        "material_mode": "TEXTURE_TOON",
+        "source_model": "res://game/assets/models/tomo/CH_Tomo.glb"
+      },
+      "actor_function_checks": {
+        "headless": {
+          "checks": 39,
+          "failures": []
+        },
+        "gpu": {
+          "checks": 39,
+          "failures": []
+        }
+      },
+      "rendered_artifacts": {
+        "written": 7,
+        "failures": []
+      },
+      "skirt_middle": null,
+      "review_directory": "assets/models/jrpg-resident-renewal/tomo/review/actor-import",
+      "remaining": "Natural-town contacts, sleep, meals, actions and save/resume acceptance belong to the separate gameplay review; mouth/Smile/lip-sync and atlas hair-aging remain unsupported."
+    },
+    "yui": {
+      "capabilities": {
+        "contract_errors": [],
+        "expression_mode": "TEXTURE_EYES",
+        "eye_charts": 2,
+        "eyelid_method": "compress",
+        "face_layout": "res://game/assets/models/yui/face-layout.json",
+        "facial_controls": [
+          "Blink",
+          "TiredEyes"
+        ],
+        "hair_aging": false,
+        "material_mode": "TEXTURE_TOON",
+        "source_model": "res://game/assets/models/yui/CH_Yui.glb"
+      },
+      "actor_function_checks": {
+        "headless": {
+          "checks": 44,
+          "failures": []
+        },
+        "gpu": {
+          "checks": 44,
+          "failures": []
+        }
+      },
+      "rendered_artifacts": {
+        "failures": [],
+        "written": 8
+      },
+      "skirt_middle": {
+        "poses": {
+          "eat": {
+            "rotation_from_standing_rad": 1.418989777565
+          },
+          "rest": {
+            "rotation_from_standing_rad": 1.418989777565
+          },
+          "sit_talk": {
+            "rotation_from_standing_rad": 1.418989777565
+          }
+        },
+        "weighted_vertices": 2866
+      },
+      "review_directory": "assets/models/jrpg-resident-renewal/yui/review/actor-import",
+      "remaining": "Natural-town contacts, sleep, meals, actions and save/resume acceptance belong to the separate gameplay review; mouth/Smile/lip-sync and atlas hair-aging remain unsupported."
+    }
+  }
+}

@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Shader" path="res://game/assets/town_ground.gdshader" id="Shader"]
+
+[sub_resource type="ShaderMaterial" id="Paving"]
+shader = ExtResource("Shader")
+shader_parameter/paving = true
+shader_parameter/main_color = Color(0.7882353, 0.74509805, 0.654902, 1)
+
+[sub_resource type="PlaneMesh" id="NorthWestStreet"]
+size = Vector2(1.2, 6.0)
+
+[sub_resource type="PlaneMesh" id="NorthWestApproach"]
+size = Vector2(5.2, 1.2)
+
+[sub_resource type="PlaneMesh" id="NorthWestDoor"]
+size = Vector2(1.2, 1.2)
+
+[sub_resource type="PlaneMesh" id="NorthEastStreet"]
+size = Vector2(1.2, 7.0)
+
+[sub_resource type="PlaneMesh" id="NorthEastApproach"]
+size = Vector2(5.8, 1.2)
+
+[sub_resource type="PlaneMesh" id="NorthEastDoor"]
+size = Vector2(1.2, 1.2)
+
+[sub_resource type="PlaneMesh" id="NorthCrossStreet"]
+size = Vector2(9.453, 1.2)
+
+[node name="NorthStreets" type="Node3D"]
+
+[node name="NorthWestStreet" type="MeshInstance3D" parent="."]
+position = Vector3(-5, 0.018, -7)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthWestStreet")
+
+[node name="NorthWestApproach" type="MeshInstance3D" parent="."]
+position = Vector3(-7, 0.018, -10)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthWestApproach")
+
+[node name="NorthWestDoor" type="MeshInstance3D" parent="."]
+position = Vector3(-9, 0.018, -10.6)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthWestDoor")
+
+[node name="NorthEastStreet" type="MeshInstance3D" parent="."]
+position = Vector3(4.4, 0.018, -7.5)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthEastStreet")
+
+[node name="NorthEastApproach" type="MeshInstance3D" parent="."]
+position = Vector3(6.7, 0.018, -11)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthEastApproach")
+
+[node name="NorthEastDoor" type="MeshInstance3D" parent="."]
+position = Vector3(9, 0.018, -11.6)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthEastDoor")
+
+[node name="NorthCrossStreet" type="MeshInstance3D" parent="."]
+position = Vector3(-0.3, 0.018, -10.5)
+rotation = Vector3(0, 0.105984, 0)
+material_override = SubResource("Paving")
+mesh = SubResource("NorthCrossStreet")

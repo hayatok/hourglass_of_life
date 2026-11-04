@@ -1,12 +1,22 @@
 .DS_Store
 .godot/
 .artifacts/
-builds/
+builds/*
+!builds/.gdignore
 *.blend1
 *.blend2
 *.tmp
+__pycache__/
+*.pyc
 assets/artwork/*.zip
 .env
 .env.*
 !.env.example
 
+assets/models/jrpg-resident-renewal/*/exports/
+
+# Regenerated review output; durable production inputs live beside the sources.
+**/review/
+/docs/verification/*
+!/docs/verification/README.md
+!/docs/verification/current-status.md

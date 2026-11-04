@@ -1,0 +1,21 @@
+{
+  "baseline_commit": "afb4c32",
+  "residents": {
+    "haru": {
+      "model_scene": "res://game/scenes/characters/haru.tscn",
+      "body_scale": [
+        1.035,
+        1.035,
+        1.035
+      ],
+      "palette": {
+        "1": "#7d6252",
+        "6": "#202b3c",
+        "7": "#35445b",
+        "8": "#53637c",
+        "16": "#b87832",
+        "17": "#354653"
+      }
+    }
+  }
+}

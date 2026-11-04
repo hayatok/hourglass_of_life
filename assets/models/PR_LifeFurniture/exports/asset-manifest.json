@@ -1,0 +1,241 @@
+{
+  "units": "metres",
+  "blender_up": "Z",
+  "blender_front": "-Y",
+  "engine_up": "Y",
+  "engine_front": "+Z",
+  "source": "original perspective concepts and inferred construction; final art acceptance pending",
+  "models": {
+    "Bench": {
+      "file": "PR_Bench.glb",
+      "triangles": 3584,
+      "dimensions_m": [
+        1.7492283582687378,
+        0.6436582803726196,
+        1.0256506204605103
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "Chair": {
+      "file": "PR_Chair.glb",
+      "triangles": 1980,
+      "dimensions_m": [
+        0.5099999904632568,
+        0.5099999904632568,
+        1.063354253768921
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "RoundTable": {
+      "file": "PR_RoundTable.glb",
+      "triangles": 1224,
+      "dimensions_m": [
+        1.100000023841858,
+        1.100000023841858,
+        0.7509909868240356
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "Worktable": {
+      "file": "PR_Worktable.glb",
+      "triangles": 2304,
+      "dimensions_m": [
+        1.5499999523162842,
+        0.8399999737739563,
+        0.9500000476837158
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "Bed": {
+      "file": "PR_Bed.glb",
+      "triangles": 1296,
+      "dimensions_m": [
+        1.0,
+        2.0824999809265137,
+        0.8250000476837158
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "Footstool": {
+      "file": "PR_Footstool.glb",
+      "triangles": 216,
+      "dimensions_m": [
+        0.47999998927116394,
+        0.49499979615211487,
+        0.23000000417232513
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "Radio": {
+      "file": "PR_Radio.glb",
+      "triangles": 1372,
+      "dimensions_m": [
+        0.36000001430511475,
+        0.1734999120235443,
+        0.2942500114440918
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "TownModel": {
+      "file": "PR_TownModel.glb",
+      "triangles": 672,
+      "dimensions_m": [
+        0.550000011920929,
+        0.3799999952316284,
+        0.27950000762939453
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "BreadPlate": {
+      "file": "PR_BreadPlate.glb",
+      "triangles": 2108,
+      "dimensions_m": [
+        0.41999998688697815,
+        0.41999998688697815,
+        0.11500000208616257
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    },
+    "Mug": {
+      "file": "PR_Mug.glb",
+      "triangles": 460,
+      "dimensions_m": [
+        0.156088724732399,
+        0.11400000005960464,
+        0.11500000208616257
+      ],
+      "materials": 1,
+      "embedded_images": 3
+    }
+  },
+  "texture_contract": {
+    "size": [
+      256,
+      256
+    ],
+    "BaseColor": "sRGB",
+    "ORM": "Non-Color R=AO(1), G=roughness, B=metallic",
+    "Normal": "Non-Color OpenGL +Y neutral",
+    "palette": [
+      {
+        "name": "Brass",
+        "linear_color": [
+          0.550000011920929,
+          0.33000001311302185,
+          0.07500000298023224,
+          1.0
+        ],
+        "roughness": 0.3799999952316284,
+        "metallic": 0.699999988079071
+      },
+      {
+        "name": "Bread crust",
+        "linear_color": [
+          0.6700000166893005,
+          0.28999999165534973,
+          0.054999999701976776,
+          1.0
+        ],
+        "roughness": 0.949999988079071,
+        "metallic": 0.0
+      },
+      {
+        "name": "Graphite",
+        "linear_color": [
+          0.03500000014901161,
+          0.03999999910593033,
+          0.0430000014603138,
+          1.0
+        ],
+        "roughness": 0.6800000071525574,
+        "metallic": 0.0
+      },
+      {
+        "name": "Ivory",
+        "linear_color": [
+          0.7799999713897705,
+          0.699999988079071,
+          0.5600000023841858,
+          1.0
+        ],
+        "roughness": 0.8799999952316284,
+        "metallic": 0.0
+      },
+      {
+        "name": "Painted teal",
+        "linear_color": [
+          0.0430000014603138,
+          0.1899999976158142,
+          0.20000000298023224,
+          1.0
+        ],
+        "roughness": 0.800000011920929,
+        "metallic": 0.0
+      },
+      {
+        "name": "Roof blue",
+        "linear_color": [
+          0.06499999761581421,
+          0.11999999731779099,
+          0.20999999344348907,
+          1.0
+        ],
+        "roughness": 0.8399999737739563,
+        "metallic": 0.0
+      },
+      {
+        "name": "Sage",
+        "linear_color": [
+          0.20000000298023224,
+          0.28999999165534973,
+          0.12999999523162842,
+          1.0
+        ],
+        "roughness": 0.8399999737739563,
+        "metallic": 0.0
+      },
+      {
+        "name": "Terracotta",
+        "linear_color": [
+          0.4000000059604645,
+          0.10499999672174454,
+          0.04500000178813934,
+          1.0
+        ],
+        "roughness": 0.8199999928474426,
+        "metallic": 0.0
+      },
+      {
+        "name": "Timber edge",
+        "linear_color": [
+          0.23000000417232513,
+          0.09000000357627869,
+          0.026000000536441803,
+          1.0
+        ],
+        "roughness": 0.800000011920929,
+        "metallic": 0.0
+      },
+      {
+        "name": "Warm timber",
+        "linear_color": [
+          0.47999998927116394,
+          0.23999999463558197,
+          0.07500000298023224,
+          1.0
+        ],
+        "roughness": 0.7200000286102295,
+        "metallic": 0.0
+      }
+    ]
+  }
+}

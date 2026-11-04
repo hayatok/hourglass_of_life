@@ -1,0 +1,1188 @@
+[gd_scene load_steps=96 format=3]
+
+[ext_resource type="Script" path="res://game/scripts/sewing_prop_workpiece.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="Material_fabric"]
+albedo_color = Color(0.39, 0.61, 0.57, 1)
+roughness = 0.95
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_lining"]
+albedo_color = Color(0.22, 0.38, 0.37, 1)
+roughness = 0.98
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_cut_edge"]
+albedo_color = Color(0.68, 0.79, 0.66, 1)
+roughness = 0.98
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_thread"]
+albedo_color = Color(0.97, 0.87, 0.64, 1)
+roughness = 0.94
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_trim"]
+albedo_color = Color(0.8, 0.44, 0.34, 1)
+roughness = 0.9
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_pattern"]
+albedo_color = Color(0.91, 0.85, 0.68, 1)
+roughness = 0.97
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_button"]
+albedo_color = Color(0.83, 0.64, 0.3, 1)
+roughness = 0.6
+metallic = 0.12
+
+[sub_resource type="SphereMesh" id="Mesh_fabric_sphere"]
+material = SubResource("Material_fabric")
+radius = 1.0
+height = 2.0
+radial_segments = 24
+rings = 12
+
+[sub_resource type="SphereMesh" id="Mesh_edge_sphere"]
+material = SubResource("Material_cut_edge")
+radius = 1.0
+height = 2.0
+radial_segments = 20
+rings = 10
+
+[sub_resource type="SphereMesh" id="Mesh_lining_sphere"]
+material = SubResource("Material_lining")
+radius = 1.0
+height = 2.0
+radial_segments = 24
+rings = 12
+
+[sub_resource type="SphereMesh" id="Mesh_flower"]
+material = SubResource("Material_thread")
+radius = 1.0
+height = 2.0
+radial_segments = 12
+rings = 6
+
+[sub_resource type="SphereMesh" id="Mesh_button"]
+material = SubResource("Material_button")
+radius = 1.0
+height = 2.0
+radial_segments = 12
+rings = 6
+
+[sub_resource type="BoxMesh" id="Mesh_fold"]
+material = SubResource("Material_fabric")
+size = Vector3(0.28, 0.006, 0.2)
+
+[sub_resource type="BoxMesh" id="Mesh_fold_edge"]
+material = SubResource("Material_cut_edge")
+size = Vector3(0.28, 0.0012, 0.006)
+
+[sub_resource type="BoxMesh" id="Mesh_pattern"]
+material = SubResource("Material_pattern")
+size = Vector3(0.24, 0.0008, 0.19)
+
+[sub_resource type="BoxMesh" id="Mesh_cut_panel"]
+material = SubResource("Material_fabric")
+size = Vector3(0.22, 0.002, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_cut_strip"]
+material = SubResource("Material_fabric")
+size = Vector3(0.018, 0.0016, 0.18)
+
+[sub_resource type="CylinderMesh" id="Mesh_RolledFold"]
+material = SubResource("Material_fabric")
+top_radius = 0.004
+bottom_radius = 0.004
+height = 0.272
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem5"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem40"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem75"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem110"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem145"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem180"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Hem215"]
+material = SubResource("Material_thread")
+top_radius = 0.00065
+bottom_radius = 0.00065
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_PatternTick0"]
+material = SubResource("Material_lining")
+top_radius = 0.00035
+bottom_radius = 0.00035
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_PatternTick1"]
+material = SubResource("Material_lining")
+top_radius = 0.00035
+bottom_radius = 0.00035
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_PatternTick2"]
+material = SubResource("Material_lining")
+top_radius = 0.00035
+bottom_radius = 0.00035
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_PatternTick3"]
+material = SubResource("Material_lining")
+top_radius = 0.00035
+bottom_radius = 0.00035
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_PatternTick4"]
+material = SubResource("Material_lining")
+top_radius = 0.00035
+bottom_radius = 0.00035
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="TorusMesh" id="Mesh_open_rim"]
+material = SubResource("Material_fabric")
+inner_radius = 0.029
+outer_radius = 0.034
+rings = 32
+ring_segments = 10
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch00"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch01"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch02"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch03"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch04"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch05"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch06"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch07"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch08"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch09"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch10"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch11"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch12"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch13"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch14"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch15"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch16"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_Stitch17"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.005
+radial_segments = 8
+
+[sub_resource type="TorusMesh" id="Mesh_neck_cord"]
+material = SubResource("Material_thread")
+inner_radius = 0.039
+outer_radius = 0.042
+rings = 32
+ring_segments = 10
+
+[sub_resource type="TorusMesh" id="Mesh_bow_loop"]
+material = SubResource("Material_thread")
+inner_radius = 0.0088
+outer_radius = 0.0114
+rings = 20
+ring_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_CordLeft"]
+material = SubResource("Material_thread")
+top_radius = 0.0014
+bottom_radius = 0.0014
+height = 0.040459857
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_CordRight"]
+material = SubResource("Material_thread")
+top_radius = 0.0014
+bottom_radius = 0.0014
+height = 0.04414748
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL00"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR00"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL01"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR01"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL02"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR02"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL03"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR03"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL04"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR04"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL05"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR05"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL06"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR06"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL07"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR07"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL08"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR08"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL09"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR09"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL10"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR10"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL11"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR11"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL12"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR12"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL13"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR13"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL14"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR14"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL15"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR15"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL16"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR16"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamL17"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_FinishedSeamR17"]
+material = SubResource("Material_thread")
+top_radius = 0.0007
+bottom_radius = 0.0007
+height = 0.0034
+radial_segments = 8
+
+[sub_resource type="TorusMesh" id="Mesh_turned_cuff"]
+material = SubResource("Material_fabric")
+inner_radius = 0.030
+outer_radius = 0.058
+rings = 24
+ring_segments = 16
+
+[sub_resource type="TorusMesh" id="Mesh_inner_fold_hem"]
+material = SubResource("Material_cut_edge")
+inner_radius = 0.037
+outer_radius = 0.040
+rings = 24
+ring_segments = 10
+
+[sub_resource type="TorusMesh" id="Mesh_cord_eyelet"]
+material = SubResource("Material_trim")
+inner_radius = 0.0018
+outer_radius = 0.0031
+rings = 16
+ring_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_CordFromLeftEyelet"]
+material = SubResource("Material_thread")
+top_radius = 0.0013
+bottom_radius = 0.0013
+height = 0.022338308
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="Mesh_CordFromRightEyelet"]
+material = SubResource("Material_thread")
+top_radius = 0.0013
+bottom_radius = 0.0013
+height = 0.022338308
+radial_segments = 8
+
+[node name="SewingWorkpiece" type="Node3D"]
+metadata/bottom_origin = true
+metadata/kind = "sewing_workpiece"
+metadata/finished_nominal_size = Vector3(0.22, 0.25, 0.1)
+script = ExtResource("1")
+
+[node name="Fabric" type="Node3D" parent="."]
+visible = true
+
+[node name="Cut" type="Node3D" parent="."]
+visible = false
+
+[node name="Sewing" type="Node3D" parent="."]
+visible = false
+
+[node name="Finished" type="Node3D" parent="."]
+visible = false
+
+[node name="Fold0" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_fold")
+position = Vector3(0.0, 0.003, 0.0)
+scale = Vector3(1.0, 1.0, 1.0)
+
+[node name="FoldEdge0" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_fold_edge")
+position = Vector3(0.0, 0.0045, 0.097)
+
+[node name="Fold1" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_fold")
+position = Vector3(0.0, 0.009, 0.0)
+scale = Vector3(0.994, 1.0, 0.988)
+
+[node name="FoldEdge1" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_fold_edge")
+position = Vector3(0.0, 0.0105, 0.096)
+
+[node name="Fold2" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_fold")
+position = Vector3(0.0, 0.015, 0.0)
+scale = Vector3(0.988, 1.0, 0.976)
+
+[node name="FoldEdge2" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_fold_edge")
+position = Vector3(0.0, 0.0165, 0.095)
+
+[node name="RolledFold" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_RolledFold")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.0, 0.02, -0.094)
+
+[node name="Hem5" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem5")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.105, 0.0208, 0.092)
+
+[node name="Hem40" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem40")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.07, 0.0208, 0.092)
+
+[node name="Hem75" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem75")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.035, 0.0208, 0.092)
+
+[node name="Hem110" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem110")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.0, 0.0208, 0.092)
+
+[node name="Hem145" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem145")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.035, 0.0208, 0.092)
+
+[node name="Hem180" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem180")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.07, 0.0208, 0.092)
+
+[node name="Hem215" type="MeshInstance3D" parent="Fabric"]
+mesh = SubResource("Mesh_Hem215")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.105, 0.0208, 0.092)
+
+[node name="ReusablePattern" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_pattern")
+position = Vector3(0.0, 0.0004, 0.0)
+
+[node name="Panel0" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_cut_panel")
+position = Vector3(-0.004, 0.0018, -0.019)
+
+[node name="RoundedCut0" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(-0.004, 0.0018, 0.051)
+scale = Vector3(0.11, 0.001, 0.03)
+
+[node name="Panel1" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_cut_panel")
+position = Vector3(0.004, 0.004, -0.011)
+
+[node name="RoundedCut1" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(0.004, 0.004, 0.059)
+scale = Vector3(0.11, 0.001, 0.03)
+
+[node name="Cutoff0" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_cut_strip")
+position = Vector3(-0.13, 0.0025, 0.0)
+rotation = Vector3(0.0, -0.025, 0.0)
+
+[node name="Cutoff1" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_cut_strip")
+position = Vector3(0.13, 0.0025, 0.0)
+rotation = Vector3(0.0, 0.025, 0.0)
+
+[node name="PatternTick0" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_PatternTick0")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.1165, 0.001, -0.065)
+
+[node name="PatternTick1" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_PatternTick1")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.1165, 0.001, -0.03)
+
+[node name="PatternTick2" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_PatternTick2")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.1165, 0.001, 0.005)
+
+[node name="PatternTick3" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_PatternTick3")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.1165, 0.001, 0.04)
+
+[node name="PatternTick4" type="MeshInstance3D" parent="Cut"]
+mesh = SubResource("Mesh_PatternTick4")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.1165, 0.001, 0.075)
+
+[node name="OpenBody" type="MeshInstance3D" parent="Sewing"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(0.0, 0.027, 0.0)
+scale = Vector3(0.112, 0.027, 0.084)
+
+[node name="LooseFrontPanel" type="MeshInstance3D" parent="Sewing"]
+mesh = SubResource("Mesh_edge_sphere")
+position = Vector3(0.0, 0.018, 0.055)
+scale = Vector3(0.105, 0.011, 0.033)
+
+[node name="LiningInsideMouth" type="MeshInstance3D" parent="Sewing"]
+mesh = SubResource("Mesh_lining_sphere")
+position = Vector3(0.0, 0.054, 0.024)
+scale = Vector3(0.074, 0.002, 0.028)
+
+[node name="UnsewnMouth" type="MeshInstance3D" parent="Sewing"]
+mesh = SubResource("Mesh_open_rim")
+position = Vector3(0.0, 0.059, 0.024)
+scale = Vector3(2.3, 1.0, 0.95)
+
+[node name="LooseCornerLeft" type="MeshInstance3D" parent="Sewing"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(-0.078, 0.041, 0.048)
+scale = Vector3(0.019, 0.009, 0.022)
+rotation = Vector3(0.0, 0.0, 0.15)
+
+[node name="LooseCornerRight" type="MeshInstance3D" parent="Sewing"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(0.078, 0.041, 0.048)
+scale = Vector3(0.019, 0.009, 0.022)
+rotation = Vector3(0.0, 0.0, -0.15)
+
+[node name="SeamStitches" type="Node3D" parent="Sewing"]
+
+[node name="Stitch00" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch00")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.039311082, 0.034, -0.070246981)
+
+[node name="Stitch01" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch01")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.067538087, 0.034, -0.057381004)
+
+[node name="Stitch02" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch02")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.088757242, 0.034, -0.03856109)
+
+[node name="Stitch03" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch03")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.100766816, 0.034, -0.015740022)
+
+[node name="Stitch04" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch04")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.102320679, 0.034, 0.008714253)
+
+[node name="Stitch05" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch05")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.0932576, 0.034, 0.032264326)
+
+[node name="Stitch06" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch06")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.074517976, 0.034, 0.052466604)
+
+[node name="Stitch07" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch07")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.048046259, 0.034, 0.067224872)
+
+[node name="Stitch08" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch08")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, -0.016589193, 0.034, 0.075007789)
+
+[node name="Stitch09" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch09")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.016589193, 0.034, 0.075007789)
+
+[node name="Stitch10" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch10")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.048046259, 0.034, 0.067224872)
+
+[node name="Stitch11" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch11")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.074517976, 0.034, 0.052466604)
+
+[node name="Stitch12" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch12")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.0932576, 0.034, 0.032264326)
+
+[node name="Stitch13" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch13")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.102320679, 0.034, 0.008714253)
+
+[node name="Stitch14" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch14")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.100766816, 0.034, -0.015740022)
+
+[node name="Stitch15" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch15")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.088757242, 0.034, -0.03856109)
+
+[node name="Stitch16" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch16")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.067538087, 0.034, -0.057381004)
+
+[node name="Stitch17" type="MeshInstance3D" parent="Sewing/SeamStitches"]
+mesh = SubResource("Mesh_Stitch17")
+transform = Transform3D(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.039311082, 0.034, -0.070246981)
+
+[node name="PouchBody" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(0.0, 0.101, 0.0)
+scale = Vector3(0.108, 0.101, 0.046)
+
+[node name="PouchBaseHem" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_edge_sphere")
+position = Vector3(0.0, 0.015, 0.0)
+scale = Vector3(0.06, 0.01, 0.027)
+
+[node name="GatheredShoulder" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_fabric_sphere")
+position = Vector3(0.0, 0.202, 0.0)
+scale = Vector3(0.066, 0.023, 0.034)
+
+[node name="DrawcordAroundNeck" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_neck_cord")
+position = Vector3(0.0, 0.220, 0.0)
+scale = Vector3(1.45, 0.7, 0.78)
+
+[node name="TurnedCuff" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_turned_cuff")
+position = Vector3(0, 0.232, 0)
+scale = Vector3(1.10, 1.285714286, 0.58)
+
+[node name="InnerFoldHem" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_inner_fold_hem")
+position = Vector3(0, 0.247, 0)
+scale = Vector3(1.10, 0.50, 0.58)
+
+[node name="LeftEyeletBacking" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_lining_sphere")
+position = Vector3(-0.015, 0.220, 0.0315)
+scale = Vector3(0.0045, 0.0045, 0.0016)
+
+[node name="LeftDrawcordEyelet" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_cord_eyelet")
+position = Vector3(-0.015, 0.220, 0.033)
+rotation = Vector3(1.570796327, 0, 0)
+scale = Vector3(1, 0.70, 1)
+
+[node name="RightEyeletBacking" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_lining_sphere")
+position = Vector3(0.015, 0.220, 0.0315)
+scale = Vector3(0.0045, 0.0045, 0.0016)
+
+[node name="RightDrawcordEyelet" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_cord_eyelet")
+position = Vector3(0.015, 0.220, 0.033)
+rotation = Vector3(1.570796327, 0, 0)
+scale = Vector3(1, 0.70, 1)
+
+[node name="CordFromLeftEyelet" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_CordFromLeftEyelet")
+transform = Transform3D(-0.707106781, -0.707106781, 0.0, 0.671492222, -0.671492222, 0.313363037, -0.221581128, 0.221581128, 0.949633407, -0.0075, 0.2125, 0.0365)
+
+[node name="CordFromRightEyelet" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_CordFromRightEyelet")
+transform = Transform3D(-0.707106781, 0.707106781, 0.0, -0.671492222, -0.671492222, 0.313363037, 0.221581128, 0.221581128, 0.949633407, 0.0075, 0.2125, 0.0365)
+
+[node name="GatheredOpening" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_lining_sphere")
+position = Vector3(0.0, 0.232, 0.0)
+scale = Vector3(0.031, 0.0010, 0.015)
+
+[node name="BowLeft" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_bow_loop")
+position = Vector3(-0.015, 0.205, 0.038)
+scale = Vector3(1.0, 0.42, 0.64)
+rotation = Vector3(1.570796327, 0.0, -0.26)
+
+[node name="BowRight" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_bow_loop")
+position = Vector3(0.015, 0.205, 0.038)
+scale = Vector3(1.0, 0.42, 0.64)
+rotation = Vector3(1.570796327, 0.0, 0.26)
+
+[node name="CordLeft" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_CordLeft")
+transform = Transform3D(-0.832050294, 0.554700196, 0.0, -0.543748837, -0.815623256, 0.19772685, 0.109679122, 0.164518684, 0.980257156, -0.011, 0.1875, 0.043)
+
+[node name="CordRight" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_CordRight")
+transform = Transform3D(-0.911921505, -0.410364677, 0.0, 0.40772429, -0.906053979, 0.113256747, -0.046476569, 0.103281263, 0.993565755, 0.009, 0.184, 0.0415)
+
+[node name="BowKnot" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_flower")
+position = Vector3(0.0, 0.205, 0.04)
+scale = Vector3(0.004, 0.004, 0.003)
+
+[node name="FinishedSeamL00" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL00")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.076846217, 0.035, 0.012879693)
+
+[node name="FinishedSeamR00" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR00")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.076846217, 0.035, 0.012879693)
+
+[node name="FinishedSeamL01" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL01")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.08318228, 0.0431, 0.013859188)
+
+[node name="FinishedSeamR01" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR01")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.08318228, 0.0431, 0.013859188)
+
+[node name="FinishedSeamL02" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL02")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.088321388, 0.0512, 0.014653645)
+
+[node name="FinishedSeamR02" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR02")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.088321388, 0.0512, 0.014653645)
+
+[node name="FinishedSeamL03" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL03")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.092463338, 0.0593, 0.015293951)
+
+[node name="FinishedSeamR03" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR03")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.092463338, 0.0593, 0.015293951)
+
+[node name="FinishedSeamL04" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL04")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.095737639, 0.0674, 0.015800126)
+
+[node name="FinishedSeamR04" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR04")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.095737639, 0.0674, 0.015800126)
+
+[node name="FinishedSeamL05" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL05")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.098231092, 0.0755, 0.016185591)
+
+[node name="FinishedSeamR05" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR05")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.098231092, 0.0755, 0.016185591)
+
+[node name="FinishedSeamL06" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL06")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.100002124, 0.0836, 0.016459375)
+
+[node name="FinishedSeamR06" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR06")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.100002124, 0.0836, 0.016459375)
+
+[node name="FinishedSeamL07" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL07")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.101088711, 0.0917, 0.016627351)
+
+[node name="FinishedSeamR07" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR07")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.101088711, 0.0917, 0.016627351)
+
+[node name="FinishedSeamL08" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL08")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.101512834, 0.0998, 0.016692917)
+
+[node name="FinishedSeamR08" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR08")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.101512834, 0.0998, 0.016692917)
+
+[node name="FinishedSeamL09" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL09")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.101282816, 0.1079, 0.016657358)
+
+[node name="FinishedSeamR09" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR09")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.101282816, 0.1079, 0.016657358)
+
+[node name="FinishedSeamL10" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL10")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.100394161, 0.116, 0.01651998)
+
+[node name="FinishedSeamR10" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR10")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.100394161, 0.116, 0.01651998)
+
+[node name="FinishedSeamL11" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL11")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.098829103, 0.1241, 0.016278037)
+
+[node name="FinishedSeamR11" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR11")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.098829103, 0.1241, 0.016278037)
+
+[node name="FinishedSeamL12" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL12")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.096554757, 0.1322, 0.015926445)
+
+[node name="FinishedSeamR12" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR12")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.096554757, 0.1322, 0.015926445)
+
+[node name="FinishedSeamL13" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL13")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.093519387, 0.1403, 0.015457206)
+
+[node name="FinishedSeamR13" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR13")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.093519387, 0.1403, 0.015457206)
+
+[node name="FinishedSeamL14" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL14")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.089645724, 0.1484, 0.014858375)
+
+[node name="FinishedSeamR14" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR14")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.089645724, 0.1484, 0.014858375)
+
+[node name="FinishedSeamL15" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL15")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.084818992, 0.1565, 0.014112208)
+
+[node name="FinishedSeamR15" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR15")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.084818992, 0.1565, 0.014112208)
+
+[node name="FinishedSeamL16" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL16")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.078864391, 0.1646, 0.013191683)
+
+[node name="FinishedSeamR16" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR16")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.078864391, 0.1646, 0.013191683)
+
+[node name="FinishedSeamL17" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamL17")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, -0.071500687, 0.1727, 0.012053325)
+
+[node name="FinishedSeamR17" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_FinishedSeamR17")
+transform = Transform3D(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.071500687, 0.1727, 0.012053325)
+
+[node name="FlowerPetal0" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_flower")
+position = Vector3(-0.006, 0.112, 0.0475)
+scale = Vector3(0.0055, 0.0055, 0.0015)
+
+[node name="FlowerPetal1" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_flower")
+position = Vector3(0.006, 0.112, 0.0475)
+scale = Vector3(0.0055, 0.0055, 0.0015)
+
+[node name="FlowerPetal2" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_flower")
+position = Vector3(0.0, 0.106, 0.0475)
+scale = Vector3(0.0055, 0.0055, 0.0015)
+
+[node name="FlowerPetal3" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_flower")
+position = Vector3(0.0, 0.118, 0.0475)
+scale = Vector3(0.0055, 0.0055, 0.0015)
+
+[node name="FlowerButton" type="MeshInstance3D" parent="Finished"]
+mesh = SubResource("Mesh_button")
+position = Vector3(0.0, 0.112, 0.0492)
+scale = Vector3(0.0035, 0.0035, 0.0016)
+
+[node name="Contacts" type="Node3D" parent="Fabric"]
+
+[node name="GripLeft" type="Marker3D" parent="Fabric/Contacts"]
+position = Vector3(-0.14, 0.012, 0.0)
+
+[node name="GripRight" type="Marker3D" parent="Fabric/Contacts"]
+position = Vector3(0.14, 0.012, 0.0)
+
+[node name="PinchCenter" type="Marker3D" parent="Fabric/Contacts"]
+position = Vector3(0.0, 0.018, 0.097)
+
+[node name="SurfaceCenter" type="Marker3D" parent="Fabric/Contacts"]
+position = Vector3(0.0, 0.0, 0.0)
+
+[node name="Contacts" type="Node3D" parent="Cut"]
+
+[node name="GripLeft" type="Marker3D" parent="Cut/Contacts"]
+position = Vector3(-0.14, 0.003, 0.0)
+
+[node name="GripRight" type="Marker3D" parent="Cut/Contacts"]
+position = Vector3(0.14, 0.003, 0.0)
+
+[node name="PinchCenter" type="Marker3D" parent="Cut/Contacts"]
+position = Vector3(0.0, 0.005, 0.075)
+
+[node name="SurfaceCenter" type="Marker3D" parent="Cut/Contacts"]
+position = Vector3(0.0, 0.0, 0.0)
+
+[node name="CutPoint" type="Marker3D" parent="Cut/Contacts"]
+position = Vector3(0.0, 0.006, 0.075)
+
+[node name="Contacts" type="Node3D" parent="Sewing"]
+
+[node name="GripLeft" type="Marker3D" parent="Sewing/Contacts"]
+position = Vector3(-0.112, 0.027, 0.0)
+
+[node name="GripRight" type="Marker3D" parent="Sewing/Contacts"]
+position = Vector3(0.112, 0.027, 0.0)
+
+[node name="PinchCenter" type="Marker3D" parent="Sewing/Contacts"]
+position = Vector3(0.07, 0.049, 0.01)
+
+[node name="SurfaceCenter" type="Marker3D" parent="Sewing/Contacts"]
+position = Vector3(0.0, 0.0, 0.0)
+
+[node name="NeedlePoint" type="Marker3D" parent="Sewing/Contacts"]
+position = Vector3(0.07, 0.049, 0.01)
+
+[node name="Contacts" type="Node3D" parent="Finished"]
+
+[node name="GripLeft" type="Marker3D" parent="Finished/Contacts"]
+position = Vector3(-0.108, 0.101, 0.0)
+
+[node name="GripRight" type="Marker3D" parent="Finished/Contacts"]
+position = Vector3(0.108, 0.101, 0.0)
+
+[node name="PinchCenter" type="Marker3D" parent="Finished/Contacts"]
+position = Vector3(0.0, 0.21, 0.03)
+
+[node name="SurfaceCenter" type="Marker3D" parent="Finished/Contacts"]
+position = Vector3(0.0, 0.0, 0.0)

@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "status": "source_material_only_not_runtime",
+  "files": [
+    {
+      "file": "raw/mhlw-life2024.xlsx",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/xls/life24-12.xlsx",
+      "resolved_url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/xls/life24-12.xlsx",
+      "http_status_observed": 200,
+      "bytes": 38036,
+      "retrieved_at_utc": "2026-11-04T19:31:15.489717+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/mhlw-life2024-about.pdf",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-01.pdf",
+      "resolved_url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-01.pdf",
+      "http_status_observed": 200,
+      "bytes": 176856,
+      "retrieved_at_utc": "2026-11-04T19:31:15.576142+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/mhlw-life2024-definitions.pdf",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-08.pdf",
+      "resolved_url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-08.pdf",
+      "http_status_observed": 200,
+      "bytes": 299007,
+      "retrieved_at_utc": "2026-11-04T19:31:15.700165+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/mhlw-life2024-release.pdf",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-14.pdf",
+      "resolved_url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-14.pdf",
+      "http_status_observed": 200,
+      "bytes": 179239,
+      "retrieved_at_utc": "2026-11-04T19:31:15.792158+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/mhlw-landing.html",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/index.html",
+      "resolved_url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/index.html",
+      "http_status_observed": 200,
+      "bytes": 11557,
+      "retrieved_at_utc": "2026-11-04T19:31:15.855446+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/mhlw-terms.html",
+      "url": "https://www.mhlw.go.jp/chosakuken/",
+      "resolved_url": "https://www.mhlw.go.jp/chosakuken/",
+      "http_status_observed": 200,
+      "bytes": 51593,
+      "retrieved_at_utc": "2026-11-04T19:31:15.945739+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/uis-wdi-primary-age-2019-2024.json",
+      "url": "https://api.worldbank.org/v2/country/JPN;FIN;FRA/indicator/SE.PRM.AGES?date=2019:2024&format=json&per_page=1000",
+      "resolved_url": "https://api.worldbank.org/v2/country/JPN;FIN;FRA/indicator/SE.PRM.AGES?date=2019:2024&format=json&per_page=1000",
+      "http_status_observed": 200,
+      "bytes": 3801,
+      "retrieved_at_utc": "2026-11-04T19:31:16.008557+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/uis-wdi-primary-age-metadata.json",
+      "url": "https://api.worldbank.org/v2/indicator/SE.PRM.AGES?format=json",
+      "resolved_url": "https://api.worldbank.org/v2/indicator/SE.PRM.AGES?format=json",
+      "http_status_observed": 200,
+      "bytes": 932,
+      "retrieved_at_utc": "2026-11-04T19:31:16.105070+00:00",
+      "timestamp_basis": "successful response body write time; original download batch timed out only on the subsequent World Bank HTML landing page",
+      "response_headers_retained": false
+    },
+    {
+      "file": "raw/wdi-primary-age-glossary.html",
+      "url": "https://databank.worldbank.org/metadataglossary/world-development-indicators/series/SE.PRM.AGES",
+      "resolved_url": "https://databank.worldbank.org/metadataglossary/world-development-indicators/series/SE.PRM.AGES",
+      "http_status_observed": 200,
+      "retrieved_at_utc": "2026-11-04T19:33:14.939838+00:00",
+      "timestamp_basis": "response completed",
+      "bytes": 56258,
+      "content_type": "text/html; charset=utf-8",
+      "last_modified": null,
+      "response_headers_retained": true
+    },
+    {
+      "file": "raw/wdi-summary-terms.html",
+      "url": "https://data.worldbank.org/summary-terms-of-use",
+      "resolved_url": "https://data.worldbank.org/summary-terms-of-use",
+      "http_status_observed": 200,
+      "retrieved_at_utc": "2026-11-04T19:33:15.101009+00:00",
+      "timestamp_basis": "response completed",
+      "bytes": 207426,
+      "content_type": "text/html; charset=utf-8",
+      "last_modified": null,
+      "response_headers_retained": true
+    }
+  ],
+  "unsaved_attempts": [
+    {
+      "url": "https://data.worldbank.org/indicator/SE.PRM.AGES",
+      "result": "urllib response timed out at 25s; the official page and its CC BY 4.0/source description were successfully read separately with the web tool. No fake raw HTML was written."
+    }
+  ]
+}

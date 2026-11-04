@@ -1,0 +1,110 @@
+{
+  "resident": "tomo",
+  "status": "dedicated_body_integrated_requires_current_runtime_review",
+  "service": "Tripo Studio",
+  "interaction": "Chrome browser UI only",
+  "task_id": "dc372926-a456-4f17-b424-c5717269a941",
+  "task_url": "https://studio.tripo3d.ai/ja/workspace/generate/dc372926-a456-4f17-b424-c5717269a941",
+  "input": "assets/artwork/jrpg-resident-renewal/tomo-concept-v1.png",
+  "input_sha256": "ce91b6edffa6f080e1019935a604d9b6a52b7f168bdab5a15b61a49dfccb5ca7",
+  "model_display": "H3.1 – 最高品質",
+  "requested": {
+    "triangle_target": 30000,
+    "texture_resolution": 2048,
+    "ultra_mesh": false,
+    "texture": true,
+    "pbr": true,
+    "remove_lighting": true,
+    "privacy": "private"
+  },
+  "user_approved_generation_credits": 30,
+  "credit_batch": {
+    "members": [
+      "saki",
+      "tomo",
+      "yui"
+    ],
+    "approved_total": 90,
+    "balance_before": 2895,
+    "balance_after_generation": 2805,
+    "generation": 90,
+    "GLB_export_additional_observed": 0,
+    "basis": "All three submitted jobs accepted after re-upload; browser balance 2895 to 2805. Exported local files verified, no further balance change observed."
+  },
+  "gameplay_integration": "Dedicated body and current runtime resources are retained. Historical verification reports were removed during cleanup; current foundation acceptance is tracked in docs/verification/current-status.md.",
+  "output": "assets/models/jrpg-resident-renewal/tomo/raw/CH_Tomo_JRPG_Raw.glb",
+  "bytes": 3118572,
+  "sha256": "dfa2f42235365fd8badd3053bef2a1a45f9718591229f1d7e2c35c19526edd65",
+  "glb_contents": {
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "skins": 0,
+    "animations": 0,
+    "triangles": 29032,
+    "embedded_images": [
+      {
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 555306,
+        "sha256": "3b2fd274123578d7a56ca7e659390973a31d106f47ef750ef578dc90bb6c6d0a"
+      },
+      {
+        "mime": "image/jpeg",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 404950,
+        "sha256": "47d5a9f88fdb089845afb9d7b63166db92fa5e92ceb578b3eca881dd6e47d95d"
+      },
+      {
+        "mime": "image/png",
+        "size": [
+          2048,
+          2048
+        ],
+        "bytes": 1243158,
+        "sha256": "934ee59f19012b410bd3cd3d7fec2f5cf9c7edcf5917f0cbb0b3694895fda434"
+      }
+    ]
+  },
+  "observed_browser_geometry": {
+    "triangle_faces": 29032,
+    "vertices": 17648
+  },
+  "raw_generation_history": {
+    "status_at_export": "raw_exported_review_pending",
+    "gameplay_integration_at_export": "not integrated",
+    "scope": "Original Tripo settings, task, credits, output, bytes, SHA, glb_contents and browser geometry below refer to the immutable raw export, not the rigged runtime body."
+  },
+  "canonical_authoring_source": "assets/models/jrpg-resident-renewal/source/tomo/CH_Tomo_AnimationMaster.blend",
+  "runtime": {
+    "model": "game/assets/models/tomo/CH_Tomo.glb",
+    "manifest": "game/assets/models/tomo/asset-manifest.json",
+    "scene": "game/scenes/characters/tomo.tscn",
+    "bones": 35,
+    "clips": 9,
+    "lods": 3,
+    "material": "TEXTURE_TOON",
+    "face_controls": [
+      "Blink",
+      "TiredEyes"
+    ],
+    "eye_charts": 2,
+    "eyelid_method": "compress",
+    "facial_geometry_morphs": 0
+  },
+  "remaining_work": [
+    "Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",
+    "Hair aging for the generated atlas remains unfinished; old palette-cell aging is disabled.",
+    "Natural walking and real skin deformation were observed, but foot sliding has not been resolved or accepted.",
+    "Activity-specific tools and fine finger interactions remain unfinished; shared project gestures are still generic.",
+    "Clothing, hair, bedding and pillow interactions are incomplete. Yui hair overlaps the pillow region and no hair/pillow deformation is implemented.",
+    "Night scenes can be dark, morning skin can overexpose, and crowded residents can overlap.",
+    "Human UI playtesting, clarity of player purpose and game-fun acceptance remain unfinished; a separate UI redesign is in progress."
+  ]
+}

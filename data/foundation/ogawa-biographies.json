@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "note": "Authored fictional G1 family histories, not inferred individual biographies or medical/behavioural models. Episodes predate simulation and never count as observed play, performed minutes, completed work or earned rewards. Weights and deadlines are game rules. Only these three family members are covered.",
+  "profiles": {
+    "nagisa": {
+      "episodes": [
+        {"id":"apprentice_baking","when":"十代後半から","participants":["nagisa"],"known_to":["nagisa","ryo"],"summary":"店でパンづくりの段取りを学び、発酵を急いで一度仕込みを失敗した。作業ノートへ手順を書く習慣になった。","influence":"仕込みの責任と、試作を記録する時間を大切にする"},
+        {"id":"earlier_shift_for_family","when":"凛の入学前","participants":["nagisa","ryo"],"known_to":["nagisa","ryo","rin"],"summary":"家族と相談して早朝の製造を続け、帰宅後の時間を家族と使う働き方を選んだ。","influence":"夕食を一人に任せず、家族との約束と自分の試作を両立したい"}
+      ],
+      "values":{"family_time":0.72,"reliability":0.86,"creative_pride":0.88,"independence":0.72},
+      "experience":{"cook":0.80,"care":0.55,"personal_project":0.60},
+      "responsibilities":["朝の製造を担当する","先に帰った大人が夕食の準備を引き受け、締切があれば相談する"],
+      "commitments":[{"id":"family_evening","kind":"family","actions":["care","family_time"],"due_minute":1140,"window_minutes":180,"required_minutes":25,"known_to":["nagisa","ryo","rin"],"label":"帰宅後は家族と落ち着いて過ごす"}],
+      "treasured_items":[{"id":"ogawa_nagisa_recipe_notebook","kind":"notebook","label":"失敗と試作を書いた作業ノート","fixture":"parents_storage","provenance":"authored_fiction"}],
+      "project":{"id":"seasonal_bread_plan","activity":"bread_notebook","label":"季節のパンの案をノートに書く","source_item_id":"ogawa_nagisa_recipe_notebook","storage_fixture":"parents_storage","required_minutes":90,"artifact_kind":"recipe_plan","independent":true}
+    },
+    "ryo": {
+      "episodes": [
+        {"id":"freelance_repeat_work","when":"独立後","participants":["ryo"],"known_to":["ryo","nagisa"],"summary":"単発の受注を続けながら継続案件を探してきた。説明用の下書きと受注の記録を机に残している。","influence":"約束した締切を守り、次の仕事につなげたい"},
+        {"id":"after_school_models","when":"凛の入学前から","participants":["ryo","rin"],"known_to":["ryo","rin","nagisa"],"summary":"仕事の合間に凛の世話をし、一緒に町の模型を作ってきた。最近は凛が先に考える時間を待つようにしている。","influence":"家族との制作を守りつつ、子どもの自立を邪魔したくない"}
+      ],
+      "values":{"family_time":0.88,"reliability":0.84,"creative_pride":0.78,"independence":0.58},
+      "experience":{"cook":0.28,"care":0.78,"personal_project":0.80},
+      "responsibilities":["平日の下校後に凛を見守る","締切が近い時は家事を頼み、余裕がある時は引き受ける"],
+      "commitments":[
+        {"id":"client_delivery","kind":"project","project_id":"client_draft","actions":["personal_project"],"due_minute":1140,"window_minutes":180,"required_minutes":90,"known_to":["ryo","nagisa"],"label":"依頼されたデザインの下書きをまとめる"},
+        {"id":"model_time_together","kind":"family","actions":["care","family_time"],"due_minute":1080,"window_minutes":180,"required_minutes":25,"known_to":["ryo","nagisa","rin"],"label":"凛と模型の続きをする時間を取る"}
+      ],
+      "treasured_items":[{"id":"ogawa_ryo_client_folder","kind":"client_folder","label":"受注の記録と下書きの束","fixture":"parents_desk","provenance":"authored_fiction"}],
+      "project":{"id":"client_draft","activity":"design_draft","label":"受注したデザインの下書きを進める","source_item_id":"ogawa_ryo_client_folder","storage_fixture":"parents_desk","required_minutes":90,"artifact_kind":"design_draft","independent":false}
+    },
+    "rin": {
+      "episodes": [
+        {"id":"school_discoveries","when":"入学してから","participants":["rin"],"known_to":["rin","nagisa","ryo"],"summary":"学校で見た建物や友達の工夫を、家で作る町の模型へ入れたいと思い始めた。","influence":"教わるだけでなく自分の案を試したい"},
+        {"id":"model_help_yesterday","when":"前日の夕方","participants":["rin","ryo"],"known_to":["rin","ryo","nagisa"],"summary":"模型の土台を亮と一緒に整えた。今日は自分で置く場所を考えてから見せる、と話した。","influence":"手伝いをいつでも受けるのではなく、まず一人で試し、使った物は片付ける"}
+      ],
+      "values":{"family_time":0.76,"reliability":0.40,"creative_pride":0.94,"independence":0.86},
+      "experience":{"care":0.20,"personal_project":0.24,"tidy_tools":0.30},
+      "responsibilities":["学校へ通う","自分で試した後は使った道具を片付ける"],
+      "commitments":[{"id":"own_idea_first","kind":"independent","actions":["personal_project","tidy_tools"],"due_minute":1110,"window_minutes":180,"required_minutes":15,"known_to":["rin","ryo","nagisa"],"label":"今日は自分の案を試してから家族に見せる"}],
+      "treasured_items":[{"id":"ogawa_rin_town_model_base","kind":"model_base","label":"家族で作り始めた町の模型の土台","fixture":"rin_desk","provenance":"authored_fiction"}],
+      "project":{"id":"town_model","activity":"town_model","label":"自分で考えた町の模型を進める","source_item_id":"ogawa_rin_town_model_base","storage_fixture":"rin_desk","required_minutes":60,"artifact_kind":"town_model","independent":true}
+    }
+  }
+}

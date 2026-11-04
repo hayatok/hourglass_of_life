@@ -1,0 +1,21 @@
+{
+  "view": "front",
+  "az": 0.0,
+  "matte": "/Users/hayatok/Documents/dev/hourglass_of_life/assets/models/jrpg-resident-renewal/saki/ref/front-matte.png",
+  "m_per_px": 0.0011163734776725304,
+  "iou": 0.9355,
+  "ref_only_pct": 3.19,
+  "render_only_pct": 3.48,
+  "band_width_diff": [
+    0.0041,
+    -0.0068,
+    -0.0054,
+    -0.0081,
+    0.0,
+    -0.002,
+    -0.0068,
+    -0.002,
+    0.0135,
+    -0.0034
+  ]
+}

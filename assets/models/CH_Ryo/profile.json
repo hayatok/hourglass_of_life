@@ -1,0 +1,54 @@
+{
+  "id": "ryo",
+  "height": 1.76,
+  "head_scale": 1.03,
+  "head_x": 1.07,
+  "width": 1.14,
+  "depth": 1.05,
+  "arm_length": 1.12,
+  "arm_close": 0.09,
+  "stance": 0.04,
+  "shoe_stance": 0.064,
+  "foot_turn": 0.18,
+  "jaw": 0.2,
+  "costume": "overshirt",
+  "top_color": [
+    0.052,
+    0.08,
+    0.18
+  ],
+  "pants_color": [
+    0.41,
+    0.32,
+    0.2
+  ],
+  "shoe_color": [
+    0.78,
+    0.73,
+    0.61
+  ],
+  "hair": {
+    "style": "quiff",
+    "color": [
+      0.045,
+      0.022,
+      0.012
+    ]
+  },
+  "motion": {
+    "walk_frames": 26,
+    "stride": 0.95
+  },
+  "sheet": "07-ryo-turnaround.png",
+  "ground": 841,
+  "top": 17,
+  "axis": [
+    263,
+    224,
+    261
+  ],
+  "reference": {
+    "subject_fraction": 0.9289740698985344,
+    "ground_fraction": 0.05186020293122886
+  }
+}

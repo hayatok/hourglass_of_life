@@ -1,0 +1,47 @@
+{
+  "iris_pixels": [
+    [
+      1199,
+      1443
+    ],
+    [
+      1323,
+      1533
+    ]
+  ],
+  "radius_x_fraction": 0.34,
+  "radius_y_fraction": 0.28,
+  "annotation": "Manual iris-centre picks from this resident raw embedded 2048px atlas; calibrated to geometry rays before GPU review.",
+  "center_offset_raw": {
+    "left": [
+      0,
+      0.0005
+    ],
+    "right": [
+      0,
+      -0.0014
+    ]
+  },
+  "radius_scale": {
+    "left": [
+      1.17,
+      1.15
+    ],
+    "right": [
+      1,
+      1
+    ]
+  },
+  "gpu_refinement": "Left lower white corner remained in the first GPU view; expanded this eye mask and aligned the independently sampled lid centers.",
+  "additional_eye_patches": [
+    {
+      "eye": "left",
+      "probe_raw": [
+        -0.030625,
+        0.8864874462370483
+      ],
+      "reason": "Outer/lower white corner belongs to another UV island; uncovered by a single chart despite enlargement."
+    }
+  ],
+  "eyelid_method": "occlusion"
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Mean positive backward velocity of foot joints in the low support window (both sample endpoints z <= 0.15m, above rest foot joint z0.112m); in-place 30fps cycle. Recalculated from fitted Haru bones, not inherited Aoi speed.",
+  "fps": 30,
+  "cycle_seconds": 0.8,
+  "support_samples": [
+    {
+      "side": "L",
+      "frame": 6,
+      "velocity_m_s": 0.34151583909988403,
+      "height_m": 0.14537367224693298
+    },
+    {
+      "side": "L",
+      "frame": 7,
+      "velocity_m_s": 1.0164329409599304,
+      "height_m": 0.1444876790046692
+    },
+    {
+      "side": "L",
+      "frame": 8,
+      "velocity_m_s": 1.6587576270103455,
+      "height_m": 0.14175286889076233
+    },
+    {
+      "side": "L",
+      "frame": 9,
+      "velocity_m_s": 2.224631756544113,
+      "height_m": 0.13698893785476685
+    },
+    {
+      "side": "L",
+      "frame": 10,
+      "velocity_m_s": 2.65319287776947,
+      "height_m": 0.13006865978240967
+    },
+    {
+      "side": "L",
+      "frame": 11,
+      "velocity_m_s": 2.8834131360054016,
+      "height_m": 0.133387953042984
+    },
+    {
+      "side": "R",
+      "frame": 18,
+      "velocity_m_s": 0.34151583909988403,
+      "height_m": 0.14521339535713196
+    },
+    {
+      "side": "R",
+      "frame": 19,
+      "velocity_m_s": 1.0164329409599304,
+      "height_m": 0.14430665969848633
+    },
+    {
+      "side": "R",
+      "frame": 20,
+      "velocity_m_s": 1.6587576270103455,
+      "height_m": 0.14151152968406677
+    },
+    {
+      "side": "R",
+      "frame": 21,
+      "velocity_m_s": 2.224631756544113,
+      "height_m": 0.13665294647216797
+    },
+    {
+      "side": "R",
+      "frame": 22,
+      "velocity_m_s": 2.65319287776947,
+      "height_m": 0.12958824634552002
+    },
+    {
+      "side": "R",
+      "frame": 23,
+      "velocity_m_s": 2.8834131360054016,
+      "height_m": 0.13345566391944885
+    }
+  ],
+  "measured_speed_m_s": 1.7963240295648575,
+  "contact_window_m": 0.15,
+  "limitation": "The inherited FK gait has varying stance velocity. This is a best-fit playback speed, not proof of zero sliding or final walk quality."
+}

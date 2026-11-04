@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "oecd_lmf12_2023",
+      "url": "https://webfs.oecd.org/els-com/Family_Database/LMF_1_2_Maternal_Employment.xlsx",
+      "resolved_url": "https://webfs.oecd.org/els-com/Family_Database/LMF_1_2_Maternal_Employment.xlsx",
+      "retrieved_at_utc": "2026-11-04T18:05:00+00:00",
+      "bytes": 750104,
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "last_modified": "Wed, 13 Sep 2023 14:40:57 GMT"
+    },
+    {
+      "source_id": "mhlw_employment_2024",
+      "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/dl/zuhyo.xlsx",
+      "resolved_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/dl/zuhyo.xlsx",
+      "retrieved_at_utc": "2026-11-04T18:05:00+00:00",
+      "bytes": 916801,
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "last_modified": "Tue, 26 Aug 2025 05:02:38 GMT"
+    },
+    {
+      "source_id": "mhlw_csls_2022_care82",
+      "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040071983&fileKind=1",
+      "resolved_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040071983&fileKind=1",
+      "retrieved_at_utc": "2026-11-04T18:05:00+00:00",
+      "bytes": 753,
+      "content_type": "text/csv;charset=UTF-8",
+      "last_modified": null
+    }
+  ]
+}

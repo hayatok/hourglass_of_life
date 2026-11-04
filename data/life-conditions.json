@@ -6,7 +6,9 @@
     "ogawa": {"label": "小川家", "cash": 45, "daily_basics": 6, "season_housing": 18, "daily_support": 0},
     "saeki": {"label": "佐伯家", "cash": 40, "daily_basics": 4, "season_housing": 12, "daily_support": 8},
     "shared_house": {"label": "共同住宅", "cash": 28, "daily_basics": 6, "season_housing": 21, "daily_support": 4},
-    "aoi_apartment": {"label": "葵の新しい暮らし", "cash": 0, "daily_basics": 3, "season_housing": 9, "daily_support": 0}
+    "aoi_apartment": {"label": "葵の新しい暮らし", "cash": 0, "daily_basics": 3, "season_housing": 9, "daily_support": 0},
+    "north_house": {"label": "北の共同住宅", "cash": 50, "daily_basics": 3, "season_housing": 9, "daily_support": 0},
+    "mori": {"label": "森家", "cash": 55, "daily_basics": 3, "season_housing": 9, "daily_support": 0}
   },
   "earnings_per_work_minute": {"nagisa": 0.035, "ryo": 0.04, "rin": 0, "osamu": 0.03, "fumi": 0, "maho": 0.025, "ritsu": 0.032, "aoi": 0},
   "project_materials": {"nagisa": 2, "ryo": 0, "rin": 3, "osamu": 4, "fumi": 1, "maho": 0, "ritsu": 2, "aoi": 4}
