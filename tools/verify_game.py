@@ -17,6 +17,7 @@ CHECKS={
  'household_day':('test_household_day.gd',r'Household day checks: \d+ passed, 0 failed'),
  'household_props':('test_household_props.gd',r'Household props source/attachment checks: \d+ passed, 0 failed'),
  'household_carry_frames':('test_household_carry_frames.gd',r'Household carry frame checks: \d+ passed, 0 failed'),
+ 'household_tools':('test_household_tools.gd',r'Household tool geometry checks: \d+ passed, 0 failed'),
  'foundation_world':('test_foundation_world.gd',r'Foundation world checks: \d+ passed, 0 failed'),
  'sewing_integration':('test_sewing_integration.gd',r'Sewing integration checks: \d+ passed, 0 failed'),
  'sewing_work':('test_sewing_work.gd',r'Sewing work checks: \d+ passed, 0 failed'),

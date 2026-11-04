@@ -1,38 +1,46 @@
 {
-  "created_utc": "2026-11-04T18:32:04.226737+00:00",
-  "source_commit_identification_only": "21cc967668becaaa5d5b2ad38c52235ceb7a46cb",
+  "created_utc": "2026-11-04T21:09:54.233310+00:00",
+  "source_commit_identification_only": "0d644fe42c25228bc31ec14f933e64adbe97c9df",
   "source_configuration": "preview-configuration.patch",
-  "application": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/foundation-preview-20261105-r2/命の砂時計・生活基盤プレビュー.app",
-  "archive": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/foundation-preview-20261105-r2/hourglass-of-life-foundation-preview-20261105-macOS.zip",
+  "application": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/foundation-preview-20261105-r3/命の砂時計・生活基盤プレビュー.app",
+  "archive": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/foundation-preview-20261105-r3/hourglass-of-life-foundation-preview-20261105-macOS.zip",
   "bundle_identifier": "com.hayatok.hourglassoflife.foundationpreview",
   "save_directory_name": "命の砂時計・生活基盤プレビュー",
   "scope": "Playable development checkpoint of the new house/life scene; roadmap stage 1 remains in progress.",
   "packaged_headless_boot": "passed",
   "native_ui_review": {
-    "status": "passed_for_listed_operations",
-    "reviewed_utc": "2026-11-04T18:35:08.786516+00:00",
-    "operations": [
-      "Packaged app opens the eight-room home and three residents",
-      "Pause and resume visibly stop and advance the clock",
-      "Resident button follows Nagisa",
-      "Plus button zooms the actual game camera",
-      "Overview after following returns to the whole house",
-      "Wall visibility toggles both ways",
-      "Save and reload returns 04:13 to 04:11 and restores the unfinished cooking state",
-      "Review application quits after use"
+    "source_commit_identification_only": "0d644fe",
+    "scope": "Actual exported native application, brief UI and state review; not full-day/natural-motion acceptance.",
+    "observed": [
+      "Native launch with three people and multiroom home",
+      "Pause/resume and advancing cooking phases",
+      "Ryo sleeping in his real bed",
+      "Person follow and authored history scroll",
+      "Person selection returns to interior cutaway",
+      "Plus-button zoom",
+      "Overview closes inspector and releases person follow",
+      "Save confirmation at 04:09",
+      "Paused load after 04:38 returns to 04:09 with saved bodies and unfinished cooking",
+      "Application quit"
     ],
-    "not_accepted": [
-      "Natural gait, seating, sleeping and tool animation",
-      "New family models",
-      "A continuously observed full day",
-      "Physical trackpad pinch gesture"
-    ]
+    "not_verified": [
+      "physical trackpad pinch",
+      "normal-speed full household day",
+      "camera drag: attempted but no visible rotation observed"
+    ],
+    "known_issues": [
+      "Exterior toggle while following someone gives a roof close-up; exterior should switch to overview",
+      "Old character meshes, clothes and shoes remain; not final JRPG family models",
+      "Whole-body cooking/tool/food transfers are not integrated in this checkpoint"
+    ],
+    "previous_preview_save_restored": true,
+    "own_app_quit": true
   },
   "remaining": [
-    "new family models",
-    "accepted natural locomotion",
-    "seat and bed interaction",
-    "whole-body tool and carrying motion",
-    "causal family backgrounds"
-  ]
+    "new family models and day/night clothing",
+    "accepted natural locomotion and furniture use over a full day",
+    "whole-body tool and carrying motion integrated with actual housework",
+    "full family-day acceptance"
+  ],
+  "native_review": "native-ui-review.json"
 }
