@@ -4,6 +4,10 @@
 
 渚の基準画は [turnaround-v1.png](../../assets/models/foundation-family/CH_Nagisa/ref/turnaround-v1.png)。2026年11月5日、組み込み image_gen で生成。これは制作の参照画像で、ゲーム内モデルやモーションの完成を表さない。画像に写る比率を測り、プロンプトに書いた頭身を実測値として扱わない。
 
+同じ制作方針の正面基準画：[亮](../../assets/models/foundation-family/CH_Ryo/ref/front-v1.png) / [凛](../../assets/models/foundation-family/CH_Rin/ref/front-v1.png)。生成は組み込み image_gen、[各プロンプト](../../assets/models/foundation-family/family-reference-prompts.json)を保存する。横・後ろの形状はまだ参照に含まず、推測を確定形として扱わない。
+
+モデルの制作時は靴・室内履き・足、日中着・寝間着、渚のエプロンを着脱できる形で分ける。寝具へ入る前後の身支度まで動作と接続し、衣服や靴を色だけ変えた状態で済ませない。既存の板状エプロンと一体化した履物をそのまま新しい生活の完成品にしない。
+
 ## 生成プロンプト
 
 ```text

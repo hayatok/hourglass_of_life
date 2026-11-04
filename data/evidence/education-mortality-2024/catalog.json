@@ -1,0 +1,257 @@
+{
+  "schema": 1,
+  "status": "independent_source_snapshot_for_future_G4",
+  "runtime_connected": false,
+  "selected_on_jst": "2026-11-05",
+  "new_scope": [
+    "education-system primary entrance age",
+    "period life-table age-specific mortality context"
+  ],
+  "not_covered": [
+    "fertility or conception probability",
+    "illness incidence",
+    "recovery duration",
+    "disability onset",
+    "education completion/dropout transitions",
+    "individual daily/minute hazards"
+  ],
+  "sources": [
+    {
+      "id": "mhlw_abridged_life_2024",
+      "publisher": "厚生労働省",
+      "title": "令和6(2024)年簡易生命表",
+      "release_date": "2025-07-25",
+      "raw_file": "raw/mhlw-life2024.xlsx",
+      "landing_url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/index.html",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/xls/life24-12.xlsx",
+      "definition_urls": [
+        "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-01.pdf",
+        "https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/dl/life24-08.pdf"
+      ],
+      "definition": "nqx is the conditional probability that a life-table survivor at exact age x dies before x+n; qx is not a crude population death rate. lx starts from a hypothetical 100000 live births. The selected annual rows have n=1 for ages0-104; the age105 row has n=infinity, not one year.",
+      "basis_period": "2024-01-01/2024-12-31",
+      "population": "Japanese nationals in Japan; sex-specific period mortality, national geography. Based on 2024 provisional vital-statistics deaths, 2023-2024 births and 2024 Japanese population estimates. Not foreign nationals or a local-town cohort.",
+      "selection": {
+        "sex_source_categories": [
+          "male",
+          "female"
+        ],
+        "age_exact_years": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105
+        ],
+        "observations": 212,
+        "excluded_neonatal_rows_per_sex": 8,
+        "exclusion_reason": "Week/month infant subdivisions are retained only in raw because they overlap annual age0. Do not add them to q0."
+      },
+      "variables": {
+        "qx": {
+          "unit": "probability0..1 over named interval",
+          "denominator": "life-table survivors at exact age x"
+        },
+        "lx": {
+          "unit": "hypothetical survivors from radix100000",
+          "denominator": null,
+          "source_reported_unit": "人"
+        },
+        "dx": {
+          "unit": "hypothetical deaths within interval",
+          "denominator": null,
+          "source_reported_unit": "人"
+        },
+        "Lx": {
+          "unit": "person-years within interval",
+          "denominator": null,
+          "source_reported_unit": "人",
+          "unit_note": "The Japanese sheet labels stationary population as persons; the underlying life-table exposure integral is represented here as person-years, not observed people or an event frequency."
+        },
+        "Tx": {
+          "unit": "remaining hypothetical person-years at x",
+          "denominator": null,
+          "source_reported_unit": "人",
+          "unit_note": "The Japanese sheet labels stationary population as persons; the underlying life-table exposure integral is represented here as person-years, not observed people or an event frequency."
+        },
+        "ex": {
+          "unit": "expected remaining years under fixed period mortality",
+          "denominator": "life-table survivors lx",
+          "source_reported_unit": "年"
+        }
+      },
+      "missing_policy": "The source uses … for unknown/inappropriate-to-display counts. Preserve that marker as null and keep its raw string; an unmarked absent numeric cell is a schema error. All 212 selected rows have every selected value in this snapshot.",
+      "limitations": [
+        "Period table, not an observed birth cohort followed through life",
+        "Ages0-104 use annual intervals;105+ is an open final interval",
+        "Published counts and probabilities are rounded; arithmetic may differ",
+        "No cause of death, diagnosis, recovery or disability status",
+        "Male/female are source statistical categories, not personality or family-role rules",
+        "No daily-hazard transformation is supplied"
+      ],
+      "license": {
+        "id": "PDL-1.0",
+        "url": "https://www.mhlw.go.jp/chosakuken/",
+        "checked_on_jst": "2026-11-05",
+        "saved_conditions": "raw/mhlw-terms.html",
+        "conditions": "Attribute MHLW and source URL, identify this project’s selection/processing, and do not present adaptations as government-authored. Logos and separately restricted content are excluded.",
+        "attribution": "厚生労働省「令和6年簡易生命表」（2025年7月25日公表、https://www.mhlw.go.jp/toukei/saikin/hw/life/life24/index.html、2026年11月5日取得）を選択・加工して作成。"
+      }
+    },
+    {
+      "id": "uis_wdi_primary_age_2026_02",
+      "publisher": "UNESCO Institute for Statistics (UIS); official redistribution by World Bank WDI",
+      "title": "Primary school starting age (years), SE.PRM.AGES",
+      "release": "UIS2026-02; WDI lastupdated2026-10-08; UIS API accessed by WDI2026-03-19",
+      "raw_file": "raw/uis-wdi-primary-age-2019-2024.json",
+      "metadata_file": "raw/uis-wdi-primary-age-metadata.json",
+      "landing_url": "https://data.worldbank.org/indicator/SE.PRM.AGES",
+      "url": "https://api.worldbank.org/v2/country/JPN;FIN;FRA/indicator/SE.PRM.AGES?date=2019:2024&format=json&per_page=1000",
+      "definition_urls": [
+        "https://databank.worldbank.org/metadataglossary/world-development-indicators/series/SE.PRM.AGES",
+        "https://api.uis.unesco.org/api/public/documentation/"
+      ],
+      "definition": "The theoretical age at which pupils enter primary education if they began at the official starting age of the lowest education level and studied full-time without repeating/skipping grades. Mapped to ISCED2011. It is not necessarily the most common actual entry age.",
+      "population": "National education-system metadata for Japan, Finland and France, reference school years2019-2024. It is not a sampled person-level ratio. Where a school year spans calendar years, the reference is the calendar year in which the school year ends.",
+      "selection": {
+        "countries": [
+          "JPN",
+          "FIN",
+          "FRA"
+        ],
+        "school_reference_years": [
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "observations": 18,
+        "unit": "years of age",
+        "denominator": null,
+        "denominator_note": "Not applicable: theoretical institutional age, not a rate"
+      },
+      "missing_policy": "Keep an explicit API value:null as null with missing_reason=source_null; never infer a nearby year’s value. Preserve obs_status and the empty API unit field; the official glossary supplies unit=Years. All18 selected values are present.",
+      "limitations": [
+        "Not a probability of enrolling at a particular age",
+        "Not the compulsory-schooling starting age or preschool age",
+        "Not learning readiness, achievement, completion, delay or dropout",
+        "A national institutional descriptor does not show local exceptions or individual decisions"
+      ],
+      "license": {
+        "id": "CC-BY-4.0-with-WB-data-additional-terms",
+        "url": "https://datacatalog.worldbank.org/public-licenses#cc-by",
+        "terms_url": "https://data.worldbank.org/summary-terms-of-use",
+        "checked_on_jst": "2026-11-05",
+        "saved_conditions": [
+          "raw/wdi-primary-age-glossary.html",
+          "raw/wdi-summary-terms.html"
+        ],
+        "conditions": "The specific WDI indicator metadata explicitly labels CC BY4.0. Retain World Bank and UNESCO UIS attribution, processing indication and no endorsement; follow the data terms including their additional mediation/arbitration condition. Do not extend this series-specific licence statement to all UIS bulk datasets or general World Bank website material.",
+        "attribution": "World Bank: World Development Indicators, SE.PRM.AGES, Primary school starting age (years): UNESCO Institute for Statistics, UIS API2026-02 (WDI lastupdated2026-10-08; retrieved2026-11-05), https://data.worldbank.org/indicator/SE.PRM.AGES. Selected and normalized by Hourglass of Life."
+      }
+    }
+  ]
+}
