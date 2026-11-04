@@ -210,6 +210,9 @@ func _activity(a: Dictionary, b: Dictionary, key: String) -> Dictionary:
 		return {"key":"social","title":"ゆっくり話す","place":"square","center":center,"group":"bench","venue":"bench","duration":25}
 	var activity: Dictionary = sim.resident_activities.definition(a,b,key)
 	if activity.is_empty(): return {}
+	if activity.key=="craft":
+		activity.duration=sim.sewing.planned_minutes(a,b,activity)
+		activity.cost=sim.work_family.project_material_cost(a,b,activity)
 	activity.payer = a.id
 	activity.group = activity.key
 	activity.venue = "project"
@@ -338,6 +341,7 @@ func _busy_until(p: Dictionary) -> int:
 		if p.action in ["eat","sleep"] or (p.action=="rest" and p.fatigue>.55):
 			return int(sim.elapsed)+_path_minutes(p)+maxi(0,int(p.remaining))
 		return int(sim.elapsed)
+	if sim.sewing.supports(meeting): return int(sim.elapsed)+sim.sewing.remaining_minutes(meeting)+5
 	var remaining: int = int(meeting.remaining)
 	if meeting.state in ["travel","waiting"]:
 		var other: Dictionary = sim.person(meeting.b if meeting.a==p.id else meeting.a)
@@ -392,6 +396,7 @@ func _dispatch(record: Dictionary, a: Dictionary, b: Dictionary) -> void:
 	meeting.appointment_id = record.id
 	meeting.not_before = record.start
 	meeting.remaining = record.duration
+	if sim.sewing.supports(meeting): meeting.remaining=sim.sewing.work_remaining(meeting)
 	record.meeting_id = meeting.id
 	record.state = "travel"
 	record.shared_before = {a.id:_shared_count(a,b.id),b.id:_shared_count(b,a.id)}

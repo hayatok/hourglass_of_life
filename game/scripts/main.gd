@@ -20,6 +20,7 @@ var bench_preview: Node3D
 var event_focus := ""
 var interaction_view: WorldInteractionView
 var tabletop_view: TabletopGameView
+var sewing_view: SewingWorkView
 
 @onready var camera: Camera3D = $Camera
 @onready var roster: VBoxContainer = %Roster
@@ -78,6 +79,8 @@ func _ready() -> void:
 	interaction_view.setup($Town,avatars,Sim)
 	tabletop_view = TabletopGameView.new();tabletop_view.name = "TabletopObjects";add_child(tabletop_view)
 	tabletop_view.setup($Town,avatars,Sim)
+	sewing_view = SewingWorkView.new();sewing_view.name="SewingObjects";add_child(sewing_view)
+	sewing_view.setup(avatars,Sim)
 	_build_roster()
 	_refresh_ui()
 	title.visible = true
@@ -151,6 +154,7 @@ func _rebuild() -> void:
 		record.get_node("Sign").text = item.label
 	if is_instance_valid(interaction_view): interaction_view.setup($Town,avatars,Sim)
 	if is_instance_valid(tabletop_view): tabletop_view.setup($Town,avatars,Sim)
+	if is_instance_valid(sewing_view): sewing_view.setup(avatars,Sim)
 	if is_node_ready():
 		var preferred: String = partner.get_selected_metadata() if partner.item_count>0 else ""
 		_build_roster()
@@ -265,6 +269,7 @@ func _process(delta: float) -> void:
 			_update_resident_name_label(actor,p.id)
 	if is_instance_valid(interaction_view): interaction_view.sync(delta)
 	if is_instance_valid(tabletop_view): tabletop_view.sync(delta)
+	if is_instance_valid(sewing_view): sewing_view.sync(delta)
 	ui_timer -= delta
 	if ui_timer<=0:
 		ui_timer = .2
@@ -472,7 +477,8 @@ func _refresh_detail() -> void:
 	%ProposeButton.text = "%sに提案する"%p.name.split(" ")[-1]
 	%Occupation.text = "%d歳・%s"%[p.age,p.occupation]
 	%Occupation.tooltip_text = p.occupation
-	%Activity.text = ("移動中 → " if p.moving else "")+Sim.ACTION_NAMES.get(p.action,p.action)
+	var making: String=SewingWorkView.activity_text(Sim,p)
+	%Activity.text = making if not making.is_empty() else ("移動中 → " if p.moving else "")+Sim.ACTION_NAMES.get(p.action,p.action)
 	var plan: Dictionary = p.get("cognition_plan",{})
 	var plan_reason: String = plan.get("reason","")
 	var active_plan: bool = plan.get("stage","") in ["travel","execute"]
@@ -513,6 +519,8 @@ func _refresh_detail() -> void:
 		text = _appointments_text(p)
 	else:
 		text = Sim.work_family.person_text(p)
+		var works: String=SewingWorkView.person_summary(Sim,p)
+		if not works.is_empty(): text+="\n\n"+works
 		var personal: String = Sim.social.person_text(p)
 		if not personal.is_empty(): text += "\n\n"+personal
 		text += "\n\n"+("暮らしの背景\n\n" if p.alive else "大切にしていたこと\n\n")+Sim.definitions[p.id].public_private_difference+"\n\n暮らしの始まりに気にかけていたこと\n"+Sim.definitions[p.id].goals[1]

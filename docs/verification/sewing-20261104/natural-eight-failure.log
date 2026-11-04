@@ -1,0 +1,28 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Autonomy sample 710 intervention=false collaborations=40
+Autonomy sample 710 intervention=true collaborations=55
+Autonomy sample 711 intervention=false collaborations=48
+Autonomy sample 711 intervention=true collaborations=40
+Autonomy sample 712 intervention=false collaborations=48
+Autonomy sample 712 intervention=true collaborations=52
+Autonomy sample 713 intervention=false collaborations=50
+Autonomy sample 713 intervention=true collaborations=57
+Autonomy sample 714 intervention=false collaborations=52
+Autonomy sample 714 intervention=true collaborations=62
+Autonomy sample 715 intervention=false collaborations=44
+Autonomy sample 715 intervention=true collaborations=60
+Autonomy sample 716 intervention=false collaborations=48
+Autonomy sample 716 intervention=true collaborations=44
+Autonomy sample 717 intervention=false collaborations=46
+Autonomy sample 717 intervention=true collaborations=54
+Autonomy sample 718 intervention=false collaborations=56
+Autonomy sample 718 intervention=true collaborations=49
+Autonomy sample 719 intervention=false collaborations=50
+Autonomy sample 719 intervention=true collaborations=42
+ERROR: Unmodified natural towns create, actually show and store owned pouches without player proposals
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://tests/test_autonomy.gd:14)
+       [1] run (res://tests/test_autonomy.gd:188)
+Autonomy checks: 23 passed, 1 failed

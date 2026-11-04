@@ -20,8 +20,8 @@
 
 ## 次に作る一連の遊び
 
-1. **布小物を作り、見せる**。材料を取り出し、道具で加工し、完成品を知人へ見せ、収納する。作りかけと完成品が実物として町に残る。
-2. **教わるか、自分で進めるかを選ぶ**。上達したい気持ち、自分で完成させたい気持ち、教える側の余裕から、実演・練習・手伝い・断りを選ぶ。
+1. **教わるか、自分で進めるかを選ぶ**。布小物づくりに、上達したい気持ち、自分で完成させたい気持ち、教える側の余裕をつなぎ、実演・練習・手伝い・断りを選ぶ。
+2. **作品を暮らしへつなぐ**。布の色・柄と作品の種類、使う・贈る・感想を聞く行動、材料の補充を用意する。同じ工程の反復から、用途と相手による選択へ広げる。
 3. **雨の日の過ごし方を選ぶ**。上着を用意して出かける、屋内へ誘い直す、別の日にする、濡れた服を干す。約束相手も自分の事情から返答する。
 
 この三つに使う人物・道具・場所・動作・UIを一緒に仕上げ、その後に制作や生活行動の種類を広げる。
@@ -52,5 +52,5 @@
 ## 設計と進捗の参照先
 
 - 設計：[欲求と行動](needs-and-behavior-design.md) / [モーションと街の物](motion-and-world-interaction.md) / [季節・服装・経済](world-context-and-actions.md) / [調査資料](research-notes.md)
-- 作業管理：[人物 #17](https://github.com/hayatok/hourglass_of_life/issues/17) / [UI #18](https://github.com/hayatok/hourglass_of_life/issues/18) / [モーション #19](https://github.com/hayatok/hourglass_of_life/issues/19) / [欲求と個性 #12](https://github.com/hayatok/hourglass_of_life/issues/12) / [関係 #13](https://github.com/hayatok/hourglass_of_life/issues/13) / [人口 #14](https://github.com/hayatok/hourglass_of_life/issues/14) / [人生 #15](https://github.com/hayatok/hourglass_of_life/issues/15) / [世界と暮らし #20](https://github.com/hayatok/hourglass_of_life/issues/20)
-- 実装・検証の記録：[モーション](verification/motion-20261104/README.md) / [天候と暮らし](verification/weather-20261104/README.md)
+- 作業管理：[人物 #17](https://github.com/hayatok/hourglass_of_life/issues/17) / [UI #18](https://github.com/hayatok/hourglass_of_life/issues/18) / [モーション #19](https://github.com/hayatok/hourglass_of_life/issues/19) / [布小物 #21](https://github.com/hayatok/hourglass_of_life/issues/21) / [欲求と個性 #12](https://github.com/hayatok/hourglass_of_life/issues/12) / [関係 #13](https://github.com/hayatok/hourglass_of_life/issues/13) / [人口 #14](https://github.com/hayatok/hourglass_of_life/issues/14) / [人生 #15](https://github.com/hayatok/hourglass_of_life/issues/15) / [世界と暮らし #20](https://github.com/hayatok/hourglass_of_life/issues/20)
+- 実装・検証の記録：[モーション](verification/motion-20261104/README.md) / [天候と暮らし](verification/weather-20261104/README.md) / [布小物](verification/sewing-20261104/README.md)

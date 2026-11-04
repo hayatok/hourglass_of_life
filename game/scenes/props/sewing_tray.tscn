@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Material_wood"]
+albedo_color = Color(0.7, 0.5, 0.29, 1)
+roughness = 0.88
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_edge"]
+albedo_color = Color(0.54, 0.35, 0.19, 1)
+roughness = 0.87
+metallic = 0
+
+[sub_resource type="StandardMaterial3D" id="Material_liner"]
+albedo_color = Color(0.79, 0.74, 0.59, 1)
+roughness = 0.98
+metallic = 0
+
+[sub_resource type="BoxMesh" id="Mesh_base"]
+material = SubResource("Material_wood")
+size = Vector3(0.38, 0.016, 0.27)
+
+[sub_resource type="BoxMesh" id="Mesh_liner"]
+material = SubResource("Material_liner")
+size = Vector3(0.352, 0.002, 0.242)
+
+[sub_resource type="BoxMesh" id="Mesh_side"]
+material = SubResource("Material_edge")
+size = Vector3(0.012, 0.024, 0.27)
+
+[sub_resource type="BoxMesh" id="Mesh_end"]
+material = SubResource("Material_edge")
+size = Vector3(0.356, 0.024, 0.012)
+
+[node name="SewingTray" type="Node3D"]
+metadata/bottom_origin = true
+metadata/contents_height = 0.018
+metadata/outer_size = Vector3(0.38, 0.028, 0.27)
+
+[node name="Base" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_base")
+position = Vector3(0.0, 0.008, 0.0)
+
+[node name="Liner" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_liner")
+position = Vector3(0.0, 0.017, 0.0)
+
+[node name="LeftRim" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_side")
+position = Vector3(-0.184, 0.016, 0.0)
+
+[node name="RightRim" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_side")
+position = Vector3(0.184, 0.016, 0.0)
+
+[node name="BackRim" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_end")
+position = Vector3(0.0, 0.016, -0.129)
+
+[node name="FrontRim" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_end")
+position = Vector3(0.0, 0.016, 0.129)
+
+[node name="ContentsSurface" type="Marker3D" parent="."]
+position = Vector3(0.0, 0.018, 0.0)
+
+[node name="GripCenter" type="Marker3D" parent="."]
+position = Vector3(0.0, 0.014, 0.129)

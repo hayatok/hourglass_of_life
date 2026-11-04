@@ -1,8 +1,8 @@
 {
   "asset": "CH_Haru",
-  "generated": "2026-11-04T02:00:34.788770+09:00",
+  "generated": "2026-11-04T04:21:43.972550+00:00",
   "blender": "5.2.1 LTS",
-  "source": "builds/haru-hand-repair/r2/CH_Haru_HandWeights_Master.blend",
+  "source": "builds/haru-finger-influence-20261104/CH_Haru_FingerIsolation_Master.blend",
   "target_engine": "Godot 4.7 Compatibility",
   "units": {
     "system": "METRIC",
@@ -242,11 +242,11 @@
     "limitation": "The inherited FK gait has varying stance velocity. This is a best-fit playback speed, not proof of zero sliding or final walk quality."
   },
   "raw_source_sha256": "5b0d35cdace93c434abcee76f75c711a5970e52b16474fb9cd0147f66fbeac71",
-  "exported_glb_sha256": "678f022d3f5471a9412564e512602d465d00515882c7c4f8ddd655f55df009a5",
+  "exported_glb_sha256": "0c9115d585a1c7df9b9b3e3af1e2e311b8c080580fe26a51612f82f392ef803f",
   "lod_sha256": {
-    "CH_Haru_LOD2.glb": "de1793d682bda05a705681fdcd68437bb33fc264b25cade19899f36641292962",
-    "CH_Haru.glb": "678f022d3f5471a9412564e512602d465d00515882c7c4f8ddd655f55df009a5",
-    "CH_Haru_LOD1.glb": "5754b3003cc63816af342f3a14e876011a5108c26b9b347d4f01441b5b554c7a"
+    "CH_Haru_LOD2.glb": "48a1dc555dbcd536ca053c5a68046d550a8fa92a688a2477002b7f1786e737c0",
+    "CH_Haru.glb": "0c9115d585a1c7df9b9b3e3af1e2e311b8c080580fe26a51612f82f392ef803f",
+    "CH_Haru_LOD1.glb": "1a03837c0e7e3e936b2f645fc825e939a09c774c9d2f31a7f8c75dc89906ced0"
   },
   "source_images": [
     {
@@ -340,7 +340,7 @@
     "LOD0/1/2 share all 35 named bind poses and one surface; only mesh geometry differs.",
     "The unchanged painted atlas is sampled by the dedicated TEXTURE_EYES shader: Blink closes eyes during sleep, TiredEyes follows fatigue; mouth/Smile controls remain unsupported."
   ],
-  "revision": "r3-lod-seam-repair",
+  "revision": "r4-finger-lower-body-weight-isolation",
   "distance_lod_texture_policy": "LOD0 retains exact r1 bytes and original three images/PBR source metadata. LOD1/2 are geometry-only with one untextured material slot and no images; the actor keeps its LOD0 material override when swapping mesh and skin. Standalone distance LODs are intentionally untextured.",
   "r2_verification": "assets/models/haru-cute-pilot/review/r2/comparison.json",
   "lod_seam_repair": {
@@ -386,5 +386,51 @@
       479,
       187
     ]
+  },
+  "finger_lower_body_weight_repair": {
+    "script": "tools/repair_haru_finger_weights.py",
+    "previous_revision": "r3-lod-seam-repair",
+    "manifest": "builds/asset-repairs/haru-finger-weights/20261104T042055518520Z/manifest.json",
+    "rule": "For vertices with a DEF-fingerN.L/R influence >=0.85, remove positive DEF-thigh/shin/foot/toe.L/R weights and normalize only the retained influences. All other vertices and attributes remain byte-identical.",
+    "changed_vertices": [
+      78,
+      51,
+      17
+    ],
+    "removed_influences": [
+      {
+        "DEF-thigh.R": 33,
+        "DEF-thigh.L": 45
+      },
+      {
+        "DEF-thigh.R": 23,
+        "DEF-thigh.L": 28
+      },
+      {
+        "DEF-thigh.R": 9,
+        "DEF-thigh.L": 8
+      }
+    ],
+    "removed_weight_ranges": [
+      [
+        0.0049285804852843285,
+        0.1478530317544937
+      ],
+      [
+        0.007354359608143568,
+        0.1478530317544937
+      ],
+      [
+        0.012140076607465744,
+        0.09396979212760925
+      ]
+    ],
+    "preserved_bytes": "All bytes outside the selected WEIGHTS_0 rows, including GLB JSON, positions, normals, UVs, joints, bind poses, animations, materials and embedded images.",
+    "identification_only": "The input/output SHA values identify the assets. They are not a game, skin-contact or rendering test.",
+    "authoring_master": "builds/haru-finger-influence-20261104/CH_Haru_FingerIsolation_Master.blend",
+    "authoring_master_sync": "Synchronized into a distinct Blender authoring copy, preserving the previous master; all three GLBs cleanly reimported.",
+    "runtime_quality_status": "The post-modifier all-weight skin-surface matrix passes at all 72 rig/phase/progress points within 6mm, including Haru. Actual Haru GPU gameplay and LOD checks pass; see docs/verification/sewing-20261104.",
+    "authoring_master_status": "Synchronized into a distinct authoring copy with build/16_apply_hand_weights_master.py; all three repaired GLBs cleanly reimported. Previous master retained.",
+    "master_sync_report": "builds/haru-finger-influence-20261104/master-and-roundtrip.json"
   }
 }

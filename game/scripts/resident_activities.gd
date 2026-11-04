@@ -132,7 +132,8 @@ func _feasible(a: Dictionary, b: Dictionary, project: Dictionary) -> Dictionary:
 	var hypothetical := {"mode":"project","project":project}
 	for p in [a,b]:
 		if not sim.work_family.meeting_compatible(p,hypothetical): return {}
-	if sim.work_family.household(a).cash<float(project.cost): return {}
+	if sim.work_family.household(a).cash<sim.work_family.project_material_cost(a,b,project): return {}
+	if project.key=="craft" and not sim.sewing.available(a,b,project): return {}
 	var pair: Array = sim.activities.pair_for(project.key,project.center,[a.id,b.id])
 	if pair.size()!=2: return {}
 	for spot in pair:
@@ -152,7 +153,10 @@ func _feasible(a: Dictionary, b: Dictionary, project: Dictionary) -> Dictionary:
 			if not routine.is_empty():
 				var destination: String = sim._place_for(p,routine.place)
 				return_minutes = _travel(pair[index].approach,project.place,sim.SITES[destination],destination)
-		if travel+int(project.duration)+return_minutes+1>=int(next.minutes): return {}
+		var duration: int=sim.sewing.planned_minutes(a,b,project) if project.key=="craft" else int(project.duration)
+		var total: int=travel+duration+return_minutes+1
+		if total>=int(next.minutes): return {}
+		if project.key=="craft" and float(p.hunger)+total*sim.HUNGER_PER_MINUTE>.78: return {}
 	return {"travel_minutes":travel,"spots":[pair[0].id,pair[1].id]}
 
 func _travel(origin: Vector3, place: String, target: Vector3, destination: String) -> int:

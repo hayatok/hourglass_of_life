@@ -103,6 +103,8 @@ func run() -> void:
 	# The production table sits south of the z=7 street, clear of the homes.
 	var art := assembly(layout,"CraftArt",Vector3(-2.8,0,8.3))
 	workstation(art,"craft_art","square",Vector3.ZERO,"craft")
+	var sewing_cabinet: Node3D=load("res://game/scenes/props/sewing_cabinet.tscn").instantiate()
+	sewing_cabinet.name="SewingCabinet";sewing_cabinet.position=Vector3(-4.55,0,8.35);add(layout,sewing_cabinet)
 	var packed := PackedScene.new()
 	assert(packed.pack(layout)==OK)
 	assert(ResourceSaver.save(packed,"res://game/scenes/activity_layout.tscn")==OK)

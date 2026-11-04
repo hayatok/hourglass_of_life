@@ -204,6 +204,12 @@ layout_mode = 2
 text = "今は相談できる相手がいません。"
 autowrap_mode = 3
 
+[node name="ProjectActivity" type="OptionButton" parent="Dialog/Margins/Layout/Scroll/Pages/Target"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
 [node name="Execute" type="Button" parent="Dialog/Margins/Layout/Scroll/Pages/Target"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)

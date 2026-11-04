@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" path="res://game/assets/furniture/PR_Radio.glb" id="9_bewk6"]
 [ext_resource type="PackedScene" path="res://game/scenes/props/radio_shelf.tscn" id="10_radio_shelf"]
 
+[ext_resource type="PackedScene" path="res://game/scenes/props/sewing_cabinet.tscn" id="11_sewing_cabinet"]
+
 [node name="ActivityLayout" type="Node3D" unique_id=963921295]
 
 [node name="Ogawa" type="Node3D" parent="." unique_id=1711990862]
@@ -1367,3 +1369,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.99, 0.34)
 
 [node name="HandRight" type="Marker3D" parent="Mori/home_mori_deskAssembly/home_mori_desk_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.99, 0.34)
+
+[node name="SewingCabinet" parent="." instance=ExtResource("11_sewing_cabinet")]
+position = Vector3(-4.55, 0, 8.35)

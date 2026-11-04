@@ -1,0 +1,104 @@
+{
+	"clock": "13:07",
+	"elapsed": 1447,
+	"item": {
+		"container": "sewing_table",
+		"cut_minutes": 12,
+		"holder": "",
+		"id": "sewing_cloth_06",
+		"kind": "fabric",
+		"material_used": true,
+		"ordinal": 6,
+		"owner": "yui",
+		"pitch": 0.0,
+		"position": {
+			"__vector3": [
+				-2.79999995231628,
+				0.949999988079071,
+				8.55000019073486
+			]
+		},
+		"reserved_by": "sewing_1",
+		"result_recorded": false,
+		"sew_minutes": 5,
+		"shown_to": [],
+		"stage": "sewing",
+		"state": "on_table",
+		"yaw": 6.28318530717959
+	},
+	"save_file": "res://builds/sewing-native/natural-town.json",
+	"schema": 9,
+	"scope": "Unmodified twelve-person natural simulation; native inspection entry point, not human playtesting.",
+	"seed": 711,
+	"session": {
+		"a": "tomo",
+		"b": "yui",
+		"carry_yaw": 1.63615655024955,
+		"cut_at_start": 0,
+		"finished": -1,
+		"id": "sewing_1",
+		"maker": "yui",
+		"meeting": "meeting_9",
+		"object_id": "sewing_cloth_06",
+		"phase": "sew",
+		"phase_carry_yaw": 1.63615655024955,
+		"phase_object_position": {
+			"__vector3": [
+				-2.79999995231628,
+				0.949999988079071,
+				8.55000019073486
+			]
+		},
+		"phase_object_yaw": 6.28318530717959,
+		"phase_started": 1439,
+		"reason": "",
+		"recipe": "drawstring_pouch",
+		"required_work": 45,
+		"resume_finished": false,
+		"sew_at_start": 0,
+		"show_yaw": 3.14159265358979,
+		"shown": false,
+		"source_approach": {
+			"__vector3": [
+				-3.82500004768372,
+				0.0,
+				9.05000019073486
+			]
+		},
+		"source_position": {
+			"__vector3": [
+				-3.82500004768372,
+				0.949999988079071,
+				8.42000007629395
+			]
+		},
+		"started": 1403,
+		"targets": {
+			"tomo": {
+				"position": {
+					"__vector3": [
+						-3.14999985694885,
+						0.0,
+						8.96000003814697
+					]
+				},
+				"spot": "craft_art_0"
+			},
+			"yui": {
+				"position": {
+					"__vector3": [
+						-2.45000004768372,
+						0.0,
+						8.96000003814697
+					]
+				},
+				"spot": "craft_art_1"
+			}
+		},
+		"tool_phase": "operate",
+		"tool_started": 1443,
+		"travel_distance": 1.37794232368469,
+		"viewer": "tomo",
+		"worked_minutes": 17
+	}
+}

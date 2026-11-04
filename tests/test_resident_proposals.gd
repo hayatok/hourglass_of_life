@@ -21,7 +21,8 @@ func expect(value: bool, message: String) -> void:
 func snapshot(world) -> Dictionary:
 	return world._encode({"people":world.people,"elapsed":world.elapsed,"rng":str(world.rng.state),
 		"events":world.events,"meetings":world.meetings,"event_serial":world.event_serial,"meeting_serial":world.meeting_serial,
-		"social":world.social.serialize(),"agenda":world.agenda.serialize(),"work":world.work_family.serialize(),"life":world.life.serialize(),"interactions":world.interactions.serialize(),"tabletop":world.tabletop.serialize()}).duplicate(true)
+		"social":world.social.serialize(),"agenda":world.agenda.serialize(),"work":world.work_family.serialize(),"life":world.life.serialize(),"interactions":world.interactions.serialize(),"tabletop":world.tabletop.serialize(),
+		"weather":world.weather.serialize(),"sewing":world.sewing.serialize()}).duplicate(true)
 
 func fresh(id: String, other: String, running: bool = true) -> void:
 	panel.close_panel()
@@ -99,6 +100,57 @@ func verify_partner_popup() -> void:
 	expect(snapshot(sim)==before and replies.is_empty(),"Opening, scrolling and choosing a popup partner never submits a proposal")
 	panel.close_panel()
 
+func verify_project_popup() -> void:
+	var previous_size := root.size
+	var previous_scale_size := root.content_scale_size
+	root.size = Vector2i(1024,700);root.content_scale_size = Vector2i(1024,700)
+	await fresh("tomo","yui")
+	var before := snapshot(sim)
+	panel.choose_kind("project")
+	var recipes: OptionButton = panel.get_node("%ProjectActivity")
+	expect(recipes.visible and snapshot(sim)==before and replies.is_empty(),"Choosing a project exposes its recipes without changing weather, sewing or the rest of the world")
+	var craft_index := -1
+	for index in recipes.item_count:
+		if str(recipes.get_item_metadata(index))=="craft": craft_index = index;break
+	recipes.grab_focus()
+	input_key(root,KEY_SPACE,true)
+	await process_frame
+	input_key(root,KEY_SPACE,false)
+	await process_frame;await process_frame
+	var popup: PopupMenu = recipes.get_popup()
+	expect(popup.visible and craft_index>=0,"Space opens the actual recipe PopupMenu with a cloth-craft option")
+	var popup_position := popup.position if root.gui_embed_subwindows else popup.position-root.position
+	var rect := Rect2(Vector2(popup_position),Vector2(popup.size))
+	expect(Rect2(Vector2.ZERO,Vector2(1024,700)).encloses(rect),"The actual recipe popup stays inside the 1024-by-700 viewport")
+	report.project_popup = {"viewport":sim._encode(Vector2(root.size)),"position":sim._encode(Vector2(popup_position)),"size":sim._encode(Vector2(popup.size)),"native_window":not root.gui_embed_subwindows,"opened_by":"Space on focused OptionButton","recipe":"craft"}
+	if craft_index>=0:
+		popup.set_focused_item(craft_index);popup.scroll_to_item(craft_index)
+		await process_frame
+		input_key(popup,KEY_ENTER,true)
+		input_key(popup,KEY_ENTER,false)
+		await process_frame
+	expect(recipes.get_selected_metadata()=="craft" and not popup.visible,"Enter selects cloth craft through the actual recipe popup")
+	expect(snapshot(sim)==before and replies.is_empty(),"Opening and selecting a recipe only changes the preview, including no weather or sewing mutations")
+	var execute_text: String = panel.get_node("%Execute").text
+	expect(sim.person("tomo").name in execute_text and sim.person("yui").name in execute_text and "布小物" in execute_text,"The submit button names both residents and the selected cloth craft")
+	# Finish the selection's input/focus return before the independent close
+	# contract. Popup focus loss queues a deferred hide, so observe the real
+	# open -> close_panel -> hidden transition without yielding between them.
+	root.grab_focus()
+	await process_frame;await process_frame
+	recipes.show_popup()
+	var opened_before_close: bool = popup.visible and panel.visible and recipes.is_visible_in_tree()
+	expect(opened_before_close,"The actual recipe popup is visible immediately before close_panel is called")
+	panel.close_panel()
+	var closed_synchronously: bool = not panel.visible and not popup.visible
+	await process_frame
+	expect(closed_synchronously and not panel.visible and not popup.visible and snapshot(sim)==before and replies.is_empty(),"close_panel synchronously closes its open recipe popup and keeps it closed without submitting or changing the world")
+	report.project_popup.close_panel = {"opened_before_close":opened_before_close,"closed_synchronously":closed_synchronously,"still_closed_next_frame":not popup.visible,"activation":"OptionButton.show_popup; synchronous close contract after the separate keyboard-selection check"}
+	panel.choose_activity("")
+	expect(recipes.get_selected_metadata()=="","Recipe selection returns to automatic before the existing direct-API comparisons")
+	root.size = previous_size;root.content_scale_size = previous_scale_size
+	await process_frame
+
 func capture(name: String) -> void:
 	if DisplayServer.get_name()=="headless": return
 	await process_frame;await RenderingServer.frame_post_draw
@@ -166,6 +218,7 @@ func run() -> void:
 	var escape := InputEventKey.new();escape.keycode = KEY_ESCAPE;escape.pressed = true
 	panel._input(escape)
 	expect(not panel.visible and sim.running,"Escape closes the modal and restores its saved running state")
+	await verify_project_popup()
 	for row in [["rest","tomo","yui"],["goal","saki","haru"],["meet","tomo","yui"],["support","tomo","osamu"],["project","tomo","yui"],["play","haru","osamu"]]:
 		await verify_direct(row[0],row[1],row[2])
 	expect(panel.get_node("%Done").theme_type_variation==&"PrimaryButton","Returning to town becomes the primary action after a reply")

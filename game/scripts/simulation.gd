@@ -86,6 +86,7 @@ var agenda: ResidentAgenda
 var support_plans: ResidentSupportPlans
 var interactions: WorldInteractions
 var tabletop: TabletopGame
+var sewing: SewingWork
 var weather: WorldWeather
 var resident_weather: ResidentWeather
 var load_error := ""
@@ -189,6 +190,8 @@ func reset(seed_value: int = 71103, population: int = BASE_POPULATION) -> void:
 	interactions.reset()
 	if tabletop==null: tabletop = TabletopGame.new(self)
 	tabletop.reset()
+	if sewing==null: sewing = SewingWork.new(self)
+	sewing.reset()
 	for p in people:
 		# The clock starts in an existing day, so active shifts are already underway.
 		var routine = _routine_at(p)
@@ -237,6 +240,7 @@ func advance_minutes(amount: float, stop_at_review: bool = false) -> void:
 		life.tick()
 		interactions.tick()
 		tabletop.tick()
+		sewing.tick()
 		work_family.tick()
 		support_plans.tick()
 		agenda.tick()
@@ -508,9 +512,8 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 	if origin_place == destination and activities.inside(destination,origin) and activities.inside(destination,target):
 		return activities.indoor_route(destination,origin,target)
 	var public_shortcut := origin_place==destination and origin.distance_to(target)<3
-	var public_obstacles: Array = []
+	var public_obstacles: Array = _public_route_obstacles()
 	if public_shortcut:
-		public_obstacles = _public_route_obstacles()
 		if _public_segment_clear(origin,target,public_obstacles): return [target]
 	var path: Array = []
 	var departure: Vector3 = ENTRIES.get(origin_place, origin)
@@ -539,7 +542,7 @@ func route(origin: Vector3, origin_place: String, target: Vector3, destination: 
 		path.append_array(activities.indoor_route(destination,entry,target))
 	# Keep the street graph for the detour. Its final connectors also need to
 	# clear furniture: the closest street point can lie across the same table.
-	return _public_clear_path(origin,path,public_obstacles) if public_shortcut else path
+	return _public_clear_path(origin,path,public_obstacles)
 
 func _public_route_obstacles() -> Array:
 	# ActivityPlaces already expands authored public tables by the .18m body
@@ -650,8 +653,8 @@ func confirm_offer(selected: String) -> Dictionary:
 func propose_support(receiver: String, giver: String) -> Dictionary:
 	return work_family.propose_support(receiver,giver)
 
-func propose_project(first: String, second: String) -> Dictionary:
-	return work_family.propose_project(first,second)
+func propose_project(first: String, second: String, activity: String = "") -> Dictionary:
+	return work_family.propose_project(first,second,activity)
 
 func propose_play(first: String, second: String) -> Dictionary:
 	return tabletop.propose(first,second)
@@ -686,6 +689,22 @@ func _tick_meetings() -> void:
 			var play_stage: String = tabletop.advance(m)
 			if play_stage in ["completed","interrupted"]:
 				_finish_meeting(m,play_stage=="completed");ended.append(m)
+			continue
+		if sewing.supports(m):
+			if not m.has("sewing_id") and not sewing.begin(m):
+				_finish_meeting(m,false);ended.append(m);continue
+			var sewing_stage: String = sewing.advance(m)
+			if sewing_stage in ["completed","interrupted"]:
+				_finish_meeting(m,sewing_stage=="completed");ended.append(m);continue
+			if sewing_stage=="working":
+				if m.state!="engaged":
+					m.state="engaged";planner.engaged(m)
+				if not work_family.project_tick(m):
+					_finish_meeting(m,false);ended.append(m);continue
+				m.remaining=maxf(0,float(m.remaining)-1)
+				for p in [a,b]: p.connection=maxf(0,p.connection-.006)
+				sewing.worked(m)
+				m.remaining=sewing.work_remaining(m)
 			continue
 		if interactions.supports(m):
 			if not m.has("interaction_id") and not interactions.begin(m):
@@ -747,13 +766,16 @@ func _finish_meeting(m: Dictionary, completed: bool) -> void:
 		planner.finish(m,completed)
 		for p in [a,b]: p.meeting_id = "";p.remaining = 0;p.routine_id = ""
 		return
+	sewing.end(m,completed)
 	interactions.end(m,completed)
 	# Finished work remains real even if a later cleanup is forcibly interrupted.
 	var achieved: bool = completed or m.get("work_completed",false)
-	social.finish(m,achieved)
+	# A replay of a completed object is not a new completed conversation.
+	var shared_success: bool = bool(m.get("sewing_presented",false)) if sewing.supports(m) else achieved
+	social.finish(m,shared_success)
 	if achieved: work_family.finish_project(m)
 	if agenda!=null: agenda.finish(m,achieved)
-	if achieved:
+	if shared_success:
 		var used_skill: String = m.get("project",{}).get("skill","")
 		_learn_profile(a,b,used_skill)
 		_learn_profile(b,a,used_skill)
@@ -859,6 +881,7 @@ func save_game(path: String = SAVE_PATH) -> bool:
 	data.interactions = interactions.serialize()
 	data.tabletop = tabletop.serialize()
 	data.weather = weather.serialize()
+	data.sewing = sewing.serialize()
 	data.route_layout = 1
 	var file = FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file == null:
@@ -911,6 +934,7 @@ func load_game(path: String = SAVE_PATH) -> bool:
 	agenda.restore(data.get("agenda",{}))
 	interactions.restore(data.get("interactions",{}))
 	tabletop.restore(data.get("tabletop",{}))
+	sewing.restore(data.sewing)
 	for p in people:
 		cognition.upgrade_person(p)
 		planner.upgrade_person(p)

@@ -80,8 +80,15 @@ func run() -> void:
 	while not sim.meetings.is_empty() and sim.meetings[0].state=="travel" and limit<180:
 		sim.advance_minutes(1)
 		limit += 1
-	sim.advance_minutes(45)
-	expect(a.goal_progress==0 and a.private_project>=.18,"An unrelated craft advances private work rather than the radio wish")
+	var cloth_meeting: Dictionary = sim.meetings[0] if not sim.meetings.is_empty() else {}
+	# The 45 work minutes now sit between real material/tool handling phases.
+	# Wait for the actual finished object rather than assuming wall time equals work.
+	for minute in int(sim.sewing.config.timeout_minutes):
+		if cloth_meeting.get("work_completed",false) or not sim.meetings.has(cloth_meeting): break
+		sim.advance_minutes(1)
+	var cloth_session: Dictionary = sim.sewing.sessions.get(cloth_meeting.get("sewing_id",""),{})
+	var cloth_item: Dictionary = sim.sewing.objects.get(cloth_session.get("object_id",""),{})
+	expect(cloth_meeting.get("work_completed",false) and cloth_item.get("kind","")=="pouch" and a.goal_progress==0 and a.private_project>=.18,"An actually finished unrelated craft advances private work rather than the radio wish")
 	sim.reset()
 	make_free()
 	sim.person("osamu").hunger = .99
@@ -133,9 +140,10 @@ func run() -> void:
 	var report: Array = []
 	var signatures := {}
 	var total_autonomous := 0
+	var autonomous_pouches := 0
 	for seed_value in range(710,720):
 		for intervention in [false,true]:
-			sim.reset(seed_value)
+			sim.reset(seed_value,12)
 			if intervention: sim.work_family.propose_project("aoi","osamu","radio")
 			sim.advance_minutes(12*1440-sim.start_minute)
 			var pairs := {}
@@ -159,6 +167,11 @@ func run() -> void:
 					if memory.kind=="shared_time" and "一緒に取り組んだ" in memory.text:
 						autonomous += 1
 			var keys: Array = pairs.keys()
+			var sewing_items: Array = []
+			for item in sim.sewing.objects.values():
+				if not item.material_used: continue
+				sewing_items.append(sim._encode(item).duplicate(true))
+				if not intervention and item.kind=="pouch" and not item.shown_to.is_empty() and item.container=="sewing_storage": autonomous_pouches+=1
 			keys.sort()
 			var signature := ",".join(keys)
 			if not intervention:
@@ -166,16 +179,18 @@ func run() -> void:
 				total_autonomous += autonomous
 			report.append({"seed":seed_value,"intervention":intervention,"completed_participant_experiences":autonomous,
 				"recent_collaborations":keys,"learned_contexts":learned,"event_serial":sim.event_serial,
+				"sewing_items":sewing_items,"sewing_sessions":sim._encode(sim.sewing.sessions).duplicate(true),
 				"retained_resident_agreements_kept":kept,"retained_resident_agreements_postponed":postponed,
 				"retained_autonomous_support_completed":completed_help})
 			print("Autonomy sample %d intervention=%s collaborations=%d"%[seed_value,intervention,pairs.size()])
 	expect(total_autonomous>0,"Residents can complete joint work without player intervention")
 	expect(signatures.size()>1,"Different seeds produce different actual collaborators or activities")
-	var output := "res://docs/verification/v0.6"
+	expect(autonomous_pouches>0,"Unmodified natural towns create, actually show and store owned pouches without player proposals")
+	var output := "res://builds/autonomy"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
 	var file := FileAccess.open(output+"/autonomy-comparison.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"scope":"10 seeds, 12 representative days, matched intervention; not a human playtest",
-		"rules":"authored game hypotheses, not measured human behavior","samples":report},"  "))
+	file.store_string(JSON.stringify({"scope":"10 seeds, twelve residents, 12 representative days, matched intervention; not a human playtest","population":12,
+		"rules":"authored game hypotheses, not measured human behavior","autonomous_stored_shown_pouches":autonomous_pouches,"samples":report},"  "))
 	file.close()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://test-autonomy.json"))
 	print("Autonomy checks: %d passed, %d failed"%[checks-failures.size(),failures.size()])

@@ -3,7 +3,7 @@ extends RefCounted
 
 # Furniture roles and the physical interaction pool are a current-format contract.
 # Development saves from older layouts are intentionally not migrated.
-const CURRENT_SCHEMA := 8
+const CURRENT_SCHEMA := 9
 
 static func number(value: Variant) -> bool:
 	return (value is int or value is float) and is_finite(float(value))
@@ -482,6 +482,7 @@ static func valid(raw: Variant, definitions: Dictionary, sites: Dictionary, hous
 	if raw.has("interactions") and not world_interactions(raw.interactions,raw,definitions): return false
 	if int(raw.schema)>=6 and not raw.has("tabletop"): return false
 	if raw.has("tabletop") and not tabletop(raw.tabletop,raw,definitions): return false
+	if not SewingWork.valid_save(raw.get("sewing"),raw,definitions): return false
 	if raw.has("social"):
 		var social = raw.social
 		if not social is Dictionary or not social.get("appointments") is Array or not social.get("offer") is Dictionary or not number(social.get("serial")): return false

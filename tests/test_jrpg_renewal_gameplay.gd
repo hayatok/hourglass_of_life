@@ -107,7 +107,7 @@ func focus(id: String) -> void:
 	main._process(0)
 	await render(.12)
 
-func verify_model(id: String) -> bool:
+func verify_model(id: String, require_visible: bool = true) -> bool:
 	selected = id
 	var actor = current_actor()
 	var model = actor.jrpg
@@ -121,11 +121,11 @@ func verify_model(id: String) -> bool:
 	var source_valid: bool = imported!=null and imported.scene_file_path==model_path(id)
 	var mesh_paths: Array = []
 	var bound := false
-	for part in meshes(model):
+	for part in meshes(model,require_visible):
 		mesh_paths.append(part.mesh.resource_path)
 		source_valid = source_valid and (id+"/CH_"+id.capitalize()) in part.mesh.resource_path
 		bound = bound or (part.skin!=null and part.get_node_or_null(part.skeleton)==model.skeleton)
-	expect(source_valid and not mesh_paths.is_empty(),id+": the visible model is the new resident GLB, never the previous shared-rig variant")
+	expect(source_valid and not mesh_paths.is_empty(),id+(": the visible model" if require_visible else ": the restored off-map model")+" is the new resident GLB with actual meshes")
 	expect(not actor.get_node("Visual/Hips").is_visible_in_tree(),id+": the procedural fallback is hidden under the imported model")
 	var raw_matches_recorded: bool = FileAccess.get_sha256(raw_path)==RAW_SHAS[id] and metadata.sha256==RAW_SHAS[id] and manifest.get("raw_source_sha256","")==RAW_SHAS[id]
 	var export_matches_manifest: bool = FileAccess.get_sha256(model_path(id))==manifest.get("exported_glb_sha256","")
@@ -133,7 +133,7 @@ func verify_model(id: String) -> bool:
 	var rig_valid: bool = bound and int(runtime.get("bone_count",0))==model.skeleton.get_bone_count()
 	for bone in JrpgResidentModel.REQUIRED_BONES:
 		rig_valid = rig_valid and model.skeleton.find_bone("DEF-"+bone)>=0 and ("DEF-"+bone) in runtime.get("required_named_bones",[])
-	for part in meshes(model):
+	for part in meshes(model,require_visible):
 		rig_valid = rig_valid and part.skin!=null and part.skin.get_bind_count()==int(runtime.get("skin_bind_count",0))
 	expect(rig_valid,id+": actual bound skin follows the manifest's rig size and preserves every required contact/animation bone")
 	var lod_record := lod_structure(id,model,runtime)
@@ -294,10 +294,10 @@ func source_albedo(path: String) -> Dictionary:
 	return {"embedded_sha256":sha(image_bytes),"pixels_sha256":image_sha(decoded),"width":decoded.get_width(),"height":decoded.get_height()}
 
 
-func meshes(model: Node) -> Array:
+func meshes(model: Node, visible_only: bool = true) -> Array:
 	var result: Array = []
 	for node in model.find_children("*","MeshInstance3D",true,false):
-		if node.mesh!=null and node.is_visible_in_tree(): result.append(node)
+		if node.mesh!=null and (not visible_only or node.is_visible_in_tree()): result.append(node)
 	return result
 
 
@@ -760,7 +760,12 @@ func run() -> void:
 		animation_manual_mode()
 		for id in IDS:
 			await focus(id)
-			expect(verify_model(id),id+": save restoration rebuilds the new resident model and its gameplay rig")
+			# A changed natural timeline may save another resident during an
+			# off-map shift. Validate its loaded rig without making it visible;
+			# the natural motion/render checks above still require visible skin.
+			var restored_visible: bool=main.avatars[id].visible
+			report.residents[id].restore_actor_visible=restored_visible
+			expect(verify_model(id,restored_visible),id+": save restoration rebuilds the resident model and bound rig while preserving town visibility")
 		await focus(saved_resident);await render(.20)
 		expect(current_actor().animation_name=="work","The saved actual project restores its gameplay-selected work pose")
 		report.save_replay = {"saved_minute":saved_minute,"saved_resident":saved_resident,"restored":actor_snapshot(),"minutes_replayed":120,"test_save_path":save_path()}

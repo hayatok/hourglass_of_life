@@ -15,11 +15,14 @@ const PLAY_PIECE_RADIUS := .018
 
 static var _play_pad_data: Dictionary = {}
 static var _play_grip_cache: Dictionary = {}
+static var _sewing_side_pad_data: Dictionary = {}
+static var _sewing_grip_cache: Dictionary = {}
 
 var object_transform := Transform3D.IDENTITY
 var object_active := false
 var object_id := ""
 var last_result: Dictionary = {}
+var sewing_motion := ResidentSewingMotion.new()
 
 var _phase_token := ""
 var _entry_hands: Dictionary = {}
@@ -46,6 +49,9 @@ func update(contacts: ResidentContacts, p: Dictionary, activity: Dictionary, pos
 	_cache_palms(contacts)
 	if pose.get("key", "") == "radio" and pose.get("object_position") is Vector3 and not str(pose.get("object_id", "")).is_empty():
 		last_result = _radio(contacts, p, activity, pose)
+	elif pose.get("key", "") == "sewing":
+		_phase_token = ""
+		last_result = sewing_motion.update(contacts,p,activity,pose,_delta,self)
 	elif pose.get("key", "") == "four_in_row":
 		_phase_token = ""
 		last_result = _play(contacts, p, pose)
@@ -221,7 +227,7 @@ func _play_choose_hand(contacts: ResidentContacts, p: Dictionary, pose: Dictiona
 			_play_hand = side
 	return _play_hand
 
-func _play_grip_solution(contacts: ResidentContacts, side: String) -> Dictionary:
+func _play_grip_solution(contacts: ResidentContacts, side: String, radius_override: float = PLAY_PIECE_RADIUS) -> Dictionary:
 	var unsupported := {"supported": false, "center": Vector3(0, .055, 0), "reason": "No measured distal finger contacts for this model."}
 	if _play_pad_data.is_empty():
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/finger-pad-contacts.json"))
@@ -233,7 +239,7 @@ func _play_grip_solution(contacts: ResidentContacts, side: String) -> Dictionary
 			source = child.scene_file_path
 			break
 	var scale: Vector3 = contacts.skeleton.global_basis.get_scale()
-	var key := "%s:%s:%s" % [source, side, scale]
+	var key := "%s:%s:%s:%s" % [source, side, scale, radius_override]
 	if _play_grip_cache.has(key):
 		return _play_grip_cache[key]
 	var measured: Dictionary = _play_pad_data.get(source, {}).get("hands", {}).get(side, {})
@@ -277,7 +283,7 @@ func _play_grip_solution(contacts: ResidentContacts, side: String) -> Dictionary
 		var flat_axis := Vector3(axis.x * scale.x, axis.y * scale.y, 0).normalized()
 		var wrist_correction := Quaternion(scaled_axis, flat_axis)
 		var wrist_tilt := acos(clampf(scaled_axis.dot(flat_axis), -1, 1))
-		var radius := PLAY_PIECE_RADIUS / maxf(.001, (axis * scale).length())
+		var radius := radius_override / maxf(.001, (axis * scale).length())
 		var sphere_thumb := base_thumb + axis * radius
 		var sphere_index := base_index - axis * radius
 		var line := sphere_index - sphere_thumb
@@ -324,6 +330,97 @@ func _play_grip_solution(contacts: ResidentContacts, side: String) -> Dictionary
 		best.rotations.append(Quaternion(Vector3.RIGHT, float(PLAY_CLOSED_FINGERS[finger]) * .85))
 	_play_grip_cache[key] = best
 	return best
+
+func _sewing_grip_solution(contacts: ResidentContacts, side: String, radius_override: float) -> Dictionary:
+	# Keep the existing distal grip for rigs that can naturally pinch a thin
+	# needle. Older single-bone index fingers use their real side skin for both
+	# sewing tools; their distant tips cannot oppose the thumb without folding
+	# the whole finger backwards. Board grips never call this helper.
+	var thin: Dictionary = _play_grip_solution(contacts, side, .002)
+	if thin.get("supported", false): return _play_grip_solution(contacts, side, radius_override)
+	var source := ""
+	for child in contacts.model.get_children():
+		if child.scene_file_path.ends_with(".glb"): source = child.scene_file_path;break
+	var scale: Vector3 = contacts.skeleton.global_basis.get_scale()
+	var cache_key := "%s:%s:%s:%s" % [source, side, scale, radius_override]
+	if _sewing_grip_cache.has(cache_key): return _sewing_grip_cache[cache_key]
+	if _sewing_side_pad_data.is_empty():
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/sewing-finger-pad-contacts.json"))
+		if parsed is Dictionary: _sewing_side_pad_data = parsed.get("models", {})
+	var surface: Dictionary = _sewing_side_pad_data.get(source, {}).get("hands", {}).get(side, {})
+	var measured: Dictionary = _play_pad_data.get(source, {}).get("hands", {}).get(side, {})
+	var unsupported := {"supported":false, "reason":"No measured, fully weighted index-side surface for this sewing rig."}
+	if not surface.get("supported", false) or float(surface.get("minimum_skin_weight", 0)) < .999: return unsupported
+	var hand := contacts.skeleton.find_bone("DEF-hand." + side)
+	if hand < 0: return unsupported
+	var to_hand := contacts.skeleton.get_bone_global_rest(hand).affine_inverse()
+	var pads := {};var rest: Array = []
+	for setting in [[0, "thumb"], [1, "index"]]:
+		var data: Dictionary = measured.get(setting[1], {}) if setting[0] == 0 else surface
+		var point: Array = data.get("point", [])
+		var bone := contacts.skeleton.find_bone("DEF-finger%d.%s" % [setting[0], side])
+		if bone < 0 or not data.get("supported", false) or point.size() != 3: return unsupported
+		pads[setting[1]] = Vector3(point[0], point[1], point[2])
+		rest.append(to_hand * contacts.skeleton.get_bone_global_rest(bone))
+	var initial: Array = [Quaternion(Vector3.RIGHT, PLAY_CLOSED_FINGERS[0] * .55), Quaternion(Vector3.RIGHT, PLAY_CLOSED_FINGERS[1] * .85)]
+	var old_mid: Vector3 = ((rest[0] * (initial[0] * pads.thumb)) + (rest[1] * (initial[1] * pads.index))) * .5
+	var thumb_length: float = pads.thumb.length();var index_length: float = pads.index.length()
+	var normal_data: Array = surface.get("normal", [])
+	if normal_data.size() != 3: return unsupported
+	var side_normal := Vector3(normal_data[0], normal_data[1], normal_data[2])
+	var best: Dictionary = {};var best_score := INF
+	for option in 72:
+		var angle := TAU * float(option % 24) / 24.0
+		var elevation: float = [-.5, 0.0, .5][int(option / 24)]
+		var horizontal := sqrt(1.0 - elevation * elevation)
+		var axis := Vector3(cos(angle) * horizontal, sin(angle) * horizontal, elevation)
+		var scaled_axis := (axis * scale).normalized()
+		var flat_axis := Vector3(axis.x * scale.x, axis.y * scale.y, 0).normalized()
+		var correction := Quaternion(scaled_axis, flat_axis)
+		var tilt := acos(clampf(scaled_axis.dot(flat_axis), -1, 1))
+		var radius := radius_override / maxf(.001, (axis * scale).length())
+		var sphere_thumb: Vector3 = rest[0].origin + axis * radius
+		var sphere_index: Vector3 = rest[1].origin - axis * radius
+		var line := sphere_index - sphere_thumb;var distance := line.length()
+		if distance < .00001 or distance > thumb_length + index_length or distance < absf(thumb_length - index_length): continue
+		line /= distance
+		var along := (thumb_length * thumb_length - index_length * index_length + distance * distance) / (2.0 * distance)
+		var height := sqrt(maxf(0, thumb_length * thumb_length - along * along))
+		var circle := sphere_thumb + line * along
+		var radial := old_mid - circle;radial -= line * radial.dot(line)
+		if radial.length_squared() < .00000001:
+			radial = line.cross(Vector3.FORWARD)
+			if radial.length_squared() < .00000001: radial = line.cross(Vector3.RIGHT)
+		radial = radial.normalized()
+		var tangent := line.cross(radial).normalized()
+		for sample in 12:
+			var around := TAU * float(sample) / 12.0
+			var center := circle + (radial * cos(around) + tangent * sin(around)) * height
+			var targets: Array = [center - axis * radius, center + axis * radius]
+			var rotations: Array = [];var corrections: Array = []
+			for finger in 2:
+				var pad: Vector3 = pads.thumb if finger == 0 else pads.index
+				var finger_rest: Transform3D = rest[finger]
+				var target: Vector3 = finger_rest.basis.inverse() * (targets[finger] - finger_rest.origin)
+				var start: Quaternion = initial[finger]
+				var rotation := (Quaternion((start * pad).normalized(), target.normalized()) * start).normalized()
+				rotations.append(rotation);corrections.append(start.angle_to(rotation))
+			var maximum := maxf(float(corrections[0]), float(corrections[1]))
+			if maximum > .85: continue
+			var actual_normal: Vector3 = rest[1].basis * (rotations[1] * side_normal)
+			var normal_alignment := actual_normal.normalized().dot(-axis)
+			if normal_alignment < .60: continue
+			var score := maximum + .10 * (float(corrections[0]) + float(corrections[1])) + .30 * center.distance_to(old_mid) / maxf(thumb_length, index_length) + .15 * tilt
+			if score < best_score:
+				best_score = score
+				best = {"supported":true, "center":center, "pads":pads, "rest":rest, "axis":axis,
+					"rotations":rotations, "maximum_correction":maximum, "wrist_correction":correction, "wrist_tilt":tilt,
+					"pad_mode":"index_side", "index_normal_alignment":normal_alignment, "measurement":{"index":surface.duplicate(true), "thumb":measured.thumb.duplicate(true)}}
+	if best.is_empty(): unsupported.reason = "No bounded sewing opposition reaches the measured index-side skin and thumb pad."
+	else:
+		for finger in range(2, 5): best.rotations.append(Quaternion(Vector3.RIGHT, float(PLAY_CLOSED_FINGERS[finger]) * .85))
+	_sewing_grip_cache[cache_key] = best if not best.is_empty() else unsupported
+	return _sewing_grip_cache[cache_key]
 
 func _play_home_hands(contacts: ResidentContacts, result: Dictionary) -> void:
 	var scale: Vector3 = contacts.skeleton.global_basis.get_scale()

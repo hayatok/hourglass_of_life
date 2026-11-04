@@ -52,6 +52,10 @@ func run() -> void:
 	for button in main.roster.get_children(): portraits = portraits and button.icon!=null
 	expect(portraits,"All twelve portrait choices work, including the original atlas and the four new portraits")
 	expect(is_instance_valid(main.interaction_view.object_node("workshop_radio")) and main.tabletop_view.piece_nodes.size()==16 and is_instance_valid(main.tabletop_view.board_node),"The package reconstructs one real radio and the board with all sixteen physical tokens")
+	expect(FileAccess.file_exists("res://data/sewing-work.json") and sim.sewing.objects.size()==9 and main.sewing_view.object_nodes.size()==9,"The package contains the finite six cloth pieces and three actual sewing tools, each rendered once")
+	var cloth=main.sewing_view.object_node("sewing_cloth_01")
+	var support: Dictionary=cloth.local_contacts("sewing")
+	expect(support.get("support_left") is Vector3 and support.get("support_right") is Vector3,"The packaged workpiece resolves support from its real folded mesh surface")
 	var before_zoom: float = main.distance
 	main.get_node("%ZoomIn").pressed.emit()
 	expect(main.distance<before_zoom and not sim.running,"The exported zoom-in control changes the actual camera distance while paused")
@@ -68,6 +72,9 @@ func run() -> void:
 	expect(proposals.get_node("%Execute").text.contains(sim.person(target).name) and proposals.get_node("%Execute").text.contains("咲"),"The packaged confirmation names the helper and the selected resident")
 	proposals.close_panel()
 	expect(not proposals.visible and not sim.running,"Cancelling the packaged proposal preserves the original pause")
+	proposals.open_for("tomo");proposals.choose_kind("project");proposals._select_partner("yui");proposals.choose_activity("craft")
+	expect(proposals.get_node("%ProjectActivity").visible and "智" in proposals.get_node("%Execute").text and "結衣" in proposals.get_node("%Execute").text and "布小物" in proposals.get_node("%Execute").text,"The actual package exposes the cloth recipe and names both participants before submitting")
+	proposals.close_panel()
 	main.get_node("%DetailToggle").button_pressed = true
 	main.get_node("%PlansTab").pressed.emit()
 	expect(main.detail_tab==4 and main.get_node("%DetailText").is_visible_in_tree() and not main.get_node("%DetailText").text.is_empty(),"The packaged notebook exposes the full confirmed-promise page")

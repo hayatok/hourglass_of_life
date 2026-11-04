@@ -99,10 +99,11 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 	var bed: bool = active and activity.pose=="bed"
 	var work: bool = active and activity.pose=="work" and clip=="work"
 	var tabletop_standing: bool = not p.moving and interaction_result.get("profile","")=="four_in_row" and interaction_result.get("phase","") not in ["travel","align","completed","interrupted"]
+	var sewing_standing: bool = not p.moving and interaction_result.get("profile","")=="sewing" and interaction_result.get("phase","") not in ["to_source","carry_to_table","carry_to_store"]
 	var child: bool = avatar.displayed_model=="rin"
 	var body_scale: Vector3 = avatar.visual.scale
 	var scale_y: float = body_scale.y
-	var yaw: float = activity.yaw if active else avatar.visual.rotation.y
+	var yaw: float = interaction_result.get("body_yaw",activity.yaw if active else avatar.visual.rotation.y)
 	var facing := Basis(Vector3.UP,yaw)
 	var root_target: Vector3 = avatar.global_position
 	var rise := 0.0
@@ -113,16 +114,16 @@ func update_contact(p: Dictionary, activity: Dictionary, clip: String, attention
 	elif bed:
 		root_target = activity.contact-facing*(pose_samples.bed.head*body_scale)
 		root_target.y = activity.contact.y+.11*scale_y-pose_samples.bed.pelvis.y*scale_y
-	elif (work or tabletop_standing) and child:
+	elif (work or tabletop_standing or sewing_standing) and child:
 		var surface_y: float = interaction_result.get("surface_y",activity.get("hand_left",Vector3.ZERO).y)
 		rise = clampf(surface_y+.14-rest_shoulder*scale_y-avatar.global_position.y,0,.23)
 		root_target += Vector3.UP*rise+facing*Vector3(0,0,.08)
 	if active: avatar.visual.rotation.y = lerp_angle(avatar.visual.rotation.y,yaw,minf(1,delta*10))
 	avatar.visual.position = avatar.visual.position.lerp(root_target-avatar.global_position,minf(1,delta*12))
-	step.visible = child and (seat or work or tabletop_standing)
+	step.visible = child and (seat or work or tabletop_standing or sewing_standing)
 	if step.visible:
 		step.global_basis = facing
-		if work or tabletop_standing:
+		if work or tabletop_standing or sewing_standing:
 			step.scale.y = maxf(.1,rise/.23);step.global_position = root_target-Vector3.UP*rise
 		else:
 			var feet := (point("foot.L")+point("foot.R"))*.5

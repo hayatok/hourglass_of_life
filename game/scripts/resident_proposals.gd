@@ -28,6 +28,12 @@ func _ready() -> void:
 	%Play.pressed.connect(_choose_partner.bind("play"))
 	%Execute.pressed.connect(_execute_selected)
 	%ConfirmOffer.pressed.connect(_confirm_offer)
+	%ProjectActivity.add_item("お互いの関心から制作を選ぶ")
+	%ProjectActivity.set_item_metadata(0,"")
+	for entry in sim.resident_activities.definitions:
+		%ProjectActivity.add_item(entry.title)
+		%ProjectActivity.set_item_metadata(%ProjectActivity.item_count-1,entry.key)
+	%ProjectActivity.item_selected.connect(func(_index): sync_partner_preview())
 	partner.item_selected.connect(func(_index): sync_partner_preview())
 	%Close.focus_previous = %Close.get_path_to(%Done)
 	%Done.focus_next = %Done.get_path_to(%Close)
@@ -59,6 +65,7 @@ func open_for(id: String) -> void:
 func close_panel() -> void:
 	if not visible and not owns_pause: return
 	partner.get_popup().hide()
+	%ProjectActivity.get_popup().hide()
 	hide()
 	_restore_running()
 	closed.emit()
@@ -94,6 +101,7 @@ func _fit_partner_popup() -> void:
 	if not is_instance_valid(partner): return
 	var viewport := get_viewport_rect().size
 	partner.get_popup().max_size = Vector2i(maxi(1,int(viewport.x-32)),maxi(1,mini(420,int(viewport.y-32))))
+	%ProjectActivity.get_popup().max_size = partner.get_popup().max_size
 
 func _show_choices() -> void:
 	proposal_kind = ""
@@ -117,6 +125,11 @@ func _choose_partner(kind: String) -> void:
 func choose_kind(kind: String) -> void:
 	if kind in ["rest","goal"]: _execute(kind)
 	elif kind in ["meet","support","project","play"]: _choose_partner(kind)
+
+func choose_activity(key: String) -> void:
+	for index in %ProjectActivity.item_count:
+		if str(%ProjectActivity.get_item_metadata(index))==key:
+			%ProjectActivity.select(index);sync_partner_preview();return
 
 func submit() -> void:
 	_execute_selected()
@@ -157,11 +170,18 @@ func sync_partner_preview() -> void:
 		"support":"誰に、%sさんの手助けを頼みますか？"%who,
 		"project":"%sさんと、誰が一緒に制作しますか？"%who,
 		"play":"%sさんと、誰が一緒に遊びますか？"%who}.get(proposal_kind,"")
+	%ProjectActivity.visible=proposal_kind=="project"
 	%PairDirection.text = {"support":"手伝う →","meet":"会話","project":"一緒に制作","play":"四目並べ"}.get(proposal_kind,"")
 	%Execute.text = {"meet":"%sさんと%sさんを会話に誘う"%[who,with_who],
 		"support":"%sさんに、%sさんの手助けを頼む"%[with_who,who],
 		"project":"%sさんと%sさんに制作を提案する"%[who,with_who],
 		"play":"%sさんと%sさんを四目並べに誘う"%[who,with_who]}.get(proposal_kind,"提案する")
+	if proposal_kind=="project":
+		var activity_key: String=str(%ProjectActivity.get_item_metadata(%ProjectActivity.selected))
+		var project: Dictionary=sim.resident_activities.definition(sim.person(resident_id),sim.person(other),activity_key)
+		if not project.is_empty():
+			%PairDirection.text=project.title
+			%Execute.text="%sさんと%sさんに、%sを提案する"%[who,with_who,project.title]
 	%Execute.disabled = not _alive(resident_id) or not _alive(other) or resident_id==other
 	%NoPartner.visible = partner.item_count==0
 	partner.add_theme_constant_override("icon_max_width",30)
@@ -184,7 +204,7 @@ func _execute(kind: String) -> void:
 		"goal": reply = sim.support_goal(resident_id)
 		"meet": reply = sim.propose_meeting(resident_id,other,"bench")
 		"support": reply = sim.propose_support(resident_id,other)
-		"project": reply = sim.propose_project(resident_id,other)
+		"project": reply = sim.propose_project(resident_id,other,str(%ProjectActivity.get_item_metadata(%ProjectActivity.selected)))
 		"play": reply = sim.propose_play(resident_id,other)
 		_: return
 	_present_reply(reply)

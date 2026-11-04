@@ -1,0 +1,2968 @@
+{
+  "cases": [
+    {
+      "actual_maker": "nagisa",
+      "age": 36,
+      "first": "nagisa",
+      "first_craft_skill": 0.3,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "nagisa",
+      "model_scene": "res://game/scenes/characters/nagisa.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "nagisa",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "nagisa",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.19358207939513e-06,
+            "thumb": 2.03792114916723e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 1.14961275589382e-06,
+            "thumb": 0.0014669924427092
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19358207939513e-06,
+            "thumb": 2.03792114916723e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.819362819194794
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 4.80548010273196e-07,
+            "thumb": 1.07288360595703e-06
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.78813934326172e-07,
+            "thumb": 0.00146553462842753
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 4.80548010273196e-07,
+            "thumb": 1.07288360595703e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.790267884731293
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 1.09257121039263e-06
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.14961275589382e-06,
+            "thumb": 0.00146705738337187
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 1.09257121039263e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.788034558296204
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00146625456758005
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.61096020546393e-07,
+            "thumb": 2.66560078898692e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.798780620098114
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.00146625456758005
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.09257121039263e-06,
+            "thumb": 7.25121822142683e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.798780620098114
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00146625456758005
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 4.76837158203125e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.798780620098114
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.3,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00146705738337187,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Nagisa_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.98017406463623,
+            0.960327565670013,
+            8.64951801300049
+          ]
+        },
+        "pose_frame": 193,
+        "pose_serial": 386,
+        "query": {
+          "__vector3": [
+            -2.981205701828,
+            0.960750043392181,
+            8.64856433868408
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 24933,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.98049068450928,
+              0.95915687084198,
+              8.64934158325195
+            ]
+          },
+          {
+            "__vector3": [
+              -2.9809582233429,
+              0.961430847644806,
+              8.65085506439209
+            ]
+          },
+          {
+            "__vector3": [
+              -2.97969794273376,
+              0.959723830223083,
+              8.64873504638672
+            ]
+          }
+        ],
+        "vertex_indices": [
+          39494,
+          39492,
+          39495
+        ]
+      }
+    },
+    {
+      "actual_maker": "ryo",
+      "age": 37,
+      "first": "ryo",
+      "first_craft_skill": 0.0,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "ryo",
+      "model_scene": "res://game/scenes/characters/ryo.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "ryo",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "ryo",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.06790503195953e-06,
+            "thumb": 2.03792114916723e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 1.14961275589382e-06,
+            "thumb": 0.00131405307754008
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.06790503195953e-06,
+            "thumb": 2.03792114916723e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.768050491809845
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.38123391479894e-06,
+            "thumb": 2.13581006391905e-06
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 3.81655945624879e-07,
+            "thumb": 0.00131482647752407
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.38123391479894e-06,
+            "thumb": 2.13581006391905e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.820980608463287
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.09257121039263e-06,
+            "thumb": 1.09257121039263e-06
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.1198696033988e-06,
+            "thumb": 0.00131416069924678
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.09257121039263e-06,
+            "thumb": 1.09257121039263e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.759125769138336
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 0.0,
+            "thumb": 0.00131419850317255
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 9.83024960987677e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.799568116664886
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 2.66560074985002e-07,
+            "thumb": 0.00131436242294731
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.21570099054225e-06,
+            "thumb": 7.25121822142683e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.799568116664886
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 0.0,
+            "thumb": 0.00131419850317255
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 9.90226681096829e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.799568116664886
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00131482647752407,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Ryo_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.90343022346497,
+            0.957482755184174,
+            8.65236186981201
+          ]
+        },
+        "pose_frame": 530,
+        "pose_serial": 264,
+        "query": {
+          "__vector3": [
+            -2.90425586700439,
+            0.958500027656555,
+            8.65247249603271
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 5309,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.90277767181396,
+              0.957865953445435,
+              8.65370559692383
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90407133102417,
+              0.957494139671326,
+              8.64748287200928
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90677928924561,
+              0.95505678653717,
+              8.64968299865723
+            ]
+          }
+        ],
+        "vertex_indices": [
+          19604,
+          19606,
+          19607
+        ]
+      }
+    },
+    {
+      "actual_maker": "osamu",
+      "age": 68,
+      "first": "osamu",
+      "first_craft_skill": 0.8,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "osamu",
+      "model_scene": "res://game/scenes/characters/osamu.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "",
+      "project_teacher": "",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "osamu",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 2.03792114916723e-06,
+            "thumb": 2.03792114916723e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 1.1198696033988e-06,
+            "thumb": 0.00148423981715186
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.03792114916723e-06,
+            "thumb": 2.03792114916723e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.827492237091064
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.9915587270516e-07,
+            "thumb": 9.9915587270516e-07
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.02720784781063e-06,
+            "thumb": 0.00148464533759092
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.9915587270516e-07,
+            "thumb": 9.9915587270516e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.787481844425201
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 9.9915587270516e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.98023223876953e-07,
+            "thumb": 0.00148472604553311
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 9.9915587270516e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.808459162712097
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.66560074985002e-07,
+            "thumb": 0.00148474894006136
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.12461816570431e-06,
+            "thumb": 5.96046447753906e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.821110129356384
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.0014847909762526
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19209289550781e-06,
+            "thumb": 7.25121822142683e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.821110129356384
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.66560074985002e-07,
+            "thumb": 0.0014847909762526
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.09257121039263e-06,
+            "thumb": 5.33120157797384e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.821110129356384
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.8,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.0014847909762526,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Osamu_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.72408032417297,
+            1.03231132030487,
+            8.57678699493408
+          ]
+        },
+        "pose_frame": 1121,
+        "pose_serial": 650,
+        "query": {
+          "__vector3": [
+            -2.72484278678894,
+            1.03283476829529,
+            8.57794857025146
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 6525,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.72316980361938,
+              1.0330913066864,
+              8.57703304290771
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72863626480103,
+              1.03079319000244,
+              8.57448101043701
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72330904006958,
+              1.03190636634827,
+              8.57747554779053
+            ]
+          }
+        ],
+        "vertex_indices": [
+          26172,
+          26170,
+          26173
+        ]
+      }
+    },
+    {
+      "actual_maker": "fumi",
+      "age": 65,
+      "first": "fumi",
+      "first_craft_skill": 0.0,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "fumi",
+      "model_scene": "res://game/scenes/characters/fumi.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "fumi",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "fumi",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.35001562284742e-06,
+            "thumb": 1.52662380514812e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00139161401602439
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.35001562284742e-06,
+            "thumb": 1.52662380514812e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.796935498714447
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 4.80548010273196e-07,
+            "thumb": 9.90226681096829e-07
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 3.37174788087152e-07,
+            "thumb": 0.00139180369710312
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 4.80548010273196e-07,
+            "thumb": 9.90226681096829e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.771706342697144
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 2.98023223876953e-07,
+            "thumb": 2.45756240246919e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.78813934326172e-07,
+            "thumb": 0.00139182093213007
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.98023223876953e-07,
+            "thumb": 2.45756240246919e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.767301082611084
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.00139228464576917
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 5.96046447753906e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.781485617160797
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.00139261996198878
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19803848974698e-06,
+            "thumb": 1.21570099054225e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.781485617160797
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.00139228464576917
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 1.07288360595703e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.781485617160797
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00139261996198878,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Fumi_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.72346639633179,
+            1.0326828956604,
+            8.57780265808105
+          ]
+        },
+        "pose_frame": 1519,
+        "pose_serial": 650,
+        "query": {
+          "__vector3": [
+            -2.72484302520752,
+            1.03283452987671,
+            8.57794857025146
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 24860,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.72368192672729,
+              1.03172636032104,
+              8.57676029205322
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72332549095154,
+              1.03249859809875,
+              8.5793285369873
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72359180450439,
+              1.03285431861877,
+              8.57643699645996
+            ]
+          }
+        ],
+        "vertex_indices": [
+          38243,
+          38244,
+          38245
+        ]
+      }
+    },
+    {
+      "actual_maker": "maho",
+      "age": 26,
+      "first": "maho",
+      "first_craft_skill": 0.0,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "maho",
+      "model_scene": "res://game/scenes/characters/maho.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "maho",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "maho",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 4.91512480493839e-07,
+            "thumb": 4.91512480493839e-07
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 5.96046447753906e-08,
+            "thumb": 0.00148379273554264
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 4.91512480493839e-07,
+            "thumb": 4.91512480493839e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.788750886917114
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 5.09262292780477e-07,
+            "thumb": 9.9915587270516e-07
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 5.96046447753906e-08,
+            "thumb": 0.00148394987295981
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 5.09262292780477e-07,
+            "thumb": 9.9915587270516e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.754756152629852
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.90226681096829e-07,
+            "thumb": 2.45756240246919e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.19209289550781e-07,
+            "thumb": 0.00148375396578049
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.90226681096829e-07,
+            "thumb": 2.45756240246919e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.766371607780457
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.66560074985002e-07,
+            "thumb": 0.00148442700597967
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 2.66560078898692e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.801520466804504
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.83024960987677e-07,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.00148448184078937
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 1.09257121039263e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.801520466804504
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 0.0,
+            "thumb": 0.00148442700597967
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 4.91512480493839e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.801520466804504
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00148448184078937,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Maho_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.72428750991821,
+            1.03215134143829,
+            8.57675361633301
+          ]
+        },
+        "pose_frame": 1917,
+        "pose_serial": 650,
+        "query": {
+          "__vector3": [
+            -2.7248432636261,
+            1.032834649086,
+            8.57794857025146
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 7126,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.72339200973511,
+              1.0318648815155,
+              8.5773344039917
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72714757919312,
+              1.03423523902893,
+              8.57423114776611
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72858381271362,
+              1.03092622756958,
+              8.57545566558838
+            ]
+          }
+        ],
+        "vertex_indices": [
+          14527,
+          14530,
+          14531
+        ]
+      }
+    },
+    {
+      "actual_maker": "ritsu",
+      "age": 31,
+      "first": "ritsu",
+      "first_craft_skill": 0.25,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "ritsu",
+      "model_scene": "res://game/scenes/characters/ritsu.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "ritsu",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "ritsu",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 5.09262292780477e-07,
+            "thumb": 1.08113033547852e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 3.81655945624879e-07,
+            "thumb": 0.00131006893773648
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 5.09262292780477e-07,
+            "thumb": 1.08113033547852e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.765528440475464
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 7.37268749162467e-07,
+            "thumb": 1.2054293847541e-06
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.0013107529270153
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 7.37268749162467e-07,
+            "thumb": 1.2054293847541e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.818031132221222
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 2.45756240246919e-07,
+            "thumb": 4.80548010273196e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.1198696033988e-06,
+            "thumb": 0.00131008568603025
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.45756240246919e-07,
+            "thumb": 4.80548010273196e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.757106244564056
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.66560074985002e-07,
+            "thumb": 0.00131012829341862
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 1.19209289550781e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.802871465682983
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 0.00131022322220946
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 4.76837158203125e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.802871465682983
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00131022322220946
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 4.76837158203125e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.802871465682983
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.25,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.0013107529270153,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Ritsu_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.90343475341797,
+            0.957484662532806,
+            8.65235900878906
+          ]
+        },
+        "pose_frame": 2119,
+        "pose_serial": 258,
+        "query": {
+          "__vector3": [
+            -2.90425586700439,
+            0.958500027656555,
+            8.65247249603271
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 5313,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.90276837348938,
+              0.95787501335144,
+              8.65368938446045
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90411162376404,
+              0.95747035741806,
+              8.64758396148682
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90676617622375,
+              0.955085039138794,
+              8.64971828460693
+            ]
+          }
+        ],
+        "vertex_indices": [
+          21860,
+          21862,
+          21863
+        ]
+      }
+    },
+    {
+      "actual_maker": "aoi",
+      "age": 20,
+      "first": "aoi",
+      "first_craft_skill": 0.4,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "aoi",
+      "model_scene": "res://game/scenes/characters/aoi.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "aoi",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "aoi",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.08113033547852e-06,
+            "thumb": 1.2054293847541e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 4.29815205986975e-07,
+            "thumb": 0.0014414199712389
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.08113033547852e-06,
+            "thumb": 1.2054293847541e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.772393822669983
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 1.02720787253929e-06
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 3.81655945624879e-07,
+            "thumb": 0.00144194918018017
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 1.02720787253929e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.836371898651123
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 4.91512480493839e-07,
+            "thumb": 3.8165595128703e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.0014413897631691
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 4.91512480493839e-07,
+            "thumb": 3.8165595128703e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.758524060249329
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00144095621156523
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 5.33120157797384e-07,
+            "thumb": 1.24458154004969e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.797992706298828
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00144120376846647
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 4.91512480493839e-07,
+            "thumb": 9.61096020546393e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.797992706298828
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00144095621156523
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 1.07288360595703e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.797992706298828
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.4,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00144194918018017,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Aoi_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.90287947654724,
+            0.958130359649658,
+            8.65225315093994
+          ]
+        },
+        "pose_frame": 2515,
+        "pose_serial": 254,
+        "query": {
+          "__vector3": [
+            -2.90425586700439,
+            0.958500027656555,
+            8.65247249603271
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 5304,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.90257143974304,
+              0.958621442317963,
+              8.65336132049561
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90397667884827,
+              0.956855893135071,
+              8.64750862121582
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90286874771118,
+              0.957454741001129,
+              8.65346240997314
+            ]
+          }
+        ],
+        "vertex_indices": [
+          25139,
+          25137,
+          25140
+        ]
+      }
+    },
+    {
+      "actual_maker": "saki",
+      "age": 42,
+      "first": "saki",
+      "first_craft_skill": 0.0,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "saki",
+      "model_scene": "res://game/scenes/characters/saki.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "saki",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "saki",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.84830307970697e-07,
+            "thumb": 1.2054293847541e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 1.78813934326172e-07,
+            "thumb": 7.17734967398184e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.84830307970697e-07,
+            "thumb": 1.2054293847541e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.493345856666565
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.61096020546393e-07,
+            "thumb": 9.84830307970697e-07
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 5.96046447753906e-08,
+            "thumb": 5.09262308199258e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.61096020546393e-07,
+            "thumb": 9.84830307970697e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.57030177116394
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 5.33120157797384e-07,
+            "thumb": 1.19358207939513e-06
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 3.37174788087152e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 5.33120157797384e-07,
+            "thumb": 1.19358207939513e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.456326484680176
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 1.19209289550781e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 5.33120157797384e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.333476275205612
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 1.06624031559477e-06
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 9.83024984745422e-07,
+            "thumb": 5.33120149970005e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 9.90226681096829e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.333476275205612
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 1.19209289550781e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19209289550781e-07,
+            "thumb": 2.66560078898692e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.333476275205612
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 9.83024984745422e-07,
+        "finger": "index",
+        "finger_name": "DEF-finger1.R",
+        "mesh": "CH_Saki_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.72361874580383,
+            1.03283476829529,
+            8.57417583465576
+          ]
+        },
+        "pose_frame": 3111,
+        "pose_serial": 650,
+        "query": {
+          "__vector3": [
+            -2.72361850738525,
+            1.03283476829529,
+            8.57417678833008
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 1260,
+        "triangle_count": 71,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.71630072593689,
+              1.03112971782684,
+              8.57063007354736
+            ]
+          },
+          {
+            "__vector3": [
+              -2.72451400756836,
+              1.02889502048492,
+              8.57498073577881
+            ]
+          },
+          {
+            "__vector3": [
+              -2.7253954410553,
+              1.0353946685791,
+              8.57484531402588
+            ]
+          }
+        ],
+        "vertex_indices": [
+          5924,
+          2076,
+          10475
+        ]
+      }
+    },
+    {
+      "actual_maker": "haru",
+      "age": 25,
+      "first": "haru",
+      "first_craft_skill": 0.44,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "haru",
+      "model_scene": "res://game/scenes/characters/haru.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "haru",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "haru",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.21570099054225e-06,
+            "thumb": 1.06790503195953e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 0.00454730815142592,
+            "thumb": 0.000854505126133525
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.21570099054225e-06,
+            "thumb": 1.06790503195953e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.524499416351318
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.19803848974698e-06,
+            "thumb": 1.19803848974698e-06
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 0.00454742875421209,
+            "thumb": 0.000854753017796755
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19803848974698e-06,
+            "thumb": 1.19803848974698e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.623230516910553
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 7.74860382080078e-07,
+            "thumb": 7.53945755604946e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 0.00454698432812125,
+            "thumb": 0.000854842060329491
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 7.74860382080078e-07,
+            "thumb": 7.53945755604946e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.471763640642166
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 7.15255737304688e-07,
+            "thumb": 9.5367431640625e-07
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 0.00454691712039495,
+            "thumb": 0.000855026998431916
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 7.53945755604946e-07,
+            "thumb": 1.36961045882344e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.495979964733124
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 4.76837158203125e-07,
+            "thumb": 2.38418579101562e-07
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 0.00454708393774551,
+            "thumb": 0.000854279087627289
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 2.66560078898692e-07,
+            "thumb": 9.90226681096829e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.495979964733124
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.5367431640625e-07,
+            "thumb": 9.5367431640625e-07
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 0.00454706713627513,
+            "thumb": 0.000854807082815607
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.09257121039263e-06,
+            "thumb": 2.05095420824364e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.495979964733124
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.44,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00454742875421209,
+        "finger": "index",
+        "finger_name": "DEF-finger1.R",
+        "mesh": "CH_Haru_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 0.893873512744904,
+        "point": {
+          "__vector3": [
+            -2.90559887886047,
+            0.962035298347473,
+            8.64994716644287
+          ]
+        },
+        "pose_frame": 3313,
+        "pose_serial": 258,
+        "query": {
+          "__vector3": [
+            -2.90425586700439,
+            0.958500027656555,
+            8.65247249603271
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 1146,
+        "triangle_count": 19,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.91930532455444,
+              0.96501499414444,
+              8.63974094390869
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90949606895447,
+              0.964095413684845,
+              8.65304470062256
+            ]
+          },
+          {
+            "__vector3": [
+              -2.90559887886047,
+              0.962035298347473,
+              8.64994716644287
+            ]
+          }
+        ],
+        "vertex_indices": [
+          10323,
+          10324,
+          2010
+        ]
+      }
+    },
+    {
+      "actual_maker": "tomo",
+      "age": 52,
+      "first": "tomo",
+      "first_craft_skill": 0.82,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "tomo",
+      "model_scene": "res://game/scenes/characters/tomo.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "",
+      "project_teacher": "",
+      "proposal_status": "accept",
+      "proposal_text": "佐伯 修さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "tomo",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.08113033547852e-06,
+            "thumb": 2.0448824216146e-06
+          },
+          "minute": 126,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 1.06790500087553e-06,
+            "thumb": 0.00343561817753627
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.08113033547852e-06,
+            "thumb": 2.0448824216146e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.834915995597839
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.08113033547852e-06,
+            "thumb": 2.98023223876953e-07
+          },
+          "minute": 129,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 1.10710713988583e-06,
+            "thumb": 0.00343524555661341
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.08113033547852e-06,
+            "thumb": 2.98023223876953e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.780261874198914
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.70293285718071e-07,
+            "thumb": 9.70293285718071e-07
+          },
+          "minute": 133,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.01152436426146e-06,
+            "thumb": 0.00343489010609625
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.70293285718071e-07,
+            "thumb": 9.70293285718071e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.713595747947693
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 149,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.0034347753214805
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 4.29815202096506e-07,
+            "thumb": 3.57627868652344e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.324858665466309
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.06624031559477e-06,
+            "thumb": 0.0
+          },
+          "minute": 159,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 3.57627868652344e-07,
+            "thumb": 0.00343397503238943
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.90226681096829e-07,
+            "thumb": 4.91512480493839e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.324858665466309
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 169,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00343475797768133
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 3.37174782316652e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.324858665466309
+        }
+      ],
+      "second": "osamu",
+      "second_craft_skill": 0.8,
+      "skills_after": {
+        "first": 0.82,
+        "second": 0.8
+      },
+      "worst_skin_surface": {
+        "distance": 0.00343561817753627,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Tomo_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.82423377037048,
+            0.962801039218903,
+            8.65436363220215
+          ]
+        },
+        "pose_frame": 3648,
+        "pose_serial": 132,
+        "query": {
+          "__vector3": [
+            -2.82113265991211,
+            0.96150004863739,
+            8.65366077423096
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 1350,
+        "triangle_count": 49,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.82909798622131,
+              0.962824404239655,
+              8.65041637420654
+            ]
+          },
+          {
+            "__vector3": [
+              -2.82354831695557,
+              0.966251969337463,
+              8.65100002288818
+            ]
+          },
+          {
+            "__vector3": [
+              -2.825523853302,
+              0.956305146217346,
+              8.66069507598877
+            ]
+          }
+        ],
+        "vertex_indices": [
+          3199,
+          5613,
+          5614
+        ]
+      }
+    },
+    {
+      "actual_maker": "yui",
+      "age": 27,
+      "first": "yui",
+      "first_craft_skill": 0.22,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "yui",
+      "model_scene": "res://game/scenes/characters/yui.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "yui",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "yui",
+      "rin_age_12_fixture": false,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.35001562284742e-06,
+            "thumb": 1.19803848974698e-06
+          },
+          "minute": 126,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 8.59630411973951e-07,
+            "thumb": 1.19803853286754e-06
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.35001562284742e-06,
+            "thumb": 1.19803848974698e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.668646574020386
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 1.06790503195953e-06
+          },
+          "minute": 129,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 3.37174788087152e-07,
+            "thumb": 9.9022672926403e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.01152431852825e-06,
+            "thumb": 1.06790503195953e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.825124025344849
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.84830307970697e-07,
+            "thumb": 2.45756240246919e-07
+          },
+          "minute": 133,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 5.33120149970005e-07,
+            "thumb": 9.61096018349951e-07
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.84830307970697e-07,
+            "thumb": 2.45756240246919e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.64584082365036
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.06624031559477e-06,
+            "thumb": 1.06624031559477e-06
+          },
+          "minute": 149,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 4.76837158203125e-07,
+            "thumb": 0.0
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 1.19803848974698e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.748614966869354
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 159,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 2.66560074985002e-07,
+            "thumb": 0.0
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19209289550781e-07,
+            "thumb": 2.66560078898692e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.748614966869354
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.06624031559477e-06,
+            "thumb": 1.06624031559477e-06
+          },
+          "minute": 169,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 4.29815205986975e-07,
+            "thumb": 0.0
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.07288360595703e-06,
+            "thumb": 1.19803848974698e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_distal_mesh_caps",
+          "maximum_finger_correction_rad": 0.748614966869354
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.22,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 1.19803853286754e-06,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_Yui_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.82259321212769,
+            0.961499929428101,
+            8.61197185516357
+          ]
+        },
+        "pose_frame": 4046,
+        "pose_serial": 132,
+        "query": {
+          "__vector3": [
+            -2.82259249687195,
+            0.96150004863739,
+            8.61197090148926
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 563,
+        "triangle_count": 15,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.83227968215942,
+              0.952872574329376,
+              8.61070156097412
+            ]
+          },
+          {
+            "__vector3": [
+              -2.83337211608887,
+              0.960172057151794,
+              8.61356353759766
+            ]
+          },
+          {
+            "__vector3": [
+              -2.82259321212769,
+              0.961499929428101,
+              8.61197185516357
+            ]
+          }
+        ],
+        "vertex_indices": [
+          6008,
+          2085,
+          3437
+        ]
+      }
+    },
+    {
+      "actual_maker": "rin",
+      "age": 12,
+      "first": "rin",
+      "first_craft_skill": 0.15,
+      "maker_position": {
+        "__vector3": [
+          -3.14999985694885,
+          0.0,
+          8.96000003814697
+        ]
+      },
+      "maker_spot": "craft_art_0",
+      "model": "rin_adult",
+      "model_scene": "res://game/scenes/characters/rin_adult.tscn",
+      "object_id": "sewing_cloth_06",
+      "passed": true,
+      "project_learner": "rin",
+      "project_teacher": "tomo",
+      "proposal_status": "accept",
+      "proposal_text": "森 智さんと、布小物づくりを進めよう。まずは道具を広げる場所へ。",
+      "resident": "rin",
+      "rin_age_12_fixture": true,
+      "samples": [
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.25,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.19358207939513e-06,
+            "thumb": 1.19209289550781e-06
+          },
+          "minute": 102,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 2.38418579101562e-07,
+            "thumb": 0.00126738867527333
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.19358207939513e-06,
+            "thumb": 1.19209289550781e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.797966539859772
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.5,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 1.06624031559477e-06,
+            "thumb": 4.76837158203125e-07
+          },
+          "minute": 105,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 3.37174788087152e-07,
+            "thumb": 0.0012671611715051
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 1.06624031559477e-06,
+            "thumb": 4.76837158203125e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.76850152015686
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.833333333333333,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 9.9915587270516e-07,
+            "thumb": 1.78813934326172e-07
+          },
+          "minute": 109,
+          "passed": true,
+          "phase": "cut",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 1.06790500087553e-06,
+            "thumb": 0.00126750882491971
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 9.9915587270516e-07,
+            "thumb": 1.78813934326172e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.767847180366516
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.212121212121212,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 0.0
+          },
+          "minute": 125,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.2,
+          "skin_surface_peak_m": {
+            "index": 0.0,
+            "thumb": 0.00126726568836297
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 3.37174782316652e-07,
+            "thumb": 3.37174782316652e-07
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.786095142364502
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.515151515151515,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 135,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.5,
+          "skin_surface_peak_m": {
+            "index": 0.0,
+            "thumb": 0.00126726568836297
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 7.25121822142683e-07,
+            "thumb": 1.19803848974698e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.786095142364502
+        },
+        {
+          "actual_pad_samples": 12,
+          "actual_progress": 0.818181818181818,
+          "clock_and_work_frozen": true,
+          "displayed_prop_peak_m": {
+            "index": 0.0,
+            "thumb": 9.83024960987677e-07
+          },
+          "minute": 145,
+          "passed": true,
+          "phase": "sew",
+          "requested_progress": 0.8,
+          "skin_surface_peak_m": {
+            "index": 0.0,
+            "thumb": 0.00126719472549596
+          },
+          "skin_surface_supported": true,
+          "supported": true,
+          "target_peak_m": {
+            "index": 5.96046447753906e-07,
+            "thumb": 1.12461816570431e-06
+          },
+          "tool_phase": "operate",
+          "measurement_source": "measured_sewing_side_mesh_surfaces",
+          "maximum_finger_correction_rad": 0.786095142364502
+        }
+      ],
+      "second": "tomo",
+      "second_craft_skill": 0.82,
+      "skills_after": {
+        "first": 0.15,
+        "second": 0.82
+      },
+      "worst_skin_surface": {
+        "distance": 0.00126750882491971,
+        "finger": "thumb",
+        "finger_name": "DEF-finger0.R",
+        "mesh": "CH_RinAdult_Body_LOD0",
+        "mesh_count": 1,
+        "method": "All-weight CPU skin triangles captured at skeleton_updated; nearest world-space triangle point.",
+        "metric": "unsigned_distance_to_selected_finger_triangles",
+        "minimum_target_weight": 1.0,
+        "point": {
+          "__vector3": [
+            -2.98010802268982,
+            0.960367679595947,
+            8.64805889129639
+          ]
+        },
+        "pose_frame": 4574,
+        "pose_serial": 392,
+        "query": {
+          "__vector3": [
+            -2.981205701828,
+            0.960750043392181,
+            8.64856433868408
+          ]
+        },
+        "supported": true,
+        "surface": 0,
+        "triangle": 5304,
+        "triangle_count": 60,
+        "triangle_world": [
+          {
+            "__vector3": [
+              -2.97956800460815,
+              0.960655331611633,
+              8.64901542663574
+            ]
+          },
+          {
+            "__vector3": [
+              -2.98199915885925,
+              0.96010810136795,
+              8.64414596557617
+            ]
+          },
+          {
+            "__vector3": [
+              -2.97990083694458,
+              0.959660887718201,
+              8.64904499053955
+            ]
+          }
+        ],
+        "vertex_indices": [
+          22649,
+          22647,
+          22650
+        ]
+      }
+    }
+  ],
+  "checks": 505,
+  "display_backend": "headless",
+  "failures": [],
+  "fixture": "Eleven currently eligible authored residents plus Rin explicitly aged to 12 to select her growth model. Authored positions and skills are retained; routines emptied, needs .1, and new plans deferred. No workpiece, progress, tool target or body pose is teleported or forged.",
+  "limit_m": 0.006,
+  "measure_frames": 6,
+  "measurement": "Post-skeleton-modifier observed measured skin points (distal or index-side), compared with contact targets and the displayed scissors loop markers or needle GripBand surface. Simulation clock is fixed while animation/contact frames settle.",
+  "passed_rigs": 12,
+  "rig_count": 12,
+  "scope": "Controlled production Main/Avatar/Contacts rig and prop-contact fixture. Not natural emergence, a complete workflow, visual review or human playtesting.",
+  "settle_frames": 60,
+  "full_report": "builds/sewing-rigs/results.json (also retained by CI as an artifact)"
+}

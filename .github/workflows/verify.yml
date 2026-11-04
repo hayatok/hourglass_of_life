@@ -25,6 +25,10 @@ jobs:
           name: engine-verification
           path: |
             builds/verification/
+            builds/sewing-integration/*.json
+            builds/sewing-presentation/*.json
+            builds/sewing-rigs/*.json
+            builds/autonomy/*.json
             builds/weather/*.json
             builds/weather-presentation/*.json
             builds/tabletop-presentation/*.json

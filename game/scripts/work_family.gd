@@ -248,6 +248,10 @@ func _end_support(help: Dictionary, completed: bool, reason: String) -> void:
 func project_definition(a: Dictionary, b: Dictionary) -> Dictionary:
 	return sim.resident_activities.definition(a,b)
 
+func project_material_cost(a: Dictionary, b: Dictionary, project: Dictionary) -> float:
+	if project.get("key","")=="craft": return sim.sewing.material_cost(a,b,project)
+	return float(project.get("cost",0))
+
 func meeting_compatible(p: Dictionary, meeting: Dictionary) -> bool:
 	var routine = sim._routine_at(p)
 	if routine.is_empty(): return true
@@ -272,10 +276,14 @@ func propose_project(first: String, second: String, preferred: String = "", auto
 			return sim._reply(p,"counteroffer","まずは少し話して、お互いのやりたいことを知ってからにしたい。")
 		if autonomous and not _wants_to_join(p,b if p.id==a.id else a,project):
 			return sim._reply(p,"defer","今は自分の取り組みを進めたい。また余裕があるときに相談しよう。")
-	if household(a).cash<project.cost:
+	if household(a).cash<project_material_cost(a,b,project):
 		return sim._reply(a,"defer","一緒に取り組みたいけれど、材料の用意を先に考えたい。")
 	if project.key=="radio" and not sim.interactions.available():
 		return sim._reply(a,"defer","ラジオはほかの人が使っている。道具が戻ってから相談したい。")
+	if project.key=="craft" and not sim.sewing.available(a,b,project):
+		return sim._reply(a,"defer","布や道具、作りかけの用意を確認してから、また相談しよう。")
+	if project.key=="craft" and sim.resident_activities._feasible(a,b,project).is_empty():
+		return sim._reply(a,"defer","材料を広げて片付けるところまで、二人の空いた時間に進めたい。")
 	if not sim._begin_meeting(a,b,project.center,"project",false,45,0,"",project.place,project.key):
 		return sim._reply(a,"defer","作業台が使われている。空いてから一緒に取り組みたい。")
 	var meeting = sim.meetings[-1]
@@ -283,7 +291,7 @@ func propose_project(first: String, second: String, preferred: String = "", auto
 	meeting.project = project
 	meeting.materials_ready = false
 	meeting.autonomous = autonomous
-	if not sim.interactions.begin(meeting):
+	if not sim.interactions.begin(meeting) or (sim.sewing.supports(meeting) and not sim.sewing.begin(meeting)):
 		sim._finish_meeting(meeting,false)
 		sim.meetings.erase(meeting)
 		return sim._reply(a,"defer","ラジオや作業場所の準備が整ってから、改めて相談したい。")

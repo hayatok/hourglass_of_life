@@ -6,6 +6,7 @@ var animation_name: String = ""
 var jrpg: JrpgResidentModel
 var displayed_age := -1
 var displayed_model := ""
+var motion_initialized := false
 var walk_rate := 1.0
 var contacts: ResidentContacts
 var others: Dictionary = {}
@@ -76,6 +77,7 @@ func _update_body(p: Dictionary) -> void:
 		$Visual/Hips.hide()
 		$AnimationPlayer.stop()
 		if model_key != displayed_model:
+			motion_initialized = false
 			if is_instance_valid(contacts):
 				contacts.detach();contacts.free()
 			if is_instance_valid(jrpg):
@@ -171,9 +173,19 @@ func update_state(p: Dictionary, delta: float, selected: bool) -> void:
 				visual.rotation.y = lerp_angle(visual.rotation.y,atan2(toward.x,toward.z),minf(1,delta*5))
 	if is_instance_valid(contacts) and Sim.interactions!=null:
 		var pose: Dictionary = Sim.interactions.pose_for(p.id)
+		if pose.is_empty() and Sim.sewing!=null: pose = Sim.sewing.pose_for(p.id)
 		if pose.is_empty() and Sim.tabletop!=null: pose = Sim.tabletop.pose_for(p.id)
 		var motion: Dictionary = contacts.prepare_motion(p,activity if wanted=="work" or not pose.is_empty() else {},pose,delta)
+		# A rebuilt actor already belongs to the saved operation. Restore its
+		# body stance before solving held-tool contacts; turning from the default
+		# idle body would pull a saved needle out of the opposite hand for frames.
+		if not motion_initialized and pose.get("key","")=="sewing":
+			if motion.has("body_yaw"): visual.rotation.y=float(motion.body_yaw)
+			contacts.social_motion.action_lean=motion.get("lean",Vector3.ZERO)
+			motion=contacts.prepare_motion(p,activity,pose,0)
+		motion_initialized=true
 		if motion.has("clip"): wanted = motion.clip
+		if motion.has("conversation_role"): conversation_role=motion.conversation_role
 		if motion.has("body_yaw"): visual.rotation.y = lerp_angle(visual.rotation.y,float(motion.body_yaw),minf(1,delta*10))
 		if motion.has("gaze"):
 			attention = motion.gaze;attend = true
