@@ -84,7 +84,11 @@ def run(name,args,marker=None,timeout=180):
 run('import',['--headless','--editor','--import'])
 for name in a.checks:
     file,marker=CHECKS[name]
-    run(name,['--headless','--script','tests/'+file],marker,timeout=600 if name in ['life','autonomy','social_chain_presentation'] else (300 if name=='tabletop_presentation' else 180))
+    # This advances every real minute through all 88 representative years.
+    # Shared CI CPUs need more time than the local M5 (about 503 seconds);
+    # retain the full calendar and completion/error criteria on both machines.
+    timeout=1800 if name=='life' else (600 if name in ['autonomy','social_chain_presentation'] else (300 if name=='tabletop_presentation' else 180))
+    run(name,['--headless','--script','tests/'+file],marker,timeout=timeout)
 if a.gpu:
     gpu_checks={'sewing_presentation','weather_presentation','character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls','load_feedback'}
     for name in a.checks:

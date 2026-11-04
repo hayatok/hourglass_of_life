@@ -87,11 +87,11 @@
     {
       "check": "work",
       "passed": true,
-      "seconds": 1.35,
+      "seconds": 1.31,
       "failure": null,
       "log": "work.log",
       "completion": "Work/family checks: 42 passed, 0 failed",
-      "run_directory": "builds/sewing-verification/regression"
+      "run_directory": "builds/sewing-verification/notebook-clarity"
     },
     {
       "check": "life",
@@ -267,11 +267,11 @@
     {
       "check": "resident_proposals",
       "passed": true,
-      "seconds": 1.16,
+      "seconds": 1.12,
       "failure": null,
       "log": "resident_proposals.log",
       "completion": "Resident proposal UI checks: 75 passed, 0 failed",
-      "run_directory": "builds/sewing-verification/recipe-popup-focus"
+      "run_directory": "builds/sewing-verification/notebook-clarity"
     },
     {
       "check": "observation_hud",
@@ -422,11 +422,11 @@
     {
       "check": "scene-gpu",
       "passed": true,
-      "seconds": 4.8,
+      "seconds": 4.83,
       "failure": null,
       "log": "scene-gpu.log",
       "completion": "Scene/UI smoke: PASS (focused UI flow through completed collaboration)",
-      "run_directory": "builds/sewing-verification/rig-matrix-fixed"
+      "run_directory": "builds/sewing-verification/finger-repaired"
     },
     {
       "check": "haru_jrpg-gpu",
@@ -453,6 +453,15 @@
       "failure": null,
       "log": "resident_foot_plant-gpu.log",
       "completion": "Resident foot plant checks: 41 passed, 0 failed",
+      "run_directory": "builds/sewing-verification/finger-repaired"
+    },
+    {
+      "check": "tabletop_presentation-gpu",
+      "passed": true,
+      "seconds": 47.98,
+      "failure": null,
+      "log": "tabletop_presentation-gpu.log",
+      "completion": "Tabletop presentation: 62 passed, 0 functional failures; 0 artifact failures",
       "run_directory": "builds/sewing-verification/finger-repaired"
     }
   ]
