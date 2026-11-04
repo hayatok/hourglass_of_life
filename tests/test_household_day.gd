@@ -2,6 +2,7 @@ extends SceneTree
 
 # Controlled state/action executor fixtures. Positions are explicitly placed at
 # use points here; these tests do not demonstrate real 3D arrival or a lived day.
+const KitchenFixture = preload("res://tests/controlled_kitchen_fixture.gd")
 var checks: int = 0
 var failures: Array[String] = []
 var home_plan: Dictionary
@@ -52,6 +53,7 @@ func stop(day: HouseholdDay, actor: String, task_id: String, reason: String = "�
 	return day.end_use(actor,task_id,response.task.target)
 
 func phase(day: HouseholdDay, actor: String) -> Dictionary:
+	if day.kitchen.supports(day.task_for(actor)):return KitchenFixture.phase(day,actor)
 	if day.task_for(actor).is_empty(): return {}
 	if day.task_for(actor).status not in ["arrived","working","phase_ready"] and not located(day,actor): return {}
 	var task: Dictionary = day.task_for(actor)
@@ -80,10 +82,18 @@ func intention_and_clock() -> void:
 	expect(day.arrive("nagisa",task.id).status=="not_arrived","Arrival cannot be asserted from the bedroom while the target is the refrigerator")
 	if not located(day,"nagisa"): return
 	var arrived: Dictionary = day.snapshot()
-	expect(day.perform("nagisa",task.id,1).status=="waiting_for_time" and HouseholdDay._same(arrived,day.snapshot()),"Arrival alone and duplicate same-clock work grant no elapsed credit")
+	expect(day.perform("nagisa",task.id,1).status=="waiting_physical" and HouseholdDay._same(arrived,day.snapshot()),"Arrival alone grants neither physical interaction nor elapsed work")
+	for ignored in 20:
+		if day.next_operation("nagisa",task.id).get("kind")=="work":break
+		KitchenFixture.step(day,"nagisa")
+	var operation: Dictionary=day.next_operation("nagisa",task.id)
+	day.set_position("nagisa",operation.target.approach);day.set_physical_work("nagisa",task.id,true)
+	arrived=day.snapshot()
+	expect(day.perform("nagisa",task.id,1).status=="waiting_for_time" and HouseholdDay._same(arrived,day.snapshot()),"Explicit interaction admission still grants no duplicate same-clock work")
 	day.advance_time(1)
+	day.set_physical_work("nagisa",task.id,true)
 	var hunger_before: float = float(day.person("nagisa").hunger)
-	expect(day.perform("nagisa",task.id,100).task.phase_progress==1 and day.inventory.ingredients==6,"A large caller delta is capped by actual elapsed time; ingredients are consumed once on real work")
+	expect(day.perform("nagisa",task.id,100).task.phase_progress==1 and day.inventory.ingredients==6,"A large caller delta is capped by actual elapsed time; actual grasp charged the materials only once")
 	var performed: Dictionary = day.snapshot()
 	day.perform("nagisa",task.id,1)
 	expect(HouseholdDay._same(performed,day.snapshot()) and day.person("nagisa").hunger==hunger_before,"Repeating work at the same time neither consumes twice nor relieves hunger while cooking")
@@ -120,15 +130,21 @@ func meal_chain() -> void:
 func save_and_handoff() -> void:
 	var day: HouseholdDay = fresh()
 	var first: Dictionary = begin(day,"nagisa","cook")
-	if first.is_empty() or not located(day,"nagisa"): return
-	day.advance_time(1);day.perform("nagisa",first.id,1)
+	if first.is_empty():return
+	for ignored in 20:
+		if day.next_operation("nagisa",first.id).get("kind")=="work":break
+		KitchenFixture.step(day,"nagisa")
+	var operation: Dictionary=day.next_operation("nagisa",first.id)
+	day.set_position("nagisa",operation.target.approach);day.set_physical_work("nagisa",first.id,true)
+	day.advance_time(1);day.set_physical_work("nagisa",first.id,true);day.perform("nagisa",first.id,1)
 	var saved: Dictionary = JSON.parse_string(JSON.stringify(day.snapshot()))
 	var restored: HouseholdDay = fresh()
 	if not expect(restored.restore(saved) and HouseholdDay._same(restored.snapshot(),saved),"The complete current-format controller restores exact intermediate needs, resources, phase, clock and reservations"): return
-	day.advance_time(1);day.perform("nagisa",first.id,1)
-	restored.advance_time(1);restored.perform("nagisa",first.id,1)
+	day.advance_time(1);day.set_physical_work("nagisa",first.id,true);day.perform("nagisa",first.id,1)
+	restored.advance_time(1);restored.set_physical_work("nagisa",first.id,true);restored.perform("nagisa",first.id,1)
 	expect(HouseholdDay._same(day.snapshot(),restored.snapshot()),"A restored cooking phase evolves identically under the same actual-time inputs")
 	stop(day,"nagisa",first.id,"勤務のため交代する")
+	day.request("nagisa","quiet");KitchenFixture.complete(day,"nagisa")
 	var second: Dictionary = begin(day,"ryo","cook")
 	if not expect(not second.is_empty() and second.started_effects and day.inventory.ingredients==6,"A different adult takes the existing batch without a second ingredient debit"): return
 	if not expect(complete(day,"ryo"),"The replacement adult finishes the actual remaining phases"): return
@@ -307,52 +323,33 @@ func background_projects_and_decisions() -> void:
 	expect(day.tasks[care.id].status=="cancelled" and day.person("ryo").actual_minutes.get("care",0)==0,"A declined invitation lets the parent choose again without fictional shared time or endless waiting")
 
 func batch_transport_and_safe_handoff() -> void:
-	var day: HouseholdDay = fresh()
-	var cook: Dictionary = begin(day,"nagisa","cook")
-	if cook.is_empty() or not expect(phase(day,"nagisa").status=="next_phase","Finishing actual refrigerator pickup begins transport"): return
-	var batch: Dictionary = day.batch_location("cook")
-	var identity: String = batch.batch_id
-	expect(batch.holder=="nagisa" and batch.container.is_empty() and batch.last_fixture=="fridge" and day.inventory.ingredients==6,"A single debited batch is held, and remembers its last actual fixture")
+	var day: HouseholdDay=fresh()
+	var cook: Dictionary=begin(day,"nagisa","cook")
+	if cook.is_empty() or not expect(phase(day,"nagisa").status=="next_phase","Explicit controlled source pickup finishes before transport"):return
+	var batch: Dictionary=day.batch_location("cook");var identity: String=batch.batch_id
+	var item_id: String=day.kitchen.role_id("ingredient_carrier")
+	expect(batch.holder=="nagisa" and batch.last_fixture=="fridge" and day.inventory.ingredients==6,"One actually grasped material batch remembers its original source")
 	day.set_position("nagisa",Vector3(1.5,0,4.95))
-	var moving: Dictionary = day.batch_location("cook")
-	expect(moving.position==day.person("nagisa").position+Vector3(0,1,0) and moving.last_fixture=="fridge" and moving.position!=day._surface_position("prep"),"Movement follows the real holder and never changes to the unvisited preparation fixture")
-	var before: Dictionary = day.snapshot();day.batch_locations();day.batch_location("cook")
-	expect(HouseholdDay._same(before,day.snapshot()),"Batch inspection is pure and returns copies")
+	expect(day.batch_location("cook").position==batch.position,"A body position alone does not invent a held-object frame")
+	var frame:=Transform3D(Basis.IDENTITY,Vector3(1.5,1,4.95))
+	expect(day.update_held_frame("nagisa",cook.id,item_id,frame) and day.batch_location("cook").position==frame.origin,"Only an explicit executor frame moves the same held material")
 	stop(day,"nagisa",cook.id,"途中で用事ができた")
-	expect(day.batch_location("cook").position==moving.position and day.batch_location("cook").holder=="nagisa","Mid-route cancellation leaves the same material in the actual carrier's hands")
-	expect(day.request("ryo","cook").status=="unavailable","A different adult cannot remotely steal a batch still held by its previous actor")
-	var saved: Dictionary = JSON.parse_string(JSON.stringify(day.snapshot()))
-	var restored: HouseholdDay = fresh()
-	expect(restored.restore(saved) and HouseholdDay._same(saved,restored.snapshot()),"A cancelled but actually held batch resumes from JSON without moving or duplicating it")
-	var put: Dictionary = day.request("nagisa","toilet").task
-	expect(put.kind=="put_down" and day.batch_location("cook").holder=="nagisa","Another requested action first creates an actual safe put-down intention")
-	if not located(day,"nagisa"): return
-	expect(day.batch_location("cook").holder=="nagisa","Arrival at the safe surface alone does not put down the batch")
-	day.advance_time(.5);day.perform("nagisa",put.id,.5)
-	expect(day.batch_location("cook").holder=="nagisa","Half a put-down minute does not claim the completed placement")
-	saved=JSON.parse_string(JSON.stringify(day.snapshot()))
-	var checkpoint: HouseholdDay = fresh()
-	expect(checkpoint.restore(saved) and HouseholdDay._same(saved,checkpoint.snapshot()),"A partially performed safe put-down restores the original holder, real position and its separate source job")
-	day.advance_time(.5);day.perform("nagisa",put.id,.5);day.finish("nagisa",put.id)
-	var placed: Dictionary = day.batch_location("cook")
-	expect(placed.holder.is_empty() and placed.container==put.fixture and placed.position==day._surface_position(put.fixture) and placed.batch_id==identity,"Only actual completed placement changes the container, preserving the batch identity")
-	var replacement: Dictionary = begin(day,"ryo","cook")
-	expect(replacement.fixture==placed.container and replacement.phases[int(replacement.phase_index)].get("transport","")=="pickup" and day.inventory.ingredients==6,"The replacement first goes to the material's real current surface without consuming again")
-	if not located(day,"ryo"): return
-	day.advance_time(.5);day.perform("ryo",replacement.id,.5)
-	saved=JSON.parse_string(JSON.stringify(day.snapshot()));checkpoint=fresh()
-	expect(checkpoint.restore(saved) and HouseholdDay._same(saved,checkpoint.snapshot()),"A partial recovery pickup restores its own clock without advancing the saved real processing phase")
-	if not expect(phase(day,"ryo").status=="next_phase","The replacement actually picks up the existing material"): return
-	expect(day.batch_location("cook").holder=="ryo" and day.batch_location("cook").batch_id==identity,"Actual pickup transfers the same batch to the new carrier")
-	var corrupt: Dictionary = day.snapshot();corrupt.jobs.cook.position=HouseholdDay._encode(day._surface_position("stove"))
-	before=day.snapshot()
-	expect(not day.restore(corrupt) and HouseholdDay._same(before,day.snapshot()),"A forged held-batch destination is rejected atomically rather than teleporting the material")
-	if not located(day,"ryo"): return
-	expect(day.batch_location("cook").container.is_empty(),"Arrival at the processing fixture does not teleport the held material onto it")
-	day.advance_time(1);day.perform("ryo",replacement.id,1)
-	expect(day.batch_location("cook").container=="prep" and day.batch_location("cook").holder.is_empty(),"The first actual placing minute puts the batch on the preparation surface")
-	if not expect(complete(day,"ryo"),"The recovered batch finishes its real remaining preparation and heating"): return
-	expect(day.inventory.ingredients==6 and day.inventory.prepared_servings==3 and day.batch_locations().is_empty(),"Cancellation, storage, recovery and handoff still produce one finite meal batch")
+	var saved: Dictionary=JSON.parse_string(JSON.stringify(day.snapshot()));var restored:=fresh()
+	expect(restored.restore(saved) and HouseholdDay._same(saved,restored.snapshot()),"Actual held frames and quantities survive interrupted JSON")
+	expect(day.request("ryo","cook").status=="unavailable","Another actor cannot steal a held carrier")
+	var put: Dictionary=day.request("nagisa","toilet").task
+	expect(put.kind=="put_down" and day.jobs.cook.holder=="nagisa","A changed intention first requires a real put-down")
+	var intent: Dictionary=day.next_operation("nagisa",put.id)
+	day.set_position("nagisa",intent.target.approach)
+	expect(day.jobs.cook.holder=="nagisa","Merely reaching a support does not release the carrier")
+	if not expect(KitchenFixture.complete(day,"nagisa").status=="completed","Explicit release, rather than a minute threshold, completes the safe put-down"):return
+	expect(day.jobs.cook.holder.is_empty() and day.jobs.cook.batch_id==identity,"Placement keeps the same batch identity")
+	var replacement: Dictionary=begin(day,"ryo","cook")
+	expect(replacement.started_effects and day.inventory.ingredients==6,"Handoff resumes the existing material without consuming stock again")
+	var before: Dictionary=day.snapshot();var corrupt: Dictionary=before.duplicate(true)
+	corrupt.jobs.cook.position=HouseholdDay._encode(day._surface_position("stove"))
+	expect(not day.restore(corrupt) and HouseholdDay._same(before,day.snapshot()),"Forging the unvisited destination is atomically rejected")
+	expect(complete(day,"ryo") and day.inventory.prepared_servings==3 and day.inventory.ingredients==6,"Recovered controlled prep, actual pour boundary and stirring produce only one batch")
 
 func authored_supports_and_carried_towel() -> void:
 	var day: HouseholdDay = fresh()
@@ -499,7 +496,7 @@ func continuous_scheduled_use() -> void:
 	expect(day.task_for("rin").status=="phase_ready" and is_equal_approx(day.person("rin").actual_minutes.school,160),"A late school arrival uses only the remaining school day, without repeating an hourly departure or crediting travel")
 
 func run() -> void:
-	home_plan=JSON.parse_string(FileAccess.get_file_as_string("res://data/foundation/ogawa-home.json"))
+	home_plan=KitchenFixture.plan_with_metadata(JSON.parse_string(FileAccess.get_file_as_string("res://data/foundation/ogawa-home.json")))
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/residents.json"))
 	for p in source.residents:
 		if p.id not in ["nagisa","ryo","rin"]: continue

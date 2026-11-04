@@ -192,6 +192,8 @@ func run() -> void:
 	expect_unreachable=args.has("--expect-unreachable")
 	rendered=DisplayServer.get_name()!="headless";Engine.max_fps=30 if rendered else 0
 	out="res://builds/motion-retarget/household/probe/"+who+("-gpu" if rendered else "-headless")+("-affordance" if expect_unreachable else "")
+	for argument in args:
+		if argument.begins_with("--output="):out=argument.trim_prefix("--output=")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(out))
 	var library_path := "res://game/assets/motion/household/"+who+".tres"
 	var source_available := ResourceLoader.exists(library_path)
@@ -267,7 +269,7 @@ func run() -> void:
 		FileAccess.open(out+"/results.json",FileAccess.WRITE).store_string(JSON.stringify(HouseholdDay._encode({"scope":"Physical pickup rejected before lift; this is not completed-carry acceptance.","target":who,"source_available":source_available,"checks":checks,"failures":failures,"pickup_rejected":true,"holder":holder,"calibration":fit,"carry_local":carry_local,"prop_bounds":str(bounds),"actual":provider.telemetry(),"observations":rows}),"\t"))
 		print("Household pickup rejected before transfer: "+who+" / "+str(provider.telemetry().get("not_ready_reason","")))
 		world.free();quit(1);return
-	if provider.transfer_ready("grasp"):holder=true
+	if provider.transfer_ready("grasp"):holder=provider.confirm_grasp("fixture-tray")
 	await action_phase("lift",.75,source_frame,actor.global_transform*carry_local)
 	var side_clearance := prep_size.x*.5+.30
 	check(actor.follow_path([Vector3(side_clearance,0,0),Vector3(side_clearance,0,4),Vector3(0,0,4)]),"Carrying uses the continuous motor and goes around the real source counter")
@@ -286,7 +288,8 @@ func run() -> void:
 	await action_phase("lower",.85,prop_frame,target_frame)
 	await action_phase("release",.6,target_frame,target_frame)
 	check(provider.transfer_ready("release"),"Real prior grasp, open release pose and actual prop-bottom/support coincidence permit placement")
-	if provider.transfer_ready("release"):holder=false
+	if provider.transfer_ready("release"):
+		holder=false;provider.confirm_release("fixture-tray")
 	await action_phase("recover",.6,target_frame,target_frame)
 	# Controlled semantic work targets expose whole-body paths, not a claim
 	# that missing knife/spoon/cloth deformation assets are already complete.

@@ -1,9 +1,0 @@
-Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
-
-ERROR: tomo: the finite natural run covers travel, actual talk, completed joint work, seated food, sleep and waking without forcing an outcome
-   at: push_error (core/variant/variant_utility.cpp:1023)
-   GDScript backtrace (most recent call first):
-       [0] expect (res://tests/test_jrpg_renewal_gameplay.gd:42)
-       [1] run (res://tests/test_jrpg_renewal_gameplay.gd:744)
-JRPG renewal gameplay checks: 107 passed, 1 failed
-JRPG renewal gameplay seconds: 11.697

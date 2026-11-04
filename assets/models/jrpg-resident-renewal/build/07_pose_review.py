@@ -35,7 +35,7 @@ for label,clip,frame in poses:
   arm.animation_data.action=None;arm.pose.bones['DEF-head'].rotation_euler.y=.60
  bpy.context.view_layer.update()
  if spec['skirt'] and label in ['deep_bend','arms_overhead','head_turn']:
-  bind=json.loads((ROOT/ident/'review/bind-report.json').read_text());garment_helpers.update(arm,bind['landmarks_inferred_from_forms']['skirt_min']+.015,label);bpy.context.view_layer.update()
+  bind=json.loads((ROOT/ident/'production-inputs/bind-report.json').read_text());garment_helpers.update(arm,bind['landmarks_inferred_from_forms']['skirt_min']+.015,label);bpy.context.view_layer.update()
  ev=body.evaluated_get(bpy.context.evaluated_depsgraph_get());mesh=ev.to_mesh();points=[v.co.copy() for v in mesh.vertices];ev.to_mesh_clear();lo=Vector([min(v[i] for v in points) for i in range(3)]);hi=Vector([max(v[i] for v in points) for i in range(3)]);center=(lo+hi)*.5
  cam.data.ortho_scale=2.5 if label=='sleep' else (2.3 if label=='arms_overhead' else 1.95)
  for angle,name in [(0,'front'),(65,'threequarter')]:

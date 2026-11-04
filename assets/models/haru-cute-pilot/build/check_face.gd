@@ -29,7 +29,7 @@ func run() -> void:
 	camera.position = Vector3(0,.887,.75);world.add_child(camera);camera.look_at(Vector3(0,.887,0));camera.current = true
 	model = load(PILOT+"/raw/CH_Haru_JRPG_Pilot_Raw.glb").instantiate();world.add_child(model)
 	material = ShaderMaterial.new();material.shader = load(PILOT+"/build/texture_face.gdshader")
-	var landmarks: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(PILOT+"/review/texture-face/landmarks.json"))
+	var landmarks: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(PILOT+"/production-inputs/texture-face/landmarks.json"))
 	for side in ["left","right"]:
 		var landmark: Dictionary = landmarks["eye_"+side];var prefix := "eye_l" if side=="left" else "eye_r"
 		material.set_shader_parameter(prefix,vec2(landmark.center.uv));material.set_shader_parameter(prefix+"_x",vec2(landmark.axis_x)*1.18);material.set_shader_parameter(prefix+"_y",vec2(landmark.axis_y)*1.35);material.set_shader_parameter(prefix+"_skin",vec2(landmark.skin_uv))

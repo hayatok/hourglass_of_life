@@ -5,7 +5,9 @@ extends FoundationLocomotionPose
 # still owns every Node3D world transform. No animation changes life/task results.
 const FURNITURE_FORMAT := 1
 const PHASES := ["chair_pull","chair_push","sit_enter","sit_idle","chair_slide","sit_exit",
-	"bed_seat","legs_in","lie_down","lie_idle","sit_up","legs_out","bed_stand"]
+	"bed_seat","legs_in","lie_down","lie_idle","sit_up","legs_out","bed_stand","fixture_pull","fixture_push","step_back","step_forward"]
+const STEP_PHASES := ["chair_pull","chair_push","fixture_pull","fixture_push","step_back","step_forward"]
+const BACK_PHASES := ["chair_pull","fixture_pull","step_back"]
 var _f_request: Dictionary = {}
 var _f_enabled := false
 var _f_serial := 0
@@ -24,8 +26,9 @@ var _f_last_pose: Array = []
 var _rendered_pose: Array = []
 var _rendered_world := Transform3D.IDENTITY
 var _rendered_serial := 0
-var _skin_points: Dictionary = {"seat":[],"back":[],"head":[],"L":[],"R":[]}
+var _skin_points: Dictionary = {"seat":[],"back":[],"head":[],"L":[],"R":[],"thumb.L":[],"thumb.R":[],"index.L":[],"index.R":[]}
 var _palm_points: Dictionary = {}
+var _handle_palms: Dictionary = {}
 var _calibration: Dictionary = {}
 var _f_observed: Dictionary = {}
 var _f_profile: Dictionary = {}
@@ -33,6 +36,9 @@ var _f_static_key: Dictionary = {}
 var _f_static_observed: Dictionary = {}
 var _skin_seen: Dictionary = {}
 var _skin_meshes: Array[WeakRef] = []
+var _handle_finger_angles: Dictionary = {}
+const HANDLE_FINGER_OPEN := .08
+const HANDLE_FINGER_LIMIT := 1.35 # Single authored finger joint, under 80 degrees.
 
 func configure(actor: Node3D, library: AnimationLibrary, contract: Dictionary, profile: Dictionary = {}) -> bool:
 	if not super.configure(actor,library,contract,profile): return false
@@ -63,6 +69,21 @@ func configure(actor: Node3D, library: AnimationLibrary, contract: Dictionary, p
 
 func calibration() -> Dictionary: return _calibration.duplicate(true)
 func request_state() -> Dictionary: return _f_request.duplicate(true) if _f_enabled else {}
+func handle_palm_local(side: String) -> Variant:
+	if not _handle_palms.has(side):return null
+	var point: Dictionary=_handle_palms[side]
+	return Transform3D(point.basis,point.position)
+
+func _hand_contact(side: String) -> Dictionary:
+	return _handle_palms.get(side,{}) if _f_request.get("handle") is Dictionary else _palm_points.get(side,{})
+
+func _actual_palm(side: String, point: Dictionary) -> Vector3:
+	if not point.has("skin_records"):return _bone_world("DEF-hand."+side)*point.position
+	var actual := Vector3.ZERO
+	# Re-evaluate all three real deformed Skin vertices after Skeleton_updated.
+	# This is a point on the imported triangle, not an unskinned rest landmark.
+	for index in 3:actual+=_skin_point(point.skin_records[index])*float(point.barycentric[index])
+	return actual
 
 func present(request: Dictionary, _elapsed_delta: float = 0.0) -> bool:
 	if not _configured or not _valid_request(request): return false
@@ -83,6 +104,11 @@ func _capture_rendered() -> void:
 	_rendered_pose=_read_locals();_rendered_world=get_skeleton().global_transform;_rendered_serial+=1
 	if _f_enabled and _f_applied==_f_serial:
 		_f_sample_serial=_f_serial;_f_observed["latest_sample_serial"]=_f_sample_serial
+		for side in _f_observed.get("hands",{}):
+			var record: Dictionary=_f_observed.hands[side]
+			record.actual_palm=_actual_palm(side,_hand_contact(side))
+			record.error_m=record.actual_palm.distance_to(record.target)
+			if _f_request.get("handle") is Dictionary:record.fingers=_finger_contacts(side,_f_request.handle)
 
 func _process_modification_with_delta(_skeleton_delta: float) -> void:
 	if not _f_enabled or _f_request.is_empty(): return
@@ -115,7 +141,7 @@ func _process_modification_with_delta(_skeleton_delta: float) -> void:
 	var goals: Dictionary={}
 	var branch_started := Time.get_ticks_usec()
 	match phase:
-		"chair_pull","chair_push": goals=_move_chair_pose(phase,progress)
+		"chair_pull","chair_push","fixture_pull","fixture_push","step_back","step_forward": goals=_move_chair_pose(phase,progress)
 		"chair_slide":
 			_set_locals(_sample("sit_idle",float(_f_request.get("pose_seconds",0.0))))
 			_neutral_toes()
@@ -142,7 +168,7 @@ func _process_modification_with_delta(_skeleton_delta: float) -> void:
 			_support_seat(weight)
 	var branch_usec := Time.get_ticks_usec()-branch_started
 	var feet_started := Time.get_ticks_usec()
-	var foot_result := _solve_furniture_feet(goals,phase in ["chair_pull","chair_push"])
+	var foot_result := _solve_furniture_feet(goals,phase in STEP_PHASES)
 	var feet_usec := Time.get_ticks_usec()-feet_started
 	var hand_result := _hands(phase,progress)
 	_update_garment()
@@ -162,6 +188,7 @@ func _process_modification_with_delta(_skeleton_delta: float) -> void:
 		"support_surface_y":surface,"actual_support_min_y":skin_y,"body_support_error_m":support_error,
 		"feet":foot_result,"hands":hand_result,"legs":legs,"profile_usec":_f_profile,"supports_ready":ready,"sample_method":"final skeletal pose plus actual imported Skin vertices",
 		"sleep_source":"new authored full-body seat/legs/lie sequence; no sleeping clip exists in the source library" if phase in ["legs_in","lie_down","lie_idle","sit_up","legs_out"] else "Quaternius sitting/reverse-walk source plus physical target adaptation"}
+	if phase in ["fixture_pull","fixture_push","step_back","step_forward"]:_f_observed.motion_source="authored two-step foot/support targets with Quaternius standing pose; motor owns the full physical root translation"
 	if phase=="lie_idle": _f_static_key=static_key.duplicate(true);_f_static_observed=_f_observed.duplicate(true)
 	else: _f_static_key.clear();_f_static_observed.clear()
 
@@ -183,7 +210,7 @@ func _begin_phase(phase: String) -> void:
 			if value.y<low: low=value.y;key=candidate;point=value
 		_f_feet[side]={"transform":transform,"point":key,"anchor":point}
 	_f_swing="L"
-	if phase in ["chair_pull","chair_push"]:
+	if phase in STEP_PHASES:
 		var movement: Vector3=(_f_request.get("root_end",_f_start) as Transform3D).origin-_f_start.origin
 		if movement.length()>.001:
 			var left: float=(_f_feet.L.transform.origin-_f_start.origin).dot(movement)
@@ -257,7 +284,7 @@ func _support_seat(weight: float) -> void:
 
 func _move_chair_pose(phase: String, progress: float) -> Dictionary:
 	var motion := clampf((progress-.08)/.84,0,1)
-	var source_phase: float=1.0-motion if phase=="chair_pull" else motion
+	var source_phase: float=1.0-motion if phase in BACK_PHASES else motion
 	var values := _standing_pose(source_phase*_walk_length)
 	# Authored working posture keeps the target's standing centre of mass,
 	# source breathing/arms and a small weight transfer. Reverse full-body
@@ -268,6 +295,11 @@ func _move_chair_pose(phase: String, progress: float) -> Dictionary:
 	values=_chair_working_posture(values)
 	_set_locals(_blend(_f_entry,values,_ease(clampf(progress/.12,0,1))))
 	_neutral_toes()
+	if (_f_request.get("root_end",_f_start) as Transform3D).origin.distance_to(_f_start.origin)<.00001:
+		# Reaching a fixed handle must not invent a standing foot-lift sequence.
+		var stationary := {}
+		for side in SIDES:stationary[side]=_chair_foot_record(side,_f_feet[side].transform,true,_floor,{},"stationary_floor_support")
+		return stationary
 	var step: int=mini(1,int(floor(motion*2)))
 	var fraction: float=1.0 if motion>=1 else motion*2-step
 	var first: String=_f_feet.L.first_swing
@@ -283,6 +315,7 @@ func _move_chair_pose(phase: String, progress: float) -> Dictionary:
 
 func _chair_working_posture(values: Array) -> Array:
 	var requests: Dictionary=_f_request.get("hands",{})
+	if requests.is_empty():requests=_f_request.get("working_hands",{})
 	if requests.is_empty(): return values
 	var globals := _globals(values)
 	var world := get_skeleton().global_transform
@@ -308,7 +341,8 @@ func _chair_working_posture(values: Array) -> Array:
 				# treating the visible contact vertex as the wrist joint.
 				var target: Transform3D=requests[side].palm_transform
 				var wrist: Vector3=target.origin
-				if _palm_points.has(side): wrist-=target.basis*_palm_points[side].position
+				var contact: Dictionary=_hand_contact(side)
+				if not contact.is_empty():wrist-=(target.basis*contact.basis.inverse())*contact.position
 				excess=maxf(excess,shoulder.distance_to(wrist)-length*.98)
 			var score := maxf(0,excess)*100+angle*.025+lower*.10
 			if score<best_score: best_score=score;chosen_angle=angle;chosen_lower=lower
@@ -531,24 +565,88 @@ func _solve_supine_leg(side: String, target: Transform3D) -> float:
 
 func _hands(phase: String, progress: float) -> Dictionary:
 	var requests: Dictionary=_f_request.get("hands",{})
-	var result := {};var weight := smoothstep(0,.15,progress) if phase in ["chair_pull","chair_push"] else 1.0
+	var result := {};var weight := smoothstep(0,.15,progress) if phase in STEP_PHASES else 1.0
+	if bool(_f_request.get("keep_hand_contact",false)):weight=1.0
 	for side in SIDES:
 		if not requests.get(side) is Dictionary: continue
 		var record: Dictionary=requests[side]
-		if not record.get("palm_transform") is Transform3D or not _palm_points.has(side): continue
-		var palm: Dictionary=_palm_points[side]
+		var palm: Dictionary=_hand_contact(side)
+		if not record.get("palm_transform") is Transform3D or palm.is_empty(): continue
 		var target: Transform3D=record.palm_transform
 		var basis: Basis=target.basis*palm.basis.inverse()
 		var wrist := Transform3D(basis,target.origin-basis*palm.position)
 		wrist=_rigid_blend(_bone_world("DEF-hand."+side),wrist,weight)
 		var error := _solve_arm(side,wrist)
-		var actual: Vector3=_bone_world("DEF-hand."+side)*palm.position
+		var actual: Vector3=_actual_palm(side,palm)
 		result[side]={"actual_palm":actual,"target":target.origin,"error_m":actual.distance_to(target.origin),"reach_residual_m":error,"source_vertex":palm.vertex}
+		if palm.has("skin_records"):
+			result[side].source_contact={"method":"actual imported hand-only Skin triangle at 75% of the index base; final deformed barycentric measurement",
+				"surface":palm.surface,"vertices":palm.vertices,"barycentric":palm.barycentric,"hand_local":Transform3D(palm.basis,palm.position)}
+		var closure: float=clampf(float(record.get("grip",false)),0,1)
 		for finger in 5:
 			var index: int=_bones["DEF-finger%d.%s"%[finger,side]]
 			var rest := get_skeleton().get_bone_rest(index).basis.get_rotation_quaternion()
-			get_skeleton().set_bone_pose_rotation(index,(rest*Quaternion(Vector3.RIGHT,.35 if record.get("grip",false) else .08)).normalized())
+			var closed := .35
+			if finger<2 and _f_request.get("handle") is Dictionary and closure>0:
+				closed=_fit_handle_finger(side,"thumb" if finger==0 else "index",_f_request.handle)
+			get_skeleton().set_bone_pose_rotation(index,(rest*Quaternion(Vector3.RIGHT,lerpf(HANDLE_FINGER_OPEN,closed,closure))).normalized())
+		if _f_request.get("handle") is Dictionary:result[side].fingers=_finger_contacts(side,_f_request.handle)
 	return result
+
+func _fit_handle_finger(side: String, label: String, handle: Dictionary) -> float:
+	# Fit only a legal rest-relative joint rotation. Evaluate the imported Skin
+	# surface against the real cylinder; never translate bones or move targets.
+	# Relative hand/handle geometry is stable during a pull, so solve it once.
+	var hand: Transform3D=_bone_world("DEF-hand."+side).affine_inverse()
+	var a: Vector3=hand*handle.a;var b: Vector3=hand*handle.b
+	var key: String=side+label+str(a.snapped(Vector3.ONE*.0001))+str(b.snapped(Vector3.ONE*.0001))+str(handle.radius)
+	if _handle_finger_angles.has(key):return _handle_finger_angles[key]
+	var bone: int=_bones["DEF-finger%d.%s"%[0 if label=="thumb" else 1,side]]
+	var skeleton: Skeleton3D=get_skeleton();var poses: Array[Transform3D]=[]
+	for index in skeleton.get_bone_count():poses.append(skeleton.get_bone_global_pose(index))
+	var local: Transform3D=skeleton.get_bone_pose(bone)
+	var rest: Quaternion=skeleton.get_bone_rest(bone).basis.get_rotation_quaternion()
+	var parent: int=skeleton.get_bone_parent(bone)
+	var best := INF;var chosen := .35
+	for step in 33:
+		var angle: float=lerpf(.35,HANDLE_FINGER_LIMIT,float(step)/32)
+		local.basis=Basis((rest*Quaternion(Vector3.RIGHT,angle)).normalized())
+		poses[bone]=poses[parent]*local if parent>=0 else local
+		var nearest := INF;var deepest := 0.0
+		for point in _skin_points[label+"."+side]:
+			var distance: float=_handle_signed_distance(_skin_point(point,poses),handle)
+			nearest=minf(nearest,absf(distance));deepest=minf(deepest,distance)
+		# A touching vertex must not conceal deep penetration of this finger.
+		var score: float=nearest+maxf(0,-deepest-.002)*50+angle*.00001
+		if score<best:best=score;chosen=angle
+	if _handle_finger_angles.size()>=32:_handle_finger_angles.clear()
+	_handle_finger_angles[key]=chosen
+	return chosen
+
+func _finger_contacts(side: String, handle: Dictionary) -> Dictionary:
+	var result := {}
+	for label in ["thumb","index"]:
+		var closest: float=INF;var signed: float=INF;var deepest := 0.0;var observed: Dictionary={}
+		for point in _skin_points[label+"."+side]:
+			var actual: Vector3=_skin_point(point)
+			var error: float=_handle_signed_distance(actual,handle)
+			deepest=minf(deepest,error)
+			if error<-.004:continue
+			if absf(error)<closest:closest=absf(error);signed=error;observed={"actual":actual,"vertex":point.vertex,"surface":point.surface}
+		var bone: int=_bones["DEF-finger%d.%s"%[0 if label=="thumb" else 1,side]]
+		var angle: float=get_skeleton().get_bone_rest(bone).basis.get_rotation_quaternion().angle_to(get_skeleton().get_bone_pose_rotation(bone))
+		observed.distance_m=closest;observed.signed_distance_m=signed;observed.penetration_m=maxf(0,-deepest);observed.observed_rotation=angle;observed.contact=closest<=.01 and deepest>=-.004 and angle>=.25
+		result[label]=observed
+	return result
+
+static func _handle_signed_distance(point: Vector3, handle: Dictionary) -> float:
+	var axis: Vector3=handle.b-handle.a
+	var length: float=axis.length()
+	var offset: Vector3=point-(handle.a+handle.b)*.5
+	var along: float=offset.dot(axis/length)
+	var radial: float=(offset-axis/length*along).length()
+	var q := Vector2(radial-float(handle.radius),absf(along)-length*.5)
+	return q.max(Vector2.ZERO).length()+minf(maxf(q.x,q.y),0)
 
 func _solve_arm(side: String, target: Transform3D) -> float:
 	var names := ["DEF-upper_arm."+side,"DEF-forearm."+side,"DEF-hand."+side]
@@ -620,6 +718,8 @@ func _collect_skin() -> bool:
 	for key in _skin_points: _skin_points[key]=[]
 	_skin_seen.clear()
 	_skin_meshes.clear()
+	_handle_finger_angles.clear()
+	_handle_palms.clear()
 	var palms := {"L":[],"R":[]}
 	for node in _actor.find_children("*","MeshInstance3D",true,false):
 		var part: MeshInstance3D=node
@@ -636,6 +736,7 @@ func _collect_skin() -> bool:
 			if positions.is_empty() or joints==null or weights==null: continue
 			var count: int=joints.size()/positions.size()
 			if count not in [4,8]: continue
+			var hand_skin := {"L":{},"R":{}}
 			for vertex in positions.size():
 				var influences: Array=[];var groups := {};var rest := Vector3.ZERO
 				for slot in count:
@@ -660,16 +761,56 @@ func _collect_skin() -> bool:
 				if torso>=.8 and local.z<0 and local.y>=-.08*scale: _add_skin_point("back",record)
 				if float(groups.get("DEF-head",0))>=.95 and rest_skeleton.z<0: _add_skin_point("head",record)
 				for side in SIDES:
+					if float(groups.get("DEF-finger0."+side,0))>=.5:_add_skin_point("thumb."+side,record)
+					if float(groups.get("DEF-finger1."+side,0))>=.5:_add_skin_point("index."+side,record)
 					if float(groups.get("DEF-foot."+side,0))+float(groups.get("DEF-toe."+side,0))>=.99: _add_skin_point(side,record)
 					if float(groups.get("DEF-hand."+side,0))>=.9999:
 						var point: Vector3=_rest_globals[_bones["DEF-hand."+side]].affine_inverse()*rest_skeleton
+						hand_skin[side][vertex]={"position":point,"record":record}
 						if point.y>.005 and point.y<.06*scale: palms[side].append({"position":point,"vertex":vertex,"surface":surface})
+			for side in SIDES:_collect_handle_triangles(side,hand_skin[side],arrays[Mesh.ARRAY_INDEX],positions.size(),surface)
 	for side in SIDES:
 		if palms[side].is_empty(): continue
 		palms[side].sort_custom(func(a,b):return absf(a.position.y-.03*scale)-a.position.z<absf(b.position.y-.03*scale)-b.position.z)
 		var selected: Dictionary=palms[side][0]
 		_palm_points[side]={"position":selected.position,"basis":Basis.IDENTITY,"vertex":selected.vertex,"surface":selected.surface}
 	return not _skin_points.seat.is_empty() and not _skin_points.back.is_empty() and not _skin_points.head.is_empty()
+
+func _collect_handle_triangles(side: String, vertices: Dictionary, indices: Variant, vertex_count: int, surface: int) -> void:
+	var hand: Transform3D=_rest_globals[_bones["DEF-hand."+side]]
+	var index_base: Vector3=hand.affine_inverse()*_rest_globals[_bones["DEF-finger1."+side]].origin
+	var plane: float=index_base.y*.75
+	var count: int=indices.size() if indices!=null and not indices.is_empty() else vertex_count
+	for offset in range(0,count-2,3):
+		var ids: Array[int]=[]
+		for corner in 3:ids.append(int(indices[offset+corner]) if indices!=null and not indices.is_empty() else offset+corner)
+		if not vertices.has(ids[0]) or not vertices.has(ids[1]) or not vertices.has(ids[2]):continue
+		var points: Array[Vector3]=[vertices[ids[0]].position,vertices[ids[1]].position,vertices[ids[2]].position]
+		var hits: Array=[]
+		for edge in 3:
+			var next: int=(edge+1)%3;var a: Vector3=points[edge];var b: Vector3=points[next]
+			if absf(a.y-b.y)<.00000001 or (a.y-plane)*(b.y-plane)>0:continue
+			var t: float=(plane-a.y)/(b.y-a.y);var weights := Vector3.ZERO
+			weights[edge]=1-t;weights[next]=t
+			var position: Vector3=a.lerp(b,t)
+			if not hits.is_empty() and position.distance_squared_to(hits[0].position)<.000000000001:continue
+			hits.append({"position":position,"weights":weights})
+		if hits.size()<2:continue
+		var a: Dictionary=hits[0];var b: Dictionary=hits[1]
+		var t: float=clampf(-a.position.x/(b.position.x-a.position.x),0,1) if absf(b.position.x-a.position.x)>.00000001 else 0
+		var position: Vector3=a.position.lerp(b.position,t)
+		if position.z<=0:continue
+		var normal: Vector3=(points[1]-points[0]).cross(points[2]-points[0])
+		if normal.length_squared()<.000000000001:continue
+		normal=normal.normalized()
+		if normal.z<0:normal=-normal
+		var along: Vector3=Vector3.UP-normal*normal.y
+		if along.length_squared()<.000001:continue
+		along=along.normalized();var right: Vector3=along.cross(normal).normalized();along=normal.cross(right).normalized()
+		var score: float=-position.z+absf(position.x)*.15
+		if _handle_palms.has(side) and score>=float(_handle_palms[side].score):continue
+		_handle_palms[side]={"position":position,"basis":Basis(right,along,normal),"vertex":ids[0],"vertices":ids,"surface":surface,
+			"barycentric":a.weights.lerp(b.weights,t),"skin_records":[vertices[ids[0]].record,vertices[ids[1]].record,vertices[ids[2]].record],"score":score}
 
 func snapshot() -> Dictionary:
 	return {"version":FURNITURE_FORMAT,"target":_contract.get("target",""),"enabled":_f_enabled,"request":_encode(_f_request),"serial":_f_serial,"applied":_f_applied,"sample_serial":_f_sample_serial,
@@ -711,7 +852,7 @@ func _checked_furniture_restore(data: Variant) -> Dictionary:
 			if foot.has(key) and not _valid_transform(foot[key]): return {}
 			if data.phase=="chair_slide" and not foot.has(key): return {}
 		if foot.has("first_swing") and foot.first_swing not in SIDES: return {}
-		if data.phase in ["chair_pull","chair_push"] and not foot.has("first_swing"): return {}
+		if data.phase in STEP_PHASES and not foot.has("first_swing"): return {}
 	return decoded
 
 static func _valid_request(value: Dictionary) -> bool:
@@ -720,16 +861,23 @@ static func _valid_request(value: Dictionary) -> bool:
 	if not is_finite(float(value.get("floor_y",0.0))): return false
 	if value.has("pose_seconds") and (not _finite_number(value.pose_seconds) or value.pose_seconds<0): return false
 	if value.has("allow_dangling_feet") and not value.allow_dangling_feet is bool:return false
+	if value.has("keep_hand_contact") and not value.keep_hand_contact is bool:return false
 	if value.phase in ["legs_in","lie_down","lie_idle","sit_up","legs_out"]:
 		if not value.get("bed") is Dictionary: return false
 		for key in ["pelvis_point","pillow_point","head_direction"]:
 			if not value.bed.get(key) is Vector3 or not value.bed[key].is_finite(): return false
 		if not _finite_number(value.bed.get("sheet_y")) or Vector2(value.bed.head_direction.x,value.bed.head_direction.z).length()<.5: return false
-	else:
+	elif value.phase not in ["step_back","step_forward"]:
 		if not value.get("seat_point") is Vector3 or not value.seat_point.is_finite(): return false
 	if value.has("root_end") and not _valid_transform(value.root_end): return false
 	if value.has("root_start") and not _valid_transform(value.root_start): return false
 	if not value.get("feet",{}) is Dictionary or not value.get("hands",{}) is Dictionary or not value.get("footrest",{}) is Dictionary: return false
+	if not value.get("working_hands",{}) is Dictionary:return false
+	for side in value.get("working_hands",{}):
+		if side not in SIDES or not value.working_hands[side] is Dictionary or not _valid_transform(value.working_hands[side].get("palm_transform")):return false
+	if value.phase in ["step_back","step_forward"] and not value.get("hands",{}).is_empty():return false
+	if value.has("handle"):
+		if not value.handle is Dictionary or not value.handle.get("a") is Vector3 or not value.handle.get("b") is Vector3 or not value.handle.a.is_finite() or not value.handle.b.is_finite() or value.handle.a.distance_to(value.handle.b)<.01 or not _finite_number(value.handle.get("radius")) or value.handle.radius<=0 or value.handle.radius>.1:return false
 	if not value.get("footrest",{}).is_empty():
 		var rail: Dictionary=value.footrest
 		if not rail.get("center") is Vector3 or not rail.center.is_finite() or not _finite_number(rail.get("half_width")) or rail.half_width<=0 or not _finite_number(rail.get("support_y")): return false

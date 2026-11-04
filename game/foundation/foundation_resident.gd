@@ -13,6 +13,8 @@ var motion_ready := false
 var locomotion: FoundationLocomotionPose
 var furniture_pose
 var _furniture_request: Dictionary = {}
+var household_pose
+var _household_request: Dictionary = {}
 var current_action := ""
 var action_elapsed := 0.0
 var _action_node: AnimationNodeAnimation
@@ -99,6 +101,48 @@ func clear_furniture_pose() -> void:
 func furniture_contacts_ready() -> bool:
 	return is_instance_valid(furniture_pose) and furniture_pose.contacts_ready()
 
+func enable_household_poses() -> bool:
+	if not motion_ready or is_instance_valid(household_pose):return false
+	var base: String="res://game/assets/motion/household/"+resident_id
+	if not ResourceLoader.exists(base+".tres"):return false
+	var contract: Variant=JSON.parse_string(FileAccess.get_file_as_string(base+".contract.json"))
+	if not contract is Dictionary:return false
+	var factory: Script=load("res://game/foundation/foundation_household_pose.gd")
+	var candidate=factory.new();candidate.name="FoundationHouseholdPose"
+	model.skeleton.add_child(candidate)
+	if not candidate.configure(self,model.animator.get_animation_library("foundation"),motion_contract,snapshot().profile) or not candidate.set_action_library(load(base+".tres"),contract):
+		candidate.queue_free();return false
+	model.skeleton.modifier_callback_mode_process=Skeleton3D.MODIFIER_CALLBACK_MODE_PROCESS_MANUAL
+	household_pose=candidate
+	return true
+
+func household_calibration() -> Dictionary:
+	return household_pose.calibration() if is_instance_valid(household_pose) else {}
+
+func use_household_pose(request: Dictionary) -> bool:
+	if not is_instance_valid(household_pose) or not household_pose.can_present(request):return false
+	_household_request=request.duplicate(true)
+	return true
+
+func clear_household_pose() -> void:
+	_household_request.clear()
+	if is_instance_valid(household_pose):household_pose.clear()
+
+func household_contacts_ready() -> bool:
+	return is_instance_valid(household_pose) and household_pose.contacts_ready()
+
+func household_transfer_ready(operation: String) -> bool:
+	return is_instance_valid(household_pose) and household_pose.transfer_ready(operation)
+
+func confirm_household_grasp(item_id: String) -> bool:
+	return is_instance_valid(household_pose) and household_pose.confirm_grasp(item_id)
+
+func confirm_household_release(item_id: String) -> bool:
+	return is_instance_valid(household_pose) and household_pose.confirm_release(item_id)
+
+func household_grasped_objects() -> Dictionary:
+	return household_pose.grasped_objects() if is_instance_valid(household_pose) else {}
+
 func bind_name_tag(label: Label3D) -> bool:
 	if not motion_ready or not is_instance_valid(label) or model.skeleton.find_bone("DEF-head")<0:return false
 	_name_tag=label;_name_tag.top_level=true
@@ -164,12 +208,16 @@ func tick_body(delta: float, moving: bool = true) -> bool:
 			# Furniture root tracks are not forward walking. Disable walking IK
 			# without feeding its state machine a fabricated walking velocity.
 			gait.state="idle";gait.speed=0.0;gait.normalized_speed=0.0
-		locomotion.advance(gait,delta,_furniture_request.is_empty() and (current_action.is_empty() or current_action=="idle"))
+		var walking_with_load: bool=_household_request.get("phase","")=="carry"
+		locomotion.advance(gait,delta,_furniture_request.is_empty() and (_household_request.is_empty() or walking_with_load) and (current_action.is_empty() or current_action=="idle"))
 	if is_instance_valid(furniture_pose) and not _furniture_request.is_empty():
 		_furniture_request.pose_seconds=_visual_seconds
 		furniture_pose.present(_furniture_request,delta)
+	if is_instance_valid(household_pose) and not _household_request.is_empty():
+		_household_request.pose_seconds=_visual_seconds
+		household_pose.present(_household_request,delta)
 	animation_tree.advance(delta)
-	if is_instance_valid(locomotion) or is_instance_valid(furniture_pose):model.skeleton.advance(delta)
+	if is_instance_valid(locomotion) or is_instance_valid(furniture_pose) or is_instance_valid(household_pose):model.skeleton.advance(delta)
 	if not current_action.is_empty():
 		action_elapsed+=delta
 		if not _action_loop and not _last_action_finished and action_elapsed>=_action_duration:
@@ -193,14 +241,15 @@ func action_is_finished() -> bool:
 	return _last_action_finished
 
 func motion_state() -> Dictionary:
-	return {"schema":2,"resident_id":resident_id,"motor":snapshot(),"action":current_action,"action_elapsed":action_elapsed,
+	return {"schema":3,"resident_id":resident_id,"motor":snapshot(),"action":current_action,"action_elapsed":action_elapsed,
 		"motion_ready":motion_ready,"locomotion_blend":_locomotion_weight,"action_blend":_action_weight,"visual_seconds":_visual_seconds,
 		"locomotion":locomotion.snapshot() if is_instance_valid(locomotion) else {},
 		"furniture":furniture_pose.snapshot() if is_instance_valid(furniture_pose) else {},
+		"household":household_pose.snapshot() if is_instance_valid(household_pose) else {},
 		"source":"Quaternius Universal Animation Library Standard, CC0"}
 
 func can_restore_motion(data: Variant) -> bool:
-	if not motion_ready or not data is Dictionary or data.get("schema")!=2 or data.get("resident_id")!=resident_id:return false
+	if not motion_ready or not data is Dictionary or data.get("schema")!=3 or data.get("resident_id")!=resident_id:return false
 	if not data.get("motor") is Dictionary or ResidentMotor._checked_snapshot(data.motor).is_empty():return false
 	if not data.get("action") is String or data.action.length()>48:return false
 	if not data.action.is_empty() and not model.animator.has_animation("foundation/"+data.action):return false
@@ -215,12 +264,16 @@ func can_restore_motion(data: Variant) -> bool:
 	if is_instance_valid(furniture_pose):
 		if not furniture_pose.can_restore(data.furniture):return false
 	elif not data.furniture.is_empty():return false
+	if not data.get("household") is Dictionary:return false
+	if is_instance_valid(household_pose):
+		if not household_pose.can_restore(data.household):return false
+	elif not data.household.is_empty():return false
 	return true
 
 func restore_motion(data: Variant) -> bool:
 	if not can_restore_motion(data):return false
 	if not restore(data.motor):return false
-	current_action="";_furniture_request.clear();_visual_seconds=float(data.visual_seconds)
+	current_action="";_furniture_request.clear();_household_request.clear();_visual_seconds=float(data.visual_seconds)
 	_locomotion_weight=float(data.locomotion_blend);_action_weight=float(data.action_blend)
 	if not data.action.is_empty():
 		# Saved bodies can be in a turn/arrival state. Restoration is distinct
@@ -238,4 +291,7 @@ func restore_motion(data: Variant) -> bool:
 	if is_instance_valid(furniture_pose):
 		furniture_pose.restore(data.furniture)
 		_furniture_request=furniture_pose.request_state()
+	if is_instance_valid(household_pose):
+		household_pose.restore(data.household)
+		_household_request=household_pose.request_state()
 	return true

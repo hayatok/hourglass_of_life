@@ -21,3 +21,9 @@
 - 重い描画・検証の同時実行を避け、負荷を確認しながら順番に進める。
 - 使い終えた自身の制作・検証プロセスとブラウザタブを終了する。Tripoの3Dプレビューは原則1タブで操作し、結果を保存したら閉じる。
 - ユーザー作業由来のアプリや未保存の作業は識別して保護する。
+
+## 開始時の情報と中間生成物
+
+- 開始時は `AGENTS.md`、`docs/development-roadmap.md`、`docs/verification/current-status.md` とGitの状態を先に読む。過去セッションや古いログ・検証結果を網羅的に読み込まない。
+- 原本、編集用マスター、後工程が読む入力は `assets/` の `source/`・`production-inputs/` に置く。削除可能な `builds/` や `review/` に唯一の原本を置かない。
+- ログ、レンダー、巨大な観測JSON、重複ビルドはGit管理しない。必要な最新結果だけを残し、未確認点は短く `docs/verification/current-status.md` へ反映する。

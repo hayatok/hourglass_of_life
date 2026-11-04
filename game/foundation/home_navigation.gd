@@ -15,6 +15,7 @@ var _free_cells: Dictionary = {}
 var _wall_solids: Array = []
 var _fixture_solids: Dictionary = {}
 var _fixture_shapes: Dictionary = {}
+var _transient_solids: Dictionary = {}
 var _grid: AStarGrid2D
 var _baseline
 
@@ -131,7 +132,7 @@ func configure(plan: Variant, radius: float = .24) -> bool:
 	# Derived geometry is committed only after the authored plan is consistent.
 	_house_id = plan.house.id;_radius = radius;_floor_y = float(plan.house.get("floor_y",0))
 	_zones = zones;_doors = doors;_wall_solids = solids;_fixture_solids=fixture_solids;_fixture_shapes=fixture_shapes
-	_solids=_wall_solids+_fixture_solids.values();_baseline = baseline
+	_transient_solids.clear();_solids=_wall_solids+_fixture_solids.values();_baseline = baseline
 	_floors = floors
 	_grid = AStarGrid2D.new();_grid.cell_size = Vector2(STEP,STEP)
 	_grid.offset = Vector2(floorf(envelope.position.x/STEP)*STEP,floorf(envelope.position.y/STEP)*STEP)
@@ -158,19 +159,47 @@ func move_fixture(id: String, position: Vector3) -> bool:
 	var before: Rect2=_fixture_solids[id]
 	var after:=rect.grow(_radius)
 	if before==after:return true
-	_fixture_solids[id]=after;_solids=_wall_solids+_fixture_solids.values()
+	_fixture_solids[id]=after;_solids=_wall_solids+_fixture_solids.values()+_transient_solids.values()
+	_refresh_changed_rect(before,after)
+	return true
+
+func set_transient_rect(id: String, footprint: Rect2) -> bool:
+	# The caller supplies the actual hardware projection, without body padding.
+	# Opening a drawer changes routing even when no body walks into its cabinet.
+	if _grid==null or id.is_empty() or id.length()>96 or not footprint.position.is_finite() or maxf(absf(footprint.position.x),absf(footprint.position.y))>1000 or not footprint.size.is_finite() or not footprint.has_area() or maxf(footprint.size.x,footprint.size.y)>64:return false
+	var before: Rect2=_transient_solids.get(id,Rect2())
+	var after: Rect2=footprint.grow(_radius)
+	if before==after:return true
+	_transient_solids[id]=after;_solids=_wall_solids+_fixture_solids.values()+_transient_solids.values()
+	_refresh_changed_rect(before,after)
+	return true
+
+func clear_transient_rect(id: String) -> bool:
+	if not _transient_solids.has(id):return true
+	var before: Rect2=_transient_solids[id];_transient_solids.erase(id)
+	_solids=_wall_solids+_fixture_solids.values()+_transient_solids.values()
+	_refresh_changed_rect(before,Rect2())
+	return true
+
+func _refresh_changed_rect(before: Rect2, after: Rect2) -> void:
 	var affected: Rect2=before.merge(after).grow(STEP)
+	if not before.has_area():affected=after.grow(STEP)
+	elif not after.has_area():affected=before.grow(STEP)
 	var first:=Vector2i(floori((affected.position.x-_grid.offset.x)/STEP),floori((affected.position.y-_grid.offset.y)/STEP))
 	var last:=Vector2i(ceili((affected.end.x-_grid.offset.x)/STEP),ceili((affected.end.y-_grid.offset.y)/STEP))
+	first=first.max(_grid.region.position);last=last.min(_grid.region.end-Vector2i.ONE)
 	for z in range(first.y,last.y+1):
 		for x in range(first.x,last.x+1):
 			var cell:=Vector2i(x,z)
 			if not _grid.is_in_boundsv(cell):continue
-			var clear:=_point_clear(_grid.get_point_position(cell),[])
+			var position: Vector2=_grid.get_point_position(cell)
+			# Sub-grid hardware motion usually changes no cell's occupancy. Keep
+			# exact geometry for segment checks while avoiding a full grid rebuild.
+			if (before.has_area() and _inside(position,before))==(after.has_area() and _inside(position,after)):continue
+			var clear:=_point_clear(position,[])
 			_grid.set_point_solid(cell,not clear)
 			if clear:_free_cells[cell]=true
 			else:_free_cells.erase(cell)
-	return true
 
 func _point_clear(point: Vector2, additional: Array) -> bool:
 	for rect: Rect2 in _solids+additional:

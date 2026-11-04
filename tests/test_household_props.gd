@@ -3,6 +3,7 @@ extends SceneTree
 # Controlled source-state and real Skeleton3D attachment fixtures. Helpers place
 # actors at use points and usage anchors explicitly; this is not a natural-play,
 # walking, seat-entry or exit-motion test. Physical motion is accepted elsewhere.
+const KitchenFixture = preload("res://tests/controlled_kitchen_fixture.gd")
 const Props = preload("res://game/foundation/household_props.gd")
 class PropModel extends Node3D:
 	var skeleton: Skeleton3D
@@ -102,12 +103,21 @@ func stop(actor: String, task_id: String, reason: String) -> Dictionary:
 
 func work(actor: String, minutes: float) -> Dictionary:
 	var task: Dictionary=_day.task_for(actor)
+	if _day.kitchen.supports(task):
+		for ignored in 30:
+			if _day.next_operation(actor,task.id).get("kind")=="work":break
+			KitchenFixture.step(_day,actor)
+		var operation: Dictionary=_day.next_operation(actor,task.id)
+		_day.set_position(actor,operation.target.approach);_day.set_physical_work(actor,task.id,true)
 	_day.advance_time(minutes)
+	if _day.kitchen.supports(task):_day.set_physical_work(actor,task.id,true)
 	var reply: Dictionary=_day.perform(actor,task.id,minutes)
 	_view.sync()
 	return reply
 
 func phase(actor: String) -> Dictionary:
+	if _day.kitchen.supports(_day.task_for(actor)):
+		var physical_reply: Dictionary=KitchenFixture.phase(_day,actor);_view.sync();return physical_reply
 	var task: Dictionary=_day.task_for(actor)
 	if task.is_empty(): return {}
 	if task.status not in ["arrived","working","phase_ready"] and not arrive(actor): return {}
@@ -172,16 +182,33 @@ func no_early_food() -> void:
 	_view.free();_view=null
 	expect(_fixed_linen.all(func(entry):return entry.node.visible==entry.visible) and _preserved_decor.all(func(entry):return entry.node.visible==entry.visible),"Removing the derived layer restores its own hidden artwork without changing family decoration")
 
+func physical_source_positions() -> void:
+	if not fresh():return
+	begin("nagisa","cook")
+	for ignored in 12:
+		if _day.task_for("nagisa").physical.transfer.get("state")=="prepared":break
+		KitchenFixture.step(_day,"nagisa")
+	_view.sync()
+	var original: Array=[];var side_stock: Array=[]
+	for i in 3:original.append(_view.objects[_day.kitchen.ingredient_id(_day.kitchen.role_id("ingredient_carrier"),i)].node.global_position)
+	for i in 6:side_stock.append(_view.objects["inventory:ingredients:side_"+str(i)].node.global_position)
+	var basket_id: String=_day.kitchen.role_id("ingredient_carrier");var basket_node: Node3D=_view.objects[basket_id].node
+	KitchenFixture.step(_day,"nagisa");_view.sync()
+	for i in 3:expect(_view.objects[_day.jobs.cook.units[i].id].node.global_position.distance_to(original[i])<.00001,"Grasp keeps each visible raw unit at its exact pre-grasp source position")
+	for i in 6:expect(_view.objects["inventory:ingredients:side_"+str(i)].node.global_position.distance_to(side_stock[i])<.00001,"The same unclaimed side source keeps its exact drawer position after the initial three-unit debit")
+	expect(_view.objects[basket_id].node==basket_node,"The original source carrier node survives the actual state grasp")
+
 func carry_cancel_and_resume() -> void:
 	if not fresh(): return
 	begin("nagisa","cook")
 	if not expect(phase("nagisa").status=="next_phase","Taking materials completes before the carry starts"): return
 	var batch: Dictionary=_day.batch_location("cook")
-	var original_node: Node3D=_view.objects["job:cook:0"].node
+	var material_id: String=_day.jobs.cook.units[0].id
+	var original_node: Node3D=_view.objects[material_id].node
 	var held: Dictionary=_view.pose_for("nagisa")
 	var socket: BoneAttachment3D=_view.hand_socket("nagisa")
-	expect(batch.holder=="nagisa" and not held.is_empty() and _view.objects[held.source_id].node.get_parent()==socket and not socket.override_pose,"A real held batch is attached to the actual hand bone without overriding the skeleton")
-	expect(not held.get("pose_accepted",true) and _view.diagnostics.any(func(row):return row.kind=="carry_pose_not_accepted"),"Bone attachment alone never claims accepted carrying, supporting-hand contact or full-body motion")
+	expect(batch.holder=="nagisa" and not held.is_empty() and _view.objects[held.source_id].node.get_parent()==_view and not socket.override_pose,"The physical carrier keeps its authoritative equipment frame independently of the hand bone")
+	expect(not held.get("pose_accepted",true) and held.attachment=="HouseholdEquipmentFrame","Bone attachment alone never claims accepted carrying, supporting-hand contact or full-body motion")
 	var actor_position: Vector3=_actors.nagisa.position
 	var source_before: Dictionary=_day.snapshot()
 	var rig: Skeleton3D=_actors.nagisa.model.skeleton
@@ -199,7 +226,7 @@ func carry_cancel_and_resume() -> void:
 	modifier.active=false;modifier.queue_free()
 	var current: Dictionary=_day.task_for("nagisa")
 	stop("nagisa",current.id,"Controlled interruption during carry");_view.sync()
-	expect(_day.batch_location("cook").holder=="nagisa" and not _view.pose_for("nagisa").is_empty() and _view.objects["job:cook:0"].node==original_node,"Cancelling an in-flight task retains its same real held batch and visual objects")
+	expect(_day.batch_location("cook").holder=="nagisa" and not _view.pose_for("nagisa").is_empty() and _view.objects[material_id].node==original_node,"Cancelling an in-flight task retains its same real held batch and visual objects")
 	var snapshot: Dictionary=JSON.parse_string(JSON.stringify(_day.snapshot()))
 	var held_manifest: Dictionary=_view.manifest()
 	if not fresh(snapshot): return
@@ -212,10 +239,13 @@ func carry_cancel_and_resume() -> void:
 	expect(placed.holder.is_empty() and not placed.container.is_empty() and _view.pose_for("nagisa").is_empty() and _view.represented_quantity("job","cook")==3,"Only the real put-down releases the holder and retains all three unfinished units")
 	begin("ryo","cook")
 	var pickup: Dictionary=_day.task_for("ryo")
-	if not expect(pickup.phases[pickup.phase_index].get("transport")=="pickup","The replacement resident first targets the actual stored batch"): return
-	expect(_view.pose_for("ryo").is_empty(),"An assigned pickup has no carried object before actual source pickup")
-	phase("ryo")
-	expect(_day.batch_location("cook").batch_id==batch.batch_id and _view.represented_quantity("job","cook")==3 and _view.pose_for("ryo").holder=="ryo","After actual pickup, the same batch transfers to the replacement's real hand")
+	var operation: Dictionary=_day.next_operation("ryo",pickup.id)
+	expect(operation.kind=="transfer" or operation.kind=="access","A replacement targets the actual source as a physical subgoal")
+	expect(_view.pose_for("ryo").is_empty(),"An assigned pickup creates no remotely carried object")
+	for ignored in 20:
+		if _day.batch_location("cook").holder=="ryo":break
+		KitchenFixture.step(_day,"ryo");_view.sync()
+	expect(_day.batch_location("cook").batch_id==batch.batch_id and _view.represented_quantity("job","cook")==3 and _view.pose_for("ryo").holder=="ryo","Explicit grasp transfers the same finite batch to the replacement")
 
 func meal_and_dishes() -> void:
 	if not fresh(): return
@@ -309,7 +339,7 @@ func bath_towel() -> void:
 	expect(dirty.size()==1 and dirty[0].container=="towel_basket" and _view.represented_quantity("inventory","dirty_laundry")==4,"Only completed bathing returns the used towel to the actual basket, as one subset of four dirty textiles")
 
 func run() -> void:
-	_plan=JSON.parse_string(FileAccess.get_file_as_string("res://data/foundation/ogawa-home.json"))
+	_plan=KitchenFixture.plan_with_metadata(JSON.parse_string(FileAccess.get_file_as_string("res://data/foundation/ogawa-home.json")))
 	var parsed: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/residents.json"))
 	for record in parsed.residents:
 		if record.id in ["nagisa","ryo","rin"]:
@@ -326,7 +356,7 @@ func run() -> void:
 	for name in ["InitialRinDrawing","InitialDesignStudy"]:
 		var picture: Node3D=_home.find_child(name,true,false)
 		if is_instance_valid(picture): _preserved_decor.append({"node":picture,"visible":picture.visible})
-	no_early_food();await carry_cancel_and_resume();meal_and_dishes();textiles();projects_and_cleanup();bath_towel()
+	no_early_food();physical_source_positions();await carry_cancel_and_resume();meal_and_dishes();textiles();projects_and_cleanup();bath_towel()
 	_dispose();_home.free()
 	print("Household props source/attachment checks: %d passed, %d failed"%[checks-failures.size(),failures.size()])
 	quit(0 if failures.is_empty() else 1)

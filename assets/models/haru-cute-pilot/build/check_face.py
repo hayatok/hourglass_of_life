@@ -19,7 +19,7 @@ def main():
     module=importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     module.produce()
-    files=['raw/CH_Haru_JRPG_Pilot_Raw.glb','build/check_face.gd','build/texture_face.gdshader','review/texture-face/landmarks.json']
+    files=['raw/CH_Haru_JRPG_Pilot_Raw.glb','build/check_face.gd','build/texture_face.gdshader','production-inputs/texture-face/landmarks.json']
     project=Path(tempfile.mkdtemp(prefix='hourglass-haru-face-'))
     sources=[]
     for name in files:

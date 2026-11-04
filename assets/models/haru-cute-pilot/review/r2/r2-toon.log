@@ -1,4 +1,0 @@
-Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
-OpenGL API 4.1 Metal - 91.7 - Compatibility - Using Device: Apple - Apple M5
-
-HARU_TEXTURE_MEMORY r2 toon 35/35 steps=[{ "label": "empty_viewport", "rendering_texture_bytes": 16587715, "rendering_buffer_bytes": 6411192, "performance_texture_bytes": 16587715.0, "static_memory_bytes": 31648224 }, { "label": "lod0_only", "rendering_texture_bytes": 66923456, "rendering_buffer_bytes": 8049540, "performance_texture_bytes": 66923456.0, "static_memory_bytes": 35788870 }, { "label": "lods_prepared", "rendering_texture_bytes": 66923456, "rendering_buffer_bytes": 8750346, "performance_texture_bytes": 66923456.0, "static_memory_bytes": 35836465 }, { "label": "lod_switch_cycle", "rendering_texture_bytes": 66923456, "rendering_buffer_bytes": 8750346, "performance_texture_bytes": 66923456.0, "static_memory_bytes": 43843157 }]

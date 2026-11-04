@@ -68,12 +68,12 @@
       "shared": true,
       "phases": [
         {
-          "name": "材料を取り出す",
+          "name": "材料を取り出して確かめる",
           "fixture": "fridge",
           "minutes": 2
         },
         {
-          "name": "材料を切って準備する",
+          "name": "野菜に切れ目を入れる",
           "fixture": "prep",
           "minutes": 6
         },
@@ -388,5 +388,7 @@
     }
   },
   "inventory_semantics": "Laundry counts are total textile items; *_towels are subsets. Washing/drying machine contents retain their towel subtype so a used towel can return to the clean towel supply.",
-  "biography_source": "res://data/foundation/ogawa-biographies.json"
+  "biography_source": "res://data/foundation/ogawa-biographies.json",
+  "recipe_id": "scored_vegetable_soup",
+  "recipe_preparation": "score_connected"
 }

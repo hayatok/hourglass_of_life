@@ -4,6 +4,7 @@ var occupancy: HomeOccupancy
 var navigation: HomeNavigation
 var household: HouseholdDay
 var executor: FoundationLifeExecutor
+var kitchen_fixtures: HouseholdKitchenFixtures
 var household_props: HouseholdProps
 var family_inspector: FoundationFamilyInspector
 var residents: Dictionary = {}
@@ -18,6 +19,12 @@ var initialization_error := ""
 var _ui_time := 0.0
 var _pose_resume_frames := 0
 var _feedback_seconds := 0.0
+
+func _toggle_walls() -> void:
+	# "See exterior" means the building, rather than a close-up roof over the
+	# followed person's head. Selecting a person returns to the interior.
+	if house.cutaway:_show_overview()
+	super._toggle_walls()
 
 func _show_overview() -> void:
 	followed=""
@@ -43,8 +50,8 @@ func _ready() -> void:
 		if not actor.load_resident(id):
 			initialization_error=id+" の基盤モーションを読み込めませんでした";push_error(initialization_error);running=false;return
 		var stride_speed: float=float(actor.motion_contract.clips.walk.authored_speed_mps)
-		if not actor.configure({"walk_speed":stride_speed,"turn_speed":PI*.5}):initialization_error="身体制御を設定できませんでした";running=false;return
-		if not actor.enable_contact_locomotion() or not actor.enable_furniture_poses():
+		if not actor.configure({"walk_speed":stride_speed,"turn_speed":PI*.5,"arrival_radius":.005}):initialization_error="身体制御を設定できませんでした";running=false;return
+		if not actor.enable_contact_locomotion() or not actor.enable_furniture_poses() or not actor.enable_household_poses():
 			initialization_error=id+" の歩行と家具動作を設定できませんでした";push_error(initialization_error);running=false;return
 		residents[id]=actor
 		var label:=Label3D.new();label.text=household.people[id].name;label.billboard=BaseMaterial3D.BILLBOARD_ENABLED
@@ -55,6 +62,8 @@ func _ready() -> void:
 	if not executor.configure(house,household,occupancy,navigation,residents):initialization_error="生活動作を接続できませんでした";push_error(initialization_error);running=false;return
 	household_props=HouseholdProps.new();household_props.name="HouseholdObjects";add_child(household_props)
 	if not household_props.configure(house,household,residents):initialization_error="生活の道具を配置できませんでした";push_error(initialization_error);running=false;return
+	kitchen_fixtures=preload("res://game/foundation/household_kitchen_fixtures.gd").new();kitchen_fixtures.name="AccessibleKitchen";add_child(kitchen_fixtures)
+	if not kitchen_fixtures.configure(house,household,navigation) or not executor.connect_household(household_props,kitchen_fixtures):initialization_error="家族と台所の実動作を接続できませんでした";push_error(initialization_error);running=false;return
 	_build_household_ui()
 
 func _build_household_ui() -> void:
@@ -100,6 +109,7 @@ func _process(delta: float) -> void:
 		for actor in residents.values():actor.tick_body(0,false)
 		_pose_resume_frames-=1
 	elif running:executor.step(minf(delta,.1),minf(delta,.1)*minutes_per_second)
+	if kitchen_fixtures!=null:kitchen_fixtures.sync()
 	if household_props!=null:household_props.sync(delta if running else 0.0)
 	_ui_time+=delta
 	if _ui_time>=.2:_ui_time=0;_update_household_ui()
@@ -113,7 +123,7 @@ func _update_household_ui() -> void:
 		cards[id].action.text=task.get("label","次にすることを考える")
 		cards[id].progress.value=float(task.get("phase_progress",0))/maxf(.001,float(task.get("phase_minutes",1)))
 		var detail: String=task.get("phase_name","")
-		if entry.state in ["wait","yield","door"]:detail=entry.reason
+		if entry.state in ["wait","yield","door","household"]:detail=entry.reason
 		elif entry.state=="walk":
 			var destination: String=house.fixtures.get(task.get("fixture",""),{}).get("definition",{}).get("label","外" if task.get("room")=="outside" else "玄関")
 			detail=destination+"へ向かっている"
@@ -128,10 +138,10 @@ func snapshot_day() -> Dictionary:
 	for id in residents:bodies[id]=residents[id].motion_state()
 	var door_states: Dictionary={}
 	for id in house.doors:door_states[id]=float(house.doors[id].get("open_fraction",1.0 if house.doors[id].opened else 0.0))
-	return {"schema":2,"life":household.snapshot(),"bodies":bodies,"executor":executor.snapshot(),"doors":door_states}
+	return {"schema":3,"life":household.snapshot(),"bodies":bodies,"executor":executor.snapshot(),"doors":door_states}
 
 func restore_day(data: Variant) -> bool:
-	if not data is Dictionary or data.get("schema")!=2 or not data.get("life") is Dictionary or not data.get("bodies") is Dictionary or data.bodies.size()!=residents.size() or not data.get("doors") is Dictionary or data.doors.size()!=house.doors.size():return false
+	if not data is Dictionary or data.get("schema")!=3 or not data.get("life") is Dictionary or not data.get("bodies") is Dictionary or data.bodies.size()!=residents.size() or not data.get("doors") is Dictionary or data.doors.size()!=house.doors.size():return false
 	var probe_occupancy:=HomeOccupancy.new();var probe_life:=HouseholdDay.new()
 	if not probe_occupancy.configure(house.definition) or not probe_life.configure(house.definition,[],probe_occupancy) or not probe_life.restore(data.life):return false
 	for id in residents:
@@ -150,6 +160,7 @@ func restore_day(data: Variant) -> bool:
 	executor.restore(data.executor,household,data.bodies)
 	for id in house.doors:house.set_door_fraction(id,float(data.doors[id]))
 	_pose_resume_frames=1
+	if kitchen_fixtures!=null:kitchen_fixtures.sync()
 	if household_props!=null:household_props.sync(0)
 	_update_household_ui()
 	return true

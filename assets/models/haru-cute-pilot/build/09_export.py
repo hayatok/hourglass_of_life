@@ -21,7 +21,7 @@ bpy.ops.wm.save_as_mainfile(filepath=str(BUILD/'CH_Haru_AnimationMaster.blend'))
 for action in list(bpy.data.actions):
     if action.name.startswith('_'):bpy.data.actions.remove(action)
 arm.animation_data.action=bpy.data.actions['idle'];arm.animation_data.action_slot=bpy.data.actions['idle'].slots[0]
-walk_measurement=json.loads((ROOT/'review/walk-measurement.json').read_text())
+walk_measurement=json.loads((ROOT/'production-inputs/walk-measurement.json').read_text())
 bpy.data.actions['walk']['speed_mps']=walk_measurement['measured_speed_m_s']
 bpy.data.actions['rest']['intentional_hold_pose']=True
 bpy.context.scene.frame_set(0)

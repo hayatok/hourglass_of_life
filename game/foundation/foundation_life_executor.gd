@@ -11,6 +11,7 @@ var actors: Dictionary = {}
 var execution: Dictionary = {}
 var doors_in_use: Dictionary = {}
 var furniture: Dictionary = {}
+var kitchen: Dictionary = {}
 var _fixtures: Dictionary = {}
 var _room_bounds: Dictionary = {}
 var _retry_elapsed := 0.0
@@ -37,6 +38,17 @@ func configure(house: LivingHouse, household: HouseholdDay, room_occupancy: Home
 		if not room.is_empty():occupancy.reserve_room(room,id)
 	return true
 
+func connect_household(objects: HouseholdProps, hardware: HouseholdKitchenFixtures) -> bool:
+	if objects==null or hardware==null or not kitchen.is_empty():return false
+	for id in actors:
+		var controller=preload("res://game/foundation/household_performance.gd").new()
+		if not controller.configure(home,life,navigation,occupancy,objects,hardware,actors[id]):kitchen.clear();return false
+		kitchen[id]=controller
+	return true
+
+func _kitchen_intention(id: String) -> bool:
+	return kitchen.has(id) and (kitchen[id].owns_body() or life.kitchen.supports(life.task_for(id)))
+
 func room_at(point: Vector3) -> String:
 	for id in _room_bounds:
 		var bounds: Rect2=_room_bounds[id]
@@ -56,7 +68,8 @@ func step(seconds: float, minutes: float) -> bool:
 		_decision_minutes+=clock_delta
 		if _decision_minutes>=1:
 			_decision_minutes=fmod(_decision_minutes,1)
-			for id in actors:life.request(id)
+			for id in actors:
+				if not _kitchen_intention(id):life.request(id)
 		for id in actors:_step_actor(id,delta,clock_delta)
 		_update_private_use(delta)
 	return true
@@ -82,6 +95,8 @@ func _step_actor(id: String, delta: float, minutes: float) -> void:
 	entry.retry=maxf(0,float(entry.retry)-delta)
 	var task: Dictionary=life.task_for(id)
 	var use: FoundationFurnitureUse=furniture[id]
+	if kitchen.has(id) and kitchen[id].active():
+		_step_kitchen(id,task,delta,minutes);return
 	if use.active():
 		_step_furniture(id,task,delta,minutes)
 		return
@@ -99,6 +114,8 @@ func _step_actor(id: String, delta: float, minutes: float) -> void:
 		entry.target=[task.target.x,task.target.y,task.target.z]
 	if task.status in ["completed","cancelled"]:
 		entry.state="choose";entry.task="";actor.clear_action();_release_doors(id);actor.tick_body(delta);return
+	if kitchen.has(id) and life.kitchen.supports(task):
+		_step_kitchen(id,task,delta,minutes);return
 	match str(entry.state):
 		"plan","wait":
 			if not actor.body_is_settled():actor.tick_body(delta);return
@@ -143,6 +160,16 @@ func _step_actor(id: String, delta: float, minutes: float) -> void:
 	# house; they are not presented as simulated shop/school interiors.
 	if task.room=="outside" and task.kind in ["work","school","shop","wait_outside"] and entry.state=="use":
 		actor.visible=false;entry.offsite=true
+
+func _step_kitchen(id: String, task: Dictionary, delta: float, minutes: float) -> void:
+	var entry: Dictionary=execution[id]
+	var reply: Dictionary=kitchen[id].advance(task,delta,minutes,_obstacles(id))
+	life.set_position(id,actors[id].global_position);_sync_room(id)
+	entry.task=task.get("id",entry.task);entry.phase=task.get("phase_index",entry.phase)
+	entry.state="household";entry.reason=reply.get("reason",kitchen[id].reason)
+	if reply.status in ["next_phase","completed","cancelled"]:
+		_release_doors(id);entry.state="plan" if reply.status=="next_phase" else "choose"
+		if reply.status in ["completed","cancelled"]:entry.task=""
 
 func _step_furniture(id: String, task: Dictionary, delta: float, minutes: float) -> void:
 	var actor: FoundationResident=actors[id]
@@ -310,16 +337,18 @@ static func LivingHousePoint(value: Array) -> Vector3:
 func snapshot() -> Dictionary:
 	var uses: Dictionary={}
 	for id in furniture:uses[id]=furniture[id].snapshot()
-	return {"schema":2,"execution":execution.duplicate(true),"doors_in_use":doors_in_use.duplicate(),"decision_minutes":_decision_minutes,"furniture":uses}
+	var household: Dictionary={}
+	for id in kitchen:household[id]=kitchen[id].snapshot()
+	return {"schema":3,"execution":execution.duplicate(true),"doors_in_use":doors_in_use.duplicate(),"decision_minutes":_decision_minutes,"furniture":uses,"household":household}
 
 func can_restore(data: Variant, restored_life: HouseholdDay, body_states: Dictionary) -> bool:
-	if not data is Dictionary or data.get("schema")!=2 or not data.get("execution") is Dictionary or not data.get("doors_in_use") is Dictionary or not data.get("furniture") is Dictionary or data.furniture.size()!=actors.size():return false
+	if not data is Dictionary or data.get("schema")!=3 or not data.get("execution") is Dictionary or not data.get("doors_in_use") is Dictionary or not data.get("furniture") is Dictionary or data.furniture.size()!=actors.size():return false
 	if not (data.get("decision_minutes") is float or data.get("decision_minutes") is int) or not is_finite(float(data.decision_minutes)) or data.decision_minutes<0 or data.decision_minutes>=1:return false
-	if data.execution.size()!=actors.size():return false
+	if data.execution.size()!=actors.size() or not data.get("household") is Dictionary or data.household.size()!=kitchen.size():return false
 	for id in actors:
 		if not furniture[id].can_restore(data.furniture.get(id)):return false
 		var entry: Variant=data.execution.get(id)
-		if not entry is Dictionary or entry.get("state") not in ["choose","plan","wait","walk","align","use","door","yield","settle","enter","exit"]:return false
+		if not entry is Dictionary or entry.get("state") not in ["choose","plan","wait","walk","align","use","door","yield","settle","enter","exit","household"]:return false
 		if not entry.get("task") is String or not entry.get("reason") is String or entry.reason.length()>512 or not entry.get("current_room") is String or not _room_bounds.has(entry.current_room):return false
 		if not entry.task.is_empty() and (not restored_life.tasks.has(entry.task) or restored_life.tasks[entry.task].actor!=id):return false
 		if not (entry.get("phase") is int or entry.get("phase") is float) or entry.phase!=int(entry.phase) or entry.phase< -1 or entry.phase>20:return false
@@ -331,7 +360,11 @@ func can_restore(data: Variant, restored_life: HouseholdDay, body_states: Dictio
 		for key in entry.get("doors",[]):
 			if not key is String or not home.doors.has(key):return false
 		if not body_states.get(id) is Dictionary or not body_states[id].get("motor") is Dictionary:return false
-		if not furniture[id].can_restore_transaction(data.furniture[id],restored_life.task_for(id),entry,body_states[id]):return false
+		if kitchen.has(id) and not kitchen[id].can_restore(data.household.get(id),restored_life,body_states[id]):return false
+		if entry.state=="household":
+			if not kitchen.has(id) or not HouseholdDay._decode(data.furniture[id].session).is_empty() or not restored_life.kitchen.supports(restored_life.task_for(id)) or restored_life.task_for(id).get("usage",{}).get("required",false):return false
+		else:
+			if not furniture[id].can_restore_transaction(data.furniture[id],restored_life.task_for(id),entry,body_states[id]):return false
 	for key in data.doors_in_use:
 		if not home.doors.has(key) or not data.doors_in_use[key] is String or not actors.has(data.doors_in_use[key]):return false
 	return true
@@ -340,6 +373,7 @@ func restore(data: Variant, restored_life: HouseholdDay, body_states: Dictionary
 	if not can_restore(data,restored_life,body_states):return false
 	execution=data.execution.duplicate(true);doors_in_use=data.doors_in_use.duplicate();_decision_minutes=float(data.decision_minutes)
 	for id in furniture:furniture[id].restore(data.furniture[id])
+	for id in kitchen:kitchen[id].restore(data.household[id],restored_life,body_states[id])
 	for id in actors:
 		actors[id].visible=not execution[id].offsite
 		var task: Dictionary=restored_life.task_for(id)

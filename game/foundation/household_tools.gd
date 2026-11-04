@@ -4,7 +4,7 @@ extends RefCounted
 # Native, metre-scale utensils. Root is near the handle grip; +Z points to the
 # working end and +Y is up. No body, clock, holder or resource is owned here.
 # Public specs are deep copies of private generated data, never mutable aliases.
-const KINDS := ["spoon","child_spoon","knife","spatula"]
+const KINDS := ["spoon","child_spoon","knife","spatula","ladle"]
 static var _cache: Dictionary = {}
 
 static func kinds() -> Array:return KINDS.duplicate()
@@ -189,6 +189,13 @@ static func _data(kind: String) -> Dictionary:
 			_blade(parts)
 			working={"tip":Transform3D(Basis.IDENTITY,Vector3(0,-.008,.235)),"edge_start":Transform3D(Basis.IDENTITY,Vector3(0,-.020,.060)),"edge_end":Transform3D(Basis.IDENTITY,Vector3(0,-.020,.195)),"cut_edge":Transform3D(Basis.IDENTITY,Vector3(0,-.020,.125))}
 			lay=Basis(Vector3.BACK,PI*.5);rear_support=Vector3(-.012,0,.045);front_support=working.tip.origin
+		"ladle":
+			grip_x=.009
+			_tube(parts,"GripHandle","wood",[Vector4(-.090,.007,.006,0),Vector4(-.074,.009,.007,0),Vector4(0,.009,.007,0),Vector4(.065,.0065,.005,0)])
+			_tube(parts,"LadleShaft","metal",[Vector4(.060,.004,.003,0),Vector4(.155,.004,.003,-.004),Vector4(.200,.004,.003,-.014)])
+			_spoon_bowl(parts,.238,.043,.045,-.012,.037,.0018)
+			working={"tip":Transform3D(Basis.IDENTITY,Vector3(0,-.012,.283)),"food_anchor":Transform3D(Basis.IDENTITY,Vector3(0,-.049,.238)),"pour_lip":Transform3D(Basis.IDENTITY,Vector3(0,-.012,.283))}
+			rear_support=Vector3(0,-.007,-.074);front_support=Vector3(0,-.0508,.238)
 		"spatula":
 			grip_x=.009
 			_tube(parts,"GripHandle","wood",[Vector4(-.090,.0065,.005,0),Vector4(-.074,.009,.0065,0),Vector4(0,.009,.0065,0),Vector4(.055,.0065,.005,0)])

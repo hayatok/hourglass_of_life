@@ -9,8 +9,8 @@ from collections import Counter
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 from mathutils.geometry import barycentric_transform
-ROOT=Path(__file__).resolve().parents[1];REPO=ROOT.parents[2];BUILD=REPO/'builds/haru-cute-pilot';OUT=BUILD/'r3-seam-fixed';OUT.mkdir(exist_ok=True)
-bpy.ops.wm.open_mainfile(filepath=str(BUILD/'CH_Haru_Delivery.blend'))
+ROOT=Path(__file__).resolve().parents[1];REPO=ROOT.parents[2];BUILD=REPO/'builds/haru-cute-pilot';OUT=BUILD/'r3-seam-fixed';OUT.mkdir(parents=True,exist_ok=True)
+bpy.ops.wm.open_mainfile(filepath=str(ROOT/'source/CH_Haru_LegacyDelivery.blend'))
 body=bpy.data.objects['CH_Haru_Body_LOD0'];arm=bpy.data.objects['CH_Haru_Rig']
 source_bvh=BVHTree.FromPolygons([v.co for v in body.data.vertices],[list(p.vertices) for p in body.data.polygons],all_triangles=True)
 for ob in list(bpy.data.collections['LOW'].objects):

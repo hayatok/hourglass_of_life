@@ -718,10 +718,58 @@
       "capacity": 1,
       "support_point": [
         0.7,
-        0.55,
+        0.8,
         4.05
       ],
-      "put_down_kinds": []
+      "put_down_kinds": [],
+      "operation_targets": {
+        "ingredients": {
+          "surface": [
+            0.7,
+            0.8,
+            4.22
+          ],
+          "approach": [
+            0.7,
+            0,
+            4.7
+          ],
+          "half_extents": [
+            0.26,
+            0,
+            0.27
+          ],
+          "kind": "refrigerated_drawer_shelf",
+          "moving_support": "fridge:drawer",
+          "open_offset": [
+            0,
+            0,
+            0.55
+          ]
+        }
+      },
+      "drawer_geometry": {
+        "shelf_y": 0.8,
+        "shelf_thickness": 0.024,
+        "front_bottom_y": 0.7,
+        "front_top_y": 1.13,
+        "handle_y": 1.04,
+        "handle_span": 0.38,
+        "handle_radius": 0.012,
+        "grasp_pitch": 0.35,
+        "handle_z": 0.38,
+        "case_thickness": 0.035,
+        "open_offset": [
+          0,
+          0,
+          0.55
+        ]
+      },
+      "ingredient_stock_center": [
+        0.7,
+        0.8,
+        4.05
+      ]
     },
     {
       "id": "sink",
@@ -826,7 +874,115 @@
             0.85,
             3.78
           ],
-          "kind": "clean_dish_parking"
+          "kind": "vertical_plate_rack",
+          "approach": [
+            3.75,
+            0,
+            4.6
+          ],
+          "half_extents": [
+            0.16,
+            0,
+            0.14
+          ],
+          "rack_support_y": 0.862,
+          "unit_frames": [
+            {
+              "position": [
+                3.84,
+                0.957,
+                3.78
+              ],
+              "rotation_degrees": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "position": [
+                3.813,
+                0.957,
+                3.78
+              ],
+              "rotation_degrees": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "position": [
+                3.786,
+                0.957,
+                3.78
+              ],
+              "rotation_degrees": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "position": [
+                3.759,
+                0.957,
+                3.78
+              ],
+              "rotation_degrees": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "position": [
+                3.732,
+                0.957,
+                3.78
+              ],
+              "rotation_degrees": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "position": [
+                3.705,
+                0.957,
+                3.78
+              ],
+              "rotation_degrees": [
+                0,
+                0,
+                90
+              ]
+            }
+          ]
+        },
+        "knife": {
+          "surface": [
+            2.58,
+            0.85,
+            4.0
+          ],
+          "approach": [
+            2.58,
+            0,
+            4.6
+          ],
+          "rotation_degrees": [
+            0,
+            180,
+            0
+          ],
+          "half_extents": [
+            0.055,
+            0,
+            0.2
+          ],
+          "kind": "knife_parking"
         }
       },
       "support_surfaces": {
@@ -931,6 +1087,29 @@
           "surface_kind": "saucepan",
           "clearance_y": 0.08,
           "kind": "pour_into_pan_not_set_down"
+        },
+        "ladle": {
+          "surface": [
+            5.04,
+            0.855,
+            4.0
+          ],
+          "approach": [
+            5.04,
+            0,
+            4.68
+          ],
+          "rotation_degrees": [
+            0,
+            180,
+            0
+          ],
+          "half_extents": [
+            0.065,
+            0,
+            0.205
+          ],
+          "kind": "unheated_cooktop_edge_parking"
         }
       }
     },
@@ -970,7 +1149,86 @@
         "wash_dishes",
         "shop",
         "personal_project"
-      ]
+      ],
+      "centerpiece_offset": [
+        0.45,
+        0,
+        0.25
+      ],
+      "operation_targets": {
+        "carrier": {
+          "surface": [
+            2.7,
+            0.746,
+            6.18
+          ],
+          "approach": [
+            2.7,
+            0,
+            5.45
+          ],
+          "half_extents": [
+            0.29,
+            0,
+            0.21
+          ],
+          "kind": "serving_tray_parking"
+        },
+        "plate_0": {
+          "surface": [
+            2.055,
+            0.74,
+            6.4
+          ],
+          "approach": [
+            2.055,
+            0,
+            5.65
+          ],
+          "half_extents": [
+            0.105,
+            0,
+            0.105
+          ],
+          "kind": "dining_plate_place"
+        },
+        "plate_1": {
+          "surface": [
+            3.345,
+            0.74,
+            6.4
+          ],
+          "approach": [
+            3.345,
+            0,
+            5.65
+          ],
+          "half_extents": [
+            0.105,
+            0,
+            0.105
+          ],
+          "kind": "dining_plate_place"
+        },
+        "plate_2": {
+          "surface": [
+            2.7,
+            0.746,
+            6.715
+          ],
+          "approach": [
+            2.2,
+            0,
+            7.15
+          ],
+          "half_extents": [
+            0.105,
+            0,
+            0.105
+          ],
+          "kind": "dining_plate_place"
+        }
+      }
     },
     {
       "id": "dining_nagisa",
@@ -2224,6 +2482,54 @@
       ],
       "kind": "design_study",
       "provenance": "authored_fiction"
+    }
+  ],
+  "household_access": {
+    "fridge:drawer": {
+      "fixture": "fridge",
+      "approach_closed": [
+        0.7,
+        0,
+        4.7
+      ],
+      "approach_open": [
+        0.7,
+        0,
+        5.25
+      ],
+      "open_offset": [
+        0,
+        0,
+        0.55
+      ],
+      "kind": "pull_out_refrigerated_drawer"
+    }
+  },
+  "household_equipment": [
+    {
+      "id": "kitchen_vegetable_basket",
+      "kind": "basket",
+      "role": "ingredient_carrier",
+      "support_slot": "fridge:ingredients",
+      "initially_loaded": true
+    },
+    {
+      "id": "kitchen_serving_tray",
+      "kind": "tray",
+      "role": "serving_carrier",
+      "support_slot": "dining_table:carrier"
+    },
+    {
+      "id": "kitchen_preparation_knife",
+      "kind": "knife",
+      "role": "preparation_tool",
+      "support_slot": "prep:knife"
+    },
+    {
+      "id": "kitchen_soup_ladle",
+      "kind": "ladle",
+      "role": "cooking_tool",
+      "support_slot": "stove:ladle"
     }
   ]
 }

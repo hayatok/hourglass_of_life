@@ -1,0 +1,15 @@
+/Users/hayatok/Documents/dev/hourglass_of_life の開発を引き継いでください。
+
+最初に AGENTS.md、docs/development-roadmap.md、docs/verification/current-status.md、docs/design/foundation-implementation.md と git status を確認してください。現在の作業ブランチは codex/life-foundation-rebuild、現行PRは https://github.com/hayatok/hourglass_of_life/pull/30（base main）。旧PR・旧Issueは新しい8段階へ整理済みです。mainへ戻したり、途中実装を上書きしたりしないでください。
+
+目的は、複数室で実際に家族が暮らせる住宅、自然な歩行と生活動作、統一した可愛いJRPG調の人物と町、背景と経験に基づく自律行動、公式統計に根拠を持つ出生から死去までの人生です。小さな修正と成功件数だけで進捗を作らず、通常の画面で質が変わる単位で開発してください。ロードマップは「これから何を作るか」を中心に保ってください。
+
+段階1「家族が一日暮らせる家」は未完了です。新基盤は game/foundation/foundation_world.tscn。既定 main.tscn は旧12人の町なので混同しないでください。現在の台所統合には未確認・失敗が残ります。current-status.md の接続問題を対象に確認してから、調理・配膳・食事・片付けと家族の一日を通してください。個別の指先や小道具の調整だけを延々と続けないでください。不自然さの原因が設計にあるなら、既存の収納・把持ルーチンにも固執せず作り直してください。
+
+新しい渚のTripo原本は assets/models/foundation-family/CH_Nagisa/source/tripo-f8a25d0b-bd76-4332-9378-6da16d751a0e/ にあります。生成30クレジットは消費済みですが、原型の造形受入、リグ、表情・衣服、LOD、実ゲーム導入は未実施です。古いprocedural masterは未受入の参考WIPであり、自動的に制作を再開しないでください。新たな有料処理は承認されていません。今後Tripoを使う場合も必ずログイン済みChromeのUIを使い、同時プレビューは1タブにしてください。
+
+CMU家事動作の原本・転送コードは保持しています。再生成可能な候補・ログ・比較画像・古いビルドは削除しました。必要になった対象だけを再生成し、過去セッションや古い検証結果を一括で読み込まないでください。素材用Python環境は tools/setup_asset_tools.sh で再作成できます。初回のGodot importも必要です。
+
+実装と実ゲームでの動作確認まで進め、意味のある区切りでMacビルドを残してください。最後の確認済み版は builds/foundation-preview-20261105-r3/ のZIPで、現在の途中実装や新しい渚を含みません。旧開発セーブの互換は不要です。SHAやハッシュをテストとして数えず、動作・状態変化・描画・接触・保存再開を根拠にしてください。Macの負荷を見ながらGodot・Blender・Tripoを順番に使い、使い終えた自分のプロセスとタブを閉じ、利用者のアプリや保存データは保護してください。
+
+今回はロードマップに沿って開発を継続する依頼です。既存の公開リポジトリ・現行PR・8段階のIssueで管理し、勝手にマージ・リリースタグ作成・公開配布は行わないでください。

@@ -1,6 +1,6 @@
 {
   "resident": "yui",
-  "status": "dedicated_body_integrated_partial_character_acceptance",
+  "status": "dedicated_body_integrated_requires_current_runtime_review",
   "service": "Tripo Studio",
   "interaction": "Chrome browser UI only",
   "task_id": "6ee22af9-ba9b-4371-95b0-c1d7a1698d8b",
@@ -31,7 +31,7 @@
     "GLB_export_additional_observed": 0,
     "basis": "All three submitted jobs accepted after re-upload; browser balance 2895 to 2805. Exported local files verified, no further balance change observed."
   },
-  "gameplay_integration": "Dedicated body, nine clips, compatible LODs and the two UV-eye controls are integrated. Partial real-town character acceptance is recorded; full facial/hair-aging behavior, motion/contact polish and human UI/game-fun acceptance are still incomplete.",
+  "gameplay_integration": "Dedicated body and current runtime resources are retained. Historical verification reports were removed during cleanup; current foundation acceptance is tracked in docs/verification/current-status.md.",
   "output": "assets/models/jrpg-resident-renewal/yui/raw/CH_Yui_JRPG_Raw.glb",
   "bytes": 3001736,
   "sha256": "4cf28e49cd65fbb7550b25a18dbde831aa8e65406ba2828ab6d953942c29333e",
@@ -97,43 +97,6 @@
     "eye_charts": 2,
     "eyelid_method": "compress",
     "facial_geometry_morphs": 0
-  },
-  "runtime_acceptance": {
-    "status": "partial_character_runtime_acceptance",
-    "date": "2026-11-03",
-    "scope": "Dedicated resident bodies in the real twelve-person town at seed 711, with natural action/partner/needs/knowledge/relationship/routine state preserved. Agent-driven character verification, not human UI or game-fun acceptance.",
-    "observed_behaviors": [
-      "Actual skin deformation and walking",
-      "Conversation gesture and head attention after the ordinary transition",
-      "Natural joint work and a real skill change",
-      "Meal seating and hand/cup contact",
-      "Own-bed head/pelvis contact, sleep closure and waking reopening",
-      "All LOD rig/bind/clip compatibility",
-      "Project-in-progress save/resume and subsequent state/RNG continuation"
-    ],
-    "aggregate_functional_results": {
-      "scope": "One shared run across Saki, Tomo and Yui; do not sum this result once per resident.",
-      "headless": {
-        "checks": 112,
-        "failures": 0
-      },
-      "gpu": {
-        "checks": 115,
-        "failures": 0
-      }
-    },
-    "artifacts": {
-      "images_saved": 29,
-      "images_attempted": 29,
-      "counted_as_functional_checks": false
-    },
-    "evidence": {
-      "readme": "docs/verification/v0.5/jrpg-renewal-gameplay/README.md",
-      "headless": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay-headless.json",
-      "gpu": "docs/verification/v0.5/jrpg-renewal-gameplay/gameplay.json",
-      "review": "docs/verification/v0.5/jrpg-renewal-gameplay/review.json"
-    },
-    "identification_policy": "SHA and pixel fingerprints identify inputs and outputs only; they are not quality checks, pass/fail gates or functional counts."
   },
   "remaining_work": [
     "Only Blink and TiredEyes are implemented; the full six-control face, Smile/mouth deformation and lip-sync remain unfinished.",

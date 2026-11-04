@@ -56,7 +56,7 @@ done
 ```
 
 1. `00_prepare_references.py` establishes the fixed matte, image axis, ground and metre scale. `01_import_review.py` imports the raw mesh into the calibrated master.
-2. `03_fit_forms.py` applies the accepted arm/hem fitting changes. The approved front comparison and world-registration reports in each `review/` are retained review inputs. The commands above do **not** regenerate all historic raw/forms turntable or silhouette-comparison images. After changing forms, repeat and review those comparisons before adopting a new candidate; reusing their historical numbers is not a new visual acceptance.
+2. `03_fit_forms.py` applies the accepted arm/hem fitting changes. The small front comparison and world-registration inputs are retained under each resident’s `production-inputs/`; generated `review/` folders are disposable. The commands above do **not** regenerate all historic raw/forms turntable or silhouette-comparison images. After changing forms, repeat and review those comparisons before adopting a new candidate; reusing their historical numbers is not a new visual acceptance.
 3. `06_bind.py` retains the original named 35 bones, adding `DEF-skirt_middle` for Saki and Yui. Arm and cloth membership follows adjacency, including UV-split copies. Hands stay separated from the leg family, camera weighting has a gradual boundary, and lower skirt motion is shared rather than split by left/right shins.
 4. `07_pose_review.py` renders nine body poses; `10_compose_poses.py` composes those renders. `08_deformation_audit.py` records actual edge lengths, coincident-seam separation and arm/lower-body influence conflicts.
 5. `09_export.py` measures target-foot motion, welds derived LOD seams before decimation and exports body-only staging. Original encoded images are restored to LOD0; distance LOD images are removed.
@@ -66,7 +66,7 @@ done
 
 Hashes identify source files only. They are not assertions, quality tests, acceptance gates or counted checks. Declared and observed identifiers may both be recorded without a comparison or a failure outcome. Transform-only geometry and UV preservation use direct numerical arrays instead of hashes, with no replacement test counts. Decoded input-atlas identity is also provenance; rendered visual changes and actual animation/skin behavior are separate evidence.
 
-Historical delivery JSON may count decoded source-image identity as a check. It remains historical and is not silently rewritten by this source maintenance. Future `11_check_delivery.py` output records it under `provenance_only`; no replacement check was added.
+Historical delivery reports and rendered comparisons were removed during cleanup. Regenerate only the needed review; do not inherit earlier successful counts. `11_check_delivery.py` records source-image identity under `provenance_only`.
 
 This portability/source-maintenance change was checked by Python syntax compilation and static dependency inspection only. Blender, export, rendering and Godot acceptance were **not** rerun for it. The upstream helpers are copied without behavior changes. Other Blender/Pillow versions and other operating systems have not been exercised with this pipeline.
 

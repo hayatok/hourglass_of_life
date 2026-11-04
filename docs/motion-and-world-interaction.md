@@ -2,7 +2,7 @@
 
 2026年11月4日更新。「作る、運ぶ、遊ぶ、会話などが、街との相互作用も含めて破綻なく動き、見ているだけで楽しい」という要望をv0.5以降の受け入れ条件へ具体化する。ラジオの取り出し・運搬・二人の調整・返却、四目並べ、会話の番と上体の向き、4人の歩行支持を実装した。下記には今回の実装と、全活動へ広げる際の要件を分けて記す。JRPG調の形と動きを保ち、意図、重さ、接触、相手の反応、行動の結果が読み取れることを目指す。
 
-進捗は[Issue #19](https://github.com/hayatok/hourglass_of_life/issues/19)、モデルの制作は[Issue #17](https://github.com/hayatok/hourglass_of_life/issues/17)と対応づける。
+作る順序は現行ロードマップを正本とし、[家族の生活基盤 #22](https://github.com/hayatok/hourglass_of_life/issues/22)と[街区 #23](https://github.com/hayatok/hourglass_of_life/issues/23)で管理する。
 
 ## 現在の差
 

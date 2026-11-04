@@ -23,7 +23,7 @@ func run() -> void:
 	expect(model.expression_mode==JrpgResidentModel.ExpressionMode.TEXTURE_EYES and capability.facial_controls==["Blink","TiredEyes"],"Exactly two real UV eye controls are declared; mouth and morph limitations stay explicit")
 	var palette: Texture2D = model.body_materials[0].get_shader_parameter("base_palette")
 	var actual_hash := image_digest(palette.get_image())
-	var expected_hash := image_digest(Image.load_from_file("res://assets/models/haru-cute-pilot/review/texture-face/source-basecolor.jpg"))
+	var expected_hash := image_digest(Image.load_from_file("res://assets/models/haru-cute-pilot/production-inputs/texture-face/source-basecolor.jpg"))
 	var skeleton := model.skeleton;var player := model.animator
 	model.prepare_lods()
 	expect(model.lod_resources_loaded==2,"Both actual LOD resources are compatible and loaded")

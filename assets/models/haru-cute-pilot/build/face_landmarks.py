@@ -5,6 +5,7 @@ import struct,json,math,hashlib
 ROOT=Path(__file__).resolve().parents[4]
 RAW=ROOT/'assets/models/haru-cute-pilot/raw/CH_Haru_JRPG_Pilot_Raw.glb'
 OUT=ROOT/'assets/models/haru-cute-pilot/review/texture-face'
+INPUTS=ROOT/'assets/models/haru-cute-pilot/production-inputs/texture-face'
 def read_mesh():
  b=RAW.read_bytes();n=struct.unpack_from('<I',b,12)[0];d=json.loads(b[20:20+n]);offset=20+n;blen=struct.unpack_from('<I',b,offset)[0];data=b[offset+8:offset+8+blen]
  def accessor(i):
@@ -64,7 +65,8 @@ def produce():
  probe['source_sha256']=hashlib.sha256(RAW.read_bytes()).hexdigest()
  OUT.mkdir(parents=True,exist_ok=True)
  (OUT/'uv-probe.json').write_text(json.dumps(probe,indent=2)+'\n')
- (OUT/'landmarks.json').write_text(json.dumps(landmarks,indent=2)+'\n')
- b=RAW.read_bytes();n=struct.unpack_from('<I',b,12)[0];doc=json.loads(b[20:20+n]);data=b[28+n:];view=doc['bufferViews'][doc['images'][0]['bufferView']];(OUT/'source-basecolor.jpg').write_bytes(data[view.get('byteOffset',0):view.get('byteOffset',0)+view['byteLength']])
+ INPUTS.mkdir(parents=True,exist_ok=True)
+ (INPUTS/'landmarks.json').write_text(json.dumps(landmarks,indent=2)+'\n')
+ b=RAW.read_bytes();n=struct.unpack_from('<I',b,12)[0];doc=json.loads(b[20:20+n]);data=b[28+n:];view=doc['bufferViews'][doc['images'][0]['bufferView']];(INPUTS/'source-basecolor.jpg').write_bytes(data[view.get('byteOffset',0):view.get('byteOffset',0)+view['byteLength']])
  print('Read-only face UV landmarks and unchanged embedded JPEG extracted')
 if __name__=='__main__':produce()

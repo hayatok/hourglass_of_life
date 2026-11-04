@@ -42,8 +42,8 @@ func simulate(game, seconds: float) -> void:
 func meaningful_state(data: Dictionary) -> Dictionary:
 	var copy: Dictionary=data.duplicate(true)
 	for body in copy.bodies.values():
-		for key in ["locomotion","furniture"]:
-			for counter in ["serial","applied","sample_serial","rendered_serial"]:body[key].erase(counter)
+		for key in ["locomotion","furniture","household"]:
+			for counter in ["serial","applied","sample_serial","rendered_serial","sample"]:body[key].erase(counter)
 	# Rendering a restored pose refreshes diagnostic sample IDs. They are not
 	# movement, contact geometry, household time, resources or performed work.
 	return copy

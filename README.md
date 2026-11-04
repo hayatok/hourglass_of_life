@@ -1,98 +1,46 @@
 # 命の砂時計
 
-自分の意思で暮らす住人たちに、小さなきっかけを渡す3D人生シミュレーション。
+自分の意思で暮らす人々を見守る、Godot 4.7.2の3D人生シミュレーション。現在は、複数室の家、自然な全身動作、人物の背景、出生から死去までの生活を土台から作り直している。
 
-プレイヤーは町の暮らしを観察し、場所を整え、予定を提案し、迷っている人を少し後押しする。住人は仕事、家庭、趣味、人付き合いに自分の時間を使い、その経験から次の行動を選ぶ。
+開発の正本は[8段階のロードマップ](docs/development-roadmap.md)。段階1「家族が一日暮らせる家」は未完了。[現在の状態と未確認点](docs/verification/current-status.md)を確認してから作業する。
 
-Godot 4.7.2で開発する3D人生シミュレーション。v0.1で日常と働きかけ、v0.2で関係と記憶、v0.3で仕事と家庭を接続し、v0.4では年月と人生の変化を実装した。現在の新規開始は12人。住人が自分の予定、欲求、責任、関係から暮らし、働いた時間による家計、家の用事、世話の交代、共同制作を積み重ねる。
+## 開発を再開する
 
-最初の3年を見守ると、その町で起きたことを振り返れる。その後も、卒業と転居、成長に伴う役割の変更、働き方の変更、別れを経て暮らしが続く。完成した取り組みの記録は3Dの町に置かれ、別の人が実際に読んで、自分の取り組みの参考にする。全員の生涯を見届けた後には、残された記録を読み返せる。
+作業ブランチは `codex/life-foundation-rebuild`、現行PRは [#30](https://github.com/hayatok/hourglass_of_life/pull/30)。別セッション用の[開始プロンプト](docs/session-start.txt)を用意している。
 
-v0.5の開発ブランチでは、8人全員のJRPG調モデルと、成長後の凛、表情と動きを実際の町へ取り込んでいる。年齢が進むと凛の体格が切り替わり、髪色も変わる。家具10点と予約する席・作業場所を接続し、着席、カップを使う食事、子どもの踏み台、専用の寝床を使用する。[人物モデル](docs/verification/v0.5/README.md)と[家具・動作の制作確認](docs/verification/v0.5/activities/README.md)を参照。人物と町の造形、道具ごとの細かな操作や衣服との重なり、音と演出、導入と一連の進行の仕上げは未完了。
+最初に `AGENTS.md`、ロードマップ、現在の状態、[実装契約](docs/design/foundation-implementation.md)を読む。必要になったソースだけを調べ、過去のログや検証結果をまとめて読み込まない。
 
-人物表現は晴・咲・智・結衣を専用のJRPG調モデルへ更新した。新しい全身参照からChromeのTripoで原型を生成し、各人の歩行・会話・共同作業・寝食、瞬きと睡眠時の閉眼を実際の12人の町へ接続している。[晴の実町検証](docs/verification/v0.5/haru-jrpg-gameplay/)と[咲・智・結衣の実町検証](docs/verification/v0.5/jrpg-renewal-gameplay/)を参照。新しい4人の笑顔・口・髪の加齢、道具ごとの指先と衣服・寝具の仕上げは残る。他8人と成長後の凛は[共通テイストの参照画像](assets/artwork/jrpg-resident-renewal/README.md)を用意し、順に更新する。
-
-v0.6の開発では共同活動6種類を人物の組合せから独立した定義へ移した。住人は関心、技能、本人が知る相手の情報、実際に空いている場所と時間から、自分で共同作業や会話を相談する。暮らしの負担が大きいときは、信頼する知人へ手助けを頼む。
-
-布小物づくりは、有限の布を収納から運び、はさみで裁ち、針と糸で縫い、相手へ巾着を見せてしまう工程を持つ。作りかけと完成品は同じ物として残り、中断後は所有者が再開する。提案画面から制作の種類を選べる。[制作・保存・実画面の確認](docs/verification/sewing-20261104/README.md)を参照。
-
-約束には本人の食事・休息と往復の時間を見込み、それぞれが準備して移動する。都合が変われば双方が同意したときだけ日時を相談し直す。実際の会話では、話し手が知る過去の情報から相手の関心や願いに合う相談先を教える。聞いただけでは技能を得ず、一緒に作業した経験から技能と状況別の期待を更新する。
-
-UIは[操作の流れから作り直した](docs/ui-redesign.md)。住民を選ぶと左下のカードから近くで見守れ、本人名を含む「提案する」から内容と相手を選べる。二人の顔・名前・手伝う方向・実行内容と住民の返答を同じ画面で読み、具体的な会話の別案は日時・場所を確認して約束する。人物手帳、最近の出来事、町の記録、時間操作、町の整備はそれぞれの入口へ分けた。[制作と検証の範囲](docs/verification/v0.6/README.md)を参照。[12人の段階検証](docs/verification/v0.8/README.md)を人口拡張から前倒しした。16人・24人への増員、複数人の集まり、経験から変わる人生、表現全体の仕上げは引き続き開発する。
-
-実プレイ後の[改訂計画](docs/development-roadmap.md)では、Macのトラックパッド操作と、Tripo由来の新4人・旧8人が混在する人物品質を先に改善する。[公開・非公開の欲求と行動](docs/needs-and-behavior-design.md)も設計した。新しい心理・成人の私的な動機、気分、対応する行動は未実装であり、今回の計画更新だけでゲームの振る舞いが変わったとは扱わない。
-
-## 起動と操作
-
-Godot 4.7.2で `project.godot` を開き、プロジェクトを実行する。macOS向けの配布物はGitHubのリリースへ版ごとに保存する。
-
-- 人物一覧または町の人をクリックすると、事情や予定、関係、記憶を見られる。
-- 左下の住民カードの「提案する」から、休息、目標への応援、相手との交流を相談できる。本人が予定や疲れから返答し、読む間は時間が止まる。
-- 相手を選んで手助けや共同制作を相談できる。手助けは実際の合流後から生活の負担を分け、制作は一緒に作業した時間から目標が進む。人物手帳の「家計・仕事」で家計、家の用事、仕事、世話の時間を見られる。
-- 「一緒に遊ぶ」から相手を選び、四目並べに誘える。住民自身も余裕のあるときに知り合いを誘い、実際の駒と手番で遊び、片付ける。工房では同じラジオを棚から運び、二人で支えて調整して戻す。
-- 「町を整える」から予算を確認してベンチを選び、広場のプレビューが緑になる場所へ置く。配置は取り消せる。使用するかは住民が選ぶ。
-- WASDでカメラ移動、右ドラッグで回転、ホイールでズーム。カードの「この人を追いかける」で人物を追従できる。
-- Macのピンチ拡縮と2本指のパン、画面右下の「−」「＋」「町の全景」、キーボードの「−」「＋」に対応。人物の手元まで近づける。物理トラックパッドでの入力確認は継続課題。
-- Spaceで一時停止、Escapeでメニュー。メニューから保存と再開ができる。
-- ×0.5でゆっくり観察し、×30で年月を早く見届けられる。早送りでも移動と参加を省略しない。「年月を振り返る」で、実際の節目と残された物を振り返れる。
-- 人物手帳と出来事は必要なときに開き、「閉じる」やEscで戻る。時間の速さは下中央で選ぶ。停止中に速さを変えても時間は進まない。
-
-保存先はGodotの `user://life-save.json`。macOSでは `~/Library/Application Support/Godot/app_userdata/命の砂時計/` に置かれる。開発中は版をまたぐ保存互換を維持せず、現行版の保存・再開と再現を確認する。
-
-## 開発と検証
-
-検証は実際の動作と結果を基準にする。SHA照合は識別記録として分け、検査の合否・件数に含めない。[検証記録の読み方](docs/verification/README.md)を参照。
-
-[GitHub](https://github.com/hayatok/hourglass_of_life)のIssueとMilestoneで、[版ごとの中心となる遊び](docs/development-roadmap.md)を管理する。[メニュー・HUD・動きの設計](docs/interface-and-animation.md)も参照。
+## 新しい生活基盤を起動する
 
 ```sh
-godot --headless --editor --import --path .
-godot --headless --path . --script tests/test_simulation.gd
-godot --headless --path . --script tests/test_social_life.gd
-godot --headless --path . --script tests/test_work_family.gd
-godot --headless --path . --script tests/test_life_course.gd
-godot --headless --path . --script tests/test_cognition.gd
-godot --headless --path . --script tests/test_resident_activities.gd
-godot --headless --path . --script tests/test_autonomy.gd
-godot --path . --script tests/test_observation_hud.gd
-godot --path . --script tests/test_scene.gd
-godot --path . --script tests/test_character_model.gd
-godot --path . --script tests/test_resident_models.gd
-godot --path . --script tests/test_activity_furniture.gd
+godot --headless --editor --path . --import --quit
+godot --path . res://game/foundation/foundation_world.tscn
 ```
 
-`godot` はGodot実行ファイルのパスに読み替える。シーン全体の確認はGPUを使用し、操作、共同制作、3年の振り返り、全員の生涯を見届けた画面まで `docs/verification/v0.6/integration/` へ保存する。人物の確認は `docs/verification/v0.5/nagisa/` へ保存する。Godotのシーンエディタで編集した `.tscn` と、保存されたAnimationPlayerのクリップを実行時に使用する。初期シーンの作成補助は `tools/build_scenes.gd` に残しているが、再実行すると後の版の編集を上書きする。
+`godot` はインストールした実行ファイルに読み替える。macOSの配置例は `/Applications/Godot.app/Contents/MacOS/Godot`。
 
-通常の新規開始は初期乱数を変える。開発時に同じ開始条件を使う場合は、`godot --path . -- --world-seed=71103` のように指定する。保存には初期seedと現在の乱数状態、知識、経験、進行中の計画を含める。
+新基盤は `game/foundation/` と `data/foundation/`。既定の `game/scenes/main.tscn` は旧12人の町なので、新基盤の動作確認と混同しない。開発セーブの下位互換は維持しない。既存の利用者セーブは整理の対象外とする。
 
-`python3 tools/verify_game.py --gpu` で、エンジンの終了コード・エラーログ・各テストの完了表示も照合できる。必要に応じて `--godot` に実行ファイルを指定する。亮・凛・成長後の姿と加齢の描画は `docs/verification/v0.5/cast/`、ローカルの実行ログは `builds/verification/` へ保存する。
+ローカルで残す配布物は `builds/foundation-preview-20261105-r3/hourglass-of-life-foundation-preview-20261105-macOS.zip` の1件。これは以前に短い実機確認をしたプレビューで、現在の途中実装や新しい渚モデルを含まない。
 
-## 制作方針
+## 設計と素材
 
-家の中まで見える3Dの箱庭と、日本のJRPGを参考にしたアニメ調3Dの人間キャラクターを採用する。大人は6頭身前後、子どもは4〜4.5頭身を制作時の目安とする。視線、姿勢、身振り、座る場所から、人物の気持ちや関係が伝わることを重視する。
+- [家族の一日と生活設備](docs/design/life-foundation.md)
+- [街並みの造形方針](docs/design/town-art-direction.md)
+- [人物・衣服の方向](docs/design/family-visual-direction.md)
+- [統計と生活史](docs/life-course-evidence.md)
+- [渚の制作仕様](assets/models/foundation-family/CH_Nagisa/asset-brief.md)
+- [CMU動作原本と再生成方法](assets/motion-sources/cmu/README.md)
 
-歴史資料、公的統計、行動科学の知見を、生活の条件と行動の仕組みに反映する。統計の平均値、研究上の知見、ゲーム用の仮設定を区別する。
+原本・制作マスター・制作入力は `assets/` に保持する。生成ログやレンダーはGit管理せず、必要な範囲を再生成する。Pythonの素材制作環境は `tools/setup_asset_tools.sh` で用意する。
 
-## 設計資料
+## 検証
 
-- [ゲーム企画](docs/game-design.md)
-- [キャラクター行動仕様](docs/character-spec.md)
-- [欲求・内面と行動を一緒に広げる設計](docs/needs-and-behavior-design.md)
-- [行動が街と噛み合うモーションの設計](docs/motion-and-world-interaction.md)
-- [季節・服装・経済と行動の拡張](docs/world-context-and-actions.md)
-- [晴雨・気温と自由時間の選択、Mac版の確認](docs/verification/weather-20261104/README.md)
-- [布小物の制作・提示・収納と再開](docs/verification/sewing-20261104/README.md)
-- [調査資料と仕様への反映](docs/research-notes.md)
-- [行動モデルの設定案](data/behavior-model.json)
-- [住民12人の設定](data/residents.json)
-- [町 人物 建物 家具のJRPG調アートワーク](assets/artwork/v02-jrpg/README.md)
-- [JRPG調の立体表現の追加アートワーク](assets/artwork/v03-render-target/README.md)
-- [初期アートワーク](assets/artwork/v01/README.md)
+[検証の方針](docs/verification/README.md)に従う。実際の動作・状態変化・接触・描画・保存再開を根拠にし、識別用SHAやハッシュをテストに数えない。
 
-## 最初の試作
+```sh
+python3 -m unittest discover -s tests -p 'test_cmu_*.py'
+python3 tools/verify_game.py --checks home_navigation household_day
+```
 
-3世帯8人が暮らす町に、住宅、工房、パン屋兼喫茶店、広場を置く。仕事や学校への町外移動も生活時間に含める。
-
-最初に確かめるのは、住人が自律的に暮らすこと、働きかけへの返答に理由があること、その結果を3Dの動きから読み取れること。長期の加齢や世代交代は、この日常が成立したあとに組み込む。
-
-設定ファイルは実装への入力案であり、実測に合わせて調整した行動モデルではない。採点式、係数、架空の人物設定はゲーム用の設計値。
+現在の基盤統合は未受入であり、全検証が通る状態とはしていない。対象に関係する確認を先に行い、その後に実ゲームで一連の生活を確認する。過去の成功記録を現在の品質へ引き継がない。

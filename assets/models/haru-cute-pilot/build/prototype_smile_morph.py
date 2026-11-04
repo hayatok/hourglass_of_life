@@ -63,7 +63,7 @@ def run_prototype():
     VARIANT = 'cheek-supported' if '--cheek-supported' in sys.argv else 'tight-corners'
     if VARIANT == 'cheek-supported':
         OUT = OUT / VARIANT
-    SOURCE = REPO / 'builds/haru-cute-pilot/CH_Haru_Delivery.blend'
+    SOURCE = PILOT / 'source/CH_Haru_LegacyDelivery.blend'
     RAW = PILOT / 'raw/CH_Haru_JRPG_Pilot_Raw.glb'
     GAME = REPO / 'game/assets/models/haru/CH_Haru.glb'
     OUT.mkdir(parents=True, exist_ok=True)
@@ -130,7 +130,7 @@ def run_prototype():
     weights_before = weights_hash()
     images_before = packed_images()
     base_positions = [vertex.co.copy() for vertex in body.data.vertices]
-    landmarks = json.loads((PILOT/'review/texture-face/landmarks.json').read_text())
+    landmarks = json.loads((PILOT/'production-inputs/texture-face/landmarks.json').read_text())
     original_curve = landmarks['original_mouth']
     left = point_from_gltf_uv(original_curve[0][:2])
     right = point_from_gltf_uv(original_curve[-1][2:])

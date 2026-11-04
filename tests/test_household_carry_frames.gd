@@ -87,7 +87,8 @@ func geometric_grips() -> void:
 	expect(Props.grips_for("tray").local_grips.size()==2 and Props.grips_for("unknown").is_empty() and HouseholdDay._same(before,day.snapshot()),"Grip queries return independent metadata without objects, time or source changes")
 
 func stable_carrier() -> void:
-	begin("nagisa","cook")
+	# Legacy noncooking transport remains a separate adapter until its motion work.
+	begin("nagisa","laundry")
 	if not expect(phase("nagisa").status=="next_phase","The actual first pickup gives the actor one finite carried batch"): return
 	var held: Dictionary=view.pose_for("nagisa")
 	var carrier: Node3D=view.objects[held.source_id].node

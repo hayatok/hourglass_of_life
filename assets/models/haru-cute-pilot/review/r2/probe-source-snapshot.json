@@ -1,8 +1,0 @@
-{
-  "project": "/tmp/hourglass-haru-texture-r2",
-  "source_files_sha256": {
-    "game/scripts/jrpg_resident_model.gd": "5bb6fad37e4d369acc4134b3ab7240c9e12bccfe2573fbfab40446563485eced",
-    "game/assets/models/resident_toon.gdshader": "a898eedf1d7efb01b76d2436e1e11898faeb58c5ffbc4de500a560a5ae509211"
-  },
-  "no_game_save_or_simulation": true
-}

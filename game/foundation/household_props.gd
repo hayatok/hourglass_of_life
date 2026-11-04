@@ -11,6 +11,8 @@ const TRAY_HANDLE_X := .30
 const TRAY_HANDLE_Y := .105
 const TRAY_HANDLE_RADIUS := .010
 const LINEN = preload("res://game/assets/foundation/home/linen.gdshader")
+const TOOLS = preload("res://game/foundation/household_tools.gd")
+const FOOD = preload("res://game/foundation/household_food.gd")
 var house: LivingHouse
 var life: HouseholdDay
 var actors: Dictionary = {}
@@ -183,10 +185,9 @@ func _hide_authored_stock() -> void:
 
 func _build_pan() -> void:
 	if not _definitions.has("stove"): return
-	var f: Dictionary=_definitions.stove;var size := _v(f.size)
 	var pan := Node3D.new();pan.name="OpenSourceSaucepan";_hardware.add_child(pan)
-	pan.transform=Transform3D(_front("stove"),_support("stove")+_front("stove")*Vector3(-size.x*.24,.028,-size.z*.05))
-	_lathe(pan,"OpenPot",[Vector2(0,.012),Vector2(.075,.012),Vector2(.098,.13),Vector2(.105,.13),Vector2(.088,0),Vector2(0,0)],Vector3.ZERO,_paint("pot","b87558"))
+	pan.transform=life.kitchen.pan_root_frame()
+	_lathe(pan,"OpenPot",life.kitchen.pan_profile(),Vector3.ZERO,_paint("pot","b87558"))
 
 func _build_washer_window() -> void:
 	if not _definitions.has("washer"): return
@@ -257,7 +258,7 @@ func set_carry_frame(actor: String, world: Transform3D) -> bool:
 		anchor=Node3D.new();anchor.name="HouseholdCarryFrame";actors[actor].add_child(anchor);_carry_anchors[actor]=anchor
 	anchor.global_transform=world;_carry_frames[actor]=world
 	for record in objects.values():
-		if record.holder==actor and is_instance_valid(record.node):
+		if record.holder==actor and not record.get("physical_item",false) and is_instance_valid(record.node):
 			if record.node.get_parent()!=anchor: record.node.reparent(anchor,false)
 			record.node.transform=Transform3D.IDENTITY
 	return true
@@ -296,11 +297,25 @@ static func _grip_frame(at: Vector3, normal: Vector3, fingers: Vector3) -> Trans
 	var y: Vector3=(fingers-z*fingers.dot(z)).normalized()
 	return Transform3D(Basis(y.cross(z).normalized(),y,z),at)
 
-static func grips_for(kind: String) -> Dictionary:
+static func grips_for(kind: String, ingredient_kind: String = "", food_state: String = "whole") -> Dictionary:
 	# Local +Z is the palm's pressing normal; local +Y runs along the fingers.
 	# L/R are anatomical hand labels, not a screen-left/right convention.
 	var grips: Dictionary = {}
+	if kind=="ingredient" and not ingredient_kind.is_empty():
+		var food: Dictionary=FOOD.spec(ingredient_kind,food_state)
+		grips=FOOD.grips_for(ingredient_kind,food_state,"R")
+		if food.is_empty() or grips.is_empty():return {}
+		return {"kind":kind,"local_grips":grips,"support_local":food.support_local,"grip_midpoint":grips.R.origin,"working_frames":food.get("working_frames",{}),
+			"axes":"Foodkit actual surface frames; Z=palm pressing normal; Y=finger length direction","contact_phase":"same_for_pickup_carry_place","pose_accepted":false}
+	if kind in TOOLS.kinds():
+		var spec: Dictionary=TOOLS.spec(kind)
+		return {"kind":kind,"local_grips":{"R":spec.local_grips.R},"support_local":spec.support_local,"grip_midpoint":spec.local_grips.R.origin,"working_frames":spec.working_frames,
+			"axes":"Z=palm pressing normal; Y=finger length direction","contact_phase":"same_for_pickup_carry_place","pose_accepted":false}
 	match kind:
+		"plate":
+			# True outer ceramic rim, fingers tangent to the rim. Source rack and
+			# final skin clearance are measured by the real executor, not assumed.
+			grips.L=_grip_frame(Vector3(PLATE_RADIUS,.015,0),Vector3.LEFT,Vector3.BACK)
 		"tray":
 			# One unchanged contact for pickup/carry/place: the outer surface of
 			# a real raised handle, not the inaccessible underside above a table.
@@ -328,7 +343,9 @@ func _put(id: String, source_type: String, source_key: String, kind: String, pos
 	if source_type in ["job","equipment"] and life.jobs.has(source_key):
 		var batch: Dictionary=life.jobs[source_key]
 		record.batch_id=batch.get("batch_id","");record.display_fixture=container
-		record.container=batch.get("container","");record.source_holder=batch.get("holder","");record.last_fixture=batch.get("last_fixture","")
+		if not record.get("physical_item",false):
+			record.container=batch.get("container","");record.source_holder=batch.get("holder","");record.last_fixture=batch.get("last_fixture","")
+		else:record.source_holder=record.holder
 	_wanted[id]=record
 
 func _indices(count: int, source: String) -> int:
@@ -342,7 +359,25 @@ func _overflow(count: int, visible: int, source_type: String, key: String, at: V
 func _stock() -> void:
 	var inv: Dictionary=life.inventory
 	var count: int=int(inv.get("ingredients",0));var visible: int=_indices(count,"ingredients")
-	for i in visible: _put("inventory:ingredients:%d"%i,"inventory","ingredients","ingredient",_support("fridge")+_front("fridge")*Vector3((i%3-1)*.17,.002+floori(i/3.0)*.095,0),"fridge",{"state":"stored_raw"})
+	var basket_id: String=life.kitchen.role_id("ingredient_carrier")
+	var basket: Dictionary=life.equipment.get(basket_id,{})
+	var source: Dictionary=life.kitchen.slot(basket.get("home_slot",""))
+	var stock_base: Vector3=source.get("position",_support("fridge"))
+	# Loose stock belongs to the drawer shelf, independently of where a basket
+	# is placed on that shelf. Repositioning the basket must not push the six
+	# other vegetables through the front panel or beyond the shelf.
+	if _definitions.fridge.get("ingredient_stock_center") is Array and not source.is_empty():
+		var closed: Dictionary=life.kitchen.slot(str(basket.home_slot),{str(source.moving_support):0.0})
+		if not closed.is_empty():stock_base=_v(_definitions.fridge.ingredient_stock_center)+source.position-closed.position
+	for i in visible:
+		var offset := Vector3((i%3-1)*.11,.03,0)
+		var contained: bool=not basket.is_empty() and basket.stock_loaded and i<int(life.rules.recipe_servings)
+		var side_index: int=i-int(life.rules.recipe_servings) if not basket.is_empty() and basket.stock_loaded else i
+		var side_offset := Vector3(-.275 if posmod(side_index,2)==0 else .275,0,(-.18+floori(side_index/2.0)*.18))
+		var at: Vector3=basket.frame*offset if contained else stock_base+_front("fridge")*side_offset
+		var id: String=life.kitchen.ingredient_id(basket_id,i) if contained else "inventory:ingredients:side_%d"%side_index
+		var frame := Transform3D(_front("fridge"),at)
+		_put(id,"inventory","ingredients","ingredient",at,"fridge",{"state":"stored_raw","physical_item":true,"authoritative_frame":frame,"ingredient_kind":life.kitchen.INGREDIENT_KINDS[(i if contained else side_index)%3],"food_state":"whole","hands":["R"],"hand":"R"})
 	_overflow(count,visible,"inventory","ingredients",_at("fridge",Vector3(0,1.3,0)),"fridge")
 	count=int(inv.get("prepared_servings",0));visible=_indices(count,"prepared_servings")
 	for i in visible: _put("inventory:prepared_servings:%d"%i,"inventory","prepared_servings","food_portion",_pan_point(i),"stove",{"state":"prepared","food_fraction":1.0})
@@ -363,7 +398,9 @@ func _stock() -> void:
 		var washing: int=int(life.jobs.get("wash_dishes",{}).get("quantity",0)) if key=="dirty_dishes" else 0
 		for i in visible:
 			var at: Vector3=_dish_point(i+washing) if key=="dirty_dishes" else _clean_dish_point(i)
-			_put("inventory:%s:%d"%[key,i],"inventory",key,"plate",at,"sink" if key=="dirty_dishes" else "prep",{"state":"dirty" if key=="dirty_dishes" else "clean"})
+			var extra: Dictionary={"state":"dirty" if key=="dirty_dishes" else "clean"}
+			if key=="clean_dishes" and life.kitchen.dish_frame(i)!=Transform3D.IDENTITY:extra.authoritative_frame=life.kitchen.dish_frame(i)
+			_put("inventory:%s:%d"%[key,i],"inventory",key,"plate",at,"sink" if key=="dirty_dishes" else "prep",extra)
 		_overflow(count,visible,"inventory",key,_dish_point(0) if key=="dirty_dishes" else _clean_dish_point(0),"sink" if key=="dirty_dishes" else "prep")
 	for key in ["clean_laundry","dirty_laundry","washing_laundry","wet_laundry","drying_laundry","dry_laundry"]:
 		count=int(inv.get(key,0));visible=_indices(count,key)
@@ -380,10 +417,11 @@ func _stock() -> void:
 		_overflow(count,visible,"inventory",key,_linen_point(0,false),"linen_storage")
 
 func _pan_point(index: int) -> Vector3:
-	var size := _v(_definitions.stove.size)
-	return _support("stove")+_front("stove")*Vector3(-size.x*.24+(index%2-.5)*.065,.041+floori(index/4.0)*.012,-size.z*.05+(floori(index/2.0)%2-.5)*.065)
+	return life.kitchen.pan_support_frame(index).origin
 
 func _clean_dish_point(index: int) -> Vector3:
+	var frame: Transform3D=life.kitchen.dish_frame(index)
+	if frame!=Transform3D.IDENTITY:return frame.origin
 	var parking: Dictionary=_definitions.prep.get("operation_targets",{}).get("dishes",{})
 	if parking.has("surface"):return _v(parking.surface)+Vector3.UP*(.003+index*.014)
 	var size := _v(_definitions.prep.size)
@@ -393,6 +431,11 @@ func _dish_point(index: int) -> Vector3:
 	return _support("sink")+Vector3(0,.002+index*.014,0)
 
 func _plate_place(seat: String) -> Vector3:
+	var ids: Array=_resident_places.keys();ids.sort()
+	for i in ids.size():
+		if _resident_places[ids[i]].dining_seat==seat:
+			var target: Dictionary=life.kitchen.slot("dining_table:plate_"+str(i))
+			if not target.is_empty():return target.position
 	var table: Dictionary=_definitions.dining_table;var size := _v(table.size)
 	var direction := _v(_definitions[seat].position)-_v(table.position);direction.y=0;direction=direction.normalized()
 	return _support("dining_table")+Vector3(direction.x*(size.x*.5-PLATE_RADIUS-.06),.003,direction.z*(size.z*.5-PLATE_RADIUS-.04))
@@ -446,6 +489,9 @@ func _jobs() -> void:
 		var job: Dictionary=life.jobs[key]
 		if not job.get("started_effects",false) or int(job.get("quantity",0))<=0: continue
 		var count: int=int(job.quantity);var visible: int=_indices(count,"job:"+key)
+		if job.kind in ["cook","serve"] and job.has("material_slot"):
+			_physical_recipe_job(key,job,visible)
+			continue
 		var task: Dictionary=_active_job_task(key,job)
 		var source: String=job.get("container","")
 		if source.is_empty(): source=job.get("last_fixture",job.get("source_fixture",""))
@@ -494,6 +540,44 @@ func _jobs() -> void:
 				if visible>0 and not holder.is_empty(): diagnostics.append({"kind":"bath_towel_pose_not_accepted","source":key,"bone_attachment":supported})
 		_overflow(count,visible,"job",key,_at(source) if _definitions.has(source) else Vector3.ZERO,source)
 
+func _equipment() -> void:
+	for id in life.equipment:
+		var item: Dictionary=life.equipment[id]
+		_put(id,"equipment",id,item.kind,item.frame.origin,item.container,{"quantity":0,"holder":item.holder,"requested_holder":item.holder,
+			"state":"persistent_household_equipment","physical_item":true,"authoritative_frame":item.frame,"reserved_by":item.reserved_by,"support_slot":item.support_slot,"last_fixture":item.last_fixture,"hand":"R" if item.hands==["R"] else "L","role":item.role})
+
+func _physical_recipe_job(key: String, job: Dictionary, visible: int) -> void:
+	var material_slot: String=job.material_slot
+	var carrier: String=str(job.carrier_id)
+	var in_carrier: bool=material_slot=="equipment:"+carrier
+	var frame: Transform3D=life.equipment[carrier].frame
+	for i in visible:
+		if job.kind=="cook":
+			var unit: Dictionary=job.units[i]
+			_put(unit.id,"job",key,"ingredient",unit.frame.origin,unit.container,{"state":unit.state,"holder":unit.holder,"physical_item":true,"authoritative_frame":unit.frame,
+				"ingredient_kind":unit.ingredient_kind,"food_state":unit.food_state,"physical_material":true,"hands":unit.hands,"hand":"R","last_fixture":unit.last_fixture})
+			continue
+		if job.kind=="serve":
+			var plate: Dictionary=job.plates[i]
+			var empty: bool=plate.state=="empty"
+			_put(plate.id,"job",key,"plate",plate.frame.origin,plate.container,{"quantity":0 if empty else 1,"state":plate.state,"holder":plate.holder,
+				"physical_item":true,"authoritative_frame":plate.frame,"food_fraction":0.0 if empty else 1.0,"physical_material":true,"hands":plate.hands,"hand":"L"})
+			if empty:_put("job:%s:material:%d"%[key,i],"job",key,"food_portion",_pan_point(i),"stove",{"state":"prepared_reserved_for_plating","food_fraction":1.0})
+			continue
+		var parent: String="";var offset := Vector3.ZERO;var at: Vector3=job.position;var kind: String="ingredient";var state: String="raw_in_progress"
+		if job.kind=="cook":
+			if material_slot=="stove:stir":at=_pan_point(i);kind="food_portion";state="cooking_not_edible"
+			elif in_carrier:parent=carrier;offset=Vector3((i%3-1)*.11,.03,0);at=frame*offset
+			else:at=job.position+_front("prep")*Vector3((i%3-1)*.11,.002,0);state="cut_in_progress" if float(job.phase_progress)>0 else state
+		else:
+			if i<int(job.served_units):
+				var places: Array=_resident_places.keys();places.sort()
+				at=_plate_place(_resident_places[places[i]].dining_seat) if i<places.size() else _table_extra(i)
+				kind="plate";state="served_pending_completion"
+			elif i<int(job.loaded_units):parent=carrier;offset=_tray_slot(i);at=frame*offset;kind="plate";state="plated_prepared"
+			else:at=_pan_point(i);kind="food_portion";state="prepared_reserved_for_plating"
+		_put("job:%s:%d"%[key,i],"job",key,kind,at,job.container,{"parent_id":parent,"parent_offset":offset,"state":state,"food_fraction":1.0 if job.kind=="serve" else 0.0,"physical_material":true})
+
 func _projects() -> void:
 	for actor in life.people:
 		var p: Dictionary=life.people[actor]
@@ -528,7 +612,7 @@ func sync(delta: float = 0.0) -> void:
 	if not _configured or not is_instance_valid(house) or life==null or not is_finite(delta) or delta<0: return
 	global_transform=house.global_transform
 	diagnostics.clear();_wanted.clear()
-	_stock();_jobs();_projects()
+	_stock();_equipment();_jobs();_projects()
 	for node in _pan_lids:
 		if is_instance_valid(node): node.visible=int(life.inventory.get("prepared_servings",0))==0 and not life.jobs.has("cook")
 	for id in objects.keys():
@@ -547,7 +631,7 @@ func _delete_object(id: String) -> void:
 	if is_instance_valid(node):
 		for other in objects:
 			var child: Node3D=objects[other].node
-			if other!=id and is_instance_valid(child) and child.get_parent()==node: child.reparent(self,true)
+			if other!=id and is_instance_valid(child) and child.get_parent()==node: child.reparent(self,is_inside_tree() and child.is_inside_tree())
 		if node.get_parent()!=null: node.get_parent().remove_child(node)
 		node.queue_free()
 	objects.erase(id)
@@ -559,9 +643,18 @@ func _apply(id: String, description: Dictionary) -> void:
 	if objects.has(id): node=objects[id].node
 	else:
 		node=Node3D.new();node.name=id.replace(":","_").replace("/","_");add_child(node);_make_visual(node,description)
+	if objects.has(id) and description.kind=="ingredient" and not str(description.get("ingredient_kind","")).is_empty() and objects[id].get("food_state","")!=description.get("food_state",""):
+		# Score geometry changes under the same material root. Its identity and
+		# transform are retained; only the actual connected food surface changes.
+		for child in node.get_children():node.remove_child(child);child.queue_free()
+		_make_visual(node,description)
 	var parent: Node3D=self
-	var local := Transform3D(Basis(Vector3.UP,float(description.yaw)),description.position)
-	if not str(description.holder).is_empty():
+	var local: Transform3D=description.get("authoritative_frame",Transform3D(Basis(Vector3.UP,float(description.yaw)),description.position))
+	if description.get("physical_item",false):
+		# Canonical house-local frame: neither a socket nor a view-only carry
+		# proposal may relocate the actual physical-state item.
+		parent=self
+	elif not str(description.holder).is_empty():
 		if has_carry_frame(description.holder):
 			parent=_carry_anchors[description.holder];local=Transform3D.IDENTITY
 		elif sockets.get(description.holder,{}).has(description.hand):
@@ -588,9 +681,15 @@ func _apply(id: String, description: Dictionary) -> void:
 
 func _make_visual(node: Node3D, record: Dictionary) -> void:
 	var ceramic := _paint("ceramic","e9dfc8")
+	if record.kind=="ingredient" and not str(record.get("ingredient_kind","")).is_empty():
+		var food: Node3D=FOOD.create(record.ingredient_kind,record.get("food_state","whole"))
+		if food!=null:node.add_child(food)
+		return
+	if str(record.kind) in TOOLS.kinds():
+		node.add_child(TOOLS.create(record.kind));return
 	match str(record.kind):
 		"plate":
-			_lathe(node,"Dish",[Vector2(0,.006),Vector2(.064,.006),Vector2(PLATE_RADIUS,.018),Vector2(PLATE_RADIUS,.012),Vector2(.063,0),Vector2(0,0)],Vector3.ZERO,ceramic)
+			_lathe(node,"Dish",life.kitchen.plate_profile(),Vector3.ZERO,ceramic)
 			var food := Node3D.new();food.name="Food";node.add_child(food)
 			_sphere(food,"CookedPortion",Vector3(0,.024,0),Vector3(.13,.027,.12),_paint("meal","c9995e"))
 			for index in 3: _sphere(food,"Vegetable",Vector3((index-1)*.028,.039,(index%2-.5)*.026),Vector3(.024,.018,.022),_paint("vegetable_%d"%index,["8b9f6d","c48255","d2ba7b"][index]))
@@ -619,6 +718,7 @@ func _make_visual(node: Node3D, record: Dictionary) -> void:
 			var size := Vector3(.56,.035,.40) if record.kind=="tray" else Vector3(.42,.23,.31)
 			var wood := _paint("basket","b29164")
 			_box(node,"Bottom",Vector3(0,.009,0),Vector3(size.x,.018,size.z),wood)
+			if record.get("role","")=="ingredient_carrier":_box(node,"FoodSafeLiner",Vector3(0,.024,0),Vector3(.37,.012,.26),_paint("food_liner","c3aa7b"))
 			for side in [-1,1]:
 				_box(node,"Side",Vector3(side*(size.x*.5-.012),size.y*.5,0),Vector3(.024,size.y,size.z),wood)
 				_box(node,"End",Vector3(0,size.y*.5,side*(size.z*.5-.012)),Vector3(size.x,size.y,.024),wood)
@@ -662,7 +762,7 @@ func represented_quantity(source_type: String, source_key: String) -> int:
 func pose_for(actor: String) -> Dictionary:
 	for record in objects.values():
 		if record.holder!=actor: continue
-		var contract: Dictionary=grips_for(record.kind)
+		var contract: Dictionary=grips_for(record.kind,record.get("ingredient_kind",""),record.get("food_state","whole"))
 		if contract.is_empty(): continue
 		var world: Transform3D=record.node.global_transform
 		var local_grips: Dictionary=contract.local_grips
@@ -671,9 +771,29 @@ func pose_for(actor: String) -> Dictionary:
 		var framed: bool=has_carry_frame(actor)
 		var result: Dictionary={"source_id":record.source_id,"job_key":record.source_key,"kind":record.kind,"holder":actor,"hand":record.hand,
 			"object_transform":world,"object_world":world,"local_grips":local_grips,"grips":world_grips,"world_grips":world_grips.duplicate(),
-			"support_local":contract.support_local,"grip_midpoint":contract.grip_midpoint,"attachment":"ActorCarryFrame" if framed else "BoneAttachment3D","override_pose":false,
+			"support_local":contract.support_local,"grip_midpoint":contract.grip_midpoint,"attachment":"HouseholdEquipmentFrame" if record.get("physical_item",false) else "ActorCarryFrame" if framed else "BoneAttachment3D","override_pose":false,
 			"pose_accepted":false,"reason":"Actor-frame carrying is declared; skin, supporting-hand and release contacts still require measurement." if framed else "Legacy socket attachment; surface grip frames alone do not prove skin contact."}
 		if local_grips.has("L"): result.left_grip=local_grips.L.origin
 		if local_grips.has("R"): result.right_grip=local_grips.R.origin
 		return result
 	return {}
+
+func object_pose(item_id: String) -> Dictionary:
+	# A placed source is queryable before a grasp creates a holder.
+	if not objects.has(item_id):return {}
+	var record: Dictionary=objects[item_id];var contract: Dictionary=grips_for(record.kind,record.get("ingredient_kind",""),record.get("food_state","whole"))
+	if contract.is_empty():return {}
+	var world: Transform3D=record.node.global_transform;var world_grips := {}
+	for side in contract.local_grips:world_grips[side]=world*contract.local_grips[side]
+	var support_local: Vector3=FOOD.support_for(record.ingredient_kind,record.food_state,world.basis) if record.kind=="ingredient" and record.has("ingredient_kind") else life.kitchen.plate_support_local(world) if record.kind=="plate" else contract.support_local
+	return {"id":item_id,"source_id":item_id,"kind":record.kind,"holder":record.holder,"world":world,"object_world":world,
+		"local_grips":contract.local_grips.duplicate(true),"grips":world_grips,"support_local":support_local,"support_point":world*support_local,"grip_midpoint":contract.grip_midpoint,
+		"working_frames":contract.get("working_frames",{}).duplicate(true),"pose_accepted":false}
+
+func held_objects(actor: String) -> Array:
+	var result: Array=[]
+	for id in objects:
+		if objects[id].holder==actor:
+			var description: Dictionary=object_pose(id)
+			if not description.is_empty():result.append(description)
+	return result

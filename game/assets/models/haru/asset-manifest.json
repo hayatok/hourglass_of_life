@@ -2,7 +2,7 @@
   "asset": "CH_Haru",
   "generated": "2026-11-04T04:21:43.972550+00:00",
   "blender": "5.2.1 LTS",
-  "source": "builds/haru-finger-influence-20261104/CH_Haru_FingerIsolation_Master.blend",
+  "source": "assets/models/haru-cute-pilot/source/CH_Haru_FingerIsolation_Master.blend",
   "target_engine": "Godot 4.7 Compatibility",
   "units": {
     "system": "METRIC",
@@ -358,7 +358,7 @@
     "watertight_claim": false,
     "evidence": "assets/models/haru-cute-pilot/review/lod-seams/"
   },
-  "previous_authoring_master": "builds/haru-cute-pilot/CH_Haru_Delivery.blend",
+  "previous_authoring_master": "assets/models/haru-cute-pilot/source/CH_Haru_LegacyDelivery.blend",
   "hand_weight_repair": {
     "script": "assets/models/haru-cute-pilot/build/15_repair_hand_weights.py",
     "master_script": "assets/models/haru-cute-pilot/build/16_apply_hand_weights_master.py",
@@ -427,10 +427,9 @@
     ],
     "preserved_bytes": "All bytes outside the selected WEIGHTS_0 rows, including GLB JSON, positions, normals, UVs, joints, bind poses, animations, materials and embedded images.",
     "identification_only": "The input/output SHA values identify the assets. They are not a game, skin-contact or rendering test.",
-    "authoring_master": "builds/haru-finger-influence-20261104/CH_Haru_FingerIsolation_Master.blend",
+    "authoring_master": "assets/models/haru-cute-pilot/source/CH_Haru_FingerIsolation_Master.blend",
     "authoring_master_sync": "Synchronized into a distinct Blender authoring copy, preserving the previous master; all three GLBs cleanly reimported.",
-    "runtime_quality_status": "The post-modifier all-weight skin-surface matrix passes at all 72 rig/phase/progress points within 6mm, including Haru. Actual Haru GPU gameplay and LOD checks pass; see docs/verification/sewing-20261104.",
-    "authoring_master_status": "Synchronized into a distinct authoring copy with build/16_apply_hand_weights_master.py; all three repaired GLBs cleanly reimported. Previous master retained.",
-    "master_sync_report": "builds/haru-finger-influence-20261104/master-and-roundtrip.json"
+    "runtime_quality_status": "Historical verification reports were removed during cleanup. Current foundation acceptance is tracked in docs/verification/current-status.md.",
+    "authoring_master_status": "Synchronized into a distinct authoring copy with build/16_apply_hand_weights_master.py; all three repaired GLBs cleanly reimported. Previous master retained."
   }
 }
