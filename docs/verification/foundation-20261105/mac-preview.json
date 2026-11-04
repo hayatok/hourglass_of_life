@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-11-04T18:32:04.226737+00:00",
+  "source_commit_identification_only": "21cc967668becaaa5d5b2ad38c52235ceb7a46cb",
+  "source_configuration": "preview-configuration.patch",
+  "application": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/foundation-preview-20261105-r2/命の砂時計・生活基盤プレビュー.app",
+  "archive": "/Users/hayatok/Documents/dev/hourglass_of_life/builds/foundation-preview-20261105-r2/hourglass-of-life-foundation-preview-20261105-macOS.zip",
+  "bundle_identifier": "com.hayatok.hourglassoflife.foundationpreview",
+  "save_directory_name": "命の砂時計・生活基盤プレビュー",
+  "scope": "Playable development checkpoint of the new house/life scene; roadmap stage 1 remains in progress.",
+  "packaged_headless_boot": "passed",
+  "native_ui_review": {
+    "status": "passed_for_listed_operations",
+    "reviewed_utc": "2026-11-04T18:35:08.786516+00:00",
+    "operations": [
+      "Packaged app opens the eight-room home and three residents",
+      "Pause and resume visibly stop and advance the clock",
+      "Resident button follows Nagisa",
+      "Plus button zooms the actual game camera",
+      "Overview after following returns to the whole house",
+      "Wall visibility toggles both ways",
+      "Save and reload returns 04:13 to 04:11 and restores the unfinished cooking state",
+      "Review application quits after use"
+    ],
+    "not_accepted": [
+      "Natural gait, seating, sleeping and tool animation",
+      "New family models",
+      "A continuously observed full day",
+      "Physical trackpad pinch gesture"
+    ]
+  },
+  "remaining": [
+    "new family models",
+    "accepted natural locomotion",
+    "seat and bed interaction",
+    "whole-body tool and carrying motion",
+    "causal family backgrounds"
+  ]
+}
