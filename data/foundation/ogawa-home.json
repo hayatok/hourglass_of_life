@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "status": "layout_and_interaction_design_only",
+  "units": "m",
+  "coordinates": {
+    "origin": "north_west_outer_corner",
+    "axes": "x east, y up, z south; south front outer face is z=10",
+    "room_bounds": "clear internal [x,z,width,depth], excluding wall thickness",
+    "wall_points": "[x,z], wall thickness centered on start/end line",
+    "door_axis": "opening width direction, x or z, parallel to its wall",
+    "fixture_position": "[x,y,z] bottom center; size [x,y,z] in world axes",
+    "facing": "actor yaw degrees at interaction_point: 0=+Z, 90=+X, 180=-Z, 270=-X",
+    "interaction_point": "standing floor approach, distinct from a later seated/lying contact pose"
+  },
+  "house": {
+    "id": "ogawa_home",
+    "label": "小川家",
+    "household": "ogawa",
+    "width": 12.0,
+    "depth": 10.0,
+    "bounds": [0.0, 0.0, 12.0, 10.0],
+    "wall_thickness": 0.2,
+    "wall_height": 2.65,
+    "floor_y": 0.0,
+    "front": "south",
+    "front_z": 10.0,
+    "design_body_radius": 0.24,
+    "assumptions": ["架空の平屋。玄関と廊下は同レベルのバリアフリー案。", "建築法規や実人体の適合を認証する図ではない。", "生活行動・設備機能・扉制御は未実装。", "既存町の狭い敷地へそのまま重ねず、新しい街区配置へ接続する。"]
+  },
+  "rooms": [
+    {"id":"parents_bedroom","label":"夫妻寝室","type":"bedroom","bounds":[0.2,0.2,5.4,3.2],"label_point":[2.6,3.05],"owner":"ogawa","private":true,"private_scope":"parents","allowed_residents":["nagisa","ryo"],"occupancy_limit":2,"guest_requires_consent":true},
+    {"id":"ldk","label":"LDK","type":"living_kitchen_dining","bounds":[0.2,3.6,5.4,6.2],"label_point":[1.25,8.7],"owner":"ogawa","private":false,"private_scope":"household","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":6,"guest_requires_consent":true},
+    {"id":"hall","label":"廊下","type":"circulation","bounds":[5.8,0.2,1.4,7.8],"label_point":[6.5,4.05],"owner":"ogawa","private":false,"private_scope":"household","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":3,"guest_requires_consent":true},
+    {"id":"entrance","label":"玄関","type":"entrance","bounds":[5.8,8.2,1.4,1.6],"label_point":[6.5,8.5],"owner":"ogawa","private":false,"private_scope":"household","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":2,"guest_requires_consent":true},
+    {"id":"rin_bedroom","label":"凛の個室","type":"bedroom","bounds":[7.4,0.2,4.4,4.2],"label_point":[10.2,3.65],"owner":"rin","private":true,"private_scope":"resident","allowed_residents":["rin"],"occupancy_limit":2,"guest_requires_consent":true},
+    {"id":"toilet","label":"トイレ","type":"toilet","bounds":[7.4,4.6,1.7,2.0],"label_point":[8.25,4.85],"owner":"ogawa","private":true,"private_scope":"exclusive_when_occupied","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":1,"guest_requires_consent":true},
+    {"id":"bathroom","label":"浴室","type":"bathroom","bounds":[9.3,4.6,2.5,2.0],"label_point":[9.75,6.2],"owner":"ogawa","private":true,"private_scope":"exclusive_when_occupied","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":1,"guest_requires_consent":true},
+    {"id":"washroom","label":"洗面・脱衣・洗濯","type":"washroom_laundry","bounds":[7.4,6.8,4.4,3.0],"label_point":[10.0,9.55],"owner":"ogawa","private":true,"private_scope":"exclusive_while_changing","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":2,"exclusive_during":["changing"],"guest_requires_consent":true}
+  ],
+  "external_zones": [
+    {"id":"outside","label":"南側玄関ポーチ","bounds":[5.5,10.0,2.0,1.5],"floor_y":0.0,"covered":true}
+  ],
+  "walls": [
+    {"id":"north","start":[0.0,0.1],"end":[12.0,0.1],"exterior":true},
+    {"id":"south","start":[0.0,9.9],"end":[12.0,9.9],"exterior":true},
+    {"id":"west","start":[0.1,0.0],"end":[0.1,10.0],"exterior":true},
+    {"id":"east","start":[11.9,0.0],"end":[11.9,10.0],"exterior":true},
+    {"id":"hall_west","start":[5.7,0.2],"end":[5.7,9.8]},
+    {"id":"hall_east","start":[7.3,0.2],"end":[7.3,9.8]},
+    {"id":"parents_ldk","start":[0.2,3.5],"end":[5.6,3.5]},
+    {"id":"rin_services","start":[7.4,4.5],"end":[11.8,4.5]},
+    {"id":"toilet_bath","start":[9.2,4.6],"end":[9.2,6.6]},
+    {"id":"services_wash","start":[7.4,6.7],"end":[11.8,6.7]},
+    {"id":"hall_entrance","start":[5.8,8.1],"end":[7.2,8.1]}
+  ],
+  "doors": [
+    {"id":"D01","label":"玄関扉","wall":"south","room_a":"outside","room_b":"entrance","width":1.0,"height":2.1,"center":[6.5,0.0,9.9],"axis":"x","kind":"hinged","default_state":"closed","occupancy_limit":1,"private_scope":"household","hinge":[6.0,0.0,9.9],"open_end":[6.0,0.0,10.9],"swing_room":"outside","swing_clearance":[6.0,9.9,1.0,1.0],"approaches":{"outside":[6.5,0.0,11.25],"entrance":[6.5,0.0,9.2]}},
+    {"id":"D02","label":"玄関から廊下","wall":"hall_entrance","room_a":"entrance","room_b":"hall","width":1.0,"height":2.1,"center":[6.5,0.0,8.1],"axis":"x","kind":"opening","default_state":"open","occupancy_limit":1,"private_scope":"household","approaches":{"entrance":[6.5,0.0,8.65],"hall":[6.5,0.0,7.55]}},
+    {"id":"D03","label":"LDK引戸","wall":"hall_west","room_a":"hall","room_b":"ldk","width":1.0,"height":2.1,"center":[5.7,0.0,5.4],"axis":"z","kind":"sliding","pocket_interval":[6.0,7.0],"default_state":"open","occupancy_limit":1,"private_scope":"household","approaches":{"hall":[6.5,0.0,5.4],"ldk":[5.05,0.0,5.4]}},
+    {"id":"D04","label":"夫妻寝室引戸","wall":"hall_west","room_a":"hall","room_b":"parents_bedroom","width":0.9,"height":2.1,"center":[5.7,0.0,2.2],"axis":"z","kind":"sliding","pocket_interval":[0.75,1.65],"default_state":"closed","occupancy_limit":1,"private_scope":"parents","approaches":{"hall":[6.5,0.0,2.2],"parents_bedroom":[5.05,0.0,2.2]}},
+    {"id":"D05","label":"凛個室引戸","wall":"hall_east","room_a":"hall","room_b":"rin_bedroom","width":0.9,"height":2.1,"center":[7.3,0.0,2.2],"axis":"z","kind":"sliding","pocket_interval":[0.75,1.65],"default_state":"closed","occupancy_limit":1,"private_scope":"resident:rin","approaches":{"hall":[6.5,0.0,2.2],"rin_bedroom":[7.95,0.0,2.2]}},
+    {"id":"D06","label":"独立トイレ引戸","wall":"hall_east","room_a":"hall","room_b":"toilet","width":0.85,"height":2.1,"center":[7.3,0.0,5.1],"axis":"z","kind":"sliding","pocket_interval":[5.625,6.475],"default_state":"closed","occupancy_limit":1,"private_scope":"exclusive_when_occupied","approaches":{"hall":[6.5,0.0,5.1],"toilet":[8.25,0.0,5.1]}},
+    {"id":"D07","label":"洗面脱衣室扉","wall":"hall_east","room_a":"hall","room_b":"washroom","width":0.9,"height":2.1,"center":[7.3,0.0,7.4],"axis":"z","kind":"hinged","hinge":[7.3,0.0,6.95],"open_end":[8.2,0.0,6.95],"swing_room":"washroom","swing_clearance":[7.3,6.95,0.9,0.9],"default_state":"closed","occupancy_limit":1,"private_scope":"exclusive_while_changing","approaches":{"hall":[6.5,0.0,7.4],"washroom":[8.55,0.0,7.4]}},
+    {"id":"D08","label":"浴室引戸","wall":"services_wash","room_a":"washroom","room_b":"bathroom","width":0.85,"height":2.1,"center":[10.35,0.0,6.7],"axis":"x","kind":"sliding","pocket_interval":[10.875,11.725],"default_state":"closed","occupancy_limit":1,"private_scope":"exclusive_when_occupied","approaches":{"washroom":[10.35,0.0,7.35],"bathroom":[10.35,0.0,6.05]}}
+  ],
+  "fixtures": [
+    {"id":"fridge","label":"冷蔵庫","type":"fridge","room":"ldk","position":[0.7,0.0,4.05],"size":[0.75,1.9,0.7],"facing":180,"interaction_point":[0.7,0.0,4.95],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"sink","label":"流し台","type":"sink","room":"ldk","position":[1.85,0.0,4.0],"size":[1.1,0.85,0.65],"facing":180,"interaction_point":[1.85,0.0,4.95],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"prep","label":"調理台","type":"prep","room":"ldk","position":[2.95,0.0,4.0],"size":[1.0,0.85,0.65],"facing":180,"interaction_point":[2.95,0.0,4.95],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"stove","label":"コンロ","type":"stove","room":"ldk","position":[4.0,0.0,4.0],"size":[1.0,0.85,0.65],"facing":180,"interaction_point":[4.0,0.0,4.95],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"dining_table","label":"食卓","type":"dining_table","room":"ldk","position":[2.7,0.0,6.4],"size":[1.6,0.74,0.9],"facing":0,"interaction_point":[2.7,0.0,5.4],"owner":"ogawa","private":false,"capacity":3},
+    {"id":"dining_nagisa","label":"食卓席・渚","type":"dining_seat","room":"ldk","position":[1.55,0.0,6.4],"size":[0.5,0.9,0.5],"facing":90,"interaction_point":[0.95,0.0,6.4],"seat_height":0.45,"owner":"nagisa","private":false,"capacity":1,"serves":"dining_table"},
+    {"id":"dining_ryo","label":"食卓席・亮","type":"dining_seat","room":"ldk","position":[3.85,0.0,6.4],"size":[0.5,0.9,0.5],"facing":270,"interaction_point":[4.45,0.0,6.4],"seat_height":0.45,"owner":"ryo","private":false,"capacity":1,"serves":"dining_table"},
+    {"id":"dining_rin","label":"食卓席・凛","type":"dining_seat","room":"ldk","position":[2.7,0.0,7.2],"size":[0.5,0.9,0.5],"facing":180,"interaction_point":[2.7,0.0,7.85],"seat_height":0.45,"owner":"rin","private":false,"capacity":1,"serves":"dining_table","child_foot_support_required":true},
+    {"id":"sofa","label":"家族のソファ","type":"sofa","room":"ldk","position":[3.9,0.0,8.9],"size":[2.6,0.85,0.85],"facing":0,"use_facing":180,"interaction_point":[4.0,0.0,7.95],"seat_height":0.43,"owner":"ogawa","private":false,"capacity":3},
+    {"id":"bed_nagisa","label":"渚の寝床","type":"bed","room":"parents_bedroom","position":[1.3,0.0,1.55],"size":[1.0,0.5,2.05],"facing":270,"use_facing":180,"interaction_point":[2.1,0.0,1.7],"head_end":"north","owner":"nagisa","private":true,"capacity":1},
+    {"id":"bed_ryo","label":"亮の寝床","type":"bed","room":"parents_bedroom","position":[2.9,0.0,1.55],"size":[1.0,0.5,2.05],"facing":270,"use_facing":180,"interaction_point":[3.95,0.0,1.7],"head_end":"north","owner":"ryo","private":true,"capacity":1},
+    {"id":"parents_desk","label":"亮の仕事机","type":"desk","room":"parents_bedroom","position":[4.5,0.0,0.6],"size":[1.1,0.74,0.6],"facing":180,"interaction_point":[4.5,0.0,2.1],"use_via":"parents_desk_chair","owner":"ryo","private":true,"capacity":1},
+    {"id":"parents_desk_chair","label":"仕事机の椅子","type":"chair","room":"parents_bedroom","position":[4.5,0.0,1.35],"size":[0.5,0.9,0.5],"facing":180,"interaction_point":[4.5,0.0,2.1],"seat_height":0.45,"owner":"ryo","private":true,"capacity":1,"serves":"parents_desk"},
+    {"id":"parents_storage","label":"夫妻の衣類収納","type":"storage","room":"parents_bedroom","position":[0.55,0.0,3.0],"size":[0.55,2.1,0.6],"facing":270,"interaction_point":[1.5,0.0,3.0],"owner":"ogawa","private":true,"allowed_residents":["nagisa","ryo"],"capacity":1},
+    {"id":"bed_rin","label":"凛の寝床","type":"bed","room":"rin_bedroom","position":[11.05,0.0,1.65],"size":[1.0,0.5,2.05],"facing":90,"use_facing":180,"interaction_point":[10.0,0.0,1.8],"head_end":"north","owner":"rin","private":true,"capacity":1},
+    {"id":"rin_desk","label":"凛の机","type":"desk","room":"rin_bedroom","position":[8.6,0.0,0.55],"size":[1.35,0.62,0.6],"facing":180,"interaction_point":[8.6,0.0,2.15],"use_via":"rin_desk_chair","owner":"rin","private":true,"capacity":1},
+    {"id":"rin_desk_chair","label":"凛の椅子","type":"chair","room":"rin_bedroom","position":[8.6,0.0,1.35],"size":[0.5,0.78,0.5],"facing":180,"interaction_point":[8.6,0.0,2.15],"seat_height":0.34,"owner":"rin","private":true,"capacity":1,"serves":"rin_desk"},
+    {"id":"rin_storage","label":"凛の本と道具","type":"storage","room":"rin_bedroom","position":[8.3,0.0,4.05],"size":[1.4,1.4,0.5],"facing":0,"interaction_point":[8.3,0.0,3.25],"owner":"rin","private":true,"capacity":1},
+    {"id":"hall_storage","label":"共用収納","type":"storage","room":"hall","position":[6.5,0.0,0.5],"size":[1.0,2.1,0.45],"facing":180,"interaction_point":[6.5,0.0,1.3],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"shoes","label":"三人の靴収納","type":"shoes","room":"entrance","position":[5.98,0.0,9.0],"size":[0.3,1.0,0.65],"facing":270,"interaction_point":[6.65,0.0,9.0],"owner":"ogawa","private":false,"capacity":1,"resident_slots":["nagisa","ryo","rin"]},
+    {"id":"toilet","label":"便器","type":"toilet","room":"toilet","position":[8.25,0.0,6.1],"size":[0.7,0.78,0.8],"facing":0,"interaction_point":[8.25,0.0,5.15],"seat_height":0.43,"owner":"ogawa","private":true,"capacity":1,"private_scope":"exclusive_when_occupied"},
+    {"id":"bath","label":"浴槽","type":"bath","room":"bathroom","position":[10.2,0.0,5.05],"size":[1.6,0.6,0.75],"facing":180,"interaction_point":[10.1,0.0,5.95],"owner":"ogawa","private":true,"capacity":1,"private_scope":"exclusive_when_occupied"},
+    {"id":"shower","label":"洗い場シャワー","type":"shower","room":"bathroom","position":[11.7,0.4,5.75],"size":[0.16,1.7,0.14],"facing":90,"interaction_point":[11.15,0.0,5.75],"owner":"ogawa","private":true,"capacity":1},
+    {"id":"washbasin","label":"洗面台","type":"washbasin","room":"washroom","position":[11.45,0.0,7.55],"size":[0.6,0.85,1.0],"facing":90,"interaction_point":[10.55,0.0,7.55],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"washer","label":"洗濯機","type":"washer","room":"washroom","position":[11.45,0.0,8.85],"size":[0.65,0.95,0.65],"facing":90,"interaction_point":[10.5,0.0,8.85],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"linen_storage","label":"タオル・洗濯収納","type":"storage","room":"washroom","position":[8.5,0.0,9.5],"size":[1.4,2.0,0.5],"facing":0,"interaction_point":[8.5,0.0,8.65],"owner":"ogawa","private":false,"capacity":1},
+    {"id":"changing_space","label":"脱衣の占有場所","type":"changing_space","room":"washroom","position":[9.55,0.0,8.3],"size":[1.0,0.02,1.0],"facing":0,"interaction_point":[9.55,0.0,8.3],"owner":"ogawa","private":true,"capacity":1,"blocking":false,"private_scope":"exclusive_while_changing"}
+  ],
+  "residents": [
+    {"id":"nagisa","bed":"bed_nagisa","bedroom":"parents_bedroom","dining_seat":"dining_nagisa"},
+    {"id":"ryo","bed":"bed_ryo","bedroom":"parents_bedroom","dining_seat":"dining_ryo"},
+    {"id":"rin","bed":"bed_rin","bedroom":"rin_bedroom","dining_seat":"dining_rin"}
+  ],
+  "circulation": [
+    {"id":"main","label":"玄関と各室を結ぶ廊下","color":"#bd6b36","points":[[6.5,11.25],[6.5,9.2],[6.5,8.65],[6.5,7.4],[6.5,5.4],[6.5,2.2],[6.5,1.3]]},
+    {"id":"sanitary_bath","label":"廊下→洗面→浴室（居室を通らない）","color":"#187f85","points":[[6.5,7.4],[8.55,7.4],[10.35,7.35],[10.35,6.05]]},
+    {"id":"sanitary_toilet","label":"廊下→独立トイレ","color":"#187f85","points":[[6.5,5.1],[8.25,5.1]]},
+    {"id":"kitchen","label":"廊下→LDK→調理・配膳","color":"#a0556e","points":[[6.5,5.4],[5.05,5.4],[4.8,4.95],[2.95,4.95],[2.7,5.4]]},
+    {"id":"bedrooms","label":"廊下から両寝室へ","color":"#7a6da5","points":[[5.05,2.2],[6.5,2.2],[7.95,2.2]]}
+  ]
+}

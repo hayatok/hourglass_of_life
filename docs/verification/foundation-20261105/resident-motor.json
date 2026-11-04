@@ -1,0 +1,443 @@
+{
+	"cases": [
+		{
+			"deltas": [
+				0.0333333333333333
+			],
+			"name": "straight_delta",
+			"observed": {
+				"accepted_ticks": true,
+				"peak_acceleration": 2.12483525276184,
+				"peak_speed": 1.10000002384186,
+				"snapshot": {
+					"direction": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"gait_distance": 9.96,
+					"goal_heading": 0.0,
+					"has_pending_path": false,
+					"heading": 0.0,
+					"length": 0.0,
+					"path": [],
+					"pending_path": [],
+					"position": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"profile": {
+						"acceleration": 1.8,
+						"arrival_radius": 0.04,
+						"deceleration": 2.2,
+						"turn_speed": 2.4,
+						"walk_speed": 1.1
+					},
+					"progress": 0.0,
+					"remainder": 0.0,
+					"replant_remaining": 0.0,
+					"segment_origin": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"speed": 0.0,
+					"state": "idle",
+					"state_elapsed": 4.25,
+					"stop_requested": false,
+					"turn_phase": "none",
+					"turn_total_angle": 0.0,
+					"velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"version": 1
+				}
+			}
+		},
+		{
+			"deltas": [
+				0.0166666666666667
+			],
+			"name": "straight_delta",
+			"observed": {
+				"accepted_ticks": true,
+				"peak_acceleration": 2.12507486343384,
+				"peak_speed": 1.10000002384186,
+				"snapshot": {
+					"direction": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"gait_distance": 9.96,
+					"goal_heading": 0.0,
+					"has_pending_path": false,
+					"heading": 0.0,
+					"length": 0.0,
+					"path": [],
+					"pending_path": [],
+					"position": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"profile": {
+						"acceleration": 1.8,
+						"arrival_radius": 0.04,
+						"deceleration": 2.2,
+						"turn_speed": 2.4,
+						"walk_speed": 1.1
+					},
+					"progress": 0.0,
+					"remainder": 0.0,
+					"replant_remaining": 0.0,
+					"segment_origin": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"speed": 0.0,
+					"state": "idle",
+					"state_elapsed": 4.25,
+					"stop_requested": false,
+					"turn_phase": "none",
+					"turn_total_angle": 0.0,
+					"velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"version": 1
+				}
+			}
+		},
+		{
+			"deltas": [
+				0.00833333333333333
+			],
+			"name": "straight_delta",
+			"observed": {
+				"accepted_ticks": true,
+				"peak_acceleration": 2.12639808654785,
+				"peak_speed": 1.10000002384186,
+				"snapshot": {
+					"direction": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"gait_distance": 9.96,
+					"goal_heading": 0.0,
+					"has_pending_path": false,
+					"heading": 0.0,
+					"length": 0.0,
+					"path": [],
+					"pending_path": [],
+					"position": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"profile": {
+						"acceleration": 1.8,
+						"arrival_radius": 0.04,
+						"deceleration": 2.2,
+						"turn_speed": 2.4,
+						"walk_speed": 1.1
+					},
+					"progress": 0.0,
+					"remainder": 0.0,
+					"replant_remaining": 0.0,
+					"segment_origin": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"speed": 0.0,
+					"state": "idle",
+					"state_elapsed": 4.25,
+					"stop_requested": false,
+					"turn_phase": "none",
+					"turn_total_angle": 0.0,
+					"velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"version": 1
+				}
+			}
+		},
+		{
+			"deltas": [
+				0.013,
+				0.027,
+				0.041,
+				0.019
+			],
+			"name": "straight_delta",
+			"observed": {
+				"accepted_ticks": true,
+				"peak_acceleration": 2.12519645690918,
+				"peak_speed": 1.10000002384186,
+				"snapshot": {
+					"direction": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"gait_distance": 9.96,
+					"goal_heading": 0.0,
+					"has_pending_path": false,
+					"heading": 0.0,
+					"length": 0.0,
+					"path": [],
+					"pending_path": [],
+					"position": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"profile": {
+						"acceleration": 1.8,
+						"arrival_radius": 0.04,
+						"deceleration": 2.2,
+						"turn_speed": 2.4,
+						"walk_speed": 1.1
+					},
+					"progress": 0.0,
+					"remainder": 0.0,
+					"replant_remaining": 0.0,
+					"segment_origin": [
+						0.0,
+						0.0,
+						9.96000003814697
+					],
+					"speed": 0.0,
+					"state": "idle",
+					"state_elapsed": 4.25,
+					"stop_requested": false,
+					"turn_phase": "none",
+					"turn_total_angle": 0.0,
+					"velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"version": 1
+				}
+			}
+		},
+		{
+			"arrival_seconds": 15.7833333333337,
+			"name": "physical_profile",
+			"peak_speed": 0.649999976158142,
+			"walk_speed": 0.65
+		},
+		{
+			"arrival_seconds": 9.75000000000006,
+			"name": "physical_profile",
+			"peak_speed": 1.10000002384186,
+			"walk_speed": 1.1
+		},
+		{
+			"arrival_seconds": 7.54999999999998,
+			"name": "physical_profile",
+			"peak_speed": 1.5,
+			"walk_speed": 1.5
+		},
+		{
+			"braked_before_corner": true,
+			"name": "closed_corner",
+			"on_corridor": true,
+			"snapshot": {
+				"direction": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"gait_distance": 8.95999999999988,
+				"goal_heading": -3.14159265358979,
+				"has_pending_path": false,
+				"heading": -3.14159265358979,
+				"length": 0.0,
+				"path": [],
+				"pending_path": [],
+				"position": [
+					3.0,
+					0.0,
+					0.0399999618530273
+				],
+				"profile": {
+					"acceleration": 1.8,
+					"arrival_radius": 0.04,
+					"deceleration": 2.2,
+					"turn_speed": 2.4,
+					"walk_speed": 1.1
+				},
+				"progress": 0.0,
+				"remainder": 0.0,
+				"replant_remaining": 0.0,
+				"segment_origin": [
+					3.0,
+					0.0,
+					0.0399999618530273
+				],
+				"speed": 0.0,
+				"state": "idle",
+				"state_elapsed": 0.0,
+				"stop_requested": false,
+				"turn_phase": "none",
+				"turn_total_angle": 0.0,
+				"velocity": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"version": 1
+			},
+			"turn_entries": 2,
+			"visits": [
+				true,
+				true
+			]
+		},
+		{
+			"name": "180_turn",
+			"replant_seconds": 0.125,
+			"rotation_seconds": 1.31666666666666,
+			"snapshot": {
+				"direction": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"gait_distance": 5.95999999999992,
+				"goal_heading": -3.14159265358979,
+				"has_pending_path": false,
+				"heading": -3.14159265358979,
+				"length": 0.0,
+				"path": [],
+				"pending_path": [],
+				"position": [
+					0.0,
+					0.0,
+					-1.96000003814697
+				],
+				"profile": {
+					"acceleration": 1.8,
+					"arrival_radius": 0.04,
+					"deceleration": 2.2,
+					"turn_speed": 2.4,
+					"walk_speed": 1.1
+				},
+				"progress": 0.0,
+				"remainder": 0.0,
+				"replant_remaining": 0.0,
+				"segment_origin": [
+					0.0,
+					0.0,
+					-1.96000003814697
+				],
+				"speed": 0.0,
+				"state": "idle",
+				"state_elapsed": 0.0,
+				"stop_requested": false,
+				"turn_phase": "none",
+				"turn_total_angle": 0.0,
+				"velocity": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"version": 1
+			}
+		},
+		{
+			"name": "pause_stop_restart",
+			"snapshot": {
+				"direction": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"gait_distance": 9.95999999237068,
+				"goal_heading": 0.0,
+				"has_pending_path": false,
+				"heading": 0.0,
+				"length": 0.0,
+				"path": [],
+				"pending_path": [],
+				"position": [
+					0.0,
+					0.0,
+					9.96000003814697
+				],
+				"profile": {
+					"acceleration": 1.8,
+					"arrival_radius": 0.04,
+					"deceleration": 2.2,
+					"turn_speed": 2.4,
+					"walk_speed": 1.1
+				},
+				"progress": 0.0,
+				"remainder": 0.0,
+				"replant_remaining": 0.0,
+				"segment_origin": [
+					0.0,
+					0.0,
+					9.96000003814697
+				],
+				"speed": 0.0,
+				"state": "idle",
+				"state_elapsed": 4.3,
+				"stop_requested": false,
+				"turn_phase": "none",
+				"turn_total_angle": 0.0,
+				"velocity": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"version": 1
+			},
+			"stopping_distance": 0.274999976158142
+		},
+		{
+			"checkpoint": "walk_with_fractional_remainder",
+			"exact_state": true,
+			"name": "save_restore",
+			"restored": true
+		},
+		{
+			"checkpoint": "corner_rotation",
+			"exact_state": true,
+			"name": "save_restore",
+			"restored": true
+		},
+		{
+			"checkpoint": "corner_replant",
+			"exact_state": true,
+			"name": "save_restore",
+			"restored": true
+		},
+		{
+			"checkpoint": "requested_stop",
+			"exact_state": true,
+			"name": "save_restore",
+			"restored": true
+		},
+		{
+			"checkpoint": "queued_path_during_braking",
+			"exact_state": true,
+			"name": "save_restore",
+			"restored": true
+		}
+	],
+	"checks": 36,
+	"failures": [],
+	"scope": "Continuous movement/controller tests in physical metres and render seconds. No source walk clips, AnimationTree, rendered feet, natural gait or human play quality are established."
+}

@@ -1,0 +1,85 @@
+{
+  "roadmap": "docs/development-roadmap.md",
+  "stages": [
+    {
+      "stage": 1,
+      "title": "家族が一日暮らせる家",
+      "milestone": 11,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/11",
+      "outcome": "小川家3人の複数室の住宅、生活設備、自然な移動と生活動作を一日の暮らしとして通し、Macビルドを残す。",
+      "status": "in_progress",
+      "issue_number": 22,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/22"
+    },
+    {
+      "stage": 2,
+      "title": "町として暮らせる街区",
+      "milestone": 12,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/12",
+      "outcome": "5世帯と店舗・学校・診療所・交通、道路と敷地、12人の動作を生活圏として再構築し、街区版をビルドする。",
+      "status": "planned",
+      "issue_number": 23,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/23"
+    },
+    {
+      "stage": 3,
+      "title": "背景を持つ12人",
+      "milestone": 13,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/13",
+      "outcome": "全員の家族史・職歴・経験・願いを部屋、持ち物、内面、対人行動と日々の選択へ接続し、人物版をビルドする。",
+      "status": "planned",
+      "issue_number": 24,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/24"
+    },
+    {
+      "stage": 4,
+      "title": "出生から老いまでの出来事",
+      "milestone": 14,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/14",
+      "outcome": "公式統計を条件付きの生活イベントへ接続し、出生・教育・仕事・家族・健康・退職・死去まで複数経路を成立させ、人生版をビルドする。",
+      "status": "planned",
+      "issue_number": 25,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/25"
+    },
+    {
+      "stage": 5,
+      "title": "季節・経済・世界に反応する生活",
+      "milestone": 15,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/15",
+      "outcome": "四季、気候、衣服、物価・在庫・雇用・家賃、ニュース由来の地域・供給変化を暮らしへ接続し、季節経済版をビルドする。",
+      "status": "planned",
+      "issue_number": 26,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/26"
+    },
+    {
+      "stage": 6,
+      "title": "人生が町へ残る",
+      "milestone": 16,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/16",
+      "outcome": "世代交代、住居と仕事の継承、作品・遺品・写真・教え・家族史が次の人の暮らしへ残る町をビルドする。",
+      "status": "planned",
+      "issue_number": 27,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/27"
+    },
+    {
+      "stage": 7,
+      "title": "人が増えるほど関係が広がる町",
+      "milestone": 17,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/17",
+      "outcome": "生活基盤を持つ16人・24人、紹介・集まり・地域行事・混雑時の移動と設備利用を成立させ、24人版をビルドする。",
+      "status": "planned",
+      "issue_number": 28,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/28"
+    },
+    {
+      "stage": 8,
+      "title": "見守るゲームとして仕上げる",
+      "milestone": 18,
+      "milestone_url": "https://github.com/hayatok/hourglass_of_life/milestone/18",
+      "outcome": "導入、UI、トラックパッド、振り返り、保存、音・照明・全体の画風を統一し、通常と長期のプレイを経て完成版をビルドする。",
+      "status": "planned",
+      "issue_number": 29,
+      "issue_url": "https://github.com/hayatok/hourglass_of_life/issues/29"
+    }
+  ]
+}
