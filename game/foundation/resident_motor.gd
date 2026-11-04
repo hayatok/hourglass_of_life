@@ -6,7 +6,7 @@ extends Node3D
 # The motor's global transform and pose.heading are world-space. A child visual
 # inherits that transform; it must not apply the heading or position a second time.
 # No gait, skeleton pose, contact or natural-looking motion is claimed here.
-const FORMAT_VERSION := 1
+const FORMAT_VERSION := 2
 const STEP_SECONDS := 1.0 / 120.0
 const REPLANT_SECONDS := .12
 const POSITION_EPSILON := .000001
@@ -40,6 +40,7 @@ var _turn_total_angle := 0.0
 var _replant_remaining := 0.0
 var _remainder := 0.0
 var _gait_distance := 0.0
+var _turn_only := false
 
 func configure(profile: Dictionary) -> bool:
 	var checked := _checked_profile(profile)
@@ -72,6 +73,16 @@ func stop() -> void:
 	else:
 		_finish_path()
 
+func face_heading(angle: float) -> bool:
+	# Furniture alignment uses the same controller as a path corner. Callers
+	# cannot rotate the rendered model independently of its body.
+	if _state!="idle" or not is_finite(angle): return false
+	_goal_heading=wrapf(angle,-PI,PI)
+	_turn_total_angle=absf(wrapf(_goal_heading-_heading,-PI,PI))
+	if _turn_total_angle<=HEADING_EPSILON:return true
+	_turn_only=true;_turn_phase="rotate";_set_state("turn")
+	return true
+
 func tick(delta: float) -> bool:
 	# A bounded public tick also prevents malformed callers from creating an
 	# unbounded catch-up loop. Normal render deltas and one-second tests fit.
@@ -100,13 +111,14 @@ func snapshot() -> Dictionary:
 		"path":_encoded_path(_path),"pending_path":_encoded_path(_pending_path),"has_pending_path":_has_pending_path,
 		"stop_requested":_stop_requested,"segment_origin":_xyz(_segment_origin),"direction":_xyz(_direction),
 		"length":_length,"progress":_progress,"speed":_speed,"turn_phase":_turn_phase,"turn_total_angle":_turn_total_angle,
-		"replant_remaining":_replant_remaining,"remainder":_remainder,"gait_distance":_gait_distance}
+		"replant_remaining":_replant_remaining,"remainder":_remainder,"gait_distance":_gait_distance,"turn_only":_turn_only}
 
 func restore(data: Variant) -> bool:
 	var checked := _checked_snapshot(data)
 	if checked.is_empty(): return false
 	# All validation precedes mutation, including transform and configuration.
 	_profile = checked.profile
+	_turn_only=data.turn_only
 	_path.assign(checked.path);_pending_path.assign(checked.pending_path)
 	_has_pending_path = data.has_pending_path;_stop_requested = data.stop_requested
 	_segment_origin = checked.segment_origin;_direction = checked.direction
@@ -134,7 +146,8 @@ func _integrate(delta: float) -> void:
 		else:
 			_replant_remaining = maxf(0,_replant_remaining-delta)
 			if _replant_remaining==0:
-				_turn_phase = "none";_set_state("start")
+				if _turn_only:_finish_path()
+				else:_turn_phase = "none";_set_state("start")
 		return
 	var limit := _length
 	if _path.size()==1: limit = maxf(0,_length-float(_profile.arrival_radius))
@@ -176,6 +189,7 @@ func _integrate(delta: float) -> void:
 	else: _set_state("walk" if _speed>=float(_profile.walk_speed)*.995 else "stop")
 
 func _start_path(points: Array) -> void:
+	_turn_only=false
 	_path.clear();_pending_path.clear();_has_pending_path = false;_stop_requested = false
 	var start := global_position
 	for point in points:
@@ -214,6 +228,7 @@ func _finish_path() -> void:
 	_segment_origin = global_position;_direction = Vector3.ZERO
 	_length = 0.0;_progress = 0.0;_speed = 0.0
 	_goal_heading = _heading;_turn_phase = "none";_turn_total_angle = 0.0;_replant_remaining = 0.0
+	_turn_only=false
 	_set_state("idle")
 
 func _set_state(value: String) -> void:
@@ -239,7 +254,7 @@ static func _checked_path(data: Variant, encoded: bool) -> Variant:
 	return result
 
 static func _checked_snapshot(data: Variant) -> Dictionary:
-	if not data is Dictionary or data.size()!=22 or not _number(data.get("version")) or data.version!=FORMAT_VERSION: return {}
+	if not data is Dictionary or data.size()!=23 or not _number(data.get("version")) or data.version!=FORMAT_VERSION: return {}
 	if not data.get("profile") is Dictionary: return {}
 	var profile := _checked_profile(data.profile,true)
 	if profile.is_empty(): return {}
@@ -249,6 +264,8 @@ static func _checked_snapshot(data: Variant) -> Dictionary:
 		if not _number(data.get(key)) or absf(float(data[key]))>PI+.0000001: return {}
 	if data.get("state") not in STATES or data.get("turn_phase") not in ["none","rotate","replant"]: return {}
 	if not data.get("has_pending_path") is bool or not data.get("stop_requested") is bool: return {}
+	if not data.get("turn_only") is bool: return {}
+	if data.turn_only and data.state!="turn":return {}
 	if data.speed>profile.walk_speed+.000001 or data.remainder>=STEP_SECONDS or data.replant_remaining>REPLANT_SECONDS or data.turn_total_angle>PI+.0000001: return {}
 	var result := {"profile":profile}
 	for key in ["position","velocity","segment_origin","direction"]:
@@ -265,6 +282,8 @@ static func _checked_snapshot(data: Variant) -> Dictionary:
 	if data.state=="idle":
 		if not result.path.is_empty() or data.speed!=0 or data.turn_phase!="none" or data.stop_requested or data.length!=0 or data.progress!=0 or result.direction!=Vector3.ZERO: return {}
 		if result.position.distance_to(result.segment_origin)>.00001 or absf(wrapf(float(data.goal_heading)-float(data.heading),-PI,PI))>HEADING_EPSILON or data.turn_total_angle!=0: return {}
+	elif data.turn_only:
+		if not result.path.is_empty() or data.length!=0 or data.progress!=0 or result.direction!=Vector3.ZERO or result.position.distance_to(result.segment_origin)>.00001: return {}
 	else:
 		if result.path.is_empty(): return {}
 		for index in range(1,result.path.size()):

@@ -208,6 +208,19 @@ func queued_route() -> void:
 	expect(motor.state()=="idle" and motor.global_position.distance_to(Vector3(3,0,5))<=.1,"The queued route starts after the old segment's bounded stop and reaches its new destination")
 	motor.free()
 
+func furniture_facing() -> void:
+	var motor=create()
+	var origin: Vector3=motor.global_position
+	expect(motor.face_heading(PI*.5) and motor.state()=="turn","Furniture alignment starts a bounded turn without creating a path")
+	simulate(motor,.3,[1.0/60])
+	replay_checkpoint(motor,"furniture_facing_turn")
+	simulate(motor,2,[1.0/60])
+	expect(motor.state()=="idle" and motor.global_position==origin and absf(motor.heading-PI*.5)<.00001,"Furniture alignment finishes at the requested heading without translating the body")
+	motor.follow_path([Vector3(0,0,4)]);simulate(motor,2,[1.0/60])
+	var before: Dictionary=motor.snapshot()
+	expect(not motor.face_heading(0) and equal(before,motor.snapshot()),"A furniture alignment cannot overwrite a moving body")
+	motor.free()
+
 func run() -> void:
 	straight_delta_variants()
 	speed_profiles()
@@ -216,6 +229,7 @@ func run() -> void:
 	pause_stop_restart()
 	save_restore_and_reject()
 	queued_route()
+	furniture_facing()
 	report.checks=checks;report.failures=failures
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
 	var file := FileAccess.open(OUT+"/results.json",FileAccess.WRITE)

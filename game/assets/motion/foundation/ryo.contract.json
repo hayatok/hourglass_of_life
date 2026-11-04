@@ -1,0 +1,579 @@
+{
+  "format": 1,
+  "target": "ryo",
+  "target_input_identification": {
+    "path": "game/assets/models/ryo/CH_Ryo.glb",
+    "bytes": 3872860,
+    "sha256_identification_only": "4151af0c8dc4696a04d444cc1419ba7ad809bee7959eda9d52d5abace16f31ae"
+  },
+  "source": {
+    "path": "assets/motion-sources/quaternius/Unreal-Godot/UAL1_Standard.glb",
+    "bytes": 7618436,
+    "sha256_identification_only": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997"
+  },
+  "source_rm": {
+    "path": "assets/motion-sources/quaternius/Unreal-Godot/UAL1_Standard_RM.glb",
+    "bytes": 7620504,
+    "sha256_identification_only": "be684571ed655a1b892c2c07e6e2aeca053b606c442d34004adaf1d944090d01"
+  },
+  "license": "CC0-1.0",
+  "license_file": "assets/motion-sources/quaternius/License.txt",
+  "authoring_units": "metres; glTF/Godot +Y up,+Z forward; Blender +Z up,-Y forward",
+  "animation_root_path": "existing target AnimationPlayer.get_root(); resolve in actor adapter",
+  "target_skeleton_relative_path": "Skeleton3D",
+  "track_prefix": "Skeleton3D:",
+  "track_transform_convention": "Godot4 absolute parent-relative bone TRS, includes target rest",
+  "world_movement_owner": "ResidentMotor; clips have no root X/Z or root yaw displacement",
+  "mapping": {
+    "DEF-pelvis": "pelvis",
+    "DEF-spine_01": "spine_01",
+    "DEF-spine_02": "spine_02",
+    "DEF-chest": "spine_03",
+    "DEF-neck": "neck_01",
+    "DEF-head": "Head",
+    "DEF-clavicle.L": "clavicle_l",
+    "DEF-upper_arm.L": "upperarm_l",
+    "DEF-forearm.L": "lowerarm_l",
+    "DEF-hand.L": "hand_l",
+    "DEF-thigh.L": "thigh_l",
+    "DEF-shin.L": "calf_l",
+    "DEF-foot.L": "foot_l",
+    "DEF-toe.L": "ball_l",
+    "DEF-finger0.L": "thumb_01_l",
+    "DEF-finger1.L": "index_01_l",
+    "DEF-finger2.L": "middle_01_l",
+    "DEF-finger3.L": "ring_01_l",
+    "DEF-finger4.L": "pinky_01_l",
+    "DEF-clavicle.R": "clavicle_r",
+    "DEF-upper_arm.R": "upperarm_r",
+    "DEF-forearm.R": "lowerarm_r",
+    "DEF-hand.R": "hand_r",
+    "DEF-thigh.R": "thigh_r",
+    "DEF-shin.R": "calf_r",
+    "DEF-foot.R": "foot_r",
+    "DEF-toe.R": "ball_r",
+    "DEF-finger0.R": "thumb_01_r",
+    "DEF-finger1.R": "index_01_r",
+    "DEF-finger2.R": "middle_01_r",
+    "DEF-finger3.R": "ring_01_r",
+    "DEF-finger4.R": "pinky_01_r"
+  },
+  "translation_scale": 1.065325787616799,
+  "geometry_policy": "No model output or mutation. Existing geometry/skin/rest/old9clips read-only.",
+  "unmapped_source_features": "three finger phalanges collapse to first proximal joint; no finger-chain fidelity claim",
+  "inferred_secondary_adaptation": "unmapped apron_front/back follows actual thigh flexion; visual garment review pending",
+  "missing_coverage": [
+    "walk_start",
+    "walk_stop",
+    "turn_90",
+    "turn_180"
+  ],
+  "clips": {
+    "idle": {
+      "source_clip": "Idle_Loop",
+      "length_seconds": 2.5,
+      "loop": true,
+      "sample_rate_hz": 30,
+      "samples": 76,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": 0.00373039915389511,
+      "loop_seam_angle_rad": 0.008976949378848076,
+      "max_unreachable_ankle_residual_m": 1.4057727354849284e-07,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.000107954467239324,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            2.5
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            2.5
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    },
+    "walk": {
+      "source_clip": "Walk_Loop",
+      "length_seconds": 1.3333333730697632,
+      "loop": true,
+      "sample_rate_hz": 30,
+      "samples": 41,
+      "root_motion": false,
+      "authored_stride_m": 1.3849234731031466,
+      "authored_speed_mps": 1.038692573871909,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        1.2999999523162842
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": 0.0,
+      "loop_seam_angle_rad": 0.0,
+      "max_unreachable_ankle_residual_m": 0.007474509593084559,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.026362938806414604,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            0.9000000268220901
+          ],
+          [
+            1.300000038743019,
+            1.3333333730697632
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            0.23333334028720856
+          ],
+          [
+            0.6333333522081375,
+            1.3333333730697632
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    },
+    "walk_formal": {
+      "source_clip": "Walk_Formal_Loop",
+      "length_seconds": 1.3333333730697632,
+      "loop": true,
+      "sample_rate_hz": 30,
+      "samples": 41,
+      "root_motion": false,
+      "authored_stride_m": 1.3849234731031466,
+      "authored_speed_mps": 1.038692573871909,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        1.2999999523162842
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": 0.006528864643769758,
+      "loop_seam_angle_rad": 0.020945027470588684,
+      "max_unreachable_ankle_residual_m": 0.01184751831906392,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.026377569884061813,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            0.9000000268220901
+          ],
+          [
+            1.300000038743019,
+            1.3333333730697632
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            0.23333334028720856
+          ],
+          [
+            0.6333333522081375,
+            1.3333333730697632
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    },
+    "sit_enter": {
+      "source_clip": "Sitting_Enter",
+      "length_seconds": 1.2999999523162842,
+      "loop": false,
+      "sample_rate_hz": 30,
+      "samples": 40,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": null,
+      "loop_seam_angle_rad": null,
+      "max_unreachable_ankle_residual_m": 1.0536712127723508e-07,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.00014800947974435985,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            1.2999999523162842
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            0.19999999266404372
+          ],
+          [
+            0.3666666532174135,
+            1.2999999523162842
+          ]
+        ]
+      },
+      "seat_alignment": "requires real seat adapter; source pelvis displacement retained",
+      "review_status": "not_rendered"
+    },
+    "sit_idle": {
+      "source_clip": "Sitting_Idle_Loop",
+      "length_seconds": 1.6666666269302368,
+      "loop": true,
+      "sample_rate_hz": 30,
+      "samples": 51,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": 0.0,
+      "loop_seam_angle_rad": 0.0,
+      "max_unreachable_ankle_residual_m": 5.3726900748371916e-08,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.000148289036587812,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            1.6666666269302368
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            1.6666666269302368
+          ]
+        ]
+      },
+      "seat_alignment": "requires real seat adapter; source pelvis displacement retained",
+      "review_status": "not_rendered"
+    },
+    "sit_exit": {
+      "source_clip": "Sitting_Exit",
+      "length_seconds": 1.0333333015441895,
+      "loop": false,
+      "sample_rate_hz": 30,
+      "samples": 32,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": null,
+      "loop_seam_angle_rad": null,
+      "max_unreachable_ankle_residual_m": 1.2013700229374393e-07,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.00014798945630900562,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            1.0333333015441895
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            0.7666666430811728
+          ],
+          [
+            0.8999999723126811,
+            1.0333333015441895
+          ]
+        ]
+      },
+      "seat_alignment": "requires real seat adapter; source pelvis displacement retained",
+      "review_status": "not_rendered"
+    },
+    "talk": {
+      "source_clip": "Idle_Talking_Loop",
+      "length_seconds": 2.933333396911621,
+      "loop": true,
+      "sample_rate_hz": 30,
+      "samples": 89,
+      "root_motion": false,
+      "authored_stride_m": 0.0,
+      "authored_speed_mps": 0.0,
+      "source_rm_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_scale": 1.065325787616799,
+      "bone_length_policy": "target rest lengths unchanged; no joint scale",
+      "loop_seam_position_m": 0.0,
+      "loop_seam_angle_rad": 0.0,
+      "max_unreachable_ankle_residual_m": 1.5269146510898468e-07,
+      "source_rest_sole_floor_y_m": 0.00046152592403814197,
+      "source_animated_sole_min_y_m": -0.00010834721615538001,
+      "support_event_method": "candidate intervals from actual weighted source sole height <= measured source REST sole floor + 0.025m; not yet visually accepted stance events",
+      "support_candidates": {
+        "L": [
+          [
+            0.0,
+            2.933333396911621
+          ]
+        ],
+        "R": [
+          [
+            0.0,
+            2.933333396911621
+          ]
+        ]
+      },
+      "seat_alignment": null,
+      "review_status": "not_rendered"
+    }
+  },
+  "review_status": "retarget_baked_not_visually_accepted",
+  "tests": "No natural gait, foot-slip acceptance, seat alignment, source roundtrip or game integration established by generation.",
+  "contact_geometry": {
+    "method": "actual source GLB sole vertices; complete skin influences and inverse-bind-derived bone-local positions",
+    "feet": {
+      "L": {
+        "rest_floor_y_m": 0.005369315363536048,
+        "points": {
+          "heel": {
+            "mesh": "CH_Ryo_Body_LOD0",
+            "primitive": 0,
+            "vertex": 13398,
+            "position": [
+              0.19067536294460297,
+              0.005369202699512243,
+              -0.039248693734407425
+            ],
+            "rest_world_position": [
+              0.19067511074981613,
+              0.0053693327102378036,
+              -0.03924885248028606
+            ],
+            "influences": [
+              {
+                "bone": "DEF-foot.L",
+                "weight": 1.0,
+                "bone_local_position": [
+                  0.0016493064175567007,
+                  0.06732578101591458,
+                  -0.11231711472712658
+                ]
+              }
+            ]
+          },
+          "ball": {
+            "mesh": "CH_Ryo_Body_LOD0",
+            "primitive": 0,
+            "vertex": 13456,
+            "position": [
+              0.11798609048128128,
+              0.005369202699512243,
+              0.09513470530509949
+            ],
+            "rest_world_position": [
+              0.11798548795666781,
+              0.0053693364434765165,
+              0.09513471346423068
+            ],
+            "influences": [
+              {
+                "bone": "DEF-foot.L",
+                "weight": 0.7970953583717346,
+                "bone_local_position": [
+                  0.07025872418297506,
+                  0.16048784344755884,
+                  -0.012536351906016097
+                ]
+              },
+              {
+                "bone": "DEF-toe.L",
+                "weight": 0.20290464162826538,
+                "bone_local_position": [
+                  0.0658661278136109,
+                  -0.014571460391539892,
+                  0.023311690025893894
+                ]
+              }
+            ]
+          },
+          "toe": {
+            "mesh": "CH_Ryo_Body_LOD0",
+            "primitive": 0,
+            "vertex": 13465,
+            "position": [
+              0.1491730809211731,
+              0.005369202699512243,
+              0.13222192227840424
+            ],
+            "rest_world_position": [
+              0.14917239218645775,
+              0.005369349668524181,
+              0.132221848467439
+            ],
+            "influences": [
+              {
+                "bone": "DEF-toe.L",
+                "weight": 0.8559355139732361,
+                "bone_local_position": [
+                  0.04530392438996968,
+                  0.02725701182092799,
+                  0.010058794383328407
+                ]
+              },
+              {
+                "bone": "DEF-foot.L",
+                "weight": 0.14406448602676392,
+                "bone_local_position": [
+                  0.04082215079858392,
+                  0.19634647741428346,
+                  0.001453332309773736
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "R": {
+        "rest_floor_y_m": 0.005369193145096901,
+        "points": {
+          "heel": {
+            "mesh": "CH_Ryo_Body_LOD0",
+            "primitive": 0,
+            "vertex": 16895,
+            "position": [
+              -0.19067536294460297,
+              0.005369202699512243,
+              -0.039248693734407425
+            ],
+            "rest_world_position": [
+              -0.1906751303197688,
+              0.00536921487539449,
+              -0.03924887907950593
+            ],
+            "influences": [
+              {
+                "bone": "DEF-foot.R",
+                "weight": 1.0,
+                "bone_local_position": [
+                  -0.001649299505522478,
+                  0.06732579325466559,
+                  -0.11231710727654598
+                ]
+              }
+            ]
+          },
+          "ball": {
+            "mesh": "CH_Ryo_Body_LOD0",
+            "primitive": 0,
+            "vertex": 16973,
+            "position": [
+              -0.11798609048128128,
+              0.005369202699512243,
+              0.09513470530509949
+            ],
+            "rest_world_position": [
+              -0.11798550142386156,
+              0.005369196790494055,
+              0.09513468532762157
+            ],
+            "influences": [
+              {
+                "bone": "DEF-foot.R",
+                "weight": 0.7970954775810242,
+                "bone_local_position": [
+                  -0.07025870860570811,
+                  0.160487850498106,
+                  -0.0125363444554355
+                ]
+              },
+              {
+                "bone": "DEF-toe.R",
+                "weight": 0.20290452241897583,
+                "bone_local_position": [
+                  -0.06586615589151468,
+                  -0.014571458793421532,
+                  0.0233116968525168
+                ]
+              }
+            ]
+          },
+          "toe": {
+            "mesh": "CH_Ryo_Body_LOD0",
+            "primitive": 0,
+            "vertex": 16963,
+            "position": [
+              -0.1491730809211731,
+              0.005369202699512243,
+              0.13222192227840424
+            ],
+            "rest_world_position": [
+              -0.1491723999213312,
+              0.005369193145096901,
+              0.1322218010111245
+            ],
+            "influences": [
+              {
+                "bone": "DEF-toe.R",
+                "weight": 0.8559355139732361,
+                "bone_local_position": [
+                  -0.045303951287247096,
+                  0.027257004815404218,
+                  0.010058799702742732
+                ]
+              },
+              {
+                "bone": "DEF-foot.R",
+                "weight": 0.14406448602676392,
+                "bone_local_position": [
+                  -0.040822138939097,
+                  0.1963464753964661,
+                  0.001453339760354333
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

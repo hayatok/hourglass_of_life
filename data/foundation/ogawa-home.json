@@ -38,7 +38,7 @@
     {"id":"washroom","label":"洗面・脱衣・洗濯","type":"washroom_laundry","bounds":[7.4,6.8,4.4,3.0],"label_point":[10.0,9.55],"owner":"ogawa","private":true,"private_scope":"exclusive_while_changing","allowed_residents":["nagisa","ryo","rin"],"occupancy_limit":2,"exclusive_during":["changing"],"guest_requires_consent":true}
   ],
   "external_zones": [
-    {"id":"outside","label":"南側玄関ポーチ","bounds":[5.5,10.0,2.0,1.5],"floor_y":0.0,"covered":true}
+    {"id":"outside","label":"南側玄関ポーチと庭","bounds":[0.2,10.0,11.6,3.2],"floor_y":0.0,"covered":false}
   ],
   "walls": [
     {"id":"north","start":[0.0,0.1],"end":[12.0,0.1],"exterior":true},
@@ -90,7 +90,8 @@
     {"id":"washbasin","label":"洗面台","type":"washbasin","room":"washroom","position":[11.45,0.0,7.55],"size":[0.6,0.85,1.0],"facing":90,"interaction_point":[10.55,0.0,7.55],"owner":"ogawa","private":false,"capacity":1},
     {"id":"washer","label":"洗濯機","type":"washer","room":"washroom","position":[11.45,0.0,8.85],"size":[0.65,0.95,0.65],"facing":90,"interaction_point":[10.5,0.0,8.85],"owner":"ogawa","private":false,"capacity":1},
     {"id":"linen_storage","label":"タオル・洗濯収納","type":"storage","room":"washroom","position":[8.5,0.0,9.5],"size":[1.4,2.0,0.5],"facing":0,"interaction_point":[8.5,0.0,8.65],"owner":"ogawa","private":false,"capacity":1},
-    {"id":"changing_space","label":"脱衣の占有場所","type":"changing_space","room":"washroom","position":[9.55,0.0,8.3],"size":[1.0,0.02,1.0],"facing":0,"interaction_point":[9.55,0.0,8.3],"owner":"ogawa","private":true,"capacity":1,"blocking":false,"private_scope":"exclusive_while_changing"}
+    {"id":"changing_space","label":"脱衣の占有場所","type":"changing_space","room":"washroom","position":[9.55,0.0,8.3],"size":[1.0,0.02,1.0],"facing":0,"interaction_point":[9.55,0.0,8.3],"owner":"ogawa","private":true,"capacity":1,"blocking":false,"private_scope":"exclusive_while_changing"},
+    {"id":"drying_rack","label":"庭の物干し","type":"drying_rack","room":"outside","position":[2.5,0.0,11.4],"size":[1.8,1.65,0.6],"facing":180,"interaction_point":[2.5,0.0,12.25],"owner":"ogawa","private":false,"capacity":1}
   ],
   "residents": [
     {"id":"nagisa","bed":"bed_nagisa","bedroom":"parents_bedroom","dining_seat":"dining_nagisa"},

@@ -7,6 +7,9 @@ import argparse,json,os,re,shutil,subprocess,sys,time
 ROOT=Path(__file__).resolve().parents[1]
 CHECKS={
  'resident_motor':('test_resident_motor.gd',r'Resident motor checks: \d+ passed, 0 failed'),
+ 'home_navigation':('test_home_navigation.gd',r'Home navigation and occupancy: \d+ passed, 0 failed'),
+ 'household_day':('test_household_day.gd',r'Household day checks: \d+ passed, 0 failed'),
+ 'foundation_world':('test_foundation_world.gd',r'Foundation world checks: \d+ passed, 0 failed'),
  'sewing_integration':('test_sewing_integration.gd',r'Sewing integration checks: \d+ passed, 0 failed'),
  'sewing_work':('test_sewing_work.gd',r'Sewing work checks: \d+ passed, 0 failed'),
  'sewing_presentation':('test_sewing_presentation.gd',r'Sewing presentation checks: \d+ passed, 0 failed'),

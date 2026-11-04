@@ -106,6 +106,8 @@ func _build() -> void:
 			open_angle=wrapf(atan2(opened_end.x,opened_end.z)-atan2(closed_end.x,closed_end.z),-PI,PI)
 		doors[door.id]={"definition":door.duplicate(true),"node":node,"panel":panel,"base_position":base_position,"open_angle":open_angle,"opened":false,"occupant":""}
 	for fixture in definition.fixtures: _build_fixture(fixture)
+	for id in doors:
+		set_door_open(id,doors[id].definition.get("default_state","closed")=="open")
 
 func _wall_piece(id: String, origin: Vector2, direction: Vector2, from: float, to: float, bottom: float, top: float, thickness: float, material: Material) -> void:
 	if to-from<.001 or top-bottom<.001:return
@@ -123,7 +125,12 @@ func _build_fixture(record: Dictionary) -> void:
 	var metal:=_material("metal",Color("a6b6b4"),.3)
 	var dark:=_material("dark",Color("424e4c"))
 	var textile:=_material("cloth",Color("8ba9a5"))
-	if "bed" in type:
+	if type=="drying_rack":
+		for x in [-1,1]:
+			_box(node,"Post",Vector3(x*size.x*.48,size.y*.5,0),Vector3(.055,size.y,.055),metal,true)
+			_box(node,"Foot",Vector3(x*size.x*.48,.035,0),Vector3(.1,.07,size.z),metal,true)
+		_box(node,"Rail",Vector3(0,size.y-.05,0),Vector3(size.x,.045,.045),metal)
+	elif "bed" in type:
 		_box(node,"Frame",Vector3(0,.18,0),Vector3(size.x,.36,size.z),wood,true)
 		_box(node,"Mattress",Vector3(0,.43,0),Vector3(size.x-.08,.18,size.z-.08),white)
 		_box(node,"Blanket",Vector3(0,.54,size.z*.10),Vector3(size.x-.08,.08,size.z*.68),textile)
@@ -167,15 +174,20 @@ func _build_fixture(record: Dictionary) -> void:
 	fixtures[record.id]={"definition":record.duplicate(true),"node":node,"anchor":anchor,"reserved_by":""}
 
 func set_door_open(id: String, opened: bool) -> bool:
+	return set_door_fraction(id,1.0 if opened else 0.0)
+
+func set_door_fraction(id: String, amount: float) -> bool:
 	if not doors.has(id):return false
+	if not is_finite(amount) or amount<0 or amount>1:return false
 	var record: Dictionary=doors[id]
-	if record.definition.kind=="opening":return opened
-	record.opened=opened
+	if record.definition.kind=="opening":return amount==1
+	var was_opened: bool=record.opened
+	record.opened=amount>=.999;record.open_fraction=amount
 	var node: Node3D=record.panel
 	if record.definition.get("kind","")=="sliding":
-		node.position=record.base_position+(Vector3.RIGHT if record.definition.axis=="x" else Vector3.BACK)*float(record.definition.width)*(.9 if opened else 0.0)
-	else: record.node.rotation.y=record.open_angle if opened else 0.0
-	door_changed.emit(id,opened)
+		node.position=record.base_position+(Vector3.RIGHT if record.definition.axis=="x" else Vector3.BACK)*float(record.definition.width)*amount
+	else: record.node.rotation.y=record.open_angle*amount
+	if was_opened!=record.opened:door_changed.emit(id,record.opened)
 	return true
 
 func update_cutaway(eye: Vector3) -> void:

@@ -187,13 +187,15 @@ def check_plan(plan):
 
     for item in fixtures.values():
         key = item["id"]
-        require(item["room"] in rooms, f'{key}: nonexistent fixture room')
+        require(item["room"] in zones, f'{key}: nonexistent fixture room or outdoor zone')
         bounds = footprint(item)
         require(all(value > 0 for value in item["size"])
                 and item["position"][1] >= 0
                 and item["position"][1] + item["size"][1] <= house["wall_height"],
                 f'{key}: invalid physical dimensions')
-        room = rooms[item["room"]]["bounds"]
+        if item["room"] not in zones:
+            continue
+        room = zones[item["room"]]["bounds"]
         require(inside(bounds[:2], room)
                 and inside([bounds[0] + bounds[2], bounds[1] + bounds[3]], room),
                 f'{key}: fixture leaves its room or occupies wall thickness')
@@ -214,7 +216,7 @@ def check_plan(plan):
     # Grid flood-fill per room checks every authored fixture approach against
     # portal landings, rather than accepting a connected room label alone.
     grid_step = 0.05
-    for room_id, room in rooms.items():
+    for room_id, room in zones.items():
         x, z, width, depth = room["bounds"]
         blocked = [expanded(footprint(item), radius) for item in solid_items
                    if item["room"] == room_id]
@@ -298,10 +300,10 @@ def render(plan, output):
         x1, y1 = point(first); x2, y2 = point(last)
         return node(parent, "line", x1=x1, y1=y1, x2=x2, y2=y2, **attrs)
 
-    svg = ET.Element(f"{{{namespace}}}svg", {"width":"1450", "height":"1160", "viewBox":"0 0 1450 1160", "role":"img"})
+    svg = ET.Element(f"{{{namespace}}}svg", {"width":"1450", "height":"1360", "viewBox":"0 0 1450 1360", "role":"img"})
     node(svg, "title").text = "小川家 12m×10m 平屋の初期間取り"
     node(svg, "desc").text = "JSON正本から生成。中央廊下で寝室とLDK、水回りを分ける8室。扉の開口と接近点、家具外形、開扉時の人動線を表示。実生活機能の完成を示すものではない。"
-    node(svg, "rect", width=1450, height=1160, fill="#faf9f5")
+    node(svg, "rect", width=1450, height=1360, fill="#faf9f5")
     group = node(svg, "g", font_family="Hiragino Sans, Noto Sans CJK JP, Yu Gothic, sans-serif", fill="#28313b")
     text(group, 80, 32, "小川家  |  12m × 10m・平屋", font_size=24, font_weight=700)
     text(group, 80, 54, "初期実装用の空間設計  ·  内法寸法 / 壁厚 0.20m / 南側玄関", font_size=13, fill="#606872")
@@ -395,7 +397,7 @@ def render(plan, output):
     for index, note in enumerate(notes):
         text(group, legend_x, base+212+index*19, note, font_size=11, fill="#606872")
     for index, flow in enumerate(plan["circulation"]):
-        y = 1030+index*22
+        y = 1220+index*22
         node(group, "line", x1=80, y1=y-4, x2=120, y2=y-4, stroke=flow["color"], stroke_width=3, stroke_dasharray="7 5")
         text(group, 134, y, flow["label"], font_size=12)
     output.parent.mkdir(parents=True, exist_ok=True)
