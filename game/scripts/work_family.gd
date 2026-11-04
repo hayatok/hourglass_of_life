@@ -379,8 +379,6 @@ func person_text(p: Dictionary) -> String:
 	var text = "%sの暮らし\n\n生活費の残り：%.1f\n今日の収入：%.1f\n家の用事：%d%%\n\n本人の今日の仕事：%.1f\n世話をした時間：%d分\n仕事への手応え：%d%%\n"%[d.label,h.cash,h.earned_today,int(h.home_load*100),p.earned_today,p.care_minutes,int(p.work_satisfaction*100)]
 	if worry(p)>.5: text += "\nしばらくの出費が気になっている。\n"
 	if p.id=="ryo": text += "\n凛との模型づくり：%d%%\n"%int(p.private_project*100)
-	var own_project = {"aoi":"radio","osamu":"radio","rin":"model","nagisa":"bread","maho":"bread","fumi":"photo","ritsu":"music"}.get(p.id,"model")
-	text += "\n二人で進める制作：%d%%\n"%int(projects[own_project]*100)
 	for help in _active_supports():
 		if help.state in ["travel","active","handoff"] and p.id in [help.giver,help.receiver]:
 			text += "\n%sさんが%s。\n"%[sim.person(help.giver).name,"家に向かっている" if help.state=="travel" else "暮らしの用事を引き受けている"]
