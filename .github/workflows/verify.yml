@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Verify human-motion source parsing and kinematics
+        run: python3 -m unittest discover -s tests -p 'test_cmu_*.py'
       - name: Install Godot 4.7.2
         run: |
           curl -fL --retry 3 -o /tmp/godot.zip https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
