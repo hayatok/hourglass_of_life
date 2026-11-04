@@ -14,6 +14,10 @@ var followed := ""
 var initialization_error := ""
 var _ui_time := 0.0
 
+func _show_overview() -> void:
+	followed=""
+	super._show_overview()
+
 func _ready() -> void:
 	super._ready()
 	HomeArt.new().add_visuals(house)

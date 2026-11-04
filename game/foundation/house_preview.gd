@@ -32,7 +32,7 @@ func _build_ui() -> void:
 	var canvas:=CanvasLayer.new();add_child(canvas)
 	var top:=HBoxContainer.new();top.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE);top.offset_left=20;top.offset_right=-20;top.offset_top=18;top.offset_bottom=70;top.add_theme_constant_override("separation",12);canvas.add_child(top)
 	var title:=Label.new();title.text="小川家";title.add_theme_font_size_override("font_size",30);title.size_flags_horizontal=Control.SIZE_EXPAND_FILL;top.add_child(title)
-	var overview:=Button.new();overview.text="家を見渡す";overview.custom_minimum_size=Vector2(150,48);overview.pressed.connect(func():target=Vector3(6,0,5);distance=19;yaw=.45;pitch=.88);top.add_child(overview)
+	var overview:=Button.new();overview.text="家を見渡す";overview.custom_minimum_size=Vector2(150,48);overview.pressed.connect(_show_overview);top.add_child(overview)
 	wall_button=Button.new();wall_button.text="壁をすべて表示";wall_button.custom_minimum_size=Vector2(170,48);wall_button.pressed.connect(_toggle_walls);top.add_child(wall_button)
 	var zoom:=HBoxContainer.new();zoom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);zoom.offset_left=-180;zoom.offset_right=-20;zoom.offset_top=-70;zoom.offset_bottom=-20;zoom.add_theme_constant_override("separation",10);canvas.add_child(zoom)
 	for setting in [["−",1.15],["＋",1.0/1.15]]:
@@ -41,6 +41,9 @@ func _build_ui() -> void:
 
 func _zoom(factor: float) -> void:
 	distance=clampf(distance*factor,8,30)
+
+func _show_overview() -> void:
+	target=Vector3(6,0,5);distance=19;yaw=.45;pitch=.88
 
 func _toggle_walls() -> void:
 	house.cutaway=not house.cutaway
