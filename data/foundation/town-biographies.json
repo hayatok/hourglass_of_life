@@ -1,0 +1,1392 @@
+{
+  "schema": 1,
+  "status": "authored_backgrounds_and_activity_contracts_not_G3_runtime_acceptance",
+  "note": "Nine fictional authored biographies consistent with data/residents.json and the four new homes. These are not histories inferred from statistics. Specialist fixtures, tools, materials and operations are contracts for later actual executors; data authoring alone does not prove their rendered performance, interactions or gameplay quality. The existing Ogawa authoring remains in its own file.",
+  "profiles": {
+    "osamu": {
+      "authored_age_years": 68,
+      "household_id": "saeki",
+      "home_id": "saeki_home",
+      "occupation": "工房を続ける修理職人",
+      "episodes": [
+        {
+          "id": "repairing_by_listening",
+          "when": "若い頃から工房を続ける間",
+          "participants": [
+            "osamu"
+          ],
+          "known_to": [
+            "osamu",
+            "fumi"
+          ],
+          "summary": "故障を見ただけで決めつけ、直し直しになった修理を経験した。持ち主から不調の出る時を聞き、測ってから部品を選ぶようになった。",
+          "influence": "急いで台数を増やすより、一台の具合を確かめて仕上げたい"
+        },
+        {
+          "id": "bench_and_shared_life",
+          "when": "工房を続ける近年",
+          "participants": [
+            "osamu",
+            "fumi"
+          ],
+          "known_to": [
+            "osamu",
+            "fumi"
+          ],
+          "summary": "作業が長引いて夕食を文に任せた日に、続ける仕事の量と家の分担を話した。道具を広げたまま食卓へ持ち込まないことを決めた。",
+          "influence": "仕事を手放したくない気持ちと、家の時間を守る責任が競合する"
+        }
+      ],
+      "values": {
+        "family_time": 0.53,
+        "reliability": 0.93,
+        "creative_pride": 0.91,
+        "independence": 0.92
+      },
+      "experience": {
+        "cook": 0.3,
+        "wash_dishes": 0.52,
+        "personal_project": 0.92,
+        "tidy_tools": 0.88
+      },
+      "responsibilities": [
+        "引き受けた修理を納期までに仕上げる",
+        "文と生活費と家事を相談し、自分の道具を片付ける"
+      ],
+      "current_conflict": "納得する一台を作る時間を取りたいが、工房の今後を考える話と家の用事を先延ばしにはしたくない。",
+      "commitments": [
+        {
+          "id": "radio_finish",
+          "kind": "project",
+          "project_id": "saeki_personal_radio",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 1140,
+          "window_minutes": 180,
+          "required_minutes": 120,
+          "known_to": [
+            "osamu",
+            "fumi"
+          ],
+          "label": "調整したラジオを文にも聴いてもらう前に、自分で動作を確かめる"
+        },
+        {
+          "id": "clear_repair_bench",
+          "kind": "household",
+          "actions": [
+            "tidy_tools"
+          ],
+          "due_minute": 1080,
+          "window_minutes": 180,
+          "required_minutes": 5,
+          "known_to": [
+            "osamu",
+            "fumi"
+          ],
+          "label": "夕方に道具を収め、食卓へ修理を持ち込まない"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "saeki_osamu_radio_chassis",
+          "kind": "radio_chassis",
+          "label": "納得のいく音を探している自分のラジオ",
+          "fixture": "tools_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "saeki_osamu_multimeter",
+          "kind": "multimeter",
+          "label": "使い慣れた測定器",
+          "fixture": "tools_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "project_underway",
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.08,
+          "reason": "途中で投げ出さず、一台の具合を測って確かめたい"
+        },
+        {
+          "when": "tools_out",
+          "actions": [
+            "tidy_tools"
+          ],
+          "delta": 0.12,
+          "reason": "文と決めた通り、自分の修理道具は自分で収める"
+        }
+      ],
+      "project": {
+        "id": "saeki_personal_radio",
+        "activity": "radio_restore",
+        "label": "自分のラジオを点検し調整する",
+        "source_item_id": "saeki_osamu_radio_chassis",
+        "storage_fixture": "tools_storage",
+        "activity_fixture": "repair_desk",
+        "use_fixture": "repair_desk_chair",
+        "required_minutes": 120,
+        "artifact_kind": "restored_radio",
+        "independent": true,
+        "noise": "tool",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "本人のラジオ",
+          "測定器と適合する部品",
+          "家の作業机の使用権"
+        ],
+        "operations": [
+          "外観と接点を確かめる",
+          "回路を測って原因を絞る",
+          "必要な部品を扱い調整する",
+          "実際の音を聴いて確認する"
+        ],
+        "result_mode": "transform_source"
+      }
+    },
+    "fumi": {
+      "authored_age_years": 65,
+      "household_id": "saeki",
+      "home_id": "saeki_home",
+      "occupation": "退職した販売員",
+      "episodes": [
+        {
+          "id": "retired_from_counter",
+          "when": "販売の仕事を退職した頃",
+          "participants": [
+            "fumi"
+          ],
+          "known_to": [
+            "fumi",
+            "osamu"
+          ],
+          "summary": "毎日顔を合わせる仕事仲間との時間が減り、自分から外へ出る用事を作りたいと思った。客の好みを聞く仕事で身に付いた、人の話を覚える習慣が残っている。",
+          "influence": "家事だけで日を埋めず、職場の外にも関わりを作りたい"
+        },
+        {
+          "id": "first_photographs",
+          "when": "最近の散歩と図書館での出会い",
+          "participants": [
+            "fumi",
+            "saki"
+          ],
+          "known_to": [
+            "fumi",
+            "saki",
+            "osamu"
+          ],
+          "summary": "散歩で撮った写真を見直し、同じ景色でも撮る位置で印象が違うと気づいた。図書館で顔を知った咲と、写真の話を少しずつするようになった。",
+          "influence": "上手な一枚を装うより、気に入った理由を話せる写真を選びたい"
+        }
+      ],
+      "values": {
+        "family_time": 0.67,
+        "reliability": 0.63,
+        "creative_pride": 0.84,
+        "independence": 0.91
+      },
+      "experience": {
+        "cook": 0.65,
+        "shop": 0.72,
+        "personal_project": 0.25,
+        "tidy_tools": 0.62
+      },
+      "responsibilities": [
+        "修と家事と生活費を相談する",
+        "自分の外出と趣味の時間も伝え、相手任せにしない"
+      ],
+      "current_conflict": "修の作業を気に掛けつつ、自分も外で新しいことを始めたい。写真を人に見せる時はまだ少しためらう。",
+      "commitments": [
+        {
+          "id": "choose_own_prints",
+          "kind": "independent",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 1020,
+          "window_minutes": 180,
+          "required_minutes": 15,
+          "known_to": [
+            "fumi",
+            "osamu"
+          ],
+          "label": "次の散歩の前に、気に入った写真を自分で選ぶ"
+        },
+        {
+          "id": "share_housework",
+          "kind": "household",
+          "actions": [
+            "cook",
+            "wash_dishes"
+          ],
+          "due_minute": 1110,
+          "window_minutes": 120,
+          "required_minutes": 5,
+          "known_to": [
+            "fumi",
+            "osamu"
+          ],
+          "label": "夕方の用事を相談し、趣味のために片方だけが負担しない"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "saeki_fumi_photo_wallet",
+          "kind": "photo_wallet",
+          "label": "散歩で撮った写真を入れた小さなケース",
+          "fixture": "photo_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "saeki_fumi_camera",
+          "kind": "camera",
+          "label": "操作を覚えているカメラ",
+          "fixture": "photo_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fresh",
+          "threshold": 0.55,
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.1,
+          "reason": "家事だけで終わらせず、散歩の写真を自分の目で選びたい"
+        },
+        {
+          "when": "project_underway",
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.04,
+          "reason": "撮影済みの写真から、誰かに話せる一枚を選んでいる"
+        }
+      ],
+      "project": {
+        "id": "fumi_walk_photo_selection",
+        "activity": "select_walk_photos",
+        "label": "散歩で撮った写真を並べて選ぶ",
+        "source_item_id": "saeki_fumi_photo_wallet",
+        "storage_fixture": "photo_storage",
+        "activity_fixture": "reading_chair",
+        "use_fixture": "reading_chair",
+        "required_minutes": 60,
+        "artifact_kind": "selected_photo_set",
+        "independent": true,
+        "noise": "quiet",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "既に撮った写真と写真ケース",
+          "写真を手に持って見られる座席"
+        ],
+        "operations": [
+          "ケースから撮影済みの写真を取り出す",
+          "写真を手に取って見比べ、気に入ったものを選ぶ",
+          "選んだ写真をケースへ収める"
+        ],
+        "not_claimed": "この選別だけで新しい屋外撮影や他者との鑑賞が起きたことにはしない",
+        "work_surface": "lap",
+        "result_mode": "arrange_source"
+      }
+    },
+    "maho": {
+      "authored_age_years": 26,
+      "household_id": "shared_house",
+      "home_id": "shared_house_home",
+      "occupation": "パン屋兼喫茶店の接客担当",
+      "episodes": [
+        {
+          "id": "first_time_customers",
+          "when": "店の接客を覚える間",
+          "participants": [
+            "maho",
+            "nagisa"
+          ],
+          "known_to": [
+            "maho",
+            "nagisa"
+          ],
+          "summary": "常連には通じる説明が、初めて来た人には分かりにくい場面を何度か見た。渚に品物の説明を聞き、相手が選びやすい言い方を工夫してきた。",
+          "influence": "人を助けたい時も、先回りし過ぎず相手が選ぶ余地を残したい"
+        },
+        {
+          "id": "learning_to_decline_at_home",
+          "when": "共同生活を始めてから",
+          "participants": [
+            "maho",
+            "ritsu",
+            "aoi"
+          ],
+          "known_to": [
+            "maho",
+            "ritsu",
+            "aoi"
+          ],
+          "summary": "帰宅後も共用部の用事を引き受け続けて疲れた時期に、分担と休む日を相談した。律が眠る時間には、片付けを静かな作業から先にすることも話した。",
+          "influence": "役に立つ嬉しさと、自分の休息や外出を守る必要が両方ある"
+        }
+      ],
+      "values": {
+        "family_time": 0.88,
+        "reliability": 0.7,
+        "creative_pride": 0.72,
+        "independence": 0.7
+      },
+      "experience": {
+        "cook": 0.47,
+        "wash_dishes": 0.82,
+        "shop": 0.76,
+        "personal_project": 0.56
+      },
+      "responsibilities": [
+        "接客と閉店作業を担当する",
+        "共用部の片付けを分担し、疲れた日は無理に引き受けない"
+      ],
+      "current_conflict": "初めての人にも入りやすい店にしたいが、休みまで店や同居人の用事だけで埋めたくない。",
+      "commitments": [
+        {
+          "id": "shared_kitchen_turn",
+          "kind": "household",
+          "actions": [
+            "wash_dishes",
+            "fold_laundry"
+          ],
+          "due_minute": 1140,
+          "window_minutes": 180,
+          "required_minutes": 5,
+          "known_to": [
+            "maho",
+            "ritsu",
+            "aoi"
+          ],
+          "label": "自分の分担を済ませ、休む日は先に伝える"
+        },
+        {
+          "id": "welcome_sign_trial",
+          "kind": "project",
+          "project_id": "maho_welcome_sign",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 1170,
+          "window_minutes": 180,
+          "required_minutes": 75,
+          "known_to": [
+            "maho",
+            "nagisa"
+          ],
+          "label": "店へ持って行く前に小さな案内札を試作する"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "shared_maho_sign_cards",
+          "kind": "blank_sign_cards",
+          "label": "店の案内に使おうと用意した厚紙",
+          "fixture": "maho_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "shared_maho_cafe_badge",
+          "kind": "work_badge",
+          "label": "店で使う名札",
+          "fixture": "maho_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fatigued",
+          "threshold": 0.65,
+          "actions": [
+            "quiet",
+            "sleep"
+          ],
+          "delta": 0.15,
+          "reason": "閉店後まで全部引き受けず、今日は自分も休むと決めた"
+        },
+        {
+          "when": "fresh",
+          "threshold": 0.55,
+          "actions": [
+            "wash_dishes"
+          ],
+          "delta": 0.07,
+          "reason": "余裕があるうちに共同生活の自分の分担を済ませたい"
+        },
+        {
+          "when": "quiet_requested",
+          "actions": [
+            "personal_project"
+          ],
+          "project_noise": [
+            "tool",
+            "audible"
+          ],
+          "delta": -0.18,
+          "reason": "同居人が静かに休むと伝えているので、音の出る試作はあとにする"
+        }
+      ],
+      "project": {
+        "id": "maho_welcome_sign",
+        "activity": "assemble_welcome_sign",
+        "label": "初めて来る人向けの小さな案内札を作る",
+        "source_item_id": "shared_maho_sign_cards",
+        "storage_fixture": "maho_storage",
+        "activity_fixture": "maho_desk",
+        "use_fixture": "maho_desk_chair",
+        "required_minutes": 75,
+        "artifact_kind": "welcome_table_sign",
+        "independent": false,
+        "noise": "tool",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "用意した厚紙",
+          "筆記具と切る道具",
+          "机の使用権"
+        ],
+        "operations": [
+          "案内する内容と文字の配置を決める",
+          "厚紙を切って折り、札を組む",
+          "離れた位置から読めるか確かめる"
+        ],
+        "not_claimed": "完成だけで店への設置や客の反応は付けない",
+        "result_mode": "transform_source"
+      }
+    },
+    "ritsu": {
+      "authored_age_years": 31,
+      "household_id": "shared_house",
+      "home_id": "shared_house_home",
+      "occupation": "町外で夜勤をする看護職",
+      "episodes": [
+        {
+          "id": "night_work_and_recovery",
+          "when": "夜勤をする暮らしになってから",
+          "participants": [
+            "ritsu"
+          ],
+          "known_to": [
+            "ritsu",
+            "maho",
+            "aoi"
+          ],
+          "summary": "帰宅してすぐ人に合わせようとし、休む時間が削れたことがあった。眠る時間を同居人に伝え、起きてから自分の分担をするよう相談した。",
+          "influence": "人を気遣うことと、自分が休息を確保することを切り離さない"
+        },
+        {
+          "id": "unfinished_music_at_home",
+          "when": "共同住宅での最近の暮らし",
+          "participants": [
+            "ritsu",
+            "haru",
+            "yui"
+          ],
+          "known_to": [
+            "ritsu",
+            "haru",
+            "yui"
+          ],
+          "summary": "夜勤のない日に短い旋律を作り、音楽の話をする知り合いが少し増えた。合わせる約束を急ぐより、まず自分の曲の続きを形にしたいと思っている。",
+          "influence": "にぎやかな集まりより、休める時間と静かな音楽の試し方を選びたい"
+        }
+      ],
+      "values": {
+        "family_time": 0.62,
+        "reliability": 0.88,
+        "creative_pride": 0.68,
+        "independence": 0.83
+      },
+      "experience": {
+        "cook": 0.4,
+        "laundry": 0.6,
+        "personal_project": 0.7,
+        "tidy_tools": 0.7
+      },
+      "responsibilities": [
+        "町外の勤務先へ通う",
+        "眠る時間を伝え、起きてから出来る共用部の分担をする"
+      ],
+      "current_conflict": "仕事を続けながら音楽を作りたい。音楽や付き合いのために睡眠を削るやり方には戻りたくない。",
+      "commitments": [
+        {
+          "id": "declared_daytime_rest",
+          "kind": "quiet_window",
+          "actions": [],
+          "due_minute": 960,
+          "window_minutes": 420,
+          "clock_window": [
+            540,
+            960
+          ],
+          "required_minutes": 0,
+          "known_to": [
+            "ritsu",
+            "maho",
+            "aoi"
+          ],
+          "label": "日中に休む時間を同居人へ知らせる",
+          "on_days": [
+            1,
+            4,
+            6
+          ]
+        },
+        {
+          "id": "after_rest_linen",
+          "kind": "household",
+          "actions": [
+            "fold_laundry"
+          ],
+          "due_minute": 1140,
+          "window_minutes": 180,
+          "required_minutes": 5,
+          "known_to": [
+            "ritsu",
+            "maho",
+            "aoi"
+          ],
+          "label": "起きてから乾いた洗濯物をしまう分担を引き受ける"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "shared_ritsu_music_project",
+          "kind": "unfinished_music_track",
+          "label": "続きを試している短い曲の制作データ",
+          "fixture": "ritsu_desk",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "shared_ritsu_headphones",
+          "kind": "headphones",
+          "label": "家で静かに曲を聴くヘッドホン",
+          "fixture": "ritsu_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fatigued",
+          "threshold": 0.55,
+          "actions": [
+            "sleep",
+            "quiet"
+          ],
+          "delta": 0.18,
+          "reason": "同居人に伝えた通り、疲れている時は先に休息を確保する"
+        },
+        {
+          "when": "fresh",
+          "threshold": 0.45,
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.09,
+          "reason": "休めた今なら、ヘッドホンで曲の続きを試したい"
+        }
+      ],
+      "project": {
+        "id": "ritsu_headphone_demo",
+        "activity": "compose_headphone_track",
+        "label": "ヘッドホンで短い曲を作って聴き直す",
+        "source_item_id": "shared_ritsu_music_project",
+        "storage_fixture": "ritsu_desk",
+        "activity_fixture": "ritsu_desk",
+        "use_fixture": "ritsu_desk_chair",
+        "required_minutes": 90,
+        "artifact_kind": "private_music_demo",
+        "independent": true,
+        "noise": "headphones",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "本人の制作データ",
+          "ヘッドホンと音を再生・編集する道具"
+        ],
+        "operations": [
+          "前の旋律を再生して確かめる",
+          "短いフレーズを重ねて試す",
+          "聴き直した版を保存する"
+        ],
+        "not_claimed": "保存だけで共同演奏や他者に聴いてもらった記憶は作らない",
+        "result_mode": "version_source"
+      }
+    },
+    "aoi": {
+      "authored_age_years": 20,
+      "household_id": "shared_house",
+      "home_id": "shared_house_home",
+      "occupation": "町外へ通う学生",
+      "episodes": [
+        {
+          "id": "a_radio_to_keep",
+          "when": "この町で暮らし始める前後",
+          "participants": [
+            "aoi"
+          ],
+          "known_to": [
+            "aoi",
+            "maho",
+            "ritsu"
+          ],
+          "summary": "知人から譲られたラジオを捨てずに持って来た。分解した部品の戻し方に迷い、出来ると思っていたことと、まだ分からないことの違いを知った。",
+          "influence": "急いで完成と言うより、分からない箇所を自分で確かめたい"
+        },
+        {
+          "id": "looking_into_the_workshop",
+          "when": "最近の通学の行き帰り",
+          "participants": [
+            "aoi",
+            "osamu"
+          ],
+          "known_to": [
+            "aoi",
+            "osamu"
+          ],
+          "summary": "工房の前で足を止め、修と短く話すことがあった。まだ気軽に教えを頼めるほど親しくはなく、まず何を尋ねたいのか整理したい。",
+          "influence": "大人数の集まりを選ぶより、具体的な困り事を持って一人に相談したい"
+        }
+      ],
+      "values": {
+        "family_time": 0.63,
+        "reliability": 0.55,
+        "creative_pride": 0.95,
+        "independence": 0.89
+      },
+      "experience": {
+        "cook": 0.22,
+        "wash_dishes": 0.4,
+        "personal_project": 0.3,
+        "tidy_tools": 0.38
+      },
+      "responsibilities": [
+        "授業と制作の締切を守る",
+        "広げた部品を共用部へ放置せず、片付けを分担する"
+      ],
+      "current_conflict": "自分で直せるようになりたいが、誤ったまま進める不安もある。助けを頼む相手との距離を測っている。",
+      "commitments": [
+        {
+          "id": "diagnosis_before_term_plan",
+          "kind": "project",
+          "project_id": "aoi_radio_diagnosis",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 1200,
+          "window_minutes": 180,
+          "required_minutes": 60,
+          "known_to": [
+            "aoi"
+          ],
+          "label": "次に相談する前に、自分で確かめた範囲を明らかにする"
+        },
+        {
+          "id": "parts_off_shared_table",
+          "kind": "household",
+          "actions": [
+            "tidy_tools"
+          ],
+          "due_minute": 1110,
+          "window_minutes": 120,
+          "required_minutes": 5,
+          "known_to": [
+            "aoi",
+            "maho",
+            "ritsu"
+          ],
+          "label": "部品を自室の箱へ戻し、共用の食卓を空ける"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "shared_aoi_gift_radio",
+          "kind": "unrepaired_radio",
+          "label": "譲られた、まだ直っていないラジオ",
+          "fixture": "aoi_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "shared_aoi_parts_box",
+          "kind": "parts_box",
+          "label": "外した部品の場所を分けた箱",
+          "fixture": "aoi_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "project_underway",
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.09,
+          "reason": "分かったつもりで終えず、今どこまで確かめたかを整理したい"
+        },
+        {
+          "when": "quiet_requested",
+          "actions": [
+            "personal_project"
+          ],
+          "project_noise": [
+            "tool",
+            "audible"
+          ],
+          "delta": -0.2,
+          "reason": "同居人が休む時間なので、音の出る分解や試験はあとにする"
+        },
+        {
+          "when": "tools_out",
+          "actions": [
+            "tidy_tools"
+          ],
+          "delta": 0.09,
+          "reason": "見失う前に部品を箱へ戻し、共用部の約束も守る"
+        }
+      ],
+      "project": {
+        "id": "aoi_radio_diagnosis",
+        "activity": "diagnose_gift_radio",
+        "label": "譲られたラジオの故障箇所を確かめる",
+        "source_item_id": "shared_aoi_gift_radio",
+        "storage_fixture": "aoi_storage",
+        "activity_fixture": "aoi_desk",
+        "use_fixture": "aoi_desk_chair",
+        "required_minutes": 60,
+        "artifact_kind": "radio_diagnosis_record",
+        "independent": true,
+        "noise": "tool",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "本人のラジオと部品箱",
+          "点検に使う道具"
+        ],
+        "operations": [
+          "部品の元の位置を確かめる",
+          "接点と配線を点検する",
+          "確かめた箇所と相談が必要な箇所を分ける"
+        ],
+        "not_claimed": "診断の整理は修理完了や技能の習得ではない。修との相談も実際の受諾と交流が必要",
+        "result_mode": "annotate_source"
+      }
+    },
+    "saki": {
+      "authored_age_years": 42,
+      "household_id": "north_house",
+      "home_id": "north_house_home",
+      "occupation": "午前に図書館で働く人",
+      "episodes": [
+        {
+          "id": "noticing_town_details",
+          "when": "図書館で人の探し物を手伝ううちに",
+          "participants": [
+            "saki"
+          ],
+          "known_to": [
+            "saki",
+            "haru"
+          ],
+          "summary": "人が覚えている店の呼び方と、今の建物の姿が違うことに気づいた。散歩で建物の細部を撮り、撮影した場所や時期を確かめて残すようになった。",
+          "influence": "きれいな写真だけでなく、何が変わったか伝わる記録を作りたい"
+        },
+        {
+          "id": "sharing_without_taking_over",
+          "when": "晴との共同生活と文との顔見知りの間で",
+          "participants": [
+            "saki",
+            "haru",
+            "fumi"
+          ],
+          "known_to": [
+            "saki",
+            "haru",
+            "fumi"
+          ],
+          "summary": "写真の話をしたい時も、相手には修理や家の予定があると感じた。見せたい写真を先に選び、都合のよい時に誘うようにしている。",
+          "influence": "誰かに見てもらう楽しさと、自分でじっくり選ぶ時間を両立したい"
+        }
+      ],
+      "values": {
+        "family_time": 0.65,
+        "reliability": 0.79,
+        "creative_pride": 0.9,
+        "independence": 0.79
+      },
+      "experience": {
+        "cook": 0.5,
+        "shop": 0.56,
+        "personal_project": 0.62,
+        "tidy_tools": 0.7
+      },
+      "responsibilities": [
+        "午前の図書館の仕事を受け持つ",
+        "晴と家の用事を分け、見せ合う時間は相談する"
+      ],
+      "current_conflict": "町の変化を残す一冊を作りたいが、仕事と家事のあとに写真を選ぶ時間が流れがち。模型も気になるが、まず撮影済みの写真を整理したい。",
+      "commitments": [
+        {
+          "id": "one_town_comparison",
+          "kind": "independent",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 1110,
+          "window_minutes": 180,
+          "required_minutes": 15,
+          "known_to": [
+            "saki",
+            "haru"
+          ],
+          "label": "午後に町の写真を見比べる自分の時間を取る"
+        },
+        {
+          "id": "shared_evening_preparation",
+          "kind": "household",
+          "actions": [
+            "cook",
+            "wash_dishes"
+          ],
+          "due_minute": 1080,
+          "window_minutes": 150,
+          "required_minutes": 5,
+          "known_to": [
+            "saki",
+            "haru"
+          ],
+          "label": "早番の晴と相談し、夕方の家事を分ける"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "north_saki_town_prints",
+          "kind": "town_photo_archive",
+          "label": "場所と時期を確かめて残した町の写真",
+          "fixture": "saki_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "north_saki_camera",
+          "kind": "camera",
+          "label": "町の細部を撮るカメラ",
+          "fixture": "saki_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fresh",
+          "threshold": 0.6,
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.08,
+          "reason": "仕事のあと、撮影した場所と時期を覚えているうちに写真を整理したい"
+        },
+        {
+          "when": "project_underway",
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.07,
+          "reason": "町の変化が分かる写真の組合せを、一組ずつ確かめる"
+        }
+      ],
+      "project": {
+        "id": "saki_town_photo_pair",
+        "activity": "compare_town_photos",
+        "label": "町の写真を見比べて変化の分かる組を選ぶ",
+        "source_item_id": "north_saki_town_prints",
+        "storage_fixture": "saki_storage",
+        "activity_fixture": "saki_desk",
+        "use_fixture": "saki_desk_chair",
+        "required_minutes": 75,
+        "artifact_kind": "town_photo_comparison",
+        "independent": true,
+        "noise": "quiet",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "本人が持つ撮影済み写真",
+          "場所と時期の記録",
+          "写真を並べる机"
+        ],
+        "operations": [
+          "同じ場所の写真を取り出す",
+          "建物と暮らしの変化を見比べる",
+          "選んだ組と出典を台紙へ収める"
+        ],
+        "not_claimed": "撮影や住民への聞き取りは別の実行を必要とし、この作業で既知になったことにしない",
+        "result_mode": "arrange_source"
+      }
+    },
+    "haru": {
+      "authored_age_years": 25,
+      "household_id": "north_house",
+      "home_id": "north_house_home",
+      "occupation": "早番で自転車修理を手伝う人",
+      "episodes": [
+        {
+          "id": "learning_the_repair_order",
+          "when": "自転車修理を手伝い始めた頃",
+          "participants": [
+            "haru"
+          ],
+          "known_to": [
+            "haru",
+            "saki"
+          ],
+          "summary": "工具の使い方を急いで覚えようとして、戻す場所や確認の順序を飛ばしたことがあった。準備と片付けまで人へ説明できるようになりたいと思っている。",
+          "influence": "試すだけで終えず、前後の段取りも自分の責任にしたい"
+        },
+        {
+          "id": "rhythms_from_tools",
+          "when": "仕事と町の知り合いが増えた最近",
+          "participants": [
+            "haru",
+            "osamu",
+            "ritsu"
+          ],
+          "known_to": [
+            "haru",
+            "osamu",
+            "ritsu",
+            "saki"
+          ],
+          "summary": "修理の話をする修や、音楽の話をする律と知り合った。道具を整える音の違いが気になり、仕事の邪魔にならない時に録音した短い音を持ち帰るようになった。",
+          "influence": "教わった修理と自分の音楽をつなげたいが、他人の仕事や休息を邪魔したくない"
+        }
+      ],
+      "values": {
+        "family_time": 0.6,
+        "reliability": 0.7,
+        "creative_pride": 0.91,
+        "independence": 0.88
+      },
+      "experience": {
+        "cook": 0.35,
+        "wash_dishes": 0.45,
+        "personal_project": 0.48,
+        "tidy_tools": 0.66
+      },
+      "responsibilities": [
+        "早番の修理準備と片付けを担当する",
+        "咲と家事を分け、道具と音を共用部へ広げ過ぎない"
+      ],
+      "current_conflict": "修理をきちんと説明する力も、自分の曲も育てたい。早番のあとに全部試そうとすると休む時間がなくなる。",
+      "commitments": [
+        {
+          "id": "return_own_tools",
+          "kind": "household",
+          "actions": [
+            "tidy_tools"
+          ],
+          "due_minute": 1050,
+          "window_minutes": 180,
+          "required_minutes": 5,
+          "known_to": [
+            "haru",
+            "saki"
+          ],
+          "label": "自分の道具を収めてから音楽を聴き直す"
+        },
+        {
+          "id": "finish_one_tool_loop",
+          "kind": "independent",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 1140,
+          "window_minutes": 180,
+          "required_minutes": 15,
+          "known_to": [
+            "haru",
+            "saki"
+          ],
+          "label": "持ち帰った音から一つの短いリズムを試す"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "north_haru_sound_samples",
+          "kind": "recorded_tool_samples",
+          "label": "既に録音した道具の短い音",
+          "fixture": "haru_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "north_haru_recorder",
+          "kind": "audio_recorder",
+          "label": "修理の音を持ち帰る小さな録音機",
+          "fixture": "haru_storage",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fatigued",
+          "threshold": 0.7,
+          "actions": [
+            "quiet",
+            "sleep"
+          ],
+          "delta": 0.1,
+          "reason": "早番のあとまで試し続けず、次の修理に備えて休む"
+        },
+        {
+          "when": "project_underway",
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.08,
+          "reason": "録音済みの道具の音を、短いリズムとして聴き直したい"
+        }
+      ],
+      "project": {
+        "id": "haru_tool_sound_loop",
+        "activity": "edit_tool_sound_loop",
+        "label": "録音した道具の音を短いリズムに組む",
+        "source_item_id": "north_haru_sound_samples",
+        "storage_fixture": "haru_storage",
+        "activity_fixture": "haru_desk",
+        "use_fixture": "haru_desk_chair",
+        "required_minutes": 75,
+        "artifact_kind": "tool_sound_loop",
+        "independent": true,
+        "noise": "headphones",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "既存の録音データ",
+          "録音機とヘッドホン",
+          "音を編集・保存する道具"
+        ],
+        "operations": [
+          "録音済みの音を聴いて選ぶ",
+          "音の間隔を変えて組み合わせる",
+          "短いループを保存して聴き直す"
+        ],
+        "not_claimed": "編集だけで新しい修理、屋外録音、他者への実演が成立したことにしない",
+        "result_mode": "version_source"
+      }
+    },
+    "tomo": {
+      "authored_age_years": 52,
+      "household_id": "mori",
+      "home_id": "mori_home",
+      "occupation": "午後に在宅で縫製の注文を受ける人",
+      "episodes": [
+        {
+          "id": "orders_and_saved_offcuts",
+          "when": "縫製の注文を続ける中で",
+          "participants": [
+            "tomo"
+          ],
+          "known_to": [
+            "tomo",
+            "yui"
+          ],
+          "summary": "納期に合わせた縫製を重ね、使える端切れを分けて残してきた。注文とは別に、自分の好きな物を作る時間も持ちたいと思うようになった。",
+          "influence": "仕事の正確さを守りながら、余った布を自分の試作へ生かしたい"
+        },
+        {
+          "id": "adult_child_shared_home",
+          "when": "結衣も仕事を持つ今の共同生活",
+          "participants": [
+            "tomo",
+            "yui"
+          ],
+          "known_to": [
+            "tomo",
+            "yui"
+          ],
+          "summary": "親子でも互いの仕事と私室の時間を当然に空いているとは考えず、共同の出費と家事を相談してきた。結衣の音楽は楽しみだが、受注の集中が必要な時間も伝えている。",
+          "influence": "家のことを親だけで抱えず、相手の意思を待って分担したい"
+        }
+      ],
+      "values": {
+        "family_time": 0.72,
+        "reliability": 0.92,
+        "creative_pride": 0.91,
+        "independence": 0.85
+      },
+      "experience": {
+        "cook": 0.65,
+        "laundry": 0.81,
+        "personal_project": 0.85,
+        "tidy_tools": 0.9
+      },
+      "responsibilities": [
+        "午後の縫製受注を仕上げる",
+        "結衣と共同の出費と家事を相談し、自分の裁縫道具を収める"
+      ],
+      "current_conflict": "受注を優先すると自分の小物作りが後回しになる。慣れた作り方を守る安心と、他の工夫を教わりたい気持ちがある。",
+      "commitments": [
+        {
+          "id": "afternoon_order_boundary",
+          "kind": "quiet_window",
+          "actions": [],
+          "due_minute": 1080,
+          "window_minutes": 300,
+          "clock_window": [
+            780,
+            1080
+          ],
+          "required_minutes": 0,
+          "known_to": [
+            "tomo",
+            "yui"
+          ],
+          "label": "受注に集中する午後は、音や共用の予定を相談する"
+        },
+        {
+          "id": "put_sewing_tools_back",
+          "kind": "household",
+          "actions": [
+            "tidy_tools"
+          ],
+          "due_minute": 1170,
+          "window_minutes": 180,
+          "required_minutes": 5,
+          "known_to": [
+            "tomo",
+            "yui"
+          ],
+          "label": "縫製道具と端切れを収め、使う人が迷わないようにする"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "mori_tomo_saved_offcuts",
+          "kind": "sorted_fabric_offcuts",
+          "label": "注文のあとに分けて残した端切れ",
+          "fixture": "fabric_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "mori_tomo_sewing_tools",
+          "kind": "sewing_kit",
+          "label": "長く使ってきた裁縫道具",
+          "fixture": "fabric_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "mori_tomo_project_offcut",
+          "kind": "fabric_piece",
+          "label": "自分の小物用に残した一枚の端切れ",
+          "fixture": "fabric_storage",
+          "parent_item_id": "mori_tomo_saved_offcuts",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fresh",
+          "threshold": 0.55,
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.08,
+          "reason": "注文とは別に、自分の好きな布を選ぶ時間を持ちたい"
+        },
+        {
+          "when": "tools_out",
+          "actions": [
+            "tidy_tools"
+          ],
+          "delta": 0.14,
+          "reason": "針やはさみを出したままにせず、自分の裁縫道具を収める"
+        }
+      ],
+      "project": {
+        "id": "tomo_offcut_pouch",
+        "activity": "sew_offcut_pouch",
+        "label": "端切れを選び、小さな布入れを縫う",
+        "source_item_id": "mori_tomo_project_offcut",
+        "storage_fixture": "fabric_storage",
+        "activity_fixture": "sewing_table",
+        "use_fixture": "sewing_chair",
+        "required_minutes": 90,
+        "artifact_kind": "offcut_pouch",
+        "independent": true,
+        "noise": "tool",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "本人の小物用に残した一枚の端切れと糸",
+          "針とはさみ",
+          "裁断面と縫製机の使用権"
+        ],
+        "operations": [
+          "端切れと型を選ぶ",
+          "実際の布を裁つ",
+          "縫って形を作る",
+          "糸と縫い目を確かめ、道具を返す"
+        ],
+        "not_claimed": "材料・工具・裁断・縫製を実行する専用工程が必要。背景や一般の静止時間だけで縫製相互作用の完成とはしない",
+        "result_mode": "transform_source"
+      }
+    },
+    "yui": {
+      "authored_age_years": 27,
+      "household_id": "mori",
+      "home_id": "mori_home",
+      "occupation": "午後に町外で音楽を教える人",
+      "episodes": [
+        {
+          "id": "waiting_for_another_sound",
+          "when": "音楽を教える中で",
+          "participants": [
+            "yui"
+          ],
+          "known_to": [
+            "yui",
+            "tomo"
+          ],
+          "summary": "自分がすぐ弾いて見せるより、相手が好きな音を試すのを待った方が話が広がる場面を経験した。短い旋律にも相手が返せる余白を作りたいと思っている。",
+          "influence": "一緒に演奏したい時ほど、相手の試し方と返事を待ちたい"
+        },
+        {
+          "id": "music_and_a_working_parent",
+          "when": "智と暮らしながら仕事を続ける最近",
+          "participants": [
+            "yui",
+            "tomo",
+            "ritsu"
+          ],
+          "known_to": [
+            "yui",
+            "tomo",
+            "ritsu"
+          ],
+          "summary": "家では智の縫製に集中する時間と音を出す時間を話し合い、律とは曲について短く話すようになった。親子や知り合いだからいつでも聴いてくれるとは考えないようにしている。",
+          "influence": "人との音楽を楽しみつつ、相手の仕事と休息を尊重したい"
+        }
+      ],
+      "values": {
+        "family_time": 0.84,
+        "reliability": 0.72,
+        "creative_pride": 0.95,
+        "independence": 0.78
+      },
+      "experience": {
+        "cook": 0.38,
+        "wash_dishes": 0.56,
+        "personal_project": 0.8,
+        "tidy_tools": 0.63
+      },
+      "responsibilities": [
+        "午後の音楽指導を受け持つ",
+        "智と家事と費用を分け、音を出す時間は相談する"
+      ],
+      "current_conflict": "町の人と曲を作る機会を増やしたいが、教室の準備も相手の都合も大切にしたい。家では親の仕事の時間を自分の練習で埋めない。",
+      "commitments": [
+        {
+          "id": "prepare_reply_phrase",
+          "kind": "project",
+          "project_id": "yui_reply_phrase",
+          "actions": [
+            "personal_project"
+          ],
+          "due_minute": 810,
+          "window_minutes": 150,
+          "required_minutes": 60,
+          "known_to": [
+            "yui",
+            "tomo"
+          ],
+          "label": "教室へ出る前に、相手が音を返せる短い旋律を用意する"
+        },
+        {
+          "id": "clear_after_practice",
+          "kind": "household",
+          "actions": [
+            "tidy_tools"
+          ],
+          "due_minute": 1170,
+          "window_minutes": 180,
+          "required_minutes": 5,
+          "known_to": [
+            "yui",
+            "tomo"
+          ],
+          "label": "練習のあと道具を片付け、共用する家の時間を空ける"
+        }
+      ],
+      "treasured_items": [
+        {
+          "id": "mori_yui_practice_phrase",
+          "kind": "unfinished_phrase_recording",
+          "label": "教室で試したい短い旋律の録音",
+          "fixture": "yui_storage",
+          "provenance": "authored_fiction"
+        },
+        {
+          "id": "mori_yui_music_tools",
+          "kind": "small_keyboard",
+          "label": "自宅で旋律を試す鍵盤と録音道具",
+          "fixture": "music_desk",
+          "provenance": "authored_fiction"
+        }
+      ],
+      "choice_rules": [
+        {
+          "when": "fresh",
+          "threshold": 0.6,
+          "actions": [
+            "personal_project"
+          ],
+          "delta": 0.07,
+          "reason": "相手が返せる余白を残し、教室で試す短い旋律を準備したい"
+        },
+        {
+          "when": "quiet_requested",
+          "actions": [
+            "personal_project"
+          ],
+          "project_noise": [
+            "audible",
+            "tool"
+          ],
+          "delta": -0.25,
+          "reason": "智が集中すると伝えた時間なので、音を出す練習はあとにする"
+        },
+        {
+          "when": "shared_deadline",
+          "actions": [
+            "wash_dishes"
+          ],
+          "delta": 0.08,
+          "reason": "相手に仕事の締切がある時は、今出来る家事を引き受けたい"
+        }
+      ],
+      "project": {
+        "id": "yui_reply_phrase",
+        "activity": "practice_reply_phrase",
+        "label": "相手が音を返せる短い旋律を弾いて録る",
+        "source_item_id": "mori_yui_practice_phrase",
+        "storage_fixture": "yui_storage",
+        "activity_fixture": "music_desk",
+        "use_fixture": "music_desk_chair",
+        "required_minutes": 60,
+        "artifact_kind": "reply_phrase_recording",
+        "independent": false,
+        "noise": "audible",
+        "execution_status": "authored_contract_not_integrated",
+        "requirements": [
+          "本人の旋律の下書きと録音",
+          "鍵盤と録音道具",
+          "音を出す部屋の使用権"
+        ],
+        "operations": [
+          "短い旋律を弾いて試す",
+          "相手が返す間を空けて弾き直す",
+          "試した版を録音し再生する"
+        ],
+        "not_claimed": "録音の完成は教室の実施、相手の上達、共同演奏の受諾を意味しない",
+        "result_mode": "version_source"
+      }
+    }
+  }
+}

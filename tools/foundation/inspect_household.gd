@@ -19,6 +19,10 @@ func run() -> void:
 	var started:=Time.get_ticks_msec()
 	while game.household.elapsed<duration:
 		game.executor.step(1.0/30.0,1.0/60.0)
+		game.household_props.sync(1.0/30.0)
+		# Furniture work now requires the actual deferred skeletal support sample.
+		# A tight clock loop without an engine frame cannot establish that contact.
+		await process_frame
 		var ids: Array=game.residents.keys()
 		for first in ids.size():
 			for second in range(first+1,ids.size()):

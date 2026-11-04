@@ -33,7 +33,7 @@ func _build_ui() -> void:
 	var top:=HBoxContainer.new();top.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE);top.offset_left=20;top.offset_right=-20;top.offset_top=18;top.offset_bottom=70;top.add_theme_constant_override("separation",12);canvas.add_child(top)
 	var title:=Label.new();title.text="小川家";title.add_theme_font_size_override("font_size",30);title.size_flags_horizontal=Control.SIZE_EXPAND_FILL;top.add_child(title)
 	var overview:=Button.new();overview.text="家を見渡す";overview.custom_minimum_size=Vector2(150,48);overview.pressed.connect(_show_overview);top.add_child(overview)
-	wall_button=Button.new();wall_button.text="壁をすべて表示";wall_button.custom_minimum_size=Vector2(170,48);wall_button.pressed.connect(_toggle_walls);top.add_child(wall_button)
+	wall_button=Button.new();wall_button.text="外観を見る";wall_button.custom_minimum_size=Vector2(170,48);wall_button.pressed.connect(_toggle_walls);top.add_child(wall_button)
 	var zoom:=HBoxContainer.new();zoom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);zoom.offset_left=-180;zoom.offset_right=-20;zoom.offset_top=-70;zoom.offset_bottom=-20;zoom.add_theme_constant_override("separation",10);canvas.add_child(zoom)
 	for setting in [["−",1.15],["＋",1.0/1.15]]:
 		var button:=Button.new();button.text=setting[0];button.custom_minimum_size=Vector2(70,48)
@@ -47,7 +47,7 @@ func _show_overview() -> void:
 
 func _toggle_walls() -> void:
 	house.cutaway=not house.cutaway
-	wall_button.text="壁をすべて表示" if house.cutaway else "手前の壁を隠す"
+	wall_button.text="外観を見る" if house.cutaway else "室内を見る"
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(camera): _update_camera()

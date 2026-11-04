@@ -11,7 +11,10 @@ var _zones: Dictionary = {}
 var _doors: Dictionary = {}
 var _floors: Array = []
 var _solids: Array = []
-var _free_cells: Array = []
+var _free_cells: Dictionary = {}
+var _wall_solids: Array = []
+var _fixture_solids: Dictionary = {}
+var _fixture_shapes: Dictionary = {}
 var _grid: AStarGrid2D
 var _baseline
 
@@ -43,7 +46,8 @@ static func _clip(first: Vector2, last: Vector2, rect: Rect2) -> Variant:
 			if low>high+EPS: return null
 	return Vector2(low,high)
 
-static func _opening(door: Dictionary, thickness: float) -> Rect2:
+static func threshold_rect(door: Dictionary, thickness: float) -> Rect2:
+	# This exact rectangle also creates the real threshold floor in LivingHouse.
 	var center := _point(door.center)
 	return Rect2(center-Vector2(float(door.width)*.5,thickness*.5),Vector2(door.width,thickness)) if door.axis=="x" else Rect2(center-Vector2(thickness*.5,float(door.width)*.5),Vector2(thickness,door.width))
 
@@ -55,11 +59,15 @@ func configure(plan: Variant, radius: float = .24) -> bool:
 	if not plan.get("walls") is Array or plan.walls.is_empty() or plan.walls.size()>512: return false
 	var walls := {};var zones := {};var doors := {};var solids: Array = []
 	var thickness: float = plan.house.wall_thickness
-	var floors: Array = [_rect(plan.house.bounds)]
+	var house_bounds: Rect2 = _rect(plan.house.bounds)
+	var floors: Array = []
 	for room in plan.rooms:
-		if not floors[0].encloses(_rect(room.bounds)): return false
+		if not house_bounds.encloses(_rect(room.bounds)): return false
+		floors.append(_rect(room.bounds))
 	for zone in plan.external_zones: floors.append(_rect(zone.bounds))
-	var envelope: Rect2 = floors[0]
+	# bounds is an extent, never a substitute floor for a courtyard, a notch,
+	# wall thickness or an unbuilt part of an L-shaped house.
+	var envelope: Rect2 = house_bounds
 	for floor_rect: Rect2 in floors: envelope = envelope.merge(floor_rect)
 	if ceili(envelope.size.x/STEP+2)*ceili(envelope.size.y/STEP+2)>1000000: return false
 	for room in plan.rooms+plan.external_zones: zones[room.id] = _rect(room.bounds)
@@ -89,9 +97,10 @@ func configure(plan: Variant, radius: float = .24) -> bool:
 			if pocket[1]-pocket[0]<float(authored.width)-EPS or pocket[0]<minf(wall.start[axis],wall.end[axis])-EPS or pocket[1]>maxf(wall.start[axis],wall.end[axis])+EPS: return false
 			if not (pocket[1]<=low+EPS or pocket[0]>=high-EPS): return false
 		var door: Dictionary = authored.duplicate(true)
-		door.navigation_rect = _opening(door,thickness)
+		door.navigation_rect = threshold_rect(door,thickness)
 		door.narrow = float(door.width)<=2*radius+EPS
 		doors[door.id] = door
+		floors.append(door.navigation_rect)
 	for wall in walls.values():
 		var first := Vector2(wall.start[0],wall.start[1]);var last := Vector2(wall.end[0],wall.end[1])
 		var axis: int = 0 if absf(first.y-last.y)<EPS else 1
@@ -110,15 +119,19 @@ func configure(plan: Variant, radius: float = .24) -> bool:
 				var rect := Rect2(cursor,first.y-thickness*.5,cut.x-cursor,thickness) if axis==0 else Rect2(first.x-thickness*.5,cursor,thickness,cut.x-cursor)
 				solids.append(rect.grow(radius))
 			cursor = cut.y
+	var fixture_solids := {};var fixture_shapes := {}
 	for fixture in plan.fixtures:
 		if not _vector(fixture.get("position"),3) or not _vector(fixture.get("size"),3) or not _vector(fixture.get("interaction_point"),3) or fixture.size.any(func(value): return value<=0): return false
 		if fixture.has("blocking") and not fixture.blocking is bool: return false
 		var rect := Rect2(_point(fixture.position)-Vector2(fixture.size[0],fixture.size[2])*.5,Vector2(fixture.size[0],fixture.size[2]))
 		if not zones[fixture.room].encloses(rect): return false
-		if fixture.get("blocking",true): solids.append(rect.grow(radius))
+		if fixture.get("blocking",true):
+			fixture_solids[fixture.id]=rect.grow(radius)
+			fixture_shapes[fixture.id]={"size":rect.size,"room":fixture.room}
 	# Derived geometry is committed only after the authored plan is consistent.
 	_house_id = plan.house.id;_radius = radius;_floor_y = float(plan.house.get("floor_y",0))
-	_zones = zones;_doors = doors;_solids = solids;_baseline = baseline
+	_zones = zones;_doors = doors;_wall_solids = solids;_fixture_solids=fixture_solids;_fixture_shapes=fixture_shapes
+	_solids=_wall_solids+_fixture_solids.values();_baseline = baseline
 	_floors = floors
 	_grid = AStarGrid2D.new();_grid.cell_size = Vector2(STEP,STEP)
 	_grid.offset = Vector2(floorf(envelope.position.x/STEP)*STEP,floorf(envelope.position.y/STEP)*STEP)
@@ -126,13 +139,37 @@ func configure(plan: Variant, radius: float = .24) -> bool:
 	_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	_grid.update();_free_cells = []
+	_grid.update();_free_cells = {}
 	for z in _grid.region.size.y:
 		for x in _grid.region.size.x:
 			var cell := Vector2i(x,z);var position: Vector2 = _grid.get_point_position(cell)
 			var clear := _point_clear(position,[])
 			_grid.set_point_solid(cell,not clear)
-			if clear: _free_cells.append(cell)
+			if clear: _free_cells[cell]=true
+	return true
+
+func move_fixture(id: String, position: Vector3) -> bool:
+	# Moving a dining chair moves its physical routing obstacle as well as its
+	# rendered mesh. Only its affected cells are refreshed, including freed cells.
+	if _grid==null or not _fixture_shapes.has(id) or not position.is_finite() or absf(position.y-_floor_y)>.01:return false
+	var shape: Dictionary=_fixture_shapes[id]
+	var rect:=Rect2(Vector2(position.x,position.z)-shape.size*.5,shape.size)
+	if not _zones[shape.room].encloses(rect):return false
+	var before: Rect2=_fixture_solids[id]
+	var after:=rect.grow(_radius)
+	if before==after:return true
+	_fixture_solids[id]=after;_solids=_wall_solids+_fixture_solids.values()
+	var affected: Rect2=before.merge(after).grow(STEP)
+	var first:=Vector2i(floori((affected.position.x-_grid.offset.x)/STEP),floori((affected.position.y-_grid.offset.y)/STEP))
+	var last:=Vector2i(ceili((affected.end.x-_grid.offset.x)/STEP),ceili((affected.end.y-_grid.offset.y)/STEP))
+	for z in range(first.y,last.y+1):
+		for x in range(first.x,last.x+1):
+			var cell:=Vector2i(x,z)
+			if not _grid.is_in_boundsv(cell):continue
+			var clear:=_point_clear(_grid.get_point_position(cell),[])
+			_grid.set_point_solid(cell,not clear)
+			if clear:_free_cells[cell]=true
+			else:_free_cells.erase(cell)
 	return true
 
 func _point_clear(point: Vector2, additional: Array) -> bool:

@@ -6,7 +6,7 @@ extends Node3D
 # The motor's global transform and pose.heading are world-space. A child visual
 # inherits that transform; it must not apply the heading or position a second time.
 # No gait, skeleton pose, contact or natural-looking motion is claimed here.
-const FORMAT_VERSION := 2
+const FORMAT_VERSION := 3
 const STEP_SECONDS := 1.0 / 120.0
 const REPLANT_SECONDS := .12
 const POSITION_EPSILON := .000001
@@ -14,7 +14,8 @@ const HEADING_EPSILON := .00001
 const MAX_PATH_POINTS := 1024
 const MAX_COORDINATE := 10000.0
 const DEFAULT_PROFILE := {"walk_speed":1.1,"acceleration":1.8,"deceleration":2.2,"turn_speed":2.4,"arrival_radius":.04}
-const STATES := ["idle","start","walk","turn","stop"]
+const STATES := ["idle","start","walk","turn","stop","interaction"]
+const MAX_INTERACTION_SPEED := 2.0
 
 var velocity: Vector3:
 	get: return _direction * _speed
@@ -41,6 +42,7 @@ var _replant_remaining := 0.0
 var _remainder := 0.0
 var _gait_distance := 0.0
 var _turn_only := false
+var _interaction: Dictionary = {}
 
 func configure(profile: Dictionary) -> bool:
 	var checked := _checked_profile(profile)
@@ -48,11 +50,13 @@ func configure(profile: Dictionary) -> bool:
 	if not _valid_vector(global_position) or not is_finite(global_rotation.y): return false
 	_profile = checked
 	_heading = wrapf(global_rotation.y,-PI,PI)
+	_apply_heading()
 	_goal_heading = _heading
 	_segment_origin = global_position
 	return true
 
 func follow_path(points: Array) -> bool:
+	if _state=="interaction":return false
 	var checked: Variant = _checked_path(points,false)
 	if checked==null: return false
 	if checked.is_empty(): stop();return true
@@ -65,13 +69,26 @@ func follow_path(points: Array) -> bool:
 		_start_path(checked)
 	return true
 
-func stop() -> void:
+func stop() -> bool:
+	# An authored furniture transition has its own safe exit sequence. A new
+	# walk intention cannot strand the body halfway inside a chair or bed.
+	if _state=="interaction":return false
 	_pending_path.clear();_has_pending_path = false
 	if _speed>0:
 		_stop_requested = true
 		_set_state("stop")
 	else:
 		_finish_path()
+	return true
+
+func follow_interaction(token: String, frames: Array) -> bool:
+	if _state!="idle" or token.is_empty() or token.length()>96:return false
+	var checked: Array=_checked_interaction_frames(frames)
+	if checked.is_empty():return false
+	if global_position.distance_to(_vector(checked[0].position))>.00001 or absf(wrapf(float(checked[0].heading)-_heading,-PI,PI))>.00001:return false
+	_interaction={"token":token,"frames":checked,"elapsed":0.0}
+	_set_state("interaction")
+	return true
 
 func face_heading(angle: float) -> bool:
 	# Furniture alignment uses the same controller as a path corner. Callers
@@ -101,7 +118,8 @@ func pose() -> Dictionary:
 	return {"speed":_speed,"normalized_speed":_speed / float(_profile.walk_speed),"heading":_heading,
 		"turn_angle":wrapf(_goal_heading-_heading,-PI,PI),"state":_state,"state_elapsed":_state_elapsed,
 		"gait_distance":_gait_distance,"turn_phase":_turn_phase,
-		"turn_progress":1.0-clampf(absf(wrapf(_goal_heading-_heading,-PI,PI))/maxf(HEADING_EPSILON,_turn_total_angle),0,1) if _state=="turn" else 0.0}
+		"turn_progress":1.0-clampf(absf(wrapf(_goal_heading-_heading,-PI,PI))/maxf(HEADING_EPSILON,_turn_total_angle),0,1) if _state=="turn" else 0.0,
+		"interaction":_interaction.duplicate(true)}
 
 func snapshot() -> Dictionary:
 	# Plain arrays deliberately make the current format JSON-safe, independent
@@ -111,7 +129,7 @@ func snapshot() -> Dictionary:
 		"path":_encoded_path(_path),"pending_path":_encoded_path(_pending_path),"has_pending_path":_has_pending_path,
 		"stop_requested":_stop_requested,"segment_origin":_xyz(_segment_origin),"direction":_xyz(_direction),
 		"length":_length,"progress":_progress,"speed":_speed,"turn_phase":_turn_phase,"turn_total_angle":_turn_total_angle,
-		"replant_remaining":_replant_remaining,"remainder":_remainder,"gait_distance":_gait_distance,"turn_only":_turn_only}
+		"replant_remaining":_replant_remaining,"remainder":_remainder,"gait_distance":_gait_distance,"turn_only":_turn_only,"interaction":_interaction.duplicate(true)}
 
 func restore(data: Variant) -> bool:
 	var checked := _checked_snapshot(data)
@@ -119,6 +137,7 @@ func restore(data: Variant) -> bool:
 	# All validation precedes mutation, including transform and configuration.
 	_profile = checked.profile
 	_turn_only=data.turn_only
+	_interaction=data.interaction.duplicate(true)
 	_path.assign(checked.path);_pending_path.assign(checked.pending_path)
 	_has_pending_path = data.has_pending_path;_stop_requested = data.stop_requested
 	_segment_origin = checked.segment_origin;_direction = checked.direction
@@ -128,20 +147,22 @@ func restore(data: Variant) -> bool:
 	_turn_phase = data.turn_phase;_turn_total_angle = float(data.turn_total_angle)
 	_replant_remaining = float(data.replant_remaining);_remainder = float(data.remainder);_gait_distance = float(data.gait_distance)
 	global_position = checked.position
-	global_rotation = Vector3(0,_heading,0)
+	_apply_heading()
 	return true
 
 func _integrate(delta: float) -> void:
 	_state_elapsed += delta
 	if _state=="idle": return
+	if _state=="interaction":
+		_integrate_interaction(delta);return
 	if _state=="turn":
 		if _turn_phase=="rotate":
 			var error := wrapf(_goal_heading-_heading,-PI,PI)
 			var change := clampf(error,-float(_profile.turn_speed)*delta,float(_profile.turn_speed)*delta)
 			_heading = wrapf(_heading+change,-PI,PI)
-			global_rotation = Vector3(0,_heading,0)
+			_apply_heading()
 			if absf(wrapf(_goal_heading-_heading,-PI,PI))<=HEADING_EPSILON:
-				_heading = _goal_heading;global_rotation = Vector3(0,_heading,0)
+				_heading = _goal_heading;_apply_heading()
 				_turn_phase = "replant";_replant_remaining = REPLANT_SECONDS
 		else:
 			_replant_remaining = maxf(0,_replant_remaining-delta)
@@ -224,6 +245,7 @@ func _begin_segment() -> void:
 		_turn_phase = "none";_set_state("start")
 
 func _finish_path() -> void:
+	_interaction.clear()
 	_path.clear();_pending_path.clear();_has_pending_path = false;_stop_requested = false
 	_segment_origin = global_position;_direction = Vector3.ZERO
 	_length = 0.0;_progress = 0.0;_speed = 0.0
@@ -233,6 +255,55 @@ func _finish_path() -> void:
 
 func _set_state(value: String) -> void:
 	if _state!=value: _state=value;_state_elapsed=0.0
+
+func _integrate_interaction(delta: float) -> void:
+	var frames: Array=_interaction.frames
+	_interaction.elapsed=minf(float(frames[-1].at),float(_interaction.elapsed)+delta)
+	_state_elapsed=float(_interaction.elapsed)
+	var sample: Dictionary=_sample_interaction(frames,_state_elapsed)
+	global_position=sample.position;_heading=sample.heading;_goal_heading=_heading
+	_apply_heading()
+	var motion: Vector3=sample.velocity
+	_speed=motion.length();_direction=motion.normalized() if _speed>.0000001 else Vector3.ZERO
+	if _interaction.elapsed>=float(frames[-1].at)-.000000001:_finish_path()
+
+func _apply_heading() -> void:
+	# Repeated Euler assignments preserve/decompose the preceding float32 scale
+	# and slowly shrink the body. The metre-based motor always writes a fresh
+	# unit basis; restoration must not inherit the future world's scale drift.
+	global_basis=Basis(Vector3.UP,_heading)
+
+static func _checked_interaction_frames(data: Variant) -> Array:
+	if not data is Array or data.size()<2 or data.size()>64:return []
+	var result: Array=[]
+	for item in data:
+		if not item is Dictionary or item.size()!=3 or not _number(item.get("at")) or not _number(item.get("heading")):return []
+		var point: Variant=item.get("position")
+		if point is Array:point=_vector(point)
+		if not point is Vector3 or not _valid_vector(point) or item.at<0 or item.at>30 or absf(float(item.heading))>PI+.0000001:return []
+		if result.is_empty():
+			if item.at!=0:return []
+		else:
+			var previous: Dictionary=result[-1]
+			var duration: float=float(item.at)-float(previous.at)
+			if duration<.05:return []
+			# Smoothstep has a peak derivative of 1.5. This is a physical
+			# movement bound, not permission to bypass the caller's geometry.
+			if point.distance_to(_vector(previous.position))*1.5/duration>MAX_INTERACTION_SPEED:return []
+			if absf(wrapf(float(item.heading)-float(previous.heading),-PI,PI))*1.5/duration>6:return []
+		result.append({"at":float(item.at),"position":_xyz(point),"heading":float(item.heading)})
+	return result
+
+static func _sample_interaction(frames: Array, elapsed: float) -> Dictionary:
+	var index:=1
+	while index<frames.size()-1 and elapsed>float(frames[index].at):index+=1
+	var before: Dictionary=frames[index-1];var after: Dictionary=frames[index]
+	var duration: float=float(after.at)-float(before.at)
+	var progress: float=clampf((elapsed-float(before.at))/duration,0,1)
+	var eased: float=progress*progress*(3-2*progress)
+	var a: Vector3=_vector(before.position);var b: Vector3=_vector(after.position)
+	return {"position":a.lerp(b,eased),"velocity":(b-a)*(6*progress*(1-progress)/duration),
+		"heading":wrapf(lerp_angle(float(before.heading),float(after.heading),eased),-PI,PI)}
 
 static func _checked_profile(data: Dictionary, complete: bool = false) -> Dictionary:
 	if complete and data.size()!=DEFAULT_PROFILE.size(): return {}
@@ -254,7 +325,7 @@ static func _checked_path(data: Variant, encoded: bool) -> Variant:
 	return result
 
 static func _checked_snapshot(data: Variant) -> Dictionary:
-	if not data is Dictionary or data.size()!=23 or not _number(data.get("version")) or data.version!=FORMAT_VERSION: return {}
+	if not data is Dictionary or data.size()!=24 or not _number(data.get("version")) or data.version!=FORMAT_VERSION: return {}
 	if not data.get("profile") is Dictionary: return {}
 	var profile := _checked_profile(data.profile,true)
 	if profile.is_empty(): return {}
@@ -265,8 +336,10 @@ static func _checked_snapshot(data: Variant) -> Dictionary:
 	if data.get("state") not in STATES or data.get("turn_phase") not in ["none","rotate","replant"]: return {}
 	if not data.get("has_pending_path") is bool or not data.get("stop_requested") is bool: return {}
 	if not data.get("turn_only") is bool: return {}
+	if not data.get("interaction") is Dictionary:return {}
+	if data.state!="interaction" and not data.interaction.is_empty():return {}
 	if data.turn_only and data.state!="turn":return {}
-	if data.speed>profile.walk_speed+.000001 or data.remainder>=STEP_SECONDS or data.replant_remaining>REPLANT_SECONDS or data.turn_total_angle>PI+.0000001: return {}
+	if data.speed>(MAX_INTERACTION_SPEED if data.state=="interaction" else profile.walk_speed)+.000001 or data.remainder>=STEP_SECONDS or data.replant_remaining>REPLANT_SECONDS or data.turn_total_angle>PI+.0000001: return {}
 	var result := {"profile":profile}
 	for key in ["position","velocity","segment_origin","direction"]:
 		var value: Variant = _vector(data.get(key))
@@ -279,7 +352,16 @@ static func _checked_snapshot(data: Variant) -> Dictionary:
 	if result.velocity.distance_to(result.direction*float(data.speed))>.00001: return {}
 	if bool(data.has_pending_path)!=(not result.pending_path.is_empty()) or (data.has_pending_path and not data.stop_requested): return {}
 	if data.stop_requested and (data.state!="stop" or data.speed<=0): return {}
-	if data.state=="idle":
+	if data.state=="interaction":
+		if data.interaction.size()!=3 or not data.interaction.get("token") is String or data.interaction.token.is_empty() or data.interaction.token.length()>96:return {}
+		var frames: Array=_checked_interaction_frames(data.interaction.get("frames"))
+		if frames.is_empty() or not _number(data.interaction.get("elapsed")) or data.interaction.elapsed<0 or data.interaction.elapsed>=frames[-1].at:return {}
+		var sampled: Dictionary=_sample_interaction(frames,float(data.interaction.elapsed))
+		if result.position.distance_to(sampled.position)>.00002 or result.velocity.distance_to(sampled.velocity)>.00002:return {}
+		if absf(wrapf(float(data.heading)-float(sampled.heading),-PI,PI))>.00001 or absf(float(data.state_elapsed)-float(data.interaction.elapsed))>.0000001:return {}
+		if not result.path.is_empty() or not result.pending_path.is_empty() or data.length!=0 or data.progress!=0 or data.turn_only or data.turn_phase!="none" or data.turn_total_angle!=0 or data.stop_requested:return {}
+		if result.segment_origin.distance_to(_vector(frames[0].position))>.00001 or absf(wrapf(float(data.heading)-float(data.goal_heading),-PI,PI))>.00001:return {}
+	elif data.state=="idle":
 		if not result.path.is_empty() or data.speed!=0 or data.turn_phase!="none" or data.stop_requested or data.length!=0 or data.progress!=0 or result.direction!=Vector3.ZERO: return {}
 		if result.position.distance_to(result.segment_origin)>.00001 or absf(wrapf(float(data.goal_heading)-float(data.heading),-PI,PI))>HEADING_EPSILON or data.turn_total_angle!=0: return {}
 	elif data.turn_only:

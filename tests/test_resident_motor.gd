@@ -221,6 +221,51 @@ func furniture_facing() -> void:
 	expect(not motor.face_heading(0) and equal(before,motor.snapshot()),"A furniture alignment cannot overwrite a moving body")
 	motor.free()
 
+func orientation_keeps_scale() -> void:
+	var motor=create({"turn_speed":12.0})
+	for index in 180:
+		motor.face_heading(wrapf(float(index)*2.3,-PI,PI))
+		simulate(motor,1.0,[1.0/30.0])
+	var scale: Vector3=motor.global_basis.get_scale()
+	expect(scale.distance_to(Vector3.ONE)<.000001,"Repeated turns preserve a metre-sized body instead of retaining accumulated Euler decomposition scale")
+	var saved: Dictionary=motor.snapshot()
+	motor.global_basis=motor.global_basis.scaled(Vector3(.85,1,.85))
+	expect(motor.restore(saved) and motor.global_basis.get_scale().distance_to(Vector3.ONE)<.000001,"Restoring the motor rebuilds its canonical unit world orientation without inheriting the later world's scale")
+	motor.free()
+
+func furniture_root_motion() -> void:
+	var frames: Array=[{"at":0.0,"position":Vector3.ZERO,"heading":0.0},
+		{"at":1.0,"position":Vector3(-.4,0,0),"heading":0.0},
+		{"at":1.5,"position":Vector3(-.4,.2,0),"heading":.4}]
+	var reference: Dictionary={}
+	for deltas in [[1.0/30],[1.0/60],[.013,.027,.041,.019]]:
+		var motor=create()
+		expect(motor.follow_interaction("chair_pull_and_mount",frames),"A stopped body admits a bounded furniture root track")
+		simulate(motor,.5,deltas)
+		expect(motor.state()=="interaction" and motor.global_position.distance_to(Vector3(-.2,0,0))<.00001 and absf(motor.heading)<.00001 and motor.velocity.x<0,"Pulling moves the real body backward while preserving its forward-facing heading")
+		var held: Dictionary=motor.snapshot()
+		expect(not motor.stop() and not motor.follow_path([Vector3(0,0,5)]) and not motor.face_heading(PI) and equal(held,motor.snapshot()),"A walking intention cannot overwrite or stop a furniture transition at an unsafe intermediate pose")
+		replay_checkpoint(motor,"furniture_root_track")
+		motor.restore(held)
+		simulate(motor,.7,deltas)
+		if reference.is_empty():reference=motor.snapshot()
+		expect(equal(reference,motor.snapshot()),"Furniture translation, heading and time agree across render delta partitions")
+		var before: Dictionary=motor.snapshot()
+		var bad: Dictionary=before.duplicate(true);bad.position[1]+=.1
+		expect(not motor.restore(bad) and equal(before,motor.snapshot()),"A position contradicting the saved interaction track is rejected atomically")
+		simulate(motor,1,deltas)
+		expect(motor.state()=="idle" and motor.global_position.distance_to(Vector3(-.4,.2,0))<.00001 and absf(motor.heading-.4)<.00001 and motor.velocity==Vector3.ZERO,"The body finishes at the authored raised use point without a second visual follower")
+		motor.free()
+	var motor=create()
+	var before: Dictionary=motor.snapshot()
+	var invalid: Array=frames.duplicate(true);invalid[0].position=Vector3(1,0,0)
+	expect(not motor.follow_interaction("wrong_entry",invalid) and equal(before,motor.snapshot()),"An interaction cannot snap a body to a different first point")
+	invalid=frames.duplicate(true);invalid[1].at=0
+	expect(not motor.follow_interaction("wrong_time",invalid) and equal(before,motor.snapshot()),"Non-monotonic furniture keyframes are rejected before any movement")
+	invalid=frames.duplicate(true);invalid[1].position=Vector3(100,0,0)
+	expect(not motor.follow_interaction("too_fast",invalid) and equal(before,motor.snapshot()),"A furniture track cannot move the body at an unbounded speed")
+	motor.free()
+
 func run() -> void:
 	straight_delta_variants()
 	speed_profiles()
@@ -230,6 +275,8 @@ func run() -> void:
 	save_restore_and_reject()
 	queued_route()
 	furniture_facing()
+	orientation_keeps_scale()
+	furniture_root_motion()
 	report.checks=checks;report.failures=failures
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
 	var file := FileAccess.open(OUT+"/results.json",FileAccess.WRITE)

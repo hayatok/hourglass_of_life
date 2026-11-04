@@ -10,10 +10,12 @@ var navigation: HomeNavigation
 var actors: Dictionary = {}
 var execution: Dictionary = {}
 var doors_in_use: Dictionary = {}
+var furniture: Dictionary = {}
 var _fixtures: Dictionary = {}
 var _room_bounds: Dictionary = {}
 var _retry_elapsed := 0.0
 var _decision_minutes := 0.0
+var _render_contacts: Dictionary = {}
 const BODY_RADIUS := .24
 const MAX_STEP := 1.0/30.0
 
@@ -26,6 +28,9 @@ func configure(house: LivingHouse, household: HouseholdDay, room_occupancy: Home
 	for room in home.definition.rooms+home.definition.external_zones:
 		var b: Array=room.bounds;_room_bounds[room.id]=Rect2(b[0],b[1],b[2],b[3])
 	for id in actors:
+		var use:=FoundationFurnitureUse.new()
+		if not use.configure(home,navigation,occupancy,actors[id]):return false
+		furniture[id]=use
 		execution[id]={"task":"","phase":-1,"state":"choose","reason":"","retry":0.0,"door":"","target":[0,0,0],"offsite":false,"current_room":room_at(actors[id].global_position)}
 		life.set_position(id,actors[id].global_position)
 		var room:=room_at(actors[id].global_position)
@@ -41,6 +46,8 @@ func room_at(point: Vector3) -> String:
 func step(seconds: float, minutes: float) -> bool:
 	if not is_finite(seconds) or not is_finite(minutes) or seconds<0 or seconds>1 or minutes<0 or minutes>1:return false
 	if seconds==0:return minutes==0
+	_render_contacts.clear()
+	for id in actors:_render_contacts[id]=actors[id].furniture_contacts_ready()
 	var steps: int=maxi(1,int(ceil(seconds/MAX_STEP)))
 	for ignored in steps:
 		var delta: float=seconds/steps
@@ -74,6 +81,11 @@ func _step_actor(id: String, delta: float, minutes: float) -> void:
 	var entry: Dictionary=execution[id]
 	entry.retry=maxf(0,float(entry.retry)-delta)
 	var task: Dictionary=life.task_for(id)
+	var use: FoundationFurnitureUse=furniture[id]
+	if use.active():
+		_step_furniture(id,task,delta,minutes)
+		return
+	actor.model.sleeping=false
 	if task.is_empty():
 		if actor.state()!="idle":actor.stop();actor.tick_body(delta);return
 		if entry.retry>0:actor.tick_body(delta);return
@@ -109,7 +121,10 @@ func _step_actor(id: String, delta: float, minutes: float) -> void:
 			actor.tick_body(delta)
 			if actor.body_is_settled():
 				var reply: Dictionary=life.arrive(id,task.id)
-				if reply.status=="arrived":entry.state="use";entry.reason="";actor.play_action(_motion_for(task))
+				if reply.status=="entering":
+					if use.begin(task,_obstacles(id)):entry.state="enter";entry.reason="家具を使う支度をしている"
+					else:entry.state="wait";entry.reason=use.reason;entry.retry=.5
+				elif reply.status=="arrived":entry.state="use";entry.reason="";actor.play_action(_motion_for(task))
 				elif reply.status=="phase_ready":_finish_phase(id,task.id)
 				elif reply.status=="redirected":entry.state="plan"
 				else:entry.state="wait";entry.reason=reply.reason;entry.retry=1
@@ -129,6 +144,46 @@ func _step_actor(id: String, delta: float, minutes: float) -> void:
 	if task.room=="outside" and task.kind in ["work","school","shop","wait_outside"] and entry.state=="use":
 		actor.visible=false;entry.offsite=true
 
+func _step_furniture(id: String, task: Dictionary, delta: float, minutes: float) -> void:
+	var actor: FoundationResident=actors[id]
+	var entry: Dictionary=execution[id]
+	var use: FoundationFurnitureUse=furniture[id]
+	# The previous rendered pose is observed before submitting the next request;
+	# a newly requested but unapplied SkeletonModifier pose is never evidence.
+	var contact_ready: bool=use.ready() and bool(_render_contacts.get(id,false))
+	var task_id: String=use.session.task
+	if task.is_empty() or task.get("id")!=task_id or task.get("status")=="exiting":
+		use.begin_exit();entry.state="exit"
+	if actor.state() in ["start","walk","stop"] and _collision_ahead(id,delta):actor.stop()
+	if not use.advance(delta,_obstacles(id)):
+		entry.reason="家具との動作を続けられない";return
+	actor.model.sleeping=task.get("kind")=="sleep" and use.active() and use.session.phase in ["lie_down","ready"] and not use.session.leaving
+	life.set_position(id,actor.global_position);_sync_room(id)
+	if use.exit_ready():
+		var ended: Dictionary=life.end_use(id,task_id,actor.global_position)
+		if ended.status=="phase_ready":use.finalize_exit();_finish_phase(id,task_id)
+		elif ended.status=="cancelled":use.finalize_exit();entry.state="choose";entry.task=""
+		else:entry.state="exit";entry.reason=ended.reason;entry.retry=.5
+		return
+	if use.session.leaving:entry.state="exit";return
+	if not use.ready():entry.state="enter";entry.reason=use.reason;return
+	if task.get("status")=="entering":
+		if not contact_ready:return
+		var began: Dictionary=life.begin_use(id,task_id,actor.global_position,use.posture())
+		if began.status!="arrived":entry.reason=began.reason;return
+		entry.state="use";entry.reason=""
+		return # Entering time is not backfilled as food, sleep or project work.
+	if task.get("status") in ["arrived","working"]:
+		entry.state="use"
+		if not contact_ready:entry.reason="姿勢と家具の接触を整えている";return
+		var worked: Dictionary=life.perform(id,task_id,minutes)
+		if worked.status=="phase_ready":
+			life.begin_exit(id,task_id);use.begin_exit();entry.state="exit"
+		elif worked.status in ["blocked","occupied","not_arrived","not_in_usage"]:
+			life.cancel(id,task_id,worked.reason);use.begin_exit();entry.state="exit"
+	elif task.get("status")=="phase_ready":
+		life.begin_exit(id,task_id);use.begin_exit();entry.state="exit"
+
 func _finish_phase(id: String, task_id: String) -> void:
 	var finished: Dictionary=life.finish(id,task_id)
 	_sync_room(id);actors[id].clear_action();_release_doors(id)
@@ -138,7 +193,12 @@ func _finish_phase(id: String, task_id: String) -> void:
 func _obstacles(id: String) -> Array:
 	var result: Array=[]
 	for other in actors:
-		if other!=id and actors[other].visible:result.append({"position":actors[other].global_position,"radius":BODY_RADIUS})
+		if other!=id and actors[other].visible:
+			var at: Vector3=actors[other].global_position;at.y=0
+			result.append({"position":at,"radius":BODY_RADIUS})
+		if other!=id and furniture.has(other):
+			var workspace: Dictionary=furniture[other].workspace()
+			if not workspace.is_empty():result.append(workspace)
 	return result
 
 func _plan(id: String, task: Dictionary) -> void:
@@ -226,13 +286,12 @@ func _collision_ahead(id: String, delta: float) -> bool:
 		var sample: Vector3=actor.global_position+segment*float(index)/float(maxi(2,int(ceil(segment.length()/.05))))
 		var next_room:=room_at(sample)
 		if not next_room.is_empty() and not occupancy.can_enter(next_room,id):return true
-	for other in actors:
-		if other==id or not actors[other].visible:continue
-		var point: Vector3=actors[other].global_position-actor.global_position
+	for obstacle in _obstacles(id):
+		var point: Vector3=obstacle.position-actor.global_position
 		# Use exactly the same safe box as dynamic navigation. Stopping at a
 		# circle boundary could leave two bodies inside each other's planning
 		# boxes, unable to plan their next step despite not visually overlapping.
-		var extent: float=BODY_RADIUS*2+.06
+		var extent: float=BODY_RADIUS+float(obstacle.radius)+.06
 		var low:=0.0;var high:=1.0;var intersects:=true
 		for axis in [0,2]:
 			if absf(segment[axis])<.00001:
@@ -249,15 +308,18 @@ static func LivingHousePoint(value: Array) -> Vector3:
 	return Vector3(value[0],value[1],value[2])
 
 func snapshot() -> Dictionary:
-	return {"schema":1,"execution":execution.duplicate(true),"doors_in_use":doors_in_use.duplicate(),"decision_minutes":_decision_minutes}
+	var uses: Dictionary={}
+	for id in furniture:uses[id]=furniture[id].snapshot()
+	return {"schema":2,"execution":execution.duplicate(true),"doors_in_use":doors_in_use.duplicate(),"decision_minutes":_decision_minutes,"furniture":uses}
 
-func can_restore(data: Variant, restored_life: HouseholdDay) -> bool:
-	if not data is Dictionary or data.get("schema")!=1 or not data.get("execution") is Dictionary or not data.get("doors_in_use") is Dictionary:return false
+func can_restore(data: Variant, restored_life: HouseholdDay, body_states: Dictionary) -> bool:
+	if not data is Dictionary or data.get("schema")!=2 or not data.get("execution") is Dictionary or not data.get("doors_in_use") is Dictionary or not data.get("furniture") is Dictionary or data.furniture.size()!=actors.size():return false
 	if not (data.get("decision_minutes") is float or data.get("decision_minutes") is int) or not is_finite(float(data.decision_minutes)) or data.decision_minutes<0 or data.decision_minutes>=1:return false
 	if data.execution.size()!=actors.size():return false
 	for id in actors:
+		if not furniture[id].can_restore(data.furniture.get(id)):return false
 		var entry: Variant=data.execution.get(id)
-		if not entry is Dictionary or entry.get("state") not in ["choose","plan","wait","walk","align","use","door","yield","settle"]:return false
+		if not entry is Dictionary or entry.get("state") not in ["choose","plan","wait","walk","align","use","door","yield","settle","enter","exit"]:return false
 		if not entry.get("task") is String or not entry.get("reason") is String or entry.reason.length()>512 or not entry.get("current_room") is String or not _room_bounds.has(entry.current_room):return false
 		if not entry.task.is_empty() and (not restored_life.tasks.has(entry.task) or restored_life.tasks[entry.task].actor!=id):return false
 		if not (entry.get("phase") is int or entry.get("phase") is float) or entry.phase!=int(entry.phase) or entry.phase< -1 or entry.phase>20:return false
@@ -268,13 +330,20 @@ func can_restore(data: Variant, restored_life: HouseholdDay) -> bool:
 		if not entry.get("doors",[]) is Array or entry.get("doors",[]).size()>home.doors.size():return false
 		for key in entry.get("doors",[]):
 			if not key is String or not home.doors.has(key):return false
+		if not body_states.get(id) is Dictionary or not body_states[id].get("motor") is Dictionary:return false
+		if not furniture[id].can_restore_transaction(data.furniture[id],restored_life.task_for(id),entry,body_states[id]):return false
 	for key in data.doors_in_use:
 		if not home.doors.has(key) or not data.doors_in_use[key] is String or not actors.has(data.doors_in_use[key]):return false
 	return true
 
-func restore(data: Variant, restored_life: HouseholdDay) -> bool:
-	if not can_restore(data,restored_life):return false
+func restore(data: Variant, restored_life: HouseholdDay, body_states: Dictionary) -> bool:
+	if not can_restore(data,restored_life,body_states):return false
 	execution=data.execution.duplicate(true);doors_in_use=data.doors_in_use.duplicate();_decision_minutes=float(data.decision_minutes)
-	for id in actors:actors[id].visible=not execution[id].offsite
+	for id in furniture:furniture[id].restore(data.furniture[id])
+	for id in actors:
+		actors[id].visible=not execution[id].offsite
+		var task: Dictionary=restored_life.task_for(id)
+		var use: FoundationFurnitureUse=furniture[id]
+		actors[id].model.sleeping=task.get("kind")=="sleep" and use.active() and use.session.phase in ["lie_down","ready"] and not use.session.leaving
 	_update_private_use(0)
 	return true

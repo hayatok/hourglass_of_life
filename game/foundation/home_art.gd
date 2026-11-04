@@ -170,16 +170,18 @@ func add_visuals(house: LivingHouse) -> void:
 	if house==null or house.definition.is_empty(): return
 	_clear_art(house)
 	var architecture := _node(house,"HomeArt");architecture.set_meta("home_art",true)
-	architecture.set_meta("version",1)
+	architecture.set_meta("version",2)
+	for assembly: Node3D in house.wall_roots.values():_clear_art(assembly)
 	for child in house.get_children():
 		if child is Label3D: child.visible=false
 		if child is MeshInstance3D and str(child.name).begins_with("Floor_"):
 			var id: String=str(child.name).trim_prefix("Floor_")
 			if id in ["bathroom","washroom","toilet"]: child.material_override=_tiles("wet_floor","c4d1bf",.22)
 			elif id=="entrance": child.material_override=_tiles("entry_floor","b5b3a1",.33)
+			elif id=="outside": child.material_override=_tiles("patio_floor","b9b8a3",.42)
 			else: child.material_override=_wood("floor","bda174",true)
 	for wall: Node3D in house.wall_nodes: _wall_details(wall,house.definition.house)
-	for record in house.definition.doors: _door_details(house,architecture,record)
+	for record in house.definition.doors: _door_details(house,record)
 	for id in house.fixtures:
 		var fixture: Dictionary=house.fixtures[id]
 		_clear_art(fixture.node);_hide_prototype(fixture.node)
@@ -188,7 +190,9 @@ func add_visuals(house: LivingHouse) -> void:
 		_fixture(art,fixture.definition)
 	_windows(house)
 	_initial_wall_art(house)
-	_pendant(architecture,Vector3(2.7,2.25,6.4))
+	for light in house.definition.get("ceiling_lights",[]):
+		if light.get("kind","")=="pendant":_pendant(architecture,_v(light.at))
+	_roof_details(house)
 
 func _wall_details(wall: Node3D, house: Dictionary) -> void:
 	_clear_art(wall)
@@ -204,8 +208,9 @@ func _wall_details(wall: Node3D, house: Dictionary) -> void:
 	if high>=float(house.get("wall_height",2.65))-.01:
 		_box(art,"Cornice",Vector3(0,size.y*.5-.045,0),Vector3(size.x+.004,.09,size.z+.004),_wood("trim","95704e"))
 
-func _door_details(house: LivingHouse, architecture: Node3D, record: Dictionary) -> void:
-	var frame := _node(architecture,"Frame_"+str(record.id),_v(record.center))
+func _door_details(house: LivingHouse, record: Dictionary) -> void:
+	var frame := _node(house.wall_roots[record.wall],"Frame_"+str(record.id),_v(record.center))
+	frame.set_meta("home_art",true);frame.set_meta("wall_id",record.wall)
 	if record.axis=="z": frame.rotation.y=PI*.5
 	var width: float=record.width;var height: float=record.get("height",2.1)
 	var wood := _wood("trim","95704e")
@@ -227,50 +232,44 @@ func _door_details(house: LivingHouse, architecture: Node3D, record: Dictionary)
 		_box(art,"HandlePlate",Vector3(width*.31,-.05,side*.032),Vector3(.045,.16,.012),_paint("brass","99805a",.48))
 		_rod(art,"DoorPull",Vector3(width*.31,-.095,side*.044),Vector3(width*.31,-.005,side*.044),.012,_paint("dark_metal","636962",.42))
 
-func _window(house: LivingHouse, wall_id: String, label: String, center: Vector3, width: float, height: float, inward: Vector3, frosted: bool = false) -> void:
-	var support: Node3D
-	for wall: Node3D in house.wall_nodes:
-		if not str(wall.name).begins_with("Wall_"+wall_id): continue
-		var wall_mesh := wall as MeshInstance3D
-		if wall_mesh==null or not wall_mesh.mesh is BoxMesh: continue
-		var shape: BoxMesh=wall_mesh.mesh
-		var local := center-wall.position
-		if absf(local.x)<=shape.size.x*.5+.01 and absf(local.z)<=shape.size.z*.5+.01: support=wall;break
-	if support==null: return
-	var result := _node(support,label,center-support.position);result.set_meta("home_art",true)
-	result.rotation.y=atan2(inward.x,inward.z)
-	var glass := _paint("frosted_glass" if frosted else "blue_glass","c0d7cc" if frosted else "b6d0ce",.52)
-	_box(result,"Glass",Vector3(0,0,.001),Vector3(width,height,.003),glass)
-	var trim := _paint("window_ivory","e6d9be")
-	for sign in [-1,1]:
-		_box(result,"Upright",Vector3(sign*width*.5,0,.003),Vector3(.055,height+.08,.012),trim)
-		_box(result,"Crosspiece",Vector3(0,sign*height*.5,.003),Vector3(width+.08,.055,.012),trim)
-	_box(result,"Mullion",Vector3(0,0,.005),Vector3(.035,height,.008),trim)
-	if not frosted:
-		_box(result,"HorizonReflection",Vector3(0,-height*.13,.003),Vector3(width-.06,.018,.003),_paint("glass_reflection","d5e5d5",.65))
-		for sign in [-1,1]:
-			_box(result,"LinenCurtain",Vector3(sign*(width*.5-.055),.02,.011),Vector3(.10,height-.04,.008),_cloth("curtain","eee3cd",.3))
-
 func _windows(house: LivingHouse) -> void:
-	_window(house,"west","LivingWindow",Vector3(.201,1.65,7.45),1.8,1.1,Vector3.RIGHT)
-	_window(house,"north","ParentsWindow",Vector3(2.6,1.77,.201),2.1,.9,Vector3.BACK)
-	_window(house,"east","ChildWindow",Vector3(11.799,1.65,3.25),1.15,1.1,Vector3.LEFT)
-	_window(house,"east","BathWindow",Vector3(11.799,2.0,5.35),.9,.5,Vector3.LEFT,true)
-	_window(house,"south","LaundryWindow",Vector3(10.1,1.95,9.799),1.35,.65,Vector3.FORWARD,true)
+	for entry: Dictionary in house.windows.values():
+		var record: Dictionary=entry.definition
+		var frame: Node3D=entry.node
+		_clear_art(frame)
+		for part: MeshInstance3D in entry.frame_pieces:part.material_override=_wood("window_frame","d5c2a0")
+		var frosted: bool=bool(record.frosted)
+		var glass := _paint("frosted_glass" if frosted else "clear_glass","bfcec6" if frosted else "b6d0ce",.80 if frosted else .18)
+		glass.cull_mode=BaseMaterial3D.CULL_DISABLED
+		if not frosted:
+			glass.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;glass.albedo_color.a=.24
+		entry.glass.material_override=glass
+		var art := _node(frame,"WindowFinish");art.set_meta("home_art",true);art.set_meta("wall_id",record.wall)
+		var width: float=float(record.width);var height: float=float(record.height)
+		var inside: float=float(house.definition.house.wall_thickness)*.5
+		_box(art,"InnerSill",Vector3(0,-height*.5,inside+.035),Vector3(width+.10,.045,.14),_wood("window_sill","bf9b70"))
+		for side in [-1,1]:
+			_box(art,"InnerCasing",Vector3(side*(width*.5+.018),0,inside+.012),Vector3(.045,height+.08,.024),_wood("window_frame","d5c2a0"))
+		if not frosted:
+			for side in [-1,1]:
+				_box(art,"LinenCurtain",Vector3(side*(width*.5-.035),0,inside+.046),Vector3(.11,height-.04,.018),_cloth("curtain","eee3cd",.3))
 
 func _initial_wall_art(house: LivingHouse) -> void:
 	# Initial, authored possessions communicate interests. They are deliberately
 	# named as initial still life, never recorded as a new work/history event.
-	var wall: Node3D
-	for candidate: Node3D in house.wall_nodes:
-		if str(candidate.name).begins_with("Wall_north"): wall=candidate;break
-	if wall==null: return
-	for picture in [{"id":"InitialRinDrawing","at":Vector3(8.5,1.52,.202),"size":Vector2(.64,.46),"child":true},{"id":"InitialDesignStudy","at":Vector3(4.6,1.65,.202),"size":Vector2(.62,.42),"child":false}]:
-		var root := _node(wall,picture.id,picture.at-wall.position);root.set_meta("home_art",true);root.set_meta("authored_decoration",true)
-		var size: Vector2=picture.size
+	for picture in house.definition.get("initial_wall_art",[]):
+		if not house.wall_roots.has(picture.wall):continue
+		var wall: Node3D=house.wall_roots[picture.wall]
+		var inward := _v(picture.inward)
+		var at: Vector3=_v(picture.center)+inward*(float(house.definition.house.wall_thickness)*.5+.002)
+		var root := _node(wall,picture.id,at)
+		root.rotation.y=atan2(inward.x,inward.z)
+		root.set_meta("home_art",true);root.set_meta("authored_decoration",true)
+		root.set_meta("wall_id",picture.wall);root.set_meta("owner",picture.get("owner",""))
+		var size := Vector2(picture.size[0],picture.size[1])
 		_box(root,"TimberFrame",Vector3.ZERO,Vector3(size.x,size.y,.012),_wood("trim","95704e"))
 		_box(root,"Paper",Vector3(0,0,.008),Vector3(size.x-.035,size.y-.035,.003),_paint("paper","f0e5cb"))
-		if picture.child:
+		if picture.get("kind","")=="child_house":
 			_box(root,"DrawnHouse",Vector3(-.09,-.045,.011),Vector3(.16,.13,.002),_paint("drawing_sand","c8a56b"))
 			var roof := SurfaceTool.new();roof.begin(Mesh.PRIMITIVE_TRIANGLES)
 			_triangle(roof,Vector3(-.19,.02,.013),Vector3(-.09,.12,.013),Vector3(.01,.02,.013),Vector3.BACK)
@@ -279,7 +278,7 @@ func _initial_wall_art(house: LivingHouse) -> void:
 			_box(root,"DrawnTreeTrunk",Vector3(.13,-.065,.012),Vector3(.018,.10,.002),_paint("drawing_trunk","a6885d"))
 			_sphere(root,"DrawnTreeCrown",Vector3(.13,.015,.014),Vector3(.12,.14,.003),_paint("drawing_green","8b9d70"))
 			_sphere(root,"DrawnSun",Vector3(.21,.125,.014),Vector3(.055,.055,.003),_paint("drawing_sun","d4b46c"))
-		else:
+		elif picture.get("kind","")=="design_study":
 			for index in 3:
 				_box(root,"DesignSwatch",Vector3((index-1)*.15,.025,.012),Vector3(.12,.18,.002),_paint("swatch_%d"%index,["7f9f96","c49a6e","b8bca0"][index]))
 			_box(root,"DesignRule",Vector3(0,-.115,.012),Vector3(.39,.012,.002),_paint("drawing_blue","729394"))
@@ -288,19 +287,18 @@ func _fixture(art: Node3D, record: Dictionary) -> void:
 	var size := _v(record.size)
 	var kind: String=record.type
 	if kind=="bed": _bed(art,record,size);return
-	var heading: float=deg_to_rad(float(record.get("use_facing",record.facing)))
-	if kind not in ["chair","dining_seat","sofa"]:
-		var toward := _v(record.interaction_point)-_v(record.position);toward.y=0
-		if toward.length()>.02: heading=atan2(toward.x,toward.z)
+	var heading: float=LivingHouse.fixture_basis(record).get_euler().y
 	art.rotation.y=heading
 	if absf(sin(heading))>.7: size=Vector3(size.z,size.y,size.x)
 	match kind:
 		"fridge": _fridge(art,size)
 		"sink","washbasin": _sink(art,size,kind=="washbasin")
 		"stove": _stove(art,size)
-		"prep": _prep(art,size)
+		"prep":
+			if record.get("desk_content","")=="sewing_pattern":_table(art,size,record)
+			else:_prep(art,size)
 		"dining_table","desk": _table(art,size,record)
-		"dining_seat","chair": _chair(art,size,float(record.get("seat_height",.45)),record.owner=="rin")
+		"dining_seat","chair": _chair(art,size,float(record.get("seat_height",.45)),bool(record.get("child_foot_support_required",false)) or float(record.get("seat_height",.45))<.4)
 		"sofa": _sofa(art,size)
 		"toilet": _toilet(art,size,float(record.get("seat_height",.43)))
 		"bath": _bath(art,size)
@@ -308,6 +306,7 @@ func _fixture(art: Node3D, record: Dictionary) -> void:
 		"washer": _washer(art,size)
 		"storage","shoes": _storage(art,size,record)
 		"drying_rack": _drying_rack(art,size)
+		"towel_basket": _towel_basket(art,size)
 		"changing_space": pass
 		_: _slab(art,"Cabinet",Vector3(0,size.y*.5,0),size,.035,_wood("furniture"))
 
@@ -386,7 +385,7 @@ func _prep(parent: Node3D, size: Vector3) -> void:
 	_slab(parent,"Worktop",Vector3(0,size.y-.018,0),Vector3(size.x,.036,size.z),.025,_paint("countertop","dcd4ba",.72))
 	_slab(parent,"CuttingBoard",Vector3(-size.x*.12,size.y+.012,0),Vector3(size.x*.48,.024,size.z*.55),.035,_wood("board","caa876"))
 	_pull(parent,0,size.y*.75,size.z*.5-.010,size.x*.35)
-	var jar := Vector3(size.x*.34,size.y+.07,-size.z*.25)
+	var jar := Vector3(-size.x*.42,size.y+.07,-size.z*.35)
 	_cylinder(parent,"UtensilCrock",jar,.058,.14,_paint("pottery","a6b5a1",.74))
 	for index in 3:
 		var x: float=(index-1)*.032
@@ -407,21 +406,65 @@ func _table(parent: Node3D, size: Vector3, record: Dictionary) -> void:
 			var tip := Vector3((index-1)*.035,size.y+.31,-size.z*.12+.02*index)
 			_rod(parent,"Stem",Vector3(0,size.y+.13,-size.z*.12),tip,.0025,_paint("stem","70846a"))
 			_sphere(parent,"Leaf",tip,Vector3(.06,.025,.035),_paint("leaf","869b73"))
-	elif record.id=="rin_desk":
-		_asset(parent,"InitialTownModel",TOWN_MODEL,Vector3(size.x*.12,size.y+.005,-size.z*.08),.48)
+		return
+	var content: String=str(record.get("desk_content",""))
+	parent.set_meta("desk_content",content)
+	if content=="drawing":
+		if record.get("initial_model","")=="town_model_base":
+			_asset(parent,"InitialTownModel",TOWN_MODEL,Vector3(size.x*.12,size.y+.005,-size.z*.08),.48)
 		_slab(parent,"DrawingPaper",Vector3(-size.x*.28,size.y+.006,size.z*.13),Vector3(.28,.008,.20),.007,_paint("paper","f0e5cb"))
 		for index in 4:
 			var pencil := _cylinder(parent,"Crayon",Vector3(-size.x*.28+.032*index,size.y+.018,size.z*.28),.006,.09,_paint("crayon_%d"%index,["b96c56","6d9197","d2b264","819b72"][index]));pencil.rotation.z=PI*.5
 		_desk_lamp(parent,Vector3(size.x*.36,size.y,-size.z*.25))
-	else:
-		var screen := _node(parent,"DesignWorkstation",Vector3(0,size.y,0))
+	elif content=="computer":
+		var screen := _node(parent,"ComputerWorkstation",Vector3(0,size.y,0))
 		_box(screen,"ComputerFoot",Vector3(0,.012,-.10),Vector3(.22,.024,.13),_paint("dark_metal","636962",.42))
 		_box(screen,"ComputerStand",Vector3(0,.13,-.13),Vector3(.04,.24,.035),_paint("dark_metal","636962",.42))
 		_box(screen,"MonitorFrame",Vector3(0,.31,-.13),Vector3(.48,.29,.027),_paint("dark_metal","636962",.42))
 		_box(screen,"BlankScreen",Vector3(0,.31,-.113),Vector3(.44,.25,.004),_paint("screen","809a96",.65))
-		_box(screen,"DesignSheet",Vector3(-.055,.31,-.110),Vector3(.18,.19,.002),_paint("paper","f0e5cb"))
+		if record.get("screen_content","")=="design":_box(screen,"DesignSheet",Vector3(-.055,.31,-.110),Vector3(.18,.19,.002),_paint("paper","f0e5cb"))
 		_box(screen,"Keyboard",Vector3(0,.015,.15),Vector3(.36,.025,.11),_paint("keyboard","b7bcaa"))
 		_asset(parent,"WorkMug",MUG,Vector3(-size.x*.35,size.y,-size.z*.04),.72)
+	elif content=="tools":
+		_box(parent,"RepairMat",Vector3(0,size.y+.004,0),Vector3(size.x*.65,.008,size.z*.68),_paint("work_mat","7e9686"))
+		for index in 2:
+			var at := Vector3((index-.5)*.21,size.y+.018,.045)
+			_rod(parent,"ScrewdriverShaft",at,at+Vector3(.12,0,-.10),.008,_paint("tool_metal","a2aca5",.32))
+			_rod(parent,"ScrewdriverGrip",at-Vector3(.065,0,-.055),at,.018,_paint("tool_grip","a17b5b"))
+		_cylinder(parent,"PartsDish",Vector3(size.x*.28,size.y+.025,-size.z*.20),.065,.035,_paint("tool_metal","a2aca5",.32))
+	elif content=="sewing":_sewing_machine(parent,size)
+	elif content=="keyboard":_keyboard_instrument(parent,size)
+	elif content in ["writing","music","sewing_pattern"]:
+		var sheet := Vector3(minf(size.x*.68,.72),.007,minf(size.z*.70,.42))
+		_slab(parent,"PatternPaper" if content=="sewing_pattern" else "WorkPaper",Vector3(0,size.y+.005,0),sheet,.008,_paint("paper","f0e5cb"))
+		if content=="music":
+			for row in 5:_box(parent,"MusicStaff",Vector3(0,size.y+.009,(row-2)*.017),Vector3(sheet.x*.83,.0015,.0018),_paint("ink","65746b"))
+		elif content=="sewing_pattern":
+			_box(parent,"PatternOutline",Vector3(0,size.y+.01,0),Vector3(sheet.x*.7,.002,.005),_paint("ink","65746b"))
+			_box(parent,"ClothRuler",Vector3(0,size.y+.015,-size.z*.25),Vector3(minf(.6,size.x*.7),.012,.03),_wood("ruler","cbb281"))
+		else:
+			var pencil := _cylinder(parent,"Pencil",Vector3(.12,size.y+.017,size.z*.28),.006,.15,_paint("pencil","b18c5d"));pencil.rotation.z=PI*.5
+
+func _sewing_machine(parent: Node3D, size: Vector3) -> void:
+	# An authored machine, not a sewn item or a completed household outcome.
+	var at := Vector3(0,size.y,0)
+	var enamel := _paint("sewing_enamel","c8d3c7",.5)
+	_slab(parent,"MachineBase",at+Vector3(0,.035,0),Vector3(.50,.07,.28),.035,enamel)
+	_slab(parent,"MachinePillar",at+Vector3(.17,.19,-.01),Vector3(.12,.32,.23),.025,enamel)
+	_slab(parent,"MachineArm",at+Vector3(.005,.33,-.01),Vector3(.43,.095,.20),.035,enamel)
+	_box(parent,"NeedleHousing",at+Vector3(-.17,.25,-.01),Vector3(.072,.16,.095),enamel)
+	_rod(parent,"Needle",at+Vector3(-.17,.09,.005),at+Vector3(-.17,.18,.005),.003,_paint("needle","aeb6ae",.25))
+	_box(parent,"NeedlePlate",at+Vector3(-.13,.073,.005),Vector3(.19,.006,.16),_paint("tool_metal","a2aca5",.32))
+	_cylinder(parent,"ThreadSpool",at+Vector3(.075,.415,-.01),.024,.07,_cloth("thread","c49d7e"))
+	var wheel := _cylinder(parent,"Handwheel",at+Vector3(.24,.28,-.01),.062,.025,_paint("tool_metal","a2aca5",.32));wheel.rotation.z=PI*.5
+
+func _keyboard_instrument(parent: Node3D, size: Vector3) -> void:
+	var width: float=minf(size.x*.83,1.1)
+	_box(parent,"KeyboardCase",Vector3(0,size.y+.035,0),Vector3(width,.07,.28),_paint("instrument","636e67"))
+	for index in 21:
+		var x: float=(float(index)/20-.5)*(width-.08)
+		_box(parent,"IvoryKey",Vector3(x,size.y+.077,.04),Vector3((width-.08)/21*.92,.015,.17),_paint("ivory","e7e3d4"))
+		if index%7 not in [2,6]:_box(parent,"BlackKey",Vector3(x+.015,size.y+.096,-.015),Vector3((width-.08)/21*.54,.022,.10),_paint("key_black","3f4843"))
 
 func _desk_lamp(parent: Node3D, at: Vector3) -> void:
 	var metal := _paint("lamp_enamel","879f91",.52)
@@ -440,13 +483,13 @@ func _chair(parent: Node3D, size: Vector3, seat_height: float, child: bool) -> v
 	if child: _box(parent,"ChildFootRest",Vector3(0,seat_height*.41,size.z*.29),Vector3(size.x-.08,.045,.08),wood)
 
 func _bed(parent: Node3D, record: Dictionary, size: Vector3) -> void:
-	var child: bool=record.owner=="rin"
+	var bedding: String=str(record.get("bedding_color","7f9f96"))
 	var wood := _wood("furniture","b98759")
 	_feet(parent,size,.20,wood,.065)
 	_slab(parent,"BedFrame",Vector3(0,.20,0),Vector3(size.x,.15,size.z),.045,wood)
 	_slab(parent,"Mattress",Vector3(0,.335,0),Vector3(size.x-.055,.15,size.z-.055),.085,_cloth("mattress","eee6d4"))
 	_slab(parent,"LinenSheet",Vector3(0,.416,0),Vector3(size.x-.065,.012,size.z-.065),.08,_cloth("sheet","e7ddc6"))
-	_slab(parent,"Duvet",Vector3(0,.449,size.z*.13),Vector3(size.x-.07,.055,size.z*.66),.07,_cloth("rin_duvet" if child else "family_duvet","c5ac70" if child else "7f9f96",.35 if child else .10))
+	_slab(parent,"Duvet",Vector3(0,.449,size.z*.13),Vector3(size.x-.07,.055,size.z*.66),.07,_cloth("duvet_"+bedding,bedding,float(record.get("bedding_stripes",.10))))
 	_slab(parent,"TurnedCover",Vector3(0,.480,-size.z*.16),Vector3(size.x-.08,.012,.16),.035,_cloth("sheet","e7ddc6"))
 	_sphere(parent,"Pillow",Vector3(0,.458,-size.z*.32),Vector3(size.x*.74,.083,.38),_cloth("pillow","eee5d0"))
 	_box(parent,"LowHeadboard",Vector3(0,.36,-size.z*.5+.026),Vector3(size.x,.27,.052),wood)
@@ -507,7 +550,9 @@ func _washer(parent: Node3D, size: Vector3) -> void:
 
 func _storage(parent: Node3D, size: Vector3, record: Dictionary) -> void:
 	var wood := _wood("storage","b5936a",false,true)
-	var open_shelf: bool=record.id in ["rin_storage","linen_storage"]
+	var contents: String=str(record.get("display_contents",""))
+	parent.set_meta("display_contents",contents)
+	var open_shelf: bool=contents in ["books","linen","tools"]
 	if open_shelf:
 		_box(parent,"ShelfBack",Vector3(0,size.y*.5,-size.z*.5+.015),Vector3(size.x,size.y,.03),_paint("shelf_back","a78e66"))
 		for side in [-1,1]:
@@ -517,12 +562,17 @@ func _storage(parent: Node3D, size: Vector3, record: Dictionary) -> void:
 		for level in range(shelf_count):
 			var y: float=.18+float(level)*(size.y-.27)/shelf_count
 			_box(parent,"Shelf",Vector3(0,y,0),Vector3(size.x-.07,.035,size.z-.04),wood)
-			if record.id=="rin_storage":
+			if contents=="books":
 				for book in range(5 if level!=1 else 3):
 					var x: float=-size.x*.31+float(book)*.12
 					_box(parent,"Book",Vector3(x,y+.13,size.z*.37),Vector3(.07,.23+book*.01,.13),_paint("book_%d"%book,["9e8e65","6f9395","c3aa79","b47c63","8a9c77"][book]))
-			else:
+			elif contents=="linen":
 				for towel in 2: _slab(parent,"FoldedLinen",Vector3((towel-.5)*size.x*.40,y+.055,size.z*.29),Vector3(size.x*.32,.075,size.z*.32),.018,_cloth("linen_%d"%towel,"d6c6a4" if towel==0 else "9fac96",.2))
+			elif contents=="tools":
+				_box(parent,"ToolTray",Vector3(0,y+.035,0),Vector3(size.x*.72,.07,size.z*.63),_paint("tool_tray","87968b"))
+				for tool in 3:
+					var x: float=(tool-1)*size.x*.2
+					_rod(parent,"ToolHandle",Vector3(x,y+.07,-size.z*.12),Vector3(x,y+.12,size.z*.17),.014,_wood("tool_handle","b18c5d"))
 	else:
 		_cabinet(parent,size,wood)
 		for side in [-1,1]:
@@ -531,6 +581,19 @@ func _storage(parent: Node3D, size: Vector3, record: Dictionary) -> void:
 	if record.type=="shoes":
 		_slab(parent,"ShoeCabinetTop",Vector3(0,size.y-.016,0),Vector3(size.x,.032,size.z),.02,_wood("furniture","b98759"))
 		_cylinder(parent,"KeyDish",Vector3(0,size.y+.012,0),minf(size.x,size.z)*.25,.022,_paint("pottery","a6b5a1",.74))
+
+func _towel_basket(parent: Node3D, size: Vector3) -> void:
+	var wicker := _wood("basket","b99b6e")
+	_slab(parent,"BasketBottom",Vector3(0,.04,0),Vector3(size.x,.04,size.z),.025,wicker)
+	for side in [-1,1]:
+		for index in 5:
+			var offset: float=(float(index)/4-.5)*.85
+			_rod(parent,"WickerUpright",Vector3(side*size.x*.47,.055,offset*size.z),Vector3(side*size.x*.47,size.y,offset*size.z),.009,wicker)
+			_rod(parent,"WickerUpright",Vector3(offset*size.x,.055,side*size.z*.47),Vector3(offset*size.x,size.y,side*size.z*.47),.009,wicker)
+		for level in 6:
+			var y: float=.08+float(level)*(size.y-.08)/5
+			_rod(parent,"WickerWeave",Vector3(-size.x*.47,y,side*size.z*.47),Vector3(size.x*.47,y,side*size.z*.47),.008,wicker)
+			_rod(parent,"WickerWeave",Vector3(side*size.x*.47,y,-size.z*.47),Vector3(side*size.x*.47,y,size.z*.47),.008,wicker)
 
 func _drying_rack(parent: Node3D, size: Vector3) -> void:
 	var metal := _paint("rack","b0b9ab",.55)
@@ -544,3 +607,32 @@ func _pendant(parent: Node3D, at: Vector3) -> void:
 	_cylinder(lamp,"Shade",Vector3.ZERO,.21,.18,_paint("lamp_enamel","879f91",.52),.09)
 	_rod(lamp,"Cord",Vector3(0,.09,0),Vector3(0,.39,0),.008,_paint("cord","5b6257"))
 	_cylinder(lamp,"WarmDiffuser",Vector3(0,-.09,0),.18,.008,_paint("lamp_linen","efe3bc",.72))
+
+func _roof_details(house: LivingHouse) -> void:
+	if not is_instance_valid(house.roof_root):return
+	_clear_art(house.roof_root)
+	var art := _node(house.roof_root,"RoofFinish");art.set_meta("home_art",true)
+	var roof: Dictionary=house.definition.house.roof
+	var bounds: Array=house.definition.house.bounds
+	var low := Vector2(bounds[0],bounds[1]);var high := low+Vector2(bounds[2],bounds[3])
+	var height: float=float(house.definition.house.get("wall_height",2.65))
+	var rise: float=float(roof.rise);var eaves: float=float(roof.get("eaves",.35))
+	var along_x: bool=roof.get("ridge_axis","x")=="x"
+	var middle: float=(low.y+high.y)*.5 if along_x else (low.x+high.x)*.5
+	var half: float=float(bounds[3] if along_x else bounds[2])*.5
+	var eave_y: float=height-rise*eaves/half
+	var base := Color(roof.get("color","7c8276"))
+	var seams := _paint("roof_seams_"+base.to_html(false),base.darkened(.16).to_html(false),.87)
+	var ridge := _paint("roof_ridge_"+base.to_html(false),base.lightened(.08).to_html(false),.87)
+	var first := Vector3(low.x-eaves,height+rise+.035,middle) if along_x else Vector3(middle,height+rise+.035,low.y-eaves)
+	var last := Vector3(high.x+eaves,height+rise+.035,middle) if along_x else Vector3(middle,height+rise+.035,high.y+eaves)
+	_rod(art,"RidgeCap",first,last,.055,ridge)
+	for side in [-1,1]:
+		var edge: float=middle+side*(half+eaves)
+		for row in range(7):
+			var t: float=float(row)/7
+			var across: float=lerpf(edge,middle,t)
+			var y: float=lerpf(eave_y,height+rise,t)+.012
+			var a := Vector3(low.x-eaves,y,across) if along_x else Vector3(across,y,low.y-eaves)
+			var b := Vector3(high.x+eaves,y,across) if along_x else Vector3(across,y,high.y+eaves)
+			_rod(art,"TileCourse",a,b,.009,seams)

@@ -1,0 +1,2086 @@
+{
+  "schema_version": 1,
+  "status": "authored_plan_static_geometry_only",
+  "units": "m",
+  "coordinates": {
+    "origin": "north_west_outer_corner",
+    "axes": "x east, y up, z south; south front outer face is z=10.8",
+    "room_bounds": "clear internal [x,z,width,depth], excluding wall thickness",
+    "wall_points": "[x,z], wall thickness centered on start/end line",
+    "door_axis": "opening width direction, x or z, parallel to its wall",
+    "fixture_position": "[x,y,z] bottom center; size [x,y,z] in house-local axes",
+    "interaction_point": "standing floor approach; seating/lying entry requires separate runtime acceptance",
+    "facing": "actor yaw degrees at interaction_point: 0=+Z, 90=+X, 180=-Z, 270=-X",
+    "local_to_world": "All positions share the house-local origin [0,0,0]. Town placement is intentionally unassigned."
+  },
+  "house": {
+    "id": "mori_home",
+    "label": "森家",
+    "household": "mori",
+    "width": 12.4,
+    "depth": 10.8,
+    "bounds": [
+      0.0,
+      0.0,
+      12.4,
+      10.8
+    ],
+    "wall_thickness": 0.2,
+    "wall_height": 2.65,
+    "floor_y": 0.0,
+    "front": "south",
+    "front_z": 10.8,
+    "design_body_radius": 0.24,
+    "local_origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "world_placement": null,
+    "design_features": [
+      "親子とも成人。寝室と持ち物の許可を個別にし、親子関係を共有寝室の理由にしない。",
+      "在宅縫製の作業室を玄関側へ独立。裁断台・ミシン机・布収納を生活の食卓から分ける。",
+      "結衣の練習室は共用LDKから入り、寝室は別。仕事と練習の音を休息から切り分ける。"
+    ],
+    "source_residents": "data/residents.json",
+    "source_household": "mori",
+    "assumptions": [
+      "架空の温帯町の平屋。実住宅の調査図や建築・バリアフリー認証ではない。",
+      "壁・家具・開口は実寸mの設計。Godotでの経路、扉、人体動作、24時間生活は未受入。",
+      "玄関外のポーチが街接続境界。町の仕事場・学校・目的地はこの平面図で代用しない。"
+    ],
+    "street_connection": {
+      "zone": "outside",
+      "door": "D01",
+      "approach": [
+        5.4,
+        0,
+        12.6
+      ],
+      "destination": "town_navigation_not_yet_connected"
+    },
+    "roof": {
+      "shape": "gable",
+      "ridge_axis": "x",
+      "rise": 1.55,
+      "eaves": 0.35,
+      "color": "#7c7880"
+    }
+  },
+  "rooms": [
+    {
+      "id": "tomo_bedroom",
+      "label": "智の個室",
+      "type": "bedroom",
+      "kind": "bedroom",
+      "bounds": [
+        0.2,
+        0.2,
+        4.2,
+        3.2
+      ],
+      "label_point": [
+        2.3,
+        1.8
+      ],
+      "owner": "tomo",
+      "private": true,
+      "private_scope": "resident",
+      "allowed_residents": [
+        "tomo"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "yui_bedroom",
+      "label": "結衣の個室",
+      "type": "bedroom",
+      "kind": "bedroom",
+      "bounds": [
+        6.4,
+        0.2,
+        5.8,
+        3.2
+      ],
+      "label_point": [
+        9.3,
+        1.8
+      ],
+      "owner": "yui",
+      "private": true,
+      "private_scope": "resident",
+      "allowed_residents": [
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "hall",
+      "label": "廊下",
+      "type": "circulation",
+      "kind": "circulation",
+      "bounds": [
+        4.6,
+        0.2,
+        1.6,
+        7.6
+      ],
+      "label_point": [
+        5.4,
+        4.0
+      ],
+      "owner": "mori",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "entrance",
+      "label": "玄関",
+      "type": "entrance",
+      "kind": "entrance",
+      "bounds": [
+        4.6,
+        8.0,
+        1.6,
+        2.6
+      ],
+      "label_point": [
+        5.4,
+        9.3
+      ],
+      "owner": "mori",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "washroom",
+      "label": "洗面・脱衣・洗濯",
+      "type": "washroom_laundry",
+      "kind": "washroom_laundry",
+      "bounds": [
+        2.2,
+        3.6,
+        2.2,
+        4.2
+      ],
+      "label_point": [
+        3.3,
+        5.7
+      ],
+      "owner": "mori",
+      "private": true,
+      "private_scope": "exclusive_while_changing",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "bathroom",
+      "label": "浴室",
+      "type": "bathroom",
+      "kind": "bathroom",
+      "bounds": [
+        0.2,
+        3.6,
+        1.8,
+        4.2
+      ],
+      "label_point": [
+        1.1,
+        5.7
+      ],
+      "owner": "mori",
+      "private": true,
+      "private_scope": "exclusive_when_occupied",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 1,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "sewing_room",
+      "label": "智の縫製仕事室",
+      "type": "work_room",
+      "kind": "work_room",
+      "bounds": [
+        0.2,
+        8.0,
+        4.2,
+        2.6
+      ],
+      "label_point": [
+        2.3,
+        9.3
+      ],
+      "owner": "mori",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "toilet",
+      "label": "独立トイレ",
+      "type": "toilet",
+      "kind": "toilet",
+      "bounds": [
+        6.4,
+        3.6,
+        1.8,
+        2.0
+      ],
+      "label_point": [
+        7.3,
+        4.6
+      ],
+      "owner": "mori",
+      "private": true,
+      "private_scope": "exclusive_when_occupied",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 1,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "music_room",
+      "label": "結衣の練習室",
+      "type": "music_room",
+      "kind": "music_room",
+      "bounds": [
+        8.4,
+        3.6,
+        3.8,
+        2.0
+      ],
+      "label_point": [
+        10.3,
+        4.6
+      ],
+      "owner": "mori",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    },
+    {
+      "id": "ldk",
+      "label": "親子のLDK",
+      "type": "living_kitchen_dining",
+      "kind": "living_kitchen_dining",
+      "bounds": [
+        6.4,
+        5.8,
+        5.8,
+        4.8
+      ],
+      "label_point": [
+        9.3,
+        8.2
+      ],
+      "owner": "mori",
+      "private": false,
+      "private_scope": "household",
+      "allowed_residents": [
+        "tomo",
+        "yui"
+      ],
+      "occupancy_limit": 2,
+      "guest_requires_consent": true
+    }
+  ],
+  "external_zones": [
+    {
+      "id": "outside",
+      "label": "街へ出る玄関ポーチ",
+      "bounds": [
+        4.1,
+        10.8,
+        2.6,
+        2.4
+      ],
+      "floor_y": 0.0,
+      "covered": true,
+      "connection_kind": "street_boundary"
+    }
+  ],
+  "walls": [
+    {
+      "id": "north",
+      "start": [
+        0,
+        0.1
+      ],
+      "end": [
+        12.4,
+        0.1
+      ],
+      "exterior": true
+    },
+    {
+      "id": "south",
+      "start": [
+        0,
+        10.7
+      ],
+      "end": [
+        12.4,
+        10.7
+      ],
+      "exterior": true
+    },
+    {
+      "id": "west",
+      "start": [
+        0.1,
+        0
+      ],
+      "end": [
+        0.1,
+        10.8
+      ],
+      "exterior": true
+    },
+    {
+      "id": "east",
+      "start": [
+        12.3,
+        0
+      ],
+      "end": [
+        12.3,
+        10.8
+      ],
+      "exterior": true
+    },
+    {
+      "id": "hall_west",
+      "start": [
+        4.5,
+        0.2
+      ],
+      "end": [
+        4.5,
+        10.6
+      ]
+    },
+    {
+      "id": "hall_east",
+      "start": [
+        6.3,
+        0.2
+      ],
+      "end": [
+        6.3,
+        10.6
+      ]
+    },
+    {
+      "id": "tomo_wet",
+      "start": [
+        0.2,
+        3.5
+      ],
+      "end": [
+        4.4,
+        3.5
+      ]
+    },
+    {
+      "id": "yui_south",
+      "start": [
+        6.4,
+        3.5
+      ],
+      "end": [
+        12.2,
+        3.5
+      ]
+    },
+    {
+      "id": "bath_wash",
+      "start": [
+        2.1,
+        3.6
+      ],
+      "end": [
+        2.1,
+        7.8
+      ]
+    },
+    {
+      "id": "wet_studio",
+      "start": [
+        0.2,
+        7.9
+      ],
+      "end": [
+        4.4,
+        7.9
+      ]
+    },
+    {
+      "id": "hall_entry",
+      "start": [
+        4.6,
+        7.9
+      ],
+      "end": [
+        6.2,
+        7.9
+      ]
+    },
+    {
+      "id": "toilet_music",
+      "start": [
+        8.3,
+        3.6
+      ],
+      "end": [
+        8.3,
+        5.6
+      ]
+    },
+    {
+      "id": "wet_ldk",
+      "start": [
+        6.4,
+        5.7
+      ],
+      "end": [
+        12.2,
+        5.7
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "D01",
+      "label": "玄関扉",
+      "wall": "south",
+      "room_a": "outside",
+      "room_b": "entrance",
+      "width": 1.0,
+      "height": 2.1,
+      "center": [
+        5.4,
+        0,
+        10.7
+      ],
+      "axis": "x",
+      "kind": "hinged",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "outside": [
+          5.4,
+          0,
+          12.15
+        ],
+        "entrance": [
+          5.4,
+          0,
+          9.9
+        ]
+      },
+      "hinge": [
+        4.9,
+        0,
+        10.7
+      ],
+      "open_end": [
+        4.9,
+        0,
+        11.7
+      ],
+      "swing_room": "outside",
+      "swing_clearance": [
+        4.9,
+        10.7,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "id": "D02",
+      "label": "玄関から廊下",
+      "wall": "hall_entry",
+      "room_a": "entrance",
+      "room_b": "hall",
+      "width": 1.1,
+      "height": 2.1,
+      "center": [
+        5.4,
+        0,
+        7.9
+      ],
+      "axis": "x",
+      "kind": "opening",
+      "default_state": "open",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "entrance": [
+          5.4,
+          0,
+          8.55
+        ],
+        "hall": [
+          5.4,
+          0,
+          7.25
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "label": "智個室の引戸",
+      "wall": "hall_west",
+      "room_a": "hall",
+      "room_b": "tomo_bedroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        4.5,
+        0,
+        2.4
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "resident:tomo",
+      "approaches": {
+        "hall": [
+          5.15,
+          0,
+          2.4
+        ],
+        "tomo_bedroom": [
+          3.85,
+          0,
+          2.4
+        ]
+      },
+      "pocket_interval": [
+        0.8,
+        1.7
+      ]
+    },
+    {
+      "id": "D04",
+      "label": "結衣個室の引戸",
+      "wall": "hall_east",
+      "room_a": "hall",
+      "room_b": "yui_bedroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        6.3,
+        0,
+        2.4
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "resident:yui",
+      "approaches": {
+        "hall": [
+          5.65,
+          0,
+          2.4
+        ],
+        "yui_bedroom": [
+          6.95,
+          0,
+          2.4
+        ]
+      },
+      "pocket_interval": [
+        0.8,
+        1.7
+      ]
+    },
+    {
+      "id": "D05",
+      "label": "洗面脱衣室の引戸",
+      "wall": "hall_west",
+      "room_a": "hall",
+      "room_b": "washroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        4.5,
+        0,
+        4.6
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "exclusive_while_changing",
+      "approaches": {
+        "hall": [
+          5.15,
+          0,
+          4.6
+        ],
+        "washroom": [
+          3.85,
+          0,
+          4.6
+        ]
+      },
+      "pocket_interval": [
+        5.2,
+        6.1
+      ]
+    },
+    {
+      "id": "D06",
+      "label": "浴室の引戸",
+      "wall": "bath_wash",
+      "room_a": "washroom",
+      "room_b": "bathroom",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        2.1,
+        0,
+        6.5
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "exclusive_when_occupied",
+      "approaches": {
+        "washroom": [
+          2.75,
+          0,
+          6.5
+        ],
+        "bathroom": [
+          1.45,
+          0,
+          6.5
+        ]
+      },
+      "pocket_interval": [
+        4.7,
+        5.6
+      ]
+    },
+    {
+      "id": "D07",
+      "label": "トイレの引戸",
+      "wall": "hall_east",
+      "room_a": "hall",
+      "room_b": "toilet",
+      "width": 0.85,
+      "height": 2.1,
+      "center": [
+        6.3,
+        0,
+        4.975
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "exclusive_when_occupied",
+      "approaches": {
+        "hall": [
+          5.65,
+          0,
+          4.975
+        ],
+        "toilet": [
+          6.95,
+          0,
+          4.975
+        ]
+      },
+      "pocket_interval": [
+        3.6,
+        4.45
+      ]
+    },
+    {
+      "id": "D08",
+      "label": "LDKの引戸",
+      "wall": "hall_east",
+      "room_a": "hall",
+      "room_b": "ldk",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        6.3,
+        0,
+        7.25
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "hall": [
+          5.65,
+          0,
+          7.25
+        ],
+        "ldk": [
+          6.95,
+          0,
+          7.25
+        ]
+      },
+      "pocket_interval": [
+        5.8,
+        6.7
+      ]
+    },
+    {
+      "id": "D09",
+      "label": "仕事室の引戸",
+      "wall": "hall_west",
+      "room_a": "entrance",
+      "room_b": "sewing_room",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        4.5,
+        0,
+        9.1
+      ],
+      "axis": "z",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "entrance": [
+          5.3,
+          0,
+          9.1
+        ],
+        "sewing_room": [
+          3.85,
+          0,
+          9.1
+        ]
+      },
+      "pocket_interval": [
+        9.65,
+        10.55
+      ]
+    },
+    {
+      "id": "D10",
+      "label": "練習室の引戸",
+      "wall": "wet_ldk",
+      "room_a": "ldk",
+      "room_b": "music_room",
+      "width": 0.9,
+      "height": 2.1,
+      "center": [
+        11.6,
+        0,
+        5.7
+      ],
+      "axis": "x",
+      "kind": "sliding",
+      "default_state": "closed",
+      "occupancy_limit": 1,
+      "private_scope": "household",
+      "approaches": {
+        "ldk": [
+          11.6,
+          0,
+          6.35
+        ],
+        "music_room": [
+          11.6,
+          0,
+          5.05
+        ]
+      },
+      "pocket_interval": [
+        10.15,
+        11.05
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "bed_tomo",
+      "label": "森 智の寝床",
+      "type": "bed",
+      "room": "tomo_bedroom",
+      "position": [
+        1.0,
+        0.0,
+        1.45
+      ],
+      "size": [
+        1.0,
+        0.5,
+        2.05
+      ],
+      "facing": 263,
+      "interaction_point": [
+        1.85,
+        0.0,
+        1.55
+      ],
+      "owner": "tomo",
+      "private": true,
+      "capacity": 1,
+      "use_facing": 180,
+      "head_end": "north",
+      "sheet_y": 0.422,
+      "duvet_top_y": 0.4765,
+      "pillow_point": [
+        1.0,
+        0.4995,
+        0.794
+      ],
+      "usage_region": {
+        "center": [
+          1.0,
+          0.422,
+          1.45
+        ],
+        "half_extents": [
+          0.43,
+          0.22,
+          0.925
+        ],
+        "postures": [
+          "lie"
+        ]
+      }
+    },
+    {
+      "id": "bed_yui",
+      "label": "森 結衣の寝床",
+      "type": "bed",
+      "room": "yui_bedroom",
+      "position": [
+        8.4,
+        0.0,
+        1.45
+      ],
+      "size": [
+        1.0,
+        0.5,
+        2.05
+      ],
+      "facing": 263,
+      "interaction_point": [
+        9.25,
+        0.0,
+        1.55
+      ],
+      "owner": "yui",
+      "private": true,
+      "capacity": 1,
+      "use_facing": 180,
+      "head_end": "north",
+      "sheet_y": 0.422,
+      "duvet_top_y": 0.4765,
+      "pillow_point": [
+        8.4,
+        0.4995,
+        0.794
+      ],
+      "usage_region": {
+        "center": [
+          8.4,
+          0.422,
+          1.45
+        ],
+        "half_extents": [
+          0.43,
+          0.22,
+          0.925
+        ],
+        "postures": [
+          "lie"
+        ]
+      }
+    },
+    {
+      "id": "tomo_storage",
+      "label": "智の衣類と大切な物",
+      "type": "storage",
+      "room": "tomo_bedroom",
+      "position": [
+        3.85,
+        0.0,
+        0.95
+      ],
+      "size": [
+        0.5,
+        1.8,
+        1.2
+      ],
+      "facing": 90,
+      "interaction_point": [
+        3.0,
+        0.0,
+        0.95
+      ],
+      "owner": "tomo",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "yui_desk",
+      "label": "譜面と授業の準備机",
+      "type": "desk",
+      "room": "yui_bedroom",
+      "position": [
+        10.65,
+        0.0,
+        0.65
+      ],
+      "size": [
+        1.8,
+        0.74,
+        0.6
+      ],
+      "facing": 180,
+      "interaction_point": [
+        10.65,
+        0.0,
+        2.15
+      ],
+      "owner": "yui",
+      "private": true,
+      "capacity": 1,
+      "use_via": "yui_desk_chair",
+      "support_point": [
+        10.65,
+        0.74,
+        0.77
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "activity": "music",
+      "desk_content": "music"
+    },
+    {
+      "id": "yui_desk_chair",
+      "label": "譜面と授業の準備机の椅子",
+      "type": "chair",
+      "room": "yui_bedroom",
+      "position": [
+        10.65,
+        0.0,
+        1.4
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 180,
+      "interaction_point": [
+        10.65,
+        0.0,
+        2.15
+      ],
+      "owner": "yui",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "yui_desk",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          10.65,
+          0,
+          1.12
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "yui_storage",
+      "label": "結衣の衣類と楽器",
+      "type": "storage",
+      "room": "yui_bedroom",
+      "position": [
+        6.75,
+        0.0,
+        0.95
+      ],
+      "size": [
+        0.5,
+        1.8,
+        1.2
+      ],
+      "facing": 270,
+      "interaction_point": [
+        7.4,
+        0.0,
+        0.95
+      ],
+      "owner": "yui",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "sewing_table",
+      "label": "ミシンと手元の作業机",
+      "type": "desk",
+      "room": "sewing_room",
+      "position": [
+        1.45,
+        0.0,
+        8.5
+      ],
+      "size": [
+        1.8,
+        0.74,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        1.45,
+        0.0,
+        10.05
+      ],
+      "owner": "tomo",
+      "private": true,
+      "capacity": 1,
+      "use_via": "sewing_chair",
+      "activity": "sewing",
+      "support_point": [
+        1.45,
+        0.74,
+        8.62
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "desk_content": "sewing"
+    },
+    {
+      "id": "sewing_chair",
+      "label": "縫製の椅子",
+      "type": "chair",
+      "room": "sewing_room",
+      "position": [
+        1.45,
+        0.0,
+        9.3
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 180,
+      "interaction_point": [
+        1.45,
+        0.0,
+        10.05
+      ],
+      "owner": "tomo",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "sewing_table",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          1.45,
+          0,
+          9.02
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "cutting_table",
+      "label": "布を広げる裁断台",
+      "type": "prep",
+      "room": "sewing_room",
+      "position": [
+        3.2,
+        0.0,
+        10.1
+      ],
+      "size": [
+        1.8,
+        0.86,
+        0.8
+      ],
+      "facing": 0,
+      "interaction_point": [
+        3.2,
+        0.0,
+        9.1
+      ],
+      "owner": "tomo",
+      "private": true,
+      "capacity": 1,
+      "activity": "sewing",
+      "support_point": [
+        3.2,
+        0.86,
+        10.1
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "desk_content": "sewing_pattern"
+    },
+    {
+      "id": "fabric_storage",
+      "label": "注文布と端切れの収納",
+      "type": "storage",
+      "room": "sewing_room",
+      "position": [
+        0.55,
+        0.0,
+        10.2
+      ],
+      "size": [
+        0.6,
+        1.8,
+        0.6
+      ],
+      "facing": 270,
+      "interaction_point": [
+        1.3,
+        0.0,
+        10.2
+      ],
+      "owner": "tomo",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "music_desk",
+      "label": "ヘッドホンで練習する鍵盤机",
+      "type": "desk",
+      "room": "music_room",
+      "position": [
+        10.5,
+        0.0,
+        4.0
+      ],
+      "size": [
+        1.7,
+        0.74,
+        0.6
+      ],
+      "facing": 180,
+      "interaction_point": [
+        10.5,
+        0.0,
+        5.3
+      ],
+      "owner": "yui",
+      "private": true,
+      "capacity": 1,
+      "use_via": "music_desk_chair",
+      "support_point": [
+        10.5,
+        0.74,
+        4.12
+      ],
+      "put_down_kinds": [
+        "personal_project"
+      ],
+      "activity": "music",
+      "desk_content": "keyboard"
+    },
+    {
+      "id": "music_desk_chair",
+      "label": "ヘッドホンで練習する鍵盤机の椅子",
+      "type": "chair",
+      "room": "music_room",
+      "position": [
+        10.5,
+        0.0,
+        4.75
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 180,
+      "interaction_point": [
+        10.5,
+        0.0,
+        5.3
+      ],
+      "owner": "yui",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "music_desk",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          10.5,
+          0,
+          4.47
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "fridge",
+      "label": "冷蔵庫",
+      "type": "fridge",
+      "room": "ldk",
+      "position": [
+        7.0,
+        0.0,
+        6.25
+      ],
+      "size": [
+        0.7,
+        1.85,
+        0.7
+      ],
+      "facing": 180,
+      "interaction_point": [
+        7.0,
+        0.0,
+        7.2
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1
+    },
+    {
+      "id": "sink",
+      "label": "流し",
+      "type": "sink",
+      "room": "ldk",
+      "position": [
+        8.2,
+        0.0,
+        6.25
+      ],
+      "size": [
+        1.0,
+        0.85,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        8.2,
+        0.0,
+        7.2
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        8.2,
+        0.71,
+        6.37
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "prep",
+      "label": "調理台",
+      "type": "prep",
+      "room": "ldk",
+      "position": [
+        9.4,
+        0.0,
+        6.25
+      ],
+      "size": [
+        0.9,
+        0.85,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        9.4,
+        0.0,
+        7.2
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        9.4,
+        0.85,
+        6.37
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "stove",
+      "label": "コンロ",
+      "type": "stove",
+      "room": "ldk",
+      "position": [
+        10.6,
+        0.0,
+        6.25
+      ],
+      "size": [
+        0.9,
+        0.85,
+        0.65
+      ],
+      "facing": 180,
+      "interaction_point": [
+        10.6,
+        0.0,
+        7.2
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        10.6,
+        0.85,
+        6.37
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "dining_table",
+      "label": "食卓",
+      "type": "dining_table",
+      "room": "ldk",
+      "position": [
+        9.3,
+        0.0,
+        8.1
+      ],
+      "size": [
+        1.5,
+        0.74,
+        0.8
+      ],
+      "facing": 0,
+      "interaction_point": [
+        9.3,
+        0.0,
+        7.15
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        9.3,
+        0.74,
+        8.1
+      ],
+      "put_down_kinds": [
+        "cook",
+        "serve",
+        "eat",
+        "wash_dishes",
+        "shop"
+      ]
+    },
+    {
+      "id": "dining_tomo",
+      "label": "森 智の食卓席",
+      "type": "dining_seat",
+      "room": "ldk",
+      "position": [
+        8.15,
+        0.0,
+        8.1
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 90,
+      "interaction_point": [
+        7.5,
+        0.0,
+        8.1
+      ],
+      "owner": "tomo",
+      "private": false,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "dining_table",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          8.43,
+          0,
+          8.1
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "dining_yui",
+      "label": "森 結衣の食卓席",
+      "type": "dining_seat",
+      "room": "ldk",
+      "position": [
+        10.45,
+        0.0,
+        8.1
+      ],
+      "size": [
+        0.5,
+        0.9,
+        0.5
+      ],
+      "facing": 270,
+      "interaction_point": [
+        11.1,
+        0.0,
+        8.1
+      ],
+      "owner": "yui",
+      "private": false,
+      "capacity": 1,
+      "seat_height": 0.45,
+      "serves": "dining_table",
+      "pull_distance": 0.45,
+      "front_clearance": 0.53,
+      "usage_region": {
+        "center": [
+          10.17,
+          0,
+          8.1
+        ],
+        "half_extents": [
+          0.16,
+          0.25,
+          0.16
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "sofa",
+      "label": "共用のソファ",
+      "type": "sofa",
+      "room": "ldk",
+      "position": [
+        10.55,
+        0.0,
+        9.95
+      ],
+      "size": [
+        2.5,
+        0.85,
+        0.85
+      ],
+      "facing": 0,
+      "interaction_point": [
+        10.55,
+        0.0,
+        9.0
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 2,
+      "use_facing": 180,
+      "seat_height": 0.43,
+      "usage_region": {
+        "center": [
+          10.55,
+          0,
+          9.67
+        ],
+        "half_extents": [
+          1.1,
+          0.25,
+          0.2
+        ],
+        "postures": [
+          "sit"
+        ]
+      }
+    },
+    {
+      "id": "common_books",
+      "label": "共用の本と記録",
+      "type": "storage",
+      "room": "hall",
+      "position": [
+        5.4,
+        0.0,
+        0.55
+      ],
+      "size": [
+        1.0,
+        1.8,
+        0.4
+      ],
+      "facing": 180,
+      "interaction_point": [
+        5.4,
+        0.0,
+        1.3
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "display_contents": "books"
+    },
+    {
+      "id": "shoes",
+      "label": "親子の靴収納",
+      "type": "shoes",
+      "room": "entrance",
+      "position": [
+        5.95,
+        0.0,
+        9.5
+      ],
+      "size": [
+        0.3,
+        0.95,
+        1.0
+      ],
+      "facing": 90,
+      "interaction_point": [
+        5.1,
+        0.0,
+        9.5
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "resident_slots": [
+        "tomo",
+        "yui"
+      ]
+    },
+    {
+      "id": "toilet",
+      "label": "便器",
+      "type": "toilet",
+      "room": "toilet",
+      "position": [
+        7.6,
+        0.0,
+        5.1
+      ],
+      "size": [
+        0.65,
+        0.78,
+        0.8
+      ],
+      "facing": 0,
+      "interaction_point": [
+        7.6,
+        0.0,
+        4.15
+      ],
+      "owner": "mori",
+      "private": true,
+      "capacity": 1,
+      "seat_height": 0.43,
+      "private_scope": "exclusive_when_occupied"
+    },
+    {
+      "id": "bath",
+      "label": "浴槽",
+      "type": "bath",
+      "room": "bathroom",
+      "position": [
+        1.05,
+        0.0,
+        4.1
+      ],
+      "size": [
+        1.5,
+        0.6,
+        0.75
+      ],
+      "facing": 180,
+      "interaction_point": [
+        1.05,
+        0.0,
+        5.0
+      ],
+      "owner": "mori",
+      "private": true,
+      "capacity": 1,
+      "private_scope": "exclusive_when_occupied"
+    },
+    {
+      "id": "shower",
+      "label": "洗い場シャワー",
+      "type": "shower",
+      "room": "bathroom",
+      "position": [
+        0.35,
+        0.0,
+        6.8
+      ],
+      "size": [
+        0.14,
+        1.9,
+        0.14
+      ],
+      "facing": 270,
+      "interaction_point": [
+        0.95,
+        0.0,
+        6.8
+      ],
+      "owner": "mori",
+      "private": true,
+      "capacity": 1
+    },
+    {
+      "id": "washbasin",
+      "label": "洗面台",
+      "type": "washbasin",
+      "room": "washroom",
+      "position": [
+        2.65,
+        0.0,
+        4.15
+      ],
+      "size": [
+        0.65,
+        0.85,
+        0.8
+      ],
+      "facing": 270,
+      "interaction_point": [
+        3.55,
+        0.0,
+        4.15
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1
+    },
+    {
+      "id": "washer",
+      "label": "洗濯機",
+      "type": "washer",
+      "room": "washroom",
+      "position": [
+        2.65,
+        0.0,
+        5.35
+      ],
+      "size": [
+        0.65,
+        0.95,
+        0.65
+      ],
+      "facing": 270,
+      "interaction_point": [
+        3.55,
+        0.0,
+        5.35
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        2.65,
+        0.23,
+        5.35
+      ],
+      "put_down_kinds": []
+    },
+    {
+      "id": "linen_storage",
+      "label": "タオルと洗濯物の収納",
+      "type": "storage",
+      "room": "washroom",
+      "position": [
+        3.5,
+        0.0,
+        7.45
+      ],
+      "size": [
+        1.2,
+        2.0,
+        0.5
+      ],
+      "facing": 0,
+      "interaction_point": [
+        3.5,
+        0.0,
+        6.65
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        3.5,
+        0.63,
+        7.45
+      ],
+      "put_down_kinds": [
+        "laundry",
+        "hang_laundry",
+        "fold_laundry",
+        "bath"
+      ],
+      "display_contents": "linen"
+    },
+    {
+      "id": "towel_basket",
+      "label": "脱衣かご",
+      "type": "towel_basket",
+      "room": "washroom",
+      "position": [
+        2.55,
+        0.0,
+        7.3
+      ],
+      "size": [
+        0.38,
+        0.42,
+        0.38
+      ],
+      "facing": 0,
+      "interaction_point": [
+        2.55,
+        0.0,
+        6.65
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "support_point": [
+        2.55,
+        0.06,
+        7.3
+      ],
+      "put_down_kinds": [
+        "bath",
+        "laundry",
+        "hang_laundry",
+        "fold_laundry"
+      ]
+    },
+    {
+      "id": "changing_space",
+      "label": "着替える場所",
+      "type": "changing_space",
+      "room": "washroom",
+      "position": [
+        3.45,
+        0.0,
+        6.0
+      ],
+      "size": [
+        0.75,
+        0.02,
+        0.75
+      ],
+      "facing": 0,
+      "interaction_point": [
+        3.45,
+        0.0,
+        6.0
+      ],
+      "owner": "mori",
+      "private": true,
+      "capacity": 1,
+      "blocking": false,
+      "private_scope": "exclusive_while_changing",
+      "support_point": [
+        2.55,
+        0.06,
+        7.3
+      ],
+      "support_fixture": "towel_basket",
+      "put_down_kinds": [
+        "bath"
+      ]
+    },
+    {
+      "id": "drying_rack",
+      "label": "室内の物干し",
+      "type": "drying_rack",
+      "room": "ldk",
+      "position": [
+        7.15,
+        0.0,
+        10.15
+      ],
+      "size": [
+        1.1,
+        1.65,
+        0.35
+      ],
+      "facing": 0,
+      "interaction_point": [
+        7.15,
+        0.0,
+        9.3
+      ],
+      "owner": "mori",
+      "private": false,
+      "capacity": 1,
+      "put_down_kinds": []
+    }
+  ],
+  "residents": [
+    {
+      "id": "tomo",
+      "bed": "bed_tomo",
+      "bedroom": "tomo_bedroom",
+      "dining_seat": "dining_tomo",
+      "authored_age_years": 52,
+      "occupation": "午後に在宅で縫製の注文を受ける人"
+    },
+    {
+      "id": "yui",
+      "bed": "bed_yui",
+      "bedroom": "yui_bedroom",
+      "dining_seat": "dining_yui",
+      "authored_age_years": 27,
+      "occupation": "午後に町外で音楽を教える人"
+    }
+  ],
+  "circulation": [],
+  "windows": [
+    {
+      "id": "W01",
+      "room": "tomo_bedroom",
+      "wall": "north",
+      "center": [
+        1.8,
+        1.65,
+        0.1
+      ],
+      "width": 1.5,
+      "height": 1.0,
+      "inward": [
+        0,
+        0,
+        1
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W02",
+      "room": "yui_bedroom",
+      "wall": "east",
+      "center": [
+        12.3,
+        1.65,
+        1.6
+      ],
+      "width": 1.6,
+      "height": 1.0,
+      "inward": [
+        -1,
+        0,
+        0
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W03",
+      "room": "ldk",
+      "wall": "south",
+      "center": [
+        10.4,
+        1.7,
+        10.7
+      ],
+      "width": 1.8,
+      "height": 1.1,
+      "inward": [
+        0,
+        0,
+        -1
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W04",
+      "room": "sewing_room",
+      "wall": "west",
+      "center": [
+        0.1,
+        1.65,
+        9.1
+      ],
+      "width": 1.3,
+      "height": 1.1,
+      "inward": [
+        1,
+        0,
+        0
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W05",
+      "room": "music_room",
+      "wall": "east",
+      "center": [
+        12.3,
+        1.65,
+        4.6
+      ],
+      "width": 1.0,
+      "height": 1.0,
+      "inward": [
+        -1,
+        0,
+        0
+      ],
+      "frosted": false,
+      "source": "exterior_daylight"
+    },
+    {
+      "id": "W06",
+      "room": "toilet",
+      "wall": "hall_east",
+      "center": [
+        6.3,
+        2.35,
+        4.1
+      ],
+      "width": 0.65,
+      "height": 0.35,
+      "inward": [
+        1,
+        0,
+        0
+      ],
+      "frosted": true,
+      "source": "borrowed_light",
+      "ventilation": "mechanical_extract_required",
+      "note": "外窓ではなく高い曇り採光窓。機械排気の設計が別途必要で、排気機能は未実装。"
+    },
+    {
+      "id": "W07",
+      "room": "bathroom",
+      "wall": "west",
+      "center": [
+        0.1,
+        2.15,
+        5.3
+      ],
+      "width": 1.0,
+      "height": 0.45,
+      "inward": [
+        1,
+        0,
+        0
+      ],
+      "frosted": true,
+      "source": "exterior_daylight"
+    }
+  ],
+  "ceiling_lights": [
+    {
+      "at": [
+        9.3,
+        2.25,
+        8.1
+      ],
+      "kind": "pendant",
+      "room": "ldk"
+    }
+  ]
+}

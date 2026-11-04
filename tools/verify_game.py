@@ -8,7 +8,15 @@ ROOT=Path(__file__).resolve().parents[1]
 CHECKS={
  'resident_motor':('test_resident_motor.gd',r'Resident motor checks: \d+ passed, 0 failed'),
  'home_navigation':('test_home_navigation.gd',r'Home navigation and occupancy: \d+ passed, 0 failed'),
+ 'home_floors':('test_home_floors.gd',r'Home floor support: \d+ passed, 0 failed'),
+ 'home_architecture':('test_home_architecture.gd',r'Home architecture geometry/physics: \d+ passed, 0 failed'),
+ 'kitchen_geometry':('test_kitchen_geometry.gd',r'Kitchen geometry alignment: \d+ passed, 0 failed'),
+ 'furniture_use':('test_furniture_use.gd',r'Furniture use integration: \d+ passed, 0 failed'),
+ 'family_history':('test_family_history.gd',r'Family history checks: \d+ passed, 0 failed'),
+ 'town_biographies':('test_town_biographies.gd',r'Town biographies checks: \d+ passed, 0 failed'),
  'household_day':('test_household_day.gd',r'Household day checks: \d+ passed, 0 failed'),
+ 'household_props':('test_household_props.gd',r'Household props source/attachment checks: \d+ passed, 0 failed'),
+ 'household_carry_frames':('test_household_carry_frames.gd',r'Household carry frame checks: \d+ passed, 0 failed'),
  'foundation_world':('test_foundation_world.gd',r'Foundation world checks: \d+ passed, 0 failed'),
  'sewing_integration':('test_sewing_integration.gd',r'Sewing integration checks: \d+ passed, 0 failed'),
  'sewing_work':('test_sewing_work.gd',r'Sewing work checks: \d+ passed, 0 failed'),
@@ -91,7 +99,9 @@ for name in a.checks:
     # This advances every real minute through all 88 representative years.
     # Shared CI CPUs need more time than the local M5 (about 503 seconds);
     # retain the full calendar and completion/error criteria on both machines.
-    timeout=1800 if name=='life' else (600 if name in ['autonomy','social_chain_presentation'] else (300 if name=='tabletop_presentation' else 180))
+    # Foundation replay waits for real deferred skeleton frames and performs
+    # two 90-second continuations. Shared CPUs need more than a smoke timeout.
+    timeout=1800 if name=='life' else (600 if name in ['autonomy','social_chain_presentation','foundation_world'] else (300 if name=='tabletop_presentation' else 180))
     run(name,['--headless','--script','tests/'+file],marker,timeout=timeout)
 if a.gpu:
     gpu_checks={'sewing_presentation','weather_presentation','character','cast','resident_lod','resident_foot_plant','activities','neighborhood','observation_hud','resident_proposals','population_ui','population_environment','haru_jrpg','jrpg_renewal','population_collaboration','autonomy_presentation','social_chain_presentation','social_motion','interaction_presentation','tabletop_presentation','camera_controls','load_feedback'}

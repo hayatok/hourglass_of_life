@@ -82,16 +82,16 @@ def main():
         "save_directory_name": TITLE,
         "scope": "Playable development checkpoint of the new house/life scene; roadmap stage 1 remains in progress.",
         "packaged_headless_boot": "passed", "native_ui_review": "pending",
-        "remaining": ["new family models", "accepted natural locomotion", "seat and bed interaction", "whole-body tool and carrying motion", "causal family backgrounds"],
+        "remaining": ["new family models and day/night clothing", "accepted natural locomotion and furniture use over a full day", "whole-body tool and carrying motion integrated with actual housework", "full family-day acceptance"],
     }
     (output / "build.json").write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n")
     (output / "README.txt").write_text(f"""{TITLE}
 
-複数室の家、台所・衛生設備・家族の寝床、3人の生活工程を確認する開発プレビューです。
-着座・寝具・道具の全身動作と新しい人物造形は制作中です。
+複数室の家、台所・衛生設備・家族の寝床、椅子やベッドへの出入り、3人の背景と生活工程を確認する開発プレビューです。
+新しい人物造形・衣服と、物を運ぶ・道具を使う家事の全身動作は制作中です。
 ロードマップ段階1の完成版ではありません。
 
-家を見渡す：右上のボタン。人物を見る：下の人物ボタン。
+家を見渡す：右上のボタン。人物と背景を見る：下の人物ボタン。
 カメラを回す：空いている画面をドラッグ。拡縮：ピンチまたは右下の＋/−。
 一時停止・再開、保存・保存から再開は左上のボタン。
 

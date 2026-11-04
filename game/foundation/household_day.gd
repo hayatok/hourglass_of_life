@@ -6,6 +6,8 @@ extends RefCounted
 const RULES := "res://data/foundation/daily-life.json"
 const NEEDS := ["hunger","fatigue","hygiene","bladder","quiet"]
 const TERMINAL := ["completed","cancelled"]
+const BATCH_KINDS := ["cook","serve","eat","wash_dishes","bath","shop","laundry","hang_laundry","fold_laundry"]
+const USE_TYPES := ["chair","dining_seat","sofa","bed"]
 var plan: Dictionary = {}
 var rules: Dictionary = {}
 var people: Dictionary = {}
@@ -20,20 +22,31 @@ var weekday: int = 0
 var cash: float = 35.0
 var serial: int = 0
 var occupancy
+var family_history: FamilyHistory = FamilyHistory.new()
 var _fixtures: Dictionary = {}
 var _rooms: Dictionary = {}
 var _resident_places: Dictionary = {}
 var _claims: Dictionary = {}
+var _supports: Dictionary = {}
+var _support_containers: Dictionary = {}
+var _usage_regions: Dictionary = {}
 
 func _init() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RULES))
-	if parsed is Dictionary: rules=parsed
+	if parsed is Dictionary:
+		rules=parsed
+		# A mandatory physical safety action, not a new authored daily preference.
+		rules.actions.put_down={"label":"持っている物を安全な台へ置く","min_age":0,"phases":[{"name":"持っている物を置く","fixture":"prep","minutes":1}]}
 
 func configure(home_plan: Dictionary, authored_people: Array = [], room_occupancy = null) -> bool:
 	if rules.is_empty() or not home_plan.get("fixtures") is Array or not home_plan.get("residents") is Array: return false
 	plan=home_plan.duplicate(true);occupancy=room_occupancy
-	_fixtures.clear();_rooms.clear();_resident_places.clear()
+	_fixtures.clear();_rooms.clear();_resident_places.clear();_supports.clear();_support_containers.clear();_usage_regions.clear()
 	for item in plan.fixtures: _fixtures[item.id]=item.duplicate(true)
+	for fixture in _fixtures:
+		var support: Dictionary = _support_definition(fixture)
+		if not support.is_empty(): _supports[fixture]=support.position;_support_containers[fixture]=support.container
+		if _valid_region(_fixtures[fixture].get("usage_region")): _usage_regions[fixture]=_fixtures[fixture].usage_region.duplicate(true)
 	for room in plan.get("rooms",[]): _rooms[room.id]=room.duplicate(true)
 	for zone in plan.get("external_zones",[]):
 		var room: Dictionary = zone.duplicate(true);room.private_scope="public";room.allowed_residents=[];_rooms[room.id]=room
@@ -53,12 +66,13 @@ func configure(home_plan: Dictionary, authored_people: Array = [], room_occupanc
 		var p: Dictionary = {"id":id,"name":record.get("name",id),"age":int(record.get("age",record.get("age_years",30))),
 			"skills":record.get("skills",{}).duplicate(true),"routines":record.get("routines",[]).duplicate(true),
 			"position":_point(_fixtures[_resident_places[id].bed].interaction_point),"at_home":true,"return_after":0.0,"active_task":"",
-			"care_invitation":{},"care_accepted":"","care_cooldown":0.0,"history":{"minutes":rules.get("initial_histories",{}).get(id,{}).duplicate(true),"completed":{},"last_finished":{}},"actual_minutes":{},"earned":0.0}
+			"care_invitation":{},"care_accepted":"","care_cooldown":0.0,"history":{"minutes":{},"completed":{},"last_finished":{}},"actual_minutes":{},"earned":0.0}
 		for routine in p.routines:
 			var days: Array = []
 			for day in routine.on_days: days.append(int(day))
 			routine.on_days=days
 		for key in NEEDS: p[key]=float(record.get(key,rules.initial_needs[key]))
+		if not family_history.attach(p,start_minute): return false
 		people[id]=p
 	return people.size()==_resident_places.size() and not people.is_empty()
 
@@ -71,7 +85,130 @@ func minute_of_day() -> int:
 func set_position(actor: String, position: Vector3) -> bool:
 	if not people.has(actor) or not position.is_finite(): return false
 	people[actor].position=position
+	for job in jobs.values():
+		if job.get("holder","")==actor: job.position=_carry_position(actor)
 	return true
+
+func batch_locations() -> Array:
+	var rows: Array = []
+	var keys: Array = jobs.keys();keys.sort()
+	for key in keys:
+		if int(jobs[key].quantity)>0: rows.append(batch_location(key))
+	return rows
+
+func batch_location(job_key: String) -> Dictionary:
+	if not jobs.has(job_key) or int(jobs[job_key].quantity)<=0: return {}
+	var row: Dictionary = jobs[job_key].duplicate(true)
+	row.job_key=job_key
+	return row
+
+func _held_job(actor: String) -> String:
+	for key in jobs:
+		if int(jobs[key].quantity)>0 and jobs[key].get("holder","")==actor: return str(key)
+	return ""
+
+func _carry_position(actor: String) -> Vector3:
+	# Coarse body-relative batch location; exact hand contacts are a render concern.
+	return people[actor].position+Vector3(0,1,0)
+
+func _surface_position(fixture: String, actor: String = "") -> Vector3:
+	if fixture.begins_with("$"): return people[actor].position if people.has(actor) else Vector3.ZERO
+	# Unknown support is never used for a positive batch: _requirement rejects
+	# that action. Zero is only a harmless no-object fallback for qty0 records.
+	return _supports.get(fixture,Vector3.ZERO)
+
+func _support_definition(id: String, seen: Array = []) -> Dictionary:
+	if id in seen or not _fixtures.has(id): return {}
+	var visited: Array = seen.duplicate();visited.append(id)
+	var fixture: Dictionary = _fixtures[id]
+	if fixture.has("support_fixture"):
+		if not fixture.support_fixture is String: return {}
+		return _support_definition(fixture.support_fixture,visited)
+	var authored: Variant = fixture.get("support_point")
+	if authored!=null:
+		if not authored is Array or authored.size()!=3: return {}
+		for value in authored:
+			if not _number(value,-1000,1000): return {}
+		return {"position":_point(authored),"container":id}
+	if fixture.has("serves"):
+		var table: Dictionary = _fixtures.get(fixture.serves,{})
+		if table.get("type","") in ["prep","dining_table","desk"]: return _support_definition(fixture.serves,visited)
+	# These simple solids have a real authored horizontal top. Tall storage,
+	# racks, tubs, seats and appliances do not imply a shelf at an invented y.
+	if fixture.get("type","") not in ["prep","dining_table","desk"]: return {}
+	if not fixture.get("position") is Array or fixture.position.size()!=3 or not fixture.get("size") is Array or fixture.size.size()!=3: return {}
+	for value in fixture.position+fixture.size:
+		if not _number(value,-1000,1000): return {}
+	var position: Vector3 = _point(fixture.position)
+	position.y+=float(fixture.size[1])
+	return {"position":position,"container":id}
+
+func _batch_container(fixture: String) -> String:
+	return str(_support_containers.get(fixture,fixture))
+
+func _requires_usage(fixture: String) -> bool:
+	return _fixtures.get(fixture,{}).get("type","") in USE_TYPES
+
+func _inside_usage(fixture: String, position: Vector3) -> bool:
+	if not _usage_regions.has(fixture) or not position.is_finite(): return false
+	var region: Dictionary = _usage_regions[fixture]
+	var offset: Vector3 = (position-_point(region.center)).abs()
+	var half: Vector3 = _point(region.half_extents)
+	return offset.x<=half.x and offset.y<=half.y and offset.z<=half.z
+
+func _claim_held(actor: String, task: Dictionary) -> bool:
+	if _claims.get(actor,"")!=task.fixture: return false
+	if occupancy==null: return true
+	var state: Dictionary = occupancy.snapshot()
+	return actor in state.get("fixture_users",{}).get(task.fixture,[]) and actor in state.get("room_users",{}).get(task.room,[]) and _status(actor,task.fixture,task.room).status=="ready"
+
+static func _valid_region(value: Variant) -> bool:
+	if not value is Dictionary: return false
+	for field in ["center","half_extents"]:
+		if not value.get(field) is Array or value[field].size()!=3: return false
+		for number in value[field]:
+			if not _number(number,.000001 if field=="half_extents" else -1000,3 if field=="half_extents" else 1000): return false
+	if not value.get("postures") is Array or value.postures.is_empty() or value.postures.size()>2: return false
+	for posture in value.postures:
+		if posture not in ["sit","lie"]: return false
+	return true
+
+func _safe_fixture(actor: String, job: Dictionary) -> String:
+	var best: String = ""
+	var distance: float = INF
+	var options: Array = _fixtures.keys();options.sort()
+	for id in options:
+		var allowed: Variant = _fixtures[id].get("put_down_kinds",[])
+		if not allowed is Array or str(job.kind) not in allowed or not _supports.has(id) or _status(actor,id,_fixtures[id].room).status!="ready": continue
+		var value: float = people[actor].position.distance_squared_to(_point(_fixtures[id].interaction_point))
+		if value<distance: distance=value;best=str(id)
+	return best
+
+func _take_batch(job_key: String, actor: String) -> void:
+	var job: Dictionary = jobs[job_key]
+	if int(job.quantity)<=0: return
+	job.container="";job.holder=actor;job.reserved_by=actor;job.position=_carry_position(actor)
+
+func _place_batch(job_key: String, fixture: String, actor: String) -> void:
+	var job: Dictionary = jobs[job_key]
+	var container: String = _batch_container(fixture)
+	job.container=container;job.last_fixture=container;job.source_fixture=container
+	job.holder="";job.position=_surface_position(fixture,actor)
+
+func _work_phase(task: Dictionary) -> int:
+	return int(task.phases[int(task.phase_index)].get("work_phase",task.phase_index))
+
+func _resumption(actor: String, kind: String, job: Dictionary) -> Dictionary:
+	var phases: Array = _phases(actor,kind)
+	var index: int = int(job.get("phase_index",0))
+	var progress: float = float(job.get("phase_progress",0))
+	if not job.is_empty() and int(job.quantity)>0 and str(job.holder).is_empty() and index<phases.size() and job.container!=_batch_container(phases[index].fixture):
+		var source: String = job.container
+		if _fixtures.has(source):
+			phases.insert(index,{"name":"途中の物を取り上げる","fixture":source,"room":_fixtures[source].room,
+				"target":_point(_fixtures[source].interaction_point),"minutes":1.0,"transport":"pickup","work_phase":index})
+			progress=0
+	return {"phases":phases,"index":index,"progress":progress}
 
 func set_stock(key: String, count: int) -> bool:
 	if not inventory.has(key) or count<0 or count>10000: return false
@@ -82,6 +219,9 @@ func set_return_after(actor: String, at_elapsed: float) -> bool:
 	if not people.has(actor) or people[actor].at_home or not is_finite(at_elapsed) or at_elapsed<elapsed: return false
 	people[actor].return_after=at_elapsed
 	return true
+
+func set_commitment_deadline(actor: String, commitment_id: String, due_elapsed: float) -> bool:
+	return people.has(actor) and family_history.set_deadline(people[actor],commitment_id,due_elapsed)
 
 func advance_time(minutes: float) -> bool:
 	if not is_finite(minutes) or minutes<0 or minutes>1440: return false
@@ -100,13 +240,13 @@ func advance_time(minutes: float) -> bool:
 		machines.erase(key)
 	return true
 
-func _routine(p: Dictionary) -> Dictionary:
-	var now: float = start_minute+elapsed
+func _routine(p: Dictionary, at_elapsed: float = -1.0) -> Dictionary:
+	var now: float = start_minute+(elapsed if at_elapsed<0 else at_elapsed)
 	var day: int = int(floor(now/1440.0))
 	for offset in [-1,0]:
 		var current_day: int = day+offset
 		for routine in p.routines:
-			if posmod(weekday+current_day,7) not in routine.on_days: continue
+			if not routine.on_days.any(func(value):return int(value)==posmod(weekday+current_day,7)):continue
 			var begin: float = current_day*1440+float(routine.start_minute)
 			var end: float = begin+float(routine.duration_minutes)
 			if now>=begin and now<end:
@@ -175,7 +315,11 @@ func _phases(actor: String, kind: String) -> Array:
 	for authored in rules.actions[kind].phases:
 		var phase: Dictionary = authored.duplicate(true)
 		var id: String = _personal_fixture(actor,phase.fixture,routine)
+		if kind=="put_down":
+			var held: String = _held_job(actor)
+			id=_safe_fixture(actor,jobs[held]) if not held.is_empty() else ""
 		phase.fixture=id
+		phase.work_phase=phases.size()
 		if id in ["$outside","$entrance"]:
 			var found: bool = false
 			for door in plan.doors:
@@ -190,7 +334,11 @@ func _phases(actor: String, kind: String) -> Array:
 				var ids: Array = people.keys();ids.sort()
 				var slot: int = ids.find(actor)
 				phase.target.x+=(float(slot)-float(people.size()-1)*.5)*.6
-		if kind in ["work","school","sleep"] and not routine.is_empty() and routine.kind==kind: phase.minutes=minf(float(phase.minutes),float(routine.ends)-elapsed)
+		if kind in ["work","school","sleep"] and not routine.is_empty() and routine.kind==kind:
+			# A shift, school day or night's sleep is one continuous use. A
+			# sixty-minute work chunk must not make people leave/re-enter hourly.
+			phase.minutes=float(routine.ends)-elapsed;phase.scheduled_end=float(routine.ends)
+		if kind=="personal_project": phase.minutes=maxf(1,minf(float(phase.minutes),family_history.project_remaining(people[actor])))
 		phases.append(phase)
 	return phases
 
@@ -209,14 +357,21 @@ func _status(actor: String, fixture: String, room: String) -> Dictionary:
 	if users>=int(_fixtures[fixture].get("capacity",1)): return {"status":"occupied","reason":"ほかの人が使っている"}
 	return {"status":"ready","reason":""}
 
-func _requirement(actor: String, kind: String) -> String:
+func _requirement(actor: String, kind: String, work_started_at: float = -1.0) -> String:
 	var p: Dictionary = people[actor]
 	if int(p.age)<int(rules.actions[kind].min_age): return "年齢に合った別の行動をする"
+	for phase in _phases(actor,kind):
+		if _requires_usage(phase.fixture) and not _usage_regions.has(phase.fixture): return "家具の実使用位置がまだ定義されていない"
+	if kind in BATCH_KINDS:
+		for phase in _phases(actor,kind):
+			if not bool(phase.get("keep_carried",false)) and not str(phase.fixture).begins_with("$") and not _supports.has(phase.fixture): return "工程の物を置く実支持面がまだない"
 	var key: String = _job_key(actor,kind)
 	if jobs.has(key):
 		if jobs[key].get("reserved_by","") not in ["",actor]: return "別の人が途中の作業を進めている"
 		return ""
 	match kind:
+		"put_down":
+			if _held_job(actor).is_empty(): return "今は物を持っていない"
 		"cook":
 			if int(inventory.prepared_servings)+int(inventory.table_servings)>0: return "先に出来ている料理を食卓へ運ぶ"
 			if int(inventory.ingredients)<int(rules.recipe_servings): return "食材が足りない"
@@ -234,8 +389,13 @@ func _requirement(actor: String, kind: String) -> String:
 			if not _children_here(): return "一緒に過ごす子どもがまだ帰っていない"
 		"family_time":
 			if not _invitation_valid(p): return "家族の誘いをまだ受けていない"
+		"personal_project":
+			var project: Dictionary = family_history.project_for(p)
+			if project.is_empty() or p.life_history.projects[project.id].completed: return "今の個人制作は一区切りついている"
+		"tidy_tools":
+			if not p.life_history.tools_out: return "自分が使って出した道具はまだない"
 		"work","school":
-			var routine: Dictionary = _routine(p)
+			var routine: Dictionary = _routine(p,work_started_at)
 			if routine.is_empty() or routine.kind!=kind: return "今はその予定の時間ではない"
 		"return_home":
 			if p.at_home: return "すでに家にいる"
@@ -257,6 +417,9 @@ func candidates(actor: String) -> Array:
 	var p: Dictionary = people[actor]
 	var routine: Dictionary = _routine(p)
 	var hunger: float = _household_hunger()
+	var context: Dictionary = family_history.context_for(actor,people,tasks,elapsed,weekday)
+	var held: String = _held_job(actor)
+	var carrying_active: bool = not held.is_empty() and tasks.get(p.active_task,{}).get("job_key","")==held
 	var rows: Array = []
 	for kind in rules.actions:
 		var score: float = -1.0
@@ -279,9 +442,15 @@ func candidates(actor: String) -> Array:
 			"laundry": score=.22+minf(.25,float(inventory.dirty_laundry)*.04)
 			"hang_laundry": score=.5
 			"fold_laundry": score=.35
+			"personal_project": score=.25
+			"tidy_tools": score=.25
+			"put_down": score=1.3 if not held.is_empty() and not carrying_active else -.5
+		var personal: Dictionary = family_history.choice(p,kind,context)
+		score+=float(personal.score_delta)
 		if bool(rules.actions[kind].get("shared",false)):
 			score-=minf(.25,float(p.history.minutes.get(kind,0))*.0015)
 		var reason: String = _requirement(actor,kind)
+		if not held.is_empty() and not carrying_active and kind!="put_down": reason="先に持っている物を安全な台へ置く"
 		if reason.is_empty() and not p.at_home and kind not in ["work","school","return_home","wait_outside","shop"]: reason="先に帰宅する"
 		var phases: Array = _phases(actor,kind)
 		var key: String = _job_key(actor,kind)
@@ -292,13 +461,17 @@ func candidates(actor: String) -> Array:
 			var status: Dictionary = _status(actor,phases[phase_index].fixture,phases[phase_index].room)
 			if status.status!="ready": reason=status.reason
 		if kind in ["cook","shop","laundry"] and not jobs.has(key) and _free_minutes(p)<_duration(phases)+5 and hunger<.85 and reason.is_empty(): reason="次の予定までに一区切りつけられない"
-		rows.append({"kind":kind,"label":rules.actions[kind].label,"score":score,"status":"ready" if reason.is_empty() and score>=0 else "unavailable","reason":reason if not reason.is_empty() else "今は別のことを優先する"})
+		var label: String = str(family_history.project_for(p).get("label",rules.actions[kind].label)) if kind=="personal_project" else str(rules.actions[kind].label)
+		rows.append({"kind":kind,"label":label,"activity":personal.activity,"project_id":personal.project_id,"choice_reason":personal.choice_reason,"score":score,"status":"ready" if reason.is_empty() and score>=0 else "unavailable","reason":reason if not reason.is_empty() else "今は別のことを優先する"})
 	rows.sort_custom(func(a,b):return float(a.score)>float(b.score) if not is_equal_approx(float(a.score),float(b.score)) else str(a.kind)<str(b.kind))
 	return rows
 
 func request(actor: String, preferred: String = "") -> Dictionary:
 	if not people.has(actor): return _reply("invalid","住民がいない")
 	var p: Dictionary = people[actor]
+	var active: Dictionary = tasks.get(p.active_task,{})
+	if active.get("status","")=="exiting": return _reply("leaving","先に家具から安全に離れる",active)
+	if p.active_task.is_empty() and not _held_job(actor).is_empty(): preferred="put_down"
 	var choices: Array = candidates(actor)
 	var best: Dictionary = {}
 	for option in choices:
@@ -309,7 +482,7 @@ func request(actor: String, preferred: String = "") -> Dictionary:
 		var routine: Dictionary = _routine(p)
 		var duty: bool = routine.get("kind","") in ["work","school"] and current.kind!=routine.kind and current.get("routine_when_chosen","")!=routine.get("id","")
 		var lost_partner: bool = current.kind=="family_time" and not _invitation_valid(p) and str(p.care_accepted).is_empty()
-		var waited_out: bool = current.kind in ["care","family_time"] and (float(current.get("waiting_since",-1))>=0 and elapsed-float(current.waiting_since)>30 or float(current.performed)==0 and elapsed-float(current.requested_at)>45)
+		var waited_out: bool = current.kind in ["care","family_time"] and (float(current.get("waiting_since",-1))>=0 and elapsed-float(current.waiting_since)>30 or float(current.performed)==0 and elapsed-float(current.requested_at)>45 or current.kind=="care" and _all_declined(current))
 		var other_ready: bool = not best.is_empty() and best.kind!=current.kind
 		var critical: bool = float(p.bladder)>.9 or float(p.hunger)>.9 or float(p.fatigue)>.96
 		var better_urgent: bool = other_ready and critical and float(best.score)>float(current.get("priority_on_choice",0))+.03 and best.kind in ["toilet","eat","sleep"]
@@ -317,7 +490,9 @@ func request(actor: String, preferred: String = "") -> Dictionary:
 		if not lost_partner and not waited_out and not should_switch:
 			if current.status=="blocked" and not best.is_empty() and best.kind==current.kind: current.status="requested";current.reason="使えるようになったので続ける"
 			return _reply(current.status,current.reason,current)
-		cancel(actor,current.id,"相手の応答を待って別のことをする" if waited_out or lost_partner else "必要や予定を見直して、途中の物を残した")
+		var cancellation: Dictionary = cancel(actor,current.id,"相手の応答を待って別のことをする" if waited_out or lost_partner else "必要や予定を見直して、途中の物を残した")
+		if cancellation.status=="leaving": return cancellation
+		if not _held_job(actor).is_empty(): preferred="put_down"
 		choices=candidates(actor)
 	for candidate in choices:
 		if candidate.status!="ready" or not preferred.is_empty() and candidate.kind!=preferred: continue
@@ -325,9 +500,17 @@ func request(actor: String, preferred: String = "") -> Dictionary:
 		var kind: String = candidate.kind
 		var key: String = _job_key(actor,kind)
 		var job: Dictionary = jobs.get(key,{})
-		var task: Dictionary = {"id":"task_%d"%serial,"actor":actor,"kind":kind,"label":candidate.label,"status":"requested","reason":"自分の必要と家の状況から選んだ",
-			"phases":_phases(actor,kind),"phase_index":int(job.get("phase_index",0)),"phase_progress":float(job.get("phase_progress",0)),"performed":0.0,"priority_on_choice":float(candidate.score),"waiting_since":-1.0,
-			"routine_when_chosen":_routine(p).get("id",""),"requested_at":elapsed,"arrived_at":-1.0,"last_performed_at":elapsed,"finished_at":-1.0,"started_effects":bool(job.get("started_effects",false)),"job_key":key,"result":{}}
+		var resume: Dictionary = _resumption(actor,kind,job)
+		var task: Dictionary = {"id":"task_%d"%serial,"actor":actor,"kind":kind,"label":candidate.label,"activity":candidate.activity,"project_id":candidate.project_id,"choice_reason":candidate.choice_reason,"status":"requested","reason":candidate.choice_reason,
+			"phases":resume.phases,"phase_index":resume.index,"phase_progress":resume.progress,"performed":0.0,"priority_on_choice":float(candidate.score),"waiting_since":-1.0,
+			"routine_when_chosen":_routine(p).get("id",""),"requested_at":elapsed,"arrived_at":-1.0,"last_performed_at":elapsed,"finished_at":-1.0,"started_effects":bool(job.get("started_effects",false)),"job_key":key,"result":{},"declined_by":[]}
+		task.carried_job=_held_job(actor) if kind=="put_down" else ""
+		task.pending_cancel_reason=""
+		if kind!="family_time" and _invitation_valid(p):
+			var invitation_id: String = p.care_invitation.task
+			if tasks.has(invitation_id) and actor not in tasks[invitation_id].declined_by: tasks[invitation_id].declined_by.append(actor)
+			family_history.declined(p,invitation_id,task,elapsed)
+			p.care_invitation={};p.care_accepted=""
 		tasks[task.id]=task;p.active_task=task.id;_update_target(task)
 		if kind=="care":
 			for child in people.values():
@@ -339,13 +522,22 @@ func request(actor: String, preferred: String = "") -> Dictionary:
 func task_for(actor: String) -> Dictionary:
 	return tasks.get(people.get(actor,{}).get("active_task",""),{}).duplicate(true)
 
+func _fit_scheduled_use(task: Dictionary) -> Dictionary:
+	var phase: Dictionary=task.phases[int(task.phase_index)]
+	if not phase.has("scheduled_end"):return {}
+	var remaining: float=float(phase.scheduled_end)-elapsed
+	if remaining<=.000001:return cancel(task.actor,task.id,"予定の時間が終わったので、次の暮らしへ移る")
+	phase.minutes=float(task.phase_progress)+remaining;task.phase_minutes=phase.minutes
+	return {}
+
 func arrive(actor: String, task_id: String) -> Dictionary:
 	var task: Dictionary = _owned(actor,task_id)
 	if task.is_empty() or task.status in TERMINAL: return _reply("invalid","進行中の本人の行動ではない")
 	var key: String = task.job_key
 	if jobs.has(key) and jobs[key].get("reserved_by","") not in ["",actor]: task.status="blocked";return _reply("occupied","別の人がこの作業を進めている",task)
-	if jobs.has(key) and (task.phase_index!=jobs[key].phase_index or not is_equal_approx(float(task.phase_progress),float(jobs[key].phase_progress))):
-		task.phase_index=jobs[key].phase_index;task.phase_progress=jobs[key].phase_progress;task.started_effects=jobs[key].started_effects;_update_target(task)
+	if jobs.has(key) and task.phases[int(task.phase_index)].get("transport","")!="pickup" and (_work_phase(task)!=jobs[key].phase_index or not is_equal_approx(float(task.phase_progress),float(jobs[key].phase_progress))):
+		var resume: Dictionary = _resumption(actor,task.kind,jobs[key])
+		task.phases=resume.phases;task.phase_index=resume.index;task.phase_progress=resume.progress;task.started_effects=jobs[key].started_effects;_update_target(task)
 		return _reply("redirected","途中の物がある場所へ向かう",task)
 	if people[actor].position.distance_to(task.target)>float(rules.arrival_distance): return _reply("not_arrived","まだ使う場所に到着していない",task)
 	var status: Dictionary = _status(actor,task.fixture,task.room)
@@ -355,33 +547,89 @@ func arrive(actor: String, task_id: String) -> Dictionary:
 		if status.status!="ready": task.status="blocked";task.reason=status.reason;return _reply(status.status,status.reason,task)
 	_claims[actor]=task.fixture
 	if jobs.has(key): jobs[key].reserved_by=actor
-	task.status="phase_ready" if float(task.phase_progress)>=float(task.phase_minutes)-.00000001 else "arrived"
+	if not task.usage.required:
+		var fitted: Dictionary=_fit_scheduled_use(task)
+		if not fitted.is_empty():return fitted
+	task.status="entering" if task.usage.required else ("phase_ready" if float(task.phase_progress)>=float(task.phase_minutes)-.00000001 else "arrived")
+	if task.usage.required: task.usage.state="entering"
 	task.arrived_at=elapsed;task.last_performed_at=elapsed
 	people[actor].at_home=task.fixture!="$outside"
 	return _reply(task.status,"使う場所に実際に到着した",task)
+
+func begin_use(actor: String, task_id: String, position: Vector3, posture: String) -> Dictionary:
+	var task: Dictionary = _owned(actor,task_id)
+	if task.is_empty() or not task.usage.required or task.status not in ["entering","arrived","working","phase_ready"]: return _reply("not_ready","先に家具の入口へ到着して予約する",task)
+	if not position.is_finite() or position.distance_to(people[actor].position)>.01 or not _inside_usage(task.fixture,position) or posture not in _usage_regions[task.fixture].postures: return _reply("not_in_usage","実際の姿勢と身体位置が家具の使用領域に合っていない",task)
+	if not _claim_held(actor,task): return _reply("occupied","家具と部屋の本人の使用権が必要",task)
+	if task.usage.state=="using": return _reply(task.status,"すでに実使用中",task)
+	var fitted: Dictionary=_fit_scheduled_use(task)
+	if not fitted.is_empty():return fitted
+	task.usage.state="using";task.usage.anchor_position=[position.x,position.y,position.z];task.usage.posture=posture;task.usage.entered_at=elapsed
+	task.last_performed_at=elapsed
+	task.status="phase_ready" if float(task.phase_progress)>=float(task.phase_minutes)-.00000001 else "arrived"
+	return _reply(task.status,"実際の家具使用姿勢が成立した",task)
+
+func begin_exit(actor: String, task_id: String) -> Dictionary:
+	var task: Dictionary = _owned(actor,task_id)
+	if task.is_empty() or not task.usage.required or task.status in TERMINAL: return _reply("not_ready","使用中の家具がない",task)
+	if task.status=="exiting": return _reply("leaving","家具から安全に離れている",task)
+	if task.status!="phase_ready" and task.pending_cancel_reason.is_empty(): return _reply("not_ready","実作業の終了か中断の意思を確かめる",task)
+	if not _claim_held(actor,task): return _reply("occupied","退場が終わるまで本人の占有を維持する",task)
+	task.status="exiting";task.usage.state="exiting";task.usage.exit_started_at=elapsed;task.last_performed_at=elapsed
+	return _reply("leaving","実作業を止め、家具から安全に離れる",task)
+
+func end_use(actor: String, task_id: String, position: Vector3, posture: String = "stand") -> Dictionary:
+	var task: Dictionary = _owned(actor,task_id)
+	if task.is_empty() or task.status!="exiting" or not task.usage.required: return _reply("not_ready","先に家具から離れる動作を始める",task)
+	if not position.is_finite() or position.distance_to(people[actor].position)>.01 or position.distance_to(task.target)>float(rules.arrival_distance) or posture!="stand": return _reply("not_at_exit","実際に歩ける入口位置へ戻ってから終える",task)
+	if not _claim_held(actor,task): return _reply("occupied","退場完了までの使用権が必要",task)
+	task.usage.state="exited";task.usage.exited_at=elapsed;task.last_performed_at=elapsed
+	task.status="phase_ready" if float(task.phase_progress)>=float(task.phase_minutes)-.00000001 else "arrived"
+	if not task.pending_cancel_reason.is_empty(): return _cancel_now(actor,task,task.pending_cancel_reason)
+	return _reply(task.status,"家具から実際に離れた。完了処理まで占有を保つ",task)
 
 func perform(actor: String, task_id: String, minutes: float) -> Dictionary:
 	var task: Dictionary = _owned(actor,task_id)
 	if task.is_empty() or task.status not in ["arrived","working"]: return _reply("not_ready","到着してから実際に行う")
 	if not is_finite(minutes) or minutes<=0: return _reply("invalid","実作業時間が必要",task)
-	if people[actor].position.distance_to(task.target)>float(rules.arrival_distance) or _claims.get(actor,"")!=task.fixture: return _reply("not_arrived","使用位置から離れている",task)
+	if task.usage.required:
+		if task.usage.state!="using" or not _inside_usage(task.fixture,people[actor].position) or not _claim_held(actor,task):
+			task.last_performed_at=elapsed
+			return _reply("not_in_usage","実際の家具使用姿勢になってから行う",task)
+	elif people[actor].position.distance_to(task.target)>float(rules.arrival_distance) or _claims.get(actor,"")!=task.fixture: return _reply("not_arrived","使用位置から離れている",task)
 	if occupancy!=null and not str(task.fixture).begins_with("$") and occupancy.fixture_status(task.fixture,actor).status!="ready": return _reply("occupied","使用権を確認してから行う",task)
 	if task.kind in ["care","family_time"] and not _care_ready(actor,task):
 		task.last_performed_at=elapsed
 		if float(task.waiting_since)<0: task.waiting_since=elapsed
 		return _reply("waiting_for_partner","相手が受諾して同じ場に来てから一緒に過ごす",task)
 	var phase: Dictionary = task.phases[task.phase_index]
-	var amount: float = minf(minutes,minf(maxf(0,elapsed-float(task.last_performed_at)),float(phase.minutes)-float(task.phase_progress)))
+	var start: float=maxf(float(task.last_performed_at),elapsed-minutes)
+	var end: float=minf(elapsed,float(phase.get("scheduled_end",elapsed)))
+	var amount: float=minf(maxf(0,end-start),float(phase.minutes)-float(task.phase_progress))
+	if phase.has("scheduled_end") and elapsed>=float(phase.scheduled_end):
+		# Count only overlap with the actual performed interval before the end.
+		# A late callback/contact recovery cannot backfill an unattended shift.
+		var total: float=float(task.phase_progress)+amount
+		if total<=.000001:return cancel(actor,task.id,"予定の時間を過ぎたので、実行していない時間を付けずに終える")
+		phase.minutes=total;task.phase_minutes=total
+		if amount<=.00000001:
+			task.status="phase_ready";return _reply("phase_ready","実際に行った時間で予定の区切りを終える",task)
 	if amount<=.00000001: return _reply("waiting_for_time","同じ時刻の作業は重ねて数えない",task)
 	if not task.started_effects:
-		var reason: String = _requirement(actor,task.kind)
+		var reason: String = _requirement(actor,task.kind,start if phase.has("scheduled_end") else -1.0)
 		if not reason.is_empty(): task.status="blocked";task.reason=reason;return _reply("blocked",reason,task)
 		_start_effect(task)
 	task.last_performed_at=elapsed;task.phase_progress+=amount;task.performed+=amount;task.status="working";task.waiting_since=-1.0
+	if task.kind=="put_down":
+		if jobs.has(task.carried_job) and task.phase_progress>=float(phase.minutes)-.00000001:
+			_place_batch(task.carried_job,task.fixture,actor);jobs[task.carried_job].reserved_by=""
+	elif jobs.has(task.job_key) and jobs[task.job_key].get("holder","")==actor and phase.get("transport","")!="pickup" and not bool(phase.get("keep_carried",false)) and task.phase_progress>=minf(1,float(phase.minutes)):
+		_place_batch(task.job_key,task.fixture,actor)
 	var p: Dictionary = people[actor]
 	for key in phase.get("need_delta",{}): p[key]=clampf(float(p[key])+float(phase.need_delta[key])*amount,0,1)
 	p.actual_minutes[task.kind]=float(p.actual_minutes.get(task.kind,0))+amount
 	p.history.minutes[task.kind]=float(p.history.minutes.get(task.kind,0))+amount
+	family_history.performed(p,task,amount,elapsed)
 	if task.kind=="work": p.earned+=amount*.035;cash+=amount*.035
 	_sync_job(task)
 	if task.phase_progress>=float(phase.minutes)-.00000001: task.status="phase_ready"
@@ -392,9 +640,15 @@ func finish(actor: String, task_id: String) -> Dictionary:
 	if task.is_empty(): return _reply("invalid","本人の行動ではない")
 	if task.status=="completed": return _reply("completed","すでに完了している",task)
 	if task.status!="phase_ready": return _reply("not_ready","この工程の実作業が終わっていない",task)
+	if task.usage.required and task.usage.state!="exited": return begin_exit(actor,task_id)
+	var phase: Dictionary = task.phases[int(task.phase_index)]
+	if jobs.has(task.job_key) and int(jobs[task.job_key].quantity)>0:
+		if phase.get("transport","")=="pickup" or task.phase_index+1<task.phases.size() and task.phases[int(task.phase_index)+1].fixture!=task.fixture:
+			_take_batch(task.job_key,actor)
 	_release(actor)
 	if task.phase_index+1<task.phases.size():
 		task.phase_index+=1;task.phase_progress=0.0;task.status="requested";task.arrived_at=-1.0;task.last_performed_at=elapsed
+		if phase.get("transport","")=="pickup" and jobs.has(task.job_key): task.phase_progress=float(jobs[task.job_key].phase_progress)
 		_sync_job(task);_update_target(task)
 		return _reply("next_phase","次の場所で続ける",task)
 	_complete_effect(task)
@@ -402,6 +656,7 @@ func finish(actor: String, task_id: String) -> Dictionary:
 	task.result={"kind":task.kind,"actual_minutes":task.performed,"at":elapsed,"effects_recorded":true}
 	var p: Dictionary = people[actor]
 	p.active_task="";p.history.completed[task.kind]=int(p.history.completed.get(task.kind,0))+1;p.history.last_finished[task.kind]=elapsed
+	family_history.completed(p,task,elapsed)
 	jobs.erase(task.job_key)
 	if task.kind=="family_time": p.care_accepted="";p.care_invitation={}
 	_record(actor,task.kind,"completed",task.result)
@@ -411,10 +666,17 @@ func cancel(actor: String, task_id: String, reason: String = "本人の予定が
 	var task: Dictionary = _owned(actor,task_id)
 	if task.is_empty(): return _reply("invalid","本人の行動ではない")
 	if task.status in TERMINAL: return _reply(task.status,task.reason,task)
+	if task.usage.required and task.usage.state in ["entering","using","exiting"]:
+		task.pending_cancel_reason=reason
+		return begin_exit(actor,task_id)
+	return _cancel_now(actor,task,reason)
+
+func _cancel_now(actor: String, task: Dictionary, reason: String) -> Dictionary:
+	var task_id: String = task.id
 	_sync_job(task)
 	if jobs.has(task.job_key):
 		if int(jobs[task.job_key].quantity)==0: jobs.erase(task.job_key)
-		else: jobs[task.job_key].reserved_by=""
+		else: jobs[task.job_key].reserved_by=jobs[task.job_key].holder
 	_release(actor);task.status="cancelled";task.reason=reason;task.finished_at=elapsed
 	if people[actor].active_task==task_id: people[actor].active_task=""
 	if task.kind=="care":
@@ -427,6 +689,7 @@ func cancel(actor: String, task_id: String, reason: String = "本人の予定が
 	return _reply("cancelled",reason,task)
 
 func _start_effect(task: Dictionary) -> void:
+	if task.kind=="put_down": task.started_effects=true;return
 	var count: int = 0
 	var towels: int = 0
 	match task.kind:
@@ -441,12 +704,15 @@ func _start_effect(task: Dictionary) -> void:
 		"hang_laundry": count=int(inventory.wet_laundry);towels=int(inventory.wet_towels);inventory.wet_laundry-=count;inventory.wet_towels-=towels
 		"fold_laundry": count=int(inventory.dry_laundry);towels=int(inventory.dry_towels);inventory.dry_laundry-=count;inventory.dry_towels-=towels
 	task.started_effects=true
-	jobs[task.job_key]={"kind":task.kind,"quantity":count,"towels":towels,"phase_index":task.phase_index,"phase_progress":task.phase_progress,"started_effects":true,"reserved_by":task.actor,"source_fixture":task.fixture}
+	var container: String = _batch_container(task.fixture) if count>0 else str(task.fixture)
+	jobs[task.job_key]={"kind":task.kind,"quantity":count,"towels":towels,"phase_index":_work_phase(task),"phase_progress":task.phase_progress,"started_effects":true,"reserved_by":task.actor,
+		"batch_id":"batch:"+str(task.id),"container":container,"last_fixture":container,"source_fixture":container,"holder":"","position":_surface_position(task.fixture,task.actor) if count>0 else people[task.actor].position}
 
 func _sync_job(task: Dictionary) -> void:
 	if not jobs.has(task.job_key): return
 	var job: Dictionary = jobs[task.job_key]
-	job.phase_index=task.phase_index;job.phase_progress=task.phase_progress;job.source_fixture=task.fixture
+	if task.phases[int(task.phase_index)].get("transport","")=="pickup": return
+	job.phase_index=_work_phase(task);job.phase_progress=task.phase_progress
 
 func _complete_effect(task: Dictionary) -> void:
 	var job: Dictionary = jobs.get(task.job_key,{"quantity":0})
@@ -471,17 +737,27 @@ func _invitation_valid(p: Dictionary) -> bool:
 	var task: Dictionary = tasks.get(invitation.get("task",""),{})
 	return not task.is_empty() and task.status not in TERMINAL and float(invitation.get("until",-1))>=elapsed and p.at_home
 
+func _all_declined(task: Dictionary) -> bool:
+	if task.get("declined_by",[]).is_empty(): return false
+	for p in people.values():
+		if int(p.age)>=13 or not p.at_home: continue
+		if p.care_accepted==task.id or p.care_invitation.get("task","")==task.id: return false
+	return true
+
 func _care_ready(actor: String, task: Dictionary) -> bool:
 	if task.kind=="care":
 		for child in people.values():
 			if child.care_accepted!=task.id or not child.at_home: continue
 			var other: Dictionary = tasks.get(child.active_task,{})
-			if other.get("kind","")=="family_time" and other.get("status","") in ["arrived","working","phase_ready"] and child.position.distance_to(people[actor].position)<=1.5: return true
+			if other.get("kind","")=="family_time" and other.get("status","") in ["arrived","working","phase_ready"] and _use_ready(other) and child.position.distance_to(people[actor].position)<=1.5: return true
 		return false
 	var parent: Dictionary = tasks.get(people[actor].care_accepted,{})
 	if parent.is_empty() or parent.kind!="care" or parent.status=="cancelled": return false
 	if parent.status=="completed" and not is_equal_approx(float(parent.finished_at),elapsed): return false
-	return people[parent.actor].at_home and people[parent.actor].position.distance_to(people[actor].position)<=1.5 and parent.status in ["arrived","working","phase_ready","completed"]
+	return people[parent.actor].at_home and people[parent.actor].position.distance_to(people[actor].position)<=1.5 and _use_ready(parent) and parent.status in ["arrived","working","phase_ready","completed"]
+
+func _use_ready(task: Dictionary) -> bool:
+	return not bool(task.get("usage",{}).get("required",false)) or task.usage.state=="using"
 
 func _owned(actor: String, id: String) -> Dictionary:
 	var task: Dictionary = tasks.get(id,{})
@@ -490,6 +766,8 @@ func _owned(actor: String, id: String) -> Dictionary:
 func _update_target(task: Dictionary) -> void:
 	var phase: Dictionary = task.phases[task.phase_index]
 	task.fixture=phase.fixture;task.room=phase.room;task.target=phase.target;task.phase_name=phase.name;task.phase_minutes=phase.minutes
+	task.usage={"required":_requires_usage(task.fixture),"state":"approach" if _requires_usage(task.fixture) else "none",
+		"anchor_position":[],"posture":"","entered_at":-1.0,"exit_started_at":-1.0,"exited_at":-1.0}
 
 func _release(actor: String) -> void:
 	_claims.erase(actor)
@@ -556,16 +834,45 @@ func _valid_snapshot(s: Dictionary) -> bool:
 				if not _number(value,0,10000000): return false
 		for value in p.actual_minutes.values():
 			if not _number(value,0,10000000): return false
+		if not family_history.valid_person(p,float(s.elapsed)) or p.life_history.start_minute!=start_minute: return false
+		for progress in p.life_history.projects.values():
+			if not _fixtures.has(progress.fixture): return false
+		if p.life_history.tools_out and not _fixtures.has(p.life_history.tools_fixture): return false
 		if not p.active_task.is_empty() and (not s.tasks.get(p.active_task) is Dictionary or s.tasks[p.active_task].get("actor")!=id or s.tasks[p.active_task].get("status") in TERMINAL): return false
 	for id in s.tasks:
 		if not id is String or not id.begins_with("task_") or id.length()>14 or not id.trim_prefix("task_").is_valid_int(): return false
 		if int(id.trim_prefix("task_"))>int(s.serial): return false
 		if not s.tasks[id] is Dictionary: return false
 		var t: Dictionary = s.tasks[id]
-		if t.get("id")!=id or not people.has(t.get("actor")) or not rules.actions.has(t.get("kind")) or t.get("status") not in ["requested","arrived","working","phase_ready","blocked","completed","cancelled"]: return false
+		if t.get("id")!=id or not people.has(t.get("actor")) or not rules.actions.has(t.get("kind")) or t.get("status") not in ["requested","entering","arrived","working","phase_ready","exiting","blocked","completed","cancelled"]: return false
+		if not t.get("pending_cancel_reason") is String or t.pending_cancel_reason.length()>512: return false
+		for key in ["activity","project_id","choice_reason"]:
+			if not t.get(key) is String or t[key].length()>256: return false
+		if not t.get("carried_job") is String: return false
+		if t.kind=="put_down" and t.status not in TERMINAL and not s.jobs.has(t.carried_job): return false
+		if t.kind!="put_down" and not t.carried_job.is_empty(): return false
+		var project: Dictionary = s.people[t.actor].biography.project
+		if t.kind=="personal_project":
+			if t.project_id!=project.id or t.activity!=project.activity: return false
+		elif t.kind=="tidy_tools":
+			if t.project_id!=project.id or t.activity!="tidy_personal_tools": return false
+		elif t.activity!=t.kind or not t.project_id.is_empty(): return false
+		if not t.get("declined_by") is Array or t.declined_by.size()>people.size(): return false
+		for declined in t.declined_by:
+			if not people.has(declined): return false
 		if not t.get("phases") is Array or t.phases.is_empty() or not _whole(t.get("phase_index"),0,t.phases.size()-1) or not t.get("started_effects") is bool or not t.get("result") is Dictionary: return false
 		for phase in t.phases:
 			if not phase is Dictionary or not phase.get("fixture") is String or not phase.get("room") is String or not phase.get("target") is Vector3 or not phase.target.is_finite() or phase.target.length()>1000 or not _number(phase.get("minutes"),.000001,1440): return false
+			if not _whole(phase.get("work_phase"),0,rules.actions[t.kind].phases.size()-1) or phase.get("transport","") not in ["","pickup"]: return false
+			if not phase.get("keep_carried",false) is bool: return false
+			if phase.get("transport","")=="pickup":
+				if bool(phase.get("keep_carried",false)): return false
+			elif phase.get("keep_carried",false)!=rules.actions[t.kind].phases[int(phase.work_phase)].get("keep_carried",false): return false
+			if phase.has("scheduled_end"):
+				if not _number(t.get("requested_at"),0,float(s.elapsed)):return false
+				if t.kind not in ["work","school","sleep"] or not _number(phase.scheduled_end,float(t.requested_at),float(t.requested_at)+1440):return false
+				var routine: Dictionary=_routine(s.people[t.actor],float(t.requested_at))
+				if routine.get("kind")!=t.kind or not is_equal_approx(float(routine.get("ends",-1)),float(phase.scheduled_end)):return false
 			if not phase.fixture.begins_with("$") and not _fixtures.has(phase.fixture): return false
 			if not phase.get("name") is String or not phase.get("need_delta",{}) is Dictionary: return false
 			for key in phase.get("need_delta",{}):
@@ -578,23 +885,77 @@ func _valid_snapshot(s: Dictionary) -> bool:
 		if t.get("job_key")!=_job_key(t.actor,t.kind): return false
 		var phase: Dictionary = t.phases[int(t.phase_index)]
 		if t.get("target")!=phase.target or t.get("fixture")!=phase.fixture or t.get("room")!=phase.room: return false
+		if not _number(t.get("phase_minutes"),.000001,1440) or not is_equal_approx(float(t.phase_minutes),float(phase.minutes)) or t.get("phase_name")!=phase.name: return false
+		if not _valid_usage(t,s): return false
+	var batch_ids: Array = []
 	for key in s.jobs:
 		var job: Variant = s.jobs[key]
 		if not job is Dictionary or not rules.actions.has(job.get("kind")) or not job.get("reserved_by") is String or not job.get("started_effects") is bool or not job.started_effects: return false
 		if not _whole(job.get("quantity"),0,100) or not _whole(job.get("towels"),0,float(job.quantity)) or not _whole(job.get("phase_index"),0,rules.actions[job.kind].phases.size()-1) or not _number(job.get("phase_progress"),0,1440): return false
+		if not job.get("batch_id") is String or not job.batch_id.begins_with("batch:task_") or job.batch_id in batch_ids: return false
+		batch_ids.append(job.batch_id)
+		for field in ["container","last_fixture","holder","source_fixture"]:
+			if not job.get(field) is String: return false
+		if job.last_fixture!=job.source_fixture or not (job.last_fixture.begins_with("$") or _fixtures.has(job.last_fixture)) or not job.get("position") is Vector3 or not job.position.is_finite() or job.position.length()>1000: return false
+		if not job.holder.is_empty():
+			if not job.container.is_empty() or not s.people.has(job.holder) or job.reserved_by!=job.holder or job.position.distance_to(s.people[job.holder].position+Vector3(0,1,0))>.000001: return false
+		elif job.container.is_empty() or job.container!=job.last_fixture: return false
+		elif int(job.quantity)>0 and not job.container.begins_with("$"):
+			if not _supports.has(job.container) or job.position.distance_to(_surface_position(job.container))>.000001: return false
 		if not job.reserved_by.is_empty():
-			if not s.people.has(job.reserved_by) or s.people[job.reserved_by].active_task.is_empty(): return false
-			var active: Dictionary = s.tasks[s.people[job.reserved_by].active_task]
-			if active.job_key!=key or not active.started_effects or active.phase_index!=job.phase_index or not is_equal_approx(float(active.phase_progress),float(job.phase_progress)): return false
+			if not s.people.has(job.reserved_by): return false
+			var active_id: String = s.people[job.reserved_by].active_task
+			if active_id.is_empty():
+				if job.holder!=job.reserved_by: return false
+				continue
+			var active: Dictionary = s.tasks[active_id]
+			if active.kind=="put_down" and active.carried_job==key and job.holder==active.actor: continue
+			if active.job_key!=key or not active.started_effects or _work_phase(active)!=job.phase_index: return false
+			if active.phases[int(active.phase_index)].get("transport","")!="pickup" and not is_equal_approx(float(active.phase_progress),float(job.phase_progress)): return false
 	for actor in s.claims:
 		if not s.people.has(actor) or not s.claims[actor] is String or not (s.claims[actor].begins_with("$") or _fixtures.has(s.claims[actor])): return false
 		var active_id: String = s.people[actor].active_task
-		if active_id.is_empty() or s.tasks[active_id].fixture!=s.claims[actor] or s.tasks[active_id].status not in ["arrived","working","phase_ready","blocked"]: return false
+		if active_id.is_empty() or s.tasks[active_id].fixture!=s.claims[actor] or s.tasks[active_id].status not in ["entering","arrived","working","phase_ready","exiting","blocked"]: return false
 	for key in s.machines:
 		var m: Variant = s.machines[key]
 		if key not in ["wash_cycle","dry_cycle"] or not m is Dictionary or not _whole(m.get("quantity"),1,100) or not _number(m.get("ready_at"),float(s.elapsed),10000000): return false
 		if not _whole(m.get("towels"),0,float(m.quantity)): return false
 		if m.get("inflight")!=("washing_laundry" if key=="wash_cycle" else "drying_laundry") or m.get("output")!=("wet_laundry" if key=="wash_cycle" else "dry_laundry"): return false
+	return true
+
+func _valid_usage(task: Dictionary, snapshot_data: Dictionary) -> bool:
+	var use: Variant = task.get("usage")
+	if not use is Dictionary or not use.get("required") is bool or use.required!=_requires_usage(task.fixture): return false
+	if not use.get("anchor_position") is Array or use.anchor_position.size() not in [0,3] or not use.get("posture") is String: return false
+	for value in use.anchor_position:
+		if not _number(value,-1000,1000): return false
+	for key in ["entered_at","exit_started_at","exited_at"]:
+		if not _number(use.get(key),-1,float(snapshot_data.elapsed)): return false
+	if not use.required:
+		return use.get("state")=="none" and use.anchor_position.is_empty() and use.posture.is_empty() and use.entered_at==-1 and use.exit_started_at==-1 and use.exited_at==-1 and task.status not in ["entering","exiting"] and task.pending_cancel_reason.is_empty()
+	if not _usage_regions.has(task.fixture) or use.get("state") not in ["approach","entering","using","exiting","exited"]: return false
+	if use.anchor_position.is_empty():
+		if not use.posture.is_empty() or use.entered_at!=-1 or use.state=="using": return false
+	else:
+		if not _inside_usage(task.fixture,_point(use.anchor_position)) or use.posture not in _usage_regions[task.fixture].postures or float(use.entered_at)<0: return false
+	match str(use.state):
+		"approach":
+			if task.status not in ["requested","blocked","cancelled"] or not use.anchor_position.is_empty(): return false
+		"entering":
+			if task.status!="entering" or not use.anchor_position.is_empty(): return false
+		"using":
+			if task.status not in ["arrived","working","phase_ready"] or not _inside_usage(task.fixture,snapshot_data.people[task.actor].position): return false
+		"exiting":
+			if task.status!="exiting" or float(use.exit_started_at)<0: return false
+			if task.pending_cancel_reason.is_empty() and float(task.phase_progress)<float(task.phase_minutes)-.00000001: return false
+		"exited":
+			if task.status not in ["phase_ready","completed","cancelled"] or float(use.exited_at)<0: return false
+	if task.status not in TERMINAL and use.state!="approach":
+		if snapshot_data.people[task.actor].active_task!=task.id or snapshot_data.claims.get(task.actor,"")!=task.fixture: return false
+		if occupancy!=null:
+			if not snapshot_data.occupancy.get("fixture_users") is Dictionary or not snapshot_data.occupancy.get("room_users") is Dictionary: return false
+			if not snapshot_data.occupancy.fixture_users.get(task.fixture) is Array or not snapshot_data.occupancy.room_users.get(task.room) is Array: return false
+			if task.actor not in snapshot_data.occupancy.fixture_users[task.fixture] or task.actor not in snapshot_data.occupancy.room_users[task.room]: return false
 	return true
 
 static func _same(a: Variant, b: Variant) -> bool:

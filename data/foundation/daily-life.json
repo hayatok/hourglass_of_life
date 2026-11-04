@@ -61,19 +61,6 @@
       1230
     ]
   ],
-  "initial_histories": {
-    "nagisa": {
-      "cook": 25,
-      "care": 20
-    },
-    "ryo": {
-      "cook": 0,
-      "care": 35
-    },
-    "rin": {
-      "quiet": 20
-    }
-  },
   "actions": {
     "cook": {
       "label": "食事を作る",
@@ -183,7 +170,8 @@
           "minutes": 8,
           "need_delta": {
             "hygiene": -0.055
-          }
+          },
+          "keep_carried": true
         },
         {
           "name": "湯につかる",
@@ -191,7 +179,8 @@
           "minutes": 7,
           "need_delta": {
             "hygiene": -0.025
-          }
+          },
+          "keep_carried": true
         },
         {
           "name": "体を拭いて着替える",
@@ -370,7 +359,34 @@
           }
         }
       ]
+    },
+    "personal_project": {
+      "label": "自分の制作を進める",
+      "min_age": 0,
+      "phases": [
+        {
+          "name": "手元のノートや制作に取り組む",
+          "fixture": "$quiet",
+          "minutes": 15,
+          "need_delta": {
+            "quiet": -0.003,
+            "fatigue": 0.0002
+          }
+        }
+      ]
+    },
+    "tidy_tools": {
+      "label": "自分の使った道具を片付ける",
+      "min_age": 5,
+      "phases": [
+        {
+          "name": "使った物をまとめて片付ける",
+          "fixture": "$quiet",
+          "minutes": 5
+        }
+      ]
     }
   },
-  "inventory_semantics": "Laundry counts are total textile items; *_towels are subsets. Washing/drying machine contents retain their towel subtype so a used towel can return to the clean towel supply."
+  "inventory_semantics": "Laundry counts are total textile items; *_towels are subsets. Washing/drying machine contents retain their towel subtype so a used towel can return to the clean towel supply.",
+  "biography_source": "res://data/foundation/ogawa-biographies.json"
 }

@@ -27,6 +27,7 @@ var elapsed := 0.0
 var fatigue := 0.0
 var warmth := 0.0
 var gaze := 0.0
+var sleeping := false
 var lod_level := 0
 var lod_variants: Array[Dictionary] = []
 var lod_parts: Dictionary = {}
@@ -279,13 +280,14 @@ func _process(delta: float) -> void:
 	elapsed += delta*animator.speed_scale
 	var phase := fmod(elapsed+1.6,4.3)
 	var blink := maxf(0,1-absf(phase-.11)/.11) if phase<.22 else 0.0
+	if sleeping or animator.current_animation=="sleep":blink=1.0
 	if expression_mode==ExpressionMode.TEXTURE_EYES:
 		for material in body_materials:
-			material.set_shader_parameter("blink",1.0 if animator.current_animation=="sleep" else blink)
+			material.set_shader_parameter("blink",blink)
 			material.set_shader_parameter("tired_eyes",clampf((fatigue-.55)/.45,0,.7))
 		return
 	if not is_instance_valid(face): return
-	_blend("Blink",1.0 if animator.current_animation=="sleep" else blink)
+	_blend("Blink",blink)
 	_blend("Smile",warmth)
 	_blend("Tired",clampf((fatigue-.55)/.45,0,.7))
 	_blend("LookLeft",maxf(gaze,0))

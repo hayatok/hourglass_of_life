@@ -14,6 +14,8 @@ var skeleton: Skeleton3D
 var observed: Dictionary={}
 var bone_lengths: Dictionary={}
 var length_error := 0.0
+var local_position_error := 0.0
+var local_scale_error := 0.0
 var processed_count := 0
 var peak_support: Dictionary={}
 
@@ -44,7 +46,10 @@ func capture_final_pose() -> void:
 	for side in ["L","R"]:
 		var points: Array[Vector3]=[]
 		for part in ["thigh","shin","foot"]:
-			points.append(skeleton.get_bone_global_pose(skeleton.find_bone("DEF-"+part+"."+side)).origin)
+			var index: int=skeleton.find_bone("DEF-"+part+"."+side)
+			points.append(skeleton.get_bone_global_pose(index).origin)
+			local_position_error=maxf(local_position_error,skeleton.get_bone_pose_position(index).distance_to(skeleton.get_bone_rest(index).origin))
+			local_scale_error=maxf(local_scale_error,skeleton.get_bone_pose_scale(index).distance_to(Vector3.ONE))
 		for i in 2:
 			length_error=maxf(length_error,absf(points[i].distance_to(points[i+1])-float(bone_lengths[side][i])))
 
@@ -81,14 +86,16 @@ func run() -> void:
 	if root.has_node("Sim"): root.get_node("Sim").set_process(false)
 	var args := OS.get_cmdline_user_args()
 	var who: String=args[0] if not args.is_empty() else "nagisa"
+	var contract: Variant=JSON.parse_string(FileAccess.get_file_as_string("res://game/assets/motion/foundation/"+who+".contract.json"))
+	var speed: float=1.1 if who=="nagisa" else float(contract.clips.walk.authored_speed_mps)
+	if args.size()>1: speed=args[1].to_float()
 	motor=MOTOR.new();root.add_child(motor)
-	motor.configure({"turn_speed":PI/2})
+	motor.configure({"walk_speed":speed,"turn_speed":PI/2})
 	model=load("res://game/scenes/characters/"+who+".tscn").instantiate();motor.add_child(model)
 	model.animator.stop();skeleton=model.skeleton
 	skeleton.modifier_callback_mode_process=Skeleton3D.MODIFIER_CALLBACK_MODE_PROCESS_MANUAL
 	modifier=LOCOMOTION.new();modifier.name="FoundationLocomotionPose";skeleton.add_child(modifier)
-	var contract: Variant=JSON.parse_string(FileAccess.get_file_as_string("res://game/assets/motion/foundation/"+who+".contract.json"))
-	check(modifier.configure(motor,load("res://game/assets/motion/foundation/"+who+".tres"),contract),"The real rig/library/measured shoe vertices configure together")
+	check(modifier.configure(motor,load("res://game/assets/motion/foundation/"+who+".tres"),contract,motor.snapshot().profile),"The real rig/library/measured shoe vertices configure together")
 	if not failures.is_empty(): quit(1);return
 	for side in ["L","R"]:
 		var points: Array[Vector3]=[]
@@ -105,10 +112,9 @@ func run() -> void:
 	check(absf(float(modifier.snapshot().machine.clock)-clock-3.0/60)<.000001,"Three physical substeps before one deferred callback preserve all elapsed pose time")
 	motor.follow_path([Vector3(0,0,10),Vector3(2,0,10),Vector3(0,0,10)])
 	var modes := {};var saved := {};var turn_steps := {};var support_peak := 0.0;var swing_peak := 0.0
-	for frame in 1500:
+	for frame in 2400:
 		await step()
 		if frame%200==0: print("LOCOMOTION progress frame "+str(frame)+" motor="+motor.state()+" body="+str(observed.get("mode","no callback")))
-		var record: Dictionary=modifier.snapshot()
 		var mode: String=observed.get("mode","")
 		modes[mode]=true
 		if mode=="turn": turn_steps[int(observed.turn_step)]=true
@@ -129,13 +135,13 @@ func run() -> void:
 	check(motor.state()=="idle" and modifier.is_settled() and modes.has("start") and modes.has("walk") and modes.has("stop") and modes.has("turn"),"Departure, walk, two turn sizes, closing step and final settle execute on the real rig")
 	check(turn_steps.has(3) and swing_peak>.03,"The180-degree return has four foot stages and a raised free shoe rather than frozen idle-root rotation")
 	check(support_peak<=.02,"World support contacts remain within2cm throughout departure/walk/stop/turn; unreachable support is a failure")
-	check(length_error<.0001,"Actual final Skeleton3D thigh/shin lengths are retained throughout the transitions")
+	check(local_position_error<.000001 and local_scale_error<.000001 and length_error<.001,"Local leg offsets/scales are unchanged; final Skeleton3D lengths stay within1mm after world/local float conversion")
 	var before: Dictionary=modifier.snapshot()
 	var malformed: Dictionary=before.duplicate(true)
 	malformed.machine.feet.L.point="unmeasured_offset"
 	check(not modifier.restore(malformed) and same(before,modifier.snapshot()),"An invalid support surface is rejected without presentation mutation")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
-	var report := {"scope":"Real skeleton locomotion modifier/load/replay observation only. Requires normal-camera video/human review for natural gait acceptance.","target":who,"checks":checks,"failures":failures,"modes":modes,"saved_checkpoints":saved,"turn_steps":turn_steps,"support_point_error_peak_m":support_peak,"support_peak_details":peak_support,"free_shoe_height_peak_m":swing_peak,"actual_bone_length_error_peak_m":length_error,"final":modifier.snapshot()}
+	var report := {"scope":"Real skeleton locomotion modifier/load/replay observation only. Requires normal-camera video/human review for natural gait acceptance.","target":who,"profile":motor.snapshot().profile,"checks":checks,"failures":failures,"modes":modes,"saved_checkpoints":saved,"turn_steps":turn_steps,"support_point_error_peak_m":support_peak,"support_peak_details":peak_support,"free_shoe_height_peak_m":swing_peak,"actual_bone_length_error_peak_m":length_error,"local_leg_position_error_peak_m":local_position_error,"local_leg_scale_error_peak":local_scale_error,"final":modifier.snapshot()}
 	FileAccess.open(OUT+"/"+who+".json",FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))
 	print("Foundation locomotion checks: %d passed, %d failed" % [checks-failures.size(),failures.size()])
 	motor.free();quit(0 if failures.is_empty() else 1)

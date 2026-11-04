@@ -214,5 +214,26 @@ func run() -> void:
 	invalid=plan.duplicate(true);invalid.fixtures[0].use_via="missing"
 	var kept: Dictionary = restored.snapshot()
 	expect(not restored.configure(invalid) and restored.snapshot()==kept,"A broken equipment bundle cannot reset live occupancy during configure")
+	moving_chair()
 	print("Home navigation and occupancy: %d passed, %d failed"%[checks-failures.size(),failures.size()])
 	quit(0 if failures.is_empty() else 1)
+
+func moving_chair() -> void:
+	var movable=Navigation.new();movable.configure(plan,RADIUS)
+	var pulled:=Vector3(1.10,0,6.4)
+	var front:=Vector3(1.63,0,6.4)
+	var behind:=Vector3(.50,0,6.4)
+	expect(movable.route(behind,front,"nagisa").status!="ready","A body cannot stand inside the chair before it has been pulled out")
+	expect(movable.move_fixture("dining_nagisa",pulled),"A dining chair can be moved within its actual room")
+	var moved_plan: Dictionary=plan.duplicate(true)
+	for item in moved_plan.fixtures:
+		if item.id=="dining_nagisa":item.position=[pulled.x,pulled.y,pulled.z]
+	var moved_solids: Array=reference_geometry(moved_plan)
+	var enter: Dictionary=movable.route(behind,front,"nagisa")
+	expect(ready(enter,front) and clears(behind,enter.points,moved_solids),"After pulling the chair out, the actor can actually walk around it into the gap before the table")
+	var through_chair: Dictionary=movable.route(OUTSIDE,pulled,"nagisa")
+	expect(through_chair.status!="ready","Other navigation sees the pulled chair at its real new location")
+	expect(not movable.move_fixture("dining_nagisa",Vector3(-1,0,6.4)) and not movable.move_fixture("missing",pulled) and not movable.move_fixture("dining_nagisa",Vector3(NAN,0,0)),"Invalid furniture movements are rejected without moving its routing obstacle")
+	var kept: Dictionary=movable.route(behind,front,"nagisa")
+	expect(ready(kept,front) and clears(behind,kept.points,moved_solids),"Rejected furniture movements leave the previously clear entrance path usable")
+	expect(movable.move_fixture("dining_nagisa",point(fixture("dining_nagisa").position)) and movable.route(behind,front,"nagisa").status!="ready","Returning the chair closes the gap again and removes the obsolete pulled position")

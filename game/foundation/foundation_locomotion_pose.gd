@@ -23,6 +23,7 @@ var _tracks: Dictionary = {}
 var _contacts: Dictionary = {}
 var _rest_globals: Array[Transform3D] = []
 var _idle_reference: Array[Transform3D] = []
+var _leg_lengths: Dictionary = {}
 var _skeleton_in_actor := Transform3D.IDENTITY
 var _stride := 1.0
 var _walk_length := 1.0
@@ -102,6 +103,9 @@ func configure(actor: Node3D, library: AnimationLibrary, contract: Dictionary, p
 	_rest_globals.clear()
 	for index in skeleton.get_bone_count(): _rest_globals.append(skeleton.get_bone_global_rest(index))
 	_idle_reference=_globals(_sample("idle",0))
+	_leg_lengths.clear()
+	for side in SIDES:
+		_leg_lengths[side]=Vector2(skeleton.get_bone_rest(_bones["DEF-shin."+side]).origin.length(),skeleton.get_bone_rest(_bones["DEF-foot."+side]).origin.length())
 	_m={"mode":"idle","last_motor":"idle","phase":0.0,"distance_origin":0.0,"phase_offset":0.0,
 		"clock":0.0,"duration":1.0,"swing":"L","from":Transform3D.IDENTITY,"goal":Transform3D.IDENTITY,
 		"feet":{},"turn_start":0.0,"turn_total":0.0,"turn_sign":1.0,"turn_steps":2,"turn_step":-1,
@@ -296,7 +300,7 @@ func _turn_pose() -> Dictionary:
 func _step_goals(progress: float, swing: String, hold_orientation: bool) -> Dictionary:
 	var goals := {};var support := _other(swing)
 	goals[support]=_locked_goal(support,hold_orientation)
-	var goal: Transform3D=(_m.from as Transform3D).interpolate_with(_m.goal,_ease(progress))
+	var goal := _rigid_blend(_m.from,_m.goal,_ease(progress))
 	# This is a newly authored short foot trajectory. Leg rotations are solved
 	# at real length; no limb-angle amplitude multiplier is applied.
 	goal.origin.y+=sin(PI*progress)*clampf(.055*float(_contract.get("translation_scale",1.0)),.035,.07)
@@ -348,9 +352,8 @@ func _apply_goals(goals: Dictionary) -> void:
 	var lower := 0.0
 	for side in SIDES:
 		var hip := _bone_world("DEF-thigh."+side).origin
-		var knee := _bone_world("DEF-shin."+side).origin
-		var ankle := _foot_world(side).origin
-		var length := hip.distance_to(knee)+knee.distance_to(ankle)
+		var segments: Vector2=_leg_lengths[side]
+		var length := segments.x+segments.y
 		var goal: Transform3D=goals[side]
 		var horizontal := Vector2(hip.x-goal.origin.x,hip.z-goal.origin.z).length()
 		var max_height := sqrt(maxf(0,length*length-horizontal*horizontal))
@@ -373,7 +376,8 @@ func _solve_leg(side: String, target: Transform3D) -> float:
 	var skeleton := get_skeleton()
 	var hip_index: int=_bones["DEF-thigh."+side];var knee_index: int=_bones["DEF-shin."+side];var ankle_index: int=_bones["DEF-foot."+side]
 	var hip := _bone_world("DEF-thigh."+side);var knee := _bone_world("DEF-shin."+side);var ankle := _foot_world(side)
-	var upper := hip.origin.distance_to(knee.origin);var lower := knee.origin.distance_to(ankle.origin)
+	var segments: Vector2=_leg_lengths[side]
+	var upper := segments.x;var lower := segments.y
 	var toward := target.origin-hip.origin
 	if toward.length()<.000001: return upper+lower
 	var distance := clampf(toward.length(),absf(upper-lower)+.00001,upper+lower-.00001)
@@ -387,13 +391,25 @@ func _solve_leg(side: String, target: Transform3D) -> float:
 	var along := (upper*upper+distance*distance-lower*lower)/(2*distance)
 	var knee_goal := hip.origin+axis*along+bend*sqrt(maxf(0,upper*upper-along*along))
 	var ankle_goal := hip.origin+axis*distance
-	var hip_q := Quaternion((knee.origin-hip.origin).normalized(),(knee_goal-hip.origin).normalized())*hip.basis.get_rotation_quaternion()
-	var knee_q := Quaternion((ankle.origin-knee.origin).normalized(),(ankle_goal-knee_goal).normalized())*knee.basis.get_rotation_quaternion()
-	var inverse := skeleton.global_transform.affine_inverse()
-	skeleton.set_bone_global_pose(hip_index,inverse*Transform3D(Basis(hip_q),hip.origin))
-	skeleton.set_bone_global_pose(knee_index,inverse*Transform3D(Basis(knee_q),knee_goal))
-	skeleton.set_bone_global_pose(ankle_index,inverse*Transform3D(target.basis,ankle_goal))
+	var hip_q := (Quaternion((knee.origin-hip.origin).normalized(),(knee_goal-hip.origin).normalized())*hip.basis.get_rotation_quaternion()).normalized()
+	var knee_q := (Quaternion((ankle.origin-knee.origin).normalized(),(ankle_goal-knee_goal).normalized())*knee.basis.get_rotation_quaternion()).normalized()
+	# Keep the actual local rest offsets/scales exactly. Writing independently
+	# computed world knee/ankle origins back through several inverse transforms
+	# needlessly perturbs those physical offsets near a straight leg.
+	_set_joint_world_rotation(hip_index,hip_q)
+	_set_joint_world_rotation(knee_index,knee_q)
+	_set_joint_world_rotation(ankle_index,target.basis.get_rotation_quaternion().normalized())
 	return ankle_goal.distance_to(target.origin)
+
+func _set_joint_world_rotation(index: int, world_rotation: Quaternion) -> void:
+	var skeleton := get_skeleton()
+	var parent: int=_parents[index]
+	var parent_world: Transform3D=skeleton.global_transform
+	if parent>=0: parent_world*=skeleton.get_bone_global_pose(parent)
+	var local_rotation := parent_world.basis.get_rotation_quaternion().normalized().inverse()*world_rotation
+	skeleton.set_bone_pose_position(index,skeleton.get_bone_rest(index).origin)
+	skeleton.set_bone_pose_scale(index,Vector3.ONE)
+	skeleton.set_bone_pose_rotation(index,local_rotation.normalized())
 
 func _look_lead(remaining: float) -> void:
 	var skeleton := get_skeleton()
@@ -417,9 +433,9 @@ func _standing_pose(seconds: float) -> Array[Transform3D]:
 		if name in STANDING_CORE:
 			var breath := desired*_idle_reference[index].basis.get_rotation_quaternion().inverse()
 			desired=breath*_rest_globals[index].basis.get_rotation_quaternion()
-		rotations[index]=desired
+		desired=desired.normalized();rotations[index]=desired
 		var local_rotation := desired if _parents[index]<0 else rotations[_parents[index]].inverse()*desired
-		result[index].basis=Basis(local_rotation)
+		result[index].basis=Basis(local_rotation.normalized())
 	var pelvis: int=_bones["DEF-pelvis"]
 	result[pelvis].origin=get_skeleton().get_bone_rest(pelvis).origin
 	return result
@@ -482,7 +498,7 @@ func _sample(key: String, seconds: float) -> Array[Transform3D]:
 		var index: int=record.bone;var track: int=record.track
 		match int(record.type):
 			Animation.TYPE_POSITION_3D: result[index].origin=animation.position_track_interpolate(track,time)
-			Animation.TYPE_ROTATION_3D: result[index].basis=Basis(animation.rotation_track_interpolate(track,time))
+			Animation.TYPE_ROTATION_3D: result[index].basis=Basis(animation.rotation_track_interpolate(track,time).normalized())
 			Animation.TYPE_SCALE_3D: pass # Delivered target bones retain real lengths and unit scale.
 	return result
 
@@ -509,8 +525,14 @@ func _blend_entry(values: Array, weight: float) -> Array[Transform3D]:
 
 func _blend(a: Array, b: Array, weight: float) -> Array[Transform3D]:
 	var result: Array[Transform3D] = []
-	for index in a.size(): result.append((a[index] as Transform3D).interpolate_with(b[index],clampf(weight,0,1)))
+	for index in a.size(): result.append(_rigid_blend(a[index],b[index],clampf(weight,0,1)))
 	return result
+
+static func _rigid_blend(a: Transform3D, b: Transform3D, weight: float) -> Transform3D:
+	# Interpolated quaternions must remain unit rotations. Do not let tiny basis
+	# scale from repeated blending alter a limb's physical length or shoe shape.
+	var rotation := a.basis.get_rotation_quaternion().normalized().slerp(b.basis.get_rotation_quaternion().normalized(),weight).normalized()
+	return Transform3D(Basis(rotation),a.origin.lerp(b.origin,weight))
 
 func _bone_world(name: String) -> Transform3D:
 	return get_skeleton().global_transform*get_skeleton().get_bone_global_pose(_bones[name])
