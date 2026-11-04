@@ -1,0 +1,2 @@
+# Preserve the publisher's CP932/CRLF bytes; normalized observations are JSON.
+data/evidence/life-course/raw/*.csv binary

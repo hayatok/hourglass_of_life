@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "design_conditions_not_executed_in_game",
+  "context": {
+    "id": "fictional_japan_inspired_small_town_v1",
+    "definition": "架空の温帯小都市。一つの制度・通学と就労機会・家計の中で、世帯ごとの事情を変えて比較する。全国平均の小都市実測への置換ではない。",
+    "source_fixture": "observations.json",
+    "rate_usage": "context_and_population_calibration_only",
+    "time_conversion": "No source percentage is divided by simulated minutes or independently redrawn each tick.",
+    "separate_authored_parameters": ["school hours and school-entry date", "work schedule, establishment size and contract", "vacancies, hiring decisions and training opportunities", "care tasks, support services, symptom severity and recovery scenario", "fictional compression from actual years to representative days"]
+  },
+  "cases": [
+    {
+      "id": "child_growth_and_work",
+      "source_series": ["maternal_employment"],
+      "what_the_data_supports": "末子年齢と就業状態の集団構成の違い。複数国では母の年齢・婚姻範囲・分母・調査年も異なる。",
+      "what_the_data_does_not_support": "個人の復職確率、父親の未取得就業率、保育時間、入学日に就業が自動成立するルール。",
+      "paired_conditions": ["同じ家族の願い・技能・家計・seedを保ち、就学前と就学後の通園/通学・下校時刻だけを変える", "同じ子の予定で、親の早番/在宅/午後勤務と利用を知る支援先を変える", "責任分担を片方の性別へ固定せず、本人の勤務/既存負担/合意で組み替える"],
+      "visible_acceptance": ["朝の支度→実通学/通園→下校後の見守り→親の仕事/家事の変更まで同じ生活履歴でつながる", "責任があるため断る/別時刻を相談する場合と、利用可能な合意済み支援で選択肢が増える場合の両方がある", "実際に行えた仕事/支援だけが収入・負担・知識・履歴を変え、途中保存で重複しない"]
+    },
+    {
+      "id": "job_loss_and_reemployment",
+      "source_series": ["employment_flows", "job_change_wage"],
+      "what_the_data_supports": "対象事業所の年間の入離職規模、一般/パートの条件差、既に転職入職し調査時在籍している元雇用者の賃金変化の構成。",
+      "what_the_data_does_not_support": "失業者1人の再就職hazardや待機期間。自営業の廃業確率。入職率を失業者分母へ読み替えること。",
+      "paired_conditions": ["同じ失職前の技能/知識/家計で、本人が知る求人が近距離少時間/長距離高収入の条件を比べる", "子の迎えや同意済み世話責任がある/ない条件で、応募・訓練・辞退・別案の違いを見る", "採用予定だけで雇用/収入を変更せず、実採用・初回勤務・実通勤を順に成立させる"],
+      "visible_acceptance": ["契約終了→家計の調整→求人を知る→応募/訓練→採否→実通勤/勤務→家事と住まいの影響を追える", "不採用/応募辞退でも無限再抽選や自動就職をせず、次の情報・期間・家計による行動変化が残る", "2023/2024母集団更新の異なる数値を混ぜた疑似景気トレンドを作らない"]
+    },
+    {
+      "id": "recovery_and_family_support",
+      "source_series": ["care_time"],
+      "what_the_data_supports": "在宅の認定要支援/要介護者について、同居の主な介護者の負担カテゴリが要介護度で異なること。状態構成のみ。",
+      "what_the_data_does_not_support": "病気の発症、診断、回復速度。未認定の療養者全員への適用。『ほとんど終日』を24時間の作業にすること。",
+      "paired_conditions": ["同じ本人の生活目標で、断続的な援助と頻回の援助を要する作者定義の場面を比べる", "同じ必要作業に対し、同居者のみ/別居者への相談/既知のサービス/本人の拒否を比べる", "支援者自身の食事/睡眠/勤務/世話責任を保ち、一人に支援が集中する場合を検出する"],
+      "visible_acceptance": ["本人が受け入れた支援が実到着・実作業して初めて家事/移動/休養の余地を作り、到着前に責任を解放しない", "必要な休息/援助と本人の意思が残り、支援者も交代・辞退・引継ぎできる", "支援中断/死亡/退居/保存再開で、放置・支援の二重成立・架空の回復が生じない"]
+    }
+  ],
+  "later_comparison": {
+    "status": "not_run",
+    "protocol": "同じversion/contextで複数seed・複数世帯を実進行し、分布だけでなく本人の24時間・支援の偏り・機会のない人・未成年の安全を確認する。観測レコード数をゲーム品質の合格数としない。人の試遊は別。",
+    "statistics_report": ["population/household/seed/exposure years", "opportunity offered/known/accepted/executed/interrupted counts", "unfulfilled necessary care and interrupted sleep/meals", "household income/time change and actual completed life events", "source cohort mismatch, missing cells and excluded comparisons"]
+  }
+}

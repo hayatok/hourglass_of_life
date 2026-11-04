@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "status": "source_fixture_not_connected_to_runtime",
+  "selection_date_jst": "2026-11-05",
+  "selection_scope": "小川家の人生連鎖を将来校正するための小さな一次資料snapshot。最新値・架空町の実測・出来事の個人hazardを装わない。",
+  "sources": [
+    {
+      "id": "oecd_lmf12_2023",
+      "publisher": "OECD; national sources include MHLW Comprehensive Survey of Living Conditions, EU Labour Force Survey and Korean Local Area Labour Force Survey",
+      "title": "OECD Family Database LMF1.2 Maternal employment",
+      "version": "September 2023 workbook, series through 2021; deliberately pinned historical context",
+      "landing_url": "https://www.oecd.org/en/data/datasets/oecd-family-database.html",
+      "url": "https://webfs.oecd.org/els-com/Family_Database/LMF_1_2_Maternal_Employment.xlsx",
+      "raw_file": "oecd-lmf12-2023.xlsx",
+      "max_bytes": 2000000,
+      "definition_urls": ["https://webfs.oecd.org/els-com/Family_Database/LMF1_2_Maternal_Employment.pdf"],
+      "definition_locations": ["MER-Child-Age-15-64 rows 1-4 and 221-239", "Chart LMF1.2.C notes a-d"],
+      "missing_policy": "'..' is unavailable/suppressed, preserved as null. The workbook says estimates based on fewer than 50 cases are removed; it does not identify the cause of each individual missing cell.",
+      "comparability": "Country-specific population units, ages and child bands are retained. Some countries' 2021 cells are absent. Cross-sections are not the same parents followed over time; national survey/leave definitions and the EU-LFS 2021 methodological break require review before causal/trend comparisons.",
+      "license": {
+        "id": "OECD-Data-Terms-Section-3",
+        "url": "https://www.oecd.org/en/about/terms-conditions.html",
+        "checked_on_jst": "2026-11-05",
+        "summary": "OECD data terms permit extraction, reuse and sharing with attribution, subject to separately stated/third-party restrictions. This historical workbook is not labelled as blanket CC BY 4.0.",
+        "attribution": "OECD (2023), OECD Family Database, LMF1.2 Maternal employment, national sources as specified in workbook, https://webfs.oecd.org/els-com/Family_Database/LMF_1_2_Maternal_Employment.xlsx (accessed 2026-11-05).",
+        "third_party_note": "Retain the named national survey sources. No additional restriction was stated in the selected table notes; this pack does not license OECD logos, photos or unrelated database content.",
+        "adaptation_note": "Selection, normalization and Japanese design interpretation by Hourglass of Life; no OECD endorsement is implied. Preserve source acknowledgment when redistributing this derived pack."
+      }
+    },
+    {
+      "id": "mhlw_employment_2024",
+      "publisher": "厚生労働省",
+      "title": "令和6年 雇用動向調査結果の概況・図表",
+      "version": "2024 results; includes original-published 2023 comparison rows",
+      "landing_url": "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/index.html",
+      "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/dl/zuhyo.xlsx",
+      "raw_file": "mhlw-employment-2024.xlsx",
+      "max_bytes": 2000000,
+      "definition_urls": [
+        "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/dl/gaiyo.pdf",
+        "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/dl/yougo.pdf",
+        "https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/dl/sankou.pdf"
+      ],
+      "population": "全国、16大産業に属し常用労働者5人以上の事業所。常用は無期雇用または1か月以上の有期雇用。一般労働者は本調査のパートタイム以外であり、正社員と同義ではない。町の自営業や5人未満店舗を直接代表しない。",
+      "missing_policy": "Selected flow cells are present. Wage-change total includes unstated responses, so increase/unchanged/decrease need not sum to 100 and must not be renormalized. Wage changes cover former employees still registered at the survey, exclude former self-employed and exclude entrants no longer registered (table 6 note 1).",
+      "comparability": "2024 benchmark update: workbook 2023 rows are original published values, not the benchmark-adjusted reference aggregation. Treat 2023/2024 as separately defined contexts, not a clean year-on-year trend.",
+      "license": {
+        "id": "PDL-1.0",
+        "url": "https://www.mhlw.go.jp/chosakuken/",
+        "checked_on_jst": "2026-11-05",
+        "summary": "MHLW site terms refer to Public Data License 1.0 unless separately marked. Attribute the source and distinguish editing/processing from government publication.",
+        "attribution": "厚生労働省『令和6年 雇用動向調査結果の概況・図表』https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/25-2/index.html （2026年11月5日取得）を選択・加工して作成。"
+      }
+    },
+    {
+      "id": "mhlw_csls_2022_care82",
+      "publisher": "厚生労働省 / e-Stat",
+      "title": "令和4年 国民生活基礎調査 介護票 第82表 同居の主な介護者数、現在の要介護度・介護時間別",
+      "version": "2022 survey; released 2023-07-04; statInfId 000040071983",
+      "landing_url": "https://www.e-stat.go.jp/stat-search/files?cycle=7&layout=datalist&month=0&tclass1=000001206252&toukei=00450061&tstat=000001206248&year=20220",
+      "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040071983&fileKind=1",
+      "raw_file": "mhlw-csls-2022-care82.csv",
+      "max_bytes": 2000000,
+      "encoding": "cp932",
+      "definition_urls": [
+        "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa22/dl/05.pdf",
+        "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa22/dl/07.pdf"
+      ],
+      "population": "全国の介護保険法上の要支援・要介護認定を受けた在宅の者と、その同居の主な介護者。一般の病気、未認定者、入院・施設入所者の回復過程を代表しない。",
+      "missing_policy": "All selected CSV values are present. '不詳' is a published care-time category kept in the denominator, not an absent observation. Overall grade includes care-grade-unknown recipients.",
+      "comparability": "Original unit is per 100000 care recipients, not actual sampled people. Derived within-grade percentages explicitly divide by the co-resident-main-carer total of that grade, with rounding error. 'ほとんど終日' is a qualitative reported category, not 24 hours of continuous hands-on care.",
+      "license": {
+        "id": "PDL-1.0",
+        "url": "https://www.mhlw.go.jp/chosakuken/",
+        "delivery_terms_url": "https://www.e-stat.go.jp/terms-of-use",
+        "delivery_terms_id": "Government-Standard-Terms-2.0; CC-BY-4.0-compatible; numerical facts are outside copyright according to e-Stat terms",
+        "checked_on_jst": "2026-11-05",
+        "summary": "MHLW public statistics; source attribution and processing indication retained. Delivery through e-Stat does not transfer authorship to this project.",
+        "attribution": "厚生労働省『令和4年 国民生活基礎調査』介護票第82表（e-Stat、statInfId 000040071983、2026年11月5日取得）を選択・加工して作成。"
+      }
+    }
+  ],
+  "maternal_cohorts": [
+    {"country":"JPN","source_country_label":"Japan","first_group_row":102,"age":{"minimum":15,"maximum":null,"label":"15 years and over"},"youngest_child_bands":[[0,2],[3,5],[6,14]],"marital_scope":"all reported","population_unit":"households_classified_by_youngest_mother","denominator":"households containing a mother and youngest child in this age band; employment status belongs to the youngest mother, not every mother in a multi-mother household"},
+    {"country":"FRA","source_country_label":"France","first_group_row":62,"age":{"minimum":15,"maximum":64,"label":"15-64 years"},"youngest_child_bands":[[0,2],[3,5],[6,14]],"marital_scope":"all reported","population_unit":"women","denominator":"women aged 15-64 with their youngest child in this age band"},
+    {"country":"SWE","source_country_label":"Sweden","first_group_row":172,"age":{"minimum":15,"maximum":64,"label":"15-64 years"},"youngest_child_bands":[[0,2],[3,5],[6,14]],"marital_scope":"all reported","population_unit":"women","denominator":"women aged 15-64 with their youngest child in this age band"},
+    {"country":"KOR","source_country_label":"Korea","first_group_row":107,"age":{"minimum":15,"maximum":54,"label":"15-54 years"},"youngest_child_bands":[[0,6],[7,12],[13,17]],"marital_scope":"married only","population_unit":"married_women","denominator":"married women aged 15-54 with their youngest child in this age band"}
+  ],
+  "not_adopted_as_rates": ["individual conditional re-employment transition", "duration until re-employment", "illness incidence", "recovery duration/probability", "individual return-to-work after birth", "school-entry hazard"],
+  "runtime_policy": "These are calibration observations only. No record is a per-minute chance; no observed sex/parent category assigns an individual responsibility. Fictional institutions and personal decisions must be separate versioned inputs."
+}
